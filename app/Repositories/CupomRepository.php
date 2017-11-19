@@ -1,0 +1,14 @@
+<?php
+
+namespace Pedidos\Repositories;
+
+use Prettus\Repository\Contracts\RepositoryInterface;
+
+/**
+ * Interface CupomRepository
+ * @package namespace CodeDelivery\Repositories;
+ */
+interface CupomRepository extends RepositoryInterface
+{
+    public function findByCode($code);
+}
