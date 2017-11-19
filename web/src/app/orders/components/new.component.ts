@@ -16,7 +16,7 @@ export class NewComponent implements OnInit {
 
     order = {};
     client = '';
-    products = {};
+    items = {"items":[]};
     result = {};
 
     pesquisa = {
@@ -42,8 +42,15 @@ export class NewComponent implements OnInit {
                 this.pesquisa.value = null;
                 this.result = res.data;
                 this.hideLoading();
-
-                jQuery('#pesquisa').show().addClass('show');
+                if(res.data.length>1){
+                    jQuery('#pesquisa').show().addClass('show');
+                }else{
+                    if(res.data.length===1)
+                    {
+                        this.items.items.push(this.result[0]);
+                        console.log('item',this.items);
+                    }
+                }
                 console.log("pesquisou", this.result)
             });
 

@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 
 import {ToasterService} from 'angular2-toaster';
 
+import * as jQuery from 'jquery';
+
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
@@ -89,6 +91,7 @@ export class AppHttpService{
                 return res.json() || {}
             })
             .catch((err) =>{
+                jQuery(".container-loading").hide();
             console.log('erro',err);
                 let message = 'Algo deu errado, informe o erro' + err.status + 'ao administrador';
                 if(err.status === 401)
