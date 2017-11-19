@@ -1,0 +1,48 @@
+<div tabindex="-1" class="modal fade" id="successModal" role="dialog" aria-hidden="true" aria-labelledby="myModalLabel" style="display: none;">
+    <div class="modal-dialog modal-success" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Pedido: {{ order.id}}</h5>
+                <button class="close" aria-label="Close" type="button" data-dismiss="modal" (click)="close()">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h6 class="text-left"> {{ client }}</h6>
+                <h6 class="text-right" style="margin-top: -24px">{{ order.created_at }}</h6>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Produto</th>
+                        <th>Valor</th>
+                        <th>Quantadade</th>
+                        <th>Total</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let i of products.data">
+                        <td>{{ i.product.data.id }}</td>
+                        <td>{{ i.product.data.name }}</td>
+                        <td>{{ i.product.data.price | currency:'BRL':true}}</td>
+                        <td>{{ i.qtd }}</td>
+                        <td>
+                            {{ i.price | currency:'BRL':true }}
+
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <div class="modal-button">
+                    <a class="btn btn-link Left"><i class="fa fa-print"></i> Imprimir</a>
+                    <button class="btn btn-danger text-left" type="button" (click)="close()"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
+                    <button class="btn btn-success" type="button"><i class="fa fa-arrow-circle-right"></i> Fechar</button>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

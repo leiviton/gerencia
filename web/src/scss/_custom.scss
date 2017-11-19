@@ -1,0 +1,50 @@
+// Here you can add other styles
+@import '../../node_modules/angular2-toaster/toaster';
+.modal{
+  background-color: rgba(0,0,0,0.5);
+}
+.modal-button{
+  margin-left: -50px !important;
+  position: relative;
+  display: inline;
+}
+.logo{
+  width: 60%;
+  height: 60%;
+}
+.fundo_clck{
+  background: rgba(0,0,0,0.7);
+}
+.container-loading{
+  z-index: 9999999;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  top: 0;
+  left: 0;
+  cursor: wait;
+  display: none;
+}
+.img-loading {
+  position: absolute;
+  width: 60px;
+  top: 50%;
+  left: 50%;
+  margin-left: -30px;
+  margin-top: -30px;
+}
+.login{
+  background-image: url('../assets/img/fundo.jpg');
+}
+
+.img-login{
+  width: 150px;
+  height: 150px;
+  display: flex;
+  margin-left: 40%;
+}
+
+.cadastro{
+  padding: 6px;
+}

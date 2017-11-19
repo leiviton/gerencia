@@ -1,0 +1,86 @@
+<div tabindex="-1" class="modal fade" id="new_order" role="dialog" aria-hidden="true" aria-labelledby="myModalLabel" style="display: none;">
+    <div class="modal-dialog modal-primary" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Novo Pedido</h5>
+                <button class="close" aria-label="Close" type="button" data-dismiss="modal" (click)="close()">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <form (keyup.enter)="buscar()">
+                        <input type="text" class="form-control col-md-4" name="pesquisa" [(ngModel)]="pesquisa.value" placeholder="Digite produto">
+                    </form>
+
+                </div>
+
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Produto</th>
+                        <th>Valor</th>
+                        <th>Quantadade</th>
+                        <th>Total</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <div class="modal-button">
+                    <a class="btn btn-link Left"><i class="fa fa-print"></i> Imprimir</a>
+                    <button class="btn btn-danger text-left" type="button" (click)="close()"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
+                    <button class="btn btn-success" type="button"><i class="fa fa-arrow-circle-right"></i> Fechar</button>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div tabindex="-1" class="modal fade" id="pesquisa" role="dialog" aria-hidden="true" aria-labelledby="myModalLabel" style="display: none;">
+    <div class="modal-dialog modal-primary" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">result</h5>
+                <button class="close" aria-label="Close" type="button" data-dismiss="modal" (click)="closeMd()">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <form (keyup.enter)="buscar()">
+                        <input type="text" class="form-control col-md-4" name="pesquisa" [(ngModel)]="pesquisa.value" placeholder="Digite produto">
+                    </form>
+
+                </div>
+
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Produto</th>
+                        <th>Valor</th>
+                        <th>Quantadade</th>
+                        <th>Total</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <div class="modal-button">
+                    <a class="btn btn-link Left"><i class="fa fa-print"></i> Imprimir</a>
+                    <button class="btn btn-danger text-left" type="button" (click)="closeMd()"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
+                    <button class="btn btn-success" type="button"><i class="fa fa-arrow-circle-right"></i> Fechar</button>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

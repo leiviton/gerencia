@@ -1,0 +1,89 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-sm-6 col-lg-3">
+      <div class="card text-white bg-primary">
+        <div class="card-body pb-0">
+          <div class="btn-group float-right" dropdown>
+            
+          </div>
+          <h4 class="mb-0">9.823</h4>
+          <p>Pedidos pendentes</p>
+        </div>
+        <div class="chart-wrapper px-3" style="height:40px;">
+          
+        </div>
+      </div>
+    </div><!--/.col-->
+    <div class="col-sm-6 col-lg-3">
+      <div class="card text-white bg-info">
+        <div class="card-body pb-0">
+          
+          <h4 class="mb-0">9.823</h4>
+          <p>Pedidos fechados</p>
+        </div>
+        <div class="chart-wrapper px-3" style="height:40px;">
+          
+        </div>
+      </div>
+    </div><!--/.col-->
+    <div class="col-sm-6 col-lg-3">
+      <div class="card text-white bg-warning">
+        <div class="card-body pb-0">
+          
+          <h4 class="mb-0">9.823</h4>
+          <p>Produtos em estoque</p>
+        </div>
+        <div class="chart-wrapper" style="height:40px;">
+        </div>
+      </div>
+    </div><!--/.col-->
+    <div class="col-sm-6 col-lg-3">
+      <div class="card text-white bg-danger">
+        <div class="card-body pb-0">
+          <h4 class="mb-0">9.823</h4>
+          <p>Pedidos delivery</p>
+        </div>
+        <div class="chart-wrapper px-3" style="height:40px;">
+          
+        </div>
+      </div>
+    </div><!--/.col-->
+  </div><!--/.row-->
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-sm-5">
+          <h4 class="card-title mb-0">Traffic</h4>
+          <div class="small text-muted">November 2015</div>
+        </div><!--/.col-->
+        <div class="col-sm-7 hidden-sm-down">
+          <button type="button" class="btn btn-primary float-right"><i class="icon-cloud-download"></i></button>
+          <div class="btn-toolbar float-right" role="toolbar" aria-label="Toolbar with button groups">
+            <div class="btn-group mr-3" data-toggle="buttons" aria-label="First group">
+              <label class="btn btn-outline-secondary">
+                <input type="radio" name="options" id="option1"> Day
+              </label>
+              <label class="btn btn-outline-secondary active">
+                <input type="radio" name="options" id="option2" checked> Month
+              </label>
+              <label class="btn btn-outline-secondary">
+                <input type="radio" name="options" id="option3"> Year
+              </label>
+            </div>
+          </div>
+        </div><!--/.col-->
+      </div><!--/.row-->
+      <div class="chart-wrapper" style="height:300px;margin-top:40px;">
+        <canvas baseChart class="chart"
+        [datasets]="mainChartData"
+        [labels]="mainChartLabels"
+        [options]="mainChartOptions"
+        [colors]="mainChartColours"
+        [legend]="mainChartLegend"
+        [chartType]="mainChartType"
+        (chartHover)="chartHovered($event)"
+        (chartClick)="chartClicked($event)"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
