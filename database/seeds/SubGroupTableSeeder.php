@@ -13,10 +13,6 @@ class SubGroupTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Subgroup::class, 10)->create()->each(function ($s){
-            for ($i=0; $i<5; $i++){
-                $s->products()->save(factory(Product::class)->make());
-            }
-        });
+        factory(Subgroup::class, 10)->create();
     }
 }
