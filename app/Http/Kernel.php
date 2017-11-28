@@ -18,8 +18,7 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \Pedidos\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
-        \Pedidos\Http\Middleware\TrustProxies::class,
-        \Barryvdh\Cors\Handlecors::class,
+        \Pedidos\Http\Middleware\TrustProxies::class
     ];
 
     /**

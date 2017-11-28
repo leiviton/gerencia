@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
-  server_url: 'http://170.233.85.98',
-  client_id: '4',
-  client_secret: 'hMZzj0RR4UBYTFnvLmIymDUyhgNKVfNR7xIp0G6O',
+  server_url: 'http://api.floreselegance.com.br/public',
+  client_id: '1',
+  client_secret: 'hqR3XihOxu4Avy1nAK2EKYrlc9RghjBQTaxqrkMg',
 };
