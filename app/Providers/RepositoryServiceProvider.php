@@ -55,6 +55,10 @@ class RepositoryServiceProvider extends ServiceProvider
             'Pedidos\Repositories\SubgroupRepository',
             'Pedidos\Repositories\SubgroupRepositoryEloquent'
         );
+        $this->app->bind(
+            'Pedidos\Repositories\MesaRepository',
+            'Pedidos\Repositories\MesaRepositoryEloquent'
+        );
     }
 }
 

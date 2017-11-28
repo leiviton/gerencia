@@ -10,6 +10,9 @@ import { NewComponent } from './components/new.component';
 import { OrdersRoutingModule } from './orders-routing.module';
 import { TooltipModule } from 'ngx-bootstrap';
 import { OrdersService } from './services/orders.service';
+import { CuppaDataGridModule } from 'cuppa-ng2-grid/cuppa-ng2-dataGrid';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import {DatepickerModule} from "ngx-bootstrap"
 
 @NgModule({
   imports: [
@@ -18,7 +21,10 @@ import { OrdersService } from './services/orders.service';
     ChartsModule,
     BsDropdownModule,
     TooltipModule,
-    FormsModule
+    FormsModule,
+      CuppaDataGridModule,
+      TabsModule,
+      DatepickerModule
   ],
   declarations: [ OrdersComponent,EditComponent,NewComponent ],
   providers: [ OrdersService, BsModalService ]

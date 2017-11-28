@@ -18,6 +18,7 @@ export class LoginComponent {
 
     login(e) {
         e.preventDefault();
+
         this.showLoading();
         if (!this.user.username || !this.user.password) {
             return;
@@ -40,9 +41,8 @@ export class LoginComponent {
                     localStorage.setItem('user',JSON.stringify(res));
                     console.log('user',res)
                     this.hideLoading();
+                    this.router.navigate(['/']);
             });
-            this.router.navigate(['/']);
-            this.hideLoading();
         }).catch(() => {
             this.hideLoading();
         })

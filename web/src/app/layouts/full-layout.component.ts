@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+
+import {ToasterService} from 'angular2-toaster';
 
 @Component({
   selector: 'app-dashboard',
@@ -6,7 +10,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FullLayoutComponent implements OnInit {
 
-  user = JSON.parse(localStorage.getItem('user'));
+  constructor(private route: Router, private toasterService: ToasterService) {}
+
+  user = JSON.parse(localStorage.getItem('user') || null);
   public disabled = false;
   public status: {isopen: boolean} = {isopen: false};
 
@@ -20,5 +26,13 @@ export class FullLayoutComponent implements OnInit {
     this.status.isopen = !this.status.isopen;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.user);
+    if (!this.user || this.user === null || this.user.id === undefined){
+      
+      this.toasterService.pop('warning','Atenção','É necessário logar no sistema');
+      this.route.navigate(['/pages/login']);
+      return;
+    }
+  }
 }

@@ -13,7 +13,7 @@ use Pedidos\Models\Order;
 class OrderTransformer extends TransformerAbstract
 {
     protected $availableIncludes = ['cupom'];
-    protected $defaultIncludes = ['client','items'];
+    protected $defaultIncludes = ['client','items','mesa'];
 
     /**
      * Transform the \Order entity
@@ -55,5 +55,8 @@ class OrderTransformer extends TransformerAbstract
     }
     public function includeItems(Order $model){
         return $this->collection($model->items,new OrderItemTransformer());
+    }
+    public function includeMesa(Order $model){
+        return $this->item($model->mesa,new MesaTransformer());
     }
 }

@@ -476,14 +476,8 @@ export class DashboardComponent implements OnInit {
       this.mainChartData2.push(this.random(80, 100));
       this.mainChartData3.push(65);
     }
-
-    let user:any = localStorage.getItem('user');
-    if (user === null){
-      console.log(user);
-      this.route.navigate(['/pages/login']);
-    }
-      setTimeout(() => {
-          this.hideLoading();
+    setTimeout(() => {
+        this.hideLoading();
       }, 2000);
   }
 }

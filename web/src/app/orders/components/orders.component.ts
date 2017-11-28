@@ -6,6 +6,7 @@ import { OrdersService } from '../services/orders.service';
 import { FormsModule } from '@angular/forms';
 
 
+
 import * as jQuery from 'jquery';
 @Component({
   templateUrl: 'orders.component.html'
@@ -24,7 +25,7 @@ export class OrdersComponent implements OnInit {
         status:null
     };
   ngOnInit(): void {
-      this.showLoading();
+    this.showLoading();
       this.httpService.eventEmitter
           .subscribe(() => {
               this.httpService.builder().list({}, 'orders')

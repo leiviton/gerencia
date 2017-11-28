@@ -19,6 +19,7 @@ class OrderTableSeeder extends Seeder
                     'product_id' => rand(1,5),
                     'qtd' => 2,
                     'price' => 50,
+                    'mesa_id' => rand(1,10)
                 ]));
             }
         });

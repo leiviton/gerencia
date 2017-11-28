@@ -12,7 +12,8 @@
                   <tr>
                     <th class="title text-center">Status</th>
                     <th class="title text-center">Codigo</th>
-                    <th class="title">Cliente</th>
+                    <th class="title-table text-center"> Total</th>
+                    <th class="title"> Cliente</th>
                     <th class="title text-center">Data</th>
                     <th class="title text-center">Hora</th>
                     <th class="title text-center">Tipo</th>
@@ -29,6 +30,7 @@
                       <span class="badge badge-danger" *ngIf="o.status === 0" tooltip="Pendente">Cozinha</span>
                     </td>
                     <td class="text-center" *ngIf="tamanho > 0">{{ o.id }}</td>
+                    <td class="text-center" *ngIf="tamanho > 0">{{ o.total | currency:'BRL':true }}</td>
                     <td *ngIf="tamanho > 0">{{ o.client.data.user.data.name }}</td>
                     <td class="text-center" *ngIf="tamanho > 0">{{ o.created_at | slice:0:10 }} </td>
                     <td class="text-center" *ngIf="tamanho > 0">{{ o.created_at | slice:11:16}}</td>
@@ -39,7 +41,7 @@
                   </tr>
                 </tbody>
               </table>
-              <nav>
+              <!--nav>
                 <ul class="pagination">
                   <li class="page-item"><a class="page-link" href="#">Prev</a></li>
                   <li class="page-item active">
@@ -50,7 +52,7 @@
                   <li class="page-item"><a class="page-link" href="#">4</a></li>
                   <li class="page-item"><a class="page-link" href="#">Next</a></li>
                 </ul>
-              </nav>
+              </nav-->
             </div>
           </div>
         </div>

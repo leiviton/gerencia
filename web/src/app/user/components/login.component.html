@@ -5,20 +5,26 @@
         <div class="card-group mb-0">
           <div class="card p-4">
             <div class="card-body">
-              <h2>Sistema de pedidos</h2>
-              <p class="text-muted">Acessar Gerenciador</p>
-              <form (submit)="login($event)">
-                <div class="input-group mb-3">
-                  <span class="input-group-addon"><i class="icon-user"></i></span>
-                  <input type="text" class="form-control" placeholder="Seu email..." name="username" [(ngModel)]="user.username" id="email" >
+              <div class="text-center"><img src="assets/img/leiviton.png" alt=""></div>
+
+              <form #myForm="ngForm" (submit)="login($event)">
+                <div class="form-group mb-3">
+                  <label class="form-col-form-label">Usuário</label>
+                  <input type="email" class="form-control" [ngClass]="{'is-invalid': !username.valid && (username.dirty || username.touched)}" placeholder="Seu email..." name="username" [(ngModel)]="user.username" id="username" #username="ngModel" minlength="5" required>
+                  <div class="invalid-feedback" *ngIf="!username.valid">
+                    Verifique o seu usuário.
+                  </div>
                 </div>
-                <div class="input-group mb-4">
-                  <span class="input-group-addon"><i class="icon-lock"></i></span>
-                  <input type="password" class="form-control" placeholder="Sua senha..." name="password" [(ngModel)]="user.password" id="password">
+                <div class="form-group mb-4">
+                  <label class="form-col-form-label">Senha</label>
+                  <input type="password" class="form-control" [ngClass]="{'is-invalid': !password.valid && (password.dirty || password.touched)}" placeholder="Sua senha..." name="password" [(ngModel)]="user.password" id="password" #password="ngModel" required minlength="6">
+                  <div class="invalid-feedback" *ngIf="!password.valid">
+                    Senha deve ser maior que 5 caracteres.
+                  </div>
                 </div>
                 <div class="row">
-                  <div class="col-6">
-                    <button type="submit"  class="btn btn-lg btn-info">Acessar</button>
+                  <div class="col-6 text-right" style="right: -50%">
+                    <button type="submit"  class="btn btn-lg btn-success" [disabled]="!myForm.valid">Acessar</button>
                   </div>
                 </div>
               </form>

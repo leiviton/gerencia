@@ -33,12 +33,8 @@
           <a class="nav-link nav-dropdown-toggle" href="#" appNavDropdownToggle><i class="fa fa-edit"></i> Pedidos</a>
           <ul class="nav-dropdown-items">
             <li class="nav-item">
-              <a class="nav-link" routerLinkActive="active" [routerLink]="['/orders']"><i class="fa fa-edit"></i> Pedidos entregues</a>
+              <a class="nav-link" routerLinkActive="active" [routerLink]="['/orders']"><i class="fa fa-edit"></i> Gerenciar pedidos</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLinkActive="active" [routerLink]="['/components/social-buttons']"><i class="fa fa-edit"></i> Pedidos pendentes</a>
-            </li>
-            
           </ul>
         </li>
         <li class="divider"></li>
@@ -54,18 +50,9 @@
             <li class="nav-item">
               <a class="nav-link" routerLinkActive="active" [routerLink]="['/pages/login']"><i class="fa fa-credit-card"></i> Grupos</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLinkActive="active" [routerLink]="['/pages/register']"><i class="fa fa-credit-card"></i> Produtos</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLinkActive="active" [routerLink]="['/pages/register']"><i class="fa fa-credit-card"></i> Unidade de medidas</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLinkActive="active" [routerLink]="['/pages/register']"><i class="fa fa-credit-card"></i> Combos</a>
-            </li>
           </ul>
         </li>
-        <li class="nav-item nav-dropdown" appNavDropdown>
+        <li class="nav-item nav-dropdown" appNavDropdown *ngIf="user.role === 'admin'">
           <a class="nav-link nav-dropdown-toggle" href="#" appNavDropdownToggle><i class="fa fa-user"></i> Usuários</a>
           <ul class="nav-dropdown-items">
             <li class="nav-item">

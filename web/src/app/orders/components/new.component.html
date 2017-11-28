@@ -1,44 +1,87 @@
 <div tabindex="-1" class="modal fade" id="new_order" role="dialog" aria-hidden="true" aria-labelledby="myModalLabel" style="display: block; overflow-y: auto;">
-    <div class="modal-dialog modal-primary" role="document">
+    <div class="modal-dialog modal-lg modal-primary" role="document">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header cadastro">
                 <h5 class="modal-title">Novo Pedido</h5>
                 <button class="close" aria-label="Close" type="button" data-dismiss="modal" (click)="close()">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
             <div class="modal-body">
-                <div class="form-group">
-                    <form (keyup.enter)="buscar()">
-                        <input type="text" class="form-control col-md-4" name="pesquisa" [(ngModel)]="pesquisa.value" placeholder="Digite produto" autofocus>
+                <div class="col-md-12">
+                    <form #myForm="ngForm" (keyup.enter)="buscar()" class="form-inline">
+                        <div class="form-group col-md-12">
+                            <label class="col-md-2">Buscar: </label>
+                            <input type="text" class="form-control col-md-3" name="pesquisa" [(ngModel)]="pesquisa.value" placeholder="Digite produto" required minlength="2" autofocus="autofocus">
+                            <label class="label qtd col-md-2"> Qtd.</label>
+                            <input class="form-control col-md-1" type="number" min="1" max="10" name="qtd" [(ngModel)]="qtd" />
+                        </div>
                     </form>
-
                 </div>
 
-                <table class="table table-responsive scrollbox table-striped" style="overflow: scroll;">
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Produto</th>
-                        <th>Valor</th>
-                        <th>Quantadade</th>
-                        <th>Total</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr *ngFor="let p of items.items">
-                        <td>{{ p.id }}</td>
-                        <td>{{ p.name }}</td>
-                        <td>{{ p.price}}</td>
-                        <td>1</td>
-                        <td>{{ p.price * 1}}</td>
-                    </tr>
-                    </tbody>
-                </table>
+                <div class="col-md-12" style="padding-bottom: 5px;">
+                    <form #myForm="ngForm" class="form-inline">
+                        <div class="form-group col-md-12">
+                            <label class="col-md-2" *ngIf="mesa_id === 1">Telefone: </label>
+                            <input *ngIf="mesa_id === 1"  type="text" class="form-control col-md-4" name="pesquisa"  placeholder="Digite Telefone" required minlength="11" [(ngModel)]="pesquisa.telefone" (blur)="buscarCliente()">
+                            <label for="mesa" class="label col-md-2">Mesa: </label>
+                            <select id="mesa" name="category_id" class="form-control col-md-4" [(ngModel)]="mesa_id">
+                                <option *ngFor="let g of mesas" value="{{ g.id }}"> {{ g.name }}</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="row borderdiv">
+                    <div class="col-md-4 mb-4 padding" style="height: 300px; overflow: auto" *ngIf="mesa_id===1">
+                        <!-- Nav tabs -->
+                        <tabset>
+                            <tab heading="Cliente">
+                                <p>Nome: </p>
+                                <p>Telefone: </p>
+                                <p>Endereço: </p>
+                                <p>Email: </p>
+                            </tab>
+                            <tab heading="50 ultimos">
+                                <p>Pedido:</p>
+                                <p>Data:</p>
+                                <p>Produtos:</p>
+                            </tab>
+                        </tabset>
+                    </div><!--/.col-->
+                <div class="col-lg-8 padding" [ngClass]="{'col-md-12 col-lg-12': mesa_id !== 1, 'col-md-8 col-lg-8': mesa_id === 1}">
+                    <div class="table-responsive" style="height: 240px; overflow: auto">
+                        <table class="table scrollbox table-striped">
+                            <thead>
+                                <tr class="th-table title-table">
+                                    <th class="text-center">#</th>
+                                    <th>Produto</th>
+                                    <th class="text-center">Valor</th>
+                                    <th class="text-center">Qtd.</th>
+                                    <th class="text-center">Subtotal</th>
+                                    <th class="text-center"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="th-table" *ngFor="let p of items.items; let i = index">
+                                    <td class="text-center">{{ p.id }}</td>
+                                    <td>{{ p.name }}</td>
+                                    <td class="text-center">{{ p.price | currency:'BRL':true }}</td>
+                                    <td class="text-center">{{ p.qtd }}</td>
+                                    <td class="text-center">{{ p.subtotal | currency:'BRL':true }}</td>
+                                    <td class="text-center"><button class="btn btn-sm btn-default" (click)="removeItem(i)"><i class="fa fa-remove text-danger"></i></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                <hr>
+                <div class="col-md-12 text-center"><p class="qtd">TOTAL: {{ total | currency:'BRL':true }}</p></div>
+            </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <div class="modal-button">
                     <a class="btn btn-link Left"><i class="fa fa-print"></i> Imprimir</a>
+                    <button class="btn btn-info" (click)="save()" *ngIf="mesa_id !== 1"><i class="fa fa-save"></i> Salvar pedido</button>
                     <button class="btn btn-danger text-left" type="button" (click)="close()"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
                     <button class="btn btn-success" type="button"><i class="fa fa-arrow-circle-right"></i> Fechar</button>
                 </div>

@@ -28,6 +28,7 @@ Route::group(['prefix'=>'api/v1'],function () {
     });
 
     Route::group(['prefix' => 'admin','namespace'=>'Api\V1\Admin','middleware' => 'auth:api'],function (){
+       Route::post('order','AdminCheckoutController@store');
        Route::get('groups','CategoriesController@index');
        Route::get('subgroups','SubgroupsController@index');
        Route::get('products', 'ProductsController@index');
@@ -35,6 +36,7 @@ Route::group(['prefix'=>'api/v1'],function () {
        Route::post('product/store', 'ProductsController@store');
        Route::put('product/{id}', 'ProductsController@update');
        Route::get('search','AdminCheckoutController@search');
+       Route::get('mesas', 'AdminCheckoutController@getMesas');
     });
     Route::get('user','Api\UserController@authenticated');
 });

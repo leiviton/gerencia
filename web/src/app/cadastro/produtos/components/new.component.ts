@@ -25,11 +25,10 @@ export class NewComponent implements OnInit {
         category_id:null,
         subgroup_id:null
     };
-
     groups = {};
     subgroups = {};
     ngOnInit(): void {
-        this.showLoading();
+       this.showLoading();
         jQuery('#infoModal').show().addClass('show');
         setTimeout(() => {
             this.grupos();
@@ -64,7 +63,6 @@ export class NewComponent implements OnInit {
         this.httpService.builder()
           .insert(e,'product/store')
           .then(()=> {
-
               this.httpService.eventEmitter.emit();
               this.hideLoading();
               this.toasterService.pop('success', 'Sucesso', 'Produto salvo com sucesso');

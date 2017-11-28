@@ -21,6 +21,7 @@ import { BreadcrumbsComponent } from './shared/breadcrumb.component';
 import { CurrencyMaskModule } from "ng2-currency-mask";
 
 import { ToasterModule } from 'angular2-toaster';
+import { CuppaDataGridModule } from 'cuppa-ng2-grid/cuppa-ng2-dataGrid';
 
 // Routing Module
 import { AppRoutingModule } from './app.routing';
@@ -35,7 +36,7 @@ import { AppHttpService } from './app-http.service';
 @NgModule({
   imports: [
     BrowserModule,
-      BrowserAnimationsModule,
+    BrowserAnimationsModule,
     HttpModule,
     DatepickerModule.forRoot(),
     FormsModule,
@@ -45,9 +46,10 @@ import { AppHttpService } from './app-http.service';
     TooltipModule.forRoot(),
     ModalModule.forRoot(),
     CurrencyMaskModule,
-      ToasterModule,
+    ToasterModule,
     LoadingModule,
-    ChartsModule
+    ChartsModule,
+    CuppaDataGridModule
   ],
   declarations: [
     AppComponent,

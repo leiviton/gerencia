@@ -72,6 +72,8 @@ class OrderService{
             }
             $order->total = $total;
 
+            $order->mesa_id = $data['mesa_id'];
+
             if (isset($cupom)){
                 $order->total = $total - $cupom->value;
             }
