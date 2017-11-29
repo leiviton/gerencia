@@ -56,7 +56,6 @@ class Kernel extends HttpKernel
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \Pedidos\Http\Middleware\RedirectIfAuthenticated::class,
-        'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'cors' => \Pedidos\Http\Middleware\Cors::class, // <<< add this line
+        'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class
     ];
 }
