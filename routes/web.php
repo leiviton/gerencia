@@ -10,8 +10,11 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Auth::routes()->middleware('cors');
+Route::group(['middleware'=>'cors'],function (){
 
+    Auth::routes();
+
+});
 Route::get('/', function () {
     return view('welcome');
 });
