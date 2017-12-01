@@ -12,7 +12,7 @@ use Pedidos\Models\Product;
  */
 class ProductTransformer extends TransformerAbstract
 {
-    protected $defaultIncludes = ['category','subgroup'];
+    protected $defaultIncludes = ['category'];
 
     /**
      * Transform the \Product entity
@@ -40,8 +40,8 @@ class ProductTransformer extends TransformerAbstract
         return $this->item($model->category, new CategoryTransformer());
     }
 
-    public function includeSubgroup(Product $model)
+    /*public function includeSubgroup(Product $model)
     {
         return $this->item($model->subgroup, new SubgroupTransformer());
-    }
+    }*/
 }

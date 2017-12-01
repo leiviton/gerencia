@@ -11,6 +11,7 @@ import { ProdutosRoutingModule } from './produtos-routing.module';
 
 import { ProdutosService } from './services/produtos.service';
 
+
 @NgModule({
   imports: [
     CommonModule,
