@@ -65,6 +65,12 @@ $factory->define(Pedidos\Models\OrderItem::class, function (Faker\Generator $fak
     ];
 });
 
+$factory->define(Pedidos\Models\Mesa::class, function (Faker\Generator $faker){
+    return [
+
+    ];
+});
+
 $factory->define(Pedidos\Models\Cupom::class, function (Faker\Generator $faker){
     return [
         'code' => rand(100,1000),

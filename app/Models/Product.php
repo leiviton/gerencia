@@ -15,15 +15,10 @@ class Product extends Model implements Transformable
         'name',
         'description',
         'price',
-        'subgroup_id',
         'status'
     ];
 
     public function category(){
         return $this->belongsTo(Category::class);
-    }
-
-    public function subgroup(){
-        return $this->belongsTo(Subgroup::class);
     }
 }
