@@ -36,7 +36,7 @@ Route::group(['prefix'=>'api/v1'],function () {
        Route::post('product/store', 'ProductsController@store');
        Route::put('product/{id}', 'ProductsController@update');
        Route::get('search','AdminCheckoutController@search');
-       Route::get('mesas', 'AdminChechoutController@getMesas');
+       Route::get('mesas', 'AdminCheckoutController@getMesas');
     });
     Route::get('user','Api\UserController@authenticated');
 });

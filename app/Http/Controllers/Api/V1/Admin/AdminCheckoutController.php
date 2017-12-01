@@ -20,7 +20,7 @@ use Pedidos\Services\OrderService;
 
 class AdminCheckoutController extends Controller
 {
-    
+
     /**
      * @var OrderRepository
      */
