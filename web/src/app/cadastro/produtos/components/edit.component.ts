@@ -25,7 +25,6 @@ export class EditComponent implements OnInit {
         description:null,
         price:null,
         category_id:null,
-        subgroup_id:null,
         status:null
     };
 
@@ -42,7 +41,6 @@ export class EditComponent implements OnInit {
                         this.product.name = res.data.name;
                         this.product.description = res.data.description;
                         this.product.price = res.data.price;
-                        this.product.subgroup_id = res.data.subgroup.data.id;
                         this.product.category_id = res.data.category.data.id;
                         this.product.status = res.data.status;
                         this.subgrupos();

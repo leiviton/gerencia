@@ -22,8 +22,7 @@ export class NewComponent implements OnInit {
         name:null,
         description:null,
         price:null,
-        category_id:null,
-        subgroup_id:null
+        category_id:null
     };
     groups = {};
     subgroups = {};
@@ -46,6 +45,7 @@ export class NewComponent implements OnInit {
                 console.log(this.groups);
             })
     }
+
 
     subgrupos()
     {

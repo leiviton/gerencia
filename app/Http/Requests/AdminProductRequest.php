@@ -28,7 +28,6 @@ class AdminProductRequest extends Request
             'description' => 'required',
             'price' => 'required',
             'category_id' => 'required',
-            'subgroup_id' => 'required'
         ];
     }
 }

@@ -111,9 +111,9 @@ export class NewComponent implements OnInit {
             let pedido = {
                 items: this.httpService.get().items,
                 total: this.httpService.get().total,
-                mesa_id: this.mesa_id
-
-            }
+                mesa_id: this.mesa_id,
+                client_id: 1
+            };
             this.httpService.builder()
                 .insert(pedido,'order')
                 .then((res) => {

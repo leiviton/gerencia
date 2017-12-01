@@ -49,7 +49,7 @@ class ProductsController extends Controller
         return $result;
     }
 
-        public function store(AdminProductRequest $request)
+    public function store(AdminProductRequest $request)
     {
         $data = $request->all();
         $o = $this->productService->create($data);
