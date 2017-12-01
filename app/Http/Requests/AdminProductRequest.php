@@ -27,7 +27,7 @@ class AdminProductRequest extends Request
             'name' => 'required|min:3',
             'description' => 'required',
             'price' => 'required',
-            'category_id' => 'required',
+            'category_id' => 'required'
         ];
     }
 }
