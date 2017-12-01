@@ -9,6 +9,8 @@
 namespace Pedidos\Http\Controllers\Api\V1\Admin;
 
 
+use Pedidos\Http\Controllers\Controller;
+
 use Pedidos\Http\Requests\CheckoutRequest;
 use Illuminate\Http\Request;
 use Pedidos\Repositories\MesaRepository;
@@ -16,7 +18,7 @@ use Pedidos\Repositories\OrderRepository;
 use Pedidos\Repositories\ProductRepository;
 use Pedidos\Services\OrderService;
 
-class AdminCheckoutController
+class AdminCheckoutController extends Controller
 {
     /**
      * @var OrderRepository

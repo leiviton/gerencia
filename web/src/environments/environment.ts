@@ -7,5 +7,5 @@ export const environment = {
   production: false,
   server_url: 'http://108.61.155.169',
   client_id: '2',
-  client_secret: '4j5jGYze8ATjmhcrmzNNW3pBmP8GSQQvFvNWeg6Z',
+  client_secret: 'ANfB8DW1guNguHB8wqpQ8MBGyh09wQKeV6bPFbyA',
 };
