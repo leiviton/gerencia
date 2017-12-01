@@ -8,14 +8,14 @@
     <meta name="description" content="Sistema de gerenciamento de restaurantes">
     <meta name="author" content="Leiviton Carlos">
     <meta name="keyword" content="Restaurantes,Pedidos,Food,Comida">
-    <link rel="shortcut icon" href="js/assets/img/favicon.png">
+    <link rel="shortcut icon" href="assets/img/favicon.png">
 
     <title>Gerencia | Pedidos</title>
 
     <!-- Icons -->
-    <link href="js/assets/css/font-awesome.min.css" rel="stylesheet">
-    <link href="js/assets/css/simple-line-icons.css" rel="stylesheet">
-    <link href="js/assets/css/login.css" rel="stylesheet">
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet">
+    <link href="assets/css/simple-line-icons.css" rel="stylesheet">
+    <link href="assets/css/login.css" rel="stylesheet">
 
 </head>
 
@@ -49,12 +49,12 @@
 <script>window.__theme = 'bs4';</script>
 
 <!-- App Loading... -->
-<script type="text/javascript" src="js/inline.bundle.js"></script>
-<script type="text/javascript" src="js/polyfills.bundle.js"></script>
-<script type="text/javascript" src="js/scripts.bundle.js"></script>
-<script type="text/javascript" src="js/styles.bundle.js"></script>
-<script type="text/javascript" src="js/vendor.bundle.js"></script>
-<script type="text/javascript" src="js/main.bundle.js"></script>
+<script type="text/javascript" src="inline.bundle.js"></script>
+<script type="text/javascript" src="polyfills.bundle.js"></script>
+<script type="text/javascript" src="scripts.bundle.js"></script>
+<script type="text/javascript" src="styles.bundle.js"></script>
+<script type="text/javascript" src="vendor.bundle.js"></script>
+<script type="text/javascript" src="main.bundle.js"></script>
 </body>
 
 </html>

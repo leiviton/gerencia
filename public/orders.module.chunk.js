@@ -125,7 +125,7 @@ var NewComponent = (function () {
         this.items = [];
         this.result = {};
         this.qtd = 1;
-        this.total = this.httpService.get().total;
+        this.total = 0;
         this.pesquisa = {
             value: null,
             telefone: null

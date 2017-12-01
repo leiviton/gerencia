@@ -22,7 +22,7 @@ export class NewComponent implements OnInit {
     items = [];
     result = {};
     qtd = 1;
-    total = this.httpService.get().total;
+    total = 0;
     pesquisa = {
         value:null,
         telefone:null
