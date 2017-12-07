@@ -45,7 +45,7 @@ var DashboardRoutingModule = (function () {
 /***/ "../../../../../src/app/dashboard/dashboard.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!-- Breadcrumb -->\n<ol class=\"breadcrumb\">\n  <app-breadcrumbs></app-breadcrumbs>\n</ol>\n<div class=\"animated fadeIn\">\n  <div class=\"row\">\n    <div class=\"col-sm-6 col-lg-3\">\n      <div class=\"card text-white bg-primary\">\n        <div class=\"card-body pb-0\">\n          <div class=\"btn-group float-right\" dropdown>\n            \n          </div>\n          <h4 class=\"mb-0\">9.823</h4>\n          <p>Pedidos pendentes</p>\n        </div>\n        <div class=\"chart-wrapper px-3\" style=\"height:40px;\">\n          \n        </div>\n      </div>\n    </div><!--/.col-->\n    <div class=\"col-sm-6 col-lg-3\">\n      <div class=\"card text-white bg-info\">\n        <div class=\"card-body pb-0\">\n          \n          <h4 class=\"mb-0\">9.823</h4>\n          <p>Pedidos fechados</p>\n        </div>\n        <div class=\"chart-wrapper px-3\" style=\"height:40px;\">\n          \n        </div>\n      </div>\n    </div><!--/.col-->\n    <div class=\"col-sm-6 col-lg-3\">\n      <div class=\"card text-white bg-warning\">\n        <div class=\"card-body pb-0\">\n          \n          <h4 class=\"mb-0\">9.823</h4>\n          <p>Produtos em estoque</p>\n        </div>\n        <div class=\"chart-wrapper\" style=\"height:40px;\">\n        </div>\n      </div>\n    </div><!--/.col-->\n    <div class=\"col-sm-6 col-lg-3\">\n      <div class=\"card text-white bg-danger\">\n        <div class=\"card-body pb-0\">\n          <h4 class=\"mb-0\">9.823</h4>\n          <p>Pedidos delivery</p>\n        </div>\n        <div class=\"chart-wrapper px-3\" style=\"height:40px;\">\n          \n        </div>\n      </div>\n    </div><!--/.col-->\n  </div><!--/.row-->\n    <div class=\"row col-md-12\">\n      <div class=\"col-6 col-lg-3\" *ngFor=\"let o of mesas.data\">\n        <div class=\"card\">\n          <div class=\"card-body p-3 clearfix\">\n            <i class=\"p-3 font-2xl mr-3 float-left mesao\" [ngClass]=\"{'bg-success': o.status == 0, 'bg-danger': o.status === 1, 'bg-info': o.status === 2}\"></i>\n            <div class=\"h5 text-primary mb-0 mt-2\"></div>\n            <div class=\"text-muted text-uppercase font-weight-bold font-xs\">{{ o.name }}</div>\n          </div>\n        </div>\n      </div>\n    </div>\n</div>\n"
+module.exports = "<div class=\"animated fadeIn\">\n  <div class=\"row\">\n    <div class=\"col-sm-6 col-lg-3\">\n      <div class=\"card text-white bg-primary\">\n        <div class=\"card-body pb-0\">\n          <div class=\"btn-group float-right\" dropdown>\n            \n          </div>\n          <h4 class=\"mb-0\">9.823</h4>\n          <p>Pedidos pendentes</p>\n        </div>\n        <div class=\"chart-wrapper px-3\" style=\"height:40px;\">\n          \n        </div>\n      </div>\n    </div><!--/.col-->\n    <div class=\"col-sm-6 col-lg-3\">\n      <div class=\"card text-white bg-info\">\n        <div class=\"card-body pb-0\">\n          \n          <h4 class=\"mb-0\">9.823</h4>\n          <p>Pedidos fechados</p>\n        </div>\n        <div class=\"chart-wrapper px-3\" style=\"height:40px;\">\n          \n        </div>\n      </div>\n    </div><!--/.col-->\n    <div class=\"col-sm-6 col-lg-3\">\n      <div class=\"card text-white bg-warning\">\n        <div class=\"card-body pb-0\">\n          \n          <h4 class=\"mb-0\">9.823</h4>\n          <p>Produtos em estoque</p>\n        </div>\n        <div class=\"chart-wrapper\" style=\"height:40px;\">\n        </div>\n      </div>\n    </div><!--/.col-->\n    <div class=\"col-sm-6 col-lg-3\">\n      <div class=\"card text-white bg-danger\">\n        <div class=\"card-body pb-0\">\n          <h4 class=\"mb-0\">9.823</h4>\n          <p>Pedidos delivery</p>\n        </div>\n        <div class=\"chart-wrapper px-3\" style=\"height:40px;\">\n          \n        </div>\n      </div>\n    </div><!--/.col-->\n  </div><!--/.row-->\n    <div class=\"row col-md-12\">\n      <div class=\"col-6 col-lg-3\" *ngFor=\"let o of mesas.data\">\n        <div class=\"card\">\n          <div class=\"card-body p-3 clearfix\">\n            <i class=\"bg-danger p-3 font-2xl mr-3 float-left mesao\" [ngClass]=\"{'bg-success': o.status == 0, 'bg-danger': o.status === 1, 'bg-': o.status === 2}\"></i>\n            <div class=\"h5 text-primary mb-0 mt-2\"></div>\n            <div class=\"text-muted text-uppercase font-weight-bold font-xs\">{{ o.name }}</div>\n          </div>\n        </div>\n      </div>\n    </div>\n</div>\n"
 
 /***/ }),
 
@@ -558,14 +558,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__dashboard_component__ = __webpack_require__("../../../../../src/app/dashboard/dashboard.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__dashboard_routing_module__ = __webpack_require__("../../../../../src/app/dashboard/dashboard-routing.module.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_dashboard_service__ = __webpack_require__("../../../../../src/app/dashboard/services/dashboard.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__shared_breadcrumb_component__ = __webpack_require__("../../../../../src/app/shared/breadcrumb.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-
 
 
 
@@ -584,8 +582,7 @@ var DashboardModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_2_ng2_charts_ng2_charts__["ChartsModule"],
                 __WEBPACK_IMPORTED_MODULE_3_ngx_bootstrap_dropdown__["a" /* BsDropdownModule */],
             ],
-            declarations: [__WEBPACK_IMPORTED_MODULE_4__dashboard_component__["a" /* DashboardComponent */],
-                __WEBPACK_IMPORTED_MODULE_7__shared_breadcrumb_component__["a" /* BreadcrumbsComponent */]],
+            declarations: [__WEBPACK_IMPORTED_MODULE_4__dashboard_component__["a" /* DashboardComponent */]],
             providers: [__WEBPACK_IMPORTED_MODULE_6__services_dashboard_service__["a" /* DashboardService */]]
         })
     ], DashboardModule);

@@ -155,7 +155,7 @@ var AuthService = (function (_super) {
         return this.toPromise(observable);
     };
     AuthService.prototype.logout = function () {
-        var observable = this.http.get(this.url + 'logout');
+        var observable = this.http.get(this.url + 'logout', { headers: this.header });
         return this.toPromise(observable);
     };
     AuthService = __decorate([
