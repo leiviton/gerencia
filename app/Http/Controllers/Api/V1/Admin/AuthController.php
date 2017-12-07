@@ -6,7 +6,7 @@
  * Time: 12:34
  */
 
-namespace CodeDelivery\Http\Controllers\Api;
+namespace Pedidos\Http\Controllers\Api\V1\Admin;
 
 use Pedidos\Http\Controllers\Controller;
 
