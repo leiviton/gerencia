@@ -9,7 +9,7 @@ import { LoginComponent } from "./components/login.component"
 
 import { UserRoutingModule } from "./user-routing.module"
 import { AuthService } from './services/auth.service';
-//import { LogoutComponent } from './components/logout.component';
+import { LogoutComponent } from './components/logout.component';
 
 @NgModule({
     imports: [
@@ -20,7 +20,7 @@ import { AuthService } from './services/auth.service';
     declarations: [
         PasswordComponent,
         ProfileComponent,
-       // LogoutComponent
+        LogoutComponent,
         LoginComponent
     ],
     providers: [ AuthService ]

@@ -39,6 +39,7 @@ Route::group(['prefix'=>'api/v1','middleware' => 'auth:api'],function () {
        Route::get('mesas', 'AdminCheckoutController@getMesas');
     });
     Route::get('user','Api\UserController@authenticated');
+    Route::get('logout','AuthController@logout');
 });
 
 Route::get('/home', 'HomeController@index')->name('home');

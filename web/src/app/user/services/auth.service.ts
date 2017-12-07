@@ -41,6 +41,7 @@ export class AuthService extends AppHttpService {
     }
 
     logout() {
-       
+        let observable = this.http.get(this.url + 'logout');
+        return this.toPromise(observable);
     }
 }
