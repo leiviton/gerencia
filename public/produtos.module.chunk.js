@@ -192,7 +192,6 @@ var NewComponent = (function () {
         __WEBPACK_IMPORTED_MODULE_2_jquery__('#infoModal').show().addClass('show');
         setTimeout(function () {
             _this.grupos();
-            _this.subgrupos();
             _this.hideLoading();
         }, 300);
     };

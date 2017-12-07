@@ -45,7 +45,7 @@ var DashboardRoutingModule = (function () {
 /***/ "../../../../../src/app/dashboard/dashboard.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"animated fadeIn\">\n  <div class=\"row\">\n    <div class=\"col-sm-6 col-lg-3\">\n      <div class=\"card text-white bg-primary\">\n        <div class=\"card-body pb-0\">\n          <div class=\"btn-group float-right\" dropdown>\n            \n          </div>\n          <h4 class=\"mb-0\">9.823</h4>\n          <p>Pedidos pendentes</p>\n        </div>\n        <div class=\"chart-wrapper px-3\" style=\"height:40px;\">\n          \n        </div>\n      </div>\n    </div><!--/.col-->\n    <div class=\"col-sm-6 col-lg-3\">\n      <div class=\"card text-white bg-info\">\n        <div class=\"card-body pb-0\">\n          \n          <h4 class=\"mb-0\">9.823</h4>\n          <p>Pedidos fechados</p>\n        </div>\n        <div class=\"chart-wrapper px-3\" style=\"height:40px;\">\n          \n        </div>\n      </div>\n    </div><!--/.col-->\n    <div class=\"col-sm-6 col-lg-3\">\n      <div class=\"card text-white bg-warning\">\n        <div class=\"card-body pb-0\">\n          \n          <h4 class=\"mb-0\">9.823</h4>\n          <p>Produtos em estoque</p>\n        </div>\n        <div class=\"chart-wrapper\" style=\"height:40px;\">\n        </div>\n      </div>\n    </div><!--/.col-->\n    <div class=\"col-sm-6 col-lg-3\">\n      <div class=\"card text-white bg-danger\">\n        <div class=\"card-body pb-0\">\n          <h4 class=\"mb-0\">9.823</h4>\n          <p>Pedidos delivery</p>\n        </div>\n        <div class=\"chart-wrapper px-3\" style=\"height:40px;\">\n          \n        </div>\n      </div>\n    </div><!--/.col-->\n  </div><!--/.row-->\n    <div class=\"row col-md-12\">\n      <div class=\"col-6 col-lg-3\">\n        <div class=\"card\">\n          <div class=\"card-body p-3 clearfix\">\n            <i class=\"bg-danger p-3 font-2xl mr-3 float-left mesao\"></i>\n            <div class=\"h5 text-primary mb-0 mt-2\"></div>\n            <div class=\"text-muted text-uppercase font-weight-bold font-xs\">Mesa 1</div>\n          </div>\n        </div>\n      </div>\n      <div class=\"col-6 col-lg-3\">\n        <div class=\"card\">\n          <div class=\"card-body p-3 clearfix\">\n            <i class=\"bg-warning p-3 font-2xl mr-3 float-left mesar\"></i>\n            <div class=\"h5 text-primary mb-0 mt-2\"></div>\n            <div class=\"text-muted text-uppercase font-weight-bold font-xs\">Mesa 1</div>\n          </div>\n        </div>\n      </div>\n      <div class=\"col-6 col-lg-3\">\n        <div class=\"card\">\n          <div class=\"card-body p-3 clearfix\">\n            <i class=\"bg-success p-3 font-2xl mr-3 float-left mesal\"></i>\n            <div class=\"h5 text-primary mb-0 mt-2\"></div>\n            <div class=\"text-muted text-uppercase font-weight-bold font-xs\">Mesa 1</div>\n          </div>\n        </div>\n      </div>\n      <div class=\"col-6 col-lg-3\">\n        <div class=\"card\">\n          <div class=\"card-body p-3 clearfix\">\n            <i class=\"bg-danger p-3 font-2xl mr-3 float-left mesao\"></i>\n            <div class=\"h5 text-primary mb-0 mt-2\"></div>\n            <div class=\"text-muted text-uppercase font-weight-bold font-xs\">Mesa 1</div>\n          </div>\n        </div>\n      </div>\n      <div class=\"col-6 col-lg-3\">\n        <div class=\"card\">\n          <div class=\"card-body p-3 clearfix\">\n            <i class=\"bg-warning p-3 font-2xl mr-3 float-left mesar\"></i>\n            <div class=\"h5 text-primary mb-0 mt-2\"></div>\n            <div class=\"text-muted text-uppercase font-weight-bold font-xs\">Mesa 1</div>\n          </div>\n        </div>\n      </div>\n      <div class=\"col-6 col-lg-3\">\n        <div class=\"card\">\n          <div class=\"card-body p-3 clearfix\">\n            <i class=\"bg-success p-3 font-2xl mr-3 float-left mesal\"></i>\n            <div class=\"h5 text-primary mb-0 mt-2\"></div>\n            <div class=\"text-muted text-uppercase font-weight-bold font-xs\">Mesa 1</div>\n          </div>\n        </div>\n      </div>\n      <div class=\"col-6 col-lg-3\">\n        <div class=\"card\">\n          <div class=\"card-body p-3 clearfix\">\n            <i class=\"bg-danger p-3 font-2xl mr-3 float-left mesao\"></i>\n            <div class=\"h5 text-primary mb-0 mt-2\"></div>\n            <div class=\"text-muted text-uppercase font-weight-bold font-xs\">Mesa 1</div>\n          </div>\n        </div>\n      </div>\n      <div class=\"col-6 col-lg-3\">\n        <div class=\"card\">\n          <div class=\"card-body p-3 clearfix\">\n            <i class=\"bg-warning p-3 font-2xl mr-3 float-left mesar\"></i>\n            <div class=\"h5 text-primary mb-0 mt-2\"></div>\n            <div class=\"text-muted text-uppercase font-weight-bold font-xs\">Mesa 1</div>\n          </div>\n        </div>\n      </div>\n      <div class=\"col-6 col-lg-3\">\n        <div class=\"card\">\n          <div class=\"card-body p-3 clearfix\">\n            <i class=\"bg-success p-3 font-2xl mr-3 float-left mesal\"></i>\n            <div class=\"h5 text-primary mb-0 mt-2\"></div>\n            <div class=\"text-muted text-uppercase font-weight-bold font-xs\">Mesa 1</div>\n          </div>\n        </div>\n      </div>\n    </div>\n</div>\n"
+module.exports = "<!-- Breadcrumb -->\n<ol class=\"breadcrumb\">\n  <app-breadcrumbs></app-breadcrumbs>\n</ol>\n<div class=\"animated fadeIn\">\n  <div class=\"row\">\n    <div class=\"col-sm-6 col-lg-3\">\n      <div class=\"card text-white bg-primary\">\n        <div class=\"card-body pb-0\">\n          <div class=\"btn-group float-right\" dropdown>\n            \n          </div>\n          <h4 class=\"mb-0\">9.823</h4>\n          <p>Pedidos pendentes</p>\n        </div>\n        <div class=\"chart-wrapper px-3\" style=\"height:40px;\">\n          \n        </div>\n      </div>\n    </div><!--/.col-->\n    <div class=\"col-sm-6 col-lg-3\">\n      <div class=\"card text-white bg-info\">\n        <div class=\"card-body pb-0\">\n          \n          <h4 class=\"mb-0\">9.823</h4>\n          <p>Pedidos fechados</p>\n        </div>\n        <div class=\"chart-wrapper px-3\" style=\"height:40px;\">\n          \n        </div>\n      </div>\n    </div><!--/.col-->\n    <div class=\"col-sm-6 col-lg-3\">\n      <div class=\"card text-white bg-warning\">\n        <div class=\"card-body pb-0\">\n          \n          <h4 class=\"mb-0\">9.823</h4>\n          <p>Produtos em estoque</p>\n        </div>\n        <div class=\"chart-wrapper\" style=\"height:40px;\">\n        </div>\n      </div>\n    </div><!--/.col-->\n    <div class=\"col-sm-6 col-lg-3\">\n      <div class=\"card text-white bg-danger\">\n        <div class=\"card-body pb-0\">\n          <h4 class=\"mb-0\">9.823</h4>\n          <p>Pedidos delivery</p>\n        </div>\n        <div class=\"chart-wrapper px-3\" style=\"height:40px;\">\n          \n        </div>\n      </div>\n    </div><!--/.col-->\n  </div><!--/.row-->\n    <div class=\"row col-md-12\">\n      <div class=\"col-6 col-lg-3\" *ngFor=\"let o of mesas.data\">\n        <div class=\"card\">\n          <div class=\"card-body p-3 clearfix\">\n            <i class=\"p-3 font-2xl mr-3 float-left mesao\" [ngClass]=\"{'bg-success': o.status == 0, 'bg-danger': o.status === 1, 'bg-info': o.status === 2}\"></i>\n            <div class=\"h5 text-primary mb-0 mt-2\"></div>\n            <div class=\"text-muted text-uppercase font-weight-bold font-xs\">{{ o.name }}</div>\n          </div>\n        </div>\n      </div>\n    </div>\n</div>\n"
 
 /***/ }),
 
@@ -58,6 +58,7 @@ module.exports = "<div class=\"animated fadeIn\">\n  <div class=\"row\">\n    <d
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_jquery__ = __webpack_require__("../../../../jquery/dist/jquery.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_jquery__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_dashboard_service__ = __webpack_require__("../../../../../src/app/dashboard/services/dashboard.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -70,9 +71,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var DashboardComponent = (function () {
-    function DashboardComponent(route) {
+    function DashboardComponent(route, httpService) {
         this.route = route;
+        this.httpService = httpService;
+        this.mesas = {};
         this.brandPrimary = '#20a8d8';
         this.brandSuccess = '#4dbd74';
         this.brandInfo = '#63c2de';
@@ -516,6 +520,12 @@ var DashboardComponent = (function () {
             this.mainChartData2.push(this.random(80, 100));
             this.mainChartData3.push(65);
         }
+        this.httpService.builder()
+            .list({}, 'mesas')
+            .then(function (res) {
+            _this.mesas = res;
+            console.log('mesas', _this.mesas);
+        });
         setTimeout(function () {
             _this.hideLoading();
         }, 2000);
@@ -524,10 +534,10 @@ var DashboardComponent = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             template: __webpack_require__("../../../../../src/app/dashboard/dashboard.component.html")
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* Router */]) === "function" && _a || Object])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* Router */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__services_dashboard_service__["a" /* DashboardService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_dashboard_service__["a" /* DashboardService */]) === "function" && _b || Object])
     ], DashboardComponent);
     return DashboardComponent;
-    var _a;
+    var _a, _b;
 }());
 
 //# sourceMappingURL=dashboard.component.js.map
@@ -541,11 +551,13 @@ var DashboardComponent = (function () {
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DashboardModule", function() { return DashboardModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ng2_charts_ng2_charts__ = __webpack_require__("../../../../ng2-charts/ng2-charts.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ng2_charts_ng2_charts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_ng2_charts_ng2_charts__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ngx_bootstrap_dropdown__ = __webpack_require__("../../../../ngx-bootstrap/dropdown/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__dashboard_component__ = __webpack_require__("../../../../../src/app/dashboard/dashboard.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__dashboard_routing_module__ = __webpack_require__("../../../../../src/app/dashboard/dashboard-routing.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__("../../../common/@angular/common.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_charts_ng2_charts__ = __webpack_require__("../../../../ng2-charts/ng2-charts.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_charts_ng2_charts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_ng2_charts_ng2_charts__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ngx_bootstrap_dropdown__ = __webpack_require__("../../../../ngx-bootstrap/dropdown/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__dashboard_component__ = __webpack_require__("../../../../../src/app/dashboard/dashboard.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__dashboard_routing_module__ = __webpack_require__("../../../../../src/app/dashboard/dashboard-routing.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_dashboard_service__ = __webpack_require__("../../../../../src/app/dashboard/services/dashboard.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -557,23 +569,73 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
+
 var DashboardModule = (function () {
     function DashboardModule() {
     }
     DashboardModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
             imports: [
-                __WEBPACK_IMPORTED_MODULE_4__dashboard_routing_module__["a" /* DashboardRoutingModule */],
-                __WEBPACK_IMPORTED_MODULE_1_ng2_charts_ng2_charts__["ChartsModule"],
-                __WEBPACK_IMPORTED_MODULE_2_ngx_bootstrap_dropdown__["a" /* BsDropdownModule */]
+                __WEBPACK_IMPORTED_MODULE_1__angular_common__["CommonModule"],
+                __WEBPACK_IMPORTED_MODULE_5__dashboard_routing_module__["a" /* DashboardRoutingModule */],
+                __WEBPACK_IMPORTED_MODULE_2_ng2_charts_ng2_charts__["ChartsModule"],
+                __WEBPACK_IMPORTED_MODULE_3_ngx_bootstrap_dropdown__["a" /* BsDropdownModule */],
             ],
-            declarations: [__WEBPACK_IMPORTED_MODULE_3__dashboard_component__["a" /* DashboardComponent */]]
+            declarations: [__WEBPACK_IMPORTED_MODULE_4__dashboard_component__["a" /* DashboardComponent */]],
+            providers: [__WEBPACK_IMPORTED_MODULE_6__services_dashboard_service__["a" /* DashboardService */]]
         })
     ], DashboardModule);
     return DashboardModule;
 }());
 
 //# sourceMappingURL=dashboard.module.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/dashboard/services/dashboard.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DashboardService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_http_service__ = __webpack_require__("../../../../../src/app/app-http.service.ts");
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+var DashboardService = (function (_super) {
+    __extends(DashboardService, _super);
+    function DashboardService() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.eventEmitter = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"];
+        return _this;
+    }
+    DashboardService.prototype.builder = function (resource) {
+        if (resource === void 0) { resource = ''; }
+        return _super.prototype.builder.call(this, resource);
+    };
+    DashboardService = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])()
+    ], DashboardService);
+    return DashboardService;
+}(__WEBPACK_IMPORTED_MODULE_1__app_http_service__["a" /* AppHttpService */]));
+
+//# sourceMappingURL=dashboard.service.js.map
 
 /***/ })
 
