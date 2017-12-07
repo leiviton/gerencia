@@ -24,6 +24,7 @@ class MesaTransformer extends TransformerAbstract
             'id'         => (int) $model->id,
             'name' => $model->name,
             'description' => $model->description,
+            'status' => $model->status,
 
             /* place your other model properties here */
 

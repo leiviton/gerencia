@@ -50,84 +50,12 @@
     </div><!--/.col-->
   </div><!--/.row-->
     <div class="row col-md-12">
-      <div class="col-6 col-lg-3">
+      <div class="col-6 col-lg-3" *ngFor="let o of mesas.data">
         <div class="card">
           <div class="card-body p-3 clearfix">
-            <i class="bg-danger p-3 font-2xl mr-3 float-left mesao"></i>
+            <i class="p-3 font-2xl mr-3 float-left mesao" [ngClass]="{'bg-success': o.status == 0, 'bg-danger': o.status === 1, 'bg-info': o.status === 2}"></i>
             <div class="h5 text-primary mb-0 mt-2"></div>
-            <div class="text-muted text-uppercase font-weight-bold font-xs">Mesa 1</div>
-          </div>
-        </div>
-      </div>
-      <div class="col-6 col-lg-3">
-        <div class="card">
-          <div class="card-body p-3 clearfix">
-            <i class="bg-warning p-3 font-2xl mr-3 float-left mesar"></i>
-            <div class="h5 text-primary mb-0 mt-2"></div>
-            <div class="text-muted text-uppercase font-weight-bold font-xs">Mesa 1</div>
-          </div>
-        </div>
-      </div>
-      <div class="col-6 col-lg-3">
-        <div class="card">
-          <div class="card-body p-3 clearfix">
-            <i class="bg-success p-3 font-2xl mr-3 float-left mesal"></i>
-            <div class="h5 text-primary mb-0 mt-2"></div>
-            <div class="text-muted text-uppercase font-weight-bold font-xs">Mesa 1</div>
-          </div>
-        </div>
-      </div>
-      <div class="col-6 col-lg-3">
-        <div class="card">
-          <div class="card-body p-3 clearfix">
-            <i class="bg-danger p-3 font-2xl mr-3 float-left mesao"></i>
-            <div class="h5 text-primary mb-0 mt-2"></div>
-            <div class="text-muted text-uppercase font-weight-bold font-xs">Mesa 1</div>
-          </div>
-        </div>
-      </div>
-      <div class="col-6 col-lg-3">
-        <div class="card">
-          <div class="card-body p-3 clearfix">
-            <i class="bg-warning p-3 font-2xl mr-3 float-left mesar"></i>
-            <div class="h5 text-primary mb-0 mt-2"></div>
-            <div class="text-muted text-uppercase font-weight-bold font-xs">Mesa 1</div>
-          </div>
-        </div>
-      </div>
-      <div class="col-6 col-lg-3">
-        <div class="card">
-          <div class="card-body p-3 clearfix">
-            <i class="bg-success p-3 font-2xl mr-3 float-left mesal"></i>
-            <div class="h5 text-primary mb-0 mt-2"></div>
-            <div class="text-muted text-uppercase font-weight-bold font-xs">Mesa 1</div>
-          </div>
-        </div>
-      </div>
-      <div class="col-6 col-lg-3">
-        <div class="card">
-          <div class="card-body p-3 clearfix">
-            <i class="bg-danger p-3 font-2xl mr-3 float-left mesao"></i>
-            <div class="h5 text-primary mb-0 mt-2"></div>
-            <div class="text-muted text-uppercase font-weight-bold font-xs">Mesa 1</div>
-          </div>
-        </div>
-      </div>
-      <div class="col-6 col-lg-3">
-        <div class="card">
-          <div class="card-body p-3 clearfix">
-            <i class="bg-warning p-3 font-2xl mr-3 float-left mesar"></i>
-            <div class="h5 text-primary mb-0 mt-2"></div>
-            <div class="text-muted text-uppercase font-weight-bold font-xs">Mesa 1</div>
-          </div>
-        </div>
-      </div>
-      <div class="col-6 col-lg-3">
-        <div class="card">
-          <div class="card-body p-3 clearfix">
-            <i class="bg-success p-3 font-2xl mr-3 float-left mesal"></i>
-            <div class="h5 text-primary mb-0 mt-2"></div>
-            <div class="text-muted text-uppercase font-weight-bold font-xs">Mesa 1</div>
+            <div class="text-muted text-uppercase font-weight-bold font-xs">{{ o.name }}</div>
           </div>
         </div>
       </div>

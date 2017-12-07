@@ -12,7 +12,8 @@ class Mesa extends Model implements Transformable
 
     protected $fillable = [
         'name',
-        'description'
+        'description',
+        'status'
     ];
 
     public function orders(){

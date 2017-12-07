@@ -25,7 +25,14 @@ export class AppHttpService{
     }
 
     setAccessToken () {
-        let token = this.getCookie('token');
+        let token = '';
+
+        if(this.getCookie('token') === null || this.getCookie('token') === '' || this.getCookie('token') === undefined)
+        {
+            token = this.getToken();
+        }else{
+            token = this.getCookie('token');
+        }
         this.header = new Headers({'Authorization': 'Bearer ' + token, 'Accept': 'application/json'});
     }
 
@@ -96,9 +103,10 @@ export class AppHttpService{
                 let message = 'Algo deu errado, informe o erro' + err.status + 'ao administrador';
                 if(err.status === 401)
                 {
-                    message = 'Você não tem permissão para acessar isso, informe um usuario e uma senha validos';
+                    message = 'Você não tem permissão para acessar isso, informe um usuario e senha validos';
                     this.toaster.pop('error', 'Erro', message);
-                    this.router.navigate(['/pages/login']);
+                    localStorage.removeItem('user');
+                    this.router.navigate(['/user/login']);
                 }
                 if (err.status === 500)
                 {
@@ -137,4 +145,10 @@ export class AppHttpService{
 
         return null;
     }
+
+    private getToken()
+    {
+        return localStorage.getItem('token');
+    }
+
 }

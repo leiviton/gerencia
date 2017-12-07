@@ -46,6 +46,11 @@ export const routes: Routes = [
             path: 'cadastro/produtos',
             loadChildren: './cadastro/produtos/produtos.module#ProdutosModule',
         }
+        ,
+        {
+            path: 'user',
+            loadChildren: './user/user.module#UserModule',
+        }
     ]
   },
   {

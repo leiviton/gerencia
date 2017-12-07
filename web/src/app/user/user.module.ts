@@ -5,12 +5,15 @@ import { FormsModule } from '@angular/forms';
 import { PasswordComponent } from './components/password.component';
 import { ProfileComponent } from './components/profile.component';
 
+import { LoginComponent } from "./components/login.component"
+
+import { UserRoutingModule } from "./user-routing.module"
 import { AuthService } from './services/auth.service';
 //import { LogoutComponent } from './components/logout.component';
-import { } from 'user-routing.module';
 
 @NgModule({
     imports: [
+        UserRoutingModule,
         CommonModule,
         FormsModule
     ],
@@ -18,6 +21,7 @@ import { } from 'user-routing.module';
         PasswordComponent,
         ProfileComponent,
        // LogoutComponent
+        LoginComponent
     ],
     providers: [ AuthService ]
 })

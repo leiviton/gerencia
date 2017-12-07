@@ -31,7 +31,6 @@ export class NewComponent implements OnInit {
         jQuery('#infoModal').show().addClass('show');
         setTimeout(() => {
             this.grupos();
-            this.subgrupos();
             this.hideLoading();
         },300)
     }

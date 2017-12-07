@@ -6,14 +6,13 @@ import { environment } from '../../../environments/environment';
 
 import * as jQuery from 'jquery';
 @Component({
-    templateUrl: './login.component.html',
+    templateUrl: './logar.component.html',
 })
 export class LoginComponent {
     user: any = {
         username: null,
         password: null,
     };
-
 
     constructor(private AuthService: AuthService, private router: Router) {}
 
@@ -36,13 +35,14 @@ export class LoginComponent {
 
         this.AuthService.login(data).then((res) => {
             document.cookie = "token=" + res.access_token + "; expires=" + res.expires_in;
+            localStorage.setItem('token',res.access_token);
             this.AuthService.setAccessToken();
             this.AuthService.getUser()
                 .then((res) => {
                     localStorage.setItem('user',JSON.stringify(res));
                     console.log('user',res)
                     this.hideLoading();
-                    this.router.navigate(['/']);
+                    this.router.navigate(['/dashboard']);
             });
         }).catch(() => {
             this.hideLoading();

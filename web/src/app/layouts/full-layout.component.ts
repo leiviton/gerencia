@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-
 import {ToasterService} from 'angular2-toaster';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -10,9 +10,18 @@ import {ToasterService} from 'angular2-toaster';
 })
 export class FullLayoutComponent implements OnInit {
 
-  constructor(private route: Router, private toasterService: ToasterService) {}
-
   user = JSON.parse(localStorage.getItem('user') || null);
+  show = false;
+  constructor(private route: Router, private toasterService: ToasterService) {
+    setInterval(() => {
+        this.user = JSON.parse(localStorage.getItem('user') || null);
+        if (this.user != null)
+        {
+          this.show = true;
+        }
+      }, 1000);
+  }
+  mesas = {};
   public disabled = false;
   public status: {isopen: boolean} = {isopen: false};
 
@@ -28,11 +37,9 @@ export class FullLayoutComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.user);
-    if (!this.user || this.user === null || this.user.id === undefined){
-      
-      this.toasterService.pop('warning','Atenção','É necessário logar no sistema');
-      this.route.navigate(['/pages/login']);
-      return;
-    }
+      if (!this.user){
+        this.toasterService.pop('warning','Atenção','É necessário logar no sistema');
+        this.route.navigateByUrl('/user/login');
+      }
   }
 }

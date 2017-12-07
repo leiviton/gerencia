@@ -18,16 +18,16 @@ Route::get('/', function () {
 
 
 
-Route::group(['prefix'=>'api/v1'],function () {
+Route::group(['prefix'=>'api/v1','middleware' => 'auth:api'],function () {
 
-    Route::group(['prefix'=>'admin','namespace'=>'Api\V1\Deliveryman','middleware' => 'auth:api'], function (){
+    Route::group(['prefix'=>'admin','namespace'=>'Api\V1\Deliveryman'], function (){
         Route::get('orders','DeliverymanCheckoutController@index');
         Route::get('filters','DeliverymanCheckoutController@getOrderFiltros');
         Route::get('auth/user','DeliverymanCheckoutController@authenticated');
         Route::get('order/{id}','DeliverymanCheckoutController@show');
     });
 
-    Route::group(['prefix' => 'admin','namespace'=>'Api\V1\Admin','middleware' => 'auth:api'],function (){
+    Route::group(['prefix' => 'admin','namespace'=>'Api\V1\Admin'],function (){
        Route::post('order','AdminCheckoutController@store');
        Route::get('groups','CategoriesController@index');
        Route::get('subgroups','SubgroupsController@index');

@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { NgForOf } from '@angular/common';
 import * as jQuery from 'jquery';
+import { DashboardService } from "./services/dashboard.service"
 @Component({
   templateUrl: 'dashboard.component.html'
 })
 export class DashboardComponent implements OnInit {
 
-    constructor(private route: Router) { }
+    constructor(private route: Router, private httpService: DashboardService) { }
     hideLoading(){
         jQuery(".container-loading").hide();
     }
@@ -15,6 +17,7 @@ export class DashboardComponent implements OnInit {
         jQuery(".container-loading").show();
     }
 
+  mesas = {};
   public brandPrimary = '#20a8d8';
   public brandSuccess = '#4dbd74';
   public brandInfo = '#63c2de';
@@ -476,6 +479,14 @@ export class DashboardComponent implements OnInit {
       this.mainChartData2.push(this.random(80, 100));
       this.mainChartData3.push(65);
     }
+
+
+      this.httpService.builder()
+          .list({},'mesas')
+          .then((res) => {
+              this.mesas = res;
+              console.log('mesas', this.mesas);
+          });
     setTimeout(() => {
         this.hideLoading();
       }, 2000);

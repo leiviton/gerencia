@@ -6,6 +6,7 @@ namespace Pedidos\Services;
 
 use Pedidos\Models\Order;
 use Pedidos\Repositories\CupomRepository;
+use Pedidos\Repositories\MesaRepository;
 use Pedidos\Repositories\OrderRepository;
 use Pedidos\Repositories\ProductRepository;
 //use Dmitrovskiy\IonicPush\PushProcessor;
@@ -25,6 +26,11 @@ class OrderService{
      */
     private $productRepository;
     /**
+     * @var MesaRepository
+     */
+    private $mesaRepository;
+
+    /**
      * @var PushProcessor
      * private $pusherProcessor;
      */
@@ -33,7 +39,8 @@ class OrderService{
     public function __construct(
         OrderRepository $orderRepository,
         CupomRepository $cupomRepository,
-        ProductRepository $productRepository
+        ProductRepository $productRepository,
+        MesaRepository $mesaRepository
         //PushProcessor $pushProcessor
     )
     {
@@ -42,6 +49,7 @@ class OrderService{
         $this->productRepository = $productRepository;
 
         //$this->pushProcessor = $pushProcessor;
+        $this->mesaRepository = $mesaRepository;
     }
 
     public function create(array $data){
@@ -63,6 +71,8 @@ class OrderService{
             }
             $items = $data['items'];
             $order = $this->orderRepository->create($data);
+            $mesa = $this->mesaRepository->find($data['mesa_id']);
+            $mesa->status = 1;
 
             $total = 0;
             foreach ($items as $item){
@@ -77,6 +87,7 @@ class OrderService{
             if (isset($cupom)){
                 $order->total = $total - $cupom->value;
             }
+            $mesa->save();
             $order->save();
 
             \DB::commit();

@@ -26,12 +26,6 @@ $factory->define(Pedidos\Models\Category::class, function (Faker\Generator $fake
    ];
 });
 
-$factory->define(Pedidos\Models\Subgroup::class, function (Faker\Generator $faker){
-    return [
-        'name' =>$faker->word
-    ];
-});
-
 $factory->define(Pedidos\Models\Client::class, function (Faker\Generator $faker){
     return [
         'phone' => $faker->phoneNumber,
