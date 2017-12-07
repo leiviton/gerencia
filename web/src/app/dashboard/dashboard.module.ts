@@ -6,7 +6,9 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { DashboardComponent } from './dashboard.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 
-import { DashboardService } from "./services/dashboard.service"
+import { DashboardService } from "./services/dashboard.service";
+
+import { BreadcrumbsComponent } from './../shared/breadcrumb.component';
 
 @NgModule({
   imports: [
@@ -15,7 +17,8 @@ import { DashboardService } from "./services/dashboard.service"
     ChartsModule,
     BsDropdownModule,
   ],
-  declarations: [ DashboardComponent ],
+  declarations: [ DashboardComponent,
+      BreadcrumbsComponent ],
     providers: [DashboardService]
 })
 export class DashboardModule { }
