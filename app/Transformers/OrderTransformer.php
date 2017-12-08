@@ -30,7 +30,7 @@ class OrderTransformer extends TransformerAbstract
             'status'=>$model->status,
             'type' => (int) $model->type,
             'hash'=>$model->hash,
-            'created_at' => (string)date_format($model->created_at,'d/m/Y H:m'),
+            'created_at' => (string)date_format($model->created_at,'d/m/Y H:i:s'),
             'updated_at' => $model->updated_at
         ];
     }
