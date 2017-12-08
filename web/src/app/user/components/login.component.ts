@@ -40,7 +40,6 @@ export class LoginComponent {
             this.AuthService.getUser()
                 .then((res) => {
                     localStorage.setItem('user',JSON.stringify(res));
-                    console.log('user',res)
                     this.hideLoading();
                     this.router.navigate(['/dashboard']);
             });

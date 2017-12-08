@@ -520,6 +520,7 @@ var DashboardComponent = (function () {
             this.mainChartData2.push(this.random(80, 100));
             this.mainChartData3.push(65);
         }
+        this.httpService.setAccessToken();
         this.httpService.builder()
             .list({}, 'mesas')
             .then(function (res) {
@@ -529,6 +530,8 @@ var DashboardComponent = (function () {
         setTimeout(function () {
             _this.hideLoading();
         }, 2000);
+    };
+    DashboardComponent.prototype.getMesas = function () {
     };
     DashboardComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({

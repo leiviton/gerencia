@@ -94,20 +94,16 @@ var AppHttpService = (function () {
         this.http = http;
         this.router = router;
         this.toaster = toaster;
+        this.token = null;
         this.setAccessToken();
     }
     AppHttpService.prototype.request = function () {
         return this.http;
     };
     AppHttpService.prototype.setAccessToken = function () {
-        var token = '';
-        if (this.getCookie('token') === null || this.getCookie('token') === '' || this.getCookie('token') === undefined) {
-            token = this.getToken();
-        }
-        else {
-            token = this.getCookie('token');
-        }
-        this.header = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]({ 'Authorization': 'Bearer ' + token, 'Accept': 'application/json' });
+        this.token = this.getToken();
+        console.log('token', this.token);
+        this.header = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]({ 'Authorization': 'Bearer ' + this.token, 'Accept': 'application/json' });
     };
     AppHttpService.prototype.builder = function (resource) {
         this.url = __WEBPACK_IMPORTED_MODULE_2__environments_environment__["a" /* environment */].server_url + '/api/v1/admin/' + resource;
@@ -905,11 +901,11 @@ var SIDEBAR_TOGGLE_DIRECTIVES = [
 // The list of which env maps to which file can be found in `angular-cli.json`.
 var environment = {
     production: false,
-    server_url: 'http://108.61.155.169',
-    //server_url: 'http://localhost:8810',
+    //server_url: 'http://108.61.155.169',
+    server_url: 'http://localhost:8810',
     client_id: '2',
-    //client_secret: 'rBMntWhL5TwsCChSU8LDukT9szAGejFRYQZ3szek'
-    client_secret: 'ANfB8DW1guNguHB8wqpQ8MBGyh09wQKeV6bPFbyA'
+    client_secret: 'rBMntWhL5TwsCChSU8LDukT9szAGejFRYQZ3szek'
+    //client_secret: 'ANfB8DW1guNguHB8wqpQ8MBGyh09wQKeV6bPFbyA'
 };
 //# sourceMappingURL=environment.js.map
 

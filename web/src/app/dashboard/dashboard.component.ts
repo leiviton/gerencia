@@ -479,8 +479,7 @@ export class DashboardComponent implements OnInit {
       this.mainChartData2.push(this.random(80, 100));
       this.mainChartData3.push(65);
     }
-
-
+      this.httpService.setAccessToken();
       this.httpService.builder()
           .list({},'mesas')
           .then((res) => {
@@ -490,5 +489,10 @@ export class DashboardComponent implements OnInit {
     setTimeout(() => {
         this.hideLoading();
       }, 2000);
+  }
+
+  getMesas()
+  {
+
   }
 }

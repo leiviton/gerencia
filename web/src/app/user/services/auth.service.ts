@@ -37,11 +37,17 @@ export class AuthService extends AppHttpService {
 
     login(data) {
        let observable = this.http.post(environment.server_url + '/oauth/token',data);
-       return this.toPromise(observable);
+        return this.toPromise(observable).then((res) => {
+            this.eventEmitter.emit();
+            return res;
+        });
     }
 
     logout() {
         let observable = this.http.get(this.url + 'logout',{headers: this.header});
-        return this.toPromise(observable);
+        return this.toPromise(observable).then((res) => {
+            this.eventEmitter.emit();
+            return res;
+        });
     }
 }

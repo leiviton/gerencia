@@ -27,6 +27,11 @@ class User extends Model implements Transformable,AuthenticatableContract,
     public function client(){
         return $this->hasOne(Client::class);
     }
+
+    public function oauthAccessToken()
+    {
+        return $this->hasMany('Pedidos\Models\OauthAccessToken');
+    }
     
         /**
          * The attributes that are mass assignable.

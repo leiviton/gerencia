@@ -63,7 +63,6 @@ var LoginComponent = (function () {
             _this.AuthService.getUser()
                 .then(function (res) {
                 localStorage.setItem('user', JSON.stringify(res));
-                console.log('user', res);
                 _this.hideLoading();
                 _this.router.navigate(['/dashboard']);
             });
@@ -151,12 +150,20 @@ var AuthService = (function (_super) {
         });
     };
     AuthService.prototype.login = function (data) {
+        var _this = this;
         var observable = this.http.post(__WEBPACK_IMPORTED_MODULE_2__environments_environment__["a" /* environment */].server_url + '/oauth/token', data);
-        return this.toPromise(observable);
+        return this.toPromise(observable).then(function (res) {
+            _this.eventEmitter.emit();
+            return res;
+        });
     };
     AuthService.prototype.logout = function () {
+        var _this = this;
         var observable = this.http.get(this.url + 'logout', { headers: this.header });
-        return this.toPromise(observable);
+        return this.toPromise(observable).then(function (res) {
+            _this.eventEmitter.emit();
+            return res;
+        });
     };
     AuthService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])()

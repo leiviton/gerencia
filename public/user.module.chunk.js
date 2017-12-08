@@ -8,6 +8,8 @@ webpackJsonp(["user.module"],{
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_auth_service__ = __webpack_require__("../../../../../src/app/user/services/auth.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jquery__ = __webpack_require__("../../../../jquery/dist/jquery.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_jquery__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -20,6 +22,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var LogoutComponent = (function () {
     function LogoutComponent(router, authService) {
         this.router = router;
@@ -27,12 +30,21 @@ var LogoutComponent = (function () {
     }
     LogoutComponent.prototype.ngOnInit = function () {
         var _this = this;
+        this.showLoading();
         this.authService.builder()
             .logout()
             .then(function () {
+            localStorage.removeItem('token');
             localStorage.removeItem('user');
+            _this.hideLoading();
             _this.router.navigate(['/user/login']);
         });
+    };
+    LogoutComponent.prototype.hideLoading = function () {
+        __WEBPACK_IMPORTED_MODULE_3_jquery__(".container-loading").hide();
+    };
+    LogoutComponent.prototype.showLoading = function () {
+        __WEBPACK_IMPORTED_MODULE_3_jquery__(".container-loading").show();
     };
     LogoutComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({

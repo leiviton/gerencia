@@ -15,6 +15,7 @@ import 'rxjs/add/operator/toPromise';
 export class AppHttpService{
     protected url: string;
     protected header: Headers;
+    protected token = null;
 
     request() {
         return this.http;
@@ -25,15 +26,9 @@ export class AppHttpService{
     }
 
     setAccessToken () {
-        let token = '';
-
-        if(this.getCookie('token') === null || this.getCookie('token') === '' || this.getCookie('token') === undefined)
-        {
-            token = this.getToken();
-        }else{
-            token = this.getCookie('token');
-        }
-        this.header = new Headers({'Authorization': 'Bearer ' + token, 'Accept': 'application/json'});
+        this.token = this.getToken();
+        console.log('token',this.token);
+        this.header = new Headers({'Authorization': 'Bearer ' + this.token, 'Accept': 'application/json'});
     }
 
     builder(resource: string){
