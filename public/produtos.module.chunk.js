@@ -48,11 +48,11 @@ var EditComponent = (function () {
             status: null
         };
         this.groups = {};
-        this.subgroups = {};
     }
     EditComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.showLoading();
+        this.httpService.setAccessToken();
         __WEBPACK_IMPORTED_MODULE_1_jquery__('#infoModal').show().addClass('show');
         this.route.params
             .subscribe(function (params) {
@@ -64,7 +64,6 @@ var EditComponent = (function () {
                 _this.product.price = res.data.price;
                 _this.product.category_id = res.data.category.data.id;
                 _this.product.status = res.data.status;
-                _this.subgrupos();
                 _this.grupos();
                 _this.hideLoading();
             });
@@ -73,6 +72,7 @@ var EditComponent = (function () {
     };
     EditComponent.prototype.grupos = function () {
         var _this = this;
+        this.httpService.setAccessToken();
         this.httpService.builder()
             .list({}, 'groups')
             .then(function (res) {
@@ -80,18 +80,10 @@ var EditComponent = (function () {
             console.log(_this.groups);
         });
     };
-    EditComponent.prototype.subgrupos = function () {
-        var _this = this;
-        this.httpService.builder()
-            .list({}, 'subgroups')
-            .then(function (res) {
-            _this.subgroups = res;
-            console.log(_this.subgroups);
-        });
-    };
     EditComponent.prototype.save = function (e) {
         var _this = this;
         this.showLoading();
+        this.httpService.setAccessToken();
         this.httpService.builder('product')
             .update(this.product.id, e)
             .then(function () {
@@ -105,6 +97,7 @@ var EditComponent = (function () {
         var _this = this;
         this.showLoading();
         this.product.status = status;
+        this.httpService.setAccessToken();
         this.httpService.builder('product')
             .update(this.product.id, this.product)
             .then(function (res) {
@@ -303,7 +296,6 @@ var ProdutosComponent = (function () {
             _this.httpService.builder().list({}, 'products')
                 .then(function (res) {
                 _this.produtos = res;
-                console.log(_this.produtos);
                 _this.hideLoading();
             });
         });

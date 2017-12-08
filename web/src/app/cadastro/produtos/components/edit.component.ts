@@ -29,9 +29,9 @@ export class EditComponent implements OnInit {
     };
 
     groups = {};
-    subgroups = {};
     ngOnInit(): void {
         this.showLoading();
+        this.httpService.setAccessToken();
         jQuery('#infoModal').show().addClass('show');
         this.route.params
             .subscribe(params => {
@@ -43,7 +43,6 @@ export class EditComponent implements OnInit {
                         this.product.price = res.data.price;
                         this.product.category_id = res.data.category.data.id;
                         this.product.status = res.data.status;
-                        this.subgrupos();
                         this.grupos();
                         this.hideLoading();
                     });
@@ -53,6 +52,7 @@ export class EditComponent implements OnInit {
 
     grupos()
     {
+        this.httpService.setAccessToken();
         this.httpService.builder()
             .list({},'groups')
             .then((res)=>{
@@ -61,20 +61,12 @@ export class EditComponent implements OnInit {
             })
     }
 
-    subgrupos()
-    {
-        this.httpService.builder()
-            .list({},'subgroups')
-            .then((res)=>{
-                this.subgroups = res;
-                console.log(this.subgroups);
-            })
-    }
+
 
     save(e)
     {
         this.showLoading();
-
+        this.httpService.setAccessToken();
         this.httpService.builder('product')
             .update(this.product.id, e)
             .then(() => {
@@ -90,6 +82,7 @@ export class EditComponent implements OnInit {
     {
         this.showLoading();
         this.product.status = status;
+        this.httpService.setAccessToken();
         this.httpService.builder('product')
             .update(this.product.id,this.product)
             .then((res) =>{

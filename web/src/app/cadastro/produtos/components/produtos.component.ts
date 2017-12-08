@@ -29,7 +29,6 @@ export class ProdutosComponent implements OnInit {
               this.httpService.builder().list({}, 'products')
                   .then((res) => {
                       this.produtos = res;
-                      console.log(this.produtos);
                       this.hideLoading();
                   });
           });
