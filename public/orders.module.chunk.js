@@ -49,6 +49,7 @@ var EditComponent = (function () {
     EditComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.showLoading();
+        this.httpService.setAccessToken();
         __WEBPACK_IMPORTED_MODULE_1_jquery__('#successModal').on('show.bs.modal').show().addClass('show');
         this.route.params
             .subscribe(function (params) {
@@ -140,6 +141,7 @@ var NewComponent = (function () {
         this.items = this.httpService.get();
         console.log('items', this.items);
         this.total = this.httpService.get().total;
+        this.httpService.setAccessToken();
         this.httpService.builder()
             .list({}, 'mesas')
             .then(function (res) {
@@ -158,6 +160,7 @@ var NewComponent = (function () {
     NewComponent.prototype.buscar = function () {
         var _this = this;
         this.showLoading();
+        this.httpService.setAccessToken();
         this.httpService.builder('search')
             .search(this.pesquisa.value)
             .then(function (res) {
@@ -196,6 +199,7 @@ var NewComponent = (function () {
         var _this = this;
         console.log('mesa', this.mesa_id);
         this.showLoading();
+        this.httpService.setAccessToken();
         if (this.httpService.get().items.length > 0) {
             var pedido = {
                 items: this.httpService.get().items,
@@ -294,6 +298,7 @@ var OrdersComponent = (function () {
     OrdersComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.showLoading();
+        this.httpService.setAccessToken();
         this.httpService.eventEmitter
             .subscribe(function () {
             _this.httpService.builder().list({}, 'orders')

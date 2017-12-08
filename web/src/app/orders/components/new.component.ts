@@ -39,6 +39,7 @@ export class NewComponent implements OnInit {
         console.log('items', this.items);
         this.total = this.httpService.get().total;
 
+        this.httpService.setAccessToken();
         this.httpService.builder()
             .list({},'mesas')
             .then((res) => {
@@ -60,6 +61,7 @@ export class NewComponent implements OnInit {
     buscar()
     {
         this.showLoading();
+        this.httpService.setAccessToken();
         this.httpService.builder('search')
             .search(this.pesquisa.value)
             .then((res) => {
@@ -106,6 +108,7 @@ export class NewComponent implements OnInit {
     {
         console.log('mesa',this.mesa_id);
         this.showLoading();
+        this.httpService.setAccessToken();
         if(this.httpService.get().items.length > 0)
         {
             let pedido = {

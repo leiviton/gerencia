@@ -27,6 +27,7 @@ export class EditComponent implements OnInit {
 
     ngOnInit(): void {
         this.showLoading();
+        this.httpService.setAccessToken();
         jQuery('#successModal').on('show.bs.modal').show().addClass('show');
         this.route.params
             .subscribe(params => {
