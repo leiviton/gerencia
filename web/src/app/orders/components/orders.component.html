@@ -33,7 +33,7 @@
                     <td class="text-center" *ngIf="tamanho > 0">{{ o.total | currency:'BRL':true }}</td>
                     <td *ngIf="tamanho > 0">{{ o.client.data.user.data.name }}</td>
                     <td class="text-center" *ngIf="tamanho > 0">{{ o.created_at | slice:0:10 }} </td>
-                    <td class="text-center" *ngIf="tamanho > 0">{{ o.created_at | slice:11:16}}</td>
+                    <td class="text-center" *ngIf="tamanho > 0">{{ o.created_at | slice:11:18}}</td>
                     <td class="text-center" *ngIf="tamanho > 0">
                       <i class="fa fa-motorcycle" *ngIf="o.type === 1" tooltip="Delivery"></i>
                       <i class="fa fa fa-cutlery" *ngIf="o.type === 0" tooltip="Mesa"></i>

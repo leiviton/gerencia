@@ -23,6 +23,7 @@ class OrderTransformer extends TransformerAbstract
      */
     public function transform(Order $model)
     {
+        $previsao = date_format($model->created_at,'H:i:s');
         return [
             'id'         => (int) $model->id,
             'total'      => (float) $model->total,
@@ -31,6 +32,7 @@ class OrderTransformer extends TransformerAbstract
             'type' => (int) $model->type,
             'hash'=>$model->hash,
             'created_at' => (string)date_format($model->created_at,'d/m/Y H:i:s'),
+            'previsao' => (string) date_format(strtotime('+ 20 minutes',strtotime($previsao)), 'H:i:s'),
             'updated_at' => $model->updated_at
         ];
     }
