@@ -901,11 +901,11 @@ var SIDEBAR_TOGGLE_DIRECTIVES = [
 // The list of which env maps to which file can be found in `angular-cli.json`.
 var environment = {
     production: false,
-    //server_url: 'http://108.61.155.169',
-    server_url: 'http://localhost:8810',
+    server_url: 'http://108.61.155.169',
+    //server_url: 'http://localhost:8810',
     client_id: '2',
-    client_secret: 'rBMntWhL5TwsCChSU8LDukT9szAGejFRYQZ3szek'
-    //client_secret: 'ANfB8DW1guNguHB8wqpQ8MBGyh09wQKeV6bPFbyA'
+    //client_secret: 'rBMntWhL5TwsCChSU8LDukT9szAGejFRYQZ3szek'
+    client_secret: 'ANfB8DW1guNguHB8wqpQ8MBGyh09wQKeV6bPFbyA'
 };
 //# sourceMappingURL=environment.js.map
 
