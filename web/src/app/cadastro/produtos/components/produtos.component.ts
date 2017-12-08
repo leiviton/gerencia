@@ -23,6 +23,7 @@ export class ProdutosComponent implements OnInit {
 
   ngOnInit(): void {
       this.showLoading();
+      this.httpService.setAccessToken();
       this.httpService.eventEmitter
           .subscribe(() => {
               this.httpService.builder().list({}, 'products')

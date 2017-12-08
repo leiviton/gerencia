@@ -197,6 +197,7 @@ var NewComponent = (function () {
     };
     NewComponent.prototype.grupos = function () {
         var _this = this;
+        this.httpService.setAccessToken();
         this.httpService.builder()
             .list({}, 'groups')
             .then(function (res) {
@@ -206,6 +207,7 @@ var NewComponent = (function () {
     };
     NewComponent.prototype.subgrupos = function () {
         var _this = this;
+        this.httpService.setAccessToken();
         this.httpService.builder()
             .list({}, 'subgroups')
             .then(function (res) {
@@ -216,6 +218,7 @@ var NewComponent = (function () {
     NewComponent.prototype.save = function (e) {
         var _this = this;
         this.showLoading();
+        this.httpService.setAccessToken();
         this.httpService.builder()
             .insert(e, 'product/store')
             .then(function () {
@@ -294,6 +297,7 @@ var ProdutosComponent = (function () {
     ProdutosComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.showLoading();
+        this.httpService.setAccessToken();
         this.httpService.eventEmitter
             .subscribe(function () {
             _this.httpService.builder().list({}, 'products')

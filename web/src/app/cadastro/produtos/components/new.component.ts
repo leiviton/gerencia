@@ -37,6 +37,7 @@ export class NewComponent implements OnInit {
 
     grupos()
     {
+        this.httpService.setAccessToken();
         this.httpService.builder()
             .list({},'groups')
             .then((res)=>{
@@ -48,6 +49,7 @@ export class NewComponent implements OnInit {
 
     subgrupos()
     {
+        this.httpService.setAccessToken();
         this.httpService.builder()
             .list({},'subgroups')
             .then((res)=>{
@@ -59,6 +61,7 @@ export class NewComponent implements OnInit {
     save(e)
     {
         this.showLoading();
+        this.httpService.setAccessToken();
         this.httpService.builder()
           .insert(e,'product/store')
           .then(()=> {
