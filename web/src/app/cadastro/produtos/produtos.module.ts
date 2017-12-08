@@ -9,6 +9,7 @@ import { NewComponent } from './components/new.component';
 import { EditComponent} from "./components/edit.component";
 import { ProdutosRoutingModule } from './produtos-routing.module';
 
+
 import { ProdutosService } from './services/produtos.service';
 
 

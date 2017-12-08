@@ -23,7 +23,7 @@
                 </thead>
                 <tbody>
                   <tr *ngIf="tamanho == 0">
-                    <td colspan="7"> Sem dados</td>
+                    <td colspan="9"> Sem dados</td>
                   </tr>
                   <tr *ngFor="let o of orders.data" (dblclick)="edit(o.id)">
                     <td class="text-center" *ngIf="tamanho > 0">

@@ -41,6 +41,10 @@ var LoginComponent = (function () {
             password: null,
         };
     }
+    LoginComponent.prototype.ngOnInit = function () {
+    };
+    LoginComponent.prototype.reload = function () {
+    };
     LoginComponent.prototype.login = function (e) {
         var _this = this;
         e.preventDefault();
