@@ -39,8 +39,8 @@
                     <td class="text-center" *ngIf="tamanho > 0">{{ o.previsao }} </td>
                     <td class="text-center" *ngIf="tamanho > 0">{{ o.mesa.data.name }} </td>
                     <td class="text-center" *ngIf="tamanho > 0">
-                      <i class="fa fa-motorcycle" *ngIf="o.type === 1" tooltip="Delivery"></i>
-                      <i class="fa fa fa-cutlery" *ngIf="o.type === 0" tooltip="Mesa"></i>
+                      <i class="fa fa-motorcycle" *ngIf="o.type != 1" tooltip="Delivery"></i>
+                      <i class="fa fa fa-cutlery" *ngIf="o.type == 1" tooltip="Mesa"></i>
                     </td>
                   </tr>
                 </tbody>
