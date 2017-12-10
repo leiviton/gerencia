@@ -1,4 +1,4 @@
-<header class="app-header navbar" *ngIf="user !== '' && user !== null">
+<header class="app-header navbar" *ngIf="user !== '' && user !== null" [ngClass]="{'fundo': !user || user == '' || user == null}">
   <button class="navbar-toggler d-lg-none" type="button" appMobileSidebarToggler>&#9776;</button>
   <a class="navbar-brand logo" href="#"></a>
   <button class="navbar-toggler d-md-down-none" type="button" appSidebarToggler>&#9776;</button>
@@ -18,7 +18,10 @@
   </ul>
 </header>
 
-<div class="app-body">
+<header class="app-header navbar" *ngIf="user == '' && user == null || !user" [ngClass]="{'fundo': !user || user == '' || user == null}">
+</header>
+
+<div class="app-body" [ngClass]="{'fundo': !user || user == '' || user == null}">
   <div class="sidebar" *ngIf="user !== '' && user !== null">
     <nav class="sidebar-nav">
       <ul class="nav">
@@ -80,7 +83,6 @@
   <main class="main">
 
     <div class="container-fluid" style="padding: 15px">
-
       <router-outlet></router-outlet>
     </div><!-- /.conainer-fluid -->
   </main>

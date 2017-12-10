@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ToasterService} from 'angular2-toaster';
 import * as jQuery from 'jquery';
-import { BsModalRef } from 'ngx-bootstrap/modal';
 
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgForOf } from '@angular/common';

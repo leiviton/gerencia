@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
@@ -8,7 +8,7 @@ import * as jQuery from 'jquery';
 @Component({
     templateUrl: './logar.component.html',
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent {
     user: any = {
         username: null,
         password: null,
@@ -18,14 +18,6 @@ export class LoginComponent implements OnInit{
 
     }
 
-    ngOnInit(){
-
-    }
-
-    reload()
-    {
-
-    }
     login(e) {
         e.preventDefault();
 

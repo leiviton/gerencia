@@ -15,6 +15,12 @@
                             <input type="text" class="form-control col-md-3" name="pesquisa" [(ngModel)]="pesquisa.value" placeholder="Digite produto" required minlength="2" autofocus="autofocus">
                             <label class="label qtd col-md-2"> Qtd.</label>
                             <input class="form-control col-md-1" type="number" min="1" max="10" name="qtd" [(ngModel)]="qtd" />
+                            <label for="tipo" class="label col-md-2">Tipo: </label>
+                            <select id="tipo" name="tipo" class="form-control col-md-2" [(ngModel)]="tipo">
+                                <option value="0"> Delivery</option>
+                                <option value="1"> Salão</option>
+                                <option value="2"> Retirada</option>
+                            </select>
                         </div>
                     </form>
                 </div>
@@ -22,17 +28,17 @@
                 <div class="col-md-12" style="padding-bottom: 5px;">
                     <form #myForm="ngForm" class="form-inline">
                         <div class="form-group col-md-12">
-                            <label class="col-md-2" *ngIf="mesa_id === 1">Telefone: </label>
-                            <input *ngIf="mesa_id === 1"  type="text" class="form-control col-md-4" name="pesquisa"  placeholder="Digite Telefone" required minlength="11" [(ngModel)]="pesquisa.telefone" (blur)="buscarCliente()">
-                            <label for="mesa" class="label col-md-2">Mesa: </label>
-                            <select id="mesa" name="category_id" class="form-control col-md-4" [(ngModel)]="mesa_id">
+                            <label class="col-md-2" *ngIf="tipo != 1">Telefone: </label>
+                            <input *ngIf="tipo != 1"  type="text" class="form-control col-md-4" name="pesquisa"  placeholder="Digite Telefone" required minlength="11" [(ngModel)]="pesquisa.telefone" (blur)="buscarCliente()">
+                            <label for="mesa" class="label col-md-2" *ngIf="tipo == 1">Mesa: </label>
+                            <select id="mesa" name="category_id" class="form-control col-md-4" [(ngModel)]="mesa_id" *ngIf="tipo == 1">
                                 <option *ngFor="let g of mesas" value="{{ g.id }}"> {{ g.name }}</option>
                             </select>
                         </div>
                     </form>
                 </div>
                 <div class="row borderdiv">
-                    <div class="col-md-4 mb-4 padding" style="height: 300px; overflow: auto" *ngIf="mesa_id===1">
+                    <div class="col-md-4 mb-4 padding" style="height: 300px; overflow: auto" *ngIf="tipo != 1">
                         <!-- Nav tabs -->
                         <tabset>
                             <tab heading="Cliente">
@@ -48,7 +54,7 @@
                             </tab>
                         </tabset>
                     </div><!--/.col-->
-                <div class="col-lg-8 padding" [ngClass]="{'col-md-12 col-lg-12': mesa_id !== 1, 'col-md-8 col-lg-8': mesa_id === 1}">
+                <div class="col-lg-8 padding" [ngClass]="{'col-md-12 col-lg-12': tipo != 0 && tipo != 2, 'col-md-8 col-lg-8': tipo  != 1}">
                     <div class="table-responsive" style="height: 240px; overflow: auto">
                         <table class="table scrollbox table-striped">
                             <thead>

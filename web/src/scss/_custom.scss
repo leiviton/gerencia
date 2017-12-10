@@ -35,11 +35,21 @@
   margin-top: -30px;
 }
 
-.login{
-  width: 100%;
-  height: 100%;
-  margin-top: -90px;
-  margin-left: -100px;
+@media (min-width: 361px) {
+  .login {
+    width: 100%;
+    height: 100%;
+    margin-top: -90px;
+    margin-left: -100px;
+  }
+}
+@media (max-width: 451px) {
+  .login {
+    width: 100%;
+    height: 100%;
+    margin-top: -120px;
+    margin-left: 0;
+  }
 }
 
 .img-login{
@@ -90,4 +100,9 @@
 }
 .padding{
   padding-top: 5px;
+}
+
+.fundo{
+  background-color: #505ca7 !important;
+  border-bottom: 1px solid #505ca7 !important;
 }

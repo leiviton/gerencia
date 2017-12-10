@@ -81,6 +81,7 @@ class OrderService{
                 $total += $item['price'] * $item['qtd'];
             }
             $order->total = $total;
+            $order->type = $data['type'];
 
             $order->mesa_id = $data['mesa_id'];
 
