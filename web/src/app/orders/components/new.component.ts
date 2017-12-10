@@ -7,7 +7,6 @@ import { OrdersService } from '../services/orders.service';
 import { FormsModule } from '@angular/forms';
 
 import {ToasterService} from 'angular2-toaster';
-import {type} from "os";
 
 @Component({
     templateUrl: 'new.component.html'
@@ -17,7 +16,7 @@ export class NewComponent implements OnInit {
     constructor(private httpService: OrdersService, private router: Router, private route: ActivatedRoute,private toasterService: ToasterService) {
     }
 
-    cart =  {};
+    cart =  this.httpService.get();
     order = {};
     client = '';
     items = [];
@@ -32,20 +31,6 @@ export class NewComponent implements OnInit {
     mesa_id = 1;
     tipo = 0;
 
-    value_type = [
-        {
-            id:0,
-            name: 'Delivery'
-        },
-        {
-            id:1,
-            name: 'Salão'
-        },
-        {
-            id:2,
-            name: 'Retirada'
-        },
-    ];
     ngOnInit(): void {
         if(!this.cart)
         {
@@ -54,7 +39,7 @@ export class NewComponent implements OnInit {
         this.items = this.httpService.get();
         console.log('items', this.items);
         this.total = this.httpService.get().total;
-        this.cart = this.httpService.get();
+
         this.httpService.setAccessToken();
         this.httpService.builder()
             .list({},'mesas')
@@ -62,9 +47,6 @@ export class NewComponent implements OnInit {
                 this.mesas = res.data;
                 console.log('mesas', this.mesas);
             });
-
-        console.log('tipo',this.tipo);
-
         this.showLoading();
         jQuery('#new_order').show().addClass('show');
         setTimeout(() => {
