@@ -70,8 +70,12 @@ class AdminCheckoutController extends Controller
 
     public function getMesas()
     {
+        $status = 3;
         $result = $this->mesaRepository->skipPresenter(false)
-                        ->all();
+            ->scopeQuery(function($query) use($status){
+                return $query->where('status','<',$status);
+            })
+            ->all();
         return $result;
     }
 
