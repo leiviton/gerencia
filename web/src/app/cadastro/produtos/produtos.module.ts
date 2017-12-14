@@ -12,6 +12,7 @@ import { ProdutosRoutingModule } from './produtos-routing.module';
 
 import { ProdutosService } from './services/produtos.service';
 
+import { CurrencyMaskModule } from "ng2-currency-mask";
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { ProdutosService } from './services/produtos.service';
       FormsModule,
     ProdutosRoutingModule,
     ChartsModule,
-    BsDropdownModule
+    BsDropdownModule,
+      CurrencyMaskModule
   ],
   declarations: [ ProdutosComponent, NewComponent, EditComponent],
   providers: [ ProdutosService ]

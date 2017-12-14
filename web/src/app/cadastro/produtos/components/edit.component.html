@@ -24,7 +24,7 @@
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label" for="text-input">Preço venda <i class="fa fa-dollar"></i></label>
                         <div class="col-md-4">
-                            <input type="text" id="text-input" name="price" [(ngModel)]="product.price" class="form-control" placeholder="Price">
+                            <input type="text" id="text-input" name="price" currencyMask [(ngModel)]="product.price" [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" class="form-control" placeholder="Price">
                         </div>
                     </div>
                     <hr>

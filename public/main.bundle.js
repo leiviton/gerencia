@@ -102,7 +102,6 @@ var AppHttpService = (function () {
     };
     AppHttpService.prototype.setAccessToken = function () {
         this.token = this.getToken();
-        console.log('token', this.token);
         this.header = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]({ 'Authorization': 'Bearer ' + this.token, 'Accept': 'application/json' });
     };
     AppHttpService.prototype.builder = function (resource) {
@@ -348,6 +347,7 @@ var AppModule = (function () {
     return AppModule;
 }());
 
+//ng build --output-path=./../public 
 //# sourceMappingURL=app.module.js.map
 
 /***/ }),

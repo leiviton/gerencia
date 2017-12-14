@@ -11,11 +11,14 @@ import { UserRoutingModule } from "./user-routing.module"
 import { AuthService } from './services/auth.service';
 import { LogoutComponent } from './components/logout.component';
 
+import { LoadingModule } from 'ngx-loading';
+
 @NgModule({
     imports: [
         UserRoutingModule,
         CommonModule,
-        FormsModule
+        FormsModule,
+        LoadingModule
     ],
     declarations: [
         PasswordComponent,

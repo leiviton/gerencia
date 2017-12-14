@@ -69,3 +69,5 @@ import { AppHttpService } from './app-http.service';
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
+
+//ng build --output-path=./../public

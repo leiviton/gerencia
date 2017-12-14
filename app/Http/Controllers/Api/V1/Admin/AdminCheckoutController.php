@@ -68,6 +68,17 @@ class AdminCheckoutController extends Controller
         return $result;
     }
 
+    public function payment($id,Request $request)
+    {
+        $data = $request->all();
+
+        $o = $this->orderService->pagyment($id,$data);
+
+        return $this->repository
+            ->skipPresenter(false)
+            ->find($o->id);
+    }
+
     public function getMesas()
     {
         $status = 3;

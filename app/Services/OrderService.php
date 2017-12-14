@@ -121,6 +121,23 @@ class OrderService{
         return $order;
     }
 
+    public function pagyment($id,$data)
+    {
+        \DB::beginTransaction();
+
+        try {
+            $order = $this->orderRepository->find($id);
+            $order->payment_orders->create($data);
+            $order->status = 3;
+            $order->save();
+            \DB::commit();
+            return $order;
+        } catch (\Exception $e){
+            \DB::rollback();
+            throw $e;
+        }
+    }
+
     public function updateLocation($order,$geo){
         $order->geo = $geo->lat.','.$geo->long;
         if (!$order->geo){

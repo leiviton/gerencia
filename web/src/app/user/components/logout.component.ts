@@ -11,6 +11,8 @@ import * as jQuery from 'jquery';
 })
 
 export class LogoutComponent implements OnInit {
+
+
     constructor(private router: Router, private authService: AuthService){}
 
     ngOnInit(){
