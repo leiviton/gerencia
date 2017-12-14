@@ -18,6 +18,10 @@ class PaymentOrders extends Model implements Transformable
     ];
 
     public function order(){
-        return $this->hasMany(Order::class);
+        return $this->belongsTo(Order::class);
+    }
+
+    public function paymentTypes(){
+        return $this->belongsTo(PaymentTypes::class);
     }
 }

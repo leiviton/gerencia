@@ -46,4 +46,7 @@ class Order extends Model implements Transformable
         return $this->hasMany(Product::class);
     }
 
+    public function paymentOrders(){
+        return $this->hasMany(PaymentOrders::class);
+    }
 }
