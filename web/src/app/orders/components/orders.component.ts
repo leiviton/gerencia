@@ -13,7 +13,14 @@ import * as jQuery from 'jquery';
 })
 export class OrdersComponent implements OnInit {
 
-  constructor(private httpService: OrdersService, private router: Router, private toasterService: ToasterService) { }
+  constructor(private httpService: OrdersService, private router: Router, private toasterService: ToasterService) {
+      document.onkeydown = ((e) =>{
+          if(e.keyCode == 113)
+          {
+              return this.showModal();
+          }
+      });
+  }
 
   cor = false;
 
@@ -37,6 +44,7 @@ export class OrdersComponent implements OnInit {
                       this.hideLoading();
                   });
           });
+
       this.httpService.eventEmitter.emit();
   }
 
@@ -45,6 +53,12 @@ export class OrdersComponent implements OnInit {
         this.cor = true;
         this.router.navigate(['/orders/edit/'+ id]);
     }
+
+    new()
+    {
+       return this.router.navigate(['/orders/new']);
+    }
+
 
     hideLoading(){
         jQuery(".container-loading").hide();

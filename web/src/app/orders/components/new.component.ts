@@ -14,7 +14,19 @@ import {ToasterService} from 'angular2-toaster';
 export class NewComponent implements OnInit {
 
     constructor(private httpService: OrdersService, private router: Router, private route: ActivatedRoute,private toasterService: ToasterService) {
+        document.onkeydown = ((e) =>{
+            if(e.keyCode  == 120)
+            {
+                this.save();
+            }
+
+            if(e.keyCode == 27)
+            {
+                this.close();
+            }
+        });
     }
+
 
     cart =  this.httpService.get();
     order = {};
@@ -47,11 +59,12 @@ export class NewComponent implements OnInit {
                 this.mesas = res.data;
                 console.log('mesas', this.mesas);
             });
+
         this.showLoading();
         jQuery('#new_order').show().addClass('show');
         setTimeout(() => {
             this.hideLoading();
-        },300)
+        },300);
     }
 
     buscarCliente()
@@ -107,6 +120,9 @@ export class NewComponent implements OnInit {
 
     save()
     {
+        if(this.tipo != 1){
+            this.mesa_id = 100;
+        }
         console.log('mesa',this.mesa_id);
         this.showLoading();
         this.httpService.setAccessToken();
@@ -152,3 +168,4 @@ export class NewComponent implements OnInit {
         jQuery(".container-loading").show();
     }
 }
+
