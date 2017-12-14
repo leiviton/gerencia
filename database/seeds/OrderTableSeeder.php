@@ -18,7 +18,8 @@ class OrderTableSeeder extends Seeder
                 $c->items()->save(factory(OrderItem::class)->make([
                     'product_id' => rand(1,5),
                     'qtd' => 2,
-                    'price' => 50
+                    'price' => 50,
+                    'subtotal' => 2 * 50
                 ]));
             }
         });

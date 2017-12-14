@@ -27,7 +27,6 @@ export class AppHttpService{
 
     setAccessToken () {
         this.token = this.getToken();
-        console.log('token',this.token);
         this.header = new Headers({'Authorization': 'Bearer ' + this.token, 'Accept': 'application/json'});
     }
 

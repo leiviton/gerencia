@@ -11,6 +11,7 @@
                 <thead>
                   <tr>
                     <th class="title text-center">Status</th>
+                    <th class="title text-center">Tipo</th>
                     <th class="title text-center">Codigo</th>
                     <th class="title-table text-center"> Total</th>
                     <th class="title"> Cliente</th>
@@ -18,18 +19,22 @@
                     <th class="title text-center">Hora</th>
                     <th class="title text-center">Previsão</th>
                     <th class="title text-center">Mesa</th>
-                    <th class="title text-center">Tipo</th>
+                    <th class="title text-center">Ações</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr *ngIf="tamanho == 0">
-                    <td colspan="9"> Sem dados</td>
+                    <td colspan="10"> Sem dados</td>
                   </tr>
                   <tr *ngFor="let o of orders.data" (dblclick)="edit(o.id)">
                     <td class="text-center" *ngIf="tamanho > 0">
                       <span class="badge badge-success" *ngIf="o.status === 2" tooltip="Finalizada">Finalizada</span>
                       <span class="badge badge-info" *ngIf="o.status === 1" tooltip="Em preparo">Entregue</span>
                       <span class="badge badge-danger" *ngIf="o.status === 0" tooltip="Pendente">Cozinha</span>
+                    </td>
+                    <td class="text-center" *ngIf="tamanho > 0">
+                      <i class="fa fa-motorcycle" *ngIf="o.type != 1" tooltip="Delivery"></i>
+                      <i class="fa fa fa-cutlery" *ngIf="o.type == 1" tooltip="Mesa"></i>
                     </td>
                     <td class="text-center" *ngIf="tamanho > 0">{{ o.id }}</td>
                     <td class="text-center" *ngIf="tamanho > 0">{{ o.total | currency:'BRL':true }}</td>
@@ -38,9 +43,8 @@
                     <td class="text-center" *ngIf="tamanho > 0">{{ o.created_at | slice:11:19}}</td>
                     <td class="text-center" *ngIf="tamanho > 0">{{ o.previsao }} </td>
                     <td class="text-center" *ngIf="tamanho > 0">{{ o.mesa.data.name }} </td>
-                    <td class="text-center" *ngIf="tamanho > 0">
-                      <i class="fa fa-motorcycle" *ngIf="o.type != 1" tooltip="Delivery"></i>
-                      <i class="fa fa fa-cutlery" *ngIf="o.type == 1" tooltip="Mesa"></i>
+                    <td class="text-center">
+                      <a class="btn btn-link text-success pagamento" [routerLink]="['payment/'+ o.id]" tooltip="Finalizar"><i class="fa fa-check"></i></a>
                     </td>
                   </tr>
                 </tbody>
