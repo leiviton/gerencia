@@ -14,7 +14,8 @@ class OrderItem extends Model implements Transformable
         'product_id',
         'order_id',
         'price',
-        'qtd'
+        'qtd',
+        'subtotal'
     ];
 
     public function order(){
