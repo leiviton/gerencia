@@ -9,5 +9,5 @@ export const environment = {
   //server_url: 'http://localhost:8810',
   client_id: '2',
   //client_secret: 'rBMntWhL5TwsCChSU8LDukT9szAGejFRYQZ3szek'
-  client_secret: 'ANfB8DW1guNguHB8wqpQ8MBGyh09wQKeV6bPFbyA'
+  client_secret: 'fb7duCeekdxfWJI4gsmzoxV1vnVlmgVwIGlGgK2I'
 };

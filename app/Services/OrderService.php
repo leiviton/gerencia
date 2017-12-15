@@ -127,7 +127,7 @@ class OrderService{
 
         try {
             $order = $this->orderRepository->find($id);
-            $order->payment_orders->create($data);
+            $order->paymentOrders()->create($data);
             $order->status = 3;
             $order->save();
             \DB::commit();

@@ -70,9 +70,14 @@ class AdminCheckoutController extends Controller
 
     public function payment(Request $request)
     {
-        $data = $request->all();
+        $id = (int) $request->get('order_id');
+        $data['total_pago'] = $request->get('total_pago');
+        $data['desconto'] = $request->get('desconto');
+        $data['acrescimo'] = $request->get('acrescimo');
+        $data['total_original'] = $request->get('total_original');
+        $data['payment_types_id'] = $request->get('payment_types_id');
 
-        $o = $this->orderService->pagyment($data['order_id'],$data);
+        $o = $this->orderService->pagyment($id,$data);
 
         return $this->repository
             ->skipPresenter(false)
