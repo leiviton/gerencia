@@ -61,4 +61,8 @@ class OrderTransformer extends TransformerAbstract
     public function includeMesa(Order $model){
         return $this->item($model->mesa,new MesaTransformer());
     }
+
+    public function includePayment(Order $model){
+        return $this->collection($model->paymentOrders,new PaymentOrdersTransformer());
+    }
 }
