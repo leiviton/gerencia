@@ -14,7 +14,7 @@ class AddChavePayment extends Migration
     public function up()
     {
         Schema::table('payment_orders', function (Blueprint $table) {
-            $table->integer('payment_types_id')->unsigned()->nullable();
+            $table->integer('payment_types_id')->after('total_original')->unsigned()->nullable();
             $table->foreign('payment_types_id')->references('id')->on('payment_types');
         });
     }
