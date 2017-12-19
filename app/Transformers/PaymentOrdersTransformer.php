@@ -12,8 +12,6 @@ use Pedidos\Models\PaymentOrders;
 class PaymentOrdersTransformer extends TransformerAbstract
 {
 
-    protected $defaultIncludes = ['order'];
-
     /**
      * Transform the PaymentOrders entity
      * @param Pedidos\Models\PaymentOrders $model
@@ -32,9 +30,5 @@ class PaymentOrdersTransformer extends TransformerAbstract
             'created_at' => $model->created_at,
             'updated_at' => $model->updated_at
         ];
-    }
-
-    public function includeOrder(PaymentOrders $model){
-        return $this->item($model->order,new OrderTransformer());
     }
 }

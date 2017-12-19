@@ -7,6 +7,8 @@ import { EditComponent} from './components/edit.component';
 
 import { NewComponent } from "./components/new.component";
 
+import { PaymentComponent } from "./components/payment.component";
+
 const routes: Routes = [
   {
     path: '',
@@ -27,6 +29,13 @@ const routes: Routes = [
               component: NewComponent,
               data:{
                   title:'Novo'
+              }
+          },
+          {
+              path: 'payment/:id',
+              component: PaymentComponent,
+              data: {
+                  title: 'Editar'
               }
           }
       ]

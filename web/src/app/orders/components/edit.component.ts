@@ -16,7 +16,6 @@ export class EditComponent implements OnInit {
     order = {};
     client = '';
     products = {};
-    public loading = true;
 
     hideLoading(){
         jQuery(".container-loading").hide();

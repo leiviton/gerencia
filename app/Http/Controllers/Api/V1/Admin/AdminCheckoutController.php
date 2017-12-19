@@ -15,6 +15,7 @@ use Pedidos\Http\Requests\CheckoutRequest;
 use Illuminate\Http\Request;
 use Pedidos\Repositories\MesaRepository;
 use Pedidos\Repositories\OrderRepository;
+use Pedidos\Repositories\PaymentTypesRepository;
 use Pedidos\Repositories\ProductRepository;
 use Pedidos\Services\OrderService;
 
@@ -37,13 +38,18 @@ class AdminCheckoutController extends Controller
      * @var MesaRepository
      */
     private $mesaRepository;
+    /**
+     * @var PaymentTypesRepository
+     */
+    private $typesRepository;
 
     public function  __construct(OrderRepository $repository, OrderService $orderService
-        , ProductRepository $productRepository, MesaRepository $mesaRepository){
+        , ProductRepository $productRepository, MesaRepository $mesaRepository, PaymentTypesRepository $typesRepository){
         $this->repository = $repository;
         $this->orderService = $orderService;
         $this->productRepository = $productRepository;
         $this->mesaRepository = $mesaRepository;
+        $this->typesRepository = $typesRepository;
     }
 
     public function store(CheckoutRequest $request){
@@ -60,7 +66,7 @@ class AdminCheckoutController extends Controller
 
         $result = $this->productRepository->skipPresenter(false)
                        ->scopeQuery(function($query) use($pesquisa){
-                          return $query->where('status',0)
+                          return $query->where('status',3)
                                        ->where('id',$pesquisa)
                                        ->orWhere('name',$pesquisa);
                        })
@@ -90,6 +96,17 @@ class AdminCheckoutController extends Controller
         $result = $this->mesaRepository->skipPresenter(false)
             ->scopeQuery(function($query) use($status){
                 return $query->where('status','<',$status);
+            })
+            ->all();
+        return $result;
+    }
+
+    public function getTypePayments()
+    {
+        $ativo = 'S';
+        $result = $this->typesRepository->skipPresenter(false)
+            ->scopeQuery(function($query) use($ativo){
+                return $query->where('ativo',$ativo);
             })
             ->all();
         return $result;

@@ -13,7 +13,7 @@ use Pedidos\Models\Order;
 class OrderTransformer extends TransformerAbstract
 {
     protected $availableIncludes = ['cupom'];
-    protected $defaultIncludes = ['client','items','mesa'];
+    protected $defaultIncludes = ['client','items','mesa','payment'];
 
     /**
      * Transform the \Order entity

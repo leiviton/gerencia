@@ -128,7 +128,13 @@ class OrderService{
         try {
             $order = $this->orderRepository->find($id);
             $order->paymentOrders()->create($data);
-            $order->status = 3;
+            if($order->total > $data['total_pago'])
+            {
+                $order->status = 2;
+            }else{
+                $order->status = 3;
+            }
+
             $order->save();
             \DB::commit();
             return $order;
