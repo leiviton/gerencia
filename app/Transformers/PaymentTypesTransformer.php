@@ -22,6 +22,8 @@ class PaymentTypesTransformer extends TransformerAbstract
     {
         return [
             'id'         => (int) $model->id,
+            'name' => $model->type,
+            'ativo' => $model->ativo,
 
             /* place your other model properties here */
 

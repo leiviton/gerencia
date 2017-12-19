@@ -68,6 +68,11 @@ export class PaymentComponent implements OnInit {
                         console.log('order',this.order);
                         this.hideLoading();
                     });
+                this.httpService.builder().list('','typepayment')
+                    .then((res) => {
+                        this.tipo = res.data;
+                        console.log('tipo',this.tipo)
+                });
             });
 
         this.httpService.eventEmitter.emit();
