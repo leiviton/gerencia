@@ -121,7 +121,7 @@ export class NewComponent implements OnInit {
     save()
     {
         if(this.tipo != 1){
-            this.mesa_id = 100;
+            this.mesa_id = 1;
         }
         console.log('mesa',this.mesa_id);
         this.showLoading();

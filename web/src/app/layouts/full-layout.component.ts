@@ -37,7 +37,6 @@ export class FullLayoutComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.user);
       if (!this.user){
         this.toasterService.pop('warning','Atenção','É necessário logar no sistema');
         this.route.navigateByUrl('/user/login');

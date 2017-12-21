@@ -79,36 +79,16 @@
                             </tbody>
                         </table>
                     </div>
-                <hr>
-                <div class="col-md-12 text-center"><p class="qtd">TOTAL: {{ total | currency:'BRL':true }}</p></div>
+                    <hr>
+                    <div class="col-md-12 text-center"><p class="qtd">TOTAL: {{ total | currency:'BRL':true }}</p></div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="modal-footer">
-            <div class="modal-button">
+            <div class="modal-footer">
+                 <div class="modal-button">
                     <a class="btn btn-link Left"><i class="fa fa-print"></i> Imprimir</a>
                     <button class="btn btn-info" (click)="save()"><i class="fa fa-save"></i> Salvar pedido (F9)</button>
                     <button class="btn btn-danger text-left" type="button" (click)="close()"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
-                </div>
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<div tabindex="-1" class="modal fade" id="pesquisa" role="dialog" aria-hidden="true" aria-labelledby="myModalLabel" style="display: none;">
-    <div class="modal-dialog modal-primary" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-            </div>
-            <div class="modal-body">
-
-            </div>
-            <div class="modal-footer">
-                <div class="modal-button">
-                    <a class="btn btn-link Left"><i class="fa fa-print"></i> Imprimir</a>
-                    <button class="btn btn-danger text-left" type="button" (click)="closeMd()"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
-                    <button class="btn btn-success" type="button"><i class="fa fa-arrow-circle-right"></i> Fechar</button>
                 </div>
             </div>
         </div>

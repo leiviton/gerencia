@@ -28,10 +28,12 @@ export class PaymentComponent implements OnInit {
     }
 
     order = {
-        id:0
+        id:0,
+        total:0
     };
     products = {};
     total = 0;
+    type_id = null;
     payment = {
         'order_id':null,
         'total_pago':0,
@@ -41,22 +43,11 @@ export class PaymentComponent implements OnInit {
         'payment_id':1
     };
     troco = 0;
-    tipo = [
-        {
-            id:1,
-            name: 'Dinheiro'
-        },
-        {
-            id:2,
-            name: 'Cartão'
-        },
-        {
-            id:3,
-            name: 'Cheque'
-        }
-    ];
+    tipo = {};
     ngOnInit(): void {
-
+        this.showLoading();
+        jQuery('#payment').show().addClass('show');
+        this.tipos();
         this.httpService.setAccessToken();
         this.route.params
             .subscribe(params => {
@@ -64,23 +55,14 @@ export class PaymentComponent implements OnInit {
                     .then((res) => {
                         this.order = res.data;
                         this.payment.order_id = this.order.id;
-                        this.products = res.data.items.data;
+                        this.products = res.data.items;
                         console.log('order',this.order);
                         this.hideLoading();
                     });
-                this.httpService.builder().list('','typepayment')
-                    .then((res) => {
-                        this.tipo = res.data;
-                        console.log('tipo',this.tipo)
-                });
-            });
 
+
+            });
         this.httpService.eventEmitter.emit();
-        this.showLoading();
-        jQuery('#payment').show().addClass('show');
-        setTimeout(() => {
-            this.hideLoading();
-        },300);
     }
 
     save()
@@ -89,20 +71,36 @@ export class PaymentComponent implements OnInit {
         this.payment.total_pago = this.payment.total_pago - this.troco;
         console.log(this.payment);
         this.httpService.setAccessToken();
-        if(this.payment.total_pago > 0)
-        {
-            this.httpService.builder()
-                .insert(this.payment,'payment')
-                .then((res) => {
-                    this.httpService.eventEmitter.emit();
-                    this.hideLoading();
-                    this.toasterService.pop('success', 'Sucesso', 'Pagamento do pedido '+ res.data.id +' realizado com sucesso');
-                    this.close();
-                });
-        }else {
+        console.log('tipo',this.type_id);
+        if(this.type_id !== null) {
+            if (this.payment.total_pago < ((this.order.total + this.payment.acrescimo) - this.payment.desconto)){
+                this.hideLoading();
+                this.toasterService.pop('error', 'Erro', 'Pagamento não pode ser menor que o valor a pagar');
+            }else{
+                this.httpService.builder()
+                        .insert(this.payment, 'payment')
+                        .then((res) => {
+                            this.httpService.eventEmitter.emit();
+                            this.hideLoading();
+                            this.toasterService.pop('success', 'Sucesso', 'Pagamento do pedido ' + res.data.id + ' realizado com sucesso');
+                            this.close();
+                        });
+            }
+        }else{
             this.hideLoading();
-            this.toasterService.pop('error', 'Erro', 'Pagamento não pode ser igual a zero');
+            this.toasterService.pop('error', 'Erro', 'Tipo pagamento não selecionado');
         }
+    }
+
+    tipos()
+    {
+        this.httpService.setAccessToken();
+        this.httpService.builder()
+            .list({},'typepayment')
+            .then((res)=>{
+                this.tipo = res;
+                console.log(this.tipo);
+            })
     }
 
     close()

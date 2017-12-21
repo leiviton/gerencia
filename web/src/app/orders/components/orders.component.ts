@@ -24,7 +24,9 @@ export class OrdersComponent implements OnInit {
 
   cor = false;
 
-  orders:object = {};
+  orders = {
+      data:[]
+  };
   tamanho = 0;
     pesquisa:any = {
         inicio:null,
@@ -40,7 +42,6 @@ export class OrdersComponent implements OnInit {
                   .then((res) => {
                       this.orders = res;
                       this.tamanho = res.data.length;
-                      console.log(this.tamanho);
                       this.hideLoading();
                   });
           });
@@ -75,13 +76,12 @@ export class OrdersComponent implements OnInit {
     {
         jQuery(".modal").hide();
     }
-    pesquisar(fields)
+    pesquisar()
     {
 
         this.showLoading();
-            if(this.pesquisa.inicio !== null && this.pesquisa.fim !== null && this.pesquisa.status)
+            if(this.pesquisa.inicio !== null && this.pesquisa.fim !== null && this.pesquisa.status !== null)
             {
-                console.log(this.pesquisa.inicio);
                 let options = {
                     filters: [
                         {status: this.pesquisa.status},
@@ -99,24 +99,9 @@ export class OrdersComponent implements OnInit {
                         this.toasterService.pop('success', 'Sucesso', 'Dados carregados com sucesso');
 
                     });
-            }else if (this.pesquisa.status!==null && this.pesquisa.inicio===null && this.pesquisa.fim===null){
-                let options = {
-                    filters: [
-                        {status: this.pesquisa.status}
-                    ]
-                };
-                this.httpService.builder().list(options, 'filters/')
-                    .then((res) => {
-                        this.orders = res;
-                        console.log(this.orders);
-                        this.tamanho = res.data.length;
-                        console.log(this.tamanho);
-                        this.hideModal();
-                        this.hideLoading();
-                        this.toasterService.pop('success', 'Sucesso', 'Dados carregados com sucesso');
-                    });
-                this.hideLoading();
-            }else {
+            }else  {
+                this.toasterService.pop('error', 'Erro', 'Preencha inicio, fim e status para pesquisar.');
+
                 this.hideLoading();
             }
     }

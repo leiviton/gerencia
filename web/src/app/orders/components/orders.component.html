@@ -28,8 +28,10 @@
                   </tr>
                   <tr *ngFor="let o of orders.data" (dblclick)="edit(o.id)">
                     <td class="text-center" *ngIf="tamanho > 0">
-                      <span class="badge badge-success" *ngIf="o.status === 2" tooltip="Finalizada">Finalizada</span>
-                      <span class="badge badge-info" *ngIf="o.status === 1" tooltip="Em preparo">Entregue</span>
+                      <span class="badge badge-success" *ngIf="o.status === 3" tooltip="Pagamento realizado"> Pago</span>
+
+                      <span class="badge badge-info" *ngIf="o.status === 2" tooltip="Finalizada">Finalizada</span>
+                      <span class="badge badge-alert" *ngIf="o.status === 1" tooltip="Em preparo">Entregue</span>
                       <span class="badge badge-danger" *ngIf="o.status === 0" tooltip="Pendente">Cozinha</span>
                     </td>
                     <td class="text-center" *ngIf="tamanho > 0">
@@ -44,7 +46,9 @@
                     <td class="text-center" *ngIf="tamanho > 0">{{ o.previsao }} </td>
                     <td class="text-center" *ngIf="tamanho > 0">{{ o.mesa.data.name }} </td>
                     <td class="text-center">
-                      <a class="btn btn-link text-success pagamento" [routerLink]="['payment/'+ o.id]" tooltip="Finalizar"><i class="fa fa-check"></i></a>
+                      <a class="btn btn-link text-alert pagamento" *ngIf="o.status == 3" [routerLink]="['payment/'+ o.id]" tooltip="Ver pagamentos"><i class="fa fa-money"></i></a>
+
+                      <a class="btn btn-link text-success pagamento" *ngIf="o.status != 3" [routerLink]="['payment/'+ o.id]" tooltip="Finalizar"><i class="fa fa-check"></i></a>
                     </td>
                   </tr>
                 </tbody>
@@ -89,7 +93,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="hideModal()">Fechar</button>
-        <button type="button" class="btn btn-primary" (click)="pesquisar(pesquisa)"><i class="fa fa-search"></i> Buscar</button>
+        <button type="button" class="btn btn-primary" (click)="pesquisar()"><i class="fa fa-search"></i> Buscar</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
