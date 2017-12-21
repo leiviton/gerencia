@@ -40,7 +40,7 @@ export class NewComponent implements OnInit {
         telefone:null
     };
     mesas: {};
-    mesa_id = 1;
+    mesa_id = null;
     tipo = 0;
 
     ngOnInit(): void {

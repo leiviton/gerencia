@@ -14,7 +14,8 @@ class CreateTableMesaId extends Migration
     public function up()
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->smallInteger('mesa_id')->default(1)->nullable();
+            $table->integer('mesa_id')->after('user_id')->unsigned()->nullable();
+            $table->foreign('mesa_id')->references('id')->on('mesas');
         });
     }
 
@@ -26,6 +27,7 @@ class CreateTableMesaId extends Migration
     public function down()
     {
         Schema::table('orders', function (Blueprint $table) {
+            $table->dropForeign('mesa_id');
             $table->dropColumn('mesa_id');
         });
     }

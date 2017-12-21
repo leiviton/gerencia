@@ -72,7 +72,6 @@ class OrderService{
             $items = $data['items'];
             $order = $this->orderRepository->create($data);
             $mesa = $this->mesaRepository->find($data['mesa_id']);
-            $mesa->status = 1;
 
             $total = 0;
             foreach ($items as $item){
@@ -80,8 +79,15 @@ class OrderService{
                 $order->items()->create($item);
                 $total += $item['price'] * $item['qtd'];
             }
+
+            if($order->type === 0)
+            {
+                $mesa->status = 3;
+            }else{
+                $mesa->status = 1;
+            }
+
             $order->total = $total;
-            $order->type = $data['type'];
 
             $order->mesa_id = $data['mesa_id'];
 

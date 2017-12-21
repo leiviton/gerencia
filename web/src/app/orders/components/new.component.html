@@ -32,6 +32,7 @@
                             <input *ngIf="tipo != 1"  type="text" class="form-control col-md-4" name="pesquisa"  placeholder="Digite Telefone" required minlength="11" [(ngModel)]="pesquisa.telefone" (blur)="buscarCliente()">
                             <label for="mesa" class="label col-md-2" *ngIf="tipo == 1">Mesa: </label>
                             <select id="mesa" name="category_id" class="form-control col-md-4" [(ngModel)]="mesa_id" *ngIf="tipo == 1">
+                                <option value="null">Selecione a mesa</option>
                                 <option *ngFor="let g of mesas" value="{{ g.id }}"> {{ g.name }}</option>
                             </select>
                         </div>

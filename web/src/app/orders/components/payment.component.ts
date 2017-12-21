@@ -40,10 +40,13 @@ export class PaymentComponent implements OnInit {
         'desconto':0,
         'acrescimo':0,
         'total_original':0,
-        'payment_id':1
+        'payment_types_id':1
     };
     troco = 0;
     tipo = {};
+    valor_pag = 0;
+    divisao = 1;
+    result_div = 0;
     ngOnInit(): void {
         this.showLoading();
         jQuery('#payment').show().addClass('show');
@@ -68,16 +71,17 @@ export class PaymentComponent implements OnInit {
     save()
     {
         this.showLoading();
-        this.payment.total_pago = this.payment.total_pago - this.troco;
-        console.log(this.payment);
-        this.httpService.setAccessToken();
-        console.log('tipo',this.type_id);
-        if(this.type_id !== null) {
-            if (this.payment.total_pago < ((this.order.total + this.payment.acrescimo) - this.payment.desconto)){
-                this.hideLoading();
-                this.toasterService.pop('error', 'Erro', 'Pagamento não pode ser menor que o valor a pagar');
-            }else{
-                this.httpService.builder()
+        console.log('troco',this.troco);
+        if(this.valor_pag >= this.order.total){
+            this.payment.total_pago = (this.valor_pag - (this.valor_pag - ((this.order.total + this.payment.acrescimo) - this.payment.desconto)));
+            this.payment.total_original = this.order.total;
+            this.payment.payment_types_id = this.type_id;
+            console.log(this.payment);
+            this.httpService.setAccessToken();
+            console.log('tipo',this.type_id);
+            if(this.type_id !== null) {
+                console.log('pago',this.payment.total_pago)
+                    this.httpService.builder()
                         .insert(this.payment, 'payment')
                         .then((res) => {
                             this.httpService.eventEmitter.emit();
@@ -85,10 +89,15 @@ export class PaymentComponent implements OnInit {
                             this.toasterService.pop('success', 'Sucesso', 'Pagamento do pedido ' + res.data.id + ' realizado com sucesso');
                             this.close();
                         });
+
+            }else{
+                this.hideLoading();
+                this.toasterService.pop('error', 'Erro', 'Tipo pagamento não selecionado');
+
             }
         }else{
             this.hideLoading();
-            this.toasterService.pop('error', 'Erro', 'Tipo pagamento não selecionado');
+            this.toasterService.pop('error', 'Erro', 'Pagamento não pode ser menor que o valor a pagar');
         }
     }
 
