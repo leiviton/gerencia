@@ -40,6 +40,10 @@ var LoginComponent = (function () {
             username: null,
             password: null,
         };
+        var u = JSON.parse(localStorage.getItem('user') || null);
+        if (u && u != null) {
+            this.router.navigate(['/']);
+        }
     }
     LoginComponent.prototype.login = function (e) {
         var _this = this;

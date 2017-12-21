@@ -516,7 +516,6 @@ var FullLayoutComponent = (function () {
         this.status.isopen = !this.status.isopen;
     };
     FullLayoutComponent.prototype.ngOnInit = function () {
-        console.log(this.user);
         if (!this.user) {
             this.toasterService.pop('warning', 'Atenção', 'É necessário logar no sistema');
             this.route.navigateByUrl('/user/login');
