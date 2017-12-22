@@ -29,6 +29,7 @@ Route::group(['prefix'=>'api/v1','middleware' => 'auth:api'],function () {
 
     Route::group(['prefix' => 'admin','namespace'=>'Api\V1\Admin'],function (){
        Route::post('order','AdminCheckoutController@store');
+       Route::post('addItem','AdminCheckoutController@addItem');
        Route::get('groups','CategoriesController@index');
        Route::get('subgroups','SubgroupsController@index');
        Route::get('products', 'ProductsController@index');

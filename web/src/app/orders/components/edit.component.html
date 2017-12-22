@@ -1,44 +1,93 @@
-<div tabindex="-1" class="modal fade" id="successModal" role="dialog" aria-hidden="true" aria-labelledby="myModalLabel" style="display: none;">
-    <div class="modal-dialog modal-success" role="document">
+<div tabindex="-1" class="modal fade" id="successModal" role="dialog" aria-hidden="true" aria-labelledby="myModalLabel" style="display: block; overflow-y: auto;">
+    <div class="modal-dialog modal-lg modal-primary" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Pedido: {{ order.id}}</h5>
+            <div class="modal-header cadastro">
+                <h3 class="text-center">Editar Pedido: {{ order.id }} </h3>
+                <h3 class="text-center"> {{ mesa }} </h3>
                 <h5 class="modal-title text-right">Total: {{ order.total  | currency:'BRL':true}}</h5>
-                <button class="close" aria-label="Close" type="button" data-dismiss="modal" (click)="close()">
-                    <span aria-hidden="true">×</span>
-                </button>
             </div>
             <div class="modal-body">
-                <h6 class="text-left"> {{ client }}</h6>
-                <h6 class="text-right" style="margin-top: -24px">{{ order.created_at }}</h6>
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Produto</th>
-                            <th>Valor</th>
-                            <th>Quantadade</th>
-                            <th>SubTotal</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let i of products.data">
-                            <td>{{ i.product.data.id }}</td>
-                            <td>{{ i.product.data.name }}</td>
-                            <td>{{ i.product.data.price | currency:'BRL':true}}</td>
-                            <td>{{ i.qtd }}</td>
-                            <td>
-                                {{ i.subtotal | currency:'BRL':true }}
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="col-md-12">
+                    <form #myForm="ngForm" (keyup.enter)="buscar()" class="form-inline">
+                        <div class="form-group col-md-12">
+                            <label class="col-md-2">Buscar: </label>
+                            <input type="text" class="form-control col-md-3" name="pesquisa"  placeholder="Digite produto" required minlength="2" autofocus="autofocus">
+                            <label class="label qtd col-md-2"> Qtd.</label>
+                            <input class="form-control col-md-1" type="number" min="1"  />
+                            <label for="tipo" class="label col-md-2">Tipo: </label>
+                            <select id="tipo" name="tipo" class="form-control col-md-2" [(ngModel)]="order.type" disabled>
+                                <option value="0"> Delivery</option>
+                                <option value="1"> Salão</option>
+                                <option value="2"> Retirada</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-12" style="padding-bottom: 5px;">
+                    <form #myForm="ngForm" class="form-inline">
+                        <div class="form-group col-md-12">
+                            <label class="col-md-2" *ngIf="order.type != 1">Telefone: </label>
+                            <input *ngIf="order.type != 1"  type="text" class="form-control col-md-4" name="pesquisa"  placeholder="Digite Telefone" required minlength="11" (blur)="buscarCliente()">
+                            <label for="mesa" class="label col-md-2" *ngIf="order.type == 1">Mesa: </label>
+                            <select id="mesa" name="mesa_id" class="form-control col-md-4" [(ngModel)]="order.mesa.data.id" *ngIf="order.type == 1">
+                                <option value="null">Selecione a mesa</option>
+                                <option *ngFor="let g of mesas" value="{{ g.id }}"> {{ g.name }}</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="row borderdiv">
+                    <div class="col-md-4 mb-4 padding" style="height: 300px; overflow: auto" *ngIf="order.type != 1">
+                        <!-- Nav tabs -->
+                        <tabset>
+                            <tab heading="Cliente">
+                                <p>Nome: </p>
+                                <p>Telefone: </p>
+                                <p>Endereço: </p>
+                                <p>Email: </p>
+                            </tab>
+                            <tab heading="50 ultimos">
+                                <p>Pedido:</p>
+                                <p>Data:</p>
+                                <p>Produtos:</p>
+                            </tab>
+                        </tabset>
+                    </div><!--/.col-->
+                    <div class="col-lg-8 padding" [ngClass]="{'col-md-12 col-lg-12': order.type != 0 && order.type != 2, 'col-md-8 col-lg-8': order.type != 1}">
+                        <div class="table-responsive" style="height: 180px; overflow: auto">
+                            <table class="table scrollbox table-striped">
+                                <thead>
+                                <tr class="th-table title-table">
+                                    <th>#</th>
+                                    <th>Produto</th>
+                                    <th>Valor</th>
+                                    <th>Quantadade</th>
+                                    <th>SubTotal</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let i of products.data">
+                                    <td>{{ i.product.data.id }}</td>
+                                    <td>{{ i.product.data.name }}</td>
+                                    <td>{{ i.product.data.price | currency:'BRL':true}}</td>
+                                    <td>{{ i.qtd }}</td>
+                                    <td>
+                                        {{ i.subtotal | currency:'BRL':true }}
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <hr>
+                        <div class="col-md-12 text-center alert alert-success total-pagamento"><p class="qtd">TOTAL: {{ order.total | currency:'BRL':true }}</p></div>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <div class="modal-button">
                     <a class="btn btn-link Left"><i class="fa fa-print"></i> Imprimir</a>
+                    <button class="btn btn-info" (click)="save()"><i class="fa fa-save"></i> Salvar pedido (F9)</button>
                     <button class="btn btn-danger text-left" type="button" (click)="close()"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
-                    <button class="btn btn-success" type="button"><i class="fa fa-arrow-circle-right"></i> Fechar</button>
                 </div>
             </div>
         </div>

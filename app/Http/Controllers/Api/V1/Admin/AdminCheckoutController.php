@@ -112,5 +112,17 @@ class AdminCheckoutController extends Controller
         return $result;
     }
 
+    public function addItem(Request $request)
+    {
+        $data = $request->all();
+
+        $result = $this->orderService->addItem($data);
+
+        return $this->repository
+            ->skipPresenter(false)
+            ->find($result->id);
+    }
+
+
 
 }

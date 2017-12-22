@@ -51,7 +51,6 @@ export class NewComponent implements OnInit {
         this.items = this.httpService.get();
         console.log('items', this.items);
         this.total = this.httpService.get().total;
-
         this.httpService.setAccessToken();
         this.httpService.builder()
             .list({},'mesas')

@@ -35,15 +35,11 @@ class Order extends Model implements Transformable
     }
 
     public function mesa(){
-        return $this->belongsTo(Mesa::class);
+        return $this->hasMany(Mesa::class);
     }
 
     public function cupom(){
         return $this->belongsTo(Cupom::class);
-    }
-
-    public function product(){
-        return $this->hasMany(Product::class);
     }
 
     public function paymentOrders(){

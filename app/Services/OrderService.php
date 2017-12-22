@@ -164,5 +164,32 @@ class OrderService{
         }
         return $order;
     }
+
+    public function addItem($data)
+    {
+        \DB::beginTransaction();
+
+        try {
+
+            $order = $this->orderRepository->find((int)$data['order_id']);
+
+            $items = $data['items'];
+
+            $total = $order->total;
+
+            foreach ($items as $item){
+                $item['price'] = $this->productRepository->find($item['product_id'])->price;
+                $order->items()->create($item);
+                $total += $item['price'] * $item['qtd'];
+            }
+
+            $order->save();
+            \DB::commit();
+            return $order;
+        } catch (\Exception $e){
+            \DB::rollback();
+            throw $e;
+        }
+    }
 }
 
