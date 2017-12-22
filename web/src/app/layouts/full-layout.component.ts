@@ -13,6 +13,7 @@ export class FullLayoutComponent implements OnInit {
 
   user = JSON.parse(localStorage.getItem('user') || null);
   show = false;
+  ano = new Date().getFullYear();
   constructor(private route: Router, private toasterService: ToasterService) {
     setInterval(() => {
         this.user = JSON.parse(localStorage.getItem('user') || null);

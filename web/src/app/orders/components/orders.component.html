@@ -48,7 +48,7 @@
                     <td class="text-center">
                       <a class="btn btn-link text-alert pagamento" *ngIf="o.status == 3" [routerLink]="['payment/'+ o.id]" tooltip="Ver pagamentos"><i class="fa fa-money"></i></a>
 
-                      <a class="btn btn-link text-success pagamento" *ngIf="o.status != 3" [routerLink]="['payment/'+ o.id]" tooltip="Finalizar"><i class="fa fa-check"></i></a>
+                      <a class="btn btn-link text-success pagamento" *ngIf="o.status != 3" [routerLink]="['payment/'+ o.id]" tooltip="Pagar pedido"><i class="fa fa-check"></i></a>
                     </td>
                   </tr>
                 </tbody>
@@ -70,6 +70,7 @@
         </div>
       </div>
  </div>
+
 <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog modal-sm modal-info" role="document">
     <div class="modal-content">

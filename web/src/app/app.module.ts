@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
-import { DatepickerModule } from 'ngx-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { LoadingModule } from 'ngx-loading';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
@@ -38,7 +37,6 @@ import { AppHttpService } from './app-http.service';
     BrowserModule,
     BrowserAnimationsModule,
     HttpModule,
-    DatepickerModule.forRoot(),
     FormsModule,
     AppRoutingModule,
     BsDropdownModule.forRoot(),

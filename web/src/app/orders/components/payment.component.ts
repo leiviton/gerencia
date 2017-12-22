@@ -31,6 +31,7 @@ export class PaymentComponent implements OnInit {
         id:0,
         total:0
     };
+    mesa = '';
     products = {};
     total = 0;
     type_id = null;
@@ -59,6 +60,7 @@ export class PaymentComponent implements OnInit {
                         this.order = res.data;
                         this.payment.order_id = this.order.id;
                         this.products = res.data.items;
+                        this.mesa = res.data.mesa.data.name;
                         console.log('order',this.order);
                         this.hideLoading();
                     });

@@ -249,12 +249,12 @@ var AppComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_animations__ = __webpack_require__("../../../platform-browser/@angular/platform-browser/animations.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ngx_bootstrap__ = __webpack_require__("../../../../ngx-bootstrap/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_ngx_loading__ = __webpack_require__("../../../../ngx-loading/ngx-loading/ngx-loading.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__angular_common__ = __webpack_require__("../../../common/@angular/common.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__app_component__ = __webpack_require__("../../../../../src/app/app.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_ngx_bootstrap_dropdown__ = __webpack_require__("../../../../ngx-bootstrap/dropdown/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ngx_loading__ = __webpack_require__("../../../../ngx-loading/ngx-loading/ngx-loading.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_common__ = __webpack_require__("../../../common/@angular/common.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__app_component__ = __webpack_require__("../../../../../src/app/app.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_ngx_bootstrap_dropdown__ = __webpack_require__("../../../../ngx-bootstrap/dropdown/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_ngx_bootstrap__ = __webpack_require__("../../../../ngx-bootstrap/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_ngx_bootstrap_tabs__ = __webpack_require__("../../../../ngx-bootstrap/tabs/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__shared_nav_dropdown_directive__ = __webpack_require__("../../../../../src/app/shared/nav-dropdown.directive.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_ng2_charts_ng2_charts__ = __webpack_require__("../../../../ng2-charts/ng2-charts.js");
@@ -296,7 +296,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-
 // Routing Module
 
 // Layouts
@@ -313,21 +312,20 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
                 __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_animations__["a" /* BrowserAnimationsModule */],
                 __WEBPACK_IMPORTED_MODULE_3__angular_http__["c" /* HttpModule */],
-                __WEBPACK_IMPORTED_MODULE_4_ngx_bootstrap__["a" /* DatepickerModule */].forRoot(),
-                __WEBPACK_IMPORTED_MODULE_5__angular_forms__["FormsModule"],
+                __WEBPACK_IMPORTED_MODULE_4__angular_forms__["FormsModule"],
                 __WEBPACK_IMPORTED_MODULE_19__app_routing__["a" /* AppRoutingModule */],
-                __WEBPACK_IMPORTED_MODULE_9_ngx_bootstrap_dropdown__["a" /* BsDropdownModule */].forRoot(),
+                __WEBPACK_IMPORTED_MODULE_8_ngx_bootstrap_dropdown__["a" /* BsDropdownModule */].forRoot(),
                 __WEBPACK_IMPORTED_MODULE_10_ngx_bootstrap_tabs__["a" /* TabsModule */].forRoot(),
-                __WEBPACK_IMPORTED_MODULE_4_ngx_bootstrap__["c" /* TooltipModule */].forRoot(),
-                __WEBPACK_IMPORTED_MODULE_4_ngx_bootstrap__["b" /* ModalModule */].forRoot(),
+                __WEBPACK_IMPORTED_MODULE_9_ngx_bootstrap__["b" /* TooltipModule */].forRoot(),
+                __WEBPACK_IMPORTED_MODULE_9_ngx_bootstrap__["a" /* ModalModule */].forRoot(),
                 __WEBPACK_IMPORTED_MODULE_16_ng2_currency_mask__["CurrencyMaskModule"],
                 __WEBPACK_IMPORTED_MODULE_17_angular2_toaster__["a" /* ToasterModule */],
-                __WEBPACK_IMPORTED_MODULE_6_ngx_loading__["a" /* LoadingModule */],
+                __WEBPACK_IMPORTED_MODULE_5_ngx_loading__["a" /* LoadingModule */],
                 __WEBPACK_IMPORTED_MODULE_12_ng2_charts_ng2_charts__["ChartsModule"],
                 __WEBPACK_IMPORTED_MODULE_18_cuppa_ng2_grid_cuppa_ng2_dataGrid__["a" /* CuppaDataGridModule */]
             ],
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_8__app_component__["a" /* AppComponent */],
+                __WEBPACK_IMPORTED_MODULE_7__app_component__["a" /* AppComponent */],
                 __WEBPACK_IMPORTED_MODULE_20__layouts_full_layout_component__["a" /* FullLayoutComponent */],
                 __WEBPACK_IMPORTED_MODULE_21__layouts_simple_layout_component__["a" /* SimpleLayoutComponent */],
                 __WEBPACK_IMPORTED_MODULE_11__shared_nav_dropdown_directive__["a" /* NAV_DROPDOWN_DIRECTIVES */],
@@ -336,12 +334,12 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_14__shared_aside_directive__["a" /* AsideToggleDirective */],
             ],
             providers: [{
-                    provide: __WEBPACK_IMPORTED_MODULE_7__angular_common__["LocationStrategy"],
-                    useClass: __WEBPACK_IMPORTED_MODULE_7__angular_common__["HashLocationStrategy"]
+                    provide: __WEBPACK_IMPORTED_MODULE_6__angular_common__["LocationStrategy"],
+                    useClass: __WEBPACK_IMPORTED_MODULE_6__angular_common__["HashLocationStrategy"]
                 },
                 __WEBPACK_IMPORTED_MODULE_22__app_http_service__["a" /* AppHttpService */]
             ],
-            bootstrap: [__WEBPACK_IMPORTED_MODULE_8__app_component__["a" /* AppComponent */]]
+            bootstrap: [__WEBPACK_IMPORTED_MODULE_7__app_component__["a" /* AppComponent */]]
         })
     ], AppModule);
     return AppModule;
@@ -466,7 +464,7 @@ var AppRoutingModule = (function () {
 /***/ "../../../../../src/app/layouts/full-layout.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<header class=\"app-header navbar\" *ngIf=\"user !== '' && user !== null\" [ngClass]=\"{'fundo': !user || user == '' || user == null}\">\n  <button class=\"navbar-toggler d-lg-none\" type=\"button\" appMobileSidebarToggler>&#9776;</button>\n  <a class=\"navbar-brand logo\" href=\"#\"></a>\n  <button class=\"navbar-toggler d-md-down-none\" type=\"button\" appSidebarToggler>&#9776;</button>\n  <ul class=\"nav navbar-nav ml-auto\">\n    <li class=\"nav-item dropdown\" dropdown (onToggle)=\"toggled($event)\">\n      <a href class=\"nav-link dropdown-toggle\" dropdownToggle (click)=\"false\">\n        <img src=\"../../assets/img/logo_eguis.png\" class=\"img-avatar\" alt=\"{{ user.email }}\">\n        <span class=\"d-md-down-none\"></span>\n      </a>\n      <div class=\"dropdown-menu dropdown-menu-right\" *dropdownMenu aria-labelledby=\"simple-dropdown\">\n\n        <div class=\"dropdown-header text-center\"><i class=\"fa fa-user\"></i> <strong>{{ user.name }}</strong></div>\n        <a class=\"dropdown-item\" href=\"#\"><i class=\"fa fa-bell-o\"></i> Trocar senha</a>\n        <a class=\"dropdown-item\" [routerLink]=\"['/user/logout']\"><i class=\"fa fa-power-off\"></i> Sair</a>\n      </div>\n    </li>\n  </ul>\n</header>\n\n<header class=\"app-header navbar\" *ngIf=\"user == '' && user == null || !user\" [ngClass]=\"{'fundo': !user || user == '' || user == null}\">\n</header>\n\n<div class=\"app-body\" [ngClass]=\"{'fundo': !user || user == '' || user == null}\">\n  <div class=\"sidebar\" *ngIf=\"user !== '' && user !== null\">\n    <nav class=\"sidebar-nav\">\n      <ul class=\"nav\">\n        <li class=\"nav-item\">\n          <a class=\"nav-link\" routerLinkActive=\"active\" [routerLink]=\"['/dashboard']\"><i class=\"icon-speedometer\"></i> Dashboard </a>\n        </li>\n        <li class=\"divider\"></li>\n        <li class=\"nav-title\">\n          Gerencia\n        </li>\n        <li class=\"nav-item nav-dropdown\" routerLinkActive=\"open\" appNavDropdown>\n          <a class=\"nav-link nav-dropdown-toggle\" href=\"#\" appNavDropdownToggle><i class=\"fa fa-edit\"></i> Pedidos</a>\n          <ul class=\"nav-dropdown-items\">\n            <li class=\"nav-item\">\n              <a class=\"nav-link\" routerLinkActive=\"active\" [routerLink]=\"['/orders']\"><i class=\"fa fa-edit\"></i> Gerenciar pedidos</a>\n            </li>\n          </ul>\n        </li>\n        <li class=\"divider\"></li>\n        <li class=\"nav-title\">\n          Cadastros\n        </li>\n        <li class=\"nav-item nav-dropdown\" appNavDropdown>\n          <a class=\"nav-link nav-dropdown-toggle\" href=\"#\" appNavDropdownToggle><i class=\"fa fa-product-hunt\"></i> Produtos</a>\n          <ul class=\"nav-dropdown-items\">\n            <li class=\"nav-item\">\n              <a class=\"nav-link\" routerLinkActive=\"active\" [routerLink]=\"['/cadastro/produtos']\"><i class=\"fa fa-credit-card\"></i> Produtos <span class=\"badge badge-info\">Novo</span></a>\n            </li>\n          </ul>\n        </li>\n        <li class=\"nav-item nav-dropdown\" appNavDropdown *ngIf=\"user.role === 'admin'\">\n          <a class=\"nav-link nav-dropdown-toggle\" href=\"#\" appNavDropdownToggle><i class=\"fa fa-user\"></i> Usuários</a>\n          <ul class=\"nav-dropdown-items\">\n            <li class=\"nav-item\">\n              <a class=\"nav-link\" routerLinkActive=\"active\" [routerLink]=\"['/pages/login']\"><i class=\"fa fa-user-plus\"></i> Usuários <span class=\"badge badge-info\">Novo</span></a>\n            </li>\n          </ul>\n        </li>\n        <li class=\"divider\"></li>\n        <li class=\"nav-title\">\n          Financeiro\n        </li>\n        <li class=\"nav-item nav-dropdown\" appNavDropdown>\n          <a class=\"nav-link nav-dropdown-toggle\" href=\"#\" appNavDropdownToggle><i class=\"fa fa-credit-card\"></i> Caixa</a>\n          <ul class=\"nav-dropdown-items\">\n            <li class=\"nav-item\">\n              <a class=\"nav-link\" routerLinkActive=\"active\" [routerLink]=\"['/pages/login']\"><i class=\"fa fa-credit-card\"></i> Abrir / Fechar Caixa</a>\n            </li>\n            <li class=\"nav-item\">\n              <a class=\"nav-link\" routerLinkActive=\"active\" [routerLink]=\"['/pages/register']\"><i class=\"fa fa-credit-card\"></i> Movimento de Caixa</a>\n            </li>\n          </ul>\n        </li>\n      </ul>\n    </nav>\n  </div>\n\n  <!-- Main content -->\n  <main class=\"main\">\n\n    <div class=\"container-fluid\" style=\"padding: 15px\">\n      <router-outlet></router-outlet>\n    </div><!-- /.conainer-fluid -->\n  </main>\n</div>\n\n<footer class=\"app-footer\" *ngIf=\"user !== '' && user !== null\">\n  <a href=\"http://leiviton.com.br\">Gerencia Pedidos</a> &copy; 2017.\n  <span class=\"float-right\">Powered by <a href=\"http://leiviton.com.br\">Leiviton Software</a></span>\n</footer>\n"
+module.exports = "<header class=\"app-header navbar\" *ngIf=\"user !== '' && user !== null\" [ngClass]=\"{'fundo': !user || user == '' || user == null}\">\n  <button class=\"navbar-toggler d-lg-none\" type=\"button\" appMobileSidebarToggler>&#9776;</button>\n  <a class=\"navbar-brand logo\" href=\"#\"></a>\n  <button class=\"navbar-toggler d-md-down-none\" type=\"button\" appSidebarToggler>&#9776;</button>\n  <ul class=\"nav navbar-nav ml-auto\">\n    <li class=\"nav-item dropdown\" dropdown (onToggle)=\"toggled($event)\">\n      <a href class=\"nav-link dropdown-toggle\" dropdownToggle (click)=\"false\">\n        <img src=\"../../assets/img/logo_eguis.png\" class=\"img-avatar\" alt=\"{{ user.email }}\">\n        <span class=\"d-md-down-none\"></span>\n      </a>\n      <div class=\"dropdown-menu dropdown-menu-right\" *dropdownMenu aria-labelledby=\"simple-dropdown\">\n\n        <div class=\"dropdown-header text-center\"><i class=\"fa fa-user\"></i> <strong>{{ user.name }}</strong></div>\n        <a class=\"dropdown-item\" href=\"#\"><i class=\"fa fa-bell-o\"></i> Trocar senha</a>\n        <a class=\"dropdown-item\" [routerLink]=\"['/user/logout']\"><i class=\"fa fa-power-off\"></i> Sair</a>\n      </div>\n    </li>\n  </ul>\n</header>\n\n<header class=\"app-header navbar\" *ngIf=\"user == '' && user == null || !user\" [ngClass]=\"{'fundo': !user || user == '' || user == null}\">\n</header>\n\n<div class=\"app-body\" [ngClass]=\"{'fundo': !user || user == '' || user == null}\">\n  <div class=\"sidebar\" *ngIf=\"user !== '' && user !== null\">\n    <nav class=\"sidebar-nav\">\n      <ul class=\"nav\">\n        <li class=\"nav-item\">\n          <a class=\"nav-link\" routerLinkActive=\"active\" [routerLink]=\"['/dashboard']\"><i class=\"icon-speedometer\"></i> Dashboard </a>\n        </li>\n        <li class=\"divider\"></li>\n        <li class=\"nav-title\">\n          Gerencia\n        </li>\n        <li class=\"nav-item nav-dropdown\" routerLinkActive=\"open\" appNavDropdown>\n          <a class=\"nav-link nav-dropdown-toggle\" href=\"#\" appNavDropdownToggle><i class=\"fa fa-edit\"></i> Pedidos</a>\n          <ul class=\"nav-dropdown-items\">\n            <li class=\"nav-item\">\n              <a class=\"nav-link\" routerLinkActive=\"active\" [routerLink]=\"['/orders']\"><i class=\"fa fa-edit\"></i> Gerenciar pedidos</a>\n            </li>\n          </ul>\n        </li>\n        <li class=\"divider\"></li>\n        <li class=\"nav-title\">\n          Cadastros\n        </li>\n        <li class=\"nav-item nav-dropdown\" appNavDropdown>\n          <a class=\"nav-link nav-dropdown-toggle\" href=\"#\" appNavDropdownToggle><i class=\"fa fa-product-hunt\"></i> Produtos</a>\n          <ul class=\"nav-dropdown-items\">\n            <li class=\"nav-item\">\n              <a class=\"nav-link\" routerLinkActive=\"active\" [routerLink]=\"['/cadastro/produtos']\"><i class=\"fa fa-credit-card\"></i> Produtos <span class=\"badge badge-info\">Novo</span></a>\n            </li>\n          </ul>\n        </li>\n        <li class=\"nav-item nav-dropdown\" appNavDropdown *ngIf=\"user.role === 'admin'\">\n          <a class=\"nav-link nav-dropdown-toggle\" href=\"#\" appNavDropdownToggle><i class=\"fa fa-user\"></i> Usuários</a>\n          <ul class=\"nav-dropdown-items\">\n            <li class=\"nav-item\">\n              <a class=\"nav-link\" routerLinkActive=\"active\" [routerLink]=\"['/pages/login']\"><i class=\"fa fa-user-plus\"></i> Usuários <span class=\"badge badge-info\">Novo</span></a>\n            </li>\n          </ul>\n        </li>\n        <li class=\"divider\"></li>\n        <li class=\"nav-title\">\n          Financeiro\n        </li>\n        <li class=\"nav-item nav-dropdown\" appNavDropdown>\n          <a class=\"nav-link nav-dropdown-toggle\" href=\"#\" appNavDropdownToggle><i class=\"fa fa-credit-card\"></i> Caixa</a>\n          <ul class=\"nav-dropdown-items\">\n            <li class=\"nav-item\">\n              <a class=\"nav-link\" routerLinkActive=\"active\" [routerLink]=\"['/pages/login']\"><i class=\"fa fa-credit-card\"></i> Abrir / Fechar Caixa</a>\n            </li>\n            <li class=\"nav-item\">\n              <a class=\"nav-link\" routerLinkActive=\"active\" [routerLink]=\"['/pages/register']\"><i class=\"fa fa-credit-card\"></i> Movimento de Caixa</a>\n            </li>\n          </ul>\n        </li>\n      </ul>\n    </nav>\n  </div>\n\n  <!-- Main content -->\n  <main class=\"main\">\n\n    <div class=\"container-fluid\" style=\"padding: 15px\">\n      <router-outlet></router-outlet>\n    </div><!-- /.conainer-fluid -->\n  </main>\n</div>\n\n<footer class=\"app-footer\" *ngIf=\"user !== '' && user !== null\">\n  <a href=\"http://leiviton.com.br\">Gerencia Pedidos</a> &copy; {{ ano }}.\n  <span class=\"float-right\">Powered by <a href=\"http://leiviton.com.br\">Leiviton Software</a></span>\n</footer>\n"
 
 /***/ }),
 
@@ -497,6 +495,7 @@ var FullLayoutComponent = (function () {
         this.toasterService = toasterService;
         this.user = JSON.parse(localStorage.getItem('user') || null);
         this.show = false;
+        this.ano = new Date().getFullYear();
         this.mesas = {};
         this.disabled = false;
         this.status = { isopen: false };
