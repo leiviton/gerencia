@@ -35,7 +35,7 @@ class Order extends Model implements Transformable
     }
 
     public function mesa(){
-        return $this->hasMany(Mesa::class);
+        return $this->belongsTo(Mesa::class);
     }
 
     public function cupom(){
