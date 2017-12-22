@@ -10,6 +10,10 @@ class Caixa extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $fillable = [];
+    protected $fillable = [
+        'name',
+        'ativo',
+        'saldo'
+    ];
 
 }

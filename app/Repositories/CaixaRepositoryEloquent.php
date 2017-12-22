@@ -33,4 +33,9 @@ class CaixaRepositoryEloquent extends BaseRepository implements CaixaRepository
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
+
+    public function presenter()
+    {
+        return \Pedidos\Presenters\CaixaPresenter::class;
+    }
 }

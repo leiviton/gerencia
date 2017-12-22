@@ -59,10 +59,17 @@ class RepositoryServiceProvider extends ServiceProvider
             'Pedidos\Repositories\PaymentOrdersRepository',
             'Pedidos\Repositories\PaymentOrdersRepositoryEloquent'
         );
-
         $this->app->bind(
             'Pedidos\Repositories\PaymentTypesRepository',
             'Pedidos\Repositories\PaymentTypesRepositoryEloquent'
+        );
+        $this->app->bind(
+            'Pedidos\Repositories\CaixaRepository',
+            'Pedidos\Repositories\CaixaRepositoryEloquent'
+        );
+        $this->app->bind(
+            'Pedidos\Repositories\MovimentoCaixaRepository',
+            'Pedidos\Repositories\MovimentoCaixaRepositoryEloquent'
         );
 
     }

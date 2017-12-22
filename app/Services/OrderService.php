@@ -133,6 +133,7 @@ class OrderService{
 
         try {
             $order = $this->orderRepository->find($id);
+            $mesa = $this->mesaRepository->find($order->mesa->id);
             $order->paymentOrders()->create($data);
             if($order->total > $data['total_pago'])
             {
@@ -141,6 +142,12 @@ class OrderService{
                 $order->status = 3;
             }
 
+            if($order->type == 1)
+            {
+                $mesa->status = 0;
+            }
+
+            $mesa->save();
             $order->save();
             \DB::commit();
             return $order;

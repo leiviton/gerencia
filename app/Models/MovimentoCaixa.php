@@ -10,6 +10,12 @@ class MovimentoCaixa extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $fillable = [];
+    protected $fillable = [
+        'tipo_movimento',
+        'valor',
+        'usuario',
+        'key',
+        'entidade'
+    ];
 
 }

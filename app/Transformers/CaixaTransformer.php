@@ -22,6 +22,9 @@ class CaixaTransformer extends TransformerAbstract
     {
         return [
             'id'         => (int) $model->id,
+            'name' => $model->name,
+            'salvo' => $model->saldo,
+            'ativo' => $model->ativo,
 
             /* place your other model properties here */
 
