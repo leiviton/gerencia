@@ -16,7 +16,10 @@ export class EditComponent implements OnInit {
     order = {};
     client = '';
     products = {};
-    mesas = {};
+    mesas = {
+        data:null
+    };
+    mesa = '';
     hideLoading(){
         jQuery(".container-loading").hide();
     }
@@ -35,6 +38,7 @@ export class EditComponent implements OnInit {
                             this.order = res.data;
                             this.client = res.data.client.data.user.data.name;
                             this.products = res.data.items;
+                            this.mesa = res.data.mesa.data.name;
                             console.log(this.order);
                             this.hideLoading();
                     });
@@ -42,7 +46,7 @@ export class EditComponent implements OnInit {
                 this.httpService.builder()
                     .list({},'mesas')
                     .then((res) => {
-                        this.mesas = res.data;
+                        this.mesas = res;
                         console.log('mesas', this.mesas);
                     });
 

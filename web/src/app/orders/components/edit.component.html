@@ -4,7 +4,7 @@
             <div class="modal-header cadastro">
                 <h3 class="text-center">Editar Pedido: {{ order.id }} </h3>
                 <h3 class="text-center"> {{ mesa }} </h3>
-                <h5 class="modal-title text-right">Total: {{ order.total  | currency:'BRL':true}}</h5>
+                <h3 class="text-center">Total: {{ order.total  | currency:'BRL':true}}</h3>
             </div>
             <div class="modal-body">
                 <div class="col-md-12">
@@ -29,9 +29,9 @@
                             <label class="col-md-2" *ngIf="order.type != 1">Telefone: </label>
                             <input *ngIf="order.type != 1"  type="text" class="form-control col-md-4" name="pesquisa"  placeholder="Digite Telefone" required minlength="11" (blur)="buscarCliente()">
                             <label for="mesa" class="label col-md-2" *ngIf="order.type == 1">Mesa: </label>
-                            <select id="mesa" name="mesa_id" class="form-control col-md-4" *ngIf="order.type == 1">
+                            <select id="mesa" name="mesa_id" class="form-control col-md-4" [(ngModel)]="order.mesa.data.id" *ngIf="order.type == 1">
                                 <option value="null">Selecione a mesa</option>
-                                <option *ngFor="let g of mesas" value="{{ g.id }}"> {{ g.name }}</option>
+                                <option *ngFor="let g of mesas.data" value="{{ g.id }}"> {{ g.name }}</option>
                             </select>
                         </div>
                     </form>
