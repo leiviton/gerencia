@@ -183,6 +183,7 @@ class OrderService{
                 $total += $item['price'] * $item['qtd'];
             }
 
+            $order->total = $total;
             $order->save();
             \DB::commit();
             return $order;

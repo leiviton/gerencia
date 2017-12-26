@@ -11,9 +11,9 @@
                     <form #myForm="ngForm" (keyup.enter)="buscar()" class="form-inline">
                         <div class="form-group col-md-12">
                             <label class="col-md-2">Buscar: </label>
-                            <input type="text" class="form-control col-md-3" name="pesquisa"  placeholder="Digite produto" required minlength="2" autofocus="autofocus">
+                            <input type="text" class="form-control col-md-3" name="pesquisa" [(ngModel)]="pesquisa.value" placeholder="Digite produto" required  autofocus="autofocus">
                             <label class="label qtd col-md-2"> Qtd.</label>
-                            <input class="form-control col-md-1" type="number" min="1"  />
+                            <input class="form-control col-md-1" type="number" name="qtd" [(ngModel)]="qtd" min="1"  />
                             <label for="tipo" class="label col-md-2">Tipo: </label>
                             <select id="tipo" name="tipo" class="form-control col-md-2" [(ngModel)]="order.type" disabled>
                                 <option value="0"> Delivery</option>

@@ -21,7 +21,7 @@ export class EditComponent implements OnInit {
         document.onkeydown = ((e) =>{
             if(e.keyCode  == 120)
             {
-                
+
             }
 
             if(e.keyCode == 27)
@@ -81,11 +81,10 @@ export class EditComponent implements OnInit {
         this.httpService.builder('search')
             .search(this.pesquisa.value)
             .then((res) => {
-                this.httpService.eventEmitter.emit();
                 this.pesquisa.value = null;
                 this.result = res.data;
                 this.hideLoading();
-                this.httpService.addItem(this.result);
+                this.addItem(this.result[0]);
 
                 let pedido = {
                     items: this.httpService.get().items,
@@ -95,6 +94,8 @@ export class EditComponent implements OnInit {
                 this.httpService.builder()
                     .insert(pedido,'addItem')
                     .then((res) => {
+                        this.httpService.eventEmitter.emit();
+                        this.httpService.clear();
                         this.order = res.data;
                     });
                 /*if(res.data.length>1){
@@ -113,6 +114,13 @@ export class EditComponent implements OnInit {
             });
 
         console.log("pesquisou", this.pesquisa)
+    }
+
+    addItem(item)
+    {
+        item.qtd = this.qtd;
+        this.httpService.addItem(item);
+        this.toasterService.pop('success', 'Sucesso', 'Item codigo '+item.id+' adicionado.');
     }
 
 
