@@ -81,10 +81,14 @@ export class NewComponent implements OnInit {
             this.httpService.builder('search/client')
                 .search(this.pesquisa.value2)
                 .then((res) => {
-                    this.client.id = res.data.id;
+                    console.log('res',res.data);
+                    this.client.id = res.data[0].id;
                     this.client.name = res.data.user.data.name;
                     this.client.phone = res.data.phone;
                     this.client.email = res.data.user.data.email;
+                    this.client.address = res.data.address;
+                    console.log(this.client);
+
                 });
         }
 

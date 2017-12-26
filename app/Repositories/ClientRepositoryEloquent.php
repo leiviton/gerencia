@@ -15,6 +15,20 @@ use Pedidos\Validators\ClientValidator;
 class ClientRepositoryEloquent extends BaseRepository implements ClientRepository
 {
     protected $skipPresenter = true;
+
+    public function search($value)
+    {
+        $result = $this->model
+                ->where('id',$value)
+                ->orWhere('name',$value)
+                ->orWhere('phone',$value)
+                ->first();
+        if ($result){
+            return $this->parserResult($result);
+        }
+        throw (new ModelNotFoundException())->setModel(get_class($this->model));
+
+    }
     /**
      * Specify Model class name
      *

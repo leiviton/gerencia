@@ -44,12 +44,7 @@ class ClientsController extends Controller
         $pesquisa = $request->get('value');
 
         $result = $this->repository->skipPresenter(false)
-            ->scopeQuery(function($query) use($pesquisa){
-                return $query->where('id',$pesquisa)
-                    ->orWhere('name',$pesquisa)
-                    ->orWhere('phone',$pesquisa);
-            })
-            ->all();
+            ->search($pesquisa);
         return $result;
     }
 
