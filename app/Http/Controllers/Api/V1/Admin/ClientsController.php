@@ -41,7 +41,7 @@ class ClientsController extends Controller
 
     public function search(Request $request)
     {
-        $pesquisa = $request->get('value2');
+        $pesquisa = $request->get('value');
 
         $result = $this->repository->skipPresenter(false)
             ->scopeQuery(function($query) use($pesquisa){
