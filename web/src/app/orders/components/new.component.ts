@@ -30,7 +30,7 @@ export class NewComponent implements OnInit {
 
     cart =  this.httpService.get();
     order = {};
-    client = '';
+    client = {};
     items = [];
     result = {};
     qtd = 1;
@@ -68,7 +68,14 @@ export class NewComponent implements OnInit {
 
     buscarCliente()
     {
-        console.log(this.pesquisa.telefone);
+        this.httpService.builder('search/client')
+            .search(this.pesquisa.value)
+            .then((res) => {
+               this.client = res.data;
+            })
+            .catch((e) => {
+                this.toasterService.pop('error','error:'+ e.status);
+            })
     }
 
     buscar()

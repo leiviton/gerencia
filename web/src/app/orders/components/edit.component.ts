@@ -97,6 +97,7 @@ export class EditComponent implements OnInit {
                         this.httpService.eventEmitter.emit();
                         this.httpService.clear();
                         this.order = res.data;
+                        this.products = res.data.items;
                     });
                 /*if(res.data.length>1){
                     jQuery('#pesquisa').show().addClass('show');

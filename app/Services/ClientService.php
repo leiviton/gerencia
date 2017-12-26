@@ -38,11 +38,11 @@ class ClientService
         $this->userRepository->update($data['user'], $userId);
     }
 
-    public function create(array $data){
-        $data['user']['password'] = bcrypt(123456);
+    public function create($data){
+        $data['user']->senha = bcrypt(123456);
         $user = $this->userRepository->create($data['user']);
 
         $data['user_id'] = $user->id;
-        $this->clientRepository->create($data);
+        return $this->clientRepository->create($data);
     }
 }

@@ -39,14 +39,20 @@
                     </form>
                 </div>
                 <div class="row borderdiv">
-                    <div class="col-md-4 mb-4 padding" style="height: 300px; overflow: auto" *ngIf="tipo != 1">
+                    <div class="col-md-4 mb-4 padding" style="height: 320px; overflow: auto" *ngIf="tipo != 1">
                         <!-- Nav tabs -->
                         <tabset>
                             <tab heading="Cliente">
-                                <p>Nome: </p>
-                                <p>Telefone: </p>
-                                <p>Endereço: </p>
-                                <p>Email: </p>
+                                <form class="form-inline">
+                                    <label>Nome: </label>
+                                    <input type="text" class="form-control" name="name" [(ngModel)]="client.user.data.name"/>
+                                    <label>Telefone: </label>
+                                    <input type="text" class="form-control" name="phone" [(ngModel)]="client.phone" />
+                                    <label>Endereço: </label>
+                                    <input type="text" class="form-control" name="address" [(ngModel)]="client.address"/>
+                                    <label>Email: </label>
+                                    <input type="text" class="form-control" name="email" [(ngModel)]="client.user.data.email">
+                                </form>
                             </tab>
                             <tab heading="50 ultimos">
                                 <p>Pedido:</p>
