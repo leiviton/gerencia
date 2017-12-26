@@ -30,7 +30,13 @@ export class NewComponent implements OnInit {
 
     cart =  this.httpService.get();
     order = {};
-    client = {};
+    client = {
+        id:0,
+        name:'',
+        phone:'',
+        address:'',
+        email:''
+    };
     items = [];
     result = {};
     qtd = 1;
@@ -68,14 +74,23 @@ export class NewComponent implements OnInit {
 
     buscarCliente()
     {
-        this.httpService.builder('search/client')
-            .search(this.pesquisa.value)
-            .then((res) => {
-               this.client = res.data;
-            })
-            .catch((e) => {
-                this.toasterService.pop('error','error:'+ e.status);
-            })
+        if(this.pesquisa.value == null)
+        {
+            this.toasterService.pop('error','campo cliente vazio')
+        }else{
+            this.httpService.builder('search/client')
+                .search(this.pesquisa.value)
+                .then((res) => {
+                    this.client.id = res.data.id;
+                    this.client.name = res.data.user.data.name;
+                    this.client.phone = res.data.phone;
+                    this.client.email = res.data.user.data.email;
+                })
+                .catch((e) => {
+                    this.toasterService.pop('error','error:'+ e.status);
+                });
+        }
+
     }
 
     buscar()
