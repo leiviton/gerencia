@@ -29,7 +29,7 @@
                     <form #myForm="ngForm" class="form-inline">
                         <div class="form-group col-md-12">
                             <label class="col-md-2" *ngIf="tipo != 1">Telefone: </label>
-                            <input *ngIf="tipo != 1"  type="text" class="form-control col-md-4" name="pesquisa"  placeholder="Digite Telefone" required minlength="11" [(ngModel)]="pesquisa.value" (blur)="buscarCliente()">
+                            <input *ngIf="tipo != 1"  type="text" class="form-control col-md-4" name="pesquisa"  placeholder="Digite Cliente (Telefone, nome, codigo)" required minlength="11" [(ngModel)]="pesquisa.value2" (blur)="buscarCliente()">
                             <label for="mesa" class="label col-md-2" *ngIf="tipo == 1">Mesa: </label>
                             <select id="mesa" name="category_id" class="form-control col-md-4" [(ngModel)]="mesa_id" *ngIf="tipo == 1">
                                 <option value="null">Selecione a mesa</option>

@@ -43,7 +43,7 @@ export class NewComponent implements OnInit {
     total = 0;
     pesquisa = {
         value:null,
-        telefone:null
+        value2:null
     };
     mesas: {};
     mesa_id = null;
@@ -74,12 +74,12 @@ export class NewComponent implements OnInit {
 
     buscarCliente()
     {
-        if(this.pesquisa.value == null)
+        if(this.pesquisa.value2 == null)
         {
             this.toasterService.pop('error','campo cliente vazio')
         }else{
             this.httpService.builder('search/client')
-                .search(this.pesquisa.value)
+                .search(this.pesquisa.value2)
                 .then((res) => {
                     this.client.id = res.data.id;
                     this.client.name = res.data.user.data.name;
