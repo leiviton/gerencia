@@ -85,9 +85,6 @@ export class NewComponent implements OnInit {
                     this.client.name = res.data.user.data.name;
                     this.client.phone = res.data.phone;
                     this.client.email = res.data.user.data.email;
-                })
-                .catch((e) => {
-                    this.toasterService.pop('error','error:'+ e.status);
                 });
         }
 
