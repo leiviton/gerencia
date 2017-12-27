@@ -24,7 +24,7 @@ class Client extends Model implements Transformable
         return $this->hasOne(User::class,'id','user_id');
     }
 
-    public function addressClients()
+    public function addressClient()
     {
         return $this->belongsTo(AddressClient::class);
     }
