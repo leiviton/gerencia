@@ -56,7 +56,7 @@ export class EditComponent implements OnInit {
                 this.httpService.builder().view(params['id'],'order')
                     .then((res) => {
                             this.order = res.data;
-                            this.client = res.data.client.data.user.data.name;
+                            this.client = res.data.client.data;
                             this.products = res.data.items;
                             this.mesa = res.data.mesa.data.name;
                             console.log(this.order);
@@ -99,22 +99,7 @@ export class EditComponent implements OnInit {
                         this.order = res.data;
                         this.products = res.data.items;
                     });
-                /*if(res.data.length>1){
-                    jQuery('#pesquisa').show().addClass('show');
-                }else{
-                    if(res.data.length===1)
-                    {
-                        this.addItem(this.result[0]);
-                        this.total = this.httpService.get().total;
-                        this.items = this.httpService.get();
-                        this.qtd = 1;
-                        console.log('item',this.items);
-                    }
-                }*/
-                console.log("pesquisou", this.result)
-            });
-
-        console.log("pesquisou", this.pesquisa)
+               });
     }
 
     addItem(item)

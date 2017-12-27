@@ -34,7 +34,12 @@ export class NewComponent implements OnInit {
         id:1,
         name:'',
         phone:'',
-        address:'',
+        address:{
+            rua:null,
+            bairro:null,
+            cidade:null,
+            estado:null
+        },
         email:''
     };
     items = [];
@@ -48,6 +53,7 @@ export class NewComponent implements OnInit {
     mesas: {};
     mesa_id = null;
     tipo = 0;
+    novo = true;
 
     ngOnInit(): void {
         if(!this.cart)
@@ -82,15 +88,16 @@ export class NewComponent implements OnInit {
                 .search(this.pesquisa.value2)
                 .then((res) => {
 
-                    if(res.data = []){
+                    if(res.data == []){
                         this.toasterService.pop('info', 'Nenhum cliente encontrado, cadastre o cliente');
                     }else {
                         console.log('res', res.data);
-                        this.client.id = res.data.id;
-                        this.client.name = res.data.name;
-                        this.client.phone = res.data.phone;
-                        this.client.email = res.data.user.data.email;
-                        this.client.address = res.data.address;
+                        this.client.id = res.data[0].id;
+                        this.client.name = res.data[0].name;
+                        this.client.phone = res.data[0].phone;
+                        this.client.email = res.data[0].user.data.email;
+                        this.client.address = res.data[0].address;
+                        this.novo = false;
                         console.log(this.client);
                     }
                 });
@@ -149,30 +156,39 @@ export class NewComponent implements OnInit {
         if(this.tipo != 1){
             this.mesa_id = 1;
         }
-        console.log('mesa',this.mesa_id);
-        this.showLoading();
-        this.httpService.setAccessToken();
-        if(this.httpService.get().items.length > 0)
+
+        if(this.tipo != 1 && this.client.id == 1)
         {
-            let pedido = {
-                items: this.httpService.get().items,
-                total: this.httpService.get().total,
-                mesa_id: this.mesa_id,
-                client_id: this.client.id,
-                type: this.tipo
-            };
-            this.httpService.builder()
-                .insert(pedido,'order')
-                .then((res) => {
-                    this.httpService.clear();
-                    this.httpService.eventEmitter.emit();
-                    this.hideLoading();
-                    this.toasterService.pop('success', 'Sucesso', 'Pedido '+ res.data.id +' salvo com sucesso');
-                    this.close();
-                });
+            this.toasterService.pop('error', 'É necessário cadastrar um cliente ou selecionar');
         }else {
-            this.hideLoading();
-            this.toasterService.pop('error', 'Erro', 'É necessário adicionar ao menos um produto');
+            if (this.mesa_id != null) {
+                console.log('mesa', this.mesa_id);
+                this.showLoading();
+                this.httpService.setAccessToken();
+                if (this.httpService.get().items.length > 0) {
+                    let pedido = {
+                        items: this.httpService.get().items,
+                        total: this.httpService.get().total,
+                        mesa_id: this.mesa_id,
+                        client_id: this.client.id,
+                        type: this.tipo
+                    };
+                    this.httpService.builder()
+                        .insert(pedido, 'order')
+                        .then((res) => {
+                            this.httpService.clear();
+                            this.httpService.eventEmitter.emit();
+                            this.hideLoading();
+                            this.toasterService.pop('success', 'Sucesso', 'Pedido ' + res.data.id + ' salvo com sucesso');
+                            this.close();
+                        });
+                } else {
+                    this.hideLoading();
+                    this.toasterService.pop('error', 'Erro', 'É necessário adicionar ao menos um produto');
+                }
+            } else {
+                this.toasterService.pop('error', 'Erro', 'É necessário escolher uma mesa');
+            }
         }
     }
 
