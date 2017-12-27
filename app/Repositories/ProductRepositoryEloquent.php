@@ -15,6 +15,7 @@ use Pedidos\Validators\ProductValidator;
 class ProductRepositoryEloquent extends BaseRepository implements ProductRepository
 {
     protected $skipPresenter = true;
+
     public function model()
     {
         return Product::class;

@@ -26,8 +26,7 @@ class ClientRepositoryEloquent extends BaseRepository implements ClientRepositor
         if ($result){
             return $this->parserResult($result);
         }
-        throw (new ModelNotFoundException())->setModel(get_class($this->model));
-
+        return $result;
     }
     /**
      * Specify Model class name

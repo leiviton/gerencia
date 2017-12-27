@@ -31,7 +31,7 @@ export class NewComponent implements OnInit {
     cart =  this.httpService.get();
     order = {};
     client = {
-        id:0,
+        id:1,
         name:'',
         phone:'',
         address:'',
@@ -82,8 +82,8 @@ export class NewComponent implements OnInit {
                 .search(this.pesquisa.value2)
                 .then((res) => {
                     console.log('res',res.data);
-                    this.client.id = res.data[0].id;
-                    this.client.name = res.data.user.data.name;
+                    this.client.id = res.data.id;
+                    this.client.name = res.data.name;
                     this.client.phone = res.data.phone;
                     this.client.email = res.data.user.data.email;
                     this.client.address = res.data.address;
@@ -154,7 +154,7 @@ export class NewComponent implements OnInit {
                 items: this.httpService.get().items,
                 total: this.httpService.get().total,
                 mesa_id: this.mesa_id,
-                client_id: 1,
+                client_id: this.client.id,
                 type: this.tipo
             };
             this.httpService.builder()
