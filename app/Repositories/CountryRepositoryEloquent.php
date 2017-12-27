@@ -14,6 +14,7 @@ use Pedidos\Validators\CountryValidator;
  */
 class CountryRepositoryEloquent extends BaseRepository implements CountryRepository
 {
+    protected $skipPresenter = true;
     /**
      * Specify Model class name
      *
@@ -32,5 +33,10 @@ class CountryRepositoryEloquent extends BaseRepository implements CountryReposit
     public function boot()
     {
         $this->pushCriteria(app(RequestCriteria::class));
+    }
+
+    public function presenter()
+    {
+        return \Pedidos\Presenters\CountryPresenter::class;
     }
 }

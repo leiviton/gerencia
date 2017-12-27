@@ -14,6 +14,7 @@ use Pedidos\Validators\CityValidator;
  */
 class CityRepositoryEloquent extends BaseRepository implements CityRepository
 {
+    protected $skipPresenter = true;
     /**
      * Specify Model class name
      *
@@ -32,5 +33,10 @@ class CityRepositoryEloquent extends BaseRepository implements CityRepository
     public function boot()
     {
         $this->pushCriteria(app(RequestCriteria::class));
+    }
+
+    public function presenter()
+    {
+        return \Pedidos\Presenters\CityPresenter::class;
     }
 }

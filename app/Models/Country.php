@@ -10,6 +10,12 @@ class Country extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $fillable = [];
+    protected $fillable = [
+        'country'
+    ];
 
+    public function state()
+    {
+        return $this->hasMany(State::class);
+    }
 }

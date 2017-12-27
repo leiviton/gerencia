@@ -10,6 +10,17 @@ class City extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $fillable = [];
+    protected $fillable = [
+        'city'
+    ];
 
+    public function state()
+    {
+        return $this->belongsTo(State::class);
+    }
+
+    public function addressClient()
+    {
+        return $this->hasMany(AddressClient::class);
+    }
 }

@@ -14,6 +14,7 @@ use Pedidos\Validators\StateValidator;
  */
 class StateRepositoryEloquent extends BaseRepository implements StateRepository
 {
+    protected $skipPresenter = true;
     /**
      * Specify Model class name
      *
@@ -32,5 +33,10 @@ class StateRepositoryEloquent extends BaseRepository implements StateRepository
     public function boot()
     {
         $this->pushCriteria(app(RequestCriteria::class));
+    }
+
+    public function presenter()
+    {
+        return \Pedidos\Presenters\StatePresenter::class;
     }
 }

@@ -10,6 +10,21 @@ class AddressClient extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $fillable = [];
+    protected $fillable = [
+        'address',
+        'complemento',
+        'numero',
+        'bairro'
+    ];
+
+    public function city()
+    {
+        return $this->belongsTo(City::class);
+    }
+
+    public function client()
+    {
+        return $this->hasMany(Client::class);
+    }
 
 }

@@ -14,6 +14,7 @@ use Pedidos\Validators\AddressClientValidator;
  */
 class AddressClientRepositoryEloquent extends BaseRepository implements AddressClientRepository
 {
+    protected $skipPresenter = true;
     /**
      * Specify Model class name
      *
