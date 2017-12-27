@@ -11,7 +11,7 @@ use Pedidos\Models\City;
  */
 class CityTransformer extends TransformerAbstract
 {
-
+    protected $defaultIncludes = ['state'];
     /**
      * Transform the City entity
      * @param Pedidos\Models\City $model
@@ -22,11 +22,16 @@ class CityTransformer extends TransformerAbstract
     {
         return [
             'id'         => (int) $model->id,
-
+            'city' => $model->city,
             /* place your other model properties here */
 
             'created_at' => $model->created_at,
             'updated_at' => $model->updated_at
         ];
+    }
+
+    public function includeState(City $model)
+    {
+        return $this->item($model->state, new StateTransformer());
     }
 }

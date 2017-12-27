@@ -11,7 +11,7 @@ use Pedidos\Models\Client;
  */
 class ClientTransformer extends TransformerAbstract
 {
-    protected $defaultIncludes = ['user'];
+    protected $defaultIncludes = ['user','addressClient'];
 
     /**
      * Transform the \Client entity
@@ -37,5 +37,10 @@ class ClientTransformer extends TransformerAbstract
 
     public function includeUser(Client $model){
         return $this->item($model->user, new UserTransformer());
+    }
+
+    public function includeAddressClient(Client $model)
+    {
+        return $this->item($model->addressClient, new AddressClientTransformer());
     }
 }

@@ -22,7 +22,7 @@ class CountryTransformer extends TransformerAbstract
     {
         return [
             'id'         => (int) $model->id,
-
+            'country' => $model->country,
             /* place your other model properties here */
 
             'created_at' => $model->created_at,

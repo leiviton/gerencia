@@ -11,6 +11,7 @@ use Pedidos\Models\AddressClient;
  */
 class AddressClientTransformer extends TransformerAbstract
 {
+    protected $defaultIncludes = ['city'];
 
     /**
      * Transform the AddressClient entity
@@ -22,11 +23,20 @@ class AddressClientTransformer extends TransformerAbstract
     {
         return [
             'id'         => (int) $model->id,
+            'address' => $model->address,
+            'complemento' => $model->complemento,
+            'numero' => $model->numero,
+            'bairro' => $model->bairro,
 
             /* place your other model properties here */
 
             'created_at' => $model->created_at,
             'updated_at' => $model->updated_at
         ];
+    }
+
+    public function includeCity(AddressClient $model)
+    {
+        return $this->item($model->city, new CityTransformer());
     }
 }
