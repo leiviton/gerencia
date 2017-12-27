@@ -22,7 +22,7 @@ class ClientRepositoryEloquent extends BaseRepository implements ClientRepositor
                 ->where('id',$value)
                 ->orWhere('name',$value)
                 ->orWhere('phone',$value)
-                ->first();
+                ->get();
         if ($result){
             return $this->parserResult($result);
         }
