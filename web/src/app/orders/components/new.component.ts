@@ -207,8 +207,12 @@ export class NewComponent implements OnInit {
         {
             this.toasterService.pop('error', 'Selecione uma cidade');
         }else{
-            console.log('cliente',this.client);
-            this.toasterService.pop('success','Cliente Cadastrado com sucesso')
+            this.httpService.builder()
+                .insert(this.client,'client')
+                .then((res) =>{
+                    console.log(res);
+                    this.toasterService.pop('success','Cliente Cadastrado com sucesso');
+                })
         }
     }
 

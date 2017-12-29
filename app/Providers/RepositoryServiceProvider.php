@@ -71,6 +71,22 @@ class RepositoryServiceProvider extends ServiceProvider
             'Pedidos\Repositories\MovimentoCaixaRepository',
             'Pedidos\Repositories\MovimentoCaixaRepositoryEloquent'
         );
+        $this->app->bind(
+            'Pedidos\Repositories\AddressClientRepository',
+            'Pedidos\Repositories\AddressClientRepositoryEloquent'
+        );
+        $this->app->bind(
+            'Pedidos\Repositories\CityRepository',
+            'Pedidos\Repositories\CityClientRepositoryEloquent'
+        );
+        $this->app->bind(
+            'Pedidos\Repositories\CountryRepository',
+            'Pedidos\Repositories\CountryRepositoryEloquent'
+        );
+        $this->app->bind(
+            'Pedidos\Repositories\StateRepository',
+            'Pedidos\Repositories\StateClientRepositoryEloquent'
+        );
 
     }
 }
