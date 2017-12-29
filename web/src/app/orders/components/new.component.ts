@@ -212,7 +212,16 @@ export class NewComponent implements OnInit {
                 .insert(this.client,'client')
                 .then((res) =>{
                     console.log(res);
-                    this.toasterService.pop('success','Cliente Cadastrado com sucesso');
+                    this.client.id = res.data.id;
+                    this.client.name = res.data.name;
+                    this.client.phone = res.data.phone;
+                    this.client.email = res.data.email;
+                    this.client.address.address = res.data.addressClient.data.address;
+                    this.client.address.numero = res.data.addressClient.data.numero;
+                    this.client.address.bairro = res.data.addressClient.data.bairro;
+                    this.client.address.city_id = res.data.addressClient.data.city.data.id;
+                    console.log('cliente', this.client);
+                    this.toasterService.pop('success','Cliente '+ this.client.name+' cadastrado com sucesso, codigo:' + this.client.id);
                 })
         }
     }

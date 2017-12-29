@@ -42,7 +42,7 @@ var LoginComponent = (function () {
         };
         var u = JSON.parse(localStorage.getItem('user') || null);
         if (u && u != null) {
-            this.router.navigate(['/']);
+            this.router.navigate(['/dashboard']);
         }
     }
     LoginComponent.prototype.login = function (e) {

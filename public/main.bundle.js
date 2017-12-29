@@ -374,7 +374,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var routes = [
     {
         path: '',
-        redirectTo: 'dashboard',
+        redirectTo: 'user/login',
         pathMatch: 'full',
     },
     {
