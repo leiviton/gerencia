@@ -87,7 +87,6 @@ class RepositoryServiceProvider extends ServiceProvider
             'Pedidos\Repositories\StateRepository',
             'Pedidos\Repositories\StateClientRepositoryEloquent'
         );
-
     }
 }
 

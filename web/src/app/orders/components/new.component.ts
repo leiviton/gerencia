@@ -207,6 +207,7 @@ export class NewComponent implements OnInit {
         {
             this.toasterService.pop('error', 'Selecione uma cidade');
         }else{
+            this.client.id = null;
             this.httpService.builder()
                 .insert(this.client,'client')
                 .then((res) =>{
