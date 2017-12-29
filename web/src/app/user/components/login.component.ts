@@ -18,7 +18,7 @@ export class LoginComponent {
         let u = JSON.parse(localStorage.getItem('user') || null);
         if(u && u != null)
         {
-            this.router.navigate(['/']);
+            this.router.navigate(['/dashboard']);
         }
     }
 

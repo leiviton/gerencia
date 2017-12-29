@@ -32,15 +32,15 @@ export class NewComponent implements OnInit {
     order = {};
     client = {
         id:1,
-        name:'',
-        phone:'',
+        name:null,
+        phone:null,
         address:{
-            rua:null,
+            address:null,
+            numero:null,
             bairro:null,
-            cidade:null,
-            estado:null
+            city_id:0
         },
-        email:''
+        email:null
     };
     items = [];
     result = {};
@@ -61,14 +61,13 @@ export class NewComponent implements OnInit {
             this.httpService.initCart();
         }
         this.items = this.httpService.get();
-        console.log('items', this.items);
         this.total = this.httpService.get().total;
         this.httpService.setAccessToken();
         this.httpService.builder()
             .list({},'mesas')
             .then((res) => {
                 this.mesas = res.data;
-                console.log('mesas', this.mesas);
+
             });
 
         this.showLoading();
@@ -87,22 +86,30 @@ export class NewComponent implements OnInit {
             this.httpService.builder('search/client')
                 .search(this.pesquisa.value2)
                 .then((res) => {
-
-                    if(res.data == []){
+                    if(res.data.length == 0){
+                        this.client.id = 1;
+                        this.client.name = null;
+                        this.client.phone = null;
+                        this.client.email = null;
+                        this.client.address.address = null;
+                        this.client.address.numero = null;
+                        this.client.address.bairro = null;
+                        this.client.address.city_id = 0;
+                        this.novo = true;
                         this.toasterService.pop('info', 'Nenhum cliente encontrado, cadastre o cliente');
                     }else {
-                        console.log('res', res.data);
                         this.client.id = res.data[0].id;
                         this.client.name = res.data[0].name;
                         this.client.phone = res.data[0].phone;
                         this.client.email = res.data[0].user.data.email;
-                        this.client.address = res.data[0].address;
+                        this.client.address.address = res.data[0].addressClient.data.address;
+                        this.client.address.numero = res.data[0].addressClient.data.numero;
+                        this.client.address.bairro = res.data[0].addressClient.data.bairro;
+                        this.client.address.city_id = res.data[0].addressClient.data.city.data.id;
                         this.novo = false;
-                        console.log(this.client);
                     }
                 });
         }
-
     }
 
     buscar()
@@ -125,13 +132,9 @@ export class NewComponent implements OnInit {
                         this.total = this.httpService.get().total;
                         this.items = this.httpService.get();
                         this.qtd = 1;
-                        console.log('item',this.items);
                     }
                 }
-                console.log("pesquisou", this.result)
             });
-
-        console.log("pesquisou", this.pesquisa)
     }
 
     addItem(item)
@@ -192,6 +195,23 @@ export class NewComponent implements OnInit {
         }
     }
 
+    saveClient()
+    {
+        if(this.client.name == null || this.client.phone == null)
+        {
+            this.toasterService.pop('error', 'Campos do cadastro vazio, verifique');
+        }else if(this.client.address.address == null || this.client.address.bairro == null || this.client.address.numero == null)
+        {
+            this.toasterService.pop('error', 'Campos do endereço vazio, verifique');
+        }else if(this.client.address.city_id == 0)
+        {
+            this.toasterService.pop('error', 'Selecione uma cidade');
+        }else{
+            console.log('cliente',this.client);
+            this.toasterService.pop('success','Cliente Cadastrado com sucesso')
+        }
+    }
+
     close()
     {
         jQuery('#new_order').hide();
@@ -202,6 +222,7 @@ export class NewComponent implements OnInit {
     {
         jQuery('#pesquisa').hide();
     }
+
 
     hideLoading(){
         jQuery(".container-loading").hide();

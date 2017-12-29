@@ -33,7 +33,18 @@ export class EditComponent implements OnInit {
     order = {
         id:0
     };
-    client = '';
+    client = {
+        id:1,
+        name:'',
+        phone:'',
+        address:{
+            address:null,
+            numero:null,
+            bairro:null,
+            city_id:0
+        },
+        email:''
+    };
     products = {};
     mesas = {
         data:null
@@ -47,19 +58,28 @@ export class EditComponent implements OnInit {
         qtd:1
     };
     qtd = 1;
+    editar = true;
     ngOnInit(): void {
         this.showLoading();
         this.httpService.setAccessToken();
         jQuery('#successModal').on('show.bs.modal').show().addClass('show');
+
+        jQuery('name').disabled = false;
         this.route.params
             .subscribe(params => {
                 this.httpService.builder().view(params['id'],'order')
                     .then((res) => {
                             this.order = res.data;
-                            this.client = res.data.client.data;
+                            this.client.id = res.data.client.data.id;
+                            this.client.name = res.data.client.data.name;
+                            this.client.phone = res.data.client.data.phone;
+                            this.client.email = res.data.client.data.user.data.email;
+                            this.client.address.address = res.data.client.data.addressClient.data.address;
+                            this.client.address.numero = res.data.client.data.addressClient.data.numero;
+                            this.client.address.bairro = res.data.client.data.addressClient.data.bairro;
+                            this.client.address.city_id = res.data.client.data.addressClient.data.city.data.id;
                             this.products = res.data.items;
                             this.mesa = res.data.mesa.data.name;
-                            console.log(this.order);
                             this.hideLoading();
                     });
                 this.httpService.setAccessToken();
@@ -67,7 +87,6 @@ export class EditComponent implements OnInit {
                     .list({},'mesas')
                     .then((res) => {
                         this.mesas = res;
-                        console.log('mesas', this.mesas);
                     });
 
             });
@@ -115,6 +134,10 @@ export class EditComponent implements OnInit {
         this.router.navigate(['/orders']);
     }
 
+    habilitarEdicao()
+    {
+        this.editar = !this.editar;
+    }
     hideLoading(){
         jQuery(".container-loading").hide();
     }

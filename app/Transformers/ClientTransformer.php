@@ -12,7 +12,6 @@ use Pedidos\Models\Client;
 class ClientTransformer extends TransformerAbstract
 {
     protected $defaultIncludes = ['user','addressClient'];
-
     /**
      * Transform the \Client entity
      * @param \Client $model

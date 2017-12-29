@@ -59,8 +59,17 @@
   margin-left: 40%;
 }
 
+.modal_novo{
+  display: block;
+  overflow-y: auto;
+}
+
 .cadastro{
   padding: 5px;
+}
+
+.novo{
+  padding: 1px;
 }
 
 .title-table{
@@ -96,13 +105,17 @@
   height: 72px;
 }
 .borderdiv{
-  border-top: 1px solid #7095a7;
+  border-top: 1px solid #c2cfd6;
 }
 .padding{
   padding-top: 5px;
+  padding-bottom: 0px;
 }
 .separate{
-  padding: 6px;
+  padding: 14px;
+}
+.separate1{
+  padding: 13px;
 }
 
 .fundo{

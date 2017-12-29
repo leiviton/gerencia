@@ -1,13 +1,13 @@
-<div tabindex="-1" class="modal fade" id="new_order" role="dialog" aria-hidden="true" aria-labelledby="myModalLabel" style="display: block; overflow-y: auto;">
+<div tabindex="-1" class="modal fade modal_novo" id="new_order" role="dialog" aria-hidden="true" aria-labelledby="myModalLabel">
     <div class="modal-dialog modal-lg modal-primary" role="document">
         <div class="modal-content">
-            <div class="modal-header cadastro">
+            <div class="modal-header novo">
                 <h5 class="modal-title">Novo Pedido</h5>
                 <button class="close" aria-label="Close" type="button" data-dismiss="modal" (click)="close()">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body padding">
                 <div class="col-md-12">
                     <form #myForm="ngForm" (keyup.enter)="buscar()" class="form-inline">
                         <div class="form-group col-md-12">
@@ -29,7 +29,7 @@
                     <form #myForm="ngForm" class="form-inline">
                         <div class="form-group col-md-12">
                             <label class="col-md-2" *ngIf="tipo != 1">Telefone: </label>
-                            <input *ngIf="tipo != 1"  type="text" class="form-control col-md-4" name="pesquisa"  placeholder="Digite Cliente (Telefone, nome, codigo)" required minlength="11" [(ngModel)]="pesquisa.value2" (blur)="buscarCliente()">
+                            <input ngxPhoneMask *ngIf="tipo != 1"  type="text" class="form-control col-md-4" name="pesquisa"  placeholder="Digite Cliente (Telefone, nome, codigo)" required minlength="11" [(ngModel)]="pesquisa.value2" (blur)="buscarCliente()">
                             <label for="mesa" class="label col-md-2" *ngIf="tipo == 1">Mesa: </label>
                             <select id="mesa" name="category_id" class="form-control col-md-4" [(ngModel)]="mesa_id" *ngIf="tipo == 1">
                                 <option value="null">Selecione a mesa</option>
@@ -39,35 +39,34 @@
                     </form>
                 </div>
                 <div class="row borderdiv">
-                    <div class="col-md-6 mb-4 padding" style="height: 340px; overflow: auto" *ngIf="tipo != 1">
+                    <div class="col-md-6 mb-4 padding" style="height: 380px; overflow: auto" *ngIf="tipo != 1">
                         <!-- Nav tabs -->
                         <tabset>
                             <tab heading="Cliente">
                                 <form class="form-inline">
                                     <input type="text" class="form-control col-md-12" name="name" [(ngModel)]="client.name" placeholder="Nome Cliente"/>
                                     <br><br>
-                                    <input type="text" class="form-control col-md-12" name="phone" [(ngModel)]="client.phone" placeholder="Telefone"/>
+                                    <input ngxPhoneMask type="text" class="form-control col-md-12" id="fone" name="phone" [(ngModel)]="client.phone" placeholder="Telefone"/>
                                     <br><br>
-                                    <input type="text" class="form-control col-md-12" name="email" [(ngModel)]="client.email" placeholder="Email">
+                                    <input type="text" class="form-control col-md-12 " name="email" [(ngModel)]="client.email" placeholder="Email">
                                     <br><br>
-                                    <input type="text" class="form-control col-md-12" name="address.rua" [(ngModel)]="client.address.rua" placeholder="Rua"/>
+                                    <input type="text" class="form-control col-md-12" name="address.address" [(ngModel)]="client.address.address" placeholder="Rua"/>
                                     <br><br>
-                                    <input type="text" class="form-control col-md-12" name="address.bairro" [(ngModel)]="client.address.bairro" placeholder="Bairro"/>
+                                    <input type="text" class="form-control col-md-3" name="address.numero" [(ngModel)]="client.address.numero" placeholder="Numero">
+                                    <div class="separate1"></div>
+                                    <input type="text" class="form-control col-md-8" name="address.bairro" [(ngModel)]="client.address.bairro" placeholder="Bairro"/>
                                     <br><br>
-                                    <select name="cidade" id="estado" class="form-control">
-                                        <option value="0">Selecione estado</option>
-                                    </select>
-                                    <div class="separate"></div>
-                                    <select name="cidade" id="cidade" class="form-control">
+                                    <select name="cidade" id="cidade" class="form-control col-md-12" [(ngModel)]="client.address.city_id">
                                         <option value="0">Selecione cidade</option>
+                                        <option value="1">Guaxupé</option>
                                     </select>
                                     <br><br>
                                     <div class="padding" *ngIf="novo == true">
-                                        <button type="submit" class="btn btn-default btn-info">Cadastrar</button>
+                                        <button type="button" class="btn btn-default btn-info" (click)="saveClient()">Cadastrar</button>
                                     </div>
                                 </form>
                             </tab>
-                            <tab heading="50 ultimos">
+                            <tab heading="50 ultimos" *ngIf="novo == false">
                                 <p>Pedido:</p>
                                 <p>Data:</p>
                                 <p>Produtos:</p>
@@ -100,7 +99,7 @@
                             </table>
                         </div>
                         <hr>
-                        <div class="col-md-12 text-center"><p class="qtd">TOTAL: {{ total | currency:'BRL':true }}</p></div>
+                        <div class="col-md-12 text-center alert alert-success total-pagamento"><p class="qtd">TOTAL: {{ total | currency:'BRL':true }}</p></div>
                     </div>
                 </div>
             </div>

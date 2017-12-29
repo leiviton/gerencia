@@ -9,6 +9,7 @@
 namespace Pedidos\Services;
 
 
+use Pedidos\Repositories\AddressClientRepository;
 use Pedidos\Repositories\ClientRepository;
 use Pedidos\Repositories\UserRepository;
 
@@ -22,12 +23,18 @@ class ClientService
      * @var UserRepository
      */
     private $userRepository;
+    /**
+     * @var AddressClientRepository
+     */
+    private $addressClientRepository;
 
-    public function __construct(ClientRepository $clientRepository, UserRepository $userRepository)
+    public function __construct(ClientRepository $clientRepository, UserRepository $userRepository,
+                                AddressClientRepository $addressClientRepository)
     {
 
         $this->clientRepository = $clientRepository;
         $this->userRepository = $userRepository;
+        $this->addressClientRepository = $addressClientRepository;
     }
 
     public function update(array $data,$id){
@@ -42,7 +49,10 @@ class ClientService
         $data['user']->senha = bcrypt(123456);
         $user = $this->userRepository->create($data['user']);
 
+        $address = $this->addressClientRepository->create($data['address']);
         $data['user_id'] = $user->id;
+
+        $data['address_client_id'] = $address->id;
         return $this->clientRepository->create($data);
     }
 }

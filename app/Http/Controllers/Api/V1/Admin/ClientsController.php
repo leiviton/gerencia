@@ -58,11 +58,12 @@ class ClientsController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        $o = $this->clientService->create($data);
+        return dd($data);
+        /*$o = $this->clientService->create($data);
 
         return $this->repository
             ->skipPresenter(false)
-            ->find($o->id);
+            ->find($o->id);*/
     }
 
     public function update($id, AdminProductRequest $request)

@@ -17,6 +17,7 @@ import { CuppaDataGridModule } from 'cuppa-ng2-grid/cuppa-ng2-dataGrid';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 
 import { CurrencyMaskModule } from "ng2-currency-mask";
+import { NgxPhoneMaskModule } from 'ngx-phone-mask';
 
 @NgModule({
   imports: [
@@ -28,7 +29,8 @@ import { CurrencyMaskModule } from "ng2-currency-mask";
     FormsModule,
       CuppaDataGridModule,
       TabsModule,
-      CurrencyMaskModule
+      CurrencyMaskModule,
+      NgxPhoneMaskModule
   ],
   declarations: [ OrdersComponent,EditComponent,NewComponent,PaymentComponent ],
   providers: [ OrdersService, BsModalService ]
