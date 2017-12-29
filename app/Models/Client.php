@@ -15,9 +15,7 @@ class Client extends Model implements Transformable
         'name',
         'phone',
         'address',
-        'city',
-        'state',
-        'zipcode'
+        'address_client_id'
     ];
 
     public function user(){
