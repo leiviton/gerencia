@@ -17,9 +17,9 @@ class Order extends Model implements Transformable
         'status',
         'type',
         'cupom_id',
-        'geo',
-        'service',
-        'defect'
+        'troco',
+        'cartao',
+        'observacao'
     ];
 
     public function items(){

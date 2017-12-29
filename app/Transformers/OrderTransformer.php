@@ -31,6 +31,9 @@ class OrderTransformer extends TransformerAbstract
             'status'=>$model->status,
             'type' => (int) $model->type,
             'hash'=>$model->hash,
+            'troco' => $model->troco,
+            'cartao' => $model->cartao,
+            'observacao' => $model->observacao,
             'created_at' => (string)date_format($model->created_at,'d/m/Y H:i:s'),
             'previsao' => (string) date('H:i:s',strtotime('+ 20 minutes',strtotime($previsao))),
             'updated_at' => $model->updated_at

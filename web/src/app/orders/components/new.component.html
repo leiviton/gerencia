@@ -44,7 +44,7 @@
                         <tabset>
                             <tab heading="Cliente">
                                 <form class="form-inline">
-                                    <input type="text" class="form-control col-md-12" name="name" [(ngModel)]="client.name" placeholder="Nome Cliente"/>
+                                    <input type="text" class="form-control col-md-12" name="name" [(ngModel)]="client.name" placeholder="Nome Cliente" [required]="true" minlength="8"/>
                                     <br><br>
                                     <input ngxPhoneMask type="text" class="form-control col-md-12" id="fone" name="phone" [(ngModel)]="client.phone" placeholder="Telefone"/>
                                     <br><br>

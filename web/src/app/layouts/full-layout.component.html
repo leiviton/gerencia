@@ -81,7 +81,6 @@
 
   <!-- Main content -->
   <main class="main">
-
     <div class="container-fluid" style="padding: 15px">
       <router-outlet></router-outlet>
     </div><!-- /.conainer-fluid -->
@@ -89,6 +88,9 @@
 </div>
 
 <footer class="app-footer" *ngIf="user !== '' && user !== null">
-  <a href="http://leiviton.com.br">Gerencia Pedidos</a> &copy; {{ ano }}.
-  <span class="float-right">Powered by <a href="http://leiviton.com.br">Leiviton Software</a></span>
+  <span class="float-center">Versão: 1.12.8.17</span>
+  <span class="float-right">
+    <a href="http://leiviton.com.br">Gerencia Pedidos</a> &copy; {{ ano }} | Powered by
+    <a href="http://leiviton.com.br">Leiviton Software</a>
+  </span>
 </footer>
