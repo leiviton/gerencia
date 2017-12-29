@@ -14,7 +14,8 @@ class AddressClient extends Model implements Transformable
         'address',
         'complemento',
         'numero',
-        'bairro'
+        'bairro',
+        'city_id'
     ];
 
     public function city()
