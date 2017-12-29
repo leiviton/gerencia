@@ -101,6 +101,17 @@ class AdminCheckoutController extends Controller
         return $result;
     }
 
+    public function getMesasLivre()
+    {
+        $status = 0;
+        $result = $this->mesaRepository->skipPresenter(false)
+            ->scopeQuery(function($query) use($status){
+                return $query->where('status',$status);
+            })
+            ->all();
+        return $result;
+    }
+
     public function getTypePayments()
     {
         $ativo = 'S';

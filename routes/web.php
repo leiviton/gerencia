@@ -38,6 +38,7 @@ Route::group(['prefix'=>'api/v1','middleware' => 'auth:api'],function () {
        Route::put('product/{id}', 'ProductsController@update');
        Route::get('search','AdminCheckoutController@search');
        Route::get('mesas', 'AdminCheckoutController@getMesas');
+       Route::get('mesas/livres', 'AdminCheckoutController@getMesasLivre');
        Route::get('auth/logout','AuthController@logout');
        Route::post('payment','AdminCheckoutController@payment');
        Route::get('typepayment', 'AdminCheckoutController@getTypePayments');

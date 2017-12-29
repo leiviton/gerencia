@@ -64,7 +64,7 @@ export class NewComponent implements OnInit {
         this.total = this.httpService.get().total;
         this.httpService.setAccessToken();
         this.httpService.builder()
-            .list({},'mesas')
+            .list({},'mesas/livres')
             .then((res) => {
                 this.mesas = res.data;
 
