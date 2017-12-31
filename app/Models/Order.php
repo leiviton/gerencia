@@ -19,7 +19,8 @@ class Order extends Model implements Transformable
         'cupom_id',
         'troco',
         'cartao',
-        'observacao'
+        'observacao',
+        'link_printer'
     ];
 
     public function items(){

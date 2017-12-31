@@ -154,6 +154,8 @@ class AdminCheckoutController extends Controller
 
         $pdf->loadHTML("<h1>Test $order->id</h1>")->save(public_path().'/printer/'.$order->id.'.pdf');
 
-        return $order;
+        $order->link_printer = '/printer/'.$order->id.'pdf';
+
+        return $this->repository->skipPresenter(false)->find($order->id);
     }
 }
