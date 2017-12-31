@@ -154,6 +154,13 @@ class AdminCheckoutController extends Controller
 
         $hora = date_format($order->created_at,'H:i:s');
 
+        $produtos = '';
+
+        foreach ($order->items as $value)
+        {
+            $produtos .= '<h3>'.$value->product->name.'</h3>';
+        }
+
         $pdf = App::make('dompdf.wrapper');
 
         $pdf->loadHTML("<html>
@@ -167,7 +174,7 @@ class AdminCheckoutController extends Controller
                                 <h3>Hora: $hora</h3>
                                 <h4>-------------------------------------------------------</h4>
                                 <h3>Produtos:</h3>
-                        
+                                $produtos
                             </body>
                         </html>")->save(public_path().'/printer/'.$order->id.'.pdf');
 
