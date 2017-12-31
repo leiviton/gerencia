@@ -9,6 +9,7 @@
 namespace Pedidos\Http\Controllers\Api\V1\Admin;
 
 
+use Illuminate\Support\Facades\App;
 use Pedidos\Http\Controllers\Controller;
 
 use Pedidos\Http\Requests\CheckoutRequest;
@@ -143,5 +144,16 @@ class AdminCheckoutController extends Controller
         return $this->repository
             ->skipPresenter(false)
             ->find($id);
+    }
+
+    public function printer($id)
+    {
+        $order = $this->repository->find($id);
+
+        $pdf = App::make('dompdf.wrapper');
+
+        $pdf->loadHTML("<h1>Test $order->id</h1>")->save(public_path().'/printer/'.$order->id.'.pdf');
+
+        return $order;
     }
 }

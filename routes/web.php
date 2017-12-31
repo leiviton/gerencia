@@ -45,6 +45,7 @@ Route::group(['prefix'=>'api/v1','middleware' => 'auth:api'],function () {
        Route::get('search/client','ClientsController@search');
        Route::post('client', 'ClientsController@store');
        Route::put('order/{id}', 'AdminCheckoutController@update');
+       Route::get('printer/{id}', 'AdminCheckoutController@printer');
 
     });
     Route::get('user','Api\UserController@authenticated');
