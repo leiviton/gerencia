@@ -184,7 +184,7 @@ class AdminCheckoutController extends Controller
                                   $produtos
                                   </tr>
                                  </tbody>
-                          </table>"
+                          </table>";
         $pdf = App::make('dompdf.wrapper');
 
         $pdf->loadHTML("<html>
