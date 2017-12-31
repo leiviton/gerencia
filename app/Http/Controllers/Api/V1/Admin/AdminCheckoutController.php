@@ -150,6 +150,10 @@ class AdminCheckoutController extends Controller
     {
         $order = $this->repository->find($id);
 
+        $data = date_format($order->created_at,'d/m/Y');
+
+        $hora = date_format($order->created_at,'H:i:s');
+
         $pdf = App::make('dompdf.wrapper');
 
         $pdf->loadHTML("<html>
@@ -159,7 +163,8 @@ class AdminCheckoutController extends Controller
                             <body>
                                 <h4>------------------------------------------------------</h4>
                                 <h3>Pedido: $order->id</h3>
-                                <h3>Data: date_format($order->created_at,'d/m/Y')</h3>
+                                <h3>Data: $data</h3>
+                                <h3>Hora: $hora</h3>
                                 <h4>-------------------------------------------------------</h4>
                                 <h3>Produtos:</h3>
                         
