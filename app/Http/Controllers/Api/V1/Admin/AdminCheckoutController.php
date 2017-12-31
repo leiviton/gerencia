@@ -152,7 +152,19 @@ class AdminCheckoutController extends Controller
 
         $pdf = App::make('dompdf.wrapper');
 
-        $pdf->loadHTML("<h1>Test $order->id</h1>")->save(public_path().'/printer/'.$order->id.'.pdf');
+        $pdf->loadHTML("<html>
+                            <head>
+                                <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>
+                            </head>
+                            <body>
+                                <h1>------------------------------------</h1>
+                                <h2>Pedido: $order->id</h2>
+                                <h2>Data: $order->creatd_at</h2>
+                                <h1>------------------------------------</h1>
+                                <h3>Produtos:</h3>
+                        
+                            </body>
+                        </html>")->save(public_path().'/printer/'.$order->id.'.pdf');
 
         $order->link_printer = '/printer/'.$order->id.'.pdf';
 
