@@ -21,7 +21,7 @@ export class EditComponent implements OnInit {
         document.onkeydown = ((e) =>{
             if(e.keyCode  == 120)
             {
-
+                this.update();
             }
 
             if(e.keyCode == 27)
@@ -91,6 +91,28 @@ export class EditComponent implements OnInit {
 
             });
         this.httpService.eventEmitter.emit();
+    }
+
+    update()
+    {
+        this.showLoading();
+        this.httpService.builder('order/update')
+            .update(this.order.id, this.order)
+            .then((res) => {
+                this.order = res.data;
+                this.client.id = res.data.client.data.id;
+                this.client.name = res.data.client.data.name;
+                this.client.phone = res.data.client.data.phone;
+                this.client.email = res.data.client.data.user.data.email;
+                this.client.address.address = res.data.client.data.addressClient.data.address;
+                this.client.address.numero = res.data.client.data.addressClient.data.numero;
+                this.client.address.bairro = res.data.client.data.addressClient.data.bairro;
+                this.client.address.city_id = res.data.client.data.addressClient.data.city.data.id;
+                this.products = res.data.items;
+                this.mesa = res.data.mesa.data.name;
+                this.hideLoading();
+                this.toasterService.pop('success', 'Sucesso','Pedido '+this.order.id+' com sucesso!')
+            });
     }
 
     buscar()

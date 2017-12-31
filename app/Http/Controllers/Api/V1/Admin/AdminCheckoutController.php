@@ -134,6 +134,14 @@ class AdminCheckoutController extends Controller
             ->find($result->id);
     }
 
+    public function update($id, Request $request)
+    {
+        $data = $request->all();
 
+        $this->orderService->updateStatus($data,$id);
 
+        return $this->repository
+            ->skipPresenter(false)
+            ->find($id);
+    }
 }

@@ -54,6 +54,9 @@ export class NewComponent implements OnInit {
     mesa_id = null;
     tipo = 0;
     novo = true;
+    cartao = false;
+    troco = 0;
+    bandeira = '';
 
     ngOnInit(): void {
         if(!this.cart)
@@ -156,6 +159,7 @@ export class NewComponent implements OnInit {
 
     save()
     {
+        let card = '';
         if(this.tipo != 1){
             this.mesa_id = 1;
         }
@@ -165,6 +169,12 @@ export class NewComponent implements OnInit {
             this.toasterService.pop('error', 'É necessário cadastrar um cliente ou selecionar');
         }else {
             if (this.mesa_id != null) {
+                if(this.cartao == false)
+                {
+                    card = 'Não';
+                }else{
+                    card = 'Sim'
+                }
                 console.log('mesa', this.mesa_id);
                 this.showLoading();
                 this.httpService.setAccessToken();
@@ -174,7 +184,10 @@ export class NewComponent implements OnInit {
                         total: this.httpService.get().total,
                         mesa_id: this.mesa_id,
                         client_id: this.client.id,
-                        type: this.tipo
+                        type: this.tipo,
+                        cartao: card,
+                        troco: this.troco+',00 reais',
+                        observacao: 'Banceira do cartão: '+ this.bandeira
                     };
                     this.httpService.builder()
                         .insert(pedido, 'order')

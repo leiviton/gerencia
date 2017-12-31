@@ -106,22 +106,22 @@ class OrderService{
         }
     }
 
-    public function updateStatus($id,$idDeliveryman,$status){
-        $order = $this->orderRepository->getByIDAndDeliveryman($id,$idDeliveryman);
-        $order->status = $status;
-        switch ((int)$status){
+    public function updateStatus($data,$id){
+        $order = $this->orderRepository->find($id);
+        $order->status = $data->status;
+        $order->mesa_id = $data->mesa_id;
+        switch ((int)$data->status){
             case 1:
                 if(!$order->hash){
                     $order->hash = md5((new \DateTime())->getTimestamp());
                 }
                 $order->save();
-                $user = $order->client->user;
-
                 break;
             case 2:
-                $user = $order->client->user;
+                if(!$order->hash){
+                    $order->hash = md5((new \DateTime())->getTimestamp());
+                }
                 $order->save();
-
                 break;
         }
         return $order;
