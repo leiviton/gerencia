@@ -108,9 +108,9 @@ class OrderService{
 
     public function updateStatus($data,$id){
         $order = $this->orderRepository->find($id);
-        $order->status = $data->status;
-        $order->mesa_id = $data->mesa_id;
-        switch ((int)$data->status){
+        $order->status = $data['status'];
+        $order->mesa_id = $data['mesa_id'];
+        switch ((int)$data['status']){
             case 1:
                 if(!$order->hash){
                     $order->hash = md5((new \DateTime())->getTimestamp());

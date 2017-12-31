@@ -96,7 +96,7 @@ export class EditComponent implements OnInit {
     update()
     {
         this.showLoading();
-        this.httpService.builder('order/update')
+        this.httpService.builder('order')
             .update(this.order.id, this.order)
             .then((res) => {
                 this.order = res.data;
