@@ -156,7 +156,8 @@ class AdminCheckoutController extends Controller
 
         $produtos = '';
 
-        $table = '';
+        $contador = 0;
+
         foreach ($order->items as $value)
         {
             $produtos .= " <tr>
@@ -166,7 +167,7 @@ class AdminCheckoutController extends Controller
                             <td>".$value->price."</td>
                             <td>".$value->subtotal."</td>
                           </tr>";
-
+            $contador++;
         }
 
         $table = "<table>
@@ -191,19 +192,24 @@ class AdminCheckoutController extends Controller
                                 <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>
                             </head>
                             <body>
-                                <h4>------------------------------------------------------</h4>
+                                <h5>---------------------------------------------------------------------</h5>
                                 <h3>Pedido: $order->id</h3>
                                 <h3>Data: $data</h3>
                                 <h3>Hora: $hora</h3>
-                                <h4>-------------------------------------------------------</h4>
+                                <h5>---------------------------------------------------------------------</h5>
                                 <h4>Cliente: ".$order->client->name."</h4>
-                                <h4>Endereço: ".$order->client->addressClient->address.",".$order->client->addressClient->numero."</h4>
+                                <h5>Endereço: ".$order->client->addressClient->address.",".$order->client->addressClient->numero."</h5>
                                 <h4>Complemento: ".$order->client->addressClient->complemento."</h4>
                                 <h4>Bairro: ".$order->client->addressClient->bairro."</h4>
                                 <h4>Cidade: Guaxupé UF: MG</h4>
-                                <h4>-------------------------------------------------------</h4>
+                                <h5>---------------------------------------------------------------------</h5>
                                 <h3>Produtos:</h3>
                                 $table
+                                <h5>---------------------------------------------------------------------</h5>
+                                TOTAL DE ITENS: $contador
+                                TOTAL DA COMPRA: $order->total
+                                <h5>---------------------------------------------------------------------</h5>
+                                $order->observacao
                             </body>
                         </html>")->save(public_path().'/printer/'.$order->id.'.pdf');
 
