@@ -206,8 +206,8 @@ class AdminCheckoutController extends Controller
                                 <h3>Produtos:</h3>
                                 $table
                                 <h5>---------------------------------------------------------------------</h5>
-                                TOTAL DE ITENS: $contador
-                                TOTAL DA COMPRA: $order->total
+                                <h5>TOTAL DE ITENS: $contador</h5>
+                                <h5>TOTAL DA COMPRA: $order->total</h5>
                                 <h5>---------------------------------------------------------------------</h5>
                                 $order->observacao
                             </body>
