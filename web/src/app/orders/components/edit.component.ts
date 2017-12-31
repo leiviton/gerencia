@@ -109,6 +109,7 @@ export class EditComponent implements OnInit {
         this.httpService.builder('order')
             .update(this.order.id, order)
             .then((res) => {
+                this.httpService.eventEmitter.emit();
                 this.order = res.data;
                 this.client.id = res.data.client.data.id;
                 this.client.name = res.data.client.data.name;

@@ -51,7 +51,7 @@ class DeliverymanCheckoutController extends Controller
         //$user = \Auth::guard('api')->user();
         $orders = $this->repository
             ->skipPresenter(false)
-            ->ordersOpen(0);
+            ->ordersOpen(3);
         return $orders;
     }
 
