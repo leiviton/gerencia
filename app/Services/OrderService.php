@@ -112,15 +112,9 @@ class OrderService{
         $order->mesa_id = $data['mesa_id'];
         switch ((int)$data['status']){
             case 1:
-                if(!$order->hash){
-                    $order->hash = md5((new \DateTime())->getTimestamp());
-                }
                 $order->save();
                 break;
             case 2:
-                if(!$order->hash){
-                    $order->hash = md5((new \DateTime())->getTimestamp());
-                }
                 $order->save();
                 break;
         }
