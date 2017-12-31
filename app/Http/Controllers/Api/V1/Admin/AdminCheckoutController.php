@@ -156,10 +156,33 @@ class AdminCheckoutController extends Controller
 
         $produtos = '';
 
+        $table = '';
         foreach ($order->items as $value)
         {
-            $produtos .= '<h3>'.$value->product->name.'</h3>';
+            $produtos .= " <tr>
+                            <td>".$value->product->id."</td>
+                            <td>".$value->product->name."</td>
+                            <td>".$value->qtd."</td>
+                            <td>".$value->price."</td>
+                            <td>".$value->subtotal."</td>
+                          </tr>";
+
         }
+
+        $table = "<table>
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Produto</th>
+                        <th>Qtd</th>
+                        <th>Valor</th>
+                        <th>Subtotal</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                     $produtos
+                    </tbody>
+                  </table>";
 
         $pdf = App::make('dompdf.wrapper');
 
@@ -180,7 +203,7 @@ class AdminCheckoutController extends Controller
                                 <h4>Cidade: Guaxupé UF: MG</h4>
                                 <h4>-------------------------------------------------------</h4>
                                 <h3>Produtos:</h3>
-                                $produtos
+                                $table
                             </body>
                         </html>")->save(public_path().'/printer/'.$order->id.'.pdf');
 
