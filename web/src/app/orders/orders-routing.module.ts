@@ -9,6 +9,8 @@ import { NewComponent } from "./components/new.component";
 
 import { PaymentComponent } from "./components/payment.component";
 
+import { PrinterComponent} from "./components/printer.component";
+
 const routes: Routes = [
   {
     path: '',
@@ -22,6 +24,13 @@ const routes: Routes = [
               component: EditComponent,
               data: {
                   title: 'Editar'
+              }
+          },
+          {
+              path: 'printer/:id',
+              component: PrinterComponent,
+              data: {
+                  title: 'Printer'
               }
           },
           {

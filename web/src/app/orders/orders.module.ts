@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common'
+import { CommonModule } from '@angular/common';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { BsModalService } from 'ngx-bootstrap/modal';
@@ -18,6 +18,9 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 
 import { CurrencyMaskModule } from "ng2-currency-mask";
 import { NgxPhoneMaskModule } from 'ngx-phone-mask';
+import {PrinterComponent} from "./components/printer.component";
+
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 @NgModule({
   imports: [
@@ -30,9 +33,10 @@ import { NgxPhoneMaskModule } from 'ngx-phone-mask';
       CuppaDataGridModule,
       TabsModule,
       CurrencyMaskModule,
-      NgxPhoneMaskModule
+      NgxPhoneMaskModule,
+      PdfViewerModule
   ],
-  declarations: [ OrdersComponent,EditComponent,NewComponent,PaymentComponent ],
+  declarations: [ OrdersComponent,EditComponent,NewComponent,PaymentComponent,PrinterComponent ],
   providers: [ OrdersService, BsModalService ]
 })
 export class OrdersModule { }

@@ -56,6 +56,9 @@ class AdminCheckoutController extends Controller
     public function store(CheckoutRequest $request){
         $data = $request->all();
         $o = $this->orderService->create($data);
+
+        $this->printer($o->id);
+
         return $this->repository
             ->skipPresenter(false)
             ->find($o->id);
@@ -129,6 +132,8 @@ class AdminCheckoutController extends Controller
         $data = $request->all();
 
         $result = $this->orderService->addItem($data);
+
+        $this->printer($result->id);
 
         return $this->repository
             ->skipPresenter(false)
@@ -213,7 +218,7 @@ class AdminCheckoutController extends Controller
                             </body>
                         </html>")->save(public_path().'/printer/'.$order->id.'.pdf');
 
-        $order->link_printer = '/printer/'.$order->id.'.pdf';
+        $order->link_printer = 'http://108.61.155.169/printer/'.$order->id.'.pdf';
 
         $order->save();
 
