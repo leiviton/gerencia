@@ -156,6 +156,8 @@ class AdminCheckoutController extends Controller
 
         $order->link_printer = '/printer/'.$order->id.'pdf';
 
+        $order->save();
+
         return $this->repository->skipPresenter(false)->find($order->id);
     }
 }
