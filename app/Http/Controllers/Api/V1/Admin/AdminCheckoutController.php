@@ -148,7 +148,7 @@ class AdminCheckoutController extends Controller
 
     public function printer($id)
     {
-        $order = $this->repository->find($id);
+        $order = $this->repository->skipPresenter(true)->find($id);
 
         $data = date_format($order->created_at,'d/m/Y');
 
