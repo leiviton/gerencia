@@ -157,10 +157,10 @@ class AdminCheckoutController extends Controller
                                 <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>
                             </head>
                             <body>
-                                <h6>------------------------------------</h6>
+                                <h4>------------------------------------------------------</h4>
                                 <h3>Pedido: $order->id</h3>
-                                <h3>Data: $order->created_at</h3>
-                                <h6>------------------------------------</h6>
+                                <h3>Data: date_format($order->created_at,'d/m/Y')</h3>
+                                <h4>-------------------------------------------------------</h4>
                                 <h3>Produtos:</h3>
                         
                             </body>
