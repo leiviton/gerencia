@@ -161,11 +161,7 @@ class AdminCheckoutController extends Controller
         foreach ($order->items as $value)
         {
             $produtos .= "<h4>$value->product->id
-                                    $value->product->name
-                                    $value->price
-                                    $value->qtd
-                                    $value->subtotal
-                                  </h4>
+                                    </h4>
                           ";
         }
 
