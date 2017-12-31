@@ -197,14 +197,14 @@ class AdminCheckoutController extends Controller
                                 <h3>Data: $data</h3>
                                 <h3>Hora: $hora</h3>
                                 <h4>-------------------------------------------------------</h4>
-                                <h4>Cliente: $order->client['name']</h4>
+                                <!--h4>Cliente: $order->client</h4>
                                 <h4>Endereço: $order->client->addressClient->address ,$order->client->addressClient->numero</h4>
                                 <h4>Complemento: $order->client->addressClient->complemento</h4>
                                 <h4>Bairro: $order->client->addressClient->bairro</h4>
                                 <h4>Cidade: Guaxupé UF: MG</h4>
-                                <h4>-------------------------------------------------------</h4>
+                                <h4-->-------------------------------------------------------</h4>
                                 <h3>Produtos:</h3>
-                                $table
+                                $produtos
                             </body>
                         </html>")->save(public_path().'/printer/'.$order->id.'.pdf');
 
