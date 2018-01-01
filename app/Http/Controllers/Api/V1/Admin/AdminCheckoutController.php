@@ -140,8 +140,6 @@ class AdminCheckoutController extends Controller
 
         $result = $this->orderService->addItem($data);
 
-        $this->printer($result->id);
-
         return $this->repository
             ->skipPresenter(false)
             ->find($result->id);
