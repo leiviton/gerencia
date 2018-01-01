@@ -165,7 +165,7 @@ class AdminCheckoutController extends Controller
 
         foreach ($order->items as $value)
         {
-            $produtos .= " <tr>
+            $produtos .= " <tr class='fonte'>
                             <td>".$value->product->id."</td>
                             <td>".$value->product->name."</td>
                             <td>".$value->qtd."</td>
@@ -177,7 +177,7 @@ class AdminCheckoutController extends Controller
 
         $table = "<table>
                     <thead>
-                      <tr>
+                      <tr class='fonte'>
                         <th>#</th>
                         <th>Produto</th>
                         <th>Qtd</th>
@@ -197,7 +197,7 @@ class AdminCheckoutController extends Controller
                                 <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>
                                 <style>
                                     .fonte{
-                                        font-weight: 400;
+                                        font-weight: 300;
                                     }
                                 </style>
                             </head>
@@ -206,19 +206,19 @@ class AdminCheckoutController extends Controller
                                 <h3 class='fonte'>Pedido: $order->id | Mesa: ".$order->mesa->name."</h3>
                                 <h3 class='fonte'>Data: $data | Hora: $hora</h3>                              
                                 <h5 class='fonte'>---------------------------------------------------------------------</h5>
-                                <h4>Cliente: ".$order->client->name."</h4>
-                                <h5>Endereço: ".$order->client->addressClient->address.",".$order->client->addressClient->numero."</h5>
-                                <h4>Complemento: ".$order->client->addressClient->complemento."</h4>
-                                <h4>Bairro: ".$order->client->addressClient->bairro."</h4>
-                                <h4>Cidade: Guaxupé UF: MG</h4>
-                                <h5>---------------------------------------------------------------------</h5>
-                                <h3>Produtos:</h3>
+                                <h4 class='fonte'>Cliente: ".$order->client->name."</h4>
+                                <h5 class='fonte'>Endereço: ".$order->client->addressClient->address.",".$order->client->addressClient->numero."</h5>
+                                <h4 class='fonte'>Complemento: ".$order->client->addressClient->complemento."</h4>
+                                <h4 class='fonte'>Bairro: ".$order->client->addressClient->bairro."</h4>
+                                <h4 class='fonte'>Cidade: Guaxupé UF: MG</h4>
+                                <h5 class='fonte'>---------------------------------------------------------------------</h5>
+                                <h3 class='fonte'>Produtos:</h3>
                                 $table
-                                <h5>---------------------------------------------------------------------</h5>
-                                <h5>TOTAL DE ITENS: $contador</h5>
-                                <h5>TOTAL DA COMPRA: $order->total</h5>
-                                <h5>---------------------------------------------------------------------</h5>
-                                $order->observacao
+                                <h5 class='fonte'>---------------------------------------------------------------------</h5>
+                                <h5 class='fonte'>TOTAL DE ITENS: $contador</h5>
+                                <h5 class='fonte'>TOTAL DA COMPRA: $order->total</h5>
+                                <h5 class='fonte'>---------------------------------------------------------------------</h5>
+                                <h3 class='fonte'>$order->observacao</h3>
                             </body>
                         </html>")->save(public_path().'/printer/'.$order->id.'.pdf');
 
