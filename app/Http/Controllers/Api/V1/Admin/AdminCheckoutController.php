@@ -201,11 +201,11 @@ class AdminCheckoutController extends Controller
                                     }
                                 </style>
                             </head>
-                            <body class='fonte'>
-                                <h5>---------------------------------------------------------------------</h5>
-                                <h3>Pedido: $order->id | Mesa: ".$order->mesa->name."</h3>
-                                <h3>Data: $data | Hora: $hora</h3>                              
-                                <h5>---------------------------------------------------------------------</h5>
+                            <body>
+                                <h5 class='fonte'>---------------------------------------------------------------------</h5>
+                                <h3 class='fonte'>Pedido: $order->id | Mesa: ".$order->mesa->name."</h3>
+                                <h3 class='fonte'>Data: $data | Hora: $hora</h3>                              
+                                <h5 class='fonte'>---------------------------------------------------------------------</h5>
                                 <h4>Cliente: ".$order->client->name."</h4>
                                 <h5>Endereço: ".$order->client->addressClient->address.",".$order->client->addressClient->numero."</h5>
                                 <h4>Complemento: ".$order->client->addressClient->complemento."</h4>
