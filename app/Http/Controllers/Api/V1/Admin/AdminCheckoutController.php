@@ -184,7 +184,7 @@ class AdminCheckoutController extends Controller
                             <td class='fonte'>".$value->price."</td>
                             <td class='fonte'>".$value->subtotal."</td>
                           </tr>";
-            $items->update('impresso','S');
+            $this->itemRepository->update(['impresso'=>'S'],$value->id);
             $contador++;
         }
 
