@@ -27,6 +27,7 @@ class OrderItemTransformer extends TransformerAbstract
             'qtd'        => (int) $model->qtd,
             'price'      => (float) $model->price,
             'subtotal' => (float) $model->subtotal,
+            'impresso' => $model->impresso,
             /* place your other model properties here */
 
             'created_at' => $model->created_at,

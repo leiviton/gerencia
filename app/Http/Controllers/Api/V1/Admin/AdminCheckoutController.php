@@ -15,6 +15,7 @@ use Pedidos\Http\Controllers\Controller;
 use Pedidos\Http\Requests\CheckoutRequest;
 use Illuminate\Http\Request;
 use Pedidos\Repositories\MesaRepository;
+use Pedidos\Repositories\OrderItemRepository;
 use Pedidos\Repositories\OrderRepository;
 use Pedidos\Repositories\PaymentTypesRepository;
 use Pedidos\Repositories\ProductRepository;
@@ -43,14 +44,20 @@ class AdminCheckoutController extends Controller
      * @var PaymentTypesRepository
      */
     private $typesRepository;
+    /**
+     * @var OrderItemRepository
+     */
+    private $itemRepository;
 
     public function  __construct(OrderRepository $repository, OrderService $orderService
-        , ProductRepository $productRepository, MesaRepository $mesaRepository, PaymentTypesRepository $typesRepository){
+        , ProductRepository $productRepository, MesaRepository $mesaRepository,
+                                 PaymentTypesRepository $typesRepository, OrderItemRepository $itemRepository){
         $this->repository = $repository;
         $this->orderService = $orderService;
         $this->productRepository = $productRepository;
         $this->mesaRepository = $mesaRepository;
         $this->typesRepository = $typesRepository;
+        $this->itemRepository = $itemRepository;
     }
 
     public function store(CheckoutRequest $request){
@@ -159,11 +166,16 @@ class AdminCheckoutController extends Controller
 
         $hora = date_format($order->created_at,'H:i:s');
 
+        $items = $this->itemRepository
+                        ->scopeQuery(function($query) use($id){
+                            return $query->where('order_id',$id);
+                        })->all();
+
         $produtos = '';
 
         $contador = 0;
 
-        foreach ($order->items as $value)
+        foreach ($items as $value)
         {
             $produtos .= " <tr>
                             <td class='fonte'>".$value->product->id."</td>
@@ -172,6 +184,7 @@ class AdminCheckoutController extends Controller
                             <td class='fonte'>".$value->price."</td>
                             <td class='fonte'>".$value->subtotal."</td>
                           </tr>";
+            $items->update('impresso','S');
             $contador++;
         }
 
