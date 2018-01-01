@@ -167,6 +167,11 @@ export class EditComponent implements OnInit {
         this.router.navigate(['/orders']);
     }
 
+    save(){
+        jQuery('#successModal').on('show.bs.modal').show().removeClass('show');
+        this.router.navigate(['/orders/printer/'+ this.order.id+'/N']);
+    }
+
     habilitarEdicao()
     {
         this.editar = !this.editar;

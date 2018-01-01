@@ -46,6 +46,7 @@ Route::group(['prefix'=>'api/v1','middleware' => 'auth:api'],function () {
        Route::post('client', 'ClientsController@store');
        Route::put('order/{id}', 'AdminCheckoutController@update');
        Route::get('printer/{id}', 'AdminCheckoutController@printer');
+       Route::get('printer/new/{id}', 'AdminCheckoutController@printerNewItem');
 
     });
     Route::get('user','Api\UserController@authenticated');

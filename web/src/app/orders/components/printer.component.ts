@@ -33,13 +33,18 @@ export class PrinterComponent implements OnInit {
 
     innerHtml: SafeHtml;
     ngOnInit(): void {
-
         this.showLoading();
         this.httpService.setAccessToken();
         jQuery('#printer').on('show.bs.modal').show().addClass('show');
         this.route.params
             .subscribe(params => {
-                this.httpService.builder().view(params['id'],'printer')
+                let url = '';
+                if(params['i'] == 'S'){
+                    url = 'printer';
+                }else{
+                    url = 'printer/new'
+                }
+                this.httpService.builder().view(params['id'],url)
                     .then((res) => {
                             this.innerHtml = this.sanitizer.bypassSecurityTrustHtml(
                                 "<object data='"+res.data.link_printer+"' type='application/pdf' height='500' width='780' class='embed-responsive-item'>" +

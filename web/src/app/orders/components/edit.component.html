@@ -109,7 +109,7 @@
             <div class="modal-footer cadastro">
                 <div class="modal-button">
                     <button *ngIf="order.type != 1" class="btn btn-default" (click)="habilitarEdicao()"><i class="fa fa-pencil"></i> Editar endereço</button>
-                    <a class="btn btn-link Left"><i class="fa fa-print"></i> Imprimir</a>
+                    <button class="btn btn-link Left" (click)="save()"><i class="fa fa-print"></i> Imprimir</button>
                     <button class="btn btn-info" (click)="update()"><i class="fa fa-save"></i> Salvar pedido (F9)</button>
                     <button class="btn btn-danger text-left" type="button" (click)="close()"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
                 </div>

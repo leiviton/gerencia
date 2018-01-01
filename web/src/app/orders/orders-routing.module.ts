@@ -27,7 +27,7 @@ const routes: Routes = [
               }
           },
           {
-              path: 'printer/:id',
+              path: 'printer/:id/:i',
               component: PrinterComponent,
               data: {
                   title: 'Printer'

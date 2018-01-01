@@ -158,6 +158,90 @@ class AdminCheckoutController extends Controller
             ->find($id);
     }
 
+    public function printerNewItem($id)
+    {
+        $order = $this->repository->find($id);
+
+        $data = date_format($order->created_at,'d/m/Y');
+
+        $hora = date_format($order->created_at,'H:i:s');
+
+        $items = $this->itemRepository
+            ->scopeQuery(function($query) use($id){
+                return $query->where('order_id',$id)->where('impresso','N');
+            })->all();
+
+        $produtos = '';
+
+        $contador = 0;
+
+        foreach ($items as $value)
+        {
+            $produtos .= " <tr>
+                            <td class='fonte'>".$value->product->id."</td>
+                            <td class='fonte'>".$value->product->name."</td>
+                            <td class='fonte'>".$value->qtd."</td>
+                            <td class='fonte'>".$value->price."</td>
+                            <td class='fonte'>".$value->subtotal."</td>
+                          </tr>";
+            $this->itemRepository->update(['impresso'=>'S'],$value->id);
+            $contador++;
+        }
+
+        $table = "<table>
+                    <thead>
+                      <tr>
+                        <th class='fonte'>#</th>
+                        <th class='fonte'>Produto</th>
+                        <th class='fonte'>Qtd</th>
+                        <th class='fonte'>Valor</th>
+                        <th class='fonte'>Subtotal</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                     $produtos
+                    </tbody>
+                  </table>";
+
+        $pdf = App::make('dompdf.wrapper');
+
+        $pdf->loadHTML("<html>
+                            <head>
+                                <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>
+                                <style>
+                                    .fonte{
+                                        font-weight: 300;
+                                    }
+                                </style>
+                            </head>
+                            <body>
+                                <h5 class='fonte'>---------------------------------------------------------------------</h5>
+                                <h5 class='fonte'>Pedido: $order->id | Mesa: ".$order->mesa->name."</h5>
+                                <h5 class='fonte'>Data: $data | Hora: $hora</h5>                              
+                                <h5 class='fonte'>---------------------------------------------------------------------</h5>
+                                <h5 class='fonte'>Cliente: ".$order->client->name."</h5>
+                                <h5 class='fonte'>Endereço: ".$order->client->addressClient->address.",".$order->client->addressClient->numero."</h5>
+                                <h5 class='fonte'>Complemento: ".$order->client->addressClient->complemento."</h5>
+                                <h5 class='fonte'>Bairro: ".$order->client->addressClient->bairro."</h5>
+                                <h5 class='fonte'>Cidade: Guaxupé UF: MG</h5>
+                                <h5 class='fonte'>---------------------------------------------------------------------</h5>
+                                <h5 class='fonte'>ITENS:</h5>
+                                $table
+                                <h5 class='fonte'>---------------------------------------------------------------------</h5>
+                                <h5 class='fonte'>TOTAL DE ITENS: $contador</h5>
+                                <h5 class='fonte'>TOTAL DA COMPRA: $order->total</h5>
+                                <h5 class='fonte'>---------------------------------------------------------------------</h5>
+                                <h5 class='fonte'>$order->observacao</h5>
+                            </body>
+                        </html>")->save(public_path().'/printer/'.$order->id.'.pdf');
+
+        $order->link_printer = 'http://108.61.155.169/printer/'.$order->id.'.pdf';
+
+        $order->save();
+
+        return $this->repository->skipPresenter(false)->find($order->id);
+    }
+
     public function printer($id)
     {
         $order = $this->repository->find($id);
