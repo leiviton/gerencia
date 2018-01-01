@@ -195,8 +195,13 @@ class AdminCheckoutController extends Controller
         $pdf->loadHTML("<html>
                             <head>
                                 <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>
+                                <style>
+                                    .fonte{
+                                        font-weight: 400;
+                                    }
+                                </style>
                             </head>
-                            <body>
+                            <body class='fonte'>
                                 <h5>---------------------------------------------------------------------</h5>
                                 <h3>Pedido: $order->id | Mesa: ".$order->mesa->name."</h3>
                                 <h3>Data: $data | Hora: $hora</h3>                              
