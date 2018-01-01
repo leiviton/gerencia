@@ -165,24 +165,24 @@ class AdminCheckoutController extends Controller
 
         foreach ($order->items as $value)
         {
-            $produtos .= " <tr class='fonte'>
-                            <td>".$value->product->id."</td>
-                            <td>".$value->product->name."</td>
-                            <td>".$value->qtd."</td>
-                            <td>".$value->price."</td>
-                            <td>".$value->subtotal."</td>
+            $produtos .= " <tr>
+                            <td class='fonte'>".$value->product->id."</td>
+                            <td class='fonte'>".$value->product->name."</td>
+                            <td class='fonte'>".$value->qtd."</td>
+                            <td class='fonte'>".$value->price."</td>
+                            <td class='fonte'>".$value->subtotal."</td>
                           </tr>";
             $contador++;
         }
 
         $table = "<table>
                     <thead>
-                      <tr class='fonte'>
-                        <th>#</th>
-                        <th>Produto</th>
-                        <th>Qtd</th>
-                        <th>Valor</th>
-                        <th>Subtotal</th>
+                      <tr>
+                        <th class='fonte'>#</th>
+                        <th class='fonte'>Produto</th>
+                        <th class='fonte'>Qtd</th>
+                        <th class='fonte'>Valor</th>
+                        <th class='fonte'>Subtotal</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -203,22 +203,22 @@ class AdminCheckoutController extends Controller
                             </head>
                             <body>
                                 <h5 class='fonte'>---------------------------------------------------------------------</h5>
-                                <h3 class='fonte'>Pedido: $order->id | Mesa: ".$order->mesa->name."</h3>
-                                <h3 class='fonte'>Data: $data | Hora: $hora</h3>                              
+                                <h5 class='fonte'>Pedido: $order->id | Mesa: ".$order->mesa->name."</h5>
+                                <h5 class='fonte'>Data: $data | Hora: $hora</h5>                              
                                 <h5 class='fonte'>---------------------------------------------------------------------</h5>
-                                <h4 class='fonte'>Cliente: ".$order->client->name."</h4>
+                                <h5 class='fonte'>Cliente: ".$order->client->name."</h5>
                                 <h5 class='fonte'>Endereço: ".$order->client->addressClient->address.",".$order->client->addressClient->numero."</h5>
-                                <h4 class='fonte'>Complemento: ".$order->client->addressClient->complemento."</h4>
-                                <h4 class='fonte'>Bairro: ".$order->client->addressClient->bairro."</h4>
-                                <h4 class='fonte'>Cidade: Guaxupé UF: MG</h4>
+                                <h5 class='fonte'>Complemento: ".$order->client->addressClient->complemento."</h5>
+                                <h5 class='fonte'>Bairro: ".$order->client->addressClient->bairro."</h5>
+                                <h5 class='fonte'>Cidade: Guaxupé UF: MG</h5>
                                 <h5 class='fonte'>---------------------------------------------------------------------</h5>
-                                <h3 class='fonte'>Produtos:</h3>
+                                <h5 class='fonte'>ITENS:</h5>
                                 $table
                                 <h5 class='fonte'>---------------------------------------------------------------------</h5>
                                 <h5 class='fonte'>TOTAL DE ITENS: $contador</h5>
                                 <h5 class='fonte'>TOTAL DA COMPRA: $order->total</h5>
                                 <h5 class='fonte'>---------------------------------------------------------------------</h5>
-                                <h3 class='fonte'>$order->observacao</h3>
+                                <h5 class='fonte'>$order->observacao</h5>
                             </body>
                         </html>")->save(public_path().'/printer/'.$order->id.'.pdf');
 
