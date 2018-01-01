@@ -22,7 +22,7 @@ export class NewComponent implements OnInit {
 
             if(e.keyCode == 27)
             {
-                this.close();
+                this.cancel();
             }
         });
     }
@@ -160,6 +160,7 @@ export class NewComponent implements OnInit {
     save()
     {
         let card = '';
+        let bandeira = '';
         if(this.tipo != 1){
             this.mesa_id = 1;
         }
@@ -173,7 +174,8 @@ export class NewComponent implements OnInit {
                 {
                     card = 'Não';
                 }else{
-                    card = 'Sim'
+                    card = 'Sim';
+                    bandeira = 'Bandeira do cartão:' + this.bandeira;
                 }
                 console.log('mesa', this.mesa_id);
                 this.showLoading();
@@ -186,8 +188,8 @@ export class NewComponent implements OnInit {
                         client_id: this.client.id,
                         type: this.tipo,
                         cartao: card,
-                        troco: this.troco+',00 reais',
-                        observacao: 'Banceira do cartão: '+ this.bandeira
+                        troco: 'Troco para: '+this.troco+',00 reais',
+                        observacao: bandeira
                     };
                     this.httpService.builder()
                         .insert(pedido, 'order')
@@ -196,7 +198,7 @@ export class NewComponent implements OnInit {
                             this.httpService.eventEmitter.emit();
                             this.hideLoading();
                             this.toasterService.pop('success', 'Sucesso', 'Pedido ' + res.data.id + ' salvo com sucesso');
-                            this.close();
+                            this.close(res.data.id);
                         });
                 } else {
                     this.hideLoading();
@@ -239,7 +241,13 @@ export class NewComponent implements OnInit {
         }
     }
 
-    close()
+    close(id: number)
+    {
+        jQuery('#new_order').hide();
+        this.router.navigate(['/orders/printer/'+id]);
+    }
+
+    cancel()
     {
         jQuery('#new_order').hide();
         this.router.navigate(['/orders']);

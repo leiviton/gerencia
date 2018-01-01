@@ -198,9 +198,8 @@ class AdminCheckoutController extends Controller
                             </head>
                             <body>
                                 <h5>---------------------------------------------------------------------</h5>
-                                <h3>Pedido: $order->id</h3>
-                                <h3>Data: $data</h3>
-                                <h3>Hora: $hora</h3>
+                                <h3>Pedido: $order->id | Mesa: ".$order->mesa->name."</h3>
+                                <h3>Data: $data | Hora: $hora</h3>                              
                                 <h5>---------------------------------------------------------------------</h5>
                                 <h4>Cliente: ".$order->client->name."</h4>
                                 <h5>Endereço: ".$order->client->addressClient->address.",".$order->client->addressClient->numero."</h5>
