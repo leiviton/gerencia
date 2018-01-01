@@ -15,6 +15,7 @@ export class PrinterComponent implements OnInit {
     constructor(private httpService: OrdersService, private router: Router, private route: ActivatedRoute
         ,private toasterService: ToasterService,public sanitizer: DomSanitizer)
     {
+
         document.onkeydown = ((e) =>{
 
             if(e.keyCode == 27)
@@ -32,6 +33,7 @@ export class PrinterComponent implements OnInit {
 
     innerHtml: SafeHtml;
     ngOnInit(): void {
+
         this.showLoading();
         this.httpService.setAccessToken();
         jQuery('#printer').on('show.bs.modal').show().addClass('show');
@@ -44,10 +46,14 @@ export class PrinterComponent implements OnInit {
                                 "Object " + res.data.link_printer + " failed" +
                                 "</object>");
                             this.link_printer = 'http://108.61.155.169' + res.data.link_printer;
-
                     });
             });
         this.httpService.eventEmitter.emit();
+    }
+
+    imprimir()
+    {
+        window.print();
     }
 
     close(){

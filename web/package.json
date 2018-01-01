@@ -33,7 +33,6 @@
     "moment": "2.18.1",
     "ng2-charts": "1.6.0",
     "ng2-currency-mask": "^4.4.1",
-    "ng2-pdf-viewer": "^3.0.5",
     "ngx-bootstrap": "1.8.1",
     "ngx-loading": "^1.0.8",
     "rxjs": "^5.4.2",

@@ -20,7 +20,6 @@ import { CurrencyMaskModule } from "ng2-currency-mask";
 import { NgxPhoneMaskModule } from 'ngx-phone-mask';
 import {PrinterComponent} from "./components/printer.component";
 
-import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 @NgModule({
   imports: [
@@ -33,8 +32,7 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
       CuppaDataGridModule,
       TabsModule,
       CurrencyMaskModule,
-      NgxPhoneMaskModule,
-      PdfViewerModule
+      NgxPhoneMaskModule
   ],
   declarations: [ OrdersComponent,EditComponent,NewComponent,PaymentComponent,PrinterComponent ],
   providers: [ OrdersService, BsModalService ]
