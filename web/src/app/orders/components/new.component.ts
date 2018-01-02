@@ -165,7 +165,7 @@ export class NewComponent implements OnInit {
             this.mesa_id = 1;
         }
 
-        if(this.tipo != 1 && this.client.id == 1)
+        if(this.tipo != 1 && this.novo == true)
         {
             this.toasterService.pop('error', 'É necessário cadastrar um cliente ou selecionar');
         }else {
@@ -235,7 +235,7 @@ export class NewComponent implements OnInit {
                     this.client.address.numero = res.data.addressClient.data.numero;
                     this.client.address.bairro = res.data.addressClient.data.bairro;
                     this.client.address.city_id = res.data.addressClient.data.city.data.id;
-                    console.log('cliente', this.client);
+                    this.novo = false;
                     this.toasterService.pop('success','Cliente '+ this.client.name+' cadastrado com sucesso, codigo:' + this.client.id);
                 })
         }
@@ -244,7 +244,7 @@ export class NewComponent implements OnInit {
     close(id: number)
     {
         jQuery('#new_order').hide();
-        this.router.navigate(['/orders/printer/'+id]);
+        this.router.navigate(['/orders/printer/'+id+'/S']);
     }
 
     cancel()

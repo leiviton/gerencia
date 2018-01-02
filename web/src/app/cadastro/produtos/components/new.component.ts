@@ -53,22 +53,27 @@ export class NewComponent implements OnInit {
             .list({},'subgroups')
             .then((res)=>{
                 this.subgroups = res;
-                console.log(this.subgroups);
             })
     }
 
     save(e)
     {
-        this.showLoading();
-        this.httpService.setAccessToken();
-        this.httpService.builder()
-          .insert(e,'product/store')
-          .then(()=> {
-              this.httpService.eventEmitter.emit();
-              this.hideLoading();
-              this.toasterService.pop('success', 'Sucesso', 'Produto salvo com sucesso');
-              this.close();
-          });
+        if(this.product.name != null && this.product.name.length > 4
+            && this.product.description != null && this.product.description.length > 4
+            && this.product.price != null && this.product.category_id != null) {
+            this.showLoading();
+            this.httpService.setAccessToken();
+            this.httpService.builder()
+                .insert(e, 'product/store')
+                .then(() => {
+                    this.httpService.eventEmitter.emit();
+                    this.hideLoading();
+                    this.toasterService.pop('success', 'Sucesso', 'Produto salvo com sucesso');
+                    this.close();
+                });
+        }else{
+            this.toasterService.pop('error', 'Erro', 'Verifique se todos os campos foram preenchidos.');
+        }
 
     }
 

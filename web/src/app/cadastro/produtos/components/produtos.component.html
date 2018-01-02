@@ -18,6 +18,9 @@
                   </tr>
                 </thead>
                 <tbody>
+                  <tr *ngIf="tamanho == 0">
+                    <td colspan="5"> Sem dados</td>
+                  </tr>
                   <tr *ngFor="let o of produtos.data" (dblclick)="edit(o.id)">
                     <td class="text-center">{{ o.id }}</td>
                     <td>{{ o.name }}</td>

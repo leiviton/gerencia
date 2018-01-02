@@ -20,6 +20,7 @@ export class ProdutosComponent implements OnInit {
       status:null
   };
   produtos:object = {};
+  tamanho = 0;
 
   ngOnInit(): void {
       this.showLoading();
@@ -29,6 +30,7 @@ export class ProdutosComponent implements OnInit {
               this.httpService.builder().list({}, 'products')
                   .then((res) => {
                       this.produtos = res;
+                      this.tamanho = res.data.length;
                       this.hideLoading();
                   });
           });

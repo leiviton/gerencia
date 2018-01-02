@@ -48,7 +48,7 @@
           <a class="nav-link nav-dropdown-toggle" href="#" appNavDropdownToggle><i class="fa fa-product-hunt"></i> Produtos</a>
           <ul class="nav-dropdown-items">
             <li class="nav-item">
-              <a class="nav-link" routerLinkActive="active" [routerLink]="['/cadastro/produtos']"><i class="fa fa-credit-card"></i> Produtos <span class="badge badge-info">Novo</span></a>
+              <a class="nav-link" routerLinkActive="active" [routerLink]="['/cadastro/produtos']"><i class="fa fa-plus"></i> Produtos</a>
             </li>
           </ul>
         </li>
@@ -61,10 +61,10 @@
           </ul>
         </li>
         <li class="divider"></li>
-        <li class="nav-title">
+        <li class="nav-title" *ngIf="user.role == 'admin'">
           Financeiro
         </li>
-        <li class="nav-item nav-dropdown" appNavDropdown>
+        <li class="nav-item nav-dropdown" appNavDropdown *ngIf="user.role == 'admin'">
           <a class="nav-link nav-dropdown-toggle" href="#" appNavDropdownToggle><i class="fa fa-credit-card"></i> Caixa</a>
           <ul class="nav-dropdown-items">
             <li class="nav-item">

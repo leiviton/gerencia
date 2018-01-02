@@ -205,21 +205,27 @@ var NewComponent = (function () {
             .list({}, 'subgroups')
             .then(function (res) {
             _this.subgroups = res;
-            console.log(_this.subgroups);
         });
     };
     NewComponent.prototype.save = function (e) {
         var _this = this;
-        this.showLoading();
-        this.httpService.setAccessToken();
-        this.httpService.builder()
-            .insert(e, 'product/store')
-            .then(function () {
-            _this.httpService.eventEmitter.emit();
-            _this.hideLoading();
-            _this.toasterService.pop('success', 'Sucesso', 'Produto salvo com sucesso');
-            _this.close();
-        });
+        if (this.product.name != null && this.product.name.length > 4
+            && this.product.description != null && this.product.description.length > 4
+            && this.product.price != null && this.product.category_id != null) {
+            this.showLoading();
+            this.httpService.setAccessToken();
+            this.httpService.builder()
+                .insert(e, 'product/store')
+                .then(function () {
+                _this.httpService.eventEmitter.emit();
+                _this.hideLoading();
+                _this.toasterService.pop('success', 'Sucesso', 'Produto salvo com sucesso');
+                _this.close();
+            });
+        }
+        else {
+            this.toasterService.pop('error', 'Erro', 'Verifique se todos os campos foram preenchidos.');
+        }
     };
     NewComponent.prototype.close = function () {
         __WEBPACK_IMPORTED_MODULE_2_jquery__('#infoModal').hide();
@@ -248,7 +254,7 @@ var NewComponent = (function () {
 /***/ "../../../../../src/app/cadastro/produtos/components/produtos.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"animated fadeIn\">\n    <div class=\"row\">\n        <div class=\"col-lg-12\">\n          <div class=\"card\">\n            <div class=\"card-header\">\n              <button class=\"btn btn-default\" (click)=\"showModal()\"><i class=\"fa fa-search\"></i> Pesquisar</button>\n              <a class=\"btn btn-success\" [routerLink]=\"['new']\"><i class=\"fa fa-plus\"></i> Novo</a>\n            </div>\n            <div class=\"card-body\">\n              <table class=\"table table-responsive table-bordered table-striped table-sm\">\n                <thead>\n                  <tr>\n                    <th class=\"title text-center\">#</th>\n                    <th class=\"title\">Produto</th>\n                    <th class=\"title text-center\">Descrição</th>\n                    <th>Grupo</th>\n                    <th class=\"title text-center\">Preço Venda</th>\n                  </tr>\n                </thead>\n                <tbody>\n                  <tr *ngFor=\"let o of produtos.data\" (dblclick)=\"edit(o.id)\">\n                    <td class=\"text-center\">{{ o.id }}</td>\n                    <td>{{ o.name }}</td>\n                    <td>{{ o.description }} </td>\n                    <td>{{ o.category.data.name}}</td>\n                    <td class=\"text-center\">{{ o.price | currency:'BRL':true }}</td>\n                  </tr>\n                </tbody>\n              </table>\n              <!--nav>\n                <ul class=\"pagination\">\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">Prev</a></li>\n                  <li class=\"page-item active\">\n                    <a class=\"page-link\" href=\"#\">1</a>\n                  </li>\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">2</a></li>\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">3</a></li>\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">4</a></li>\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">Next</a></li>\n                </ul>\n              </nav-->\n            </div>\n          </div>\n        </div>\n      </div>\n</div>\n<div class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">\n  <div class=\"modal-dialog modal-sm modal-info\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <h6 class=\"modal-title\">Pesquisar</h6>\n      </div>\n      <div class=\"modal-body\">\n        <label for=\"inicio\">Descrição:</label>\n        <input type=\"text\" id=\"inicio\" class=\"form-control\" name=\"inicio\" [(ngModel)]=\"pesquisa.inicio\" required>\n      </div>\n      <div class=\"modal-footer\">\n        <button type=\"button\" class=\"btn btn-secondary\" (click)=\"hideModal()\">Fechar</button>\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"pesquisar(pesquisa)\"><i class=\"fa fa-search\"></i> Buscar</button>\n      </div>\n    </div><!-- /.modal-content -->\n  </div><!-- /.modal-dialog -->\n</div><!-- /.modal -->\n<router-outlet></router-outlet>\n\n"
+module.exports = "<div class=\"animated fadeIn\">\n    <div class=\"row\">\n        <div class=\"col-lg-12\">\n          <div class=\"card\">\n            <div class=\"card-header\">\n              <button class=\"btn btn-default\" (click)=\"showModal()\"><i class=\"fa fa-search\"></i> Pesquisar</button>\n              <a class=\"btn btn-success\" [routerLink]=\"['new']\"><i class=\"fa fa-plus\"></i> Novo</a>\n            </div>\n            <div class=\"card-body\">\n              <table class=\"table table-responsive table-bordered table-striped table-sm\">\n                <thead>\n                  <tr>\n                    <th class=\"title text-center\">#</th>\n                    <th class=\"title\">Produto</th>\n                    <th class=\"title text-center\">Descrição</th>\n                    <th>Grupo</th>\n                    <th class=\"title text-center\">Preço Venda</th>\n                  </tr>\n                </thead>\n                <tbody>\n                  <tr *ngIf=\"tamanho == 0\">\n                    <td colspan=\"5\"> Sem dados</td>\n                  </tr>\n                  <tr *ngFor=\"let o of produtos.data\" (dblclick)=\"edit(o.id)\">\n                    <td class=\"text-center\">{{ o.id }}</td>\n                    <td>{{ o.name }}</td>\n                    <td>{{ o.description }} </td>\n                    <td>{{ o.category.data.name}}</td>\n                    <td class=\"text-center\">{{ o.price | currency:'BRL':true }}</td>\n                  </tr>\n                </tbody>\n              </table>\n              <!--nav>\n                <ul class=\"pagination\">\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">Prev</a></li>\n                  <li class=\"page-item active\">\n                    <a class=\"page-link\" href=\"#\">1</a>\n                  </li>\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">2</a></li>\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">3</a></li>\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">4</a></li>\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">Next</a></li>\n                </ul>\n              </nav-->\n            </div>\n          </div>\n        </div>\n      </div>\n</div>\n<div class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">\n  <div class=\"modal-dialog modal-sm modal-info\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <h6 class=\"modal-title\">Pesquisar</h6>\n      </div>\n      <div class=\"modal-body\">\n        <label for=\"inicio\">Descrição:</label>\n        <input type=\"text\" id=\"inicio\" class=\"form-control\" name=\"inicio\" [(ngModel)]=\"pesquisa.inicio\" required>\n      </div>\n      <div class=\"modal-footer\">\n        <button type=\"button\" class=\"btn btn-secondary\" (click)=\"hideModal()\">Fechar</button>\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"pesquisar(pesquisa)\"><i class=\"fa fa-search\"></i> Buscar</button>\n      </div>\n    </div><!-- /.modal-content -->\n  </div><!-- /.modal-dialog -->\n</div><!-- /.modal -->\n<router-outlet></router-outlet>\n\n"
 
 /***/ }),
 
@@ -286,6 +292,7 @@ var ProdutosComponent = (function () {
             status: null
         };
         this.produtos = {};
+        this.tamanho = 0;
     }
     ProdutosComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -296,6 +303,7 @@ var ProdutosComponent = (function () {
             _this.httpService.builder().list({}, 'products')
                 .then(function (res) {
                 _this.produtos = res;
+                _this.tamanho = res.data.length;
                 _this.hideLoading();
             });
         });
