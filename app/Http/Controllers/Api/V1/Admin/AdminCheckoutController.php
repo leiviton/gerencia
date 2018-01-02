@@ -299,7 +299,10 @@ class AdminCheckoutController extends Controller
                                         font-weight: 300;
                                     }
                                     .padding{
-                                        padding: 10px;
+                                        padding-left: 10px;
+                                        padding-right: 10px;
+                                        padding-bottom: 0;
+                                        padding-top: 0;
                                         margin-left: 7px;
                                     }
                                 </style>
