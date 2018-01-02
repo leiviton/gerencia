@@ -176,7 +176,7 @@ class AdminCheckoutController extends Controller
         foreach ($items as $value)
         {
             $produtos .= " <tr>
-                            <td class='fonte padding' style='padding: 50px;'>".$value->product->id."</td>
+                            <td class='fonte padding'>".$value->product->id."</td>
                             <td class='fonte padding'>".$value->product->name."</td>
                             <td class='fonte padding'>".$value->qtd."</td>
                             <td class='fonte padding'>".$value->price."</td>
@@ -211,7 +211,7 @@ class AdminCheckoutController extends Controller
                                         font-weight: 300;
                                     }
                                     .padding{
-                                        padding: 25px;
+                                        padding: 15px;
                                         margin-left: 10px;
                                     }
                                 </style>
