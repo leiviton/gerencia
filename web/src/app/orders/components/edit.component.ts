@@ -28,6 +28,11 @@ export class EditComponent implements OnInit {
             {
                 this.close();
             }
+
+            if(e.keyCode == 118)
+            {
+                this.save();
+            }
         });
     }
     order = {
@@ -65,6 +70,7 @@ export class EditComponent implements OnInit {
     };
     qtd = 1;
     editar = true;
+    imprimir = false;
     ngOnInit(): void {
         this.showLoading();
         this.httpService.setAccessToken();
@@ -150,6 +156,7 @@ export class EditComponent implements OnInit {
                         this.httpService.clear();
                         this.order = res.data;
                         this.products = res.data.items;
+                        this.imprimir = true;
                     });
                });
     }
@@ -168,8 +175,12 @@ export class EditComponent implements OnInit {
     }
 
     save(){
-        jQuery('#successModal').on('show.bs.modal').show().removeClass('show');
-        this.router.navigate(['/orders/printer/'+ this.order.id+'/N']);
+        if(this.imprimir == true){
+            jQuery('#successModal').on('show.bs.modal').show().removeClass('show');
+            this.router.navigate(['/orders/printer/'+ this.order.id+'/N']);
+        }else{
+            this.toasterService.pop('error', 'Erro', 'Para imprimir é necessário ter adicionado novos itens.');
+        }
     }
 
     habilitarEdicao()
