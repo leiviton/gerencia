@@ -484,7 +484,6 @@ export class DashboardComponent implements OnInit {
           .list({},'mesas')
           .then((res) => {
               this.mesas = res;
-              console.log('mesas', this.mesas);
           });
     setTimeout(() => {
         this.hideLoading();

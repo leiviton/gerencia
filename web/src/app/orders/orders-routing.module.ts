@@ -11,6 +11,8 @@ import { PaymentComponent } from "./components/payment.component";
 
 import { PrinterComponent} from "./components/printer.component";
 
+import { ComplementComponent } from "./components/complement.component";
+
 const routes: Routes = [
   {
     path: '',
@@ -38,7 +40,16 @@ const routes: Routes = [
               component: NewComponent,
               data:{
                   title:'Novo'
-              }
+              },
+              children:[
+                  {
+                      path: 'component/:id',
+                      component: ComplementComponent,
+                      data:{
+                          title:'Component'
+                      }
+                  }
+              ]
           },
           {
               path: 'payment/:id',

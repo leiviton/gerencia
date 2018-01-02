@@ -11,38 +11,44 @@
                 <div class="col-md-12">
                     <form #myForm="ngForm" (keyup.enter)="buscar()" class="form-inline">
                         <div class="form-group col-md-12">
-                            <label class="col-md-2">Buscar: </label>
-                            <input type="text" class="form-control col-md-3" name="pesquisa" [(ngModel)]="pesquisa.value" placeholder="Digite produto" required minlength="2" autofocus="autofocus">
-                            <label class="label qtd col-md-2"> Qtd.</label>
+                            <label class="col-md-1">Buscar: </label>
+                            <input type="text" class="form-control col-md-2" name="pesquisa" [(ngModel)]="pesquisa.value" placeholder="Digite produto" required minlength="2" autofocus="autofocus">
+                            <label class="label qtd col-md-1"> Qtd.</label>
                             <input class="form-control col-md-1" type="number" min="1" max="10" name="qtd" [(ngModel)]="qtd" />
-                            <label for="tipo" class="label col-md-2">Tipo: </label>
+                            <label for="tipo" class="label col-md-1">Tipo: </label>
                             <select id="tipo" name="tipo" class="form-control col-md-2" [(ngModel)]="tipo">
                                 <option value="0"> Delivery</option>
                                 <option value="1"> Salão</option>
                                 <option value="2"> Retirada</option>
                             </select>
+                            <label class="label col-md-2">Mais sabor?</label>
+                            <label class="switch switch-text switch-success">
+                                <input type="checkbox" class="switch-input" name="cartao" checked>
+                                <span class="switch-label" data-on="Sim" data-off="Não"></span>
+                                <span class="switch-handle"></span>
+                            </label>
                         </div>
                     </form>
                 </div>
 
-                <div class="col-md-12" style="padding-bottom: 5px;">
+                <div class="col-md-12" style="padding-bottom: 5px; padding-top: 5px;">
                     <form #myForm="ngForm" class="form-inline">
                         <div class="form-group col-md-12">
-                            <label class="col-md-2" *ngIf="tipo != 1">Telefone: </label>
+                            <label class="col-md-1" *ngIf="tipo != 1">Telefone: </label>
                             <input ngxPhoneMask *ngIf="tipo != 1"  type="text" class="form-control col-md-3" name="pesquisa"  placeholder="Digite Cliente (Telefone, nome, codigo)" required minlength="11" [(ngModel)]="pesquisa.value2" (blur)="buscarCliente()">
                             <label for="mesa" class="label col-md-2" *ngIf="tipo == 1">Mesa: </label>
                             <select id="mesa" name="category_id" class="form-control col-md-4" [(ngModel)]="mesa_id" *ngIf="tipo == 1">
                                 <option value="null">Selecione a mesa</option>
                                 <option *ngFor="let g of mesas" value="{{ g.id }}"> {{ g.name }}</option>
                             </select>
-                                <label class="label col-md-2" *ngIf="tipo != 1">Cartão?</label>
+                                <label class="label col-md-1" *ngIf="tipo != 1">Cartão?</label>
                                 <label class="switch switch-text switch-success" *ngIf="tipo != 1">
                                     <input type="checkbox" class="switch-input" name="cartao" [(ngModel)]="cartao" checked>
                                     <span class="switch-label" data-on="Sim" data-off="Não"></span>
                                     <span class="switch-handle"></span>
                                 </label>
-                                <label for="troco" class="label col-md-2" *ngIf="tipo != 1 && cartao == false">Troco:</label>
-                                <input *ngIf="tipo != 1 && cartao == false" type="text" name="troco" id="troco" currencyMask [(ngModel)]="troco" [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" class="form-control col-md-2" placeholder="Troco para" style="margin-left: 10px">
+                                <label for="troco" class="label col-md-1" *ngIf="tipo != 1 && cartao == false">Troco:</label>
+                                <input *ngIf="tipo != 1 && cartao == false" type="text" name="troco" class="form-control col-md-2" id="troco" currencyMask [(ngModel)]="troco" [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"  placeholder="Troco para" style="margin-left: 10px">
 
                                 <label for="bandeira" class="label col-md-2" *ngIf="cartao == true">Bandeira:</label>
                                 <input *ngIf="cartao == true" type="text" id="bandeira" name="bandeira" [(ngModel)]="bandeira" class="form-control col-md-2" placeholder="Bandeira de cartão" style="margin-left: 10px">
@@ -104,7 +110,11 @@
                                         <td class="text-center">{{ p.price | currency:'BRL':true }}</td>
                                         <td class="text-center">{{ p.qtd }}</td>
                                         <td class="text-center">{{ p.subtotal | currency:'BRL':true }}</td>
-                                        <td class="text-center"><button class="btn btn-sm btn-default" (click)="removeItem(i)"><i class="fa fa-remove text-danger"></i></button></td>
+                                        <td class="text-center">
+                                            <button class="btn btn-sm btn-default" (click)="removeItem(i)"><i class="fa fa-remove text-danger"></i></button>
+
+                                            <button class="btn btn-sm btn-default" (click)="showComplement(i)"><i class="fa fa-plus text-info"></i></button>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -122,6 +132,42 @@
             </div>
         </div>
         <!-- /.modal-content -->
+    </div>
+    <div class="modal fade modal_novo" id="complement" role="dialog" aria-hidden="true" aria-labelledby="myModalLabell" style="z-index: 9999">
+        <div class="modal-dialog modal-info" role="document">
+            <div class="modal-content">
+                <div class="modal-header novo">
+                    <h5 class="modal-title">Complementos</h5>
+                </div>
+                <div class="modal-body padding">
+                    <div class="col-md-9">
+                        <div class="checkbox">
+                            <label for="checkbox1">
+                                <input type="checkbox" id="checkbox1" name="checkbox1" value="cebola"> Cebola
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label for="checkbox2">
+                                <input type="checkbox" id="checkbox2" name="checkbox2" value="bacon"> Bacon
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label for="checkbox3">
+                                <input type="checkbox" id="checkbox3" name="checkbox3" value="fruta"> Fruta
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer cadastro">
+                    <div class="modal-button">
+                        <button class="btn btn-info" (click)="saveComplement()"><i class="fa fa-save"></i> Salvar pedido (F9)</button>
+                        <button class="btn btn-danger text-left" type="button" (click)="closeComplement()"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
+                    </div>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
     </div>
     <!-- /.modal-dialog -->
 </div>

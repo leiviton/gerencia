@@ -1,0 +1,25 @@
+<div tabindex="-1" class="modal fade modal_novo" id="new_order" role="dialog" aria-hidden="true" aria-labelledby="myModalLabel" style="z-index: 9999">
+    <div class="modal-dialog modal-lg modal-primary" role="document">
+        <div class="modal-content">
+            <div class="modal-header novo">
+                <h5 class="modal-title">Novo Pedido</h5>
+                <button class="close" aria-label="Close" type="button" data-dismiss="modal" (click)="close()">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body padding">
+                <p>Teste</p>
+            </div>
+            <div class="modal-footer cadastro">
+                <div class="modal-button">
+                    <button class="btn btn-info" (click)="save()"><i class="fa fa-save"></i> Salvar pedido (F9)</button>
+                    <button class="btn btn-danger text-left" type="button" (click)="close()"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+

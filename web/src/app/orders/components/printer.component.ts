@@ -47,17 +47,19 @@ export class PrinterComponent implements OnInit {
                 this.httpService.builder().view(params['id'],url)
                     .then((res) => {
                             this.innerHtml = this.sanitizer.bypassSecurityTrustHtml(
-                                "<object data='"+res.data.link_printer+"' type='application/pdf' height='500' width='780' class='embed-responsive-item'>" +
+                                "<object data='"+res.data.link_printer+"' name='my_iframe' onload='window.option();window.print();window.close()' type='application/pdf' height='500' width='780' class='embed-responsive-item'>" +
                                 "Object " + res.data.link_printer + " failed" +
                                 "</object>");
                             this.link_printer = 'http://108.61.155.169' + res.data.link_printer;
+
                     });
             });
         this.httpService.eventEmitter.emit();
     }
 
-    imprimir()
+    imprimir(num, id)
     {
+        window.focus();
         window.print();
     }
 

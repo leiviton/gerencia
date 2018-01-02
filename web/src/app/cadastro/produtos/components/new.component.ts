@@ -41,8 +41,7 @@ export class NewComponent implements OnInit {
             .list({},'groups')
             .then((res)=>{
                 this.groups = res;
-                console.log(this.groups);
-            })
+            });
     }
 
 

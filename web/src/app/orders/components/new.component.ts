@@ -78,6 +78,8 @@ export class NewComponent implements OnInit {
         setTimeout(() => {
             this.hideLoading();
         },300);
+
+        jQuery('#complement').hide();
     }
 
     buscarCliente()
@@ -251,6 +253,13 @@ export class NewComponent implements OnInit {
     {
         jQuery('#new_order').hide();
         this.router.navigate(['/orders']);
+    }
+
+    showComplement(i)
+    {
+        jQuery('#complement').show().addClass('show').css('z-index',1050 + 60);
+        jQuery('#new_order').css('z-index', 1040);
+        console.log('index',i);
     }
 
     closeMd()

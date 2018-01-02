@@ -40,7 +40,7 @@
                     </td>
                     <td class="text-center" *ngIf="tamanho > 0">{{ o.id }}</td>
                     <td class="text-center" *ngIf="tamanho > 0">{{ o.total | currency:'BRL':true }}</td>
-                    <td *ngIf="tamanho > 0">{{ o.client.data.user.data.name }}</td>
+                    <td *ngIf="tamanho > 0">{{ o.client.data.name }}</td>
                     <td class="text-center" *ngIf="tamanho > 0">{{ o.created_at | slice:0:10 }} </td>
                     <td class="text-center" *ngIf="tamanho > 0">{{ o.created_at | slice:11:19}}</td>
                     <td class="text-center" *ngIf="tamanho > 0">{{ o.previsao }} </td>

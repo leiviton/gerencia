@@ -61,7 +61,6 @@ export class PaymentComponent implements OnInit {
                         this.payment.order_id = this.order.id;
                         this.products = res.data.items;
                         this.mesa = res.data.mesa.data.name;
-                        console.log('order',this.order);
                         this.hideLoading();
                     });
 
@@ -78,11 +77,8 @@ export class PaymentComponent implements OnInit {
             this.payment.total_pago = (this.valor_pag - (this.valor_pag - ((this.order.total + this.payment.acrescimo) - this.payment.desconto)));
             this.payment.total_original = this.order.total;
             this.payment.payment_types_id = this.type_id;
-            console.log(this.payment);
             this.httpService.setAccessToken();
-            console.log('tipo',this.type_id);
             if(this.type_id !== null) {
-                console.log('pago',this.payment.total_pago)
                     this.httpService.builder()
                         .insert(this.payment, 'payment')
                         .then((res) => {
@@ -110,7 +106,6 @@ export class PaymentComponent implements OnInit {
             .list({},'typepayment')
             .then((res)=>{
                 this.tipo = res;
-                console.log(this.tipo);
             })
     }
 
