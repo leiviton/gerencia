@@ -264,11 +264,11 @@ class AdminCheckoutController extends Controller
         foreach ($items as $value)
         {
             $produtos .= " <tr>
-                            <td class='fonte'>".$value->product->id."</td>
-                            <td class='fonte'>".$value->product->name."</td>
-                            <td class='fonte'>".$value->qtd."</td>
-                            <td class='fonte'>".$value->price."</td>
-                            <td class='fonte'>".$value->subtotal."</td>
+                            <td class='fonte padding'>".$value->product->id."</td>
+                            <td class='fonte padding'>".$value->product->name."</td>
+                            <td class='fonte padding'>".$value->qtd."</td>
+                            <td class='fonte padding'>".$value->price."</td>
+                            <td class='fonte padding'>".$value->subtotal."</td>
                           </tr>";
             $this->itemRepository->update(['impresso'=>'S'],$value->id);
             $contador++;
@@ -277,11 +277,11 @@ class AdminCheckoutController extends Controller
         $table = "<table>
                     <thead>
                       <tr>
-                        <th class='fonte'>#</th>
-                        <th class='fonte'>Produto</th>
-                        <th class='fonte'>Qtd</th>
-                        <th class='fonte'>Valor</th>
-                        <th class='fonte'>Subtotal</th>
+                        <th class='fonte padding'>#</th>
+                        <th class='fonte padding'>Produto</th>
+                        <th class='fonte padding'>Qtd</th>
+                        <th class='fonte padding'>Valor</th>
+                        <th class='fonte padding'>Subtotal</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -297,6 +297,10 @@ class AdminCheckoutController extends Controller
                                 <style>
                                     .fonte{
                                         font-weight: 300;
+                                    }
+                                    .padding{
+                                        padding: 10px;
+                                        margin-left: 7px;
                                     }
                                 </style>
                             </head>
