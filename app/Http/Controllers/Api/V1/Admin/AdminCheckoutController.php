@@ -14,6 +14,7 @@ use Pedidos\Http\Controllers\Controller;
 
 use Pedidos\Http\Requests\CheckoutRequest;
 use Illuminate\Http\Request;
+use Pedidos\Repositories\ComplementRepository;
 use Pedidos\Repositories\MesaRepository;
 use Pedidos\Repositories\OrderItemRepository;
 use Pedidos\Repositories\OrderRepository;
@@ -48,16 +49,22 @@ class AdminCheckoutController extends Controller
      * @var OrderItemRepository
      */
     private $itemRepository;
+    /**
+     * @var ComplementRepository
+     */
+    private $complementRepository;
 
     public function  __construct(OrderRepository $repository, OrderService $orderService
         , ProductRepository $productRepository, MesaRepository $mesaRepository,
-                                 PaymentTypesRepository $typesRepository, OrderItemRepository $itemRepository){
+                                 PaymentTypesRepository $typesRepository, OrderItemRepository $itemRepository
+        ,ComplementRepository $complementRepository){
         $this->repository = $repository;
         $this->orderService = $orderService;
         $this->productRepository = $productRepository;
         $this->mesaRepository = $mesaRepository;
         $this->typesRepository = $typesRepository;
         $this->itemRepository = $itemRepository;
+        $this->complementRepository = $complementRepository;
     }
 
     public function store(CheckoutRequest $request){
@@ -336,5 +343,10 @@ class AdminCheckoutController extends Controller
         $order->save();
 
         return $this->repository->skipPresenter(false)->find($order->id);
+    }
+
+    public function getComplements()
+    {
+        return $this->complementRepository->skipPresenter(false)->all();
     }
 }
