@@ -259,9 +259,18 @@ export class NewComponent implements OnInit {
     {
         jQuery('#complement').show().addClass('show').css('z-index',1050 + 60);
         jQuery('#new_order').css('z-index', 1040);
+        this.getComplements();
         console.log('index',i);
     }
 
+    getComplements()
+    {
+        this.httpService.builder()
+            .list({},'complements')
+            .then((res) =>{
+                console.log('complements',res);
+            })
+    }
     closeMd()
     {
         jQuery('#pesquisa').hide();

@@ -85,7 +85,15 @@ class RepositoryServiceProvider extends ServiceProvider
         );
         $this->app->bind(
             'Pedidos\Repositories\StateRepository',
-            'Pedidos\Repositories\StateClientRepositoryEloquent'
+            'Pedidos\Repositories\StateRepositoryEloquent'
+        );
+        $this->app->bind(
+            'Pedidos\Repositories\ComplementRepository',
+            'Pedidos\Repositories\ComplementRepositoryEloquent'
+        );
+        $this->app->bind(
+            'Pedidos\Repositories\ComplementItemRepository',
+            'Pedidos\Repositories\ComplementItemRepositoryEloquent'
         );
     }
 }
