@@ -60,12 +60,13 @@ export class NewComponent implements OnInit {
     complements = {};
     complement = [{
           "id":0,
-          "name":"",
+          "name":"Sem complemento",
           "price":0.0,
           "ativo":"S",
           "created_at":"",
           "updated_at":""
     }];
+    idItem = 0;
     ngOnInit(): void {
         if(!this.cart)
         {
@@ -267,7 +268,9 @@ export class NewComponent implements OnInit {
     {
         jQuery('#complement').show().addClass('show').css('z-index',1050 + 60);
         jQuery('#new_order').css('z-index', 1040);
+        jQuery('.nav').css('z-index',900);
         this.getComplements();
+        this.idItem = i;
         console.log('index',i);
     }
 
@@ -286,10 +289,25 @@ export class NewComponent implements OnInit {
         this.httpService.builder()
             .view(id,'complement')
             .then((res)=>{
-                this.toasterService.pop('success','Sucesso','Adicionado complemento'+res.data.name);
+                this.toasterService.pop('success','Sucesso','Adicionado complemento '+res.data.name);
+                if(this.complement[0].id == 0){
+                    this.complement[0] = res.data;
+                }else{
+                    this.complement.push(res.data);
+                }
             });
     }
 
+    saveComplement()
+    {
+        if(this.complement[0].id != 0){
+            this.httpService.addComplement(this.complement,this.idItem);
+            this.closeComplement();
+        }
+        else{
+            this.toasterService.pop('error', 'Erro','Adicionais não inseridos');
+        }
+    }
     closeComplement()
     {
         jQuery('#complement').hide();

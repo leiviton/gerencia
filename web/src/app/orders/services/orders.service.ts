@@ -47,6 +47,19 @@ export class OrdersService extends AppHttpService {
         localStorage.setItem(this.key,JSON.stringify(cart));
     }
 
+    addComplement(complement,i){
+        let cart = this.get(),itemAux = cart.items[i];
+        let valor = 0;
+        for (var j in complement)
+        {
+            valor = valor + complement[j].price;
+        }
+        console.log('valor',valor);
+        itemAux.complements = complement;
+        itemAux.subtotal = itemAux.subtotal + valor;
+        localStorage.setItem(this.key,JSON.stringify(cart));
+    }
+
     removeItem(i)
     {
         let cart = this.get();

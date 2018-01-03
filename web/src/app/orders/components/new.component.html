@@ -133,19 +133,30 @@
         </div>
         <!-- /.modal-content -->
     </div>
-    <div class="modal fade modal_novo" id="complement" role="dialog" aria-hidden="true" aria-labelledby="myModalLabell" style="z-index: 9999">
+    <div class="modal fade modal_novo" id="complement" role="dialog" aria-hidden="true" aria-labelledby="myModalLabell" style="">
         <div class="modal-dialog modal-info" role="document">
             <div class="modal-content">
                 <div class="modal-header novo">
                     <h5 class="modal-title">Complementos</h5>
                 </div>
-                <div class="modal-body padding">
-                    <div class="col-md-9" *ngFor="let p of complements.data">
-                        <div class="checkbox">
+                <div class="modal-body">
+                    <div class="col-md-6" style="height: 400px">
+                            <h5>Lista de adicionais</h5>
+                            <div class="checkbox" *ngFor="let p of complements.data">
+                                <label>
+                                    <p class="text-left"> {{ p.name }} - {{ p.price | currency:'BRL':true}}</p>
+                                </label>
+                                <button class="btn btn-default btn-sm" (click)="addComplement(p.id)"><i class="fa fa-plus text-success"></i></button>
+                            </div>
+                    </div>
+                    <div class="col-md-6" style="margin-left: 250px; margin-top: -400px; height: 400px">
+                        <h5>Adcionados ao item</h5>
+                        <div class="checkbox" *ngFor="let p of complement">
                             <label>
-                                <p class="text-left"> {{ p.name }} - {{ p.price}}</p>
+                                <p class="text-left"> {{ p.name }} - {{ p.price | currency:'BRL':true}}</p>
                             </label>
-                            <button class="btn btn-default btn-sm" (click)="addComplement(p.id)"><i class="fa fa-plus"></i></button>
+
+                            <button class="btn btn-default btn-sm" (click)="addComplement(p.id)"><i class="fa fa-info text-success"></i></button>
                         </div>
                     </div>
                 </div>

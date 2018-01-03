@@ -23,7 +23,7 @@ class ComplementTransformer extends TransformerAbstract
         return [
             'id'         => (int) $model->id,
             'name' => $model->name,
-            'price' => $model->price,
+            'price' => (float)$model->price,
             'ativo' => $model->ativo,
 
             /* place your other model properties here */
