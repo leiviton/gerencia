@@ -48,7 +48,7 @@ Route::group(['prefix'=>'api/v1','middleware' => 'auth:api'],function () {
        Route::get('printer/{id}', 'AdminCheckoutController@printer');
        Route::get('printer/new/{id}', 'AdminCheckoutController@printerNewItem');
        Route::get('complements', 'AdminCheckoutController@getComplements');
-
+       Route::get('complement/{id}', 'AdminCheckoutController@getComplement');
     });
     Route::get('user','Api\UserController@authenticated');
 });

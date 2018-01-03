@@ -57,7 +57,15 @@ export class NewComponent implements OnInit {
     cartao = false;
     troco = 0;
     bandeira = '';
-
+    complements = {};
+    complement = [{
+          "id":0,
+          "name":"",
+          "price":0.0,
+          "ativo":"S",
+          "created_at":"",
+          "updated_at":""
+    }];
     ngOnInit(): void {
         if(!this.cart)
         {
@@ -268,8 +276,23 @@ export class NewComponent implements OnInit {
         this.httpService.builder()
             .list({},'complements')
             .then((res) =>{
+                this.complements = res;
                 console.log('complements',res);
             })
+    }
+
+    addComplement(id)
+    {
+        this.httpService.builder()
+            .view(id,'complement')
+            .then((res)=>{
+                this.toasterService.pop('success','Sucesso','Adicionado complemento'+res.data.name);
+            });
+    }
+
+    closeComplement()
+    {
+        jQuery('#complement').hide();
     }
     closeMd()
     {

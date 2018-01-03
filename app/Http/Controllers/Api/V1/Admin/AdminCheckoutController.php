@@ -349,4 +349,11 @@ class AdminCheckoutController extends Controller
     {
         return $this->complementRepository->skipPresenter(false)->all();
     }
+
+    public function getComplement($id)
+    {
+        return $this->complementRepository->skipPresenter(false)->find($id);
+    }
+
+
 }
