@@ -33,4 +33,9 @@ class ComplementRepositoryEloquent extends BaseRepository implements ComplementR
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
+
+    public function presenter()
+    {
+        return \Pedidos\Presenters\ComplementPresenter::class;
+    }
 }
