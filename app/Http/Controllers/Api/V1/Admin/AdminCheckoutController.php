@@ -297,7 +297,7 @@ class AdminCheckoutController extends Controller
 
         $pdf = App::make('dompdf.wrapper');
 
-        if($order.type != 1) {
+        if($order->type != 1) {
             $pdf->loadHTML("<html>
                             <head>
                                 <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>
