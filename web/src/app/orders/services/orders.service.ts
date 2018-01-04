@@ -25,10 +25,10 @@ export class OrdersService extends AppHttpService {
         return this.get().items[i];
     }
 
-    addItem(item)
+    addItem(item,qtd)
     {
         var cart = this.get(),itemAux,exists = false;
-
+        item.qtd = qtd;
         for (var index in cart.items){
             itemAux = cart.items[index];
             if (itemAux.id == item.id){

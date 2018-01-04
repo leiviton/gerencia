@@ -43,7 +43,7 @@ export class NewComponent implements OnInit {
         email:null
     };
     items = [];
-    result = {};
+    result = [];
     qtd = 1;
     total = 0;
     pesquisa = {
@@ -88,6 +88,8 @@ export class NewComponent implements OnInit {
             this.hideLoading();
         },300);
 
+
+        jQuery('#pesquisa').hide();
         jQuery('#complement').hide();
     }
 
@@ -135,15 +137,15 @@ export class NewComponent implements OnInit {
             .then((res) => {
                 this.httpService.eventEmitter.emit();
                 this.pesquisa.value = null;
-                this.result = res.data;
+                this.result = res;
                 this.hideLoading();
                 if(res.data.length > 1){
-                    jQuery('#pesquisa').show().addClass('show');
-                    console.log(res.data);
+                    jQuery('#pesquisa').show().addClass('show').css('z-index', 1050 + 50);
+                    jQuery('#new_order').css('z-index', 1040);
                 }else{
                     if(res.data.length===1)
                     {
-                        this.addItem(this.result[0]);
+                        this.addItem(this.result["data"][0]);
                         this.total = this.httpService.get().total;
                         this.items = this.httpService.get();
                         this.qtd = 1;
@@ -154,18 +156,18 @@ export class NewComponent implements OnInit {
 
     addItem(item)
     {
-        item.qtd = this.qtd;
-        this.httpService.addItem(item);
-        this.toasterService.pop('success', 'Sucesso', 'Item codigo '+item.id+' adicionado.');
+        this.httpService.addItem(item,this.qtd);
+        this.items = this.httpService.get();
+        this.total = this.httpService.get().total;
+        jQuery('#pesquisa').hide();
+        this.toasterService.pop('success', 'Sucesso', 'Item codigo '+item.name+' adicionado.');
     }
 
     removeItem(i)
     {
         this.httpService.removeItem(i);
-
         this.total = this.httpService.get().total;
         this.items = this.httpService.get();
-
         this.toasterService.pop('info', 'Informação', 'Item removido.');
     }
 
@@ -269,7 +271,6 @@ export class NewComponent implements OnInit {
     {
         jQuery('#complement').show().addClass('show').css('z-index',1050 + 60);
         jQuery('#new_order').css('z-index', 1040);
-        jQuery('.nav').css('z-index',900);
         this.getComplements();
         this.idItem = i;
         console.log('index',i);
