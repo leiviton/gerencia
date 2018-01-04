@@ -314,7 +314,7 @@ class AdminCheckoutController extends Controller
                                     }
                                     .center{
                                         position: fixed;
-                                        margin-left: 150px;
+                                        margin-left: 200px;
                                     }
                                 </style>
                             </head>
