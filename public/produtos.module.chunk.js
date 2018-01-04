@@ -77,7 +77,6 @@ var EditComponent = (function () {
             .list({}, 'groups')
             .then(function (res) {
             _this.groups = res;
-            console.log(_this.groups);
         });
     };
     EditComponent.prototype.save = function (e) {
@@ -195,7 +194,6 @@ var NewComponent = (function () {
             .list({}, 'groups')
             .then(function (res) {
             _this.groups = res;
-            console.log(_this.groups);
         });
     };
     NewComponent.prototype.subgrupos = function () {

@@ -163,8 +163,7 @@ export class EditComponent implements OnInit {
 
     addItem(item)
     {
-        item.qtd = this.qtd;
-        this.httpService.addItem(item);
+        this.httpService.addItem(item,this.qtd);
         this.toasterService.pop('success', 'Sucesso', 'Item codigo '+item.id+' adicionado.');
     }
 

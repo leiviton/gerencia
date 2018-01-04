@@ -1,5 +1,48 @@
 webpackJsonp(["orders.module"],{
 
+/***/ "../../../../../src/app/orders/components/complement.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div tabindex=\"-1\" class=\"modal fade modal_novo\" id=\"new_order\" role=\"dialog\" aria-hidden=\"true\" aria-labelledby=\"myModalLabel\" style=\"z-index: 9999\">\r\n    <div class=\"modal-dialog modal-lg modal-primary\" role=\"document\">\r\n        <div class=\"modal-content\">\r\n            <div class=\"modal-header novo\">\r\n                <h5 class=\"modal-title\">Novo Pedido</h5>\r\n                <button class=\"close\" aria-label=\"Close\" type=\"button\" data-dismiss=\"modal\" (click)=\"close()\">\r\n                    <span aria-hidden=\"true\">×</span>\r\n                </button>\r\n            </div>\r\n            <div class=\"modal-body padding\">\r\n                <p>Teste</p>\r\n            </div>\r\n            <div class=\"modal-footer cadastro\">\r\n                <div class=\"modal-button\">\r\n                    <button class=\"btn btn-info\" (click)=\"save()\"><i class=\"fa fa-save\"></i> Salvar pedido (F9)</button>\r\n                    <button class=\"btn btn-danger text-left\" type=\"button\" (click)=\"close()\"><i class=\"fa fa-arrow-circle-left\"></i> Cancelar</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <!-- /.modal-content -->\r\n    </div>\r\n    <!-- /.modal-dialog -->\r\n</div>\r\n\r\n\r\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/orders/components/complement.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComplementComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery__ = __webpack_require__("../../../../jquery/dist/jquery.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_jquery__);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+var ComplementComponent = (function () {
+    function ComplementComponent() {
+    }
+    ComplementComponent.prototype.ngOnInit = function () {
+        __WEBPACK_IMPORTED_MODULE_1_jquery__('#complement').show().addClass('show');
+    };
+    ComplementComponent.prototype.close = function () {
+    };
+    ComplementComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            template: __webpack_require__("../../../../../src/app/orders/components/complement.component.html")
+        })
+    ], ComplementComponent);
+    return ComplementComponent;
+}());
+
+//# sourceMappingURL=complement.component.js.map
+
+/***/ }),
+
 /***/ "../../../../../src/app/orders/components/edit.component.html":
 /***/ (function(module, exports) {
 
@@ -172,8 +215,7 @@ var EditComponent = (function () {
         });
     };
     EditComponent.prototype.addItem = function (item) {
-        item.qtd = this.qtd;
-        this.httpService.addItem(item);
+        this.httpService.addItem(item, this.qtd);
         this.toasterService.pop('success', 'Sucesso', 'Item codigo ' + item.id + ' adicionado.');
     };
     EditComponent.prototype.close = function () {
@@ -215,7 +257,7 @@ var EditComponent = (function () {
 /***/ "../../../../../src/app/orders/components/new.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div tabindex=\"-1\" class=\"modal fade modal_novo\" id=\"new_order\" role=\"dialog\" aria-hidden=\"true\" aria-labelledby=\"myModalLabel\">\r\n    <div class=\"modal-dialog modal-lg modal-primary\" role=\"document\">\r\n        <div class=\"modal-content\">\r\n            <div class=\"modal-header novo\">\r\n                <h5 class=\"modal-title\">Novo Pedido</h5>\r\n                <button class=\"close\" aria-label=\"Close\" type=\"button\" data-dismiss=\"modal\" (click)=\"close()\">\r\n                    <span aria-hidden=\"true\">×</span>\r\n                </button>\r\n            </div>\r\n            <div class=\"modal-body padding\">\r\n                <div class=\"col-md-12\">\r\n                    <form #myForm=\"ngForm\" (keyup.enter)=\"buscar()\" class=\"form-inline\">\r\n                        <div class=\"form-group col-md-12\">\r\n                            <label class=\"col-md-2\">Buscar: </label>\r\n                            <input type=\"text\" class=\"form-control col-md-3\" name=\"pesquisa\" [(ngModel)]=\"pesquisa.value\" placeholder=\"Digite produto\" required minlength=\"2\" autofocus=\"autofocus\">\r\n                            <label class=\"label qtd col-md-2\"> Qtd.</label>\r\n                            <input class=\"form-control col-md-1\" type=\"number\" min=\"1\" max=\"10\" name=\"qtd\" [(ngModel)]=\"qtd\" />\r\n                            <label for=\"tipo\" class=\"label col-md-2\">Tipo: </label>\r\n                            <select id=\"tipo\" name=\"tipo\" class=\"form-control col-md-2\" [(ngModel)]=\"tipo\">\r\n                                <option value=\"0\"> Delivery</option>\r\n                                <option value=\"1\"> Salão</option>\r\n                                <option value=\"2\"> Retirada</option>\r\n                            </select>\r\n                        </div>\r\n                    </form>\r\n                </div>\r\n\r\n                <div class=\"col-md-12\" style=\"padding-bottom: 5px;\">\r\n                    <form #myForm=\"ngForm\" class=\"form-inline\">\r\n                        <div class=\"form-group col-md-12\">\r\n                            <label class=\"col-md-2\" *ngIf=\"tipo != 1\">Telefone: </label>\r\n                            <input ngxPhoneMask *ngIf=\"tipo != 1\"  type=\"text\" class=\"form-control col-md-3\" name=\"pesquisa\"  placeholder=\"Digite Cliente (Telefone, nome, codigo)\" required minlength=\"11\" [(ngModel)]=\"pesquisa.value2\" (blur)=\"buscarCliente()\">\r\n                            <label for=\"mesa\" class=\"label col-md-2\" *ngIf=\"tipo == 1\">Mesa: </label>\r\n                            <select id=\"mesa\" name=\"category_id\" class=\"form-control col-md-4\" [(ngModel)]=\"mesa_id\" *ngIf=\"tipo == 1\">\r\n                                <option value=\"null\">Selecione a mesa</option>\r\n                                <option *ngFor=\"let g of mesas\" value=\"{{ g.id }}\"> {{ g.name }}</option>\r\n                            </select>\r\n                                <label class=\"label col-md-2\" *ngIf=\"tipo != 1\">Cartão?</label>\r\n                                <label class=\"switch switch-text switch-success\" *ngIf=\"tipo != 1\">\r\n                                    <input type=\"checkbox\" class=\"switch-input\" name=\"cartao\" [(ngModel)]=\"cartao\" checked>\r\n                                    <span class=\"switch-label\" data-on=\"Sim\" data-off=\"Não\"></span>\r\n                                    <span class=\"switch-handle\"></span>\r\n                                </label>\r\n                                <label for=\"troco\" class=\"label col-md-2\" *ngIf=\"tipo != 1 && cartao == false\">Troco:</label>\r\n                                <input *ngIf=\"tipo != 1 && cartao == false\" type=\"text\" name=\"troco\" id=\"troco\" currencyMask [(ngModel)]=\"troco\" [options]=\"{ prefix: 'R$ ', thousands: '.', decimal: ',' }\" class=\"form-control col-md-2\" placeholder=\"Troco para\" style=\"margin-left: 10px\">\r\n\r\n                                <label for=\"bandeira\" class=\"label col-md-2\" *ngIf=\"cartao == true\">Bandeira:</label>\r\n                                <input *ngIf=\"cartao == true\" type=\"text\" id=\"bandeira\" name=\"bandeira\" [(ngModel)]=\"bandeira\" class=\"form-control col-md-2\" placeholder=\"Bandeira de cartão\" style=\"margin-left: 10px\">\r\n                        </div>\r\n                    </form>\r\n                </div>\r\n                <div class=\"row borderdiv\">\r\n                    <div class=\"col-md-6 mb-4 padding\" style=\"height: 380px; overflow: auto\" *ngIf=\"tipo != 1\">\r\n                        <!-- Nav tabs -->\r\n                        <tabset>\r\n                            <tab heading=\"Cliente\">\r\n                                <form class=\"form-inline\">\r\n                                    <input type=\"text\" class=\"form-control col-md-12\" name=\"name\" [(ngModel)]=\"client.name\" placeholder=\"Nome Cliente\" [required]=\"true\" minlength=\"8\"/>\r\n                                    <br><br>\r\n                                    <input ngxPhoneMask type=\"text\" class=\"form-control col-md-12\" id=\"fone\" name=\"phone\" [(ngModel)]=\"client.phone\" placeholder=\"Telefone\"/>\r\n                                    <br><br>\r\n                                    <input type=\"text\" class=\"form-control col-md-12 \" name=\"email\" [(ngModel)]=\"client.email\" placeholder=\"Email\">\r\n                                    <br><br>\r\n                                    <input type=\"text\" class=\"form-control col-md-12\" name=\"address.address\" [(ngModel)]=\"client.address.address\" placeholder=\"Rua\"/>\r\n                                    <br><br>\r\n                                    <input type=\"text\" class=\"form-control col-md-3\" name=\"address.numero\" [(ngModel)]=\"client.address.numero\" placeholder=\"Numero\">\r\n                                    <div class=\"separate1\"></div>\r\n                                    <input type=\"text\" class=\"form-control col-md-8\" name=\"address.bairro\" [(ngModel)]=\"client.address.bairro\" placeholder=\"Bairro\"/>\r\n                                    <br><br>\r\n                                    <select name=\"cidade\" id=\"cidade\" class=\"form-control col-md-12\" [(ngModel)]=\"client.address.city_id\">\r\n                                        <option value=\"0\">Selecione cidade</option>\r\n                                        <option value=\"1\">Guaxupé</option>\r\n                                    </select>\r\n                                    <br><br>\r\n                                    <div class=\"padding\" *ngIf=\"novo == true\">\r\n                                        <button type=\"button\" class=\"btn btn-default btn-info\" (click)=\"saveClient()\">Cadastrar</button>\r\n                                    </div>\r\n                                </form>\r\n                            </tab>\r\n                            <tab heading=\"50 ultimos\" *ngIf=\"novo == false\">\r\n                                <p>Pedido:</p>\r\n                                <p>Data:</p>\r\n                                <p>Produtos:</p>\r\n                            </tab>\r\n                        </tabset>\r\n                    </div><!--/.col-->\r\n                    <div class=\"col-lg-6 padding\" [ngClass]=\"{'col-md-12 col-lg-12': tipo != 0 && tipo != 2, 'col-md-6 col-lg-6': tipo  != 1}\">\r\n                        <div class=\"table-responsive\" style=\"height: 245px; overflow: auto\">\r\n                            <table class=\"table scrollbox table-striped\">\r\n                                <thead>\r\n                                    <tr class=\"th-table title-table\">\r\n                                        <th class=\"text-center\">#</th>\r\n                                        <th>Produto</th>\r\n                                        <th class=\"text-center\">Valor</th>\r\n                                        <th class=\"text-center\">Qtd.</th>\r\n                                        <th class=\"text-center\">Subtotal</th>\r\n                                        <th class=\"text-center\"></th>\r\n                                    </tr>\r\n                                </thead>\r\n                                <tbody>\r\n                                    <tr class=\"th-table\" *ngFor=\"let p of items.items; let i = index\">\r\n                                        <td class=\"text-center\">{{ p.id }}</td>\r\n                                        <td>{{ p.name }}</td>\r\n                                        <td class=\"text-center\">{{ p.price | currency:'BRL':true }}</td>\r\n                                        <td class=\"text-center\">{{ p.qtd }}</td>\r\n                                        <td class=\"text-center\">{{ p.subtotal | currency:'BRL':true }}</td>\r\n                                        <td class=\"text-center\"><button class=\"btn btn-sm btn-default\" (click)=\"removeItem(i)\"><i class=\"fa fa-remove text-danger\"></i></button></td>\r\n                                    </tr>\r\n                                </tbody>\r\n                            </table>\r\n                        </div>\r\n                        <hr>\r\n                        <div class=\"col-md-12 text-center alert alert-success total-pagamento\"><p class=\"qtd\">TOTAL: {{ total | currency:'BRL':true }}</p></div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"modal-footer cadastro\">\r\n                 <div class=\"modal-button\">\r\n                    <button class=\"btn btn-info\" (click)=\"save()\"><i class=\"fa fa-save\"></i> Salvar pedido (F9)</button>\r\n                    <button class=\"btn btn-danger text-left\" type=\"button\" (click)=\"close()\"><i class=\"fa fa-arrow-circle-left\"></i> Cancelar</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <!-- /.modal-content -->\r\n    </div>\r\n    <!-- /.modal-dialog -->\r\n</div>\r\n\r\n\r\n"
+module.exports = "<div tabindex=\"-1\" class=\"modal fade modal_novo\" id=\"new_order\" role=\"dialog\" aria-hidden=\"true\" aria-labelledby=\"myModalLabel\">\r\n    <div class=\"modal-dialog modal-lg modal-primary\" role=\"document\">\r\n        <div class=\"modal-content\">\r\n            <div class=\"modal-header novo\">\r\n                <h5 class=\"modal-title\">Novo Pedido</h5>\r\n                <button class=\"close\" aria-label=\"Close\" type=\"button\" data-dismiss=\"modal\" (click)=\"cancel()\">\r\n                    <span aria-hidden=\"true\">×</span>\r\n                </button>\r\n            </div>\r\n            <div class=\"modal-body padding\">\r\n                <div class=\"col-md-12\">\r\n                    <form #myForm=\"ngForm\" (keyup.enter)=\"buscar()\" class=\"form-inline\">\r\n                        <div class=\"form-group col-md-12\">\r\n                            <div class=\"col-md-1\"></div>\r\n                            <label class=\"col-md-1\">Buscar: </label>\r\n                            <input type=\"text\" class=\"form-control col-md-3\" name=\"pesquisa\" [(ngModel)]=\"pesquisa.value\" placeholder=\"Digite produto\" required minlength=\"2\" autofocus=\"autofocus\">\r\n                            <label class=\"label qtd col-md-1\"> Qtd.</label>\r\n                            <input class=\"form-control col-md-1\" type=\"number\" min=\"1\" max=\"10\" name=\"qtd\" [(ngModel)]=\"qtd\" />\r\n                            <label for=\"tipo\" class=\"label col-md-1\">Tipo: </label>\r\n                            <select id=\"tipo\" name=\"tipo\" class=\"form-control col-md-3\" [(ngModel)]=\"tipo\">\r\n                                <option value=\"0\"> Delivery</option>\r\n                                <option value=\"1\"> Salão</option>\r\n                                <option value=\"2\"> Retirada</option>\r\n                            </select>\r\n                            <!--label class=\"label col-md-2\">Mais sabor?</label>\r\n                            <label class=\"switch switch-text switch-success\">\r\n                                <input type=\"checkbox\" class=\"switch-input\" name=\"cartao\" checked>\r\n                                <span class=\"switch-label\" data-on=\"Sim\" data-off=\"Não\"></span>\r\n                                <span class=\"switch-handle\"></span>\r\n                            </label-->\r\n                        </div>\r\n                    </form>\r\n                </div>\r\n\r\n                <div class=\"col-md-12\" style=\"padding-bottom: 5px; padding-top: 5px;\">\r\n                    <form #myForm=\"ngForm\" class=\"form-inline\">\r\n                        <div class=\"form-group col-md-12\">\r\n                            <div class=\"col-md-1\"></div>\r\n                            <label class=\"col-md-1\" *ngIf=\"tipo != 1\">Telefone: </label>\r\n                            <input ngxPhoneMask *ngIf=\"tipo != 1\"  type=\"text\" class=\"form-control col-md-3\" name=\"pesquisa\"  placeholder=\"Digite Cliente (Telefone, nome, codigo)\" required minlength=\"11\" [(ngModel)]=\"pesquisa.value2\" (blur)=\"buscarCliente()\">\r\n                            <label for=\"mesa\" class=\"label col-md-1\" *ngIf=\"tipo == 1\">Mesa: </label>\r\n                            <select id=\"mesa\" name=\"category_id\" class=\"form-control col-md-3\" [(ngModel)]=\"mesa_id\" *ngIf=\"tipo == 1\">\r\n                                <option value=\"null\">Selecione a mesa</option>\r\n                                <option *ngFor=\"let g of mesas\" value=\"{{ g.id }}\"> {{ g.name }}</option>\r\n                            </select>\r\n                                <label class=\"label col-md-1\" *ngIf=\"tipo != 1\">Cartão?</label>\r\n                                <label class=\"switch switch-text switch-success\" *ngIf=\"tipo != 1\">\r\n                                    <input type=\"checkbox\" class=\"switch-input\" name=\"cartao\" [(ngModel)]=\"cartao\" checked>\r\n                                    <span class=\"switch-label\" data-on=\"Sim\" data-off=\"Não\"></span>\r\n                                    <span class=\"switch-handle\"></span>\r\n                                </label>\r\n                                <label for=\"troco\" class=\"label col-md-2\" *ngIf=\"tipo != 1 && cartao == false\">Troco:</label>\r\n                                <input *ngIf=\"tipo != 1 && cartao == false\" type=\"text\" name=\"troco\" class=\"form-control col-md-2\" id=\"troco\" currencyMask [(ngModel)]=\"troco\" [options]=\"{ prefix: 'R$ ', thousands: '.', decimal: ',' }\"  placeholder=\"Troco para\" style=\"margin-left: 10px\">\r\n\r\n                                <label for=\"bandeira\" class=\"label col-md-2\" *ngIf=\"cartao == true\">Bandeira:</label>\r\n                                <input *ngIf=\"cartao == true\" type=\"text\" id=\"bandeira\" name=\"bandeira\" [(ngModel)]=\"bandeira\" class=\"form-control col-md-2\" placeholder=\"Bandeira de cartão\" style=\"margin-left: 10px\">\r\n                        </div>\r\n                    </form>\r\n                </div>\r\n                <div class=\"row borderdiv\">\r\n                    <div class=\"col-md-6 mb-4 padding\" style=\"height: 380px; overflow: auto\" *ngIf=\"tipo != 1\">\r\n                        <!-- Nav tabs -->\r\n                        <tabset>\r\n                            <tab heading=\"Cliente\">\r\n                                <form class=\"form-inline\">\r\n                                    <input type=\"text\" class=\"form-control col-md-12\" name=\"name\" [(ngModel)]=\"client.name\" placeholder=\"Nome Cliente\" [required]=\"true\" minlength=\"8\"/>\r\n                                    <br><br>\r\n                                    <input ngxPhoneMask type=\"text\" class=\"form-control col-md-12\" id=\"fone\" name=\"phone\" [(ngModel)]=\"client.phone\" placeholder=\"Telefone\"/>\r\n                                    <br><br>\r\n                                    <input type=\"text\" class=\"form-control col-md-12 \" name=\"email\" [(ngModel)]=\"client.email\" placeholder=\"Email\">\r\n                                    <br><br>\r\n                                    <input type=\"text\" class=\"form-control col-md-12\" name=\"address.address\" [(ngModel)]=\"client.address.address\" placeholder=\"Rua\"/>\r\n                                    <br><br>\r\n                                    <input type=\"text\" class=\"form-control col-md-3\" name=\"address.numero\" [(ngModel)]=\"client.address.numero\" placeholder=\"Numero\">\r\n                                    <div class=\"separate1\"></div>\r\n                                    <input type=\"text\" class=\"form-control col-md-8\" name=\"address.bairro\" [(ngModel)]=\"client.address.bairro\" placeholder=\"Bairro\"/>\r\n                                    <br><br>\r\n                                    <select name=\"cidade\" id=\"cidade\" class=\"form-control col-md-12\" [(ngModel)]=\"client.address.city_id\">\r\n                                        <option value=\"0\">Selecione cidade</option>\r\n                                        <option value=\"1\">Guaxupé</option>\r\n                                    </select>\r\n                                    <br><br>\r\n                                    <div class=\"padding\" *ngIf=\"novo == true\">\r\n                                        <button type=\"button\" class=\"btn btn-default btn-info\" (click)=\"saveClient()\">Cadastrar</button>\r\n                                    </div>\r\n                                </form>\r\n                            </tab>\r\n                            <tab heading=\"50 ultimos\" *ngIf=\"novo == false\">\r\n                                <p>Pedido:</p>\r\n                                <p>Data:</p>\r\n                                <p>Produtos:</p>\r\n                            </tab>\r\n                        </tabset>\r\n                    </div><!--/.col-->\r\n                    <div class=\"col-lg-6 padding\" [ngClass]=\"{'col-md-12 col-lg-12': tipo != 0 && tipo != 2, 'col-md-6 col-lg-6': tipo  != 1}\">\r\n                        <div class=\"table-responsive\" style=\"height: 245px; overflow: auto\">\r\n                            <table class=\"table scrollbox table-striped\">\r\n                                <thead>\r\n                                    <tr class=\"th-table title-table\">\r\n                                        <th class=\"text-center\">#</th>\r\n                                        <th>Produto</th>\r\n                                        <th class=\"text-center\">Valor</th>\r\n                                        <th class=\"text-center\">Qtd.</th>\r\n                                        <th class=\"text-center\">Subtotal</th>\r\n                                        <th class=\"text-center\"></th>\r\n                                    </tr>\r\n                                </thead>\r\n                                <tbody>\r\n                                    <tr class=\"th-table\" *ngFor=\"let p of items.items; let i = index\">\r\n                                        <td class=\"text-center\">{{ p.id }}</td>\r\n                                        <td>{{ p.name }}</td>\r\n                                        <td class=\"text-center\">{{ p.price | currency:'BRL':true }}</td>\r\n                                        <td class=\"text-center\">{{ p.qtd }}</td>\r\n                                        <td class=\"text-center\">{{ p.subtotal | currency:'BRL':true }}</td>\r\n                                        <td class=\"text-center\">\r\n                                            <button class=\"btn btn-sm btn-default\" (click)=\"removeItem(i)\"><i class=\"fa fa-remove text-danger\"></i></button>\r\n\r\n                                            <button class=\"btn btn-sm btn-default\" (click)=\"showComplement(i)\"><i class=\"fa fa-plus text-info\"></i></button>\r\n                                        </td>\r\n                                    </tr>\r\n                                </tbody>\r\n                            </table>\r\n                        </div>\r\n                        <hr>\r\n                        <div class=\"col-md-12 text-center alert alert-success total-pagamento\"><p class=\"qtd\">TOTAL: {{ total | currency:'BRL':true }}</p></div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"modal-footer cadastro\">\r\n                 <div class=\"modal-button\">\r\n                    <button class=\"btn btn-info\" (click)=\"save()\"><i class=\"fa fa-save\"></i> Salvar pedido (F9)</button>\r\n                    <button class=\"btn btn-danger text-left\" type=\"button\" (click)=\"cancel()\"><i class=\"fa fa-arrow-circle-left\"></i> Cancelar</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <!-- /.modal-content -->\r\n    </div>\r\n    <div class=\"modal fade modal_novo\" id=\"complement\" role=\"dialog\" aria-hidden=\"true\" aria-labelledby=\"myModalLabell\" style=\"\">\r\n        <div class=\"modal-dialog modal-info\" role=\"document\">\r\n            <div class=\"modal-content\">\r\n                <div class=\"modal-header novo\">\r\n                    <h5 class=\"modal-title\">Complementos</h5>\r\n                </div>\r\n                <div class=\"modal-body\">\r\n                    <div class=\"col-md-6\" style=\"height: 400px\">\r\n                            <h5>Lista de adicionais</h5>\r\n                            <div class=\"checkbox\" *ngFor=\"let p of complements.data\">\r\n                                <label>\r\n                                    <p class=\"text-left\"> {{ p.name }} - {{ p.price | currency:'BRL':true}}</p>\r\n                                </label>\r\n                                <button class=\"btn btn-default btn-sm\" (click)=\"addComplement(p.id)\"><i class=\"fa fa-plus text-success\"></i></button>\r\n                            </div>\r\n                    </div>\r\n                    <div class=\"col-md-6\" style=\"margin-left: 250px; margin-top: -400px; height: 400px\">\r\n                        <h5>Adcionados ao item</h5>\r\n                        <div class=\"checkbox\" *ngFor=\"let p of complement\">\r\n                            <label>\r\n                                <p class=\"text-left\"> {{ p.name }} - {{ p.price | currency:'BRL':true}}</p>\r\n                            </label>\r\n\r\n                            <button class=\"btn btn-default btn-sm\" (click)=\"addComplement(p.id)\"><i class=\"fa fa-info text-success\"></i></button>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"modal-footer cadastro\">\r\n                    <div class=\"modal-button\">\r\n                        <button class=\"btn btn-info\" (click)=\"saveComplement()\"><i class=\"fa fa-save\"></i> Salvar pedido (F9)</button>\r\n                        <button class=\"btn btn-danger text-left\" type=\"button\" (click)=\"closeComplement()\"><i class=\"fa fa-arrow-circle-left\"></i> Cancelar</button>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <!-- /.modal-content -->\r\n        </div>\r\n    </div>\r\n    <!-- /.modal-dialog -->\r\n    <div class=\"modal fade modal_novo\" id=\"pesquisa\" role=\"dialog\" aria-hidden=\"true\" aria-labelledby=\"myModalLabell\">\r\n        <div class=\"modal-dialog modal-sm modal-success\" role=\"document\">\r\n            <div class=\"modal-content\">\r\n                <div class=\"modal-header novo text-center\">\r\n                    <h5 class=\"modal-title\">Resultado pesquisa</h5>\r\n                    <button class=\"close\" aria-label=\"Close\" type=\"button\" data-dismiss=\"modal\" (click)=\"closeMd()\">\r\n                        <span aria-hidden=\"true\">×</span>\r\n                    </button>\r\n                </div>\r\n                <div class=\"modal-body text-center\">\r\n                        <div class=\"checkbox\" *ngFor=\"let p of result.data\">\r\n                            <label>\r\n                                <p class=\"text-left\" (click)=\"addItem(p)\"> {{ p.name }} - {{ p.price | currency:'BRL':true}}</p>\r\n                            </label>\r\n                        </div>\r\n                </div>\r\n                <div class=\"modal-footer cadastro\">\r\n                    <div class=\"modal-button\">\r\n                        <button class=\"btn btn-danger btn-sm text-left\" type=\"button\" (click)=\"closeMd()\"><i class=\"fa fa-arrow-circle-left\"></i> Cancelar</button>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <!-- /.modal-content -->\r\n        </div>\r\n    </div>\r\n\r\n</div>\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -266,7 +308,7 @@ var NewComponent = (function () {
             email: null
         };
         this.items = [];
-        this.result = {};
+        this.result = [];
         this.qtd = 1;
         this.total = 0;
         this.pesquisa = {
@@ -279,6 +321,16 @@ var NewComponent = (function () {
         this.cartao = false;
         this.troco = 0;
         this.bandeira = '';
+        this.complements = {};
+        this.complement = [{
+                "id": 0,
+                "name": "Sem complemento",
+                "price": 0.0,
+                "ativo": "S",
+                "created_at": "",
+                "updated_at": ""
+            }];
+        this.idItem = 0;
         document.onkeydown = (function (e) {
             if (e.keyCode == 120) {
                 _this.save();
@@ -306,6 +358,8 @@ var NewComponent = (function () {
         setTimeout(function () {
             _this.hideLoading();
         }, 300);
+        __WEBPACK_IMPORTED_MODULE_1_jquery__('#pesquisa').hide();
+        __WEBPACK_IMPORTED_MODULE_1_jquery__('#complement').hide();
     };
     NewComponent.prototype.buscarCliente = function () {
         var _this = this;
@@ -351,14 +405,15 @@ var NewComponent = (function () {
             .then(function (res) {
             _this.httpService.eventEmitter.emit();
             _this.pesquisa.value = null;
-            _this.result = res.data;
+            _this.result = res;
             _this.hideLoading();
             if (res.data.length > 1) {
-                __WEBPACK_IMPORTED_MODULE_1_jquery__('#pesquisa').show().addClass('show');
+                __WEBPACK_IMPORTED_MODULE_1_jquery__('#pesquisa').show().addClass('show').css('z-index', 1050 + 50);
+                __WEBPACK_IMPORTED_MODULE_1_jquery__('#new_order').css('z-index', 1040);
             }
             else {
                 if (res.data.length === 1) {
-                    _this.addItem(_this.result[0]);
+                    _this.addItem(_this.result["data"][0]);
                     _this.total = _this.httpService.get().total;
                     _this.items = _this.httpService.get();
                     _this.qtd = 1;
@@ -367,9 +422,11 @@ var NewComponent = (function () {
         });
     };
     NewComponent.prototype.addItem = function (item) {
-        item.qtd = this.qtd;
-        this.httpService.addItem(item);
-        this.toasterService.pop('success', 'Sucesso', 'Item codigo ' + item.id + ' adicionado.');
+        this.httpService.addItem(item, this.qtd);
+        this.items = this.httpService.get();
+        this.total = this.httpService.get().total;
+        __WEBPACK_IMPORTED_MODULE_1_jquery__('#pesquisa').hide();
+        this.toasterService.pop('success', 'Sucesso', 'Item codigo ' + item.name + ' adicionado.');
     };
     NewComponent.prototype.removeItem = function (i) {
         this.httpService.removeItem(i);
@@ -468,6 +525,48 @@ var NewComponent = (function () {
         __WEBPACK_IMPORTED_MODULE_1_jquery__('#new_order').hide();
         this.router.navigate(['/orders']);
     };
+    NewComponent.prototype.showComplement = function (i) {
+        __WEBPACK_IMPORTED_MODULE_1_jquery__('#complement').show().addClass('show').css('z-index', 1050 + 60);
+        __WEBPACK_IMPORTED_MODULE_1_jquery__('#new_order').css('z-index', 1040);
+        this.getComplements();
+        this.idItem = i;
+        console.log('index', i);
+    };
+    NewComponent.prototype.getComplements = function () {
+        var _this = this;
+        this.httpService.builder()
+            .list({}, 'complements')
+            .then(function (res) {
+            _this.complements = res;
+            console.log('complements', res);
+        });
+    };
+    NewComponent.prototype.addComplement = function (id) {
+        var _this = this;
+        this.httpService.builder()
+            .view(id, 'complement')
+            .then(function (res) {
+            _this.toasterService.pop('success', 'Sucesso', 'Adicionado complemento ' + res.data.name);
+            if (_this.complement[0].id == 0) {
+                _this.complement[0] = res.data;
+            }
+            else {
+                _this.complement.push(res.data);
+            }
+        });
+    };
+    NewComponent.prototype.saveComplement = function () {
+        if (this.complement[0].id != 0) {
+            this.httpService.addComplement(this.complement, this.idItem);
+            this.closeComplement();
+        }
+        else {
+            this.toasterService.pop('error', 'Erro', 'Adicionais não inseridos');
+        }
+    };
+    NewComponent.prototype.closeComplement = function () {
+        __WEBPACK_IMPORTED_MODULE_1_jquery__('#complement').hide();
+    };
     NewComponent.prototype.closeMd = function () {
         __WEBPACK_IMPORTED_MODULE_1_jquery__('#pesquisa').hide();
     };
@@ -494,7 +593,7 @@ var NewComponent = (function () {
 /***/ "../../../../../src/app/orders/components/orders.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"animated fadeIn\">\n    <div class=\"row\">\n        <div class=\"col-lg-12\">\n          <div class=\"card\">\n            <div class=\"card-header\">\n                   <button type=\"button\" class=\"btn btn-default\" (click)=\"showModal()\"><i class=\"fa fa-search\"></i> Pesquisar </button>\n              <a class=\"btn btn-success\" [routerLink]=\"['new']\"><i class=\"fa fa-plus\"></i> Novo</a>\n            </div>\n            <div class=\"card-body\">\n              <table class=\"table table-responsive table-bordered table-striped table-sm\">\n                <thead>\n                  <tr>\n                    <th class=\"title text-center\">Status</th>\n                    <th class=\"title text-center\">Tipo</th>\n                    <th class=\"title text-center\">Codigo</th>\n                    <th class=\"title-table text-center\"> Total</th>\n                    <th class=\"title\"> Cliente</th>\n                    <th class=\"title text-center\">Data</th>\n                    <th class=\"title text-center\">Hora</th>\n                    <th class=\"title text-center\">Previsão</th>\n                    <th class=\"title text-center\">Mesa</th>\n                    <th class=\"title text-center\">Ações</th>\n                  </tr>\n                </thead>\n                <tbody>\n                  <tr *ngIf=\"tamanho == 0\">\n                    <td colspan=\"10\"> Sem dados</td>\n                  </tr>\n                  <tr *ngFor=\"let o of orders.data\" (dblclick)=\"edit(o.id)\">\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">\n                      <span class=\"badge badge-success\" *ngIf=\"o.status === 3\" tooltip=\"Pagamento realizado\"> Pago</span>\n                      <span class=\"badge badge-info\" *ngIf=\"o.status === 2\" tooltip=\"Em transito\">Em transito</span>\n                      <span class=\"badge badge-primary\" *ngIf=\"o.status === 1\" tooltip=\"Preparado\">Preparado</span>\n                      <span class=\"badge badge-danger\" *ngIf=\"o.status === 0\" tooltip=\"Na cozinha\">Cozinha</span>\n                    </td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">\n                      <i class=\"fa fa-motorcycle\" *ngIf=\"o.type == 0\" tooltip=\"Delivery\"></i>\n                      <i class=\"fa fa-upload\" *ngIf=\"o.type == 2\" tooltip=\"Retirada\"></i>\n                      <i class=\"fa fa fa-cutlery\" *ngIf=\"o.type == 1\" tooltip=\"Mesa\"></i>\n                    </td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.id }}</td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.total | currency:'BRL':true }}</td>\n                    <td *ngIf=\"tamanho > 0\">{{ o.client.data.user.data.name }}</td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.created_at | slice:0:10 }} </td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.created_at | slice:11:19}}</td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.previsao }} </td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.mesa.data.name }} </td>\n                    <td class=\"text-center\">\n                      <a class=\"btn btn-link text-alert pagamento\" *ngIf=\"o.status == 3\" [routerLink]=\"['payment/'+ o.id]\" tooltip=\"Ver pagamentos\"><i class=\"fa fa-money\"></i></a>\n                      <a class=\"btn btn-link text-success pagamento\" *ngIf=\"o.status != 3\" [routerLink]=\"['payment/'+ o.id]\" tooltip=\"Pagar pedido\"><i class=\"fa fa-check\"></i></a>\n                      <a class=\"btn btn-link pagamento\" *ngIf=\"o.status != 3\" [routerLink]=\"['printer/'+ o.id]+'/S'\" tooltip=\"Imprimir pedido\"><i class=\"fa fa-print\"></i></a>\n                    </td>\n                  </tr>\n                </tbody>\n              </table>\n              <!--nav>\n                <ul class=\"pagination\">\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">Prev</a></li>\n                  <li class=\"page-item active\">\n                    <a class=\"page-link\" href=\"#\">1</a>\n                  </li>\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">2</a></li>\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">3</a></li>\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">4</a></li>\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">Next</a></li>\n                </ul>\n              </nav-->\n            </div>\n          </div>\n        </div>\n      </div>\n </div>\n\n<div class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">\n  <div class=\"modal-dialog modal-sm modal-info\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <h6 class=\"modal-title\">Pesquisar</h6>\n      </div>\n      <div class=\"modal-body\">\n        <label for=\"inicio\">De</label>\n        <input type=\"date\" id=\"inicio\" class=\"form-control\" name=\"inicio\" [(ngModel)]=\"pesquisa.inicio\" required>\n\n        <label for=\"fim\">Até</label>\n        <input type=\"date\" id=\"fim\" class=\"form-control\" name=\"fim\" [(ngModel)]=\"pesquisa.fim\" required>\n        <label class=\"col-form-label\" for=\"select\">Status</label>\n        <select name=\"status\" class=\"form-control\" id=\"select\" [(ngModel)]=\"pesquisa.status\" required>\n          <option value=\"null\">Selecione o status</option>\n          <option value=\"0\">Pendentes</option>\n          <option value=\"1\">Em preparo</option>\n          <option value=\"2\">Entrega</option>\n          <option value=\"3\">Fechado</option>\n        </select>\n      </div>\n      <div class=\"modal-footer\">\n        <button type=\"button\" class=\"btn btn-secondary\" (click)=\"hideModal()\">Fechar</button>\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"pesquisar()\"><i class=\"fa fa-search\"></i> Buscar</button>\n      </div>\n    </div><!-- /.modal-content -->\n  </div><!-- /.modal-dialog -->\n</div><!-- /.modal -->\n\n<router-outlet></router-outlet>\n\n"
+module.exports = "<div class=\"animated fadeIn\">\n    <div class=\"row\">\n        <div class=\"col-lg-12\">\n          <div class=\"card\">\n            <div class=\"card-header\">\n                   <button type=\"button\" class=\"btn btn-default\" (click)=\"showModal()\"><i class=\"fa fa-search\"></i> Pesquisar </button>\n              <a class=\"btn btn-success\" [routerLink]=\"['new']\"><i class=\"fa fa-plus\"></i> Novo</a>\n            </div>\n            <div class=\"card-body\">\n              <table class=\"table table-responsive table-bordered table-striped table-sm\">\n                <thead>\n                  <tr>\n                    <th class=\"title text-center\">Status</th>\n                    <th class=\"title text-center\">Tipo</th>\n                    <th class=\"title text-center\">Codigo</th>\n                    <th class=\"title-table text-center\"> Total</th>\n                    <th class=\"title\"> Cliente</th>\n                    <th class=\"title text-center\">Data</th>\n                    <th class=\"title text-center\">Hora</th>\n                    <th class=\"title text-center\">Previsão</th>\n                    <th class=\"title text-center\">Mesa</th>\n                    <th class=\"title text-center\">Ações</th>\n                  </tr>\n                </thead>\n                <tbody>\n                  <tr *ngIf=\"tamanho == 0\">\n                    <td colspan=\"10\"> Sem dados</td>\n                  </tr>\n                  <tr *ngFor=\"let o of orders.data\" (dblclick)=\"edit(o.id)\">\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">\n                      <span class=\"badge badge-success\" *ngIf=\"o.status === 3\" tooltip=\"Pagamento realizado\"> Pago</span>\n                      <span class=\"badge badge-info\" *ngIf=\"o.status === 2\" tooltip=\"Em transito\">Em transito</span>\n                      <span class=\"badge badge-primary\" *ngIf=\"o.status === 1\" tooltip=\"Preparado\">Preparado</span>\n                      <span class=\"badge badge-danger\" *ngIf=\"o.status === 0\" tooltip=\"Na cozinha\">Cozinha</span>\n                    </td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">\n                      <i class=\"fa fa-motorcycle\" *ngIf=\"o.type == 0\" tooltip=\"Delivery\"></i>\n                      <i class=\"fa fa-upload\" *ngIf=\"o.type == 2\" tooltip=\"Retirada\"></i>\n                      <i class=\"fa fa fa-cutlery\" *ngIf=\"o.type == 1\" tooltip=\"Mesa\"></i>\n                    </td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.id }}</td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.total | currency:'BRL':true }}</td>\n                    <td *ngIf=\"tamanho > 0\">{{ o.client.data.name }}</td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.created_at | slice:0:10 }} </td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.created_at | slice:11:19}}</td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.previsao }} </td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.mesa.data.name }} </td>\n                    <td class=\"text-center\">\n                      <a class=\"btn btn-link text-alert pagamento\" *ngIf=\"o.status == 3\" [routerLink]=\"['payment/'+ o.id]\" tooltip=\"Ver pagamentos\"><i class=\"fa fa-money\"></i></a>\n                      <a class=\"btn btn-link text-success pagamento\" *ngIf=\"o.status != 3\" [routerLink]=\"['payment/'+ o.id]\" tooltip=\"Pagar pedido\"><i class=\"fa fa-dollar\"></i></a>\n                      <a class=\"btn btn-link pagamento\" *ngIf=\"o.status != 3\" [routerLink]=\"['printer/'+ o.id]+'/S'\" tooltip=\"Imprimir pedido\"><i class=\"fa fa-print\"></i></a>\n                    </td>\n                  </tr>\n                </tbody>\n              </table>\n              <!--nav>\n                <ul class=\"pagination\">\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">Prev</a></li>\n                  <li class=\"page-item active\">\n                    <a class=\"page-link\" href=\"#\">1</a>\n                  </li>\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">2</a></li>\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">3</a></li>\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">4</a></li>\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">Next</a></li>\n                </ul>\n              </nav-->\n            </div>\n          </div>\n        </div>\n      </div>\n </div>\n\n<div class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">\n  <div class=\"modal-dialog modal-sm modal-info\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <h6 class=\"modal-title\">Pesquisar</h6>\n      </div>\n      <div class=\"modal-body\">\n        <label for=\"inicio\">De</label>\n        <input type=\"date\" id=\"inicio\" class=\"form-control\" name=\"inicio\" [(ngModel)]=\"pesquisa.inicio\" required>\n\n        <label for=\"fim\">Até</label>\n        <input type=\"date\" id=\"fim\" class=\"form-control\" name=\"fim\" [(ngModel)]=\"pesquisa.fim\" required>\n        <label class=\"col-form-label\" for=\"select\">Status</label>\n        <select name=\"status\" class=\"form-control\" id=\"select\" [(ngModel)]=\"pesquisa.status\" required>\n          <option value=\"null\">Selecione o status</option>\n          <option value=\"0\">Pendentes</option>\n          <option value=\"1\">Em preparo</option>\n          <option value=\"2\">Entrega</option>\n          <option value=\"3\">Fechado</option>\n        </select>\n      </div>\n      <div class=\"modal-footer\">\n        <button type=\"button\" class=\"btn btn-secondary\" (click)=\"hideModal()\">Fechar</button>\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"pesquisar()\"><i class=\"fa fa-search\"></i> Buscar</button>\n      </div>\n    </div><!-- /.modal-content -->\n  </div><!-- /.modal-dialog -->\n</div><!-- /.modal -->\n\n<router-outlet></router-outlet>\n\n"
 
 /***/ }),
 
@@ -702,7 +801,6 @@ var PaymentComponent = (function () {
                 _this.payment.order_id = _this.order.id;
                 _this.products = res.data.items;
                 _this.mesa = res.data.mesa.data.name;
-                console.log('order', _this.order);
                 _this.hideLoading();
             });
         });
@@ -716,11 +814,8 @@ var PaymentComponent = (function () {
             this.payment.total_pago = (this.valor_pag - (this.valor_pag - ((this.order.total + this.payment.acrescimo) - this.payment.desconto)));
             this.payment.total_original = this.order.total;
             this.payment.payment_types_id = this.type_id;
-            console.log(this.payment);
             this.httpService.setAccessToken();
-            console.log('tipo', this.type_id);
             if (this.type_id !== null) {
-                console.log('pago', this.payment.total_pago);
                 this.httpService.builder()
                     .insert(this.payment, 'payment')
                     .then(function (res) {
@@ -747,7 +842,6 @@ var PaymentComponent = (function () {
             .list({}, 'typepayment')
             .then(function (res) {
             _this.tipo = res;
-            console.log(_this.tipo);
         });
     };
     PaymentComponent.prototype.close = function () {
@@ -843,7 +937,7 @@ var PrinterComponent = (function () {
             }
             _this.httpService.builder().view(params['id'], url)
                 .then(function (res) {
-                _this.innerHtml = _this.sanitizer.bypassSecurityTrustHtml("<object data='" + res.data.link_printer + "' type='application/pdf' height='500' width='780' class='embed-responsive-item'>" +
+                _this.innerHtml = _this.sanitizer.bypassSecurityTrustHtml("<object data='" + res.data.link_printer + "' name='my_iframe' onload='window.option();window.print();window.close()' type='application/pdf' height='500' width='780' class='embed-responsive-item'>" +
                     "Object " + res.data.link_printer + " failed" +
                     "</object>");
                 _this.link_printer = 'http://108.61.155.169' + res.data.link_printer;
@@ -851,7 +945,8 @@ var PrinterComponent = (function () {
         });
         this.httpService.eventEmitter.emit();
     };
-    PrinterComponent.prototype.imprimir = function () {
+    PrinterComponent.prototype.imprimir = function (num, id) {
+        window.focus();
         window.print();
     };
     PrinterComponent.prototype.close = function () {
@@ -890,12 +985,14 @@ var PrinterComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_new_component__ = __webpack_require__("../../../../../src/app/orders/components/new.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_payment_component__ = __webpack_require__("../../../../../src/app/orders/components/payment.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_printer_component__ = __webpack_require__("../../../../../src/app/orders/components/printer.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_complement_component__ = __webpack_require__("../../../../../src/app/orders/components/complement.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -930,7 +1027,16 @@ var routes = [
                 component: __WEBPACK_IMPORTED_MODULE_4__components_new_component__["a" /* NewComponent */],
                 data: {
                     title: 'Novo'
-                }
+                },
+                children: [
+                    {
+                        path: 'component/:id',
+                        component: __WEBPACK_IMPORTED_MODULE_7__components_complement_component__["a" /* ComplementComponent */],
+                        data: {
+                            title: 'Component'
+                        }
+                    }
+                ]
             },
             {
                 path: 'payment/:id',
@@ -984,12 +1090,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_ng2_currency_mask___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_15_ng2_currency_mask__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16_ngx_phone_mask__ = __webpack_require__("../../../../ngx-phone-mask/ngx-phone-mask/ngx-phone-mask.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_printer_component__ = __webpack_require__("../../../../../src/app/orders/components/printer.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_complement_component__ = __webpack_require__("../../../../../src/app/orders/components/complement.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -1023,9 +1131,9 @@ var OrdersModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_13_cuppa_ng2_grid_cuppa_ng2_dataGrid__["a" /* CuppaDataGridModule */],
                 __WEBPACK_IMPORTED_MODULE_14_ngx_bootstrap_tabs__["a" /* TabsModule */],
                 __WEBPACK_IMPORTED_MODULE_15_ng2_currency_mask__["CurrencyMaskModule"],
-                __WEBPACK_IMPORTED_MODULE_16_ngx_phone_mask__["a" /* NgxPhoneMaskModule */]
+                __WEBPACK_IMPORTED_MODULE_16_ngx_phone_mask__["a" /* NgxPhoneMaskModule */],
             ],
-            declarations: [__WEBPACK_IMPORTED_MODULE_6__components_orders_component__["a" /* OrdersComponent */], __WEBPACK_IMPORTED_MODULE_7__components_edit_component__["a" /* EditComponent */], __WEBPACK_IMPORTED_MODULE_8__components_new_component__["a" /* NewComponent */], __WEBPACK_IMPORTED_MODULE_9__components_payment_component__["a" /* PaymentComponent */], __WEBPACK_IMPORTED_MODULE_17__components_printer_component__["a" /* PrinterComponent */]],
+            declarations: [__WEBPACK_IMPORTED_MODULE_6__components_orders_component__["a" /* OrdersComponent */], __WEBPACK_IMPORTED_MODULE_7__components_edit_component__["a" /* EditComponent */], __WEBPACK_IMPORTED_MODULE_8__components_new_component__["a" /* NewComponent */], __WEBPACK_IMPORTED_MODULE_9__components_payment_component__["a" /* PaymentComponent */], __WEBPACK_IMPORTED_MODULE_17__components_printer_component__["a" /* PrinterComponent */], __WEBPACK_IMPORTED_MODULE_18__components_complement_component__["a" /* ComplementComponent */]],
             providers: [__WEBPACK_IMPORTED_MODULE_12__services_orders_service__["a" /* OrdersService */], __WEBPACK_IMPORTED_MODULE_4_ngx_bootstrap_modal__["a" /* BsModalService */]]
         })
     ], OrdersModule);
@@ -1086,8 +1194,9 @@ var OrdersService = (function (_super) {
     OrdersService.prototype.getItem = function (i) {
         return this.get().items[i];
     };
-    OrdersService.prototype.addItem = function (item) {
+    OrdersService.prototype.addItem = function (item, qtd) {
         var cart = this.get(), itemAux, exists = false;
+        item.qtd = qtd;
         for (var index in cart.items) {
             itemAux = cart.items[index];
             if (itemAux.id == item.id) {
@@ -1103,6 +1212,17 @@ var OrdersService = (function (_super) {
             cart.items.push(item);
         }
         cart.total = this.getTotal(cart.items);
+        localStorage.setItem(this.key, JSON.stringify(cart));
+    };
+    OrdersService.prototype.addComplement = function (complement, i) {
+        var cart = this.get(), itemAux = cart.items[i];
+        var valor = 0;
+        for (var j in complement) {
+            valor = valor + complement[j].price;
+        }
+        console.log('valor', valor);
+        itemAux.complements = complement;
+        itemAux.subtotal = itemAux.subtotal + valor;
         localStorage.setItem(this.key, JSON.stringify(cart));
     };
     OrdersService.prototype.removeItem = function (i) {

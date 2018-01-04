@@ -525,7 +525,6 @@ var DashboardComponent = (function () {
             .list({}, 'mesas')
             .then(function (res) {
             _this.mesas = res;
-            console.log('mesas', _this.mesas);
         });
         setTimeout(function () {
             _this.hideLoading();

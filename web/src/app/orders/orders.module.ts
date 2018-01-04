@@ -20,7 +20,6 @@ import { CurrencyMaskModule } from "ng2-currency-mask";
 import { NgxPhoneMaskModule } from 'ngx-phone-mask';
 import {PrinterComponent} from "./components/printer.component";
 import {ComplementComponent} from "./components/complement.component";
-import { Ng2CompleterModule } from "ng2-completer";
 
 
 @NgModule({
@@ -35,7 +34,6 @@ import { Ng2CompleterModule } from "ng2-completer";
       TabsModule,
       CurrencyMaskModule,
       NgxPhoneMaskModule,
-      Ng2CompleterModule
   ],
   declarations: [ OrdersComponent,EditComponent,NewComponent,PaymentComponent,PrinterComponent,ComplementComponent ],
   providers: [ OrdersService, BsModalService ]
