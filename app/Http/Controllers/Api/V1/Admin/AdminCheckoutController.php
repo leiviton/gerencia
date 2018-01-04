@@ -316,7 +316,7 @@ class AdminCheckoutController extends Controller
                             </head>
                             <body>
                                 <h5 class='fonte'>---------------------------------------------------------------------</h5>
-                                <h5 class='fonte'>Pedido: $order->id | Mesa: " . $order->mesa->name . "</h5>
+                                <h5 class='fonte'>Pedido: $order->id | " . $order->mesa->name . "</h5>
                                 <h5 class='fonte'>Data: $data | Hora: $hora</h5>                              
                                 <h5 class='fonte'>---------------------------------------------------------------------</h5>
                                 <h5 class='fonte'>Cliente: " . $order->client->name . "</h5>
