@@ -137,8 +137,9 @@ export class NewComponent implements OnInit {
                 this.pesquisa.value = null;
                 this.result = res.data;
                 this.hideLoading();
-                if(res.data.length>1){
+                if(res.data.length > 1){
                     jQuery('#pesquisa').show().addClass('show');
+                    console.log(res.data);
                 }else{
                     if(res.data.length===1)
                     {

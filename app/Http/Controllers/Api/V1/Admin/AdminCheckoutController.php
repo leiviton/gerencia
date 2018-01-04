@@ -86,7 +86,7 @@ class AdminCheckoutController extends Controller
                        ->scopeQuery(function($query) use($pesquisa){
                           return $query->where('status',0)
                                        ->where('id',$pesquisa)
-                                       ->orWhere('name',$pesquisa);
+                                       ->orWhere('name','like','%'.$pesquisa.'%');
                        })
                        ->all();
         return $result;
