@@ -3,7 +3,7 @@
         <div class="modal-content">
             <div class="modal-header novo">
                 <h5 class="modal-title">Novo Pedido</h5>
-                <button class="close" aria-label="Close" type="button" data-dismiss="modal" (click)="close()">
+                <button class="close" aria-label="Close" type="button" data-dismiss="modal" (click)="cancel()">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
@@ -21,12 +21,12 @@
                                 <option value="1"> Salão</option>
                                 <option value="2"> Retirada</option>
                             </select>
-                            <label class="label col-md-2">Mais sabor?</label>
+                            <!--label class="label col-md-2">Mais sabor?</label>
                             <label class="switch switch-text switch-success">
                                 <input type="checkbox" class="switch-input" name="cartao" checked>
                                 <span class="switch-label" data-on="Sim" data-off="Não"></span>
                                 <span class="switch-handle"></span>
-                            </label>
+                            </label-->
                         </div>
                     </form>
                 </div>
@@ -127,7 +127,7 @@
             <div class="modal-footer cadastro">
                  <div class="modal-button">
                     <button class="btn btn-info" (click)="save()"><i class="fa fa-save"></i> Salvar pedido (F9)</button>
-                    <button class="btn btn-danger text-left" type="button" (click)="close()"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
+                    <button class="btn btn-danger text-left" type="button" (click)="cancel()"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
                 </div>
             </div>
         </div>

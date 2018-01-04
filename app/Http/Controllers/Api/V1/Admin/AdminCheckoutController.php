@@ -277,8 +277,6 @@ class AdminCheckoutController extends Controller
                             <td class='fonte padding'>".$value->product->id."</td>
                             <td class='fonte padding'>".$value->product->name."</td>
                             <td class='fonte padding'>".$value->qtd."</td>
-                            <td class='fonte padding'>".$value->price."</td>
-                            <td class='fonte padding'>".$value->subtotal."</td>
                           </tr>";
             $this->itemRepository->update(['impresso'=>'S'],$value->id);
             $contador += $value->qtd;
@@ -290,8 +288,6 @@ class AdminCheckoutController extends Controller
                         <th class='fonte padding'>#</th>
                         <th class='fonte padding'>Produto</th>
                         <th class='fonte padding'>Qtd</th>
-                        <th class='fonte padding'>Valor</th>
-                        <th class='fonte padding'>Subtotal</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -301,7 +297,8 @@ class AdminCheckoutController extends Controller
 
         $pdf = App::make('dompdf.wrapper');
 
-        $pdf->loadHTML("<html>
+        if($order.type != 1) {
+            $pdf->loadHTML("<html>
                             <head>
                                 <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>
                                 <style>
@@ -319,13 +316,13 @@ class AdminCheckoutController extends Controller
                             </head>
                             <body>
                                 <h5 class='fonte'>---------------------------------------------------------------------</h5>
-                                <h5 class='fonte'>Pedido: $order->id | Mesa: ".$order->mesa->name."</h5>
+                                <h5 class='fonte'>Pedido: $order->id | Mesa: " . $order->mesa->name . "</h5>
                                 <h5 class='fonte'>Data: $data | Hora: $hora</h5>                              
                                 <h5 class='fonte'>---------------------------------------------------------------------</h5>
-                                <h5 class='fonte'>Cliente: ".$order->client->name."</h5>
-                                <h5 class='fonte'>Endereço: ".$order->client->addressClient->address.",".$order->client->addressClient->numero."</h5>
-                                <h5 class='fonte'>Complemento: ".$order->client->addressClient->complemento."</h5>
-                                <h5 class='fonte'>Bairro: ".$order->client->addressClient->bairro."</h5>
+                                <h5 class='fonte'>Cliente: " . $order->client->name . "</h5>
+                                <h5 class='fonte'>Endereço: " . $order->client->addressClient->address . "," . $order->client->addressClient->numero . "</h5>
+                                <h5 class='fonte'>Complemento: " . $order->client->addressClient->complemento . "</h5>
+                                <h5 class='fonte'>Bairro: " . $order->client->addressClient->bairro . "</h5>
                                 <h5 class='fonte'>Cidade: Guaxupé UF: MG</h5>
                                 <h5 class='fonte'>---------------------------------------------------------------------</h5>
                                 <h5 class='fonte'>ITENS:</h5>
@@ -335,9 +332,40 @@ class AdminCheckoutController extends Controller
                                 <h5 class='fonte'>TOTAL DA COMPRA: R$ $order->total</h5>
                                 <h5 class='fonte'>---------------------------------------------------------------------</h5>
                                 <h5 class='fonte'>$order->observacao</h5>
+                                <h5 class='fonte'>$order->troco</h5>
                             </body>
-                        </html>")->save(public_path().'/printer/'.$order->id.'.pdf');
-
+                        </html>")->save(public_path() . '/printer/' . $order->id . '.pdf');
+        }else{
+            $pdf->loadHTML("<html>
+                            <head>
+                                <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>
+                                <style>
+                                    .fonte{
+                                        font-weight: 300;
+                                    }
+                                    .padding{
+                                        padding-left: 10px;
+                                        padding-right: 10px;
+                                        padding-bottom: 0;
+                                        padding-top: 0;
+                                        margin-left: 7px;
+                                    }
+                                </style>
+                            </head>
+                            <body>
+                                <h5 class='fonte'>---------------------------------------------------------------------</h5>
+                                <h5 class='fonte'>Pedido: $order->id | " . $order->mesa->name . "</h5>
+                                <h5 class='fonte'>Data: $data | Hora: $hora</h5>                              
+                                <h5 class='fonte'>---------------------------------------------------------------------</h5>
+                                <h5 class='fonte'>ITENS:</h5>
+                                $table
+                                <h5 class='fonte'>---------------------------------------------------------------------</h5>
+                                <h5 class='fonte'>TOTAL DE ITENS: $contador</h5>
+                                <h5 class='fonte'>---------------------------------------------------------------------</h5>
+                                <h5 class='fonte'>$order->observacao</h5>
+                            </body>
+                        </html>")->save(public_path() . '/printer/' . $order->id . '.pdf');
+        }
         $order->link_printer = 'http://108.61.155.169/printer/'.$order->id.'.pdf';
 
         $order->save();
