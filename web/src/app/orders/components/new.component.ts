@@ -210,28 +210,6 @@ export class NewComponent implements OnInit {
                     troco = '';
                 }
 
-                if(this.tipo == 0)
-                {
-                    this.pesquisa.value = 58;
-                    this.httpService.builder('search')
-                        .search(this.pesquisa.value)
-                        .then((res) => {
-                            this.addItem(res.data[0]);
-                            pedido = {
-                                items: this.httpService.get().items,
-                                total: this.httpService.get().total,
-                                mesa_id: this.mesa_id,
-                                client_id: this.client.id,
-                                type: this.tipo,
-                                cartao: card,
-                                troco: troco,
-                                observacao: bandeira
-                            };
-                            console.log(res.data[0]);
-                        });
-                }
-
-                console.log('mesa', this.mesa_id);
                 this.showLoading();
                 this.httpService.setAccessToken();
                 if (this.httpService.get().items.length > 0) {
