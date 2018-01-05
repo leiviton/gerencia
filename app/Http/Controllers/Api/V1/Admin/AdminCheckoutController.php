@@ -85,8 +85,8 @@ class AdminCheckoutController extends Controller
         $result = $this->productRepository->skipPresenter(false)
                        ->scopeQuery(function($query) use($pesquisa){
                           return $query->where('status',0)
-                                       ->where('id',(int)$pesquisa)
-                                       ->orWhere('name','like','%'.$pesquisa);
+                                       ->where('id','like','%'.$pesquisa.'%')
+                                       ->orWhere('name','like','%'.$pesquisa.'%');
                        })
                        ->all();
         return $result;
