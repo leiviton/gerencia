@@ -29,6 +29,7 @@ export class OrdersService extends AppHttpService {
     {
         var cart = this.get(),itemAux,exists = false;
         item.qtd = qtd;
+        item.complements = [];
         for (var index in cart.items){
             itemAux = cart.items[index];
             if (itemAux.id == item.id){
@@ -50,13 +51,11 @@ export class OrdersService extends AppHttpService {
     addComplement(complement,i){
         let cart = this.get(),itemAux = cart.items[i];
         let valor = 0;
-        for (var j in complement)
-        {
-            valor = valor + complement[j].price;
-        }
-        console.log('valor',valor);
-        itemAux.complements = complement;
-        itemAux.subtotal = itemAux.subtotal + valor;
+        valor = valor + complement.price;
+        itemAux.complements.push(complement);
+        console.log('valor',valor)
+        itemAux.subtotal += valor;
+        cart.total = this.getTotal(cart.items);
         localStorage.setItem(this.key,JSON.stringify(cart));
     }
 

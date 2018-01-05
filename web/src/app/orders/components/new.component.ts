@@ -291,11 +291,15 @@ export class NewComponent implements OnInit {
         this.httpService.builder()
             .view(id,'complement')
             .then((res)=>{
+            console.log(res.data)
+                let cart = this.httpService.get();
                 this.toasterService.pop('success','Sucesso','Adicionado complemento '+res.data.name);
                 if(this.complement[0].id == 0){
-                    this.complement[0] = res.data;
+                    this.httpService.addComplement(res, this.idItem);
+                    this.complement = res.data;
                 }else{
                     this.complement.push(res.data);
+                    this.httpService.addComplement(res.data, this.idItem);
                 }
             });
     }
@@ -304,6 +308,8 @@ export class NewComponent implements OnInit {
     {
         if(this.complement[0].id != 0){
             this.httpService.addComplement(this.complement,this.idItem);
+            this.items = this.httpService.get();
+            this.total = this.httpService.get().total;
             this.closeComplement();
         }
         else{
