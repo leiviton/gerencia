@@ -67,6 +67,7 @@ export class NewComponent implements OnInit {
           "updated_at":""
     }];
     idItem = 0;
+    idCom = 0;
     ngOnInit(): void {
         if(!this.cart)
         {
@@ -168,6 +169,14 @@ export class NewComponent implements OnInit {
         this.httpService.removeItem(i);
         this.total = this.httpService.get().total;
         this.items = this.httpService.get();
+        this.complement = [{
+            "id":0,
+            "name":"Sem complemento",
+            "price":0.0,
+            "ativo":"S",
+            "created_at":"",
+            "updated_at":""
+        }];
         this.toasterService.pop('info', 'Informação', 'Item removido.');
     }
 
@@ -291,16 +300,13 @@ export class NewComponent implements OnInit {
         this.httpService.builder()
             .view(id,'complement')
             .then((res)=>{
-            console.log(res.data)
                 let cart = this.httpService.get();
-                this.toasterService.pop('success','Sucesso','Adicionado complemento '+res.data.name);
                 if(this.complement[0].id == 0){
-                    this.httpService.addComplement(res, this.idItem);
-                    this.complement = res.data;
+                    this.complement[0] = res.data;
                 }else{
                     this.complement.push(res.data);
-                    this.httpService.addComplement(res.data, this.idItem);
                 }
+                this.toasterService.pop('success','Sucesso','Adicionado complemento '+res.data.name);
             });
     }
 
@@ -310,6 +316,14 @@ export class NewComponent implements OnInit {
             this.httpService.addComplement(this.complement,this.idItem);
             this.items = this.httpService.get();
             this.total = this.httpService.get().total;
+            this.complement = [{
+                "id":0,
+                "name":"Sem complemento",
+                "price":0.0,
+                "ativo":"S",
+                "created_at":"",
+                "updated_at":""
+            }];
             this.closeComplement();
         }
         else{

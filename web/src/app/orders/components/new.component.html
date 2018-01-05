@@ -58,7 +58,7 @@
                     </form>
                 </div>
                 <div class="row borderdiv">
-                    <div class="col-md-6 mb-4 padding" style="height: 380px; overflow: auto" *ngIf="tipo != 1">
+                    <div class="col-md-5 mb-4 padding" style="height: 380px; overflow: auto" *ngIf="tipo != 1">
                         <!-- Nav tabs -->
                         <tabset>
                             <tab heading="Cliente">
@@ -73,7 +73,7 @@
                                     <br><br>
                                     <input type="text" class="form-control col-md-3" name="address.numero" [(ngModel)]="client.address.numero" placeholder="Numero">
                                     <div class="separate1"></div>
-                                    <input type="text" class="form-control col-md-8" name="address.bairro" [(ngModel)]="client.address.bairro" placeholder="Bairro"/>
+                                    <input type="text" class="form-control col-md-7" name="address.bairro" [(ngModel)]="client.address.bairro" placeholder="Bairro"/>
                                     <br><br>
                                     <select name="cidade" id="cidade" class="form-control col-md-12" [(ngModel)]="client.address.city_id">
                                         <option value="0">Selecione cidade</option>
@@ -92,7 +92,7 @@
                             </tab>
                         </tabset>
                     </div><!--/.col-->
-                    <div class="col-lg-6 padding" [ngClass]="{'col-md-12 col-lg-12': tipo != 0 && tipo != 2, 'col-md-6 col-lg-6': tipo  != 1}">
+                    <div class="col-lg-7 padding" [ngClass]="{'col-md-12 col-lg-12': tipo != 0 && tipo != 2, 'col-md-7 col-lg-7': tipo  != 1}">
                         <div class="table-responsive" style="height: 245px; overflow: auto">
                             <table class="table scrollbox table-striped">
                                 <thead>
@@ -108,14 +108,14 @@
                                 <tbody>
                                     <tr class="th-table" *ngFor="let p of items.items; let i = index">
                                         <td class="text-center">{{ p.id }}</td>
-                                        <td>{{ p.name }} - com: <p *ngFor="let c of p.complements">{{ c.name }}</p></td>
+                                        <td>{{ p.name }}  <p *ngFor="let c of p.complements" style="font-size: 12px; margin-bottom: 0;"> Com - {{ c.name }}</p></td>
                                         <td class="text-center">{{ p.price | currency:'BRL':true }}</td>
                                         <td class="text-center">{{ p.qtd }}</td>
                                         <td class="text-center">{{ p.subtotal | currency:'BRL':true }}</td>
                                         <td class="text-center">
-                                            <button class="btn btn-sm btn-default" (click)="removeItem(i)"><i class="fa fa-remove text-danger"></i></button>
+                                            <button class="btn btn-sm btn-link" (click)="removeItem(i)"><i class="fa fa-remove text-danger"></i></button>
 
-                                            <button class="btn btn-sm btn-default" (click)="showComplement(i)"><i class="fa fa-plus text-info"></i></button>
+                                            <button class="btn btn-sm btn-link" *ngIf="idCom == 0" (click)="showComplement(i)"><i class="fa fa-plus text-info"></i></button>
                                         </td>
                                     </tr>
                                 </tbody>
