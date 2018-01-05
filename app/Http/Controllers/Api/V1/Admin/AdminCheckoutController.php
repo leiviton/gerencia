@@ -185,7 +185,7 @@ class AdminCheckoutController extends Controller
         {
             $produtos .= " <tr>
                             <td class='fonte padding'>".$value->product->id."</td>
-                            <td class='fonte padding'>".$value->product->name."</td>
+                            <td class='fonte padding'>".$value->product->name." - ".$value->historico."</td>
                             <td class='fonte padding'>".$value->qtd."</td>
                             <td class='fonte padding'>".$value->price."</td>
                             <td class='fonte padding'>".$value->subtotal."</td>
@@ -276,7 +276,7 @@ class AdminCheckoutController extends Controller
         {
             $produtos .= " <tr>
                             <td class='fonte padding'>".$value->product->id."</td>
-                            <td class='fonte padding'>".$value->product->name."</td>
+                            <td class='fonte padding'>".$value->product->name." - ".$value->historico."</td>
                             <td class='fonte padding'>".$value->qtd."</td>
                           </tr>";
             $this->itemRepository->update(['impresso'=>'S'],$value->id);
