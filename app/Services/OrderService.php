@@ -84,6 +84,7 @@ class OrderService{
             {
                 DB::insert('insert into order_items (id,product_id,order_id,price,qtd,subtotal) values(?,?,?,?,?,?)',[null,$taxa->id,$order->id,$taxa->price,1,$taxa->price]);
                 $mesa->status = 3;
+                $order->total += $taxa->price;
             }else{
                 $mesa->status = 1;
             }
