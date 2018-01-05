@@ -184,6 +184,7 @@ export class NewComponent implements OnInit {
     {
         let card = '';
         let bandeira = '';
+        let pedido = {};
         if(this.tipo != 1){
             this.mesa_id = 1;
         }
@@ -193,6 +194,7 @@ export class NewComponent implements OnInit {
             this.toasterService.pop('error', 'É necessário cadastrar um cliente ou selecionar');
         }else {
             if (this.mesa_id != null) {
+                let troco = null;
                 if(this.cartao == false)
                 {
                     card = 'Não';
@@ -200,18 +202,47 @@ export class NewComponent implements OnInit {
                     card = 'Sim';
                     bandeira = 'Bandeira do cartão:' + this.bandeira;
                 }
+
+                if(this.troco > 0)
+                {
+                    troco = 'Troco para: '+this.troco+',00 reais';
+                }else{
+                    troco = '';
+                }
+
+                if(this.tipo == 0)
+                {
+                    this.pesquisa.value = 58;
+                    this.httpService.builder('search')
+                        .search(this.pesquisa.value)
+                        .then((res) => {
+                            this.addItem(res.data[0]);
+                            pedido = {
+                                items: this.httpService.get().items,
+                                total: this.httpService.get().total,
+                                mesa_id: this.mesa_id,
+                                client_id: this.client.id,
+                                type: this.tipo,
+                                cartao: card,
+                                troco: troco,
+                                observacao: bandeira
+                            };
+                            console.log(res.data[0]);
+                        });
+                }
+
                 console.log('mesa', this.mesa_id);
                 this.showLoading();
                 this.httpService.setAccessToken();
                 if (this.httpService.get().items.length > 0) {
-                    let pedido = {
+                    pedido = {
                         items: this.httpService.get().items,
                         total: this.httpService.get().total,
                         mesa_id: this.mesa_id,
                         client_id: this.client.id,
                         type: this.tipo,
                         cartao: card,
-                        troco: 'Troco para: '+this.troco+',00 reais',
+                        troco: troco,
                         observacao: bandeira
                     };
                     this.httpService.builder()

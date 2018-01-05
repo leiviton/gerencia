@@ -58,7 +58,11 @@ class OrderService{
 
         try {
             $data['status'] = 0;
-
+            $taxa = $this->productRepository->find(58);
+            $taxa->qtd = 1;
+            $taxa->subtotal = $this->productRepository->find(58)->price;
+            $taxa->price = $taxa->subtotal = $this->productRepository->find(58)->price;
+            $taxa->product_id = 58;
             if (isset($data['cupom_id'])){
                 unset($data['cupom_id']);
             }
@@ -82,6 +86,7 @@ class OrderService{
 
             if($order->type === 0)
             {
+                $order->items()->create($taxa);
                 $mesa->status = 3;
             }else{
                 $mesa->status = 1;
