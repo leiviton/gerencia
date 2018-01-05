@@ -51,9 +51,11 @@ export class OrdersService extends AppHttpService {
     addComplement(complement,i){
         let cart = this.get(),itemAux = cart.items[i];
         let valor = 0;
+        itemAux.historico = '';
         for (let j in complement)
         {
             valor = valor + complement[j].price;
+            itemAux.historico += 'Com:'+ complement[j].name + ',';
         }
         console.log('valor',valor);
         itemAux.subtotal += valor;
