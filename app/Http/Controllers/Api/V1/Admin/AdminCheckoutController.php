@@ -181,17 +181,25 @@ class AdminCheckoutController extends Controller
 
         $contador = 0;
 
+        $taxa = '';
+
         foreach ($items as $value)
         {
-            $produtos .= " <tr>
-                            <td class='fonte padding'>".$value->product->id."</td>
-                            <td class='fonte padding'>".$value->product->name." - ".$value->historico."</td>
-                            <td class='fonte padding'>".$value->qtd."</td>
-                            <td class='fonte padding'>".$value->price."</td>
-                            <td class='fonte padding'>".$value->subtotal."</td>
+            if($value->id != 58) {
+                $produtos .= " <tr>
+                            <td class='fonte padding'>" . $value->product->id . "</td>
+                            <td class='fonte padding'>" . $value->product->name . " - " . $value->historico . "</td>
+                            <td class='fonte padding'>" . $value->qtd . "</td>
+                            <td class='fonte padding'>" . $value->price . "</td>
+                            <td class='fonte padding'>" . $value->subtotal . "</td>
                           </tr>";
-            $this->itemRepository->update(['impresso'=>'S'],$value->id);
-            $contador += $value->qtd;
+                $this->itemRepository->update(['impresso' => 'S'], $value->id);
+                $contador += $value->qtd;
+            }
+
+            if($value->id == 58){
+                $taxa = 'Taxa de entrega:'.$value->price;
+            }
         }
 
         $table = "<table>
@@ -245,6 +253,7 @@ class AdminCheckoutController extends Controller
                                 <h5 class='fonte'>TOTAL DA COMPRA: R$ $order->total</h5>
                                 <h5 class='fonte'>---------------------------------------------------------------------</h5>
                                 <h5 class='fonte'>$order->observacao</h5>
+                                <h5 class='fonte'>$taxa</h5>
                             </body>
                         </html>")->save(public_path().'/printer/'.$order->id.'.pdf');
 
@@ -272,15 +281,23 @@ class AdminCheckoutController extends Controller
 
         $contador = 0;
 
+        $taxa = '';
+
         foreach ($items as $value)
         {
-            $produtos .= " <tr>
-                            <td class='fonte padding'>".$value->product->id."</td>
-                            <td class='fonte padding'>".$value->product->name." - ".$value->historico."</td>
-                            <td class='fonte padding'>".$value->qtd."</td>
+            if($value->id != 58) {
+                $produtos .= " <tr>
+                            <td class='fonte padding'>" . $value->product->id . "</td>
+                            <td class='fonte padding'>" . $value->product->name . " - " . $value->historico . "</td>
+                            <td class='fonte padding'>" . $value->qtd . "</td>
                           </tr>";
-            $this->itemRepository->update(['impresso'=>'S'],$value->id);
-            $contador += $value->qtd;
+                $this->itemRepository->update(['impresso' => 'S'], $value->id);
+                $contador += $value->qtd;
+            }
+
+            if($value->id == 58){
+                $taxa = 'Taxa de entrega: '.$value->price ;
+            }
         }
 
         $table = "<table>
@@ -370,6 +387,7 @@ class AdminCheckoutController extends Controller
                                 <h5 class='fonte'>TOTAL DE ITENS: $contador</h5>
                                 <h5 class='fonte'>---------------------------------------------------------------------</h5>
                                 <h5 class='fonte'>$order->observacao</h5>
+                                <h5 class='fonte'>$taxa</h5>
                             </body>
                         </html>")->save(public_path() . '/printer/' . $order->id . '.pdf');
         }
