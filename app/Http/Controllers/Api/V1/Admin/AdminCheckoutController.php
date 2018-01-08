@@ -84,12 +84,22 @@ class AdminCheckoutController extends Controller
 
         $result = $this->productRepository->skipPresenter(false)
                        ->scopeQuery(function($query) use($pesquisa){
-                           $like = '%'.$pesquisa.'%';
                           return $query->where('status',0)
-                                       ->where('id',$pesquisa)
-                                       ->orWhere('name','like',$like);
+                                       ->where('id',$pesquisa);
                        })
                        ->all();
+
+        if(count($result->data) < 0)
+        {
+            $result = $this->productRepository->skipPresenter(false)
+                ->scopeQuery(function($query) use($pesquisa){
+                    $like = '%'.$pesquisa.'%';
+                    return $query->where('status',0)
+                        ->where('id',$pesquisa)
+                        ->orWhere('name','like',$like);
+                })
+                ->all();
+        }
         return $result;
     }
 
@@ -198,7 +208,7 @@ class AdminCheckoutController extends Controller
             }
 
             if($value->product->id == 58){
-                $taxa = 'Taxa de entrega:'.$value->product->price;
+                $taxa = 'Taxa de entrega: R$ '.$value->product->price;
             }
         }
 
@@ -296,7 +306,7 @@ class AdminCheckoutController extends Controller
             }
 
             if($value->product->id == 58){
-                $taxa = 'Taxa de entrega: '.$value->product->price ;
+                $taxa = 'Taxa de entrega: R$'.$value->product->price ;
             }
         }
 
