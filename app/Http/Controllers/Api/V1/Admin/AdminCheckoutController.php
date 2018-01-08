@@ -178,13 +178,13 @@ class AdminCheckoutController extends Controller
     {
         $order = $this->repository->find($id);
 
-        $data = date_format($order->created_at,'d/m/Y');
+        $data = date_format($order->created_at, 'd/m/Y');
 
-        $hora = date_format($order->created_at,'H:i:s');
+        $hora = date_format($order->created_at, 'H:i:s');
 
         $items = $this->itemRepository
-            ->scopeQuery(function($query) use($id){
-                return $query->where('order_id',$id)->where('impresso','N');
+            ->scopeQuery(function ($query) use ($id) {
+                return $query->where('order_id', $id)->where('impresso', 'N');
             })->all();
 
         $produtos = '';
@@ -193,9 +193,8 @@ class AdminCheckoutController extends Controller
 
         $taxa = '';
 
-        foreach ($items as $value)
-        {
-            if($value->product->id != 58) {
+        foreach ($items as $value) {
+            if ($value->product->id != 58) {
                 $produtos .= " <tr>
                             <td class='fonte padding'>" . $value->product->id . "</td>
                             <td class='fonte padding'>" . $value->product->name . " - " . $value->historico . "</td>
@@ -207,8 +206,8 @@ class AdminCheckoutController extends Controller
                 $contador += $value->qtd;
             }
 
-            if($value->product->id == 58){
-                $taxa = 'Taxa de entrega: R$ '.$value->product->price;
+            if ($value->product->id == 58) {
+                $taxa = 'Taxa de entrega: R$ ' . $value->product->price;
             }
         }
 
@@ -229,6 +228,18 @@ class AdminCheckoutController extends Controller
 
         $pdf = App::make('dompdf.wrapper');
 
+        if ($order->type != 1)
+        {
+            $cliente = "<h5 class='fonte'>Cliente: ".$order->client->name."</h5>
+                                <h5 class='fonte'>Endereço: ".$order->client->addressClient->address.",".$order->client->addressClient->numero."</h5>
+                                <h5 class='fonte'>Complemento: ".$order->client->addressClient->complemento."</h5>
+                                <h5 class='fonte'>Bairro: ".$order->client->addressClient->bairro."</h5>
+                                <h5 class='fonte'>Cidade: Guaxupé UF: MG</h5>
+                                <h5 class='fonte'>---------------------------------------------------------------------</h5>
+                                ";
+        }else{
+            $cliente = "<h5 class='fonte'>---------------------------------------------------------------------</h5>";
+        }
         $pdf->loadHTML("<html>
                             <head>
                                 <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>
@@ -250,12 +261,7 @@ class AdminCheckoutController extends Controller
                                 <h5 class='fonte'>Pedido: $order->id | Mesa: ".$order->mesa->name."</h5>
                                 <h5 class='fonte'>Data: $data | Hora: $hora</h5>                              
                                 <h5 class='fonte'>---------------------------------------------------------------------</h5>
-                                <h5 class='fonte'>Cliente: ".$order->client->name."</h5>
-                                <h5 class='fonte'>Endereço: ".$order->client->addressClient->address.",".$order->client->addressClient->numero."</h5>
-                                <h5 class='fonte'>Complemento: ".$order->client->addressClient->complemento."</h5>
-                                <h5 class='fonte'>Bairro: ".$order->client->addressClient->bairro."</h5>
-                                <h5 class='fonte'>Cidade: Guaxupé UF: MG</h5>
-                                <h5 class='fonte'>---------------------------------------------------------------------</h5>
+                                $cliente
                                 <h5 class='fonte'>ITENS:</h5>
                                 $table
                                 <h5 class='fonte'>---------------------------------------------------------------------</h5>
