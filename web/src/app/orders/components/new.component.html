@@ -113,9 +113,9 @@
                                         <td class="text-center">{{ p.qtd }}</td>
                                         <td class="text-center">{{ p.subtotal | currency:'BRL':true }}</td>
                                         <td class="text-center">
-                                            <button class="btn btn-sm btn-link" (click)="removeItem(i)"><i class="fa fa-remove text-danger"></i></button>
+                                            <button class="btn btn-sm btn-link" (click)="removeItem(i)" tooltip="Remover do pedido"><i class="fa fa-remove text-danger"></i></button>
 
-                                            <button class="btn btn-sm btn-link" *ngIf="idCom == 0" (click)="showComplement(i)"><i class="fa fa-plus text-info"></i></button>
+                                            <button class="btn btn-sm btn-link" *ngIf="idCom == 0" (click)="showComplement(i)" tooltip="Gerenciar complementos"><i class="fa fa-plus text-info"></i></button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -164,7 +164,7 @@
                 </div>
                 <div class="modal-footer cadastro">
                     <div class="modal-button">
-                        <button class="btn btn-info" (click)="saveComplement()"><i class="fa fa-save"></i> Salvar pedido (F9)</button>
+                        <button class="btn btn-info" (click)="saveComplement()"><i class="fa fa-save"></i> Salvar</button>
                         <button class="btn btn-danger text-left" type="button" (click)="closeComplement()"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
                     </div>
                 </div>

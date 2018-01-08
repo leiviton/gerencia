@@ -136,3 +136,10 @@
   background-color: #9ff3bc;
   border-color: #3ba05e;
 }
+
+.truncate{
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

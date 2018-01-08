@@ -67,6 +67,17 @@ class AdminCheckoutController extends Controller
         $this->complementRepository = $complementRepository;
     }
 
+    public function orders(Request $request)
+    {
+
+        $status = $request->get('status');
+        return $this->repository->skipPresenter(false)
+            ->scopeQuery(function($query) use($status){
+                return $query->where('status',$status);
+            })
+            ->all();
+    }
+
     public function store(CheckoutRequest $request){
         $data = $request->all();
         $o = $this->orderService->create($data);

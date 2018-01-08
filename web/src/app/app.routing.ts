@@ -43,6 +43,10 @@ export const routes: Routes = [
         loadChildren: './orders/orders.module#OrdersModule',
       },
         {
+            path: 'close',
+            loadChildren: './close/orders-close.module#OrdersCloseModule',
+        },
+        {
             path: 'cadastro/produtos',
             loadChildren: './cadastro/produtos/produtos.module#ProdutosModule',
         }

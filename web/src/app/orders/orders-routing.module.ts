@@ -13,6 +13,8 @@ import { PrinterComponent} from "./components/printer.component";
 
 import { ComplementComponent } from "./components/complement.component";
 
+import { OrdersCloseComponent } from "./components/orders-close.component"
+
 const routes: Routes = [
   {
     path: '',
@@ -59,6 +61,13 @@ const routes: Routes = [
               }
           }
       ]
+  },
+  {
+     path:"orders/close",
+     component: OrdersCloseComponent,
+     data: {
+         title: 'Pedidos fechados'
+     }
   }
 ];
 

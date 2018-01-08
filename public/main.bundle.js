@@ -25,7 +25,7 @@ var map = {
 		"icons.module"
 	],
 	"./orders/orders.module": [
-		"../../../../../src/app/orders/orders.module.ts",
+		"../../../../../src/app/orders/orders-close.module.ts",
 		"orders.module"
 	],
 	"./pages/pages.module": [

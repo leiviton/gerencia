@@ -23,8 +23,8 @@
                   </tr>
                   <tr *ngFor="let o of produtos.data" (dblclick)="edit(o.id)">
                     <td class="text-center">{{ o.id }}</td>
-                    <td>{{ o.name }}</td>
-                    <td>{{ o.description }} </td>
+                    <td>{{ o.name | slice:0:35 }}</td>
+                    <td>{{ o.description | slice:0:85 }}... </td>
                     <td>{{ o.category.data.name}}</td>
                     <td class="text-center">{{ o.price | currency:'BRL':true }}</td>
                   </tr>
