@@ -89,7 +89,7 @@ class AdminCheckoutController extends Controller
                        })
                        ->all();
 
-        if(count($result) < 0)
+        if(count($result['data']) == 0)
         {
             $result = $this->productRepository->skipPresenter(false)
                 ->scopeQuery(function($query) use($pesquisa){
