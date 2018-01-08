@@ -356,6 +356,7 @@ class AdminCheckoutController extends Controller
                                     <h5 class='fonte'>---------------------------------------------------------------------</h5>
                                     <h5 class='fonte'>$order->observacao</h5>
                                     <h5 class='fonte'>$order->troco</h5>
+                                    <h5 class='fonte'>$taxa</h5>
                                 </div>
                             </body>
                         </html>")->save(public_path() . '/printer/' . $order->id . '.pdf');
