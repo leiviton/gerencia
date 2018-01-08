@@ -185,7 +185,7 @@ class AdminCheckoutController extends Controller
 
         foreach ($items as $value)
         {
-            if($value->id != 58) {
+            if($value->product->id != 58) {
                 $produtos .= " <tr>
                             <td class='fonte padding'>" . $value->product->id . "</td>
                             <td class='fonte padding'>" . $value->product->name . " - " . $value->historico . "</td>
@@ -197,7 +197,7 @@ class AdminCheckoutController extends Controller
                 $contador += $value->qtd;
             }
 
-            if($value->id == 58){
+            if($value->product->id == 58){
                 $taxa = 'Taxa de entrega:'.$value->price;
             }
         }
@@ -285,7 +285,7 @@ class AdminCheckoutController extends Controller
 
         foreach ($items as $value)
         {
-            if($value->id != 58) {
+            if($value->product->id != 58) {
                 $produtos .= " <tr>
                             <td class='fonte padding'>" . $value->product->id . "</td>
                             <td class='fonte padding'>" . $value->product->name . " - " . $value->historico . "</td>
@@ -295,7 +295,7 @@ class AdminCheckoutController extends Controller
                 $contador += $value->qtd;
             }
 
-            if($value->id == 58){
+            if($value->product->id == 58){
                 $taxa = 'Taxa de entrega: '.$value->price ;
             }
         }
