@@ -198,7 +198,7 @@ class AdminCheckoutController extends Controller
             }
 
             if($value->product->id == 58){
-                $taxa = 'Taxa de entrega:'.$value->price;
+                $taxa = 'Taxa de entrega:'.$value->product->price;
             }
         }
 
@@ -296,7 +296,7 @@ class AdminCheckoutController extends Controller
             }
 
             if($value->product->id == 58){
-                $taxa = 'Taxa de entrega: '.$value->price ;
+                $taxa = 'Taxa de entrega: '.$value->product->price ;
             }
         }
 
