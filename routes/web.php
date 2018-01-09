@@ -49,7 +49,7 @@ Route::group(['prefix'=>'api/v1','middleware' => 'auth:api'],function () {
        Route::get('printer/new/{id}', 'AdminCheckoutController@printerNewItem');
        Route::get('complements', 'AdminCheckoutController@getComplements');
        Route::get('complement/{id}', 'AdminCheckoutController@getComplement');
-        Route::get('orders/gerencia', 'AdminCheckoutController@orders');
+        Route::get('close', 'AdminCheckoutController@orders');
     });
     Route::get('user','Api\UserController@authenticated');
 });

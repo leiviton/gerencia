@@ -38,7 +38,7 @@ export class OrdersCloseComponent implements OnInit {
       this.httpService.setAccessToken();
       this.httpService.eventEmitter
           .subscribe(() => {
-              this.httpService.builder().list({}, 'orders/gerencia/?status='+1)
+              this.httpService.builder().list({}, 'close?status=3')
                   .then((res) => {
                       this.orders = res;
                       this.tamanho = res.data.length;
