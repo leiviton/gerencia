@@ -56,7 +56,7 @@ class ClientService
             $client['user_id'] = $user->id;
             $client['name'] = $data['name'];
             $client['phone'] = $data['phone'];
-            $client['address'] = $address->address.', '.$address->numero.', '.$address->bairro.' - '.$address->city;
+            $client['address'] = $address->address.', '.$address->numero.', '.$address->bairro.' - '.$address->city->city;
             $client['status'] = 0;
             $client['address_client_id'] = $address->id;
             $result = $this->clientRepository->create($client);
