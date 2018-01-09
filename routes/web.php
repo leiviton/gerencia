@@ -28,28 +28,34 @@ Route::group(['prefix'=>'api/v1','middleware' => 'auth:api'],function () {
     });
 
     Route::group(['prefix' => 'admin','namespace'=>'Api\V1\Admin'],function (){
+        /*pedidos*/
        Route::post('order','AdminCheckoutController@store');
        Route::post('addItem','AdminCheckoutController@addItem');
+       Route::get('mesas', 'AdminCheckoutController@getMesas');
+       Route::get('mesas/livres', 'AdminCheckoutController@getMesasLivre');
+       Route::get('search','AdminCheckoutController@search');
+       Route::post('payment','AdminCheckoutController@payment');
+       Route::get('typepayment', 'AdminCheckoutController@getTypePayments');
+       Route::put('order/{id}', 'AdminCheckoutController@update');
+       Route::get('printer/{id}', 'AdminCheckoutController@printer');
+       Route::get('printer/new/{id}', 'AdminCheckoutController@printerNewItem');
+       Route::get('complements', 'AdminCheckoutController@getComplements');
+       Route::get('complement/{id}', 'AdminCheckoutController@getComplement');
+       Route::get('close', 'AdminCheckoutController@orders');
+        /*produtos*/
        Route::get('groups','CategoriesController@index');
        Route::get('subgroups','SubgroupsController@index');
        Route::get('products', 'ProductsController@index');
        Route::get('product/{id}', 'ProductsController@edit');
        Route::post('product/store', 'ProductsController@store');
        Route::put('product/{id}', 'ProductsController@update');
-       Route::get('search','AdminCheckoutController@search');
-       Route::get('mesas', 'AdminCheckoutController@getMesas');
-       Route::get('mesas/livres', 'AdminCheckoutController@getMesasLivre');
+       /*user*/
        Route::get('auth/logout','AuthController@logout');
-       Route::post('payment','AdminCheckoutController@payment');
-       Route::get('typepayment', 'AdminCheckoutController@getTypePayments');
+       /*clients*/
        Route::get('search/client','ClientsController@search');
+       Route::get('clients','ClientsController@index');
        Route::post('client', 'ClientsController@store');
-       Route::put('order/{id}', 'AdminCheckoutController@update');
-       Route::get('printer/{id}', 'AdminCheckoutController@printer');
-       Route::get('printer/new/{id}', 'AdminCheckoutController@printerNewItem');
-       Route::get('complements', 'AdminCheckoutController@getComplements');
-       Route::get('complement/{id}', 'AdminCheckoutController@getComplement');
-        Route::get('close', 'AdminCheckoutController@orders');
+       Route::get('client/{id}','ClientsController@edit');
     });
     Route::get('user','Api\UserController@authenticated');
 });

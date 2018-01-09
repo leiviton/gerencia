@@ -33,10 +33,12 @@
           Gerencia
         </li>
         <li class="nav-item nav-dropdown" routerLinkActive="open" appNavDropdown>
-          <a class="nav-link nav-dropdown-toggle" href="#" appNavDropdownToggle><i class="fa fa-edit"></i> Pedidos</a>
+          <a class="nav-link nav-dropdown-toggle" href="#" appNavDropdownToggle><i class="fa fa-edit"></i> Gerenciar pedidos</a>
           <ul class="nav-dropdown-items">
             <li class="nav-item">
-              <a class="nav-link" routerLinkActive="active" [routerLink]="['/orders']"><i class="fa fa-edit"></i> Gerenciar pedidos</a>
+              <a class="nav-link" routerLinkActive="active" [routerLink]="['/orders']"><i class="fa fa-edit"></i> Pedidos</a>
+
+              <a class="nav-link" routerLinkActive="active" [routerLink]="['/close']"><i class="fa fa-edit"></i> Pedidos fechados</a>
             </li>
           </ul>
         </li>
@@ -48,10 +50,19 @@
           <a class="nav-link nav-dropdown-toggle" href="#" appNavDropdownToggle><i class="fa fa-product-hunt"></i> Produtos</a>
           <ul class="nav-dropdown-items">
             <li class="nav-item">
-              <a class="nav-link" routerLinkActive="active" [routerLink]="['/cadastro/produtos']"><i class="fa fa-plus"></i> Produtos</a>
+              <a class="nav-link" routerLinkActive="active" [routerLink]="['/cadastro/produtos']"><i class="fa fa-plus"></i> Gerenciar Produtos</a>
             </li>
           </ul>
         </li>
+        <li class="nav-item nav-dropdown" appNavDropdown>
+          <a class="nav-link nav-dropdown-toggle" href="#" appNavDropdownToggle><i class="fa fa-check-square"></i> Clientes</a>
+          <ul class="nav-dropdown-items">
+            <li class="nav-item">
+              <a class="nav-link" routerLinkActive="active" [routerLink]="['/cadastro/clients']"><i class="fa fa-plus"></i> Gerenciar Clientes</a>
+            </li>
+          </ul>
+        </li>
+
         <li class="nav-item nav-dropdown" appNavDropdown *ngIf="user.role === 'admin'">
           <a class="nav-link nav-dropdown-toggle" href="#" appNavDropdownToggle><i class="fa fa-user"></i> Usuários</a>
           <ul class="nav-dropdown-items">

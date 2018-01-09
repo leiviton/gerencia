@@ -5,7 +5,7 @@ webpackJsonp(["main"],{
 
 var map = {
 	"./cadastro/produtos/produtos.module": [
-		"../../../../../src/app/cadastro/produtos/produtos.module.ts",
+		"../../../../../src/app/cadastro/produtos/clients.module.ts",
 		"produtos.module"
 	],
 	"./chartjs/chartjs.module": [

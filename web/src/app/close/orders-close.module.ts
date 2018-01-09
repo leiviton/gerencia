@@ -17,6 +17,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { CurrencyMaskModule } from "ng2-currency-mask";
 import { NgxPhoneMaskModule } from 'ngx-phone-mask';
 import {PrinterComponent} from "./components/printer.component";
+import { EditComponent} from "./components/edit.component";
 
 
 @NgModule({
@@ -32,7 +33,7 @@ import {PrinterComponent} from "./components/printer.component";
       CurrencyMaskModule,
       NgxPhoneMaskModule,
   ],
-  declarations: [ OrdersCloseComponent,PaymentComponent,PrinterComponent ],
+  declarations: [ OrdersCloseComponent,PaymentComponent,PrinterComponent,EditComponent ],
   providers: [ OrdersService, BsModalService ]
 })
 export class OrdersCloseModule { }

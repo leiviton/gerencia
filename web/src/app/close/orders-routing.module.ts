@@ -8,6 +8,8 @@ import { PaymentComponent } from "./components/payment.component";
 
 import { PrinterComponent} from "./components/printer.component";
 
+import { EditComponent} from "./components/edit.component";
+
 
 const routes: Routes = [
   {
@@ -15,7 +17,16 @@ const routes: Routes = [
     component: OrdersCloseComponent,
     data: {
       title: 'Pedidos Fechados'
-    }
+    },
+      children: [
+          {
+              path: 'edit/:id',
+              component: EditComponent,
+              data: {
+                  title: 'Editar'
+              }
+          }
+      ]
   }
 ];
 

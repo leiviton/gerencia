@@ -18,30 +18,14 @@ export const routes: Routes = [
       title: 'Home'
     },
     children: [
-      {
-        path: 'dashboard',
-        loadChildren: './dashboard/dashboard.module#DashboardModule'
-      },
-      {
-        path: 'components',
-        loadChildren: './components/components.module#ComponentsModule'
-      },
-      {
-        path: 'icons',
-        loadChildren: './icons/icons.module#IconsModule'
-      },
-      {
-        path: 'widgets',
-        loadChildren: './widgets/widgets.module#WidgetsModule'
-      },
-      {
-        path: 'charts',
-        loadChildren: './chartjs/chartjs.module#ChartJSModule'
-      },
-      {
-        path: 'orders',
-        loadChildren: './orders/orders.module#OrdersModule',
-      },
+        {
+            path: 'dashboard',
+            loadChildren: './dashboard/dashboard.module#DashboardModule'
+        },
+        {
+            path: 'orders',
+            loadChildren: './orders/orders.module#OrdersModule',
+        },
         {
             path: 'close',
             loadChildren: './close/orders-close.module#OrdersCloseModule',
@@ -49,8 +33,11 @@ export const routes: Routes = [
         {
             path: 'cadastro/produtos',
             loadChildren: './cadastro/produtos/produtos.module#ProdutosModule',
-        }
-        ,
+        },
+        {
+            path: 'cadastro/clients',
+            loadChildren: './cadastro/clients/clients.module#ClientsModule',
+        },
         {
             path: 'user',
             loadChildren: './user/user.module#UserModule',
