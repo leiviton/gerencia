@@ -38,11 +38,13 @@ class ClientService
     }
 
     public function update(array $data,$id){
-        $this->clientRepository->update($data, $id);
+        $client['name'] = $data['name'];
+        $client['phone'] = $data['phone'];
+        $this->clientRepository->update($client, $id);
 
-        $userId = $this->clientRepository->find($id, ['user_id'])->user_id;
+        //$userId = $this->clientRepository->find($id, ['user_id'])->user_id;
 
-        $this->userRepository->update($data['user'], $userId);
+        //$this->userRepository->update($data['user'], $userId);
     }
 
     public function create($data){
