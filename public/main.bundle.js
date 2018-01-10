@@ -4,29 +4,28 @@ webpackJsonp(["main"],{
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
+	"./cadastro/clients/clients.module": [
+		"../../../../../src/app/cadastro/clients/clients.module.ts",
+		"clients.module",
+		"common"
+	],
 	"./cadastro/produtos/produtos.module": [
-		"../../../../../src/app/cadastro/produtos/clients.module.ts",
+		"../../../../../src/app/cadastro/produtos/produtos.module.ts",
 		"produtos.module"
 	],
-	"./chartjs/chartjs.module": [
-		"../../../../../src/app/chartjs/chartjs.module.ts",
-		"chartjs.module"
-	],
-	"./components/components.module": [
-		"../../../../../src/app/components/components.module.ts",
-		"components.module"
+	"./close/orders-close.module": [
+		"../../../../../src/app/close/orders-close.module.ts",
+		"orders-close.module",
+		"common"
 	],
 	"./dashboard/dashboard.module": [
 		"../../../../../src/app/dashboard/dashboard.module.ts",
 		"dashboard.module"
 	],
-	"./icons/icons.module": [
-		"../../../../../src/app/icons/icons.module.ts",
-		"icons.module"
-	],
 	"./orders/orders.module": [
-		"../../../../../src/app/orders/orders-close.module.ts",
-		"orders.module"
+		"../../../../../src/app/orders/orders.module.ts",
+		"orders.module",
+		"common"
 	],
 	"./pages/pages.module": [
 		"../../../../../src/app/pages/pages.module.ts",
@@ -37,10 +36,6 @@ var map = {
 		"../../../../../src/app/user/user.module.ts",
 		"user.module",
 		"common"
-	],
-	"./widgets/widgets.module": [
-		"../../../../../src/app/widgets/widgets.module.ts",
-		"widgets.module"
 	]
 };
 function webpackAsyncContext(req) {
@@ -389,28 +384,20 @@ var routes = [
                 loadChildren: './dashboard/dashboard.module#DashboardModule'
             },
             {
-                path: 'components',
-                loadChildren: './components/components.module#ComponentsModule'
-            },
-            {
-                path: 'icons',
-                loadChildren: './icons/icons.module#IconsModule'
-            },
-            {
-                path: 'widgets',
-                loadChildren: './widgets/widgets.module#WidgetsModule'
-            },
-            {
-                path: 'charts',
-                loadChildren: './chartjs/chartjs.module#ChartJSModule'
-            },
-            {
                 path: 'orders',
                 loadChildren: './orders/orders.module#OrdersModule',
             },
             {
+                path: 'close',
+                loadChildren: './close/orders-close.module#OrdersCloseModule',
+            },
+            {
                 path: 'cadastro/produtos',
                 loadChildren: './cadastro/produtos/produtos.module#ProdutosModule',
+            },
+            {
+                path: 'cadastro/clients',
+                loadChildren: './cadastro/clients/clients.module#ClientsModule',
             },
             {
                 path: 'user',
@@ -464,7 +451,7 @@ var AppRoutingModule = (function () {
 /***/ "../../../../../src/app/layouts/full-layout.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<header class=\"app-header navbar\" *ngIf=\"user !== '' && user !== null\" [ngClass]=\"{'fundo': !user || user == '' || user == null}\">\n  <button class=\"navbar-toggler d-lg-none\" type=\"button\" appMobileSidebarToggler>&#9776;</button>\n  <a class=\"navbar-brand logo\" href=\"#\"></a>\n  <button class=\"navbar-toggler d-md-down-none\" type=\"button\" appSidebarToggler>&#9776;</button>\n  <ul class=\"nav navbar-nav ml-auto\">\n    <li class=\"nav-item dropdown\" dropdown (onToggle)=\"toggled($event)\">\n      <a href class=\"nav-link dropdown-toggle\" dropdownToggle (click)=\"false\">\n        <img src=\"../../assets/img/logo_eguis.png\" class=\"img-avatar\" alt=\"{{ user.email }}\">\n        <span class=\"d-md-down-none\"></span>\n      </a>\n      <div class=\"dropdown-menu dropdown-menu-right\" *dropdownMenu aria-labelledby=\"simple-dropdown\">\n\n        <div class=\"dropdown-header text-center\"><i class=\"fa fa-user\"></i> <strong>{{ user.name }}</strong></div>\n        <a class=\"dropdown-item\" href=\"#\"><i class=\"fa fa-bell-o\"></i> Trocar senha</a>\n        <a class=\"dropdown-item\" [routerLink]=\"['/user/logout']\"><i class=\"fa fa-power-off\"></i> Sair</a>\n      </div>\n    </li>\n  </ul>\n</header>\n\n<header class=\"app-header navbar\" *ngIf=\"user == '' && user == null || !user\" [ngClass]=\"{'fundo': !user || user == '' || user == null}\">\n</header>\n\n<div class=\"app-body\" [ngClass]=\"{'fundo': !user || user == '' || user == null}\">\n  <div class=\"sidebar\" *ngIf=\"user !== '' && user !== null\">\n    <nav class=\"sidebar-nav\">\n      <ul class=\"nav\">\n        <li class=\"nav-item\">\n          <a class=\"nav-link\" routerLinkActive=\"active\" [routerLink]=\"['/dashboard']\"><i class=\"icon-speedometer\"></i> Dashboard </a>\n        </li>\n        <li class=\"divider\"></li>\n        <li class=\"nav-title\">\n          Gerencia\n        </li>\n        <li class=\"nav-item nav-dropdown\" routerLinkActive=\"open\" appNavDropdown>\n          <a class=\"nav-link nav-dropdown-toggle\" href=\"#\" appNavDropdownToggle><i class=\"fa fa-edit\"></i> Pedidos</a>\n          <ul class=\"nav-dropdown-items\">\n            <li class=\"nav-item\">\n              <a class=\"nav-link\" routerLinkActive=\"active\" [routerLink]=\"['/orders']\"><i class=\"fa fa-edit\"></i> Gerenciar pedidos</a>\n            </li>\n          </ul>\n        </li>\n        <li class=\"divider\"></li>\n        <li class=\"nav-title\">\n          Cadastros\n        </li>\n        <li class=\"nav-item nav-dropdown\" appNavDropdown>\n          <a class=\"nav-link nav-dropdown-toggle\" href=\"#\" appNavDropdownToggle><i class=\"fa fa-product-hunt\"></i> Produtos</a>\n          <ul class=\"nav-dropdown-items\">\n            <li class=\"nav-item\">\n              <a class=\"nav-link\" routerLinkActive=\"active\" [routerLink]=\"['/cadastro/produtos']\"><i class=\"fa fa-plus\"></i> Produtos</a>\n            </li>\n          </ul>\n        </li>\n        <li class=\"nav-item nav-dropdown\" appNavDropdown *ngIf=\"user.role === 'admin'\">\n          <a class=\"nav-link nav-dropdown-toggle\" href=\"#\" appNavDropdownToggle><i class=\"fa fa-user\"></i> Usuários</a>\n          <ul class=\"nav-dropdown-items\">\n            <li class=\"nav-item\">\n              <a class=\"nav-link\" routerLinkActive=\"active\" [routerLink]=\"['/pages/login']\"><i class=\"fa fa-user-plus\"></i> Usuários <span class=\"badge badge-info\">Novo</span></a>\n            </li>\n          </ul>\n        </li>\n        <li class=\"divider\"></li>\n        <li class=\"nav-title\" *ngIf=\"user.role == 'admin'\">\n          Financeiro\n        </li>\n        <li class=\"nav-item nav-dropdown\" appNavDropdown *ngIf=\"user.role == 'admin'\">\n          <a class=\"nav-link nav-dropdown-toggle\" href=\"#\" appNavDropdownToggle><i class=\"fa fa-credit-card\"></i> Caixa</a>\n          <ul class=\"nav-dropdown-items\">\n            <li class=\"nav-item\">\n              <a class=\"nav-link\" routerLinkActive=\"active\" [routerLink]=\"['/dashboard']\"><i class=\"fa fa-credit-card\"></i> Abrir / Fechar Caixa</a>\n            </li>\n            <li class=\"nav-item\">\n              <a class=\"nav-link\" routerLinkActive=\"active\" [routerLink]=\"['/dashboard']\"><i class=\"fa fa-credit-card\"></i> Movimento de Caixa</a>\n            </li>\n          </ul>\n        </li>\n      </ul>\n    </nav>\n  </div>\n\n  <!-- Main content -->\n  <main class=\"main\">\n    <div class=\"container-fluid\" style=\"padding: 15px\">\n      <router-outlet></router-outlet>\n    </div><!-- /.conainer-fluid -->\n  </main>\n</div>\n\n<footer class=\"app-footer\" *ngIf=\"user !== '' && user !== null\">\n  <span class=\"float-center\">Versão: 1.12.8.17</span>\n  <span class=\"float-right\">\n    <a href=\"http://leiviton.com.br\">Gerencia Pedidos</a> &copy; {{ ano }} | Powered by\n    <a href=\"http://leiviton.com.br\">Leiviton Software</a>\n  </span>\n</footer>\n"
+module.exports = "<header class=\"app-header navbar\" *ngIf=\"user !== '' && user !== null\" [ngClass]=\"{'fundo': !user || user == '' || user == null}\">\n  <button class=\"navbar-toggler d-lg-none\" type=\"button\" appMobileSidebarToggler>&#9776;</button>\n  <a class=\"navbar-brand logo\" href=\"#\"></a>\n  <button class=\"navbar-toggler d-md-down-none\" type=\"button\" appSidebarToggler>&#9776;</button>\n  <ul class=\"nav navbar-nav ml-auto\">\n    <li class=\"nav-item dropdown\" dropdown (onToggle)=\"toggled($event)\">\n      <a href class=\"nav-link dropdown-toggle\" dropdownToggle (click)=\"false\">\n        <img src=\"../../assets/img/logo_eguis.png\" class=\"img-avatar\" alt=\"{{ user.email }}\">\n        <span class=\"d-md-down-none\"></span>\n      </a>\n      <div class=\"dropdown-menu dropdown-menu-right\" *dropdownMenu aria-labelledby=\"simple-dropdown\">\n\n        <div class=\"dropdown-header text-center\"><i class=\"fa fa-user\"></i> <strong>{{ user.name }}</strong></div>\n        <a class=\"dropdown-item\" href=\"#\"><i class=\"fa fa-bell-o\"></i> Trocar senha</a>\n        <a class=\"dropdown-item\" [routerLink]=\"['/user/logout']\"><i class=\"fa fa-power-off\"></i> Sair</a>\n      </div>\n    </li>\n  </ul>\n</header>\n\n<header class=\"app-header navbar\" *ngIf=\"user == '' && user == null || !user\" [ngClass]=\"{'fundo': !user || user == '' || user == null}\">\n</header>\n\n<div class=\"app-body\" [ngClass]=\"{'fundo': !user || user == '' || user == null}\">\n  <div class=\"sidebar\" *ngIf=\"user !== '' && user !== null\">\n    <nav class=\"sidebar-nav\">\n      <ul class=\"nav\">\n        <li class=\"nav-item\">\n          <a class=\"nav-link\" routerLinkActive=\"active\" [routerLink]=\"['/dashboard']\"><i class=\"icon-speedometer\"></i> Dashboard </a>\n        </li>\n        <li class=\"divider\"></li>\n        <li class=\"nav-title\">\n          Gerencia\n        </li>\n        <li class=\"nav-item nav-dropdown\" routerLinkActive=\"open\" appNavDropdown>\n          <a class=\"nav-link nav-dropdown-toggle\" href=\"#\" appNavDropdownToggle><i class=\"fa fa-edit\"></i> Gerenciar pedidos</a>\n          <ul class=\"nav-dropdown-items\">\n            <li class=\"nav-item\">\n              <a class=\"nav-link\" routerLinkActive=\"active\" [routerLink]=\"['/orders']\"><i class=\"fa fa-edit\"></i> Pedidos</a>\n\n              <a class=\"nav-link\" routerLinkActive=\"active\" [routerLink]=\"['/close']\"><i class=\"fa fa-edit\"></i> Pedidos fechados</a>\n            </li>\n          </ul>\n        </li>\n        <li class=\"divider\"></li>\n        <li class=\"nav-title\">\n          Cadastros\n        </li>\n        <li class=\"nav-item nav-dropdown\" appNavDropdown>\n          <a class=\"nav-link nav-dropdown-toggle\" href=\"#\" appNavDropdownToggle><i class=\"fa fa-product-hunt\"></i> Produtos</a>\n          <ul class=\"nav-dropdown-items\">\n            <li class=\"nav-item\">\n              <a class=\"nav-link\" routerLinkActive=\"active\" [routerLink]=\"['/cadastro/produtos']\"><i class=\"fa fa-plus\"></i> Gerenciar Produtos</a>\n            </li>\n          </ul>\n        </li>\n        <li class=\"nav-item nav-dropdown\" appNavDropdown>\n          <a class=\"nav-link nav-dropdown-toggle\" href=\"#\" appNavDropdownToggle><i class=\"fa fa-check-square\"></i> Clientes</a>\n          <ul class=\"nav-dropdown-items\">\n            <li class=\"nav-item\">\n              <a class=\"nav-link\" routerLinkActive=\"active\" [routerLink]=\"['/cadastro/clients']\"><i class=\"fa fa-plus\"></i> Gerenciar Clientes</a>\n            </li>\n          </ul>\n        </li>\n        <li class=\"divider\"></li>\n        <li class=\"nav-title\">\n          Controle de acessos\n        </li>\n        <li class=\"nav-item nav-dropdown\" appNavDropdown *ngIf=\"user.role === 'admin'\">\n          <a class=\"nav-link nav-dropdown-toggle\" href=\"#\" appNavDropdownToggle><i class=\"fa fa-user\"></i> Usuários</a>\n          <ul class=\"nav-dropdown-items\">\n            <li class=\"nav-item\">\n              <a class=\"nav-link\" routerLinkActive=\"active\" [routerLink]=\"['/user']\"><i class=\"fa fa-user-plus\"></i> Gerenciar usuários</a>\n            </li>\n          </ul>\n        </li>\n        <li class=\"divider\"></li>\n        <li class=\"nav-title\" *ngIf=\"user.role == 'admin'\">\n          Financeiro\n        </li>\n        <li class=\"nav-item nav-dropdown\" appNavDropdown *ngIf=\"user.role == 'admin'\">\n          <a class=\"nav-link nav-dropdown-toggle\" href=\"#\" appNavDropdownToggle><i class=\"fa fa-credit-card\"></i> Caixa</a>\n          <ul class=\"nav-dropdown-items\">\n            <li class=\"nav-item\">\n              <a class=\"nav-link\" routerLinkActive=\"active\" [routerLink]=\"['/dashboard']\"><i class=\"fa fa-credit-card\"></i> Abrir / Fechar Caixa</a>\n            </li>\n            <li class=\"nav-item\">\n              <a class=\"nav-link\" routerLinkActive=\"active\" [routerLink]=\"['/dashboard']\"><i class=\"fa fa-credit-card\"></i> Movimento de Caixa</a>\n            </li>\n          </ul>\n        </li>\n      </ul>\n    </nav>\n  </div>\n\n  <!-- Main content -->\n  <main class=\"main\">\n    <div class=\"container-fluid\" style=\"padding: 15px\">\n      <router-outlet></router-outlet>\n    </div><!-- /.conainer-fluid -->\n  </main>\n</div>\n\n<footer class=\"app-footer\" *ngIf=\"user !== '' && user !== null\">\n  <span class=\"float-center\">Versão: 1.12.8.17</span>\n  <span class=\"float-right\">\n    <a href=\"http://leiviton.com.br\">Gerencia Pedidos</a> &copy; {{ ano }} | Powered by\n    <a href=\"http://leiviton.com.br\">Leiviton Software</a>\n  </span>\n</footer>\n"
 
 /***/ }),
 
