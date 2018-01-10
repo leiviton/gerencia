@@ -23,7 +23,7 @@
                   <tr *ngFor="let o of clients.data" (dblclick)="edit(o.id)">
                     <td class="text-center">{{ o.id }}</td>
                     <td>{{ o.name | slice:0:35 }}</td>
-                    <td>{{ o.phone | slice:0:85 }}... </td>
+                    <td>{{ o.phone | slice:0:85 }}</td>
                     <td>{{ o.endereco}}</td>
                   </tr>
                 </tbody>

@@ -66,7 +66,7 @@ class ClientsController extends Controller
             ->find($o->id);
     }
 
-    public function update($id, AdminProductRequest $request)
+    public function update($id,Request $request)
     {
         $data = $request->all();
 

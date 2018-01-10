@@ -62,12 +62,15 @@
             </li>
           </ul>
         </li>
-
+        <li class="divider"></li>
+        <li class="nav-title">
+          Controle de acessos
+        </li>
         <li class="nav-item nav-dropdown" appNavDropdown *ngIf="user.role === 'admin'">
           <a class="nav-link nav-dropdown-toggle" href="#" appNavDropdownToggle><i class="fa fa-user"></i> Usuários</a>
           <ul class="nav-dropdown-items">
             <li class="nav-item">
-              <a class="nav-link" routerLinkActive="active" [routerLink]="['/pages/login']"><i class="fa fa-user-plus"></i> Usuários <span class="badge badge-info">Novo</span></a>
+              <a class="nav-link" routerLinkActive="active" [routerLink]="['/user']"><i class="fa fa-user-plus"></i> Gerenciar usuários</a>
             </li>
           </ul>
         </li>

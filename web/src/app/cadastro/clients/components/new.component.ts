@@ -16,54 +16,38 @@ export class NewComponent implements OnInit {
         ,private toasterService: ToasterService
     ) {}
 
-    client = '';
-    product = {
+    client = {
         name:null,
-        description:null,
-        price:null,
-        category_id:null
+        phone:null,
+        address:{
+            address:null,
+            numero:null,
+            bairro:null,
+            city_id:0,
+            complemento:null
+        },
+        email:null
     };
-    groups = {};
-    subgroups = {};
     ngOnInit(): void {
        this.showLoading();
         jQuery('#infoModal').show().addClass('show');
         setTimeout(() => {
-            this.grupos();
             this.hideLoading();
         },300)
     }
 
-    grupos()
-    {
-        this.httpService.setAccessToken();
-        this.httpService.builder()
-            .list({},'groups')
-            .then((res)=>{
-                this.groups = res;
-            });
-    }
-
-
-    subgrupos()
-    {
-        this.httpService.setAccessToken();
-        this.httpService.builder()
-            .list({},'subgroups')
-            .then((res)=>{
-                this.subgroups = res;
-            })
-    }
-
     save(e)
     {
-        if(this.product.name != null && this.product.name.length > 4
-            && this.product.description != null && this.product.description.length > 4
-            && this.product.price != null && this.product.category_id != null) {
+        if(this.client.name != null && this.client.name.length > 4
+            && this.client.email != null && this.client.email.length > 4
+            && this.client.phone != null && this.client.phone > 10
+            && this.client.address.bairro != null && this.client.address.bairro.length > 4
+            && this.client.address.address != null && this.client.address.address.length > 4
+            && this.client.address.numero != null && this.client.address.city_id != null) {
             this.showLoading();
             this.httpService.setAccessToken();
             this.httpService.builder()
-                .insert(e, 'client/store')
+                .insert(e, 'client')
                 .then(() => {
                     this.httpService.eventEmitter.emit();
                     this.hideLoading();

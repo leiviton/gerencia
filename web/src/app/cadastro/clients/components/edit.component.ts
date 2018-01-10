@@ -18,83 +18,68 @@ export class EditComponent implements OnInit {
         ,private toasterService: ToasterService
     ) {}
 
-    client = '';
-    product = {
+    client = {
         id:null,
         name:null,
-        description:null,
-        price:null,
-        category_id:null,
-        status:null
+        phone:null,
+        address:{
+            address:null,
+            numero:null,
+            bairro:null,
+            city_id:0,
+            complemento:null
+        },
+        email:null
     };
-
-    groups = {};
     ngOnInit(): void {
         this.showLoading();
-        this.httpService.setAccessToken();
         jQuery('#infoModal').show().addClass('show');
+        this.httpService.setAccessToken();
         this.route.params
             .subscribe(params => {
-                this.httpService.builder().view(params['id'],'product')
+                this.httpService.builder().view(params['id'],'client')
                     .then((res) => {
-                        this.product.id = res.data.id;
-                        this.product.name = res.data.name;
-                        this.product.description = res.data.description;
-                        this.product.price = res.data.price;
-                        this.product.category_id = res.data.category.data.id;
-                        this.product.status = res.data.status;
-                        this.grupos();
+                        this.client.id = res.data.id;
+                        this.client.name = res.data.name;
+                        this.client.phone = res.data.phone;
+                        this.client.email = res.data.user.data.email;
+                        this.client.address.address = res.data.addressClient.data.address;
+                        this.client.address.numero = res.data.addressClient.data.numero;
+                        this.client.address.bairro = res.data.addressClient.data.bairro;
+                        this.client.address.complemento = res.data.addressClient.data.complemento;
+                        this.client.address.city_id = res.data.addressClient.data.city.data.id;
                         this.hideLoading();
                     });
             });
-        this.httpService.eventEmitter.emit();
     }
-
-    grupos()
-    {
-        this.httpService.setAccessToken();
-        this.httpService.builder()
-            .list({},'groups')
-            .then((res)=>{
-                this.groups = res;
-            })
-    }
-
-
 
     save(e)
     {
-        this.showLoading();
-        this.httpService.setAccessToken();
-        this.httpService.builder('product')
-            .update(this.product.id, e)
-            .then(() => {
-                this.httpService.eventEmitter.emit();
-                this.hideLoading();
-                this.toasterService.pop('success','Sucesso','Produto salvo com sucesso');
-                this.close();
-            })
+        if(this.client.name != null && this.client.name.length > 4
+            && this.client.email != null && this.client.email.length > 4
+            && this.client.phone != null && this.client.phone > 10
+            && this.client.address.bairro != null && this.client.address.bairro.length > 4
+            && this.client.address.address != null && this.client.address.address.length > 4
+            && this.client.address.numero != null && this.client.address.city_id != null) {
+            this.showLoading();
+            this.httpService.setAccessToken();
+            this.httpService.builder('client')
+                .update(this.client.id, e)
+                .then(() => {
+                    this.httpService.eventEmitter.emit();
+                    this.hideLoading();
+                    this.toasterService.pop('success', 'Sucesso', 'Cliente salvo com sucesso');
+                    this.close();
+                });
+        }else{
+            this.toasterService.pop('error', 'Erro', 'Verifique se todos os campos foram preenchidos.');
+        }
 
-    }
-
-    excluir(status:number)
-    {
-        this.showLoading();
-        this.product.status = status;
-        this.httpService.setAccessToken();
-        this.httpService.builder('product')
-            .update(this.product.id,this.product)
-            .then((res) =>{
-                this.httpService.eventEmitter.emit();
-                this.hideLoading();
-                this.toasterService.pop('warning','informação','Produto inativado');
-                this.close();
-            })
     }
 
     close(){
         jQuery('#infoModal').hide();
-        this.router.navigate(['/cadastro/produtos']);
+        this.router.navigate(['/cadastro/clients']);
     }
 
     hideLoading(){
@@ -104,4 +89,5 @@ export class EditComponent implements OnInit {
     showLoading(){
         jQuery(".container-loading").show();
     }
+
 }

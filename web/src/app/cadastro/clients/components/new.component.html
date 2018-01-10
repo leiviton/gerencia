@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-info" role="document">
         <div class="modal-content">
             <div class="modal-header cadastro">
-                <h6 class="modal-title">Cadastrar novo produto</h6>
+                <h6 class="modal-title">Cadastrar novo cliente</h6>
                 <button class="close" aria-label="Close" type="button" data-dismiss="modal" (click)="close()">
                     <span aria-hidden="true">×</span>
                 </button>
@@ -10,46 +10,57 @@
             <div class="modal-body">
                 <form>
                     <div class="form-group row">
-                        <label class="col-md-2 col-form-label" for="text-input">Produto:</label>
+                        <label class="col-md-2 col-form-label" for="name">Nome: <span class="text-danger">*</span></label>
                         <div class="col-md-10">
-                            <input type="text" id="text-input" name="name" [(ngModel)]="product.name" class="form-control" placeholder="Produto">
+                            <input type="text" id="name" name="name" [(ngModel)]="client.name" class="form-control" placeholder="Nome Cliente">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-2 col-form-label" for="text-input">Descrição:</label>
-                        <div class="col-md-10">
-                            <textarea id="text-input" name="description" [(ngModel)]="product.description" class="form-control" placeholder="Descrição"></textarea>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-3 col-form-label" for="text-input">Preço venda <i class="fa fa-dollar"></i></label>
+                        <label class="col-md-2 col-form-label" for="fone">Telefone:</label>
                         <div class="col-md-4">
-                            <input type="text" id="text-input" name="price" currencyMask [(ngModel)]="product.price" [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" class="form-control" placeholder="Price">
+                            <input ngxPhoneMask id="fone" name="phone" [(ngModel)]="client.phone" class="form-control" placeholder="Telefone">
+                        </div>
+                        <label class="col-md-1 col-form-label" for="email">Email:</label>
+                        <div class="col-md-5">
+                            <input id="email" name="email" [(ngModel)]="client.email" class="form-control" placeholder="Email">
                         </div>
                     </div>
                     <hr>
                     <div class="form-group row">
-                        <div class="col-md-6">
-                            <label for="select" class="label">Grupo</label>
-                            <select id="select" name="category_id" [(ngModel)]="product.category_id" class="form-control col-md9">
-                                <option value="null">Selecione o grupo</option>
-                                <option *ngFor="let g of groups.data" value="{{ g.id }}"> {{ g.name }}</option>
+                        <label class="col-md-2 col-form-label" for="address">Endereço:</label>
+                        <div class="col-md-10">
+                            <input id="address" name="address" [(ngModel)]="client.address.address" class="form-control" placeholder="Ex(Rua,Av)">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label" for="numero">Número:</label>
+                        <div class="col-md-3">
+                            <input type="text" id="numero" name="numero" [(ngModel)]="client.address.numero" class="form-control" placeholder="Número">
+                        </div>
+                        <label class="col-md-2 col-form-label" for="complemento">Compl.:</label>
+                        <div class="col-md-5">
+                            <input type="text" id="complemento" name="complemento" [(ngModel)]="client.address.complemento" class="form-control" placeholder="Complemento">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label" for="bairro">Bairro:</label>
+                        <div class="col-md-4">
+                            <input type="text" id="bairro" name="bairro" [(ngModel)]="client.address.bairro" class="form-control" placeholder="Bairro">
+                        </div>
+                        <label class="col-md-2 col-form-label" for="cidade">Cidade:</label>
+                        <div class="col-md-4">
+                            <select name="cidade" id="cidade" class="form-control" [(ngModel)]="client.address.city_id">
+                                <option value="0">Selecione cidade</option>
+                                <option value="1">Guaxupé</option>
                             </select>
                         </div>
-                        <!--div class="col-md-6">
-                            <label for="select" class="label">Subgrupo</label>
-                            <select id="select" name="subgroup_id" [(ngModel)]="product.subgroup_id" class="form-control col-md9">
-                                <option value="null">Selecione o Subgrupo</option>
-                                <option *ngFor="let sg of subgroups.data" value="{{ sg.id }}"> {{ sg.name }}</option>
-                            </select>
-                        </div-->
                     </div>
                 </form>
             </div>
             <div class="modal-footer cadastro">
                 <div class="modal-button">
                     <button class="btn btn-danger" type="button" (click)="close()"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
-                    <button class="btn btn-success" type="button" (click)="save(product)"><i class="fa fa-arrow-circle-right"></i> Salvar</button>
+                    <button class="btn btn-success" type="button" (click)="save(client)"><i class="fa fa-arrow-circle-right"></i> Salvar</button>
                 </div>
             </div>
         </div>
