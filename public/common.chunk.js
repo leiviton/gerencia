@@ -66,7 +66,7 @@ var LoginComponent = (function () {
             _this.AuthService.setAccessToken();
             _this.AuthService.getUser()
                 .then(function (res) {
-                localStorage.setItem('user', JSON.stringify(res));
+                localStorage.setItem('user', JSON.stringify(res.data));
                 _this.hideLoading();
                 _this.router.navigate(['/dashboard']);
             });

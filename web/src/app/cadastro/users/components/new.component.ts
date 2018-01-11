@@ -19,7 +19,7 @@ export class NewComponent implements OnInit {
     user = {
         name:null,
         email:null,
-        role:null,
+        role:'caixa',
         password: null
     };
     ngOnInit(): void {
@@ -34,12 +34,12 @@ export class NewComponent implements OnInit {
     {
         if(this.user.name != null && this.user.name.length > 4
             && this.user.email != null && this.user.email.length > 4
-            && this.user.role != null && this.user.role > 10
+            && this.user.role != null && this.user.role.length > 4
             && this.user.password != null && this.user.password.length > 4) {
             this.showLoading();
             this.httpService.setAccessToken();
             this.httpService.builder()
-                .insert(e, 'user')
+                .insert(e, 'users')
                 .then(() => {
                     this.httpService.eventEmitter.emit();
                     this.hideLoading();
