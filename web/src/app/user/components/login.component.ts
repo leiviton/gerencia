@@ -45,7 +45,7 @@ export class LoginComponent {
             this.AuthService.setAccessToken();
             this.AuthService.getUser()
                 .then((res) => {
-                    localStorage.setItem('user',JSON.stringify(res));
+                    localStorage.setItem('user',JSON.stringify(res.data));
                     this.hideLoading();
                     this.router.navigate(['/dashboard']);
             });
