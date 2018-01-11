@@ -46,7 +46,7 @@ export class EditComponent implements OnInit {
     {
         if(this.user.name != null && this.user.name.length > 4
             && this.user.email != null && this.user.email.length > 4
-            && this.user.role != null && this.user.role > 3
+            && this.user.role != null && this.user.role.length > 3
             ) {
             this.showLoading();
             this.httpService.setAccessToken();

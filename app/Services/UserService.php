@@ -48,6 +48,7 @@ class UserService
         \DB::beginTransaction();
 
         try {
+
             if($data['password'] && $data['password'] != null)
             {
                 $data['password'] = bcrypt($data['password']);

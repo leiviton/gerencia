@@ -12,47 +12,34 @@
                     <div class="form-group row">
                         <label class="col-md-2 col-form-label" for="name">Nome: <span class="text-danger">*</span></label>
                         <div class="col-md-10">
-                            <input type="text" id="name" name="name" [(ngModel)]="client.name" class="form-control" placeholder="Nome Cliente">
+                            <input type="text" id="name" name="name" [(ngModel)]="user.name" class="form-control" placeholder="Nome usuário">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-2 col-form-label" for="phone">Telefone:</label>
+                        <label class="col-md-2 col-form-label" for="email">Email:</label>
                         <div class="col-md-4">
-                            <input ngxPhoneMask id="phone" name="phone" [(ngModel)]="client.phone" class="form-control" placeholder="Telefone">
+                            <input type="email" id="email" name="email" [(ngModel)]="user.email" class="form-control" placeholder="Email" disabled>
                         </div>
-                        <label class="col-md-1 col-form-label" for="email">Email:</label>
-                        <div class="col-md-5">
-                            <input id="email" name="email" [(ngModel)]="client.email" class="form-control" placeholder="Email" disabled>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="form-group row">
-                        <label class="col-md-2 col-form-label" for="address">Endereço:</label>
-                        <div class="col-md-10">
-                            <input id="address" name="address" [(ngModel)]="client.address.address" class="form-control" placeholder="Ex(Rua,Av)" disabled>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-2 col-form-label" for="numero">Número:</label>
-                        <div class="col-md-3">
-                            <input type="text" id="numero" name="numero" [(ngModel)]="client.address.numero" class="form-control" placeholder="Número" disabled>
-                        </div>
-                        <label class="col-md-2 col-form-label" for="complemento">Compl.:</label>
-                        <div class="col-md-5">
-                            <input type="text" id="complemento" name="complemento" [(ngModel)]="client.address.complemento" class="form-control" placeholder="Complemento" disabled>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-2 col-form-label" for="bairro">Bairro:</label>
+                        <label class="col-md-2 col-form-label" for="perfil">Perfil:</label>
                         <div class="col-md-4">
-                            <input type="text" id="bairro" name="bairro" [(ngModel)]="client.address.bairro" class="form-control" placeholder="Bairro" disabled>
-                        </div>
-                        <label class="col-md-2 col-form-label" for="cidade">Cidade:</label>
-                        <div class="col-md-4">
-                            <select name="cidade" id="cidade" class="form-control" [(ngModel)]="client.address.city_id" disabled>
-                                <option value="0">Selecione cidade</option>
-                                <option value="1">Guaxupé</option>
+                            <select name="cidade" id="perfil" class="form-control" [(ngModel)]="user.role">
+                                <option value="caixa">Caixa</option>
+                                <option value="gerente">Gerente</option>
+                                <option value="client">Cliente</option>
+                                <option value="admin">Administrador</option>
                             </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label" for="password">Senha:</label>
+                        <div class="col-md-10">
+                            <input type="password" id="password" name="password" [(ngModel)]="user.password" class="form-control" placeholder="Nova senha">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label" for="repeat">Repita:</label>
+                        <div class="col-md-10">
+                            <input type="password" id="repeat" name="repeat" [(ngModel)]="repeat" class="form-control" placeholder="Repita a senha">
                         </div>
                     </div>
                 </form>

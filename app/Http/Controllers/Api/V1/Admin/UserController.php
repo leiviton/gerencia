@@ -36,8 +36,10 @@ class UserController extends Controller
         return $this->userRepository->skipPresenter(false)->all();
     }
 
-    public function store($data)
+    public function store(Request $request)
     {
+        $data = $request->all();
+
         $result = $this->service->create($data);
 
         return $this->userRepository->skipPresenter(false)->find($result->id);
@@ -49,8 +51,10 @@ class UserController extends Controller
         return $this->userRepository->skipPresenter(false)->find($id);
     }
 
-    public function update($data,$id)
+    public function update($id,Request $request)
     {
+        $data = $request->all();
+
         $result = $this->service->update($data,$id);
 
         return $this->userRepository->skipPresenter(false)->find($result->id);
