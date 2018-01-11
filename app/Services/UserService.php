@@ -49,9 +49,13 @@ class UserService
 
         try {
 
+            $user = $this->repository->find($id);
+
             if($data['password'] && $data['password'] != null && $data['password'] != '')
             {
                 $data['password'] = bcrypt($data['password']);
+            }else{
+                $data['password'] = $user->password;
             }
 
             $user = $this->repository->update($data,$id);
