@@ -1,0 +1,70 @@
+<div tabindex="-1" class="modal fade" id="infoModal" role="dialog" aria-hidden="true" aria-labelledby="myModalLabel" style="display: none;">
+    <div class="modal-dialog modal-info" role="document">
+        <div class="modal-content">
+            <div class="modal-header cadastro">
+                <h6 class="modal-title">Cadastrar novo produto</h6>
+                <button class="close" aria-label="Close" type="button" data-dismiss="modal" (click)="close()">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label" for="name">Nome: <span class="text-danger">*</span></label>
+                        <div class="col-md-10">
+                            <input type="text" id="name" name="name" [(ngModel)]="client.name" class="form-control" placeholder="Nome Cliente">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label" for="phone">Telefone:</label>
+                        <div class="col-md-4">
+                            <input ngxPhoneMask id="phone" name="phone" [(ngModel)]="client.phone" class="form-control" placeholder="Telefone">
+                        </div>
+                        <label class="col-md-1 col-form-label" for="email">Email:</label>
+                        <div class="col-md-5">
+                            <input id="email" name="email" [(ngModel)]="client.email" class="form-control" placeholder="Email" disabled>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label" for="address">Endereço:</label>
+                        <div class="col-md-10">
+                            <input id="address" name="address" [(ngModel)]="client.address.address" class="form-control" placeholder="Ex(Rua,Av)" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label" for="numero">Número:</label>
+                        <div class="col-md-3">
+                            <input type="text" id="numero" name="numero" [(ngModel)]="client.address.numero" class="form-control" placeholder="Número" disabled>
+                        </div>
+                        <label class="col-md-2 col-form-label" for="complemento">Compl.:</label>
+                        <div class="col-md-5">
+                            <input type="text" id="complemento" name="complemento" [(ngModel)]="client.address.complemento" class="form-control" placeholder="Complemento" disabled>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label" for="bairro">Bairro:</label>
+                        <div class="col-md-4">
+                            <input type="text" id="bairro" name="bairro" [(ngModel)]="client.address.bairro" class="form-control" placeholder="Bairro" disabled>
+                        </div>
+                        <label class="col-md-2 col-form-label" for="cidade">Cidade:</label>
+                        <div class="col-md-4">
+                            <select name="cidade" id="cidade" class="form-control" [(ngModel)]="client.address.city_id" disabled>
+                                <option value="0">Selecione cidade</option>
+                                <option value="1">Guaxupé</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer cadastro">
+                <div class="modal-button">
+                    <button class="btn btn-danger" type="button" (click)="close()"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
+                    <button class="btn btn-success" type="button" (click)="save(client)"><i class="fa fa-save"></i> Salvar</button>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

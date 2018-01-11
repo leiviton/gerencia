@@ -25,6 +25,11 @@ class UserController extends Controller
         $this->userRepository = $userRepository;
     }
 
+    public function index()
+    {
+        return $this->userRepository->skipPresenter(false)->all();
+    }
+
     public function authenticated(){
         $user = \Auth::guard('api')->user();
         return $this->userRepository->skipPresenter(false)->find($user->id);

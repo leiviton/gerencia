@@ -14,6 +14,7 @@ use Pedidos\Validators\UserValidator;
  */
 class UserRepositoryEloquent extends BaseRepository implements UserRepository
 {
+    protected $skipPresenter = true;
     /**
      * Specify Model class name
      *

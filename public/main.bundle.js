@@ -5,7 +5,7 @@ webpackJsonp(["main"],{
 
 var map = {
 	"./cadastro/clients/clients.module": [
-		"../../../../../src/app/cadastro/clients/clients.module.ts",
+		"../../../../../src/app/cadastro/clients/users.module.ts",
 		"clients.module",
 		"common"
 	],
