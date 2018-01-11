@@ -1,6 +1,6 @@
 <?php
 
-namespace CodeDelivery\Presenters;
+namespace Pedidos\Presenters;
 
 use Pedidos\Transformers\UserTransformer;
 use Prettus\Repository\Presenter\FractalPresenter;
