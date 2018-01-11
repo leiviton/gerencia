@@ -22,7 +22,8 @@ export class EditComponent implements OnInit {
         id:null,
         name:null,
         email:null,
-        role:null
+        role:null,
+        password:null
     };
     ngOnInit(): void {
         this.showLoading();
@@ -30,7 +31,7 @@ export class EditComponent implements OnInit {
         this.httpService.setAccessToken();
         this.route.params
             .subscribe(params => {
-                this.httpService.builder().view(params['id'],'client')
+                this.httpService.builder().view(params['id'],'users')
                     .then((res) => {
                         this.user.id = res.data.id;
                         this.user.name = res.data.name;
@@ -45,11 +46,11 @@ export class EditComponent implements OnInit {
     {
         if(this.user.name != null && this.user.name.length > 4
             && this.user.email != null && this.user.email.length > 4
-            && this.user.role != null && this.user.role > 10
+            && this.user.role != null && this.user.role > 3
             ) {
             this.showLoading();
             this.httpService.setAccessToken();
-            this.httpService.builder('client')
+            this.httpService.builder('users')
                 .update(this.user.id, e)
                 .then(() => {
                     this.httpService.eventEmitter.emit();

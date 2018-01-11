@@ -48,7 +48,10 @@ class UserService
         \DB::beginTransaction();
 
         try {
-            $data['password'] = bcrypt($data['password']);
+            if($data['password'] && $data['password'] != null)
+            {
+                $data['password'] = bcrypt($data['password']);
+            }
 
             $user = $this->repository->update($data,$id);
 
