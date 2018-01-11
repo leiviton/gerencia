@@ -49,7 +49,7 @@ class UserService
 
         try {
 
-            if($data['password'] && $data['password'] != null)
+            if($data['password'] && $data['password'] != null && $data['password'] != '')
             {
                 $data['password'] = bcrypt($data['password']);
             }

@@ -17,9 +17,11 @@
                     </div>
                     <div class="form-group row">
                         <label class="col-md-2 col-form-label" for="email">Email:</label>
-                        <div class="col-md-4">
+                        <div class="col-md-10">
                             <input type="email" id="email" name="email" [(ngModel)]="user.email" class="form-control" placeholder="Email" disabled>
                         </div>
+                    </div>
+                    <div class="form-group row">
                         <label class="col-md-2 col-form-label" for="perfil">Perfil:</label>
                         <div class="col-md-4">
                             <select name="cidade" id="perfil" class="form-control" [(ngModel)]="user.role">
@@ -29,17 +31,9 @@
                                 <option value="admin">Administrador</option>
                             </select>
                         </div>
-                    </div>
-                    <div class="form-group row">
                         <label class="col-md-2 col-form-label" for="password">Senha:</label>
-                        <div class="col-md-10">
+                        <div class="col-md-4">
                             <input type="password" id="password" name="password" [(ngModel)]="user.password" class="form-control" placeholder="Nova senha">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-2 col-form-label" for="repeat">Repita:</label>
-                        <div class="col-md-10">
-                            <input type="password" id="repeat" name="repeat" [(ngModel)]="repeat" class="form-control" placeholder="Repita a senha">
                         </div>
                     </div>
                 </form>
@@ -47,7 +41,7 @@
             <div class="modal-footer cadastro">
                 <div class="modal-button">
                     <button class="btn btn-danger" type="button" (click)="close()"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
-                    <button class="btn btn-success" type="button" (click)="save(client)"><i class="fa fa-save"></i> Salvar</button>
+                    <button class="btn btn-success" type="button" (click)="save(user)"><i class="fa fa-save"></i> Salvar</button>
                 </div>
             </div>
         </div>
