@@ -41,6 +41,9 @@ export const routes: Routes = [
         {
             path: 'cadastro/users',
             loadChildren: './cadastro/users/users.module#UsersModule',
+        },{
+            path: 'cadastro/mesas',
+            loadChildren: './cadastro/mesas/mesas.module#MesasModule',
         },
         {
             path: 'user',

@@ -31,7 +31,6 @@ Route::group(['prefix'=>'api/v1','middleware' => 'auth:api'],function () {
         /*pedidos*/
        Route::post('order','AdminCheckoutController@store');
        Route::post('addItem','AdminCheckoutController@addItem');
-       Route::get('mesas', 'AdminCheckoutController@getMesas');
        Route::get('mesas/livres', 'AdminCheckoutController@getMesasLivre');
        Route::get('search','AdminCheckoutController@search');
        Route::post('payment','AdminCheckoutController@payment');
@@ -42,6 +41,8 @@ Route::group(['prefix'=>'api/v1','middleware' => 'auth:api'],function () {
        Route::get('complements', 'AdminCheckoutController@getComplements');
        Route::get('complement/{id}', 'AdminCheckoutController@getComplement');
        Route::get('close', 'AdminCheckoutController@orders');
+       /*mesas*/
+       Route::get('mesas', 'MesaController@index');
         /*produtos*/
        Route::get('groups','CategoriesController@index');
        Route::get('subgroups','SubgroupsController@index');

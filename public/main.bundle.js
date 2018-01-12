@@ -14,7 +14,7 @@ var map = {
 		"produtos.module"
 	],
 	"./cadastro/users/users.module": [
-		"../../../../../src/app/cadastro/users/users.module.ts",
+		"../../../../../src/app/cadastro/users/mesas.module.ts",
 		"users.module",
 		"common"
 	],
