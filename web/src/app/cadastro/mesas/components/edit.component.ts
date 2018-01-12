@@ -46,7 +46,7 @@ export class EditComponent implements OnInit {
             ) {
             this.showLoading();
             this.httpService.setAccessToken();
-            this.httpService.builder('users')
+            this.httpService.builder('mesa')
                 .update(this.mesa.id, e)
                 .then(() => {
                     this.httpService.eventEmitter.emit();

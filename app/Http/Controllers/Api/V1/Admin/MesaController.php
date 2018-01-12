@@ -47,7 +47,7 @@ class MesaController extends Controller
     {
         $data = $request->all();
 
-        $result = $this->service->create($data);
+        $result = $this->repository->create($data);
 
         return $this->repository->skipPresenter(false)->find($result->id);
 
@@ -62,7 +62,7 @@ class MesaController extends Controller
     {
         $data = $request->all();
 
-        $result = $this->service->update($data,$id);
+        $result = $this->repository->update($data,$id);
 
         return $this->repository->skipPresenter(false)->find($result->id);
     }

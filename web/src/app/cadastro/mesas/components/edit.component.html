@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-info" role="document">
         <div class="modal-content">
             <div class="modal-header cadastro">
-                <h6 class="modal-title">Cadastrar nova mesa</h6>
+                <h6 class="modal-title">Editar mesa: {{ mesa.name }}</h6>
                 <button class="close" aria-label="Close" type="button" data-dismiss="modal" (click)="close()">
                     <span aria-hidden="true">×</span>
                 </button>
@@ -12,13 +12,13 @@
                     <div class="form-group row">
                         <label class="col-md-2 col-form-label" for="name">Mesa: <span class="text-danger">*</span></label>
                         <div class="col-md-10">
-                            <input type="text" id="name" name="name" [(ngModel)]="user.name" class="form-control" placeholder="Nome usuário">
+                            <input type="text" id="name" name="name" [(ngModel)]="mesa.name" class="form-control" placeholder="Mesa">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-2 col-form-label" for="email">Descrição:</label>
+                        <label class="col-md-2 col-form-label" for="description">Descrição:</label>
                         <div class="col-md-10">
-                            <input type="email" id="email" name="email" [(ngModel)]="user.email" class="form-control" placeholder="Email" disabled>
+                            <input type="email" id="description" name="description" [(ngModel)]="mesa.description" class="form-control" placeholder="Descrição da mesa">
                         </div>
                     </div>
                 </form>
