@@ -18,7 +18,7 @@ export class MesasComponent implements OnInit {
       fim:null,
       status:null
   };
-  users:object = {};
+  mesas:object = {};
   tamanho = 0;
 
   ngOnInit(): void {
@@ -26,9 +26,9 @@ export class MesasComponent implements OnInit {
       this.httpService.setAccessToken();
       this.httpService.eventEmitter
           .subscribe(() => {
-              this.httpService.builder().list({}, 'users')
+              this.httpService.builder().list({}, 'mesas')
                   .then((res) => {
-                      this.users = res;
+                      this.mesas = res;
                       this.tamanho = res.data.length;
                       this.hideLoading();
                   });

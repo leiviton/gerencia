@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-info" role="document">
         <div class="modal-content">
             <div class="modal-header cadastro">
-                <h6 class="modal-title">Cadastrar novo produto</h6>
+                <h6 class="modal-title">Cadastrar nova mesa</h6>
                 <button class="close" aria-label="Close" type="button" data-dismiss="modal" (click)="close()">
                     <span aria-hidden="true">×</span>
                 </button>
@@ -10,30 +10,15 @@
             <div class="modal-body">
                 <form>
                     <div class="form-group row">
-                        <label class="col-md-2 col-form-label" for="name">Nome: <span class="text-danger">*</span></label>
+                        <label class="col-md-2 col-form-label" for="name">Mesa: <span class="text-danger">*</span></label>
                         <div class="col-md-10">
                             <input type="text" id="name" name="name" [(ngModel)]="user.name" class="form-control" placeholder="Nome usuário">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-2 col-form-label" for="email">Email:</label>
+                        <label class="col-md-2 col-form-label" for="email">Descrição:</label>
                         <div class="col-md-10">
                             <input type="email" id="email" name="email" [(ngModel)]="user.email" class="form-control" placeholder="Email" disabled>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-2 col-form-label" for="perfil">Perfil:</label>
-                        <div class="col-md-4">
-                            <select name="cidade" id="perfil" class="form-control" [(ngModel)]="user.role">
-                                <option value="caixa">Caixa</option>
-                                <option value="gerente">Gerente</option>
-                                <option value="client">Cliente</option>
-                                <option value="admin">Administrador</option>
-                            </select>
-                        </div>
-                        <label class="col-md-2 col-form-label" for="password">Senha:</label>
-                        <div class="col-md-4">
-                            <input type="password" id="password" name="password" [(ngModel)]="user.password" class="form-control" placeholder="Nova senha">
                         </div>
                     </div>
                 </form>

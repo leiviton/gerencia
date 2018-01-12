@@ -11,20 +11,18 @@
                 <thead>
                   <tr>
                     <th class="title text-center">#</th>
-                    <th class="title">Usuário</th>
-                    <th class="title text-center">email</th>
-                    <th>role</th>
+                    <th class="title">Mesa</th>
+                    <th class="title text-center">Descrição</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr *ngIf="tamanho == 0">
-                    <td colspan="5"> Sem dados</td>
+                    <td colspan="3"> Sem dados</td>
                   </tr>
-                  <tr *ngFor="let o of users.data" (dblclick)="edit(o.id)">
+                  <tr *ngFor="let o of mesas.data" (dblclick)="edit(o.id)">
                     <td class="text-center">{{ o.id }}</td>
                     <td>{{ o.name | slice:0:35 }}</td>
-                    <td>{{ o.email | slice:0:85 }}</td>
-                    <td>{{ o.role}}</td>
+                    <td>{{ o.description | slice:0:85 }}</td>
                   </tr>
                 </tbody>
               </table>

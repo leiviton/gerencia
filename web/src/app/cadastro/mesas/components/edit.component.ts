@@ -18,12 +18,10 @@ export class EditComponent implements OnInit {
         ,private toasterService: ToasterService
     ) {}
 
-    user = {
+    mesa = {
         id:null,
         name:null,
-        email:null,
-        role:null,
-        password:null
+        description:null,
     };
     ngOnInit(): void {
         this.showLoading();
@@ -31,12 +29,11 @@ export class EditComponent implements OnInit {
         this.httpService.setAccessToken();
         this.route.params
             .subscribe(params => {
-                this.httpService.builder().view(params['id'],'users')
+                this.httpService.builder().view(params['id'],'mesa')
                     .then((res) => {
-                        this.user.id = res.data.id;
-                        this.user.name = res.data.name;
-                        this.user.email = res.data.email;
-                        this.user.role = res.data.role;
+                        this.mesa.id = res.data.id;
+                        this.mesa.name = res.data.name;
+                        this.mesa.description = res.data.description;
                         this.hideLoading();
                     });
             });
@@ -44,18 +41,17 @@ export class EditComponent implements OnInit {
 
     save(e)
     {
-        if(this.user.name != null && this.user.name.length > 4
-            && this.user.email != null && this.user.email.length > 4
-            && this.user.role != null && this.user.role.length > 3
+        if(this.mesa.name != null && this.mesa.name.length > 4
+            && this.mesa.description != null && this.mesa.description.length > 4
             ) {
             this.showLoading();
             this.httpService.setAccessToken();
             this.httpService.builder('users')
-                .update(this.user.id, e)
+                .update(this.mesa.id, e)
                 .then(() => {
                     this.httpService.eventEmitter.emit();
                     this.hideLoading();
-                    this.toasterService.pop('success', 'Sucesso', 'Usuário salvo com sucesso');
+                    this.toasterService.pop('success', 'Sucesso', 'Mesa salva com sucesso');
                     this.close();
                 });
         }else{
@@ -66,7 +62,7 @@ export class EditComponent implements OnInit {
 
     close(){
         jQuery('#infoModal').hide();
-        this.router.navigate(['/cadastro/users']);
+        this.router.navigate(['/cadastro/mesas']);
     }
 
     hideLoading(){
