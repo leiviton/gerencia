@@ -2,46 +2,31 @@
     <div class="modal-dialog modal-info" role="document">
         <div class="modal-content">
             <div class="modal-header cadastro">
-                <h6 class="modal-title">Cadastrar novo usuário</h6>
+                <h6 class="modal-title">Cadastrar nova mesa</h6>
                 <button class="close" aria-label="Close" type="button" data-dismiss="modal" (click)="close()">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
             <div class="modal-body">
                 <form>
-                <div class="form-group row">
-                    <label class="col-md-2 col-form-label" for="name">Nome: <span class="text-danger">*</span></label>
-                    <div class="col-md-10">
-                        <input type="text" id="name" name="name" [(ngModel)]="user.name" class="form-control" placeholder="Nome usuário" required>
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label" for="name">Mesa: <span class="text-danger">*</span></label>
+                        <div class="col-md-10">
+                            <input type="text" id="name" name="name" [(ngModel)]="mesa.name" class="form-control" placeholder="Mesa">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-md-2 col-form-label" for="email">Email:</label>
-                    <div class="col-md-10">
-                        <input type="email" id="email" name="email" [(ngModel)]="user.email" class="form-control" placeholder="Email" required>
+                    <div class="form-group row">
+                        <label class="col-md-2 col-form-label" for="description">Descrição:</label>
+                        <div class="col-md-10">
+                            <input type="email" id="description" name="description" [(ngModel)]="mesa.description" class="form-control" placeholder="Descrição da mesa">
+                        </div>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-md-2 col-form-label" for="perfil">Perfil:</label>
-                    <div class="col-md-4">
-                        <select name="cidade" id="perfil" class="form-control" [(ngModel)]="user.role" required>
-                            <option value="caixa">Caixa</option>
-                            <option value="gerente">Gerente</option>
-                            <option value="client">Cliente</option>
-                            <option value="admin">Administrador</option>
-                        </select>
-                    </div>
-                    <label class="col-md-2 col-form-label" for="password">Senha:</label>
-                    <div class="col-md-4">
-                        <input type="password" id="password" name="password" [(ngModel)]="user.password" class="form-control" placeholder="Nova senha">
-                    </div>
-                </div>
                 </form>
             </div>
             <div class="modal-footer cadastro">
                 <div class="modal-button">
                     <button class="btn btn-danger" type="button" (click)="close()"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
-                    <button class="btn btn-success" type="button" (click)="save(user)"><i class="fa fa-arrow-circle-right"></i> Salvar</button>
+                    <button class="btn btn-success" type="button" (click)="save(mesa)"><i class="fa fa-arrow-circle-right"></i> Salvar</button>
                 </div>
             </div>
         </div>

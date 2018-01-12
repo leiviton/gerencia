@@ -16,11 +16,9 @@ export class NewComponent implements OnInit {
         ,private toasterService: ToasterService
     ) {}
 
-    user = {
+    mesa = {
         name:null,
-        email:null,
-        role:'caixa',
-        password: null
+        description:null
     };
     ngOnInit(): void {
        this.showLoading();
@@ -32,18 +30,16 @@ export class NewComponent implements OnInit {
 
     save(e)
     {
-        if(this.user.name != null && this.user.name.length > 4
-            && this.user.email != null && this.user.email.length > 4
-            && this.user.role != null && this.user.role.length > 4
-            && this.user.password != null && this.user.password.length > 4) {
+        if(this.mesa.name != null && this.mesa.name.length > 4
+            && this.mesa.description != null && this.mesa.description.length > 4) {
             this.showLoading();
             this.httpService.setAccessToken();
             this.httpService.builder()
-                .insert(e, 'mesas')
+                .insert(e, 'mesa')
                 .then(() => {
                     this.httpService.eventEmitter.emit();
                     this.hideLoading();
-                    this.toasterService.pop('success', 'Sucesso', 'Usuário salvo com sucesso');
+                    this.toasterService.pop('success', 'Sucesso', 'Mesa salva com sucesso');
                     this.close();
                 });
         }else{
@@ -54,7 +50,7 @@ export class NewComponent implements OnInit {
 
     close(){
         jQuery('#infoModal').hide();
-        this.router.navigate(['/cadastro/users']);
+        this.router.navigate(['/cadastro/mesas']);
     }
 
     hideLoading(){
