@@ -33,7 +33,12 @@ class UserController extends Controller
 
     public function index()
     {
-        return $this->userRepository->skipPresenter(false)->all();
+        $role = 'admin';
+        return $this->userRepository->skipPresenter(false)
+            ->scopeQuery(function($query) use($role){
+                return $query->where('role','<>',$role);
+            })
+            ->all();
     }
 
     public function store(Request $request)
