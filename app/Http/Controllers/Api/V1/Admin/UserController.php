@@ -36,7 +36,7 @@ class UserController extends Controller
         $role = 'admin';
         return $this->userRepository->skipPresenter(false)
             ->scopeQuery(function($query) use($role){
-                return $query->where('role','<>',$role);
+                return $query->where('role','<>',$role)->where('role','<>','client');
             })
             ->all();
     }
