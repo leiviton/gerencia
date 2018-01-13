@@ -24,6 +24,13 @@ export class NewComponent implements OnInit {
     };
     ngOnInit(): void {
        this.showLoading();
+        let u = {role:null};
+        u = JSON.parse(localStorage.getItem('user') || null);
+        if(u.role !== 'gerente' && u.role !== 'admin')
+        {
+            this.toasterService.pop('error','Sem permissão','Usuário sem acesso, contate o administrador');
+            this.router.navigate(['/dashboard']);
+        }
         jQuery('#infoModal').show().addClass('show');
         setTimeout(() => {
             this.hideLoading();

@@ -1,5 +1,5 @@
 import { Component, ViewChild, OnInit,ViewContainerRef } from '@angular/core';
-
+import {ToasterService} from 'angular2-toaster';
 import { Router } from '@angular/router';
 import { NgForOf } from '@angular/common';
 import { UsersService } from '../services/users.service';
@@ -11,7 +11,7 @@ import * as jQuery from 'jquery';
   templateUrl: 'users.component.html'
 })
 export class UsersComponent implements OnInit {
-  constructor(private httpService: UsersService, private router: Router) {}
+  constructor(private httpService: UsersService, private router: Router,private toasterService: ToasterService) {}
   cor = false;
   pesquisa:any = {
       inicio:null,
@@ -23,6 +23,13 @@ export class UsersComponent implements OnInit {
 
   ngOnInit(): void {
       this.showLoading();
+      let u = {role:null};
+      u = JSON.parse(localStorage.getItem('user') || null);
+      if(u.role !== 'gerente' && u.role !== 'admin')
+      {
+          this.toasterService.pop('error','Sem permissão','Usuário sem acesso, contate o administrador');
+          this.router.navigate(['/dashboard']);
+      }
       this.httpService.setAccessToken();
       this.httpService.eventEmitter
           .subscribe(() => {

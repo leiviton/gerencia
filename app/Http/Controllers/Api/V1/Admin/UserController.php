@@ -78,4 +78,20 @@ class UserController extends Controller
 
         return $this->userRepository->updateDeviceToken($id,$deviceToken);
     }
+
+    public function changePassword($id,Request $request)
+    {
+        $rules = [
+            'password' => 'required|min:6',
+            'password_confirmation' => 'same:password'
+        ];
+
+        $this->validate($request, $rules);
+        $user = $this->userRepository->find($id)
+            ->first();
+
+        $user = $this->userRepository->update(['password' => bcrypt($request->get('password'))],$id);
+
+        return $this->userRepository->skipPresenter(false)->find($user->id);
+    }
 }

@@ -3,9 +3,9 @@ import { Router } from '@angular/router';
 
 import { NgForOf } from '@angular/common';
 import * as jQuery from 'jquery';
-import { DashboardService } from "./services/dashboard.service"
+import { DashboardService } from "../services/dashboard.service"
 @Component({
-  templateUrl: 'dashboard.component.html'
+  templateUrl: './dashboard.component.html'
 })
 export class DashboardComponent implements OnInit {
 
@@ -16,6 +16,7 @@ export class DashboardComponent implements OnInit {
     showLoading(){
         jQuery(".container-loading").show();
     }
+
 
   mesas = {};
   public brandPrimary = '#20a8d8';

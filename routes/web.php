@@ -59,6 +59,7 @@ Route::group(['prefix'=>'api/v1','middleware' => 'auth:api'],function () {
        Route::get('users/{id}','UserController@edit');
        Route::post('users','UserController@store');
        Route::put('users/{id}','UserController@update');
+       Route::put('password/{id}','UserController@changePassword');
        /*clients*/
        Route::get('search/client','ClientsController@search');
        Route::get('clients','ClientsController@index');

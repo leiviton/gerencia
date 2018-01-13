@@ -1,5 +1,5 @@
 import { Component, ViewChild, OnInit,ViewContainerRef } from '@angular/core';
-
+import {ToasterService} from 'angular2-toaster';
 import { Router } from '@angular/router';
 import { NgForOf } from '@angular/common';
 import { ProdutosService } from '../services/produtos.service';
@@ -12,7 +12,8 @@ import * as jQuery from 'jquery';
 })
 export class ProdutosComponent implements OnInit {
 
-  constructor(private httpService: ProdutosService, private router: Router,) {}
+  constructor(private httpService: ProdutosService, private router: Router
+      ,private toasterService: ToasterService) {}
   cor = false;
   pesquisa:any = {
       inicio:null,
