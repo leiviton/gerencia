@@ -28,10 +28,11 @@ export class PasswordComponent{
         },300)
     }
     save(e){
-
+        this.showLoading();
         if (this.user.password && this.user.password === this.user.password_confirmation) {
             this.authService.builder('password').update(this.id,this.user)
                 .then(() => {
+                    this.hideLoading();
                     this.toast.pop('success','Salvo','Nova senha definida com sucesso');
                     this.router.navigate(['dashboard']);
                 });

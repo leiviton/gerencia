@@ -1,55 +1,13 @@
 webpackJsonp(["dashboard.module"],{
 
-/***/ "../../../../../src/app/dashboard/dashboard-routing.module.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DashboardRoutingModule; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__dashboard_component__ = __webpack_require__("../../../../../src/app/dashboard/dashboard.component.ts");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-
-
-
-var routes = [
-    {
-        path: '',
-        component: __WEBPACK_IMPORTED_MODULE_2__dashboard_component__["a" /* DashboardComponent */],
-        data: {
-            title: 'Dashboard'
-        }
-    }
-];
-var DashboardRoutingModule = (function () {
-    function DashboardRoutingModule() {
-    }
-    DashboardRoutingModule = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
-            imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["d" /* RouterModule */].forChild(routes)],
-            exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["d" /* RouterModule */]]
-        })
-    ], DashboardRoutingModule);
-    return DashboardRoutingModule;
-}());
-
-//# sourceMappingURL=dashboard-routing.module.js.map
-
-/***/ }),
-
-/***/ "../../../../../src/app/dashboard/dashboard.component.html":
+/***/ "../../../../../src/app/dashboard/components/dashboard.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"animated fadeIn\">\n    <div class=\"row col-md-12\">\n      <div class=\"col-6 col-lg-3\" *ngFor=\"let o of mesas.data\">\n        <div class=\"card\">\n          <div class=\"card-body p-3 clearfix\">\n            <i class=\"bg-danger p-3 font-2xl mr-3 float-left mesao\" [ngClass]=\"{'bg-success': o.status == 0, 'bg-danger': o.status === 1, 'bg-': o.status === 2}\"></i>\n            <div class=\"h5 text-primary mb-0 mt-2\"></div>\n            <div class=\"text-muted text-uppercase font-weight-bold font-xs\">{{ o.name }}</div>\n          </div>\n        </div>\n      </div>\n    </div>\n</div>\n\n\n<!--div class=\"row\">\n  <div class=\"col-sm-6 col-lg-3\">\n    <div class=\"card text-white bg-primary\">\n      <div class=\"card-body pb-0\">\n        <div class=\"btn-group float-right\" dropdown>\n\n        </div>\n        <h4 class=\"mb-0\">9.823</h4>\n        <p>Pedidos pendentes</p>\n      </div>\n      <div class=\"chart-wrapper px-3\" style=\"height:40px;\">\n\n      </div>\n    </div>\n  </div><!--/.col-->\n  <!--div class=\"col-sm-6 col-lg-3\">\n    <div class=\"card text-white bg-info\">\n      <div class=\"card-body pb-0\">\n\n        <h4 class=\"mb-0\">9.823</h4>\n        <p>Pedidos fechados</p>\n      </div>\n      <div class=\"chart-wrapper px-3\" style=\"height:40px;\">\n\n      </div>\n    </div>\n  </div><!--/.col-->\n  <!--div class=\"col-sm-6 col-lg-3\">\n    <div class=\"card text-white bg-warning\">\n      <div class=\"card-body pb-0\">\n\n        <h4 class=\"mb-0\">9.823</h4>\n        <p>Produtos em estoque</p>\n      </div>\n      <div class=\"chart-wrapper\" style=\"height:40px;\">\n      </div>\n    </div>\n  </div><!--/.col-->\n  <!--div class=\"col-sm-6 col-lg-3\">\n    <div class=\"card text-white bg-danger\">\n      <div class=\"card-body pb-0\">\n        <h4 class=\"mb-0\">9.823</h4>\n        <p>Pedidos delivery</p>\n      </div>\n      <div class=\"chart-wrapper px-3\" style=\"height:40px;\">\n\n      </div>\n    </div>\n  </div><!--/.col-->\n<!--/div><!--/.row-->\n"
+module.exports = "<div class=\"animated fadeIn\">\n    <div class=\"row col-md-12\">\n      <div class=\"col-6 col-lg-3\" *ngFor=\"let o of mesas.data\">\n        <div class=\"card\">\n          <div class=\"card-body p-3 clearfix\">\n            <i class=\"bg-danger p-3 font-2xl mr-3 float-left mesao\" [ngClass]=\"{'bg-success': o.status == 0, 'bg-danger': o.status === 1, 'bg-': o.status === 2}\"></i>\n            <div class=\"h5 text-primary mb-0 mt-2\"></div>\n            <div class=\"text-muted text-uppercase font-weight-bold font-xs\">{{ o.name }}</div>\n          </div>\n        </div>\n      </div>\n    </div>\n</div>\n\n\n<router-outlet></router-outlet>\n\n\n<!--div class=\"row\">\n  <div class=\"col-sm-6 col-lg-3\">\n    <div class=\"card text-white bg-primary\">\n      <div class=\"card-body pb-0\">\n        <div class=\"btn-group float-right\" dropdown>\n\n        </div>\n        <h4 class=\"mb-0\">9.823</h4>\n        <p>Pedidos pendentes</p>\n      </div>\n      <div class=\"chart-wrapper px-3\" style=\"height:40px;\">\n\n      </div>\n    </div>\n  </div><!--/.col-->\n  <!--div class=\"col-sm-6 col-lg-3\">\n    <div class=\"card text-white bg-info\">\n      <div class=\"card-body pb-0\">\n\n        <h4 class=\"mb-0\">9.823</h4>\n        <p>Pedidos fechados</p>\n      </div>\n      <div class=\"chart-wrapper px-3\" style=\"height:40px;\">\n\n      </div>\n    </div>\n  </div><!--/.col-->\n  <!--div class=\"col-sm-6 col-lg-3\">\n    <div class=\"card text-white bg-warning\">\n      <div class=\"card-body pb-0\">\n\n        <h4 class=\"mb-0\">9.823</h4>\n        <p>Produtos em estoque</p>\n      </div>\n      <div class=\"chart-wrapper\" style=\"height:40px;\">\n      </div>\n    </div>\n  </div><!--/.col-->\n  <!--div class=\"col-sm-6 col-lg-3\">\n    <div class=\"card text-white bg-danger\">\n      <div class=\"card-body pb-0\">\n        <h4 class=\"mb-0\">9.823</h4>\n        <p>Pedidos delivery</p>\n      </div>\n      <div class=\"chart-wrapper px-3\" style=\"height:40px;\">\n\n      </div>\n    </div>\n  </div><!--/.col-->\n<!--/div><!--/.row-->\n"
 
 /***/ }),
 
-/***/ "../../../../../src/app/dashboard/dashboard.component.ts":
+/***/ "../../../../../src/app/dashboard/components/dashboard.component.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -534,7 +492,7 @@ var DashboardComponent = (function () {
     };
     DashboardComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            template: __webpack_require__("../../../../../src/app/dashboard/dashboard.component.html")
+            template: __webpack_require__("../../../../../src/app/dashboard/components/dashboard.component.html")
         }),
         __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* Router */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__services_dashboard_service__["a" /* DashboardService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_dashboard_service__["a" /* DashboardService */]) === "function" && _b || Object])
     ], DashboardComponent);
@@ -546,6 +504,151 @@ var DashboardComponent = (function () {
 
 /***/ }),
 
+/***/ "../../../../../src/app/dashboard/components/password.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div tabindex=\"-1\" class=\"modal fade\" id=\"infoModal\" role=\"dialog\" aria-hidden=\"true\" aria-labelledby=\"myModalLabel\" style=\"display: none;\">\r\n    <div class=\"modal-dialog modal-sm modal-info\" role=\"document\">\r\n        <div class=\"modal-content\">\r\n            <div class=\"modal-header cadastro text-center\">\r\n                <h6 class=\"modal-title\">Mudar senha</h6>\r\n                <button class=\"close\" aria-label=\"Close\" type=\"button\" data-dismiss=\"modal\" (click)=\"close()\">\r\n                    <span aria-hidden=\"true\">×</span>\r\n                </button>\r\n            </div>\r\n            <div class=\"modal-body\">\r\n                <form #myForm=\"ngForm\">\r\n                    <div class=\"form-group row\">\r\n                        <label class=\"col-md-5 col-form-label\" for=\"password\">Nova senha: <span class=\"text-danger\">*</span></label>\r\n                        <div class=\"col-md-7\">\r\n                            <input type=\"password\" id=\"password\" name=\"password\"\r\n                                   [ngClass]=\"{'is-invalid': user.password_confirmation !== user.password, 'is-valid': user.password == user.password_confirmation}\"\r\n                                   [(ngModel)]=\"user.password\" class=\"form-control\" placeholder=\"Nova senha\" required>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"form-group row\">\r\n                        <label class=\"col-md-5 col-form-label\" for=\"repeat_p\">Repita a senha:</label>\r\n                        <div class=\"col-md-7\">\r\n                            <input type=\"password\" id=\"repeat_p\" name=\"repeat_p\"\r\n                                   [ngClass]=\"{'is-invalid': user.password_confirmation !== user.password, 'is-valid': user.password == user.password_confirmation}\"\r\n                                   [(ngModel)]=\"user.password_confirmation\" class=\"form-control\" placeholder=\"Repita a senha\" required>\r\n                            <div class=\"invalid-feedback\" *ngIf=\"user.password !== user.password_confirmation\">\r\n                                Senhas precisam ser diferentes.\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </form>\r\n            </div>\r\n            <div class=\"modal-footer cadastro\">\r\n                <div class=\"modal-button\">\r\n                    <button class=\"btn btn-danger\" type=\"button\" (click)=\"close()\"><i class=\"fa fa-arrow-circle-left\"></i> Cancelar</button>\r\n                    <button class=\"btn btn-success\" type=\"button\" (click)=\"save(user)\" [disabled]=\"!myForm.valid && user.password !== repeat_p\"><i class=\"fa fa-arrow-circle-right\"></i> Salvar</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <!-- /.modal-content -->\r\n    </div>\r\n    <!-- /.modal-dialog -->\r\n</div>"
+
+/***/ }),
+
+/***/ "../../../../../src/app/dashboard/components/password.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PasswordComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_dashboard_service__ = __webpack_require__("../../../../../src/app/dashboard/services/dashboard.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angular2_toaster__ = __webpack_require__("../../../../angular2-toaster/angular2-toaster.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_jquery__ = __webpack_require__("../../../../jquery/dist/jquery.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_jquery__);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+var PasswordComponent = (function () {
+    function PasswordComponent(authService, toast, router) {
+        this.authService = authService;
+        this.toast = toast;
+        this.router = router;
+        this.user = {
+            password: null,
+            password_confirmation: null
+        };
+    }
+    PasswordComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        var u = { id: null };
+        u = JSON.parse(localStorage.getItem('user') || null);
+        this.id = u.id;
+        this.showLoading();
+        __WEBPACK_IMPORTED_MODULE_4_jquery__('#infoModal').on('show.bs.modal').show().addClass('show');
+        setTimeout(function () {
+            _this.hideLoading();
+        }, 300);
+    };
+    PasswordComponent.prototype.save = function (e) {
+        var _this = this;
+        this.showLoading();
+        if (this.user.password && this.user.password === this.user.password_confirmation) {
+            this.authService.builder('password').update(this.id, this.user)
+                .then(function () {
+                _this.hideLoading();
+                _this.toast.pop('success', 'Salvo', 'Nova senha definida com sucesso');
+                _this.router.navigate(['dashboard']);
+            });
+        }
+        else {
+            this.toast.pop('error', 'Error', 'Não foi possivel salvar');
+        }
+    };
+    PasswordComponent.prototype.close = function () {
+        __WEBPACK_IMPORTED_MODULE_4_jquery__('#successModal').hide();
+        this.router.navigate(['/dashboard']);
+    };
+    PasswordComponent.prototype.hideLoading = function () {
+        __WEBPACK_IMPORTED_MODULE_4_jquery__(".container-loading").hide();
+    };
+    PasswordComponent.prototype.showLoading = function () {
+        __WEBPACK_IMPORTED_MODULE_4_jquery__(".container-loading").show();
+    };
+    PasswordComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            template: __webpack_require__("../../../../../src/app/dashboard/components/password.component.html")
+        }),
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_dashboard_service__["a" /* DashboardService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_dashboard_service__["a" /* DashboardService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3_angular2_toaster__["b" /* ToasterService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_angular2_toaster__["b" /* ToasterService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */]) === "function" && _c || Object])
+    ], PasswordComponent);
+    return PasswordComponent;
+    var _a, _b, _c;
+}());
+
+//# sourceMappingURL=password.component.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/dashboard/dashboard-routing.module.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DashboardRoutingModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_dashboard_component__ = __webpack_require__("../../../../../src/app/dashboard/components/dashboard.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_password_component__ = __webpack_require__("../../../../../src/app/dashboard/components/password.component.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+
+var routes = [
+    {
+        path: '',
+        component: __WEBPACK_IMPORTED_MODULE_2__components_dashboard_component__["a" /* DashboardComponent */],
+        data: {
+            title: 'Dashboard'
+        },
+        children: [
+            {
+                path: 'password',
+                component: __WEBPACK_IMPORTED_MODULE_3__components_password_component__["a" /* PasswordComponent */],
+                data: {
+                    title: 'Nova senha'
+                }
+            }
+        ]
+    }
+];
+var DashboardRoutingModule = (function () {
+    function DashboardRoutingModule() {
+    }
+    DashboardRoutingModule = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
+            imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["d" /* RouterModule */].forChild(routes)],
+            exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["d" /* RouterModule */]]
+        })
+    ], DashboardRoutingModule);
+    return DashboardRoutingModule;
+}());
+
+//# sourceMappingURL=dashboard-routing.module.js.map
+
+/***/ }),
+
 /***/ "../../../../../src/app/dashboard/dashboard.module.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -554,18 +657,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DashboardModule", function() { return DashboardModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__("../../../common/@angular/common.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_charts_ng2_charts__ = __webpack_require__("../../../../ng2-charts/ng2-charts.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_charts_ng2_charts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_ng2_charts_ng2_charts__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ngx_bootstrap_dropdown__ = __webpack_require__("../../../../ngx-bootstrap/dropdown/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__dashboard_component__ = __webpack_require__("../../../../../src/app/dashboard/dashboard.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__dashboard_routing_module__ = __webpack_require__("../../../../../src/app/dashboard/dashboard-routing.module.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_dashboard_service__ = __webpack_require__("../../../../../src/app/dashboard/services/dashboard.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ng2_charts_ng2_charts__ = __webpack_require__("../../../../ng2-charts/ng2-charts.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ng2_charts_ng2_charts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_ng2_charts_ng2_charts__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ngx_bootstrap_dropdown__ = __webpack_require__("../../../../ngx-bootstrap/dropdown/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_dashboard_component__ = __webpack_require__("../../../../../src/app/dashboard/components/dashboard.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__dashboard_routing_module__ = __webpack_require__("../../../../../src/app/dashboard/dashboard-routing.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_password_component__ = __webpack_require__("../../../../../src/app/dashboard/components/password.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__services_dashboard_service__ = __webpack_require__("../../../../../src/app/dashboard/services/dashboard.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
 
 
 
@@ -580,12 +687,13 @@ var DashboardModule = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
             imports: [
                 __WEBPACK_IMPORTED_MODULE_1__angular_common__["CommonModule"],
-                __WEBPACK_IMPORTED_MODULE_5__dashboard_routing_module__["a" /* DashboardRoutingModule */],
-                __WEBPACK_IMPORTED_MODULE_2_ng2_charts_ng2_charts__["ChartsModule"],
-                __WEBPACK_IMPORTED_MODULE_3_ngx_bootstrap_dropdown__["a" /* BsDropdownModule */],
+                __WEBPACK_IMPORTED_MODULE_2__angular_forms__["FormsModule"],
+                __WEBPACK_IMPORTED_MODULE_6__dashboard_routing_module__["a" /* DashboardRoutingModule */],
+                __WEBPACK_IMPORTED_MODULE_3_ng2_charts_ng2_charts__["ChartsModule"],
+                __WEBPACK_IMPORTED_MODULE_4_ngx_bootstrap_dropdown__["a" /* BsDropdownModule */],
             ],
-            declarations: [__WEBPACK_IMPORTED_MODULE_4__dashboard_component__["a" /* DashboardComponent */]],
-            providers: [__WEBPACK_IMPORTED_MODULE_6__services_dashboard_service__["a" /* DashboardService */]]
+            declarations: [__WEBPACK_IMPORTED_MODULE_5__components_dashboard_component__["a" /* DashboardComponent */], __WEBPACK_IMPORTED_MODULE_7__components_password_component__["a" /* PasswordComponent */]],
+            providers: [__WEBPACK_IMPORTED_MODULE_8__services_dashboard_service__["a" /* DashboardService */]]
         })
     ], DashboardModule);
     return DashboardModule;

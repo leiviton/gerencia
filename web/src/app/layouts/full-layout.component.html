@@ -11,7 +11,7 @@
       <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown">
 
         <div class="dropdown-header text-center"><i class="fa fa-user"></i> <strong>{{ user.name }}</strong></div>
-        <a class="dropdown-item" href="#"><i class="fa fa-bell-o"></i> Trocar senha</a>
+        <a class="dropdown-item" [routerLink]="['/dashboard/password']"><i class="fa fa-bell-o"></i> Trocar senha</a>
         <a class="dropdown-item" [routerLink]="['/user/logout']"><i class="fa fa-power-off"></i> Sair</a>
       </div>
     </li>

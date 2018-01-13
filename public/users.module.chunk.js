@@ -49,6 +49,12 @@ var EditComponent = (function () {
     EditComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.showLoading();
+        var u = { role: null };
+        u = JSON.parse(localStorage.getItem('user') || null);
+        if (u.role !== 'gerente' && u.role !== 'admin') {
+            this.toasterService.pop('error', 'Sem permissão', 'Usuário sem acesso, contate o administrador');
+            this.router.navigate(['/dashboard']);
+        }
         __WEBPACK_IMPORTED_MODULE_1_jquery__('#infoModal').show().addClass('show');
         this.httpService.setAccessToken();
         this.route.params
@@ -155,6 +161,12 @@ var NewComponent = (function () {
     NewComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.showLoading();
+        var u = { role: null };
+        u = JSON.parse(localStorage.getItem('user') || null);
+        if (u.role !== 'gerente' && u.role !== 'admin') {
+            this.toasterService.pop('error', 'Sem permissão', 'Usuário sem acesso, contate o administrador');
+            this.router.navigate(['/dashboard']);
+        }
         __WEBPACK_IMPORTED_MODULE_2_jquery__('#infoModal').show().addClass('show');
         setTimeout(function () {
             _this.hideLoading();
@@ -218,10 +230,11 @@ module.exports = "<div class=\"animated fadeIn\">\n    <div class=\"row\">\n    
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return UsersComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_users_service__ = __webpack_require__("../../../../../src/app/cadastro/users/services/users.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jquery__ = __webpack_require__("../../../../jquery/dist/jquery.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_jquery__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angular2_toaster__ = __webpack_require__("../../../../angular2-toaster/angular2-toaster.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_users_service__ = __webpack_require__("../../../../../src/app/cadastro/users/services/users.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_jquery__ = __webpack_require__("../../../../jquery/dist/jquery.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_jquery__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -235,10 +248,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var UsersComponent = (function () {
-    function UsersComponent(httpService, router) {
+    function UsersComponent(httpService, router, toasterService) {
         this.httpService = httpService;
         this.router = router;
+        this.toasterService = toasterService;
         this.cor = false;
         this.pesquisa = {
             inicio: null,
@@ -251,6 +266,12 @@ var UsersComponent = (function () {
     UsersComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.showLoading();
+        var u = { role: null };
+        u = JSON.parse(localStorage.getItem('user') || null);
+        if (u.role !== 'gerente' && u.role !== 'admin') {
+            this.toasterService.pop('error', 'Sem permissão', 'Usuário sem acesso, contate o administrador');
+            this.router.navigate(['/dashboard']);
+        }
         this.httpService.setAccessToken();
         this.httpService.eventEmitter
             .subscribe(function () {
@@ -268,16 +289,16 @@ var UsersComponent = (function () {
         this.router.navigate(['/cadastro/users/edit/' + id]);
     };
     UsersComponent.prototype.showModal = function () {
-        __WEBPACK_IMPORTED_MODULE_3_jquery__(".modal").show().addClass('show');
+        __WEBPACK_IMPORTED_MODULE_4_jquery__(".modal").show().addClass('show');
     };
     UsersComponent.prototype.hideModal = function () {
-        __WEBPACK_IMPORTED_MODULE_3_jquery__(".modal").hide();
+        __WEBPACK_IMPORTED_MODULE_4_jquery__(".modal").hide();
     };
     UsersComponent.prototype.hideLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_3_jquery__(".container-loading").hide();
+        __WEBPACK_IMPORTED_MODULE_4_jquery__(".container-loading").hide();
     };
     UsersComponent.prototype.showLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_3_jquery__(".container-loading").show();
+        __WEBPACK_IMPORTED_MODULE_4_jquery__(".container-loading").show();
     };
     UsersComponent.prototype.pesquisar = function (fields) {
         console.log(fields);
@@ -286,10 +307,10 @@ var UsersComponent = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             template: __webpack_require__("../../../../../src/app/cadastro/users/components/users.component.html")
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__services_users_service__["a" /* UsersService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_users_service__["a" /* UsersService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* Router */]) === "function" && _b || Object])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__services_users_service__["a" /* UsersService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_users_service__["a" /* UsersService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_angular2_toaster__["b" /* ToasterService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_angular2_toaster__["b" /* ToasterService */]) === "function" && _c || Object])
     ], UsersComponent);
     return UsersComponent;
-    var _a, _b;
+    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=users.component.js.map

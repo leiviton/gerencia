@@ -52,6 +52,13 @@ var EditComponent = (function () {
     EditComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.showLoading();
+        var u = { role: null };
+        u = JSON.parse(localStorage.getItem('user') || null);
+        if (u.role !== 'gerente' && u.role !== 'admin') {
+            this.hideLoading();
+            this.toasterService.pop('error', 'Sem permissão', 'Usuário sem acesso, contate o administrador');
+            this.router.navigate(['/cadastro/produtos']);
+        }
         this.httpService.setAccessToken();
         __WEBPACK_IMPORTED_MODULE_1_jquery__('#infoModal').show().addClass('show');
         this.route.params
@@ -181,6 +188,13 @@ var NewComponent = (function () {
     NewComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.showLoading();
+        var u = { role: null };
+        u = JSON.parse(localStorage.getItem('user') || null);
+        if (u.role !== 'gerente' && u.role !== 'admin') {
+            this.toasterService.pop('error', 'Sem permissão', 'Usuário sem acesso, contate o administrador');
+            this.router.navigate(['/cadastro/produtos']);
+            this.hideLoading();
+        }
         __WEBPACK_IMPORTED_MODULE_2_jquery__('#infoModal').show().addClass('show');
         setTimeout(function () {
             _this.grupos();
@@ -262,10 +276,11 @@ module.exports = "<div class=\"animated fadeIn\">\n    <div class=\"row\">\n    
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProdutosComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_produtos_service__ = __webpack_require__("../../../../../src/app/cadastro/produtos/services/produtos.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jquery__ = __webpack_require__("../../../../jquery/dist/jquery.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_jquery__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angular2_toaster__ = __webpack_require__("../../../../angular2-toaster/angular2-toaster.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_produtos_service__ = __webpack_require__("../../../../../src/app/cadastro/produtos/services/produtos.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_jquery__ = __webpack_require__("../../../../jquery/dist/jquery.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_jquery__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -279,10 +294,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var ProdutosComponent = (function () {
-    function ProdutosComponent(httpService, router) {
+    function ProdutosComponent(httpService, router, toasterService) {
         this.httpService = httpService;
         this.router = router;
+        this.toasterService = toasterService;
         this.cor = false;
         this.pesquisa = {
             inicio: null,
@@ -312,16 +329,16 @@ var ProdutosComponent = (function () {
         this.router.navigate(['/cadastro/produtos/edit/' + id]);
     };
     ProdutosComponent.prototype.showModal = function () {
-        __WEBPACK_IMPORTED_MODULE_3_jquery__(".modal").show().addClass('show');
+        __WEBPACK_IMPORTED_MODULE_4_jquery__(".modal").show().addClass('show');
     };
     ProdutosComponent.prototype.hideModal = function () {
-        __WEBPACK_IMPORTED_MODULE_3_jquery__(".modal").hide();
+        __WEBPACK_IMPORTED_MODULE_4_jquery__(".modal").hide();
     };
     ProdutosComponent.prototype.hideLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_3_jquery__(".container-loading").hide();
+        __WEBPACK_IMPORTED_MODULE_4_jquery__(".container-loading").hide();
     };
     ProdutosComponent.prototype.showLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_3_jquery__(".container-loading").show();
+        __WEBPACK_IMPORTED_MODULE_4_jquery__(".container-loading").show();
     };
     ProdutosComponent.prototype.pesquisar = function (fields) {
         console.log(fields);
@@ -330,10 +347,10 @@ var ProdutosComponent = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             template: __webpack_require__("../../../../../src/app/cadastro/produtos/components/produtos.component.html")
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__services_produtos_service__["a" /* ProdutosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_produtos_service__["a" /* ProdutosService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* Router */]) === "function" && _b || Object])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__services_produtos_service__["a" /* ProdutosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_produtos_service__["a" /* ProdutosService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_angular2_toaster__["b" /* ToasterService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_angular2_toaster__["b" /* ToasterService */]) === "function" && _c || Object])
     ], ProdutosComponent);
     return ProdutosComponent;
-    var _a, _b;
+    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=produtos.component.js.map
