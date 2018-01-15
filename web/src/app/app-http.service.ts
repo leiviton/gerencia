@@ -67,6 +67,11 @@ export class AppHttpService{
             return this.toPromise(observable);
     }
 
+    valid(id: number, data: object)
+    {
+        let observable = this.http.put(this.url + '/' + id, data, {headers: this.header});
+        return this.toPromise(observable);
+    }
     update(id: number, data: object)
     {
         let observable = this.http.put(this.url + '/' + id, data, {headers: this.header});

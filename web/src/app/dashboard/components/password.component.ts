@@ -16,7 +16,8 @@ export class PasswordComponent{
     };
 
     id:null;
-
+    password_at: '';
+    validar = false;
     ngOnInit(): void {
         let u = {id:null};
         u = JSON.parse(localStorage.getItem('user') || null);
@@ -39,6 +40,25 @@ export class PasswordComponent{
         } else {
             this.toast.pop('error','Error','Não foi possivel salvar');
         }
+    }
+
+    validarSenha(p)
+    {
+        let u = JSON.parse(localStorage.getItem('user') || null);
+        let us = {
+            username:u.email,
+            password:p
+        }
+        this.authService.builder('validar')
+            .valid(u.id, us.password)
+            .then((res)=>{
+                if(res == true)
+                {
+                    this.validar = true;
+                }else{
+                    this.toast.pop('error','Error','Senha anterior inválida');
+                }
+            });
     }
     close(){
         jQuery('#successModal').hide();

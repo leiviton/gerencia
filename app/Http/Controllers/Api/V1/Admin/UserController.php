@@ -94,4 +94,18 @@ class UserController extends Controller
 
         return $this->userRepository->skipPresenter(false)->find($user->id);
     }
+
+    public function valid($id,Request $request)
+    {
+        $password = $this->userRepository->find($id,['password']);
+
+        $p = $request->get('password');
+
+        if($password === bcrypt($p))
+        {
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
