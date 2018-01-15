@@ -102,7 +102,7 @@ class UserController extends Controller
 
         $p = $request->get('password');
 
-        if($password['password'] === bcrypt($p))
+        if($password[0]->password === bcrypt($p))
         {
             return 1;
         }else{
