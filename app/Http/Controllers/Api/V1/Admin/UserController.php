@@ -97,7 +97,7 @@ class UserController extends Controller
 
     public function valid($id,Request $request)
     {
-        $password = $this->userRepository->find($id,['password']);
+        $password = $this->userRepository->find($id,'password');
 
         $p = $request->get('password');
 
