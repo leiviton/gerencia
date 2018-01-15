@@ -52,8 +52,9 @@ export class PasswordComponent{
         this.authService.builder('validar')
             .valid(u.id, us.password)
             .then((res)=>{
-                if(res == true)
+                if(res == 1)
                 {
+                    console.log('res', res)
                     this.validar = true;
                 }else{
                     this.toast.pop('error','Error','Senha anterior inválida');
