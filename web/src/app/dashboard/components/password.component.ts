@@ -46,11 +46,10 @@ export class PasswordComponent{
     {
         let u = JSON.parse(localStorage.getItem('user') || null);
         let us = {
-            username:u.email,
             password:p
-        }
+        };
         this.authService.builder('validar')
-            .valid(u.id, us.password)
+            .valid(u.id,us)
             .then((res)=>{
                 if(res == 1)
                 {
