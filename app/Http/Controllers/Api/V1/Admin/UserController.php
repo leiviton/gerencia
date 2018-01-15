@@ -13,6 +13,7 @@ use Pedidos\Http\Controllers\Controller;
 use Pedidos\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use Pedidos\Services\UserService;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -97,7 +98,7 @@ class UserController extends Controller
 
     public function valid($id,Request $request)
     {
-        $password = $this->userRepository->find($id,'password');
+        $password = DB::select("select password from users where id = ?;",[$id]);
 
         $p = $request->get('password');
 
