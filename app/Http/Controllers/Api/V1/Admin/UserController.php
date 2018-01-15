@@ -98,7 +98,7 @@ class UserController extends Controller
 
     public function valid($id,Request $request)
     {
-        $password = DB::select("select password from users where id = ?;",[$id]);
+        $password = DB::select("select password from users where id = $id");
 
         $p = $request->get('password');
 
@@ -106,7 +106,7 @@ class UserController extends Controller
         {
             return $password;
         }else{
-            return '1:'.$password.'2:'.$p;
+            return $password;
         }
     }
 }
