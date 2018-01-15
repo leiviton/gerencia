@@ -106,7 +106,7 @@ class UserController extends Controller
         {
             return 1;
         }else{
-            return 0;
+            return $password[0]->password.' , 1:'.bcrypt($p);
         }
     }
 }
