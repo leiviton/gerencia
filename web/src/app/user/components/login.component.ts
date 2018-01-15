@@ -53,6 +53,8 @@ export class LoginComponent {
             this.hideLoading();
         })
     }
+
+
     hideLoading(){
         jQuery(".container-loading").hide();
     }

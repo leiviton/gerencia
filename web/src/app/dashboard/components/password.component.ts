@@ -3,13 +3,16 @@ import { DashboardService } from '../services/dashboard.service';
 import { Router } from '@angular/router';
 import {ToasterService} from 'angular2-toaster';
 import * as jQuery from 'jquery';
+
+import { environment } from '../../../environments/environment';
+import {AuthService} from "../../user/services/auth.service";
 @Component({
     templateUrl: './password.component.html'
 })
 export class PasswordComponent{
 
-    constructor(private authService: DashboardService, private toast: ToasterService, private router: Router){}
-   
+    constructor(private authService: DashboardService,private service: AuthService, private toast: ToasterService, private router: Router){}
+
     user: any = {
         password: null,
         password_confirmation:null
@@ -42,23 +45,25 @@ export class PasswordComponent{
         }
     }
 
-    validarSenha(p)
+    valid()
     {
+
         let u = JSON.parse(localStorage.getItem('user') || null);
-        let us = {
-            password:p
+        let data = {
+            grant_type: 'password',
+            client_id: environment.client_id,
+            client_secret: environment.client_secret,
+            username: u.email,
+            password: this.password_at,
+            scope: ''
         };
-        this.authService.builder('validar')
-            .valid(u.id,us)
-            .then((res)=>{
-                if(res == 1)
-                {
-                    console.log('res', res)
-                    this.validar = true;
-                }else{
-                    this.toast.pop('error','Error','Senha anterior inválida');
-                }
-            });
+
+        this.service.login(data).then((res) => {
+            this.validar = true;
+        }).catch(() => {
+            this.validar = false;
+            this.toast.pop('error','Error','Senha invalida');
+        })
     }
     close(){
         jQuery('#successModal').hide();
