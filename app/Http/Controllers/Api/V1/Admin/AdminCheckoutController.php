@@ -321,6 +321,8 @@ class AdminCheckoutController extends Controller
                             <td class='fonte padding produto'>" . $value->product->id . "</td>
                             <td class='fonte padding produto'>" . $value->product->name . " - " . $value->historico . "</td>
                             <td class='fonte padding produto'>" . $value->qtd . "</td>
+                            <td class='fonte padding produto'>" . $value->price . "</td>
+                            <td class='fonte padding produto'>" . $value->subtotal . "</td>
                           </tr>";
                 $this->itemRepository->update(['impresso' => 'S'], $value->id);
                 $contador += $value->qtd;
@@ -336,7 +338,9 @@ class AdminCheckoutController extends Controller
                       <tr>
                         <th class='fonte padding produto'>#</th>
                         <th class='fonte padding produto'>Produto</th>
-                        <th class='fonte padding produto'>Qtd</th>
+                        <th class='fonte padding produto'>Qtd</th>                     
+                        <th class='fonte padding produto'>Vr.Uni</th>
+                        <th class='fonte padding produto'>Subtotal</th>
                       </tr>
                     </thead>
                     <tbody>
