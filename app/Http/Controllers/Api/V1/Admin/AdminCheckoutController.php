@@ -319,7 +319,7 @@ class AdminCheckoutController extends Controller
             if($value->product->id != 58) {
                 $produtos .= " <tr>
                             <td class='fonte padding produto'>" . $value->product->id . "</td>
-                            <td class='fonte padding produto' style='white-space: initial; width: 40px'>" . substr($value->product->name,0,14)."<br />".substr($value->product->name,15,35). " - <br />" . $value->historico . "</td>
+                            <td class='fonte padding produto' style='white-space: initial; width: 40px'>" . substr($value->product->name,0,14)."<br />".substr($value->product->name,14,35). " - <br />" . $value->historico . "</td>
                             <td class='fonte padding produto'>" . $value->qtd . "</td>
                             <td class='fonte padding produto'>" . $value->price . "</td>
                           </tr>";
