@@ -507,7 +507,7 @@ var DashboardComponent = (function () {
 /***/ "../../../../../src/app/dashboard/components/password.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div tabindex=\"-1\" class=\"modal fade\" id=\"infoModal\" role=\"dialog\" aria-hidden=\"true\" aria-labelledby=\"myModalLabel\" style=\"display: none;\">\r\n    <div class=\"modal-dialog modal-sm modal-info\" role=\"document\">\r\n        <div class=\"modal-content\">\r\n            <div class=\"modal-header cadastro text-center\">\r\n                <h6 class=\"modal-title\">Mudar senha</h6>\r\n                <button class=\"close\" aria-label=\"Close\" type=\"button\" data-dismiss=\"modal\" (click)=\"close()\">\r\n                    <span aria-hidden=\"true\">×</span>\r\n                </button>\r\n            </div>\r\n            <div class=\"modal-body\">\r\n                <form #myForm=\"ngForm\">\r\n                    <div class=\"form-group row\">\r\n                        <label class=\"col-md-5 col-form-label\" for=\"password\">Nova senha: <span class=\"text-danger\">*</span></label>\r\n                        <div class=\"col-md-7\">\r\n                            <input type=\"password\" id=\"password\" name=\"password\"\r\n                                   [ngClass]=\"{'is-invalid': user.password_confirmation !== user.password, 'is-valid': user.password == user.password_confirmation}\"\r\n                                   [(ngModel)]=\"user.password\" class=\"form-control\" placeholder=\"Nova senha\" required>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"form-group row\">\r\n                        <label class=\"col-md-5 col-form-label\" for=\"repeat_p\">Repita a senha:</label>\r\n                        <div class=\"col-md-7\">\r\n                            <input type=\"password\" id=\"repeat_p\" name=\"repeat_p\"\r\n                                   [ngClass]=\"{'is-invalid': user.password_confirmation !== user.password, 'is-valid': user.password == user.password_confirmation}\"\r\n                                   [(ngModel)]=\"user.password_confirmation\" class=\"form-control\" placeholder=\"Repita a senha\" required>\r\n                            <div class=\"invalid-feedback\" *ngIf=\"user.password !== user.password_confirmation\">\r\n                                Senhas precisam ser diferentes.\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </form>\r\n            </div>\r\n            <div class=\"modal-footer cadastro\">\r\n                <div class=\"modal-button\">\r\n                    <button class=\"btn btn-danger\" type=\"button\" (click)=\"close()\"><i class=\"fa fa-arrow-circle-left\"></i> Cancelar</button>\r\n                    <button class=\"btn btn-success\" type=\"button\" (click)=\"save(user)\" [disabled]=\"!myForm.valid && user.password !== repeat_p\"><i class=\"fa fa-arrow-circle-right\"></i> Salvar</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <!-- /.modal-content -->\r\n    </div>\r\n    <!-- /.modal-dialog -->\r\n</div>"
+module.exports = "<div tabindex=\"-1\" class=\"modal fade\" id=\"infoModal\" role=\"dialog\" aria-hidden=\"true\" aria-labelledby=\"myModalLabel\" style=\"display: none;\">\r\n    <div class=\"modal-dialog modal-sm modal-info\" role=\"document\">\r\n        <div class=\"modal-content\">\r\n            <div class=\"modal-header cadastro text-center\">\r\n                <h6 class=\"modal-title\">Mudar senha</h6>\r\n                <button class=\"close\" aria-label=\"Close\" type=\"button\" data-dismiss=\"modal\" (click)=\"close()\">\r\n                    <span aria-hidden=\"true\">×</span>\r\n                </button>\r\n            </div>\r\n            <div class=\"modal-body\">\r\n                <form #myForm=\"ngForm\">\r\n                    <div class=\"form-group row\">\r\n                        <label class=\"col-md-5 col-form-label\" for=\"password\">Nova senha: <span class=\"text-danger\">*</span></label>\r\n                        <div class=\"col-md-7\">\r\n                            <input type=\"password\" id=\"password\" name=\"password\"\r\n                                   [ngClass]=\"{'is-invalid': user.password_confirmation !== user.password, 'is-valid': user.password == user.password_confirmation}\"\r\n                                   [(ngModel)]=\"user.password\" class=\"form-control\" placeholder=\"Nova senha\" required>\r\n                            <div class=\"invalid-feedback text-validation\" *ngIf=\"user.password !== user.password_confirmation\">\r\n                                <p>Campo repita senha diferente do campo nova senha.</p>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"form-group row\">\r\n                        <label class=\"col-md-5 col-form-label\" for=\"repeat_p\">Repita a senha:</label>\r\n                        <div class=\"col-md-7\">\r\n                            <input type=\"password\" id=\"repeat_p\" name=\"repeat_p\"\r\n                                   [ngClass]=\"{'is-invalid': user.password_confirmation !== user.password, 'is-valid': user.password == user.password_confirmation}\"\r\n                                   [(ngModel)]=\"user.password_confirmation\" class=\"form-control\" placeholder=\"Repita a senha\" required>\r\n                            <div class=\"invalid-feedback text-validation\" *ngIf=\"user.password !== user.password_confirmation\">\r\n                                <p>Campo repita senha diferente do campo nova senha.</p>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </form>\r\n            </div>\r\n            <div class=\"modal-footer cadastro\">\r\n                <div class=\"modal-button\">\r\n                    <button class=\"btn btn-danger\" type=\"button\" (click)=\"close()\"><i class=\"fa fa-arrow-circle-left\"></i> Cancelar</button>\r\n                    <button class=\"btn btn-success\" type=\"button\" (click)=\"save(user)\" [disabled]=\"user.password !== user.password_confirmation\"><i class=\"fa fa-arrow-circle-right\"></i> Salvar</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <!-- /.modal-content -->\r\n    </div>\r\n    <!-- /.modal-dialog -->\r\n</div>"
 
 /***/ }),
 
@@ -522,6 +522,8 @@ module.exports = "<div tabindex=\"-1\" class=\"modal fade\" id=\"infoModal\" rol
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angular2_toaster__ = __webpack_require__("../../../../angular2-toaster/angular2-toaster.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_jquery__ = __webpack_require__("../../../../jquery/dist/jquery.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_jquery__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__environments_environment__ = __webpack_require__("../../../../../src/environments/environment.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__user_services_auth_service__ = __webpack_require__("../../../../../src/app/user/services/auth.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -536,15 +538,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+
 var PasswordComponent = (function () {
-    function PasswordComponent(authService, toast, router) {
+    function PasswordComponent(authService, service, toast, router) {
         this.authService = authService;
+        this.service = service;
         this.toast = toast;
         this.router = router;
         this.user = {
             password: null,
             password_confirmation: null
         };
+        this.validar = false;
     }
     PasswordComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -572,6 +578,24 @@ var PasswordComponent = (function () {
             this.toast.pop('error', 'Error', 'Não foi possivel salvar');
         }
     };
+    PasswordComponent.prototype.valid = function () {
+        var _this = this;
+        var u = JSON.parse(localStorage.getItem('user') || null);
+        var data = {
+            grant_type: 'password',
+            client_id: __WEBPACK_IMPORTED_MODULE_5__environments_environment__["a" /* environment */].client_id,
+            client_secret: __WEBPACK_IMPORTED_MODULE_5__environments_environment__["a" /* environment */].client_secret,
+            username: u.email,
+            password: this.password_at,
+            scope: ''
+        };
+        this.service.login(data).then(function (res) {
+            _this.validar = true;
+        }).catch(function () {
+            _this.validar = false;
+            _this.toast.pop('error', 'Error', 'Senha invalida');
+        });
+    };
     PasswordComponent.prototype.close = function () {
         __WEBPACK_IMPORTED_MODULE_4_jquery__('#successModal').hide();
         this.router.navigate(['/dashboard']);
@@ -586,10 +610,10 @@ var PasswordComponent = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             template: __webpack_require__("../../../../../src/app/dashboard/components/password.component.html")
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_dashboard_service__["a" /* DashboardService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_dashboard_service__["a" /* DashboardService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3_angular2_toaster__["b" /* ToasterService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_angular2_toaster__["b" /* ToasterService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */]) === "function" && _c || Object])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_dashboard_service__["a" /* DashboardService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_dashboard_service__["a" /* DashboardService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_6__user_services_auth_service__["a" /* AuthService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__user_services_auth_service__["a" /* AuthService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3_angular2_toaster__["b" /* ToasterService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_angular2_toaster__["b" /* ToasterService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */]) === "function" && _d || Object])
     ], PasswordComponent);
     return PasswordComponent;
-    var _a, _b, _c;
+    var _a, _b, _c, _d;
 }());
 
 //# sourceMappingURL=password.component.js.map
@@ -665,12 +689,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__dashboard_routing_module__ = __webpack_require__("../../../../../src/app/dashboard/dashboard-routing.module.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_password_component__ = __webpack_require__("../../../../../src/app/dashboard/components/password.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__services_dashboard_service__ = __webpack_require__("../../../../../src/app/dashboard/services/dashboard.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__user_services_auth_service__ = __webpack_require__("../../../../../src/app/user/services/auth.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -693,7 +719,7 @@ var DashboardModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_4_ngx_bootstrap_dropdown__["a" /* BsDropdownModule */],
             ],
             declarations: [__WEBPACK_IMPORTED_MODULE_5__components_dashboard_component__["a" /* DashboardComponent */], __WEBPACK_IMPORTED_MODULE_7__components_password_component__["a" /* PasswordComponent */]],
-            providers: [__WEBPACK_IMPORTED_MODULE_8__services_dashboard_service__["a" /* DashboardService */]]
+            providers: [__WEBPACK_IMPORTED_MODULE_8__services_dashboard_service__["a" /* DashboardService */], __WEBPACK_IMPORTED_MODULE_9__user_services_auth_service__["a" /* AuthService */]]
         })
     ], DashboardModule);
     return DashboardModule;

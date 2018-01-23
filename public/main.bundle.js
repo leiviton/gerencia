@@ -30,7 +30,8 @@ var map = {
 	],
 	"./dashboard/dashboard.module": [
 		"../../../../../src/app/dashboard/dashboard.module.ts",
-		"dashboard.module"
+		"dashboard.module",
+		"common"
 	],
 	"./orders/orders.module": [
 		"../../../../../src/app/orders/orders.module.ts",
@@ -140,6 +141,10 @@ var AppHttpService = (function () {
     };
     AppHttpService.prototype.view = function (id, url) {
         var observable = this.http.get(this.url + url + '/' + id, { headers: this.header });
+        return this.toPromise(observable);
+    };
+    AppHttpService.prototype.valid = function (id, data) {
+        var observable = this.http.put(this.url + '/' + id, data, { headers: this.header });
         return this.toPromise(observable);
     };
     AppHttpService.prototype.update = function (id, data) {

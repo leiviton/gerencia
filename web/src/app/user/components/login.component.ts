@@ -15,11 +15,7 @@ export class LoginComponent {
     };
 
     constructor(private AuthService: AuthService, private router: Router) {
-        let u = JSON.parse(localStorage.getItem('user') || null);
-        if(u && u != null)
-        {
-            this.router.navigate(['/dashboard']);
-        }
+        localStorage.setItem('user','');
     }
 
     login(e) {

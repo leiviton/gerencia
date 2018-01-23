@@ -15,6 +15,7 @@ use Pedidos\Validators\CategoryValidator;
 class CategoryRepositoryEloquent extends BaseRepository implements CategoryRepository
 {
 
+    protected $skipPresenter = true;
     /**
      * Specify Model class name
      *

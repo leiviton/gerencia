@@ -11,7 +11,6 @@ use Pedidos\Models\Caixa;
  */
 class CaixaTransformer extends TransformerAbstract
 {
-
     /**
      * Transform the Caixa entity
      * @param Pedidos\Models\Caixa $model
@@ -23,7 +22,7 @@ class CaixaTransformer extends TransformerAbstract
         return [
             'id'         => (int) $model->id,
             'name' => $model->name,
-            'salvo' => $model->saldo,
+            'saldo' => $model->saldo,
             'ativo' => $model->ativo,
 
             /* place your other model properties here */
@@ -32,4 +31,5 @@ class CaixaTransformer extends TransformerAbstract
             'updated_at' => $model->updated_at
         ];
     }
+
 }

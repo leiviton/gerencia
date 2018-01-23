@@ -35,7 +35,7 @@ var LogoutComponent = (function () {
             .logout()
             .then(function () {
             localStorage.removeItem('token');
-            localStorage.removeItem('user');
+            localStorage.setItem('user', '');
             _this.hideLoading();
             _this.router.navigate(['/user/login']);
         });

@@ -14,6 +14,7 @@ use Pedidos\Validators\MovimentoCaixaValidator;
  */
 class MovimentoCaixaRepositoryEloquent extends BaseRepository implements MovimentoCaixaRepository
 {
+    protected $skipCriteria = true;
     /**
      * Specify Model class name
      *
@@ -33,4 +34,11 @@ class MovimentoCaixaRepositoryEloquent extends BaseRepository implements Movimen
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
+
+
+    public function presenter()
+    {
+        return \Pedidos\Presenters\MovimentoCaixaPresenter::class;
+    }
+
 }

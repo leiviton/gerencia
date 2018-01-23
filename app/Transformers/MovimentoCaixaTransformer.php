@@ -22,11 +22,15 @@ class MovimentoCaixaTransformer extends TransformerAbstract
     {
         return [
             'id'         => (int) $model->id,
-
+            'tipo_movimento' => $model->tipo_movimento,
+            'valor'=>$model->valor,
+            'usuario'=>$model->usuario,
             /* place your other model properties here */
 
             'created_at' => $model->created_at,
             'updated_at' => $model->updated_at
         ];
     }
+
+
 }

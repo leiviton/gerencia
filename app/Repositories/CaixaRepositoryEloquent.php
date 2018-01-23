@@ -14,6 +14,7 @@ use Pedidos\Validators\CaixaValidator;
  */
 class CaixaRepositoryEloquent extends BaseRepository implements CaixaRepository
 {
+    protected $skipPresenter = true;
     /**
      * Specify Model class name
      *

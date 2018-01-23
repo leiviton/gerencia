@@ -207,11 +207,11 @@ class AdminCheckoutController extends Controller
         foreach ($items as $value) {
             if ($value->product->id != 58) {
                 $produtos .= " <tr>
-                            <td class='fonte padding'>" . $value->product->id . "</td>
-                            <td class='fonte padding'>" . $value->product->name . " - " . $value->historico . "</td>
-                            <td class='fonte padding'>" . $value->qtd . "</td>
-                            <td class='fonte padding'>" . $value->price . "</td>
-                            <td class='fonte padding'>" . $value->subtotal . "</td>
+                            <td class='fonte padding produto'>" . $value->product->id . "</td>
+                            <td class='fonte padding produto'>" . $value->product->name . " - " . $value->historico . "</td>
+                            <td class='fonte padding produto'>" . $value->qtd . "</td>
+                            <td class='fonte padding produto'>" . $value->price . "</td>
+                            <td class='fonte padding produto'>" . $value->subtotal . "</td>
                           </tr>";
                 $this->itemRepository->update(['impresso' => 'S'], $value->id);
                 $contador += $value->qtd;
@@ -225,11 +225,11 @@ class AdminCheckoutController extends Controller
         $table = "<table>
                     <thead>
                       <tr>
-                        <th class='fonte padding'>#</th>
-                        <th class='fonte padding'>Produto</th>
-                        <th class='fonte padding'>Qtd</th>
-                        <th class='fonte padding'>Valor</th>
-                        <th class='fonte padding'>Subtotal</th>
+                        <th class='fonte padding produto'>#</th>
+                        <th class='fonte padding produto'>Produto</th>
+                        <th class='fonte padding produto'>Qtd</th>
+                        <th class='fonte padding produto'>Valor</th>
+                        <th class='fonte padding produto'>Subtotal</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -264,6 +264,10 @@ class AdminCheckoutController extends Controller
                                         padding-bottom: 0;
                                         padding-top: 0;
                                         margin-left: 7px;
+                                    }
+                                    .produto{
+                                        font-weight: 400;
+                                        font-size: 14px;
                                     }
                                 </style>
                             </head>
@@ -314,9 +318,9 @@ class AdminCheckoutController extends Controller
         {
             if($value->product->id != 58) {
                 $produtos .= " <tr>
-                            <td class='fonte padding'>" . $value->product->id . "</td>
-                            <td class='fonte padding'>" . $value->product->name . " - " . $value->historico . "</td>
-                            <td class='fonte padding'>" . $value->qtd . "</td>
+                            <td class='fonte padding produto'>" . $value->product->id . "</td>
+                            <td class='fonte padding produto'>" . $value->product->name . " - " . $value->historico . "</td>
+                            <td class='fonte padding produto'>" . $value->qtd . "</td>
                           </tr>";
                 $this->itemRepository->update(['impresso' => 'S'], $value->id);
                 $contador += $value->qtd;
@@ -330,9 +334,9 @@ class AdminCheckoutController extends Controller
         $table = "<table>
                     <thead>
                       <tr>
-                        <th class='fonte padding'>#</th>
-                        <th class='fonte padding'>Produto</th>
-                        <th class='fonte padding'>Qtd</th>
+                        <th class='fonte padding produto'>#</th>
+                        <th class='fonte padding produto'>Produto</th>
+                        <th class='fonte padding produto'>Qtd</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -360,6 +364,10 @@ class AdminCheckoutController extends Controller
                                     .center{
                                         position: fixed;
                                         margin-left: 200px;
+                                    }
+                                    .produto{
+                                        font-weight: 400;
+                                        font-size: 14px;
                                     }
                                 </style>
                             </head>
@@ -402,6 +410,10 @@ class AdminCheckoutController extends Controller
                                         padding-top: 0;
                                         margin-left: 7px;
                                     }
+                                    .produto{
+                                        font-weight: 400;
+                                        font-size: 14px;
+                                    }
                                 </style>
                             </head>
                             <body>
@@ -413,6 +425,7 @@ class AdminCheckoutController extends Controller
                                 $table
                                 <h5 class='fonte'>---------------------------------------------------------------------</h5>
                                 <h5 class='fonte'>TOTAL DE ITENS: $contador</h5>
+                                <h5 class='fonte'>TOTAL DA COMPRA: R$ $order->total</h5>
                                 <h5 class='fonte'>---------------------------------------------------------------------</h5>
                                 <h5 class='fonte'>$order->observacao</h5>
                                 <h5 class='fonte'>$taxa</h5>

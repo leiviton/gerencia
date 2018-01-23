@@ -8,6 +8,7 @@ import { DashboardComponent } from './components/dashboard.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { PasswordComponent} from "./components/password.component";
 import { DashboardService } from "./services/dashboard.service";
+import {AuthService} from "../user/services/auth.service";
 
 
 @NgModule({
@@ -19,6 +20,6 @@ import { DashboardService } from "./services/dashboard.service";
     BsDropdownModule,
   ],
   declarations: [ DashboardComponent,PasswordComponent ],
-    providers: [DashboardService]
+    providers: [DashboardService, AuthService]
 })
 export class DashboardModule { }

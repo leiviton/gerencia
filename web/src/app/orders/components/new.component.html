@@ -36,8 +36,8 @@
                     <form #myForm="ngForm" class="form-inline">
                         <div class="form-group col-md-12">
                             <div class="col-md-1"></div>
-                            <label class="col-md-1" *ngIf="tipo != 1">Telefone: </label>
-                            <input ngxPhoneMask *ngIf="tipo != 1"  type="text" class="form-control col-md-3" name="pesquisa"  placeholder="Digite Cliente (Telefone, nome, codigo)" required minlength="11" [(ngModel)]="pesquisa.value2" (blur)="buscarCliente()">
+                            <label class="col-md-1" *ngIf="tipo != 1">CLiente: </label>
+                            <input *ngIf="tipo != 1"  type="text" class="form-control col-md-3" name="pesquisa"  placeholder="Digite Cliente (Telefone, nome, codigo)" required minlength="11" [(ngModel)]="pesquisa.value2" (blur)="buscarCliente()">
                             <label for="mesa" class="label col-md-1" *ngIf="tipo == 1">Mesa: </label>
                             <select id="mesa" name="category_id" class="form-control col-md-3" [(ngModel)]="mesa_id" *ngIf="tipo == 1">
                                 <option value="null">Selecione a mesa</option>
@@ -77,7 +77,11 @@
                                     <br><br>
                                     <select name="cidade" id="cidade" class="form-control col-md-12" [(ngModel)]="client.address.city_id">
                                         <option value="0">Selecione cidade</option>
-                                        <option value="1">Guaxupé</option>
+                                        <option value="3128709">Guaxupé</option>
+                                        <option value="3128303">Guaranésia</option>
+                                        <option value="3136900">Juruaia</option>
+                                        <option value="3144102">Muzambinho</option>
+                                        <option value="3163904">São Pedro da União</option>
                                     </select>
                                     <br><br>
                                     <div class="padding" *ngIf="novo == true">
@@ -198,7 +202,31 @@
             <!-- /.modal-content -->
         </div>
     </div>
-
+    <div class="modal fade modal_novo" id="cliente" role="dialog" aria-hidden="true" aria-labelledby="myModalLabell">
+        <div class="modal-dialog modal-sm modal-danger" role="document">
+            <div class="modal-content">
+                <div class="modal-header novo text-center">
+                    <h5 class="modal-title">Resultado pesquisa</h5>
+                    <button class="close" aria-label="Close" type="button" data-dismiss="modal" (click)="closeMd()">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    <div class="checkbox" *ngFor="let p of result.data">
+                        <label>
+                            <p class="text-left" (click)="addClient(p)"> {{ p.name }} - {{ p.phone }}</p>
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer cadastro">
+                    <div class="modal-button">
+                        <button class="btn btn-danger btn-sm text-left" type="button" (click)="closeMd()"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
+                    </div>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+    </div>
 </div>
 
 

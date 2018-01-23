@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "f1fad7e1434d69022860a276fa179a6e",
+    "content-hash": "286447b806411968a511b4ebb6d4350a",
     "packages": [
         {
             "name": "barryvdh/laravel-cors",
@@ -1459,6 +1459,61 @@
                 "server"
             ],
             "time": "2017-08-03T15:09:23+00:00"
+        },
+        {
+            "name": "mike42/escpos-php",
+            "version": "v1.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mike42/escpos-php.git",
+                "reference": "995d9a74d4fec9e0b99ddaf308bac4fec05efc40"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mike42/escpos-php/zipball/995d9a74d4fec9e0b99ddaf308bac4fec05efc40",
+                "reference": "995d9a74d4fec9e0b99ddaf308bac4fec05efc40",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": ">=5.3.9"
+            },
+            "require-dev": {
+                "guzzlehttp/guzzle": "~3.0|~4.0|~5.0|~6.0",
+                "phpunit/phpunit": "4.8.*",
+                "squizlabs/php_codesniffer": "2.*"
+            },
+            "suggest": {
+                "ext-gd": "Used for image printing if present.",
+                "ext-imagick": "Will be used for image printing if present. Required for PDF printing or use of custom fonts.",
+                "guzzlehttp/guzzle": "Allows the use of the ApiConnector to send print jobs over HTTP."
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Mike42\\": "src/Mike42"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Billington",
+                    "email": "michael.billington@gmail.com"
+                }
+            ],
+            "description": "PHP receipt printer library for use with ESC/POS-compatible thermal and impact printers",
+            "homepage": "https://github.com/mike42/escpos-php",
+            "keywords": [
+                "ESC-POS",
+                "driver",
+                "escpos",
+                "print",
+                "receipt"
+            ],
+            "time": "2017-11-05T10:18:27+00:00"
         },
         {
             "name": "monolog/monolog",

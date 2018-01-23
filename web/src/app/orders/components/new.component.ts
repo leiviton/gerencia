@@ -92,6 +92,7 @@ export class NewComponent implements OnInit {
 
         jQuery('#pesquisa').hide();
         jQuery('#complement').hide();
+        jQuery('#cliente').hide();
     }
 
     buscarCliente()
@@ -114,7 +115,7 @@ export class NewComponent implements OnInit {
                         this.client.address.city_id = 0;
                         this.novo = true;
                         this.toasterService.pop('info', 'Nenhum cliente encontrado, cadastre o cliente');
-                    }else {
+                    }else if (res.data.length == 1){
                         this.client.id = res.data[0].id;
                         this.client.name = res.data[0].name;
                         this.client.phone = res.data[0].phone;
@@ -124,9 +125,29 @@ export class NewComponent implements OnInit {
                         this.client.address.bairro = res.data[0].addressClient.data.bairro;
                         this.client.address.city_id = res.data[0].addressClient.data.city.data.id;
                         this.novo = false;
+                    }else if(res.data.length > 1)
+                    {
+                        jQuery('#cliente').show().addClass('show').css('z-index', 1050 + 50);
+                        jQuery('#new_order').css('z-index', 1040);
+                        this.result = res;
                     }
                 });
         }
+    }
+
+    addClient(c)
+    {
+        this.client.id = c.id;
+        this.client.name = c.name;
+        this.client.phone = c.phone;
+        this.client.email = c.user.data.email;
+        this.client.address.address = c.addressClient.data.address;
+        this.client.address.numero = c.addressClient.data.numero;
+        this.client.address.bairro = c.addressClient.data.bairro;
+        this.client.address.city_id = c.addressClient.data.city.data.id;
+        this.novo = false;
+        this.pesquisa.value2 = null;
+        jQuery('#cliente').hide();
     }
 
     buscar()
