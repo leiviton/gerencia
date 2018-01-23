@@ -267,7 +267,7 @@ class AdminCheckoutController extends Controller
                                     }
                                     .produto{
                                         font-weight: 400;
-                                        font-size: 14px;
+                                        font-size: 20px;
                                     }
                                 </style>
                             </head>
@@ -367,7 +367,7 @@ class AdminCheckoutController extends Controller
                                     }
                                     .produto{
                                         font-weight: 400;
-                                        font-size: 14px;
+                                        font-size: 20px;
                                     }
                                 </style>
                             </head>
@@ -412,7 +412,7 @@ class AdminCheckoutController extends Controller
                                     }
                                     .produto{
                                         font-weight: 400;
-                                        font-size: 14px;
+                                        font-size: 20px;
                                     }
                                 </style>
                             </head>
