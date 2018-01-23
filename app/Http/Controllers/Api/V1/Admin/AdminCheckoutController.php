@@ -269,7 +269,7 @@ class AdminCheckoutController extends Controller
                             </head>
                             <body>
                                 <h5 class='fonte'>---------------------------------------------------------------------</h5>
-                                <h5 class='fonte'>Pedido: $order->id | Mesa: ".$order->mesa->name."</h5>
+                                <h5 class='fonte produto'>Pedido: $order->id | Mesa: ".$order->mesa->name."</h5>
                                 <h5 class='fonte'>Data: $data | Hora: $hora</h5>                              
                                 <h5 class='fonte'>---------------------------------------------------------------------</h5>
                                 $cliente
@@ -370,7 +370,7 @@ class AdminCheckoutController extends Controller
                             <body>
                                 <div class='center'>
                                     <h5 class='fonte'>---------------------------------------------------------------------</h5>
-                                    <h5 class='fonte'>Pedido: $order->id | " . $order->mesa->name . "</h5>
+                                    <h5 class='fonte produto'>Pedido: $order->id | " . $order->mesa->name . "</h5>
                                     <h5 class='fonte'>Data: $data | Hora: $hora</h5>                              
                                     <h5 class='fonte'>---------------------------------------------------------------------</h5>
                                     <h5 class='fonte'>Cliente: " . $order->client->name . "</h5>
@@ -414,7 +414,7 @@ class AdminCheckoutController extends Controller
                             </head>
                             <body>
                                 <h5 class='fonte'>---------------------------------------------------------------------</h5>
-                                <h5 class='fonte'>Pedido: $order->id | " . $order->mesa->name . "</h5>
+                                <h5 class='fonte produto'>Pedido: $order->id | " . $order->mesa->name . "</h5>
                                 <h5 class='fonte'>Data: $data | Hora: $hora</h5>                              
                                 <h5 class='fonte'>---------------------------------------------------------------------</h5>
                                 <h5 class='fonte'>ITENS:</h5>
