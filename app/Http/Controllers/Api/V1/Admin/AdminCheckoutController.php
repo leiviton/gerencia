@@ -207,11 +207,9 @@ class AdminCheckoutController extends Controller
         foreach ($items as $value) {
             if ($value->product->id != 58) {
                 $produtos .= " <tr>
-                            <td class='fonte padding produto'>" . $value->product->id . "</td>
                             <td class='fonte padding produto'>" . $value->product->name . " - " . $value->historico . "</td>
                             <td class='fonte padding produto'>" . $value->qtd . "</td>
-                            <td class='fonte padding produto'>" . $value->price . "</td>
-                            <td class='fonte padding produto'>" . $value->subtotal . "</td>
+                            <td class='fonte padding produto'> R$" . $value->price . "</td>
                           </tr>";
                 $this->itemRepository->update(['impresso' => 'S'], $value->id);
                 $contador += $value->qtd;
@@ -225,11 +223,9 @@ class AdminCheckoutController extends Controller
         $table = "<table>
                     <thead>
                       <tr>
-                        <th class='fonte padding produto'>#</th>
                         <th class='fonte padding produto'>Produto</th>
                         <th class='fonte padding produto'>Qtd</th>
                         <th class='fonte padding produto'>Valor</th>
-                        <th class='fonte padding produto'>Subtotal</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -320,7 +316,7 @@ class AdminCheckoutController extends Controller
                 $produtos .= " <tr>
                             <td class='fonte padding produto' style='white-space: initial; width: 40px'>" . substr($value->product->name,0,30)." - <br />" . $value->historico . "</td>
                             <td class='fonte padding produto'>" . $value->qtd . "</td>
-                            <td class='fonte padding produto'>" . $value->price . "</td>
+                            <td class='fonte padding produto'> R$" . $value->price . "</td>
                           </tr>";
                 $this->itemRepository->update(['impresso' => 'S'], $value->id);
                 $contador += $value->qtd;
