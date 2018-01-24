@@ -186,7 +186,7 @@
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body text-center">
+                <div class="modal-body text-center" style="height: 250px; overflow: auto">
                         <div class="checkbox" *ngFor="let p of result.data">
                             <label>
                                 <p class="text-left" (click)="addItem(p)"> {{ p.name }} - {{ p.price | currency:'BRL':true}}</p>
@@ -211,7 +211,7 @@
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body text-center">
+                <div class="modal-body text-center" style="height: 250px; overflow: auto">
                     <div class="checkbox" *ngFor="let p of result.data">
                         <label>
                             <p class="text-left" (click)="addClient(p)"> {{ p.name }} - {{ p.phone }}</p>
@@ -220,7 +220,7 @@
                 </div>
                 <div class="modal-footer cadastro">
                     <div class="modal-button">
-                        <button class="btn btn-danger btn-sm text-left" type="button" (click)="closeMd()"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
+                        <button class="btn btn-danger btn-sm text-left" type="button" (click)="closeC()"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
                     </div>
                 </div>
             </div>

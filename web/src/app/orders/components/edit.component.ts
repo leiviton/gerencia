@@ -168,6 +168,12 @@ export class EditComponent implements OnInit {
             });
     }
 
+    closeMd()
+    {
+        jQuery('#pesquisa').hide();
+    }
+
+
     saveItem(item)
     {
         this.showLoading();

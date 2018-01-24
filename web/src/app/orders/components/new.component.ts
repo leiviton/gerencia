@@ -364,11 +364,17 @@ export class NewComponent implements OnInit {
     {
         jQuery('#complement').hide();
     }
+
     closeMd()
     {
         jQuery('#pesquisa').hide();
     }
 
+
+    closeC()
+    {
+        jQuery('#cliente').hide();
+    }
 
     hideLoading(){
         jQuery(".container-loading").hide();

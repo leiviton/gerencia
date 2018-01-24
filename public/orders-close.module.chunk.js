@@ -3,7 +3,7 @@ webpackJsonp(["orders-close.module"],{
 /***/ "../../../../../src/app/close/components/edit.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div tabindex=\"-1\" class=\"modal fade modal_novo\" id=\"successModal\" role=\"dialog\" aria-hidden=\"true\" aria-labelledby=\"myModalLabel\">\r\n    <div class=\"modal-dialog modal-lg modal-primary\" role=\"document\">\r\n        <div class=\"modal-content\">\r\n            <div class=\"modal-header novo\">\r\n                <h4 class=\"text-center\">Editar Pedido: {{ order.id }} </h4>\r\n                <h4 class=\"text-center\"> {{ mesa }} </h4>\r\n                <h4 class=\"text-center\">Total: {{ order.total  | currency:'BRL':true}}</h4>\r\n            </div>\r\n            <div class=\"modal-body\">\r\n                <div class=\"col-md-12\">\r\n                    <form #myForm=\"ngForm\" class=\"form-inline\">\r\n                        <div class=\"form-group col-md-12\">\r\n                            <label for=\"tipo\" class=\"label col-md-2\">Tipo: </label>\r\n                            <select id=\"tipo\" name=\"tipo\" class=\"form-control col-md-2\" [(ngModel)]=\"order.type\" disabled>\r\n                                <option value=\"0\"> Delivery</option>\r\n                                <option value=\"1\"> Salão</option>\r\n                                <option value=\"2\"> Retirada</option>\r\n                            </select>\r\n                            <label for=\"mesa\" class=\"label col-md-2\" *ngIf=\"order.type == 1\">Mesa: </label>\r\n                            <select id=\"mesa\" name=\"mesa_id\" class=\"form-control col-md-2\" [(ngModel)]=\"order.mesa.data.id\" *ngIf=\"order.type == 1\" disabled>\r\n                                <option *ngFor=\"let g of mesas.data\" value=\"{{ g.id }}\"> {{ g.name }}</option>\r\n                            </select>\r\n                            <label for=\"status\" class=\"label col-md-2\">Status: </label>\r\n                            <select id=\"status\" name=\"staus\" class=\"form-control col-md-2\" [(ngModel)]=\"order.status\" disabled>\r\n                                <option value=\"3\">Fechada</option>\r\n                            </select>\r\n\r\n                        </div>\r\n                    </form>\r\n                </div>\r\n                <div class=\"col-md-12\" style=\"padding-bottom: 5px;\">\r\n                    <form #myForm=\"ngForm\" class=\"form-inline\">\r\n                        <div class=\"form-group col-md-12\">\r\n                        </div>\r\n                    </form>\r\n                </div>\r\n                <div class=\"row borderdiv\" style=\"height: 370px; overflow: auto\">\r\n                    <div class=\"col-md-6 mb-4 padding\" *ngIf=\"order.type != 1\">\r\n                        <!-- Nav tabs -->\r\n                        <tabset>\r\n                            <tab heading=\"Cliente\">\r\n                                <form name=\"form\" class=\"form-inline\">\r\n                                    <input type=\"text\" class=\"form-control col-md-12 name\" name=\"name\" [(ngModel)]=\"client.name\" placeholder=\"Nome Cliente\" disabled/>\r\n                                    <br><br>\r\n                                    <input ngxPhoneMask type=\"text\" class=\"form-control col-md-12\" name=\"phone\" [(ngModel)]=\"client.phone\" placeholder=\"Telefone\" disabled />\r\n                                    <br><br>\r\n                                    <input type=\"text\" class=\"form-control col-md-12\" name=\"email\" [(ngModel)]=\"client.email\" placeholder=\"Email\" disabled />\r\n                                    <br><br>\r\n                                    <input type=\"text\" class=\"form-control col-md-12\" name=\"address.address\" [(ngModel)]=\"client.address.address\" placeholder=\"Rua\" [disabled]=\"editar\"/>\r\n                                    <br><br>\r\n                                    <input type=\"text\" class=\"form-control col-md-3\" name=\"address.numero\" [(ngModel)]=\"client.address.numero\" placeholder=\"Numero\" [disabled]=\"editar\">\r\n                                    <div class=\"separate1\"></div>\r\n                                    <input type=\"text\" class=\"form-control col-md-8\" name=\"address.bairro\" [(ngModel)]=\"client.address.bairro\" placeholder=\"Bairro\" [disabled]=\"editar\"/>\r\n                                    <br><br>\r\n                                    <select name=\"cidade\" id=\"cidade\" class=\"form-control col-md-12\" [(ngModel)]=\"client.address.city_id\" disabled>\r\n                                        <option value=\"0\">Selecione cidade</option>\r\n                                        <option value=\"1\">Guaxupé</option>\r\n                                    </select>\r\n                                    <br><br>\r\n                                    <div class=\"padding\" *ngIf=\"editar == false\">\r\n                                        <button type=\"button\" class=\"btn btn-default btn-info\" (click)=\"saveClient()\">Atualizar endereço</button>\r\n                                    </div>\r\n                                </form>\r\n                            </tab>\r\n                        </tabset>\r\n                    </div><!--/.col-->\r\n                    <div class=\"col-lg-6 padding\" [ngClass]=\"{'col-md-12 col-lg-12': order.type != 0 && order.type != 2, 'col-md-6 col-lg-6': order.type != 1}\">\r\n                        <div class=\"table-responsive\" style=\"height: 160px; overflow: auto\">\r\n                            <table class=\"table scrollbox table-striped\">\r\n                                <thead>\r\n                                <tr class=\"th-table title-table\">\r\n                                    <th>#</th>\r\n                                    <th>Produto</th>\r\n                                    <th>Valor</th>\r\n                                    <th>Quantadade</th>\r\n                                    <th>SubTotal</th>\r\n                                </tr>\r\n                                </thead>\r\n                                <tbody>\r\n                                <tr *ngFor=\"let i of products.data\">\r\n                                    <td>{{ i.product.data.id }}</td>\r\n                                    <td>{{ i.product.data.name }}</td>\r\n                                    <td>{{ i.product.data.price | currency:'BRL':true}}</td>\r\n                                    <td>{{ i.qtd }}</td>\r\n                                    <td>\r\n                                        {{ i.subtotal | currency:'BRL':true }}\r\n                                    </td>\r\n                                </tr>\r\n                                </tbody>\r\n                            </table>\r\n                        </div>\r\n                        <hr>\r\n                        <div class=\"col-md-12 text-center alert alert-success total-pagamento\"><p class=\"qtd\">TOTAL: {{ order.total | currency:'BRL':true }}</p></div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"modal-footer cadastro\">\r\n                <div class=\"modal-button\">\r\n                    <button class=\"btn btn-primary\" (click)=\"save()\"><i class=\"fa fa-print\"></i> Imprimir (F7)</button>\r\n                    <button class=\"btn btn-danger text-left\" type=\"button\" (click)=\"close()\"><i class=\"fa fa-arrow-circle-left\"></i> Cancelar (ESC)</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <!-- /.modal-content -->\r\n    </div>\r\n    <!-- /.modal-dialog -->\r\n</div>\r\n"
+module.exports = "<div tabindex=\"-1\" class=\"modal fade modal_novo\" id=\"successModal\" role=\"dialog\" aria-hidden=\"true\" aria-labelledby=\"myModalLabel\">\r\n    <div class=\"modal-dialog modal-lg modal-primary\" role=\"document\">\r\n        <div class=\"modal-content\">\r\n            <div class=\"modal-header novo\">\r\n                <h4 class=\"text-center\">Editar Pedido: {{ order.id }} </h4>\r\n                <h4 class=\"text-center\"> {{ mesa }} </h4>\r\n                <h4 class=\"text-center\">Total: {{ order.total  | currency:'BRL':true}}</h4>\r\n            </div>\r\n            <div class=\"modal-body\">\r\n                <div class=\"col-md-12\">\r\n                    <form #myForm=\"ngForm\" class=\"form-inline\">\r\n                        <div class=\"form-group col-md-12\">\r\n                            <label for=\"tipo\" class=\"label col-md-2\">Tipo: </label>\r\n                            <select id=\"tipo\" name=\"tipo\" class=\"form-control col-md-2\" [(ngModel)]=\"order.type\" disabled>\r\n                                <option value=\"0\"> Delivery</option>\r\n                                <option value=\"1\"> Salão</option>\r\n                                <option value=\"2\"> Retirada</option>\r\n                            </select>\r\n                            <label for=\"mesa\" class=\"label col-md-2\" *ngIf=\"order.type == 1\">Mesa: </label>\r\n                            <select id=\"mesa\" name=\"mesa_id\" class=\"form-control col-md-2\" [(ngModel)]=\"order.mesa.data.id\" *ngIf=\"order.type == 1\" disabled>\r\n                                <option *ngFor=\"let g of mesas.data\" value=\"{{ g.id }}\"> {{ g.name }}</option>\r\n                            </select>\r\n                            <label for=\"status\" class=\"label col-md-2\">Status: </label>\r\n                            <select id=\"status\" name=\"staus\" class=\"form-control col-md-2\" [(ngModel)]=\"order.status\" disabled>\r\n                                <option value=\"3\">Fechada</option>\r\n                            </select>\r\n\r\n                        </div>\r\n                    </form>\r\n                </div>\r\n                <div class=\"col-md-12\" style=\"padding-bottom: 5px;\">\r\n                    <form #myForm=\"ngForm\" class=\"form-inline\">\r\n                        <div class=\"form-group col-md-12\">\r\n                        </div>\r\n                    </form>\r\n                </div>\r\n                <div class=\"row borderdiv\" style=\"height: 370px; overflow: auto\">\r\n                    <div class=\"col-md-6 mb-4 padding\" *ngIf=\"order.type != 1\">\r\n                        <!-- Nav tabs -->\r\n                        <tabset>\r\n                            <tab heading=\"Cliente\">\r\n                                <form name=\"form\" class=\"form-inline\">\r\n                                    <input type=\"text\" class=\"form-control col-md-12 name\" name=\"name\" [(ngModel)]=\"client.name\" placeholder=\"Nome Cliente\" disabled/>\r\n                                    <br><br>\r\n                                    <input ngxPhoneMask type=\"text\" class=\"form-control col-md-12\" name=\"phone\" [(ngModel)]=\"client.phone\" placeholder=\"Telefone\" disabled />\r\n                                    <br><br>\r\n                                    <input type=\"text\" class=\"form-control col-md-12\" name=\"email\" [(ngModel)]=\"client.email\" placeholder=\"Email\" disabled />\r\n                                    <br><br>\r\n                                    <input type=\"text\" class=\"form-control col-md-12\" name=\"address.address\" [(ngModel)]=\"client.address.address\" placeholder=\"Rua\" [disabled]=\"editar\"/>\r\n                                    <br><br>\r\n                                    <input type=\"text\" class=\"form-control col-md-3\" name=\"address.numero\" [(ngModel)]=\"client.address.numero\" placeholder=\"Numero\" [disabled]=\"editar\">\r\n                                    <div class=\"separate1\"></div>\r\n                                    <input type=\"text\" class=\"form-control col-md-8\" name=\"address.bairro\" [(ngModel)]=\"client.address.bairro\" placeholder=\"Bairro\" [disabled]=\"editar\"/>\r\n                                    <br><br>\r\n                                    <select name=\"cidade\" id=\"cidade\" class=\"form-control col-md-12\" [(ngModel)]=\"client.address.city_id\" disabled>\r\n                                        <option value=\"0\">Selecione cidade</option>\r\n                                        <option value=\"3128709\">Guaxupé</option>\r\n                                        <option value=\"3128303\">Guaranésia</option>\r\n                                        <option value=\"3136900\">Juruaia</option>\r\n                                        <option value=\"3144102\">Muzambinho</option>\r\n                                        <option value=\"3163904\">São Pedro da União</option>\r\n                                    </select>\r\n                                    <br><br>\r\n                                    <div class=\"padding\" *ngIf=\"editar == false\">\r\n                                        <button type=\"button\" class=\"btn btn-default btn-info\" (click)=\"saveClient()\">Atualizar endereço</button>\r\n                                    </div>\r\n                                </form>\r\n                            </tab>\r\n                        </tabset>\r\n                    </div><!--/.col-->\r\n                    <div class=\"col-lg-6 padding\" [ngClass]=\"{'col-md-12 col-lg-12': order.type != 0 && order.type != 2, 'col-md-6 col-lg-6': order.type != 1}\">\r\n                        <div class=\"table-responsive\" style=\"height: 160px; overflow: auto\">\r\n                            <table class=\"table scrollbox table-striped\">\r\n                                <thead>\r\n                                <tr class=\"th-table title-table\">\r\n                                    <th>#</th>\r\n                                    <th>Produto</th>\r\n                                    <th>Valor</th>\r\n                                    <th>Quantadade</th>\r\n                                    <th>SubTotal</th>\r\n                                </tr>\r\n                                </thead>\r\n                                <tbody>\r\n                                <tr *ngFor=\"let i of products.data\">\r\n                                    <td>{{ i.product.data.id }}</td>\r\n                                    <td>{{ i.product.data.name }}</td>\r\n                                    <td>{{ i.product.data.price | currency:'BRL':true}}</td>\r\n                                    <td>{{ i.qtd }}</td>\r\n                                    <td>\r\n                                        {{ i.subtotal | currency:'BRL':true }}\r\n                                    </td>\r\n                                </tr>\r\n                                </tbody>\r\n                            </table>\r\n                        </div>\r\n                        <hr>\r\n                        <div class=\"col-md-12 text-center alert alert-success total-pagamento\"><p class=\"qtd\">TOTAL: {{ order.total | currency:'BRL':true }}</p></div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"modal-footer cadastro\">\r\n                <div class=\"modal-button\">\r\n                    <button class=\"btn btn-primary\" (click)=\"save()\"><i class=\"fa fa-print\"></i> Imprimir (F7)</button>\r\n                    <button class=\"btn btn-danger text-left\" type=\"button\" (click)=\"close()\"><i class=\"fa fa-arrow-circle-left\"></i> Cancelar (ESC)</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <!-- /.modal-content -->\r\n    </div>\r\n    <!-- /.modal-dialog -->\r\n</div>\r\n"
 
 /***/ }),
 
@@ -177,16 +177,11 @@ var EditComponent = (function () {
     };
     EditComponent.prototype.close = function () {
         __WEBPACK_IMPORTED_MODULE_1_jquery__('#successModal').on('show.bs.modal').show().removeClass('show');
-        this.router.navigate(['/orders']);
+        this.router.navigate(['/close']);
     };
     EditComponent.prototype.save = function () {
-        if (this.imprimir == true) {
-            __WEBPACK_IMPORTED_MODULE_1_jquery__('#successModal').on('show.bs.modal').show().removeClass('show');
-            this.router.navigate(['/orders/printer/' + this.order.id + '/N']);
-        }
-        else {
-            this.toasterService.pop('error', 'Erro', 'Para imprimir é necessário ter adicionado novos itens.');
-        }
+        __WEBPACK_IMPORTED_MODULE_1_jquery__('#successModal').on('show.bs.modal').show().removeClass('show');
+        this.router.navigate(['/close/printer/' + this.order.id + '/N']);
     };
     EditComponent.prototype.habilitarEdicao = function () {
         this.editar = !this.editar;
@@ -342,7 +337,7 @@ var OrdersCloseComponent = (function () {
 /***/ "../../../../../src/app/close/components/payment.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div tabindex=\"-1\" class=\"modal fade\" id=\"payment\" role=\"dialog\" aria-hidden=\"true\" aria-labelledby=\"myModalLabel\" style=\"display: block; overflow-y: auto;\">\r\n    <div class=\"modal-dialog modal-lg modal-primary\" role=\"document\">\r\n        <div class=\"modal-content\">\r\n            <div class=\"modal-header cadastro\">\r\n                <h3 class=\"text-center\">Pedido: {{ order.id }} </h3>\r\n                <h3 class=\"text-center\"> {{ mesa }} </h3>\r\n                <h3 class=\"text-center\"> Pagamento</h3>\r\n            </div>\r\n            <div class=\"modal-body\" style=\"height: 460px; overflow: auto\">\r\n                <div class=\"col-md-12\">\r\n                    <form class=\"form-inline\" #myForm=\"ngForm\">\r\n                        <div class=\"col-md-12\">\r\n                            <div class=\"form-row\">\r\n                                <label class=\"col-md-2\" for=\"valor_pag\">Valor: </label>\r\n                                <input type=\"text\" class=\"form-control-lg col-md-4\" id=\"valor_pag\" name=\"valor_pag\"\r\n                                       currencyMask [(ngModel)]=\"valor_pag\" [options]=\"{ prefix: 'R$ ', thousands: '.', decimal: ',' }\"\r\n                                       placeholder=\"Digite o valor\" required minlength=\"2\" autofocus=\"autofocus\">\r\n                                <div class=\"invalid-feedback\" *ngIf=\"!valor_pag.valid\">\r\n                                    Prencha o valor do pagamento\r\n                                </div>\r\n                                <label for=\"desconto\" class=\"col-md-2\">Desconto:</label>\r\n                                <input class=\"form-control-lg col-md-4\" id=\"desconto\" name=\"desconto\" currencyMask [(ngModel)]=\"payment.desconto\"  [options]=\"{ prefix: 'R$ ', thousands: '.', decimal: ',' }\" placeholder=\"Desconto\" type=\"text\">\r\n                            </div>\r\n                            <br>\r\n                            <div class=\"form-row\">\r\n                                <label for=\"desconto\" class=\"col-md-2\">Acrescimo:</label>\r\n                                <input class=\"form-control-lg col-md-4\" id=\"acrescimo\" name=\"acrescimo\" currencyMask [(ngModel)]=\"payment.acrescimo\"  [options]=\"{ prefix: 'R$ ', thousands: '.', decimal: ',' }\" placeholder=\"Acrescimos\" type=\"text\">\r\n                                <label for=\"troco\" class=\"col-md-2\">Troco:</label>\r\n                                <input class=\"form-control-lg col-md-4 troco\" id=\"troco\" name=\"troco\" [(ngModel)]=\"troco\"  value=\"{{ valor_pag - ((order.total + payment.acrescimo) - payment.desconto) | currency:'BRL':true }}\" placeholder=\"Troco\" type=\"text\" disabled=\"true\">\r\n                            </div>\r\n                            <br>\r\n                            <div class=\"form-row\">\r\n                                    <label for=\"select\" class=\"label col-md-2\">Tipo pagamento</label>\r\n                                    <select id=\"select\" name=\"type_id\" [(ngModel)]=\"type_id\" class=\"form-control-lg col-md-4\" style=\"height: 50px ;font-size: 16px;\">\r\n                                        <option value=\"null\">Selecione tipo pagamento</option>\r\n                                        <option *ngFor=\"let g of tipo.data\" value=\"{{ g.id }}\"> {{ g.name }}</option>\r\n                                    </select>\r\n                                    <label for=\"troco\" class=\"col-md-1\">Divisão:</label>\r\n                                    <input class=\"form-control-lg col-md-1 troco\" id=\"divisao\" name=\"divisao\" [(ngModel)]=\"divisao\"  placeholder=\"Dividir\" type=\"number\">\r\n                                    <label for=\"troco\" class=\"col-md-2\">Resultado:</label>\r\n                                    <input class=\"form-control-lg col-md-2 troco\" id=\"result_div\" name=\"result_div\" [(ngModel)]=\"result_div\"  value=\"{{ ((order.total + payment.acrescimo) - payment.desconto) / divisao | currency:'BRL':true }}\" placeholder=\"resulado\" type=\"text\">\r\n                            </div>\r\n                        </div>\r\n                    </form>\r\n                </div>\r\n                <br>\r\n                <div class=\"col-md-12 text-center alert alert-success total-pagamento\"><h4 class=\"qtd\">TOTAL À PAGAR: {{ (order.total + payment.acrescimo) - payment.desconto | currency:'BRL':true }}</h4></div>\r\n                <div class=\"col-md-12\">\r\n                    <div class=\"table-responsive\" style=\"height: 120px; overflow: auto\">\r\n                        <table class=\"table scrollbox table-striped\">\r\n                            <thead>\r\n                            <tr class=\"th-table title-table\">\r\n                                <th class=\"text-center\">#</th>\r\n                                <th>Produto</th>\r\n                                <th class=\"text-center\">Valor</th>\r\n                                <th class=\"text-center\">Qtd.</th>\r\n                                <th class=\"text-center\">Subtotal</th>\r\n                            </tr>\r\n                            </thead>\r\n                            <tbody>\r\n                            <tr class=\"th-table\" *ngFor=\"let p of products.data; let i = index\">\r\n                                <td class=\"text-center\">{{ p.product.data.id }}</td>\r\n                                <td>{{ p.product.data.name }}</td>\r\n                                <td class=\"text-center\">{{ p.price | currency:'BRL':true }}</td>\r\n                                <td class=\"text-center\">{{ p.qtd }}</td>\r\n                                <td class=\"text-center\">{{ p.subtotal | currency:'BRL':true }}</td>\r\n                            </tr>\r\n                            </tbody>\r\n                        </table>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"modal-footer\">\r\n                <div class=\"modal-button\">\r\n                    <button class=\"btn btn-info\" (click)=\"save()\"><i class=\"fa fa-save\"></i> Salvar pedido (F9)</button>\r\n                    <button class=\"btn btn-danger text-left\" type=\"button\" (click)=\"close()\"><i class=\"fa fa-arrow-circle-left\"></i> Cancelar</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <!-- /.modal-content -->\r\n    </div>\r\n    <!-- /.modal-dialog -->\r\n</div>\r\n"
+module.exports = "<div tabindex=\"-1\" class=\"modal fade\" id=\"payment\" role=\"dialog\" aria-hidden=\"true\" aria-labelledby=\"myModalLabel\" style=\"display: block; overflow-y: auto;\">\r\n    <div class=\"modal-dialog modal-lg modal-primary\" role=\"document\">\r\n        <div class=\"modal-content\">\r\n            <div class=\"modal-header cadastro\">\r\n                <h3 class=\"text-center\">Pedido: {{ order.id }} </h3>\r\n                <h3 class=\"text-center\"> {{ mesa }} </h3>\r\n                <h3 class=\"text-center\"> Pagamento</h3>\r\n            </div>\r\n            <div class=\"modal-body\" style=\"height: 350px; overflow: auto\">\r\n                <div class=\"col-md-12 alert alert-primary\">\r\n                    <div class=\"row\">\r\n                        <h4 class=\"col-md-6 qtd\">DATA PAGTO: {{ payment.data_pagamento }}</h4>\r\n                        <h5 class=\"col-md-1\"></h5>\r\n                        <h4 class=\"col-md-5 qtd text-right\">TOTAL PAGO: {{ payment.total_pago | currency:'BRL':true }} </h4>\r\n                    </div>\r\n                    <br>\r\n                    <div class=\"row\">\r\n                        <h4 class=\"qtd col-md-4\">TOTAL: {{ payment.total_original | currency:'BRL':true }} </h4>\r\n                        <h4 class=\"qtd col-md-4 text-center\">ACRESCIMOS: {{ payment.acrescimo | currency:'BRL':true }} </h4>\r\n                        <h4 class=\"qtd col-md-4 text-right\">DESCONTO: {{ payment.desconto | currency:'BRL':true }} </h4>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-md-12\">\r\n                    <div class=\"table-responsive\" style=\"height: 170px; overflow: auto\">\r\n                        <table class=\"table scrollbox table-striped\">\r\n                            <thead>\r\n                            <tr class=\"th-table title-table\">\r\n                                <th class=\"text-center\">#</th>\r\n                                <th>Produto</th>\r\n                                <th class=\"text-center\">Valor</th>\r\n                                <th class=\"text-center\">Qtd.</th>\r\n                                <th class=\"text-center\">Subtotal</th>\r\n                            </tr>\r\n                            </thead>\r\n                            <tbody>\r\n                            <tr class=\"th-table\" *ngFor=\"let p of products.data; let i = index\">\r\n                                <td class=\"text-center\">{{ p.product.data.id }}</td>\r\n                                <td>{{ p.product.data.name }}</td>\r\n                                <td class=\"text-center\">{{ p.price | currency:'BRL':true }}</td>\r\n                                <td class=\"text-center\">{{ p.qtd }}</td>\r\n                                <td class=\"text-center\">{{ p.subtotal | currency:'BRL':true }}</td>\r\n                            </tr>\r\n                            </tbody>\r\n                        </table>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"modal-footer\">\r\n                <div class=\"modal-button\">\r\n                    <button class=\"btn btn-danger text-left\" type=\"button\" (click)=\"close()\"><i class=\"fa fa-arrow-circle-left\"></i> Fechar</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <!-- /.modal-content -->\r\n    </div>\r\n    <!-- /.modal-dialog -->\r\n</div>\r\n"
 
 /***/ }),
 
@@ -392,7 +387,8 @@ var PaymentComponent = (function () {
             'desconto': 0,
             'acrescimo': 0,
             'total_original': 0,
-            'payment_types_id': 1
+            'payment_types': '',
+            'data_pagamento': ''
         };
         this.troco = 0;
         this.tipo = {};
@@ -400,9 +396,6 @@ var PaymentComponent = (function () {
         this.divisao = 1;
         this.result_div = 0;
         document.onkeydown = (function (e) {
-            if (e.keyCode == 120) {
-                _this.save();
-            }
             if (e.keyCode == 27) {
                 _this.close();
             }
@@ -420,41 +413,18 @@ var PaymentComponent = (function () {
                 .then(function (res) {
                 _this.order = res.data;
                 _this.payment.order_id = _this.order.id;
+                _this.payment.total_pago = res.data.payment.data[0].total_pago;
+                _this.payment.total_original = res.data.total;
+                _this.payment.data_pagamento = res.data.payment.data[0].created_at;
+                _this.payment.desconto = res.data.payment.data[0].desconto;
+                _this.payment.acrescimo = res.data.payment.data[0].acrescimo;
+                _this.payment.payment_types = res.data.payment.data[0].type.data.name;
                 _this.products = res.data.items;
                 _this.mesa = res.data.mesa.data.name;
                 _this.hideLoading();
             });
         });
         this.httpService.eventEmitter.emit();
-    };
-    PaymentComponent.prototype.save = function () {
-        var _this = this;
-        this.showLoading();
-        console.log('troco', this.troco);
-        if (this.valor_pag >= this.order.total) {
-            this.payment.total_pago = (this.valor_pag - (this.valor_pag - ((this.order.total + this.payment.acrescimo) - this.payment.desconto)));
-            this.payment.total_original = this.order.total;
-            this.payment.payment_types_id = this.type_id;
-            this.httpService.setAccessToken();
-            if (this.type_id !== null) {
-                this.httpService.builder()
-                    .insert(this.payment, 'payment')
-                    .then(function (res) {
-                    _this.httpService.eventEmitter.emit();
-                    _this.hideLoading();
-                    _this.toasterService.pop('success', 'Sucesso', 'Pagamento do pedido ' + res.data.id + ' realizado com sucesso');
-                    _this.close();
-                });
-            }
-            else {
-                this.hideLoading();
-                this.toasterService.pop('error', 'Erro', 'Tipo pagamento não selecionado');
-            }
-        }
-        else {
-            this.hideLoading();
-            this.toasterService.pop('error', 'Erro', 'Pagamento não pode ser menor que o valor a pagar');
-        }
     };
     PaymentComponent.prototype.tipos = function () {
         var _this = this;
@@ -467,7 +437,7 @@ var PaymentComponent = (function () {
     };
     PaymentComponent.prototype.close = function () {
         __WEBPACK_IMPORTED_MODULE_1_jquery__('#payment').hide();
-        this.router.navigate(['/orders']);
+        this.router.navigate(['/close']);
     };
     PaymentComponent.prototype.hideLoading = function () {
         __WEBPACK_IMPORTED_MODULE_1_jquery__(".container-loading").hide();
@@ -554,7 +524,7 @@ var PrinterComponent = (function () {
                 url = 'printer';
             }
             else {
-                url = 'printer/new';
+                url = 'printer';
             }
             _this.httpService.builder().view(params['id'], url)
                 .then(function (res) {
@@ -562,6 +532,7 @@ var PrinterComponent = (function () {
                     "Object " + res.data.link_printer + " failed" +
                     "</object>");
                 _this.link_printer = 'http://108.61.155.169' + res.data.link_printer;
+                _this.hideLoading();
             });
         });
         this.httpService.eventEmitter.emit();
@@ -572,7 +543,7 @@ var PrinterComponent = (function () {
     };
     PrinterComponent.prototype.close = function () {
         __WEBPACK_IMPORTED_MODULE_2_jquery__('#printer').on('show.bs.modal').show().removeClass('show');
-        this.router.navigate(['/orders']);
+        this.router.navigate(['/close']);
     };
     PrinterComponent.prototype.hideLoading = function () {
         __WEBPACK_IMPORTED_MODULE_2_jquery__(".container-loading").hide();
@@ -678,13 +649,17 @@ var OrdersCloseModule = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_orders_component__ = __webpack_require__("../../../../../src/app/close/components/orders.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_edit_component__ = __webpack_require__("../../../../../src/app/close/components/edit.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_payment_component__ = __webpack_require__("../../../../../src/app/close/components/payment.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_printer_component__ = __webpack_require__("../../../../../src/app/close/components/printer.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_edit_component__ = __webpack_require__("../../../../../src/app/close/components/edit.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
 
 
 
@@ -699,7 +674,21 @@ var routes = [
         children: [
             {
                 path: 'edit/:id',
-                component: __WEBPACK_IMPORTED_MODULE_3__components_edit_component__["a" /* EditComponent */],
+                component: __WEBPACK_IMPORTED_MODULE_5__components_edit_component__["a" /* EditComponent */],
+                data: {
+                    title: 'Editar'
+                }
+            },
+            {
+                path: 'printer/:id/:i',
+                component: __WEBPACK_IMPORTED_MODULE_4__components_printer_component__["a" /* PrinterComponent */],
+                data: {
+                    title: 'Printer'
+                }
+            },
+            {
+                path: 'payment/:id',
+                component: __WEBPACK_IMPORTED_MODULE_3__components_payment_component__["a" /* PaymentComponent */],
                 data: {
                     title: 'Editar'
                 }
