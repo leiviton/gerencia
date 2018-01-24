@@ -15,10 +15,6 @@ export class PaymentComponent implements OnInit {
 
     constructor(private httpService: OrdersService, private router: Router, private route: ActivatedRoute,private toasterService: ToasterService) {
         document.onkeydown = ((e) =>{
-            if(e.keyCode  == 120)
-            {
-                this.save();
-            }
 
             if(e.keyCode == 27)
             {
@@ -41,7 +37,7 @@ export class PaymentComponent implements OnInit {
         'desconto':0,
         'acrescimo':0,
         'total_original':0,
-        'payment_types_id':'',
+        'payment_types':'',
         'data_pagamento':''
     };
     troco = 0;
@@ -61,11 +57,11 @@ export class PaymentComponent implements OnInit {
                         this.order = res.data;
                         this.payment.order_id = this.order.id;
                         this.payment.total_pago = res.data.payment.data[0].total_pago;
+                        this.payment.total_original = res.data.total;
                         this.payment.data_pagamento = res.data.payment.data[0].created_at;
                         this.payment.desconto = res.data.payment.data[0].desconto;
                         this.payment.acrescimo = res.data.payment.data[0].acrescimo;
-                        this.payment.data_pagamento = res.data.payment.data[0];
-
+                        this.payment.payment_types = res.data.payment.data[0].type.data.name;
                         this.products = res.data.items;
                         this.mesa = res.data.mesa.data.name;
                         this.hideLoading();
@@ -74,36 +70,6 @@ export class PaymentComponent implements OnInit {
 
             });
         this.httpService.eventEmitter.emit();
-    }
-
-    save()
-    {
-        this.showLoading();
-        console.log('troco',this.troco);
-        if(this.valor_pag >= this.order.total){
-            this.payment.total_pago = (this.valor_pag - (this.valor_pag - ((this.order.total + this.payment.acrescimo) - this.payment.desconto)));
-            this.payment.total_original = this.order.total;
-            this.payment.payment_types_id = this.type_id;
-            this.httpService.setAccessToken();
-            if(this.type_id !== null) {
-                    this.httpService.builder()
-                        .insert(this.payment, 'payment')
-                        .then((res) => {
-                            this.httpService.eventEmitter.emit();
-                            this.hideLoading();
-                            this.toasterService.pop('success', 'Sucesso', 'Pagamento do pedido ' + res.data.id + ' realizado com sucesso');
-                            this.close();
-                        });
-
-            }else{
-                this.hideLoading();
-                this.toasterService.pop('error', 'Erro', 'Tipo pagamento não selecionado');
-
-            }
-        }else{
-            this.hideLoading();
-            this.toasterService.pop('error', 'Erro', 'Pagamento não pode ser menor que o valor a pagar');
-        }
     }
 
     tipos()
@@ -121,6 +87,7 @@ export class PaymentComponent implements OnInit {
         jQuery('#payment').hide();
         this.router.navigate(['/close']);
     }
+
 
 
     hideLoading(){

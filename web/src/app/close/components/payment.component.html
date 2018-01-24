@@ -6,10 +6,22 @@
                 <h3 class="text-center"> {{ mesa }} </h3>
                 <h3 class="text-center"> Pagamento</h3>
             </div>
-            <div class="modal-body" style="height: 460px; overflow: auto">
-                <div class="col-md-12 text-center alert alert-success total-pagamento"><h4 class="qtd">TOTAL PAGO: {{ payment.total_pago | currency:'BRL':true }} </h4></div>
+            <div class="modal-body" style="height: 350px; overflow: auto">
+                <div class="col-md-12 alert alert-primary">
+                    <div class="row">
+                        <h4 class="col-md-6 qtd">DATA PAGTO: {{ payment.data_pagamento }}</h4>
+                        <h5 class="col-md-1"></h5>
+                        <h4 class="col-md-5 qtd text-right">TOTAL PAGO: {{ payment.total_pago | currency:'BRL':true }} </h4>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <h4 class="qtd col-md-4">TOTAL: {{ payment.total_original | currency:'BRL':true }} </h4>
+                        <h4 class="qtd col-md-4 text-center">ACRESCIMOS: {{ payment.acrescimo | currency:'BRL':true }} </h4>
+                        <h4 class="qtd col-md-4 text-right">DESCONTO: {{ payment.desconto | currency:'BRL':true }} </h4>
+                    </div>
+                </div>
                 <div class="col-md-12">
-                    <div class="table-responsive" style="height: 120px; overflow: auto">
+                    <div class="table-responsive" style="height: 170px; overflow: auto">
                         <table class="table scrollbox table-striped">
                             <thead>
                             <tr class="th-table title-table">
@@ -35,8 +47,7 @@
             </div>
             <div class="modal-footer">
                 <div class="modal-button">
-                    <button class="btn btn-info" (click)="save()"><i class="fa fa-save"></i> Salvar pedido (F9)</button>
-                    <button class="btn btn-danger text-left" type="button" (click)="close()"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
+                    <button class="btn btn-danger text-left" type="button" (click)="close()"><i class="fa fa-arrow-circle-left"></i> Fechar</button>
                 </div>
             </div>
         </div>
