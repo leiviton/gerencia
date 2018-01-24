@@ -11,6 +11,7 @@ use Pedidos\Models\PaymentOrders;
  */
 class PaymentOrdersTransformer extends TransformerAbstract
 {
+    protected $defaultIncludes = ['type'];
 
     /**
      * Transform the PaymentOrders entity
@@ -30,5 +31,10 @@ class PaymentOrdersTransformer extends TransformerAbstract
             'created_at' => (string)date_format($model->created_at,'d/m/Y H:i:s'),
             'updated_at' => $model->updated_at
         ];
+    }
+
+    public function includeType(PaymentOrders $model)
+    {
+        return $this->item($model->paymentTypes, new PaymentTypesTransformer());
     }
 }

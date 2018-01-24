@@ -41,7 +41,7 @@ export class PaymentComponent implements OnInit {
         'desconto':0,
         'acrescimo':0,
         'total_original':0,
-        'payment_types_id':1,
+        'payment_types_id':'',
         'data_pagamento':''
     };
     troco = 0;
@@ -61,6 +61,10 @@ export class PaymentComponent implements OnInit {
                         this.order = res.data;
                         this.payment.order_id = this.order.id;
                         this.payment.total_pago = res.data.payment.data[0].total_pago;
+                        this.payment.data_pagamento = res.data.payment.data[0].created_at;
+                        this.payment.desconto = res.data.payment.data[0].desconto;
+                        this.payment.acrescimo = res.data.payment.data[0].acrescimo;
+                        this.payment.data_pagamento = res.data.payment.data[0];
 
                         this.products = res.data.items;
                         this.mesa = res.data.mesa.data.name;
