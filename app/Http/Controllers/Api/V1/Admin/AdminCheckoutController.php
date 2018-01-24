@@ -291,6 +291,149 @@ class AdminCheckoutController extends Controller
         return $this->repository->skipPresenter(false)->find($order->id);
     }
 
+    public function printerClose($id)
+    {
+        $order = $this->repository->find($id);
+
+        $data = date_format($order->created_at,'d/m/Y');
+
+        $hora = date_format($order->created_at,'H:i:s');
+
+        $items = $this->itemRepository
+            ->scopeQuery(function($query) use($id){
+                return $query->where('order_id',$id);
+            })->all();
+
+        $produtos = '';
+
+        $contador = 0;
+
+        $taxa = '';
+
+        foreach ($items as $value)
+        {
+            if($value->product->id != 58) {
+                $produtos .= " <tr>
+                            <td class='fonte padding produto' style='white-space: initial; width: 40px'>" . substr($value->product->name,0,30)." - <br />" . $value->historico . "</td>
+                            <td class='fonte padding produto'>" . $value->qtd . "</td>
+                            <td class='fonte padding produto'> R$" . $value->price . "</td>
+                          </tr>";
+                $this->itemRepository->update(['impresso' => 'S'], $value->id);
+                $contador += $value->qtd;
+            }
+
+            if($value->product->id == 58){
+                $taxa = 'Taxa de entrega: R$'.$value->product->price ;
+            }
+        }
+
+        $table = "<table>
+                    <thead>
+                      <tr>
+                        <th class='fonte padding produto'>Produto</th>
+                        <th class='fonte padding produto'>Qtd</th>                     
+                        <th class='fonte padding produto'>Vr.Uni</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                     $produtos
+                    </tbody>
+                  </table>";
+
+        $pdf = App::make('dompdf.wrapper');
+
+        if($order->type != 1) {
+            $pdf->loadHTML("<html>
+                            <head>
+                                <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>
+                                <style>
+                                    .fonte{
+                                        font-weight: 300;
+                                    }
+                                    .padding{
+                                        padding-left: 10px;
+                                        padding-right: 10px;
+                                        padding-bottom: 0;
+                                        padding-top: 0;
+                                        margin-left: 7px;
+                                    }
+                                    .center{
+                                        position: fixed;
+                                        margin-left: 200px;
+                                    }
+                                    .produto{
+                                        font-weight: 400;
+                                        font-size: 20px;
+                                    }
+                                </style>
+                            </head>
+                            <body>
+                                <div class='center'>
+                                    <h5 class='fonte'>---------------------------------------------------------------------</h5>
+                                    <h5 class='fonte produto'>Pedido: $order->id | " . $order->mesa->name . "</h5>
+                                    <h5 class='fonte'>Data: $data | Hora: $hora</h5>                              
+                                    <h5 class='fonte'>---------------------------------------------------------------------</h5>
+                                    <h5 class='fonte'>Cliente: " . $order->client->name . "</h5>
+                                    <h5 class='fonte'>Endereço: " . $order->client->addressClient->address . "," . $order->client->addressClient->numero . "</h5>
+                                    <h5 class='fonte'>Complemento: " . $order->client->addressClient->complemento . "</h5>
+                                    <h5 class='fonte'>Bairro: " . $order->client->addressClient->bairro . "</h5>
+                                    <h5 class='fonte'>Cidade: Guaxupé UF: MG</h5>
+                                    <h5 class='fonte'>---------------------------------------------------------------------</h5>
+                                    <h5 class='fonte'>ITENS:</h5>
+                                    $table
+                                    <h5 class='fonte'>---------------------------------------------------------------------</h5>
+                                    <h5 class='fonte'>TOTAL DE ITENS: $contador</h5>
+                                    <h5 class='fonte'>TOTAL DA COMPRA: R$ $order->total</h5>
+                                    <h5 class='fonte'>---------------------------------------------------------------------</h5>
+                                    <h5 class='fonte'>$order->observacao</h5>
+                                    <h5 class='fonte'>$order->troco</h5>
+                                    <h5 class='fonte'>$taxa</h5>
+                                </div>
+                            </body>
+                        </html>")->save(public_path() . '/printer/' . $order->id . '.pdf');
+        }else{
+            $pdf->loadHTML("<html>
+                            <head>
+                                <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>
+                                <style>
+                                    .fonte{
+                                        font-weight: 300;
+                                    }
+                                    .padding{
+                                        padding-left: 10px;
+                                        padding-right: 10px;
+                                        padding-bottom: 0;
+                                        padding-top: 0;
+                                        margin-left: 7px;
+                                    }
+                                    .produto{
+                                        font-weight: 400;
+                                        font-size: 20px;
+                                    }
+                                </style>
+                            </head>
+                            <body>
+                                <h5 class='fonte'>---------------------------------------------------------------------</h5>
+                                <h5 class='fonte produto'>Pedido: $order->id | " . $order->mesa->name . "</h5>
+                                <h5 class='fonte'>Data: $data | Hora: $hora</h5>                              
+                                <h5 class='fonte'>---------------------------------------------------------------------</h5>
+                                <h5 class='fonte'>ITENS:</h5>
+                                $table
+                                <h5 class='fonte'>---------------------------------------------------------------------</h5>
+                                <h5 class='fonte'>TOTAL DE ITENS: $contador</h5>
+                                <h5 class='fonte'>TOTAL DA COMPRA: R$ $order->total</h5>
+                                <h5 class='fonte'>---------------------------------------------------------------------</h5>
+                                <h5 class='fonte'>$order->observacao</h5>
+                                <h5 class='fonte'>$taxa</h5>
+                            </body>
+                        </html>")->save(public_path() . '/printer/' . $order->id . '.pdf');
+        }
+        $order->link_printer = 'http://108.61.155.169/printer/'.$order->id.'.pdf';
+
+        $order->save();
+
+        return $this->repository->skipPresenter(false)->find($order->id);
+    }
     public function printer($id)
     {
         $order = $this->repository->find($id);

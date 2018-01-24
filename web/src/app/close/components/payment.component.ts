@@ -41,7 +41,8 @@ export class PaymentComponent implements OnInit {
         'desconto':0,
         'acrescimo':0,
         'total_original':0,
-        'payment_types_id':1
+        'payment_types_id':1,
+        'data_pagamento':''
     };
     troco = 0;
     tipo = {};
@@ -59,6 +60,8 @@ export class PaymentComponent implements OnInit {
                     .then((res) => {
                         this.order = res.data;
                         this.payment.order_id = this.order.id;
+                        this.payment.total_pago = res.data.payment.data[0].total_pago;
+
                         this.products = res.data.items;
                         this.mesa = res.data.mesa.data.name;
                         this.hideLoading();
@@ -112,7 +115,7 @@ export class PaymentComponent implements OnInit {
     close()
     {
         jQuery('#payment').hide();
-        this.router.navigate(['/orders']);
+        this.router.navigate(['/close']);
     }
 
 

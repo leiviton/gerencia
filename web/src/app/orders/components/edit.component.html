@@ -61,7 +61,11 @@
                                     <br><br>
                                     <select name="cidade" id="cidade" class="form-control col-md-12" [(ngModel)]="client.address.city_id" disabled>
                                         <option value="0">Selecione cidade</option>
-                                        <option value="1">Guaxupé</option>
+                                        <option value="3128709">Guaxupé</option>
+                                        <option value="3128303">Guaranésia</option>
+                                        <option value="3136900">Juruaia</option>
+                                        <option value="3144102">Muzambinho</option>
+                                        <option value="3163904">São Pedro da União</option>
                                     </select>
                                     <br><br>
                                     <div class="padding" *ngIf="editar == false">
@@ -118,4 +122,29 @@
         <!-- /.modal-content -->
     </div>
     <!-- /.modal-dialog -->
+    <div class="modal fade modal_novo" id="pesquisa" role="dialog" aria-hidden="true" aria-labelledby="myModalLabell">
+        <div class="modal-dialog modal-sm modal-success" role="document">
+            <div class="modal-content">
+                <div class="modal-header novo text-center">
+                    <h5 class="modal-title">Resultado pesquisa</h5>
+                    <button class="close" aria-label="Close" type="button" data-dismiss="modal" (click)="closeMd()">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center" style="height: 250px; overflow: auto">
+                    <div class="checkbox" *ngFor="let p of result.data">
+                        <label>
+                            <p class="text-left" (click)="saveItem(p)"> {{ p.name }} - {{ p.price | currency:'BRL':true}}</p>
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer cadastro">
+                    <div class="modal-button">
+                        <button class="btn btn-danger btn-sm text-left" type="button" (click)="closeMd()"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
+                    </div>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+    </div>
 </div>

@@ -42,7 +42,7 @@ export class PrinterComponent implements OnInit {
                 if(params['i'] == 'S'){
                     url = 'printer';
                 }else{
-                    url = 'printer/new'
+                    url = 'printer'
                 }
                 this.httpService.builder().view(params['id'],url)
                     .then((res) => {
@@ -51,6 +51,7 @@ export class PrinterComponent implements OnInit {
                                 "Object " + res.data.link_printer + " failed" +
                                 "</object>");
                             this.link_printer = 'http://108.61.155.169' + res.data.link_printer;
+                            this.hideLoading();
 
                     });
             });
@@ -65,7 +66,7 @@ export class PrinterComponent implements OnInit {
 
     close(){
         jQuery('#printer').on('show.bs.modal').show().removeClass('show');
-        this.router.navigate(['/orders']);
+        this.router.navigate(['/close']);
     }
 
     hideLoading(){

@@ -103,6 +103,8 @@ export class EditComponent implements OnInit {
 
             });
         this.httpService.eventEmitter.emit();
+
+        jQuery('#pesquisa').hide();
     }
 
     update()
@@ -140,25 +142,51 @@ export class EditComponent implements OnInit {
             .search(this.pesquisa.value)
             .then((res) => {
                 this.pesquisa.value = null;
-                this.result = res.data;
+                this.result = res;
+                if(res.data.length > 1)
+                {
+                    this.hideLoading();
+                    jQuery('#pesquisa').show().addClass('show').css('z-index', 1050 + 50);
+                    jQuery('#successModal').css('z-index', 1040);
+                }else if(res.data.length == 1){
+                    this.hideLoading();
+                    this.addItem(res.data);
+                    let pedido = {
+                        items: this.httpService.get().items,
+                        order_id: this.order.id
+                    };
+                    this.httpService.builder()
+                        .insert(pedido,'addItem')
+                        .then((res) => {
+                            this.httpService.eventEmitter.emit();
+                            this.httpService.clear();
+                            this.order = res.data;
+                            this.products = res.data.items;
+                            this.imprimir = true;
+                        });
+                }
+            });
+    }
+
+    saveItem(item)
+    {
+        this.showLoading();
+        this.addItem(item);
+        let pedido = {
+            items: this.httpService.get().items,
+            order_id: this.order.id
+        };
+        this.httpService.builder()
+            .insert(pedido,'addItem')
+            .then((res) => {
+                this.httpService.eventEmitter.emit();
+                this.httpService.clear();
+                this.order = res.data;
+                this.products = res.data.items;
+                this.imprimir = true;
                 this.hideLoading();
-                this.addItem(this.result[0]);
-
-                let pedido = {
-                    items: this.httpService.get().items,
-                    order_id: this.order.id
-                };
-
-                this.httpService.builder()
-                    .insert(pedido,'addItem')
-                    .then((res) => {
-                        this.httpService.eventEmitter.emit();
-                        this.httpService.clear();
-                        this.order = res.data;
-                        this.products = res.data.items;
-                        this.imprimir = true;
-                    });
-               });
+                jQuery('#pesquisa').hide();
+            });
     }
 
     addItem(item)

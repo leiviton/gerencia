@@ -170,16 +170,12 @@ export class EditComponent implements OnInit {
 
     close(){
         jQuery('#successModal').on('show.bs.modal').show().removeClass('show');
-        this.router.navigate(['/orders']);
+        this.router.navigate(['/close']);
     }
 
     save(){
-        if(this.imprimir == true){
             jQuery('#successModal').on('show.bs.modal').show().removeClass('show');
-            this.router.navigate(['/orders/printer/'+ this.order.id+'/N']);
-        }else{
-            this.toasterService.pop('error', 'Erro', 'Para imprimir é necessário ter adicionado novos itens.');
-        }
+            this.router.navigate(['/close/printer/'+ this.order.id+'/N']);
     }
 
     habilitarEdicao()

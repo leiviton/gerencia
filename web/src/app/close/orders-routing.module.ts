@@ -25,6 +25,20 @@ const routes: Routes = [
               data: {
                   title: 'Editar'
               }
+          },
+          {
+              path: 'printer/:id/:i',
+              component: PrinterComponent,
+              data: {
+                  title: 'Printer'
+              }
+          },
+          {
+              path: 'payment/:id',
+              component: PaymentComponent,
+              data: {
+                  title: 'Editar'
+              }
           }
       ]
   }
