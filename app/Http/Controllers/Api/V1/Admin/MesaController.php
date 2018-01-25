@@ -11,6 +11,7 @@ namespace Pedidos\Http\Controllers\Api\V1\Admin;
 
 use Pedidos\Http\Controllers\Controller;
 use Pedidos\Repositories\MesaRepository;
+use Pedidos\Repositories\OrderRepository;
 use Pedidos\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use Pedidos\Services\UserService;
@@ -25,19 +26,24 @@ class MesaController extends Controller
      * @var UserService
      */
     private $service;
+    /**
+     * @var OrderRepository
+     */
+    private $orderRepository;
 
-    public function __construct(MesaRepository $repository, UserService $service)
+    public function __construct(MesaRepository $repository, UserService $service,OrderRepository $orderRepository)
     {
         $this->repository = $repository;
         $this->service = $service;
+        $this->orderRepository = $orderRepository;
     }
 
     public function index()
     {
         $status = 3;
-        $result = $this->repository->skipPresenter(false)
+        $result = $this->orderRepository->skipPresenter(false)
             ->scopeQuery(function($query) use($status){
-                return $query->where('status','<',$status);
+                return $query->where('status','<',$status)->where('type',1);
             })
             ->all();
         return $result;
