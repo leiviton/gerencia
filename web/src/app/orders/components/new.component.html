@@ -36,8 +36,13 @@
                     <form #myForm="ngForm" class="form-inline">
                         <div class="form-group col-md-12">
                             <div class="col-md-1"></div>
-                            <label class="col-md-1" *ngIf="tipo != 1">CLiente: </label>
-                            <input *ngIf="tipo != 1"  type="text" class="form-control col-md-3" name="pesquisa"  placeholder="Digite Cliente (Telefone, nome, codigo)" required minlength="11" [(ngModel)]="pesquisa.value2" (blur)="buscarCliente()">
+                            <div class="input-group col-md-4">
+                                <label *ngIf="tipo != 1">CLiente: </label>
+                                <input *ngIf="tipo != 1"  type="text" class="form-control " name="pesquisa"  placeholder="Digite Cliente (Telefone, nome, codigo)" required minlength="11" [(ngModel)]="pesquisa.value2">
+                                <span class="input-group-append">
+                                <button type="button" class="btn btn-primary" (click)="buscarCliente()"><i class="fa fa-search"></i></button>
+                              </span>
+                            </div>
                             <label for="mesa" class="label col-md-1" *ngIf="tipo == 1">Mesa: </label>
                             <select id="mesa" name="category_id" class="form-control col-md-3" [(ngModel)]="mesa_id" *ngIf="tipo == 1">
                                 <option value="null">Selecione a mesa</option>
@@ -112,7 +117,7 @@
                                 <tbody>
                                     <tr class="th-table" *ngFor="let p of items.items; let i = index">
                                         <td class="text-center">{{ p.id }}</td>
-                                        <td>{{ p.name }}  <p *ngFor="let c of p.complements" style="font-size: 12px; margin-bottom: 0;"> Com - {{ c.name }}</p></td>
+                                        <td>{{ p.name }}  <p *ngFor="let c of p.complements" style="font-size: 12px; margin-bottom: 0;"> Com - {{ c.name }}: {{ c.price | currency:'BRL':true }}</p></td>
                                         <td class="text-center">{{ p.price | currency:'BRL':true }}</td>
                                         <td class="text-center">{{ p.qtd }}</td>
                                         <td class="text-center">{{ p.subtotal | currency:'BRL':true }}</td>

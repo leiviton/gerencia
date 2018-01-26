@@ -29,6 +29,7 @@
                             <label for="mesa" class="label col-md-2" *ngIf="order.type == 1">Mesa: </label>
                             <select id="mesa" name="mesa_id" class="form-control col-md-4" [(ngModel)]="order.mesa.data.id" *ngIf="order.type == 1">
                                 <option value="null">Selecione a mesa</option>
+                                <option value="{{order.mesa.data.id}}">{{ order.mesa.data.name }}</option>
                                 <option *ngFor="let g of mesas.data" value="{{ g.id }}"> {{ g.name }}</option>
                             </select>
                             <label for="status" class="label col-md-2">Status: </label>

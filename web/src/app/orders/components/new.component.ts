@@ -97,9 +97,16 @@ export class NewComponent implements OnInit {
 
     buscarCliente()
     {
+        this.showLoading();
         if(this.pesquisa.value2 == null)
         {
-            this.toasterService.pop('error','campo cliente vazio')
+            this.httpService.builder().list({}, 'clients')
+                .then((res) => {
+                    jQuery('#cliente').show().addClass('show').css('z-index', 1050 + 50);
+                    jQuery('#new_order').css('z-index', 1040);
+                    this.result = res;
+                    this.hideLoading();
+                });
         }else{
             this.httpService.builder('search/client')
                 .search(this.pesquisa.value2)
@@ -131,6 +138,7 @@ export class NewComponent implements OnInit {
                         jQuery('#new_order').css('z-index', 1040);
                         this.result = res;
                     }
+                    this.hideLoading()
                 });
         }
     }
@@ -161,16 +169,22 @@ export class NewComponent implements OnInit {
                 this.pesquisa.value = null;
                 this.result = res;
                 this.hideLoading();
-                if(res.data.length > 1){
-                    jQuery('#pesquisa').show().addClass('show').css('z-index', 1050 + 50);
-                    jQuery('#new_order').css('z-index', 1040);
+                if(res.data.length == 0 || res.data[0].id == 58)
+                {
+                    this.toasterService.pop('error', 'Atenção', 'Item não localizado');
+
                 }else{
-                    if(res.data.length===1)
-                    {
-                        this.addItem(this.result["data"][0]);
-                        this.total = this.httpService.get().total;
-                        this.items = this.httpService.get();
-                        this.qtd = 1;
+                    if(res.data.length > 1){
+                        jQuery('#pesquisa').show().addClass('show').css('z-index', 1050 + 50);
+                        jQuery('#new_order').css('z-index', 1040);
+                    }else{
+                        if(res.data.length===1)
+                        {
+                            this.addItem(this.result["data"][0]);
+                            this.total = this.httpService.get().total;
+                            this.items = this.httpService.get();
+                            this.qtd = 1;
+                        }
                     }
                 }
             });
@@ -182,7 +196,7 @@ export class NewComponent implements OnInit {
         this.items = this.httpService.get();
         this.total = this.httpService.get().total;
         jQuery('#pesquisa').hide();
-        this.toasterService.pop('success', 'Sucesso', 'Item codigo '+item.name+' adicionado.');
+        this.toasterService.pop('success', 'Sucesso', 'Item '+item.name+' adicionado.');
     }
 
     removeItem(i)
@@ -344,6 +358,7 @@ export class NewComponent implements OnInit {
     {
         if(this.complement[0].id != 0){
             this.httpService.addComplement(this.complement,this.idItem);
+
             this.items = this.httpService.get();
             this.total = this.httpService.get().total;
             this.complement = [{

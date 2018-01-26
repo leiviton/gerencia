@@ -56,7 +56,7 @@ export class OrdersService extends AppHttpService {
         for (let j in complement)
         {
             valor = valor + complement[j].price;
-            h += complement[j].name + ',';
+            h += complement[j].name + '-' + complement[j].price + ',';
         }
         itemAux.historico += h;
         console.log('valor',valor);

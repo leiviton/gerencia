@@ -96,7 +96,7 @@ export class EditComponent implements OnInit {
                     });
                 this.httpService.setAccessToken();
                 this.httpService.builder()
-                    .list({},'mesas')
+                    .list({},'mesas/livres')
                     .then((res) => {
                         this.mesas = res;
                     });

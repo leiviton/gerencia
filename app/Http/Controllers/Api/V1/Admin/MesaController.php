@@ -49,6 +49,16 @@ class MesaController extends Controller
         return $result;
     }
 
+    public function all()
+    {
+        $status = 3;
+        $result = $this->repository->skipPresenter(false)
+            ->scopeQuery(function($query) use($status){
+                return $query->where('status','<',$status);
+            })
+            ->all();
+        return $result;
+    }
     public function store(Request $request)
     {
         $data = $request->all();
