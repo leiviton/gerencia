@@ -131,15 +131,26 @@ export class NewComponent implements OnInit {
                         this.novo = true;
                         this.toasterService.pop('info', 'Nenhum cliente encontrado, cadastre o cliente');
                     }else if (res.data.length == 1){
-                        this.client.id = res.data[0].id;
-                        this.client.name = res.data[0].name;
-                        this.client.phone = res.data[0].phone;
-                        this.client.email = res.data[0].user.data.email;
-                        this.client.user.id = res.data[0].user.data.id;
-                        this.client.address.address = res.data[0].addressClient.data.address;
-                        this.client.address.numero = res.data[0].addressClient.data.numero;
-                        this.client.address.bairro = res.data[0].addressClient.data.bairro;
-                        this.client.address.city_id = res.data[0].addressClient.data.city.data.id;
+                        if(this.client.user){
+                            this.client.id = res.data[0].id;
+                            this.client.name = res.data[0].name;
+                            this.client.phone = res.data[0].phone;
+                            this.client.email = res.data[0].user.data.email;
+                            this.client.user.id = res.data[0].user.data.id;
+                            this.client.address.address = res.data[0].addressClient.data.address;
+                            this.client.address.numero = res.data[0].addressClient.data.numero;
+                            this.client.address.bairro = res.data[0].addressClient.data.bairro;
+                            this.client.address.city_id = res.data[0].addressClient.data.city.data.id;
+                        }else{
+                            this.client.id = res.data[0].id;
+                            this.client.name = res.data[0].name;
+                            this.client.phone = res.data[0].phone;
+                            this.client.email = '';
+                            this.client.address.address = res.data[0].addressClient.data.address;
+                            this.client.address.numero = res.data[0].addressClient.data.numero;
+                            this.client.address.bairro = res.data[0].addressClient.data.bairro;
+                            this.client.address.city_id = res.data[0].addressClient.data.city.data.id;
+                        }
                         this.novo = false;
                     }else if(res.data.length > 1)
                     {
@@ -154,15 +165,26 @@ export class NewComponent implements OnInit {
 
     addClient(c)
     {
-        this.client.id = c.id;
-        this.client.name = c.name;
-        this.client.phone = c.phone;
-        this.client.email = c.user.data.email;
-        this.client.user.id = c.user.data.id;
-        this.client.address.address = c.addressClient.data.address;
-        this.client.address.numero = c.addressClient.data.numero;
-        this.client.address.bairro = c.addressClient.data.bairro;
-        this.client.address.city_id = c.addressClient.data.city.data.id;
+        if(c.user){
+            this.client.id = c.id;
+            this.client.name = c.name;
+            this.client.phone = c.phone;
+            this.client.email = c.user.data.email;
+            this.client.user.id = c.user.data.id;
+            this.client.address.address = c.addressClient.data.address;
+            this.client.address.numero = c.addressClient.data.numero;
+            this.client.address.bairro = c.addressClient.data.bairro;
+            this.client.address.city_id = c.addressClient.data.city.data.id;
+        }else{
+            this.client.id = c.id;
+            this.client.name = c.name;
+            this.client.phone = c.phone;
+            this.client.email = '';
+            this.client.address.address = c.addressClient.data.address;
+            this.client.address.numero = c.addressClient.data.numero;
+            this.client.address.bairro = c.addressClient.data.bairro;
+            this.client.address.city_id = c.addressClient.data.city.data.id;
+        }
         this.novo = false;
         this.pesquisa.value2 = null;
         jQuery('#cliente').hide();
@@ -294,7 +316,7 @@ export class NewComponent implements OnInit {
     {
         if(this.client.name == null || this.client.phone == null)
         {
-            this.toasterService.pop('error', 'Campos do cadastro vazio, verifique');
+            this.toasterService.pop('error', 'Verifique nome e telefone do cliente');
         }else if(this.client.address.address == null || this.client.address.bairro == null || this.client.address.numero == null)
         {
             this.toasterService.pop('error', 'Campos do endereço vazio, verifique');

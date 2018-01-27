@@ -51,12 +51,19 @@ class ClientService
     public function create($data){
         \DB::beginTransaction();
         try {
-            $user['name'] = $data['name'];
-            $user['email'] = $data['email'];
-            $user['password'] = bcrypt(123456);
-            $user = $this->userRepository->create($user);
+            $user = [];
+            $client = [];
+
+            if($data['email'] != '')
+            {
+                $user['name'] = $data['name'];
+                $user['email'] = $data['email'];
+                $user['password'] = bcrypt(123456);
+                $user = $this->userRepository->create($user);
+                $client['user_id'] = $user->id;
+            }
+
             $address = $this->addressClientRepository->create($data['address']);
-            $client['user_id'] = $user->id;
             $client['name'] = $data['name'];
             $client['phone'] = $data['phone'];
             $client['address'] = $address->address.', '.$address->numero.', '.$address->bairro.' - '.$address->city->city;
