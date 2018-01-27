@@ -908,8 +908,8 @@ var SIDEBAR_TOGGLE_DIRECTIVES = [
 // The list of which env maps to which file can be found in `angular-cli.json`.
 var environment = {
     production: true,
-    //server_url: 'http://108.61.155.169',
-    server_url: 'http://localhost:8810',
+    server_url: 'http://108.61.155.169',
+    //server_url: 'http://localhost:8810',
     client_id: '2',
     //client_secret: 'XU2GN5H0hSmR05BfFCxA0dRvlBACHHPr3oAQ4ScZ'
     client_secret: 'fb7duCeekdxfWJI4gsmzoxV1vnVlmgVwIGlGgK2I'
