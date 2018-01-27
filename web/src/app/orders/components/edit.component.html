@@ -27,7 +27,7 @@
                     <form #myForm="ngForm" class="form-inline">
                         <div class="form-group col-md-12">
                             <label for="mesa" class="label col-md-2" *ngIf="order.type == 1">Mesa: </label>
-                            <select id="mesa" name="mesa_id" class="form-control col-md-4" [(ngModel)]="order.mesa.data.id" *ngIf="order.type == 1">
+                            <select id="mesa" name="mesa_id" class="form-control col-md-4" [(ngModel)]="mesa_id" *ngIf="order.type == 1">
                                 <option value="null">Selecione a mesa</option>
                                 <option value="{{order.mesa.data.id}}">{{ order.mesa.data.name }}</option>
                                 <option *ngFor="let g of mesas.data" value="{{ g.id }}"> {{ g.name }}</option>
@@ -117,6 +117,7 @@
                     <button class="btn btn-primary" (click)="save()"><i class="fa fa-print"></i> Imprimir (F7)</button>
                     <button class="btn btn-success" (click)="update()"><i class="fa fa-save"></i> Salvar(F9)</button>
                     <button class="btn btn-danger text-left" type="button" (click)="close()"><i class="fa fa-arrow-circle-left"></i> Cancelar (ESC)</button>
+                    <button class="btn btn-info text-left" type="button" (click)="pagar()" tooltip="Pagamento"><i class="fa fa-money"></i> Fechar</button>
                 </div>
             </div>
         </div>

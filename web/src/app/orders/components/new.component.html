@@ -36,11 +36,11 @@
                     <form #myForm="ngForm" class="form-inline">
                         <div class="form-group col-md-12">
                             <div class="col-md-1"></div>
-                            <div class="input-group col-md-4">
-                                <label *ngIf="tipo != 1">CLiente: </label>
-                                <input *ngIf="tipo != 1"  type="text" class="form-control " name="pesquisa"  placeholder="Digite Cliente (Telefone, nome, codigo)" required minlength="11" [(ngModel)]="pesquisa.value2">
+                            <div class="input-group col-md-5" *ngIf="tipo != 1">
+                                <label>CLiente: </label>
+                                <input type="text" class="form-control " name="pesquisa"  placeholder="Digite Cliente (Telefone, nome, codigo)" required minlength="11" [(ngModel)]="pesquisa.value2">
                                 <span class="input-group-append">
-                                <button type="button" class="btn btn-primary" (click)="buscarCliente()"><i class="fa fa-search"></i></button>
+                                <button type="button" class="btn btn-primary" (click)="buscarCliente()"><i class="fa fa-search"></i> (F2)</button>
                               </span>
                             </div>
                             <label for="mesa" class="label col-md-1" *ngIf="tipo == 1">Mesa: </label>
@@ -54,7 +54,7 @@
                                     <span class="switch-label" data-on="Sim" data-off="Não"></span>
                                     <span class="switch-handle"></span>
                                 </label>
-                                <label for="troco" class="label col-md-2" *ngIf="tipo != 1 && cartao == false">Troco:</label>
+                                <label for="troco" class="label col-md-1" *ngIf="tipo != 1 && cartao == false">Troco:</label>
                                 <input *ngIf="tipo != 1 && cartao == false" type="text" name="troco" class="form-control col-md-2" id="troco" currencyMask [(ngModel)]="troco" [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"  placeholder="Troco para" style="margin-left: 10px">
 
                                 <label for="bandeira" class="label col-md-2" *ngIf="cartao == true">Bandeira:</label>
@@ -117,7 +117,7 @@
                                 <tbody>
                                     <tr class="th-table" *ngFor="let p of items.items; let i = index">
                                         <td class="text-center">{{ p.id }}</td>
-                                        <td>{{ p.name }}  <p *ngFor="let c of p.complements" style="font-size: 12px; margin-bottom: 0;"> Com - {{ c.name }}: {{ c.price | currency:'BRL':true }}</p></td>
+                                        <td>{{ p.name }}  <p *ngFor="let c of p.complements" style="font-size: 12px; margin-bottom: 0;"> {{ c.name }}: {{ c.price | currency:'BRL':true }}</p></td>
                                         <td class="text-center">{{ p.price | currency:'BRL':true }}</td>
                                         <td class="text-center">{{ p.qtd }}</td>
                                         <td class="text-center">{{ p.subtotal | currency:'BRL':true }}</td>

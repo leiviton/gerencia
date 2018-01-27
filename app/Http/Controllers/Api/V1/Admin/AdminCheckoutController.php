@@ -14,6 +14,7 @@ use Pedidos\Http\Controllers\Controller;
 
 use Pedidos\Http\Requests\CheckoutRequest;
 use Illuminate\Http\Request;
+use Pedidos\Repositories\ComplementItemRepository;
 use Pedidos\Repositories\ComplementRepository;
 use Pedidos\Repositories\MesaRepository;
 use Pedidos\Repositories\OrderItemRepository;
@@ -53,11 +54,15 @@ class AdminCheckoutController extends Controller
      * @var ComplementRepository
      */
     private $complementRepository;
+    /**
+     * @var ComplementItemRepository
+     */
+    private $complementItemRepository;
 
     public function  __construct(OrderRepository $repository, OrderService $orderService
         , ProductRepository $productRepository, MesaRepository $mesaRepository,
                                  PaymentTypesRepository $typesRepository, OrderItemRepository $itemRepository
-        ,ComplementRepository $complementRepository){
+        ,ComplementRepository $complementRepository, ComplementItemRepository $complementItemRepository){
         $this->repository = $repository;
         $this->orderService = $orderService;
         $this->productRepository = $productRepository;
@@ -65,6 +70,7 @@ class AdminCheckoutController extends Controller
         $this->typesRepository = $typesRepository;
         $this->itemRepository = $itemRepository;
         $this->complementRepository = $complementRepository;
+        $this->complementItemRepository = $complementItemRepository;
     }
 
     public function orders(Request $request)
@@ -152,6 +158,11 @@ class AdminCheckoutController extends Controller
         return $result;
     }
 
+    public function excluirItem(Request $request)
+    {
+
+    }
+
     public function getTypePayments()
     {
         $ativo = 'S';
@@ -206,11 +217,25 @@ class AdminCheckoutController extends Controller
 
         foreach ($items as $value) {
             if ($value->product->id != 58) {
+                $com = '';
+                $id = $value->id;
+                $complements = $this->complementItemRepository->scopeQuery(function($query) use($id){
+                    return $query->where('order_item_id',$id);
+                })->all();
+                if($complements) {
+                    foreach ($complements as $v) {
+                        $com = "<br />" . $v->complement->name. " - R$". $v->price;
+                    }
+                }else{
+                    $com = '';
+                }
+
                 $produtos .= " <tr>
-                            <td class='fonte padding produto'>" . $value->product->name . " - " . $value->historico . "</td>
+                            <td class='fonte padding produto'>" . $value->product->name . $com . "</td>
                             <td class='fonte padding produto'>" . $value->qtd . "</td>
                             <td class='fonte padding produto'> R$" . $value->price . "</td>
-                          </tr>";
+                            </tr>
+                          ";
                 $this->itemRepository->update(['impresso' => 'S'], $value->id);
                 $contador += $value->qtd;
             }
@@ -229,7 +254,7 @@ class AdminCheckoutController extends Controller
                       </tr>
                     </thead>
                     <tbody>
-                     $produtos
+                     $produtos*
                     </tbody>
                   </table>";
 
@@ -261,26 +286,41 @@ class AdminCheckoutController extends Controller
                                         padding-top: 0;
                                         margin-left: 7px;
                                     }
+                                    .center{
+                                        position: fixed;
+                                        margin-left: 200px;
+                                    }
                                     .produto{
                                         font-weight: 400;
                                         font-size: 20px;
                                     }
+                                    .total{
+                                        font-weight: bold;
+                                        font-size: 18px;
+                                    }
+                                    .divd{
+                                        font-weight: 100;
+                                        color: #3e515b;
+                                        font-size: 10px;
+                                    }
                                 </style>
                             </head>
                             <body>
-                                <h5 class='fonte'>---------------------------------------------------------------------</h5>
-                                <h5 class='fonte produto'>Pedido: $order->id | Mesa: ".$order->mesa->name."</h5>
-                                <h5 class='fonte'>Data: $data | Hora: $hora</h5>                              
-                                <h5 class='fonte'>---------------------------------------------------------------------</h5>
-                                $cliente
-                                <h5 class='fonte'>ITENS:</h5>
-                                $table
-                                <h5 class='fonte'>---------------------------------------------------------------------</h5>
-                                <h5 class='fonte'>TOTAL DE ITENS: $contador</h5>
-                                <h5 class='fonte'>TOTAL DA COMPRA: R$ $order->total</h5>
-                                <h5 class='fonte'>---------------------------------------------------------------------</h5>
-                                <h5 class='fonte'>$order->observacao</h5>
-                                <h5 class='fonte'>$taxa</h5>
+                                <div class='center'>
+                                    <h5 class='fonte'>---------------------------------------------------------------------</h5>
+                                    <h5 class='fonte produto'>Pedido: $order->id | Mesa: ".$order->mesa->name."</h5>
+                                    <h5 class='fonte'>Data: $data | Hora: $hora</h5>                              
+                                    <h5 class='fonte'>---------------------------------------------------------------------</h5>
+                                    $cliente
+                                    <h5 class='fonte'>ITENS:</h5>
+                                    $table
+                                    <h5 class='fonte'>---------------------------------------------------------------------</h5>
+                                    <h5 class='fonte'>TOTAL DE ITENS: $contador</h5>
+                                    <h5 class='fonte total'>TOTAL DA COMPRA: R$ $order->total</h5>
+                                    <h5 class='fonte'>---------------------------------------------------------------------</h5>
+                                    <h5 class='fonte'>$order->observacao</h5>
+                                    <h5 class='fonte'>$taxa</h5>
+                                 </div>
                             </body>
                         </html>")->save(public_path().'/printer/'.$order->id.'.pdf');
 
@@ -313,11 +353,23 @@ class AdminCheckoutController extends Controller
         foreach ($items as $value)
         {
             if($value->product->id != 58) {
-                $produtos .= " <tr>
-                            <td class='fonte padding produto' style='white-space: initial; width: 40px'>" . substr($value->product->name,0,30)." - <br />" . $value->historico . "</td>
+                $com = '';
+                $id = $value->id;
+                $complements = $this->complementItemRepository->scopeQuery(function($query) use($id){
+                    return $query->where('order_item_id',$id);
+                })->all();
+                if($complements) {
+                    foreach ($complements as $v) {
+                        $com = "<br />" . $v->complement->name. " - R$". $v->price;
+                    }
+                }else{
+                    $com = '';
+                }$produtos .= "<tr>
+                            <td class='fonte padding produto'>" . $value->product->name . $com . "</td>
                             <td class='fonte padding produto'>" . $value->qtd . "</td>
                             <td class='fonte padding produto'> R$" . $value->price . "</td>
-                          </tr>";
+                            </tr>
+                            ";
                 $this->itemRepository->update(['impresso' => 'S'], $value->id);
                 $contador += $value->qtd;
             }
@@ -365,6 +417,15 @@ class AdminCheckoutController extends Controller
                                         font-weight: 400;
                                         font-size: 20px;
                                     }
+                                    .total{
+                                        font-weight: bold;
+                                        font-size: 18px;
+                                    }
+                                    .divd{
+                                        font-weight: 100;
+                                        color: #3e515b;
+                                        font-size: 10px;
+                                    }
                                 </style>
                             </head>
                             <body>
@@ -383,7 +444,7 @@ class AdminCheckoutController extends Controller
                                     $table
                                     <h5 class='fonte'>---------------------------------------------------------------------</h5>
                                     <h5 class='fonte'>TOTAL DE ITENS: $contador</h5>
-                                    <h5 class='fonte'>TOTAL DA COMPRA: R$ $order->total</h5>
+                                    <h5 class='fonte total'>TOTAL DA COMPRA: R$ $order->total</h5>
                                     <h5 class='fonte'>---------------------------------------------------------------------</h5>
                                     <h5 class='fonte'>$order->observacao</h5>
                                     <h5 class='fonte'>$order->troco</h5>
@@ -406,25 +467,40 @@ class AdminCheckoutController extends Controller
                                         padding-top: 0;
                                         margin-left: 7px;
                                     }
+                                    .center{
+                                        position: fixed;
+                                        margin-left: 200px;
+                                    }
                                     .produto{
                                         font-weight: 400;
                                         font-size: 20px;
                                     }
+                                    .total{
+                                        font-weight: bold;
+                                        font-size: 18px;
+                                    }
+                                    .divd{
+                                        font-weight: 100;
+                                        color: #3e515b;
+                                        font-size: 10px;
+                                    }
                                 </style>
                             </head>
                             <body>
-                                <h5 class='fonte'>---------------------------------------------------------------------</h5>
-                                <h5 class='fonte produto'>Pedido: $order->id | " . $order->mesa->name . "</h5>
-                                <h5 class='fonte'>Data: $data | Hora: $hora</h5>                              
-                                <h5 class='fonte'>---------------------------------------------------------------------</h5>
-                                <h5 class='fonte'>ITENS:</h5>
-                                $table
-                                <h5 class='fonte'>---------------------------------------------------------------------</h5>
-                                <h5 class='fonte'>TOTAL DE ITENS: $contador</h5>
-                                <h5 class='fonte'>TOTAL DA COMPRA: R$ $order->total</h5>
-                                <h5 class='fonte'>---------------------------------------------------------------------</h5>
-                                <h5 class='fonte'>$order->observacao</h5>
-                                <h5 class='fonte'>$taxa</h5>
+                                <div class='center'>
+                                    <h5 class='fonte'>---------------------------------------------------------------------</h5>
+                                    <h5 class='fonte produto'>Pedido: $order->id | " . $order->mesa->name . "</h5>
+                                    <h5 class='fonte'>Data: $data | Hora: $hora</h5>                              
+                                    <h5 class='fonte'>---------------------------------------------------------------------</h5>
+                                    <h5 class='fonte'>ITENS:</h5>
+                                    $table
+                                    <h5 class='fonte'>---------------------------------------------------------------------</h5>
+                                    <h5 class='fonte'>TOTAL DE ITENS: $contador</h5>
+                                    <h5 class='fonte total'>TOTAL DA COMPRA: R$ $order->total</h5>
+                                    <h5 class='fonte'>---------------------------------------------------------------------</h5>
+                                    <h5 class='fonte'>$order->observacao</h5>
+                                    <h5 class='fonte'>$taxa</h5>
+                                 </div>
                             </body>
                         </html>")->save(public_path() . '/printer/' . $order->id . '.pdf');
         }
@@ -456,11 +532,24 @@ class AdminCheckoutController extends Controller
         foreach ($items as $value)
         {
             if($value->product->id != 58) {
-                $produtos .= " <tr>
-                            <td class='fonte padding produto' style='white-space: initial; width: 40px'>" . substr($value->product->name,0,30)." - <br />" . $value->historico . "</td>
-                            <td class='fonte padding produto'>" . $value->qtd . "</td>
-                            <td class='fonte padding produto'> R$" . $value->price . "</td>
-                          </tr>";
+                 $com = '';
+                 $id = $value->id;
+                 $complements = $this->complementItemRepository->scopeQuery(function($query) use($id){
+                     return $query->where('order_item_id',$id);
+                 })->all();
+                if($complements) {
+                    foreach ($complements as $v) {
+                        $com .= "<br />" . $v->complement->name. " - R$". $v->price;
+                    }
+                }else{
+                    $com = '';
+                }
+
+                $produtos .= "<tr class='border'>
+                            <td class='fonte produto border'>" . $value->product->name . $com . "</td>
+                            <td class='fonte padding border produto'>" . $value->qtd . "</td>
+                            <td class='price padding border'> R$" . $value->price . "</td>
+                            </tr>";
                 $this->itemRepository->update(['impresso' => 'S'], $value->id);
                 $contador += $value->qtd;
             }
@@ -475,7 +564,7 @@ class AdminCheckoutController extends Controller
                       <tr>
                         <th class='fonte padding produto'>Produto</th>
                         <th class='fonte padding produto'>Qtd</th>                     
-                        <th class='fonte padding produto'>Vr.Uni</th>
+                        <th class='price padding'>Vr.Uni</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -493,6 +582,9 @@ class AdminCheckoutController extends Controller
                                     .fonte{
                                         font-weight: 300;
                                     }
+                                    .price{
+                                        font-size:14px;
+                                    }
                                     .padding{
                                         padding-left: 10px;
                                         padding-right: 10px;
@@ -507,6 +599,18 @@ class AdminCheckoutController extends Controller
                                     .produto{
                                         font-weight: 400;
                                         font-size: 20px;
+                                    }
+                                    .total{
+                                        font-weight: bold;
+                                        font-size: 18px;
+                                    }
+                                    .divd{
+                                        font-weight: 100;
+                                        color: #3e515b;
+                                        font-size: 10px;
+                                    }
+                                    .border{
+                                         border-bottom: 1px solid #c2cfd6;;
                                     }
                                 </style>
                             </head>
@@ -526,7 +630,7 @@ class AdminCheckoutController extends Controller
                                     $table
                                     <h5 class='fonte'>---------------------------------------------------------------------</h5>
                                     <h5 class='fonte'>TOTAL DE ITENS: $contador</h5>
-                                    <h5 class='fonte'>TOTAL DA COMPRA: R$ $order->total</h5>
+                                    <h5 class='fonte total'>TOTAL DA COMPRA: R$ $order->total</h5>
                                     <h5 class='fonte'>---------------------------------------------------------------------</h5>
                                     <h5 class='fonte'>$order->observacao</h5>
                                     <h5 class='fonte'>$order->troco</h5>
@@ -553,6 +657,16 @@ class AdminCheckoutController extends Controller
                                         font-weight: 400;
                                         font-size: 20px;
                                     }
+                                    .total{
+                                        font-weight: bold;
+                                        font-size: 18px;
+                                    }
+                                    .divd{
+                                        font-weight: 100;
+                                        color: #3e515b;
+                                        font-size: 10px;
+                                    }
+                                    
                                 </style>
                             </head>
                             <body>
@@ -564,7 +678,7 @@ class AdminCheckoutController extends Controller
                                 $table
                                 <h5 class='fonte'>---------------------------------------------------------------------</h5>
                                 <h5 class='fonte'>TOTAL DE ITENS: $contador</h5>
-                                <h5 class='fonte'>TOTAL DA COMPRA: R$ $order->total</h5>
+                                <h5 class='fonte total'>TOTAL DA COMPRA: R$ $order->total</h5>
                                 <h5 class='fonte'>---------------------------------------------------------------------</h5>
                                 <h5 class='fonte'>$order->observacao</h5>
                                 <h5 class='fonte'>$taxa</h5>

@@ -14,6 +14,7 @@ use Pedidos\Validators\ComplementValidator;
  */
 class ComplementRepositoryEloquent extends BaseRepository implements ComplementRepository
 {
+    protected $skipPresenter = true;
     /**
      * Specify Model class name
      *

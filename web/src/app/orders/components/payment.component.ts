@@ -115,7 +115,10 @@ export class PaymentComponent implements OnInit {
         this.router.navigate(['/orders']);
     }
 
-
+    edit(){
+        jQuery('#payment').hide();
+        this.router.navigate(['/orders/edit/' + this.order.id]);
+    }
     hideLoading(){
         jQuery(".container-loading").hide();
     }

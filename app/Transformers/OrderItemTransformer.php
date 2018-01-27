@@ -11,7 +11,7 @@ use Pedidos\Models\OrderItem;
  */
 class OrderItemTransformer extends TransformerAbstract
 {
-    protected $defaultIncludes = ['product'];
+    protected $defaultIncludes = ['product','complement'];
 
     /**
      * Transform the \OrderItem entity
@@ -36,5 +36,12 @@ class OrderItemTransformer extends TransformerAbstract
     }
     public function includeProduct(OrderItem $model){
         return $this->item($model->product, new ProductTransformer());
+    }
+
+    public function includeComplement(OrderItem $model){
+        if (!$model->complementItems){
+            return null;
+        }
+        return $this->collection($model->complementItems, new ComplementItemTransformer());
     }
 }

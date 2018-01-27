@@ -24,6 +24,11 @@ export class NewComponent implements OnInit {
             {
                 this.cancel();
             }
+
+            if(e.keyCode == 113)
+            {
+                this.buscarCliente();
+            }
         });
     }
 
@@ -39,6 +44,9 @@ export class NewComponent implements OnInit {
             numero:null,
             bairro:null,
             city_id:0
+        },
+        user:{
+            id:1
         },
         email:null
     };
@@ -127,6 +135,7 @@ export class NewComponent implements OnInit {
                         this.client.name = res.data[0].name;
                         this.client.phone = res.data[0].phone;
                         this.client.email = res.data[0].user.data.email;
+                        this.client.user.id = res.data[0].user.data.id;
                         this.client.address.address = res.data[0].addressClient.data.address;
                         this.client.address.numero = res.data[0].addressClient.data.numero;
                         this.client.address.bairro = res.data[0].addressClient.data.bairro;
@@ -149,6 +158,7 @@ export class NewComponent implements OnInit {
         this.client.name = c.name;
         this.client.phone = c.phone;
         this.client.email = c.user.data.email;
+        this.client.user.id = c.user.data.id;
         this.client.address.address = c.addressClient.data.address;
         this.client.address.numero = c.addressClient.data.numero;
         this.client.address.bairro = c.addressClient.data.bairro;
@@ -215,6 +225,7 @@ export class NewComponent implements OnInit {
         this.toasterService.pop('info', 'Informação', 'Item removido.');
     }
 
+
     save()
     {
         let card = '';
@@ -243,6 +254,7 @@ export class NewComponent implements OnInit {
                     troco = 'Troco para: '+this.troco+',00 reais';
                 }else{
                     troco = '';
+                    bandeira = '';
                 }
 
                 this.showLoading();
@@ -258,6 +270,7 @@ export class NewComponent implements OnInit {
                         troco: troco,
                         observacao: bandeira
                     };
+                    this.httpService.setAccessToken();
                     this.httpService.builder()
                         .insert(pedido, 'order')
                         .then((res) => {

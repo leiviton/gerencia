@@ -34,7 +34,7 @@ export class MesasComponent implements OnInit {
       this.httpService.setAccessToken();
       this.httpService.eventEmitter
           .subscribe(() => {
-              this.httpService.builder().list({}, 'mesas')
+              this.httpService.builder().list({}, 'mesas/all')
                   .then((res) => {
                       this.mesas = res;
                       this.tamanho = res.data.length;

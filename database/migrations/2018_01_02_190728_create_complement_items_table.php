@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateComplementItensTable extends Migration
+class CreateComplementItemsTable extends Migration
 {
 
 	/**
@@ -13,7 +13,7 @@ class CreateComplementItensTable extends Migration
 	 */
 	public function up()
 	{
-		Schema::create('complement_itens', function(Blueprint $table) {
+		Schema::create('complement_items', function(Blueprint $table) {
             $table->increments('id');
 
             $table ->integer('complement_id')->unsigned();

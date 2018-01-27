@@ -7,6 +7,7 @@ namespace Pedidos\Services;
 use Pedidos\Models\Order;
 use Pedidos\Repositories\CupomRepository;
 use Pedidos\Repositories\MesaRepository;
+use Pedidos\Repositories\OrderItemRepository;
 use Pedidos\Repositories\OrderRepository;
 use Pedidos\Repositories\ProductRepository;
 //use Dmitrovskiy\IonicPush\PushProcessor;
@@ -29,6 +30,10 @@ class OrderService{
      * @var MesaRepository
      */
     private $mesaRepository;
+    /**
+     * @var OrderItemRepository
+     */
+    private $itemRepository;
 
     /**
      * @var PushProcessor
@@ -40,7 +45,8 @@ class OrderService{
         OrderRepository $orderRepository,
         CupomRepository $cupomRepository,
         ProductRepository $productRepository,
-        MesaRepository $mesaRepository
+        MesaRepository $mesaRepository,
+        OrderItemRepository $itemRepository
         //PushProcessor $pushProcessor
     )
     {
@@ -50,6 +56,7 @@ class OrderService{
 
         //$this->pushProcessor = $pushProcessor;
         $this->mesaRepository = $mesaRepository;
+        $this->itemRepository = $itemRepository;
     }
 
     public function create(array $data){
@@ -74,8 +81,19 @@ class OrderService{
             $mesa = $this->mesaRepository->find($data['mesa_id']);
 
             foreach ($items as $item){
+                $complements = '';
                 $item['price'] = $this->productRepository->find($item['product_id'])->price;
-                $order->items()->create($item);
+                $item['order_id'] = $order->id;
+                $res = $this->itemRepository->create($item);//$order->items()->create($item);
+
+                if($item['complements'] && $item['complements'] != '')
+                {
+                    $complements = $item['complements'];
+                    foreach ($complements as $c){
+                        $res->complementItems()->create($c);
+                    }
+                }
+
             }
 
             $total = $data['total'];
@@ -111,7 +129,11 @@ class OrderService{
     public function updateStatus($data,$id){
         $order = $this->orderRepository->find($id);
         $order->status = $data['status'];
+        $mesaAnt = $this->mesaRepository->find($data['mesa_id_ant']);
+        $mesaAnt->save();
+        $mesa = $this->mesaRepository->find($data['mesa_id']);
         $order->mesa_id = $data['mesa_id'];
+        $mesa->status = 1;
         switch ((int)$data['status']){
             case 1:
                 $order->save();
@@ -120,6 +142,8 @@ class OrderService{
                 $order->save();
                 break;
         }
+        $mesa->save();
+        $order->save();
         return $order;
     }
 

@@ -3,7 +3,7 @@
 namespace Pedidos\Transformers;
 
 use League\Fractal\TransformerAbstract;
-use Pedidos\Models\ComplementItem;
+use Pedidos\Models\ComplementItems;
 
 /**
  * Class ComplementItemTransformer
@@ -15,11 +15,11 @@ class ComplementItemTransformer extends TransformerAbstract
     protected $defaultIncludes = ['complement'];
     /**
      * Transform the ComplementItens entity
-     * @param Pedidos\Models\ComplementItem $model
+     * @param Pedidos\Models\ComplementItems $model
      *
      * @return array
      */
-    public function transform(ComplementItem $model)
+    public function transform(ComplementItems $model)
     {
         return [
             'id'         => (int) $model->id,
@@ -33,10 +33,7 @@ class ComplementItemTransformer extends TransformerAbstract
         ];
     }
 
-    public function includeComplement(ComplementItem $model){
+    public function includeComplement(ComplementItems $model){
         return $this->item($model->complement, new ComplementTransformer());
-    }
-    public function includeOrderItem(ComplementItem $model){
-        return $this->item($model->orderItem, new OrderItemTransformer());
     }
 }

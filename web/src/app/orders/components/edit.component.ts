@@ -56,6 +56,8 @@ export class EditComponent implements OnInit {
         },
         email:''
     };
+
+    mesa_id = null;
     products = {};
     mesas = {
         data:null
@@ -92,6 +94,7 @@ export class EditComponent implements OnInit {
                             this.client.address.city_id = res.data.client.data.addressClient.data.city.data.id;
                             this.products = res.data.items;
                             this.mesa = res.data.mesa.data.name;
+                            this.mesa_id = res.data.mesa.data.id;
                             this.hideLoading();
                     });
                 this.httpService.setAccessToken();
@@ -112,7 +115,8 @@ export class EditComponent implements OnInit {
         this.showLoading();
         let order = {
             'status': this.order.status,
-            'mesa_id': this.order.mesa.data.id
+            'mesa_id': this.mesa_id,
+            'mesa_id_ant': this.order.mesa.data.id
         };
         this.httpService.builder('order')
             .update(this.order.id, order)
@@ -128,7 +132,8 @@ export class EditComponent implements OnInit {
                 this.client.address.bairro = res.data.client.data.addressClient.data.bairro;
                 this.client.address.city_id = res.data.client.data.addressClient.data.city.data.id;
                 this.products = res.data.items;
-                this.mesa = res.data.mesa.data.name;
+                this.mesa = res.data.mesa.data.name
+                this.mesa_id = res.data.mesa.data.id;
                 this.hideLoading();
                 this.toasterService.pop('success', 'Sucesso','Pedido '+this.order.id+' com sucesso!')
             });
@@ -205,6 +210,11 @@ export class EditComponent implements OnInit {
     close(){
         jQuery('#successModal').on('show.bs.modal').show().removeClass('show');
         this.router.navigate(['/orders']);
+    }
+
+    pagar(){
+        jQuery('#successModal').hide();
+        this.router.navigate(['/orders/payment/'+this.order.id]);
     }
 
     save(){

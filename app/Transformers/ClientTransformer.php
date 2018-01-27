@@ -32,7 +32,12 @@ class ClientTransformer extends TransformerAbstract
     }
 
     public function includeUser(Client $model){
-        return $this->item($model->user, new UserTransformer());
+        if(!$model->user)
+        {
+            return null;
+        }else{
+            return $this->item($model->user, new UserTransformer());
+        }
     }
 
     public function includeAddressClient(Client $model)

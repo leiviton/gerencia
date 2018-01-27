@@ -3,6 +3,7 @@
 namespace Pedidos\Repositories;
 
 use Pedidos\Models\ComplementItem;
+use Pedidos\Models\ComplementItems;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Pedidos\Validators\ComplementItensValidator;
@@ -13,6 +14,7 @@ use Pedidos\Validators\ComplementItensValidator;
  */
 class ComplementItemRepositoryEloquent extends BaseRepository implements ComplementItemRepository
 {
+    protected $skipPresenter = true;
     /**
      * Specify Model class name
      *
@@ -20,7 +22,7 @@ class ComplementItemRepositoryEloquent extends BaseRepository implements Complem
      */
     public function model()
     {
-        return ComplementItem::class;
+        return ComplementItems::class;
     }
 
     
