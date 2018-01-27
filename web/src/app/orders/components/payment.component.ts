@@ -94,6 +94,25 @@ export class PaymentComponent implements OnInit {
 
             }
         }else{
+            this.payment.total_pago = this.valor_pag;
+            this.payment.total_original = this.order.total;
+            this.payment.payment_types_id = this.type_id;
+            this.httpService.setAccessToken();
+            if(this.type_id !== null) {
+                this.httpService.builder()
+                    .insert(this.payment, 'payment')
+                    .then((res) => {
+                        this.httpService.eventEmitter.emit();
+                        this.hideLoading();
+                        this.toasterService.pop('success', 'Sucesso', 'Pagamento do pedido ' + res.data.id + ' realizado com sucesso');
+                    });
+
+            }else{
+                this.hideLoading();
+                this.toasterService.pop('error', 'Erro', 'Tipo pagamento não selecionado');
+
+            }
+
             this.hideLoading();
             this.toasterService.pop('error', 'Erro', 'Pagamento não pode ser menor que o valor a pagar');
         }

@@ -178,14 +178,26 @@ var EditComponent = (function () {
             .then(function (res) {
             _this.httpService.eventEmitter.emit();
             _this.order = res.data;
-            _this.client.id = res.data.client.data.id;
-            _this.client.name = res.data.client.data.name;
-            _this.client.phone = res.data.client.data.phone;
-            _this.client.email = res.data.client.data.user.data.email;
-            _this.client.address.address = res.data.client.data.addressClient.data.address;
-            _this.client.address.numero = res.data.client.data.addressClient.data.numero;
-            _this.client.address.bairro = res.data.client.data.addressClient.data.bairro;
-            _this.client.address.city_id = res.data.client.data.addressClient.data.city.data.id;
+            if (res.data.client.data.user) {
+                _this.client.id = res.data.client.data.id;
+                _this.client.name = res.data.client.data.name;
+                _this.client.phone = res.data.client.data.phone;
+                _this.client.email = res.data.client.data.user.data.email;
+                _this.client.address.address = res.data.client.data.addressClient.data.address;
+                _this.client.address.numero = res.data.client.data.addressClient.data.numero;
+                _this.client.address.bairro = res.data.client.data.addressClient.data.bairro;
+                _this.client.address.city_id = res.data.client.data.addressClient.data.city.data.id;
+            }
+            else {
+                _this.client.id = res.data.client.data.id;
+                _this.client.name = res.data.client.data.name;
+                _this.client.phone = res.data.client.data.phone;
+                _this.client.email = '';
+                _this.client.address.address = res.data.client.data.addressClient.data.address;
+                _this.client.address.numero = res.data.client.data.addressClient.data.numero;
+                _this.client.address.bairro = res.data.client.data.addressClient.data.bairro;
+                _this.client.address.city_id = res.data.client.data.addressClient.data.city.data.id;
+            }
             _this.products = res.data.items;
             _this.mesa = res.data.mesa.data.name;
             _this.mesa_id = res.data.mesa.data.id;
@@ -1094,6 +1106,23 @@ var PaymentComponent = (function () {
             }
         }
         else {
+            this.payment.total_pago = this.valor_pag;
+            this.payment.total_original = this.order.total;
+            this.payment.payment_types_id = this.type_id;
+            this.httpService.setAccessToken();
+            if (this.type_id !== null) {
+                this.httpService.builder()
+                    .insert(this.payment, 'payment')
+                    .then(function (res) {
+                    _this.httpService.eventEmitter.emit();
+                    _this.hideLoading();
+                    _this.toasterService.pop('success', 'Sucesso', 'Pagamento do pedido ' + res.data.id + ' realizado com sucesso');
+                });
+            }
+            else {
+                this.hideLoading();
+                this.toasterService.pop('error', 'Erro', 'Tipo pagamento não selecionado');
+            }
             this.hideLoading();
             this.toasterService.pop('error', 'Erro', 'Pagamento não pode ser menor que o valor a pagar');
         }
