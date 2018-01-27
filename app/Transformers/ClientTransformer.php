@@ -34,7 +34,7 @@ class ClientTransformer extends TransformerAbstract
     public function includeUser(Client $model){
         if(!$model->user)
         {
-            return null;
+            return [];
         }else{
             return $this->item($model->user, new UserTransformer());
         }
@@ -42,6 +42,10 @@ class ClientTransformer extends TransformerAbstract
 
     public function includeAddressClient(Client $model)
     {
-        return $this->item($model->addressClient, new AddressClientTransformer());
+        if (!$model->addressClient) {
+            return [];
+        } else {
+            return $this->item($model->addressClient, new AddressClientTransformer());
+        }
     }
 }
