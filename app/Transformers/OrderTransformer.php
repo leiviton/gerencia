@@ -51,7 +51,7 @@ class OrderTransformer extends TransformerAbstract
 
     public function includeClient(Order $model){
         if(!$model->client){
-            return [];
+            return null;
         }else{
             return $this->item($model->client, new ClientTransformer());
         }
