@@ -437,15 +437,27 @@ var NewComponent = (function () {
                     _this.toasterService.pop('info', 'Nenhum cliente encontrado, cadastre o cliente');
                 }
                 else if (res.data.length == 1) {
-                    _this.client.id = res.data[0].id;
-                    _this.client.name = res.data[0].name;
-                    _this.client.phone = res.data[0].phone;
-                    _this.client.email = res.data[0].user.data.email;
-                    _this.client.user.id = res.data[0].user.data.id;
-                    _this.client.address.address = res.data[0].addressClient.data.address;
-                    _this.client.address.numero = res.data[0].addressClient.data.numero;
-                    _this.client.address.bairro = res.data[0].addressClient.data.bairro;
-                    _this.client.address.city_id = res.data[0].addressClient.data.city.data.id;
+                    if (_this.client.user) {
+                        _this.client.id = res.data[0].id;
+                        _this.client.name = res.data[0].name;
+                        _this.client.phone = res.data[0].phone;
+                        _this.client.email = res.data[0].user.data.email;
+                        _this.client.user.id = res.data[0].user.data.id;
+                        _this.client.address.address = res.data[0].addressClient.data.address;
+                        _this.client.address.numero = res.data[0].addressClient.data.numero;
+                        _this.client.address.bairro = res.data[0].addressClient.data.bairro;
+                        _this.client.address.city_id = res.data[0].addressClient.data.city.data.id;
+                    }
+                    else {
+                        _this.client.id = res.data[0].id;
+                        _this.client.name = res.data[0].name;
+                        _this.client.phone = res.data[0].phone;
+                        _this.client.email = '';
+                        _this.client.address.address = res.data[0].addressClient.data.address;
+                        _this.client.address.numero = res.data[0].addressClient.data.numero;
+                        _this.client.address.bairro = res.data[0].addressClient.data.bairro;
+                        _this.client.address.city_id = res.data[0].addressClient.data.city.data.id;
+                    }
                     _this.novo = false;
                 }
                 else if (res.data.length > 1) {
@@ -458,15 +470,27 @@ var NewComponent = (function () {
         }
     };
     NewComponent.prototype.addClient = function (c) {
-        this.client.id = c.id;
-        this.client.name = c.name;
-        this.client.phone = c.phone;
-        this.client.email = c.user.data.email;
-        this.client.user.id = c.user.data.id;
-        this.client.address.address = c.addressClient.data.address;
-        this.client.address.numero = c.addressClient.data.numero;
-        this.client.address.bairro = c.addressClient.data.bairro;
-        this.client.address.city_id = c.addressClient.data.city.data.id;
+        if (c.user) {
+            this.client.id = c.id;
+            this.client.name = c.name;
+            this.client.phone = c.phone;
+            this.client.email = c.user.data.email;
+            this.client.user.id = c.user.data.id;
+            this.client.address.address = c.addressClient.data.address;
+            this.client.address.numero = c.addressClient.data.numero;
+            this.client.address.bairro = c.addressClient.data.bairro;
+            this.client.address.city_id = c.addressClient.data.city.data.id;
+        }
+        else {
+            this.client.id = c.id;
+            this.client.name = c.name;
+            this.client.phone = c.phone;
+            this.client.email = '';
+            this.client.address.address = c.addressClient.data.address;
+            this.client.address.numero = c.addressClient.data.numero;
+            this.client.address.bairro = c.addressClient.data.bairro;
+            this.client.address.city_id = c.addressClient.data.city.data.id;
+        }
         this.novo = false;
         this.pesquisa.value2 = null;
         __WEBPACK_IMPORTED_MODULE_1_jquery__('#cliente').hide();
@@ -587,7 +611,7 @@ var NewComponent = (function () {
     NewComponent.prototype.saveClient = function () {
         var _this = this;
         if (this.client.name == null || this.client.phone == null) {
-            this.toasterService.pop('error', 'Campos do cadastro vazio, verifique');
+            this.toasterService.pop('error', 'Verifique nome e telefone do cliente');
         }
         else if (this.client.address.address == null || this.client.address.bairro == null || this.client.address.numero == null) {
             this.toasterService.pop('error', 'Campos do endereço vazio, verifique');
