@@ -167,7 +167,7 @@ var MesasComponent = (function () {
         this.httpService.setAccessToken();
         this.httpService.eventEmitter
             .subscribe(function () {
-            _this.httpService.builder().list({}, 'mesas')
+            _this.httpService.builder().list({}, 'mesas/all')
                 .then(function (res) {
                 _this.mesas = res;
                 _this.tamanho = res.data.length;
