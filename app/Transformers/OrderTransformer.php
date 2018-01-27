@@ -50,7 +50,11 @@ class OrderTransformer extends TransformerAbstract
     }
 
     public function includeClient(Order $model){
-        return $this->item($model->client, new ClientTransformer());
+        if(!$model->client){
+            return [];
+        }else{
+            return $this->item($model->client, new ClientTransformer());
+        }
     }
 
     public function includeCupom(Order $model){
