@@ -1135,8 +1135,6 @@ var PaymentComponent = (function () {
                 this.hideLoading();
                 this.toasterService.pop('error', 'Erro', 'Tipo pagamento não selecionado');
             }
-            this.hideLoading();
-            this.toasterService.pop('error', 'Erro', 'Pagamento não pode ser menor que o valor a pagar');
         }
     };
     PaymentComponent.prototype.tipos = function () {

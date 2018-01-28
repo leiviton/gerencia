@@ -31,6 +31,8 @@ export class PaymentComponent implements OnInit {
         id:0,
         total:0
     };
+
+
     mesa = '';
     products = {};
     total = 0;
@@ -41,6 +43,7 @@ export class PaymentComponent implements OnInit {
         'desconto':0,
         'acrescimo':0,
         'total_original':0,
+        'total_realizado':0,
         'payment_types_id':1
     };
     troco = 0;
@@ -83,6 +86,8 @@ export class PaymentComponent implements OnInit {
                         .insert(this.payment, 'payment')
                         .then((res) => {
                             this.httpService.eventEmitter.emit();
+                            this.payment.total_realizado = this.payment.total_pago;
+                            this.valor_pag = 0;
                             this.hideLoading();
                             this.toasterService.pop('success', 'Sucesso', 'Pagamento do pedido ' + res.data.id + ' realizado com sucesso');
                             this.close();
@@ -110,11 +115,7 @@ export class PaymentComponent implements OnInit {
             }else{
                 this.hideLoading();
                 this.toasterService.pop('error', 'Erro', 'Tipo pagamento não selecionado');
-
             }
-
-            this.hideLoading();
-            this.toasterService.pop('error', 'Erro', 'Pagamento não pode ser menor que o valor a pagar');
         }
     }
 

@@ -4,6 +4,7 @@
 namespace Pedidos\Services;
 
 
+use Faker\Provider\DateTime;
 use Pedidos\Models\Order;
 use Pedidos\Repositories\CupomRepository;
 use Pedidos\Repositories\MesaRepository;
@@ -98,9 +99,9 @@ class OrderService{
 
             $total = $data['total'];
 
-            if($order->type === 0)
+            if($order->type == 0)
             {
-                DB::insert('insert into order_items (id,product_id,order_id,price,qtd,subtotal) values(?,?,?,?,?,?)',[null,$taxa->id,$order->id,$taxa->price,1,$taxa->price]);
+                $this->productRepository->create($taxa);
                 $mesa->status = 3;
                 $total += $taxa->price;
             }else{
@@ -155,9 +156,9 @@ class OrderService{
             $order = $this->orderRepository->find($id);
             $mesa = $this->mesaRepository->find($order->mesa->id);
             $order->paymentOrders()->create($data);
-            if($order->total > $data['total_pago'])
+            if($order->total > ($data['total_pago'] + $data['desconto']))
             {
-                $order->status = 2;
+                $order->status = 4;
             }else{
                 $order->status = 3;
             }
