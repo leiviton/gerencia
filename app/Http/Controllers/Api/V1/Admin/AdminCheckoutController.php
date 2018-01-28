@@ -230,8 +230,8 @@ class AdminCheckoutController extends Controller
                     $com = '';
                 }
 
-                $produtos .= " <tr>
-                            <td class='fonte padding produto'>" . $value->product->name . $com . "</td>
+                $produtos .= " <tr class='border'>
+                            <td class='fonte padding produto'>" . $value->product->name . $com . "<br/>".$value->historico."</td>
                             <td class='fonte padding produto'>" . $value->qtd . "</td>
                             <td class='fonte padding produto'> R$" . $value->price . "</td>
                             </tr>
@@ -303,6 +303,9 @@ class AdminCheckoutController extends Controller
                                         color: #3e515b;
                                         font-size: 10px;
                                     }
+                                    .border{
+                                         border-bottom: 1px solid #c2cfd6;;
+                                    }
                                 </style>
                             </head>
                             <body>
@@ -364,10 +367,10 @@ class AdminCheckoutController extends Controller
                     }
                 }else{
                     $com = '';
-                }$produtos .= "<tr>
-                            <td class='fonte padding produto'>" . $value->product->name . $com . "</td>
+                }$produtos .= "<tr class='border'>
+                            <td class='fonte padding produto'>" . $value->product->name . $com . "<br/>".$value->historico."</td>
                             <td class='fonte padding produto'>" . $value->qtd . "</td>
-                            <td class='fonte padding produto'> R$" . $value->price . "</td>
+                            <td class='price padding produto'> R$" . $value->price . "</td>
                             </tr>
                             ";
                 $this->itemRepository->update(['impresso' => 'S'], $value->id);
@@ -426,6 +429,9 @@ class AdminCheckoutController extends Controller
                                         color: #3e515b;
                                         font-size: 10px;
                                     }
+                                    .border{
+                                         border-bottom: 1px solid #c2cfd6;;
+                                    }
                                 </style>
                             </head>
                             <body>
@@ -483,6 +489,9 @@ class AdminCheckoutController extends Controller
                                         font-weight: 100;
                                         color: #3e515b;
                                         font-size: 10px;
+                                    }
+                                    .border{
+                                         border-bottom: 1px solid #c2cfd6;;
                                     }
                                 </style>
                             </head>
@@ -546,7 +555,7 @@ class AdminCheckoutController extends Controller
                 }
 
                 $produtos .= "<tr class='border'>
-                            <td class='fonte produto border'>" . $value->product->name . $com . "</td>
+                            <td class='fonte produto border'>" . $value->product->name . $com . "<br/>".$value->historico."</td>
                             <td class='fonte padding border produto'>" . $value->qtd . "</td>
                             <td class='price padding border'> R$" . $value->price . "</td>
                             </tr>";
@@ -665,6 +674,10 @@ class AdminCheckoutController extends Controller
                                         font-weight: 100;
                                         color: #3e515b;
                                         font-size: 10px;
+                                    }
+                                    
+                                    .border{
+                                         border-bottom: 1px solid #c2cfd6;;
                                     }
                                     
                                 </style>

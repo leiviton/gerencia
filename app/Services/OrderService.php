@@ -94,7 +94,6 @@ class OrderService{
                         $res->complementItems()->create($c);
                     }
                 }
-
             }
 
             $total = $data['total'];

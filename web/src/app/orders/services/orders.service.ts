@@ -51,19 +51,21 @@ export class OrdersService extends AppHttpService {
     addComplement(complement,i){
         let cart = this.get(),itemAux = cart.items[i];
         let valor = 0;
-        let h = '';
-        itemAux.historico = 'Com:';
         for (let j in complement)
         {
             complement[j].complement_id = complement[j].id;
             complement[j].qtd = 1;
             valor = valor + complement[j].price;
         }
-        itemAux.historico += h;
-        console.log('valor',valor);
         itemAux.subtotal += valor;
         itemAux.complements = complement;
         cart.total = this.getTotal(cart.items);
+        localStorage.setItem(this.key,JSON.stringify(cart));
+    }
+
+    obs(o,i){
+        let cart = this.get(),itemAux = cart.items[i];
+        itemAux.historico = o;
         localStorage.setItem(this.key,JSON.stringify(cart));
     }
 

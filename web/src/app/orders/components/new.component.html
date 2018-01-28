@@ -116,14 +116,16 @@
                                 </thead>
                                 <tbody>
                                     <tr class="th-table" *ngFor="let p of items.items; let i = index">
-                                        <td class="text-center">{{ p.id }}</td>
-                                        <td>{{ p.name }}  <p *ngFor="let c of p.complements" style="font-size: 12px; margin-bottom: 0;"> {{ c.name }}: {{ c.price | currency:'BRL':true }}</p></td>
-                                        <td class="text-center">{{ p.price | currency:'BRL':true }}</td>
-                                        <td class="text-center">{{ p.qtd }}</td>
-                                        <td class="text-center">{{ p.subtotal | currency:'BRL':true }}</td>
+                                        <td class="text-center" (click)="showObservacao(i)">{{ p.id }}</td>
+                                        <td (click)="showObservacao(i)">{{ p.name }}
+                                            <p *ngFor="let c of p.complements" style="font-size: 12px; margin-bottom: 0;"> {{ c.name }}: {{ c.price | currency:'BRL':true }}</p>
+                                            <p>{{p.historico}}</p>
+                                        </td>
+                                        <td class="text-center" (click)="showObservacao(i)">{{ p.price | currency:'BRL':true }}</td>
+                                        <td class="text-center" (click)="showObservacao(i)">{{ p.qtd }}</td>
+                                        <td class="text-center" (click)="showObservacao(i)">{{ p.subtotal | currency:'BRL':true }}</td>
                                         <td class="text-center">
                                             <button class="btn btn-sm btn-link" (click)="removeItem(i)" tooltip="Remover do pedido"><i class="fa fa-remove text-danger"></i></button>
-
                                             <button class="btn btn-sm btn-link" *ngIf="idCom == 0" (click)="showComplement(i)" tooltip="Gerenciar complementos"><i class="fa fa-plus text-info"></i></button>
                                         </td>
                                     </tr>
@@ -175,6 +177,32 @@
                     <div class="modal-button">
                         <button class="btn btn-info" (click)="saveComplement()"><i class="fa fa-save"></i> Salvar</button>
                         <button class="btn btn-danger text-left" type="button" (click)="closeComplement()"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
+                    </div>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+    </div>
+    <!-- /.modal-dialog -->
+    <div class="modal fade modal_novo" id="informacao" role="dialog" aria-hidden="true" aria-labelledby="myModalLabell" style="">
+        <div class="modal-dialog modal-sm modal-info" role="document">
+            <div class="modal-content">
+                <div class="modal-header novo">
+                    <h5 class="modal-title">Observações item</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="card-body">
+                          <div class="form-group row">
+                                 <div class="col-md-12">
+                                     <textarea id="textarea-input" name="observacao" [(ngModel)]="historico" rows="6" class="form-control" placeholder="Digite aqui..." ></textarea>
+                                 </div>
+                          </div>
+                    </div>
+                </div>
+                <div class="modal-footer cadastro">
+                    <div class="modal-button">
+                        <button class="btn btn-info" (click)="saveObserve(historico)"><i class="fa fa-save"></i> Salvar</button>
+                        <button class="btn btn-danger text-left" type="button" (click)="closeInformacao()"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
                     </div>
                 </div>
             </div>

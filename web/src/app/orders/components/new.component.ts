@@ -76,6 +76,8 @@ export class NewComponent implements OnInit {
     }];
     idItem = 0;
     idCom = 0;
+    historico = '';
+    observacao = '';
     ngOnInit(): void {
         if(!this.cart)
         {
@@ -101,6 +103,7 @@ export class NewComponent implements OnInit {
         jQuery('#pesquisa').hide();
         jQuery('#complement').hide();
         jQuery('#cliente').hide();
+        jQuery('#informacao').hide();
     }
 
     buscarCliente()
@@ -228,6 +231,14 @@ export class NewComponent implements OnInit {
         this.total = this.httpService.get().total;
         jQuery('#pesquisa').hide();
         this.toasterService.pop('success', 'Sucesso', 'Item '+item.name+' adicionado.');
+    }
+
+    saveObserve(o)
+    {
+        this.httpService.obs(o,this.idItem);
+        this.items = this.httpService.get();
+        jQuery('#informacao').hide();
+        this.toasterService.pop('success', 'Sucesso', 'Observção salva');
     }
 
     removeItem(i)
@@ -363,6 +374,15 @@ export class NewComponent implements OnInit {
         console.log('index',i);
     }
 
+    showObservacao(i)
+    {
+        jQuery('#informacao').show().addClass('show').css('z-index',1050 + 60);
+        jQuery('#new_order').css('z-index', 1040);
+        this.getComplements();
+        this.idItem = i;
+        console.log('index',i);
+    }
+
     getComplements()
     {
         this.httpService.builder()
@@ -412,6 +432,11 @@ export class NewComponent implements OnInit {
     closeComplement()
     {
         jQuery('#complement').hide();
+    }
+
+    closeInformacao()
+    {
+        jQuery('#informacao').hide();
     }
 
     closeMd()
