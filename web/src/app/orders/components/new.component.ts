@@ -135,8 +135,7 @@ export class NewComponent implements OnInit {
                             this.client.id = res.data[0].id;
                             this.client.name = res.data[0].name;
                             this.client.phone = res.data[0].phone;
-                            this.client.email = res.data[0].user.data.email;
-                            this.client.user.id = res.data[0].user.data.id;
+                            this.client.email = '';
                             this.client.address.address = res.data[0].addressClient.data.address;
                             this.client.address.numero = res.data[0].addressClient.data.numero;
                             this.client.address.bairro = res.data[0].addressClient.data.bairro;

@@ -98,8 +98,8 @@ export class PaymentComponent implements OnInit {
                 this.toasterService.pop('error', 'Erro', 'Tipo pagamento não selecionado');
 
             }
-        }else{
-            this.payment.total_pago = this.valor_pag;
+        }else if (this.valor_pag + this.payment.desconto >= this.order.total){
+            this.payment.total_pago = (this.valor_pag - this.troco);
             this.payment.total_original = this.order.total;
             this.payment.payment_types_id = this.type_id;
             this.httpService.setAccessToken();
@@ -110,12 +110,29 @@ export class PaymentComponent implements OnInit {
                         this.httpService.eventEmitter.emit();
                         this.hideLoading();
                         this.toasterService.pop('success', 'Sucesso', 'Pagamento do pedido ' + res.data.id + ' realizado com sucesso');
-                    });
-
+                        this.close();
+                });
             }else{
                 this.hideLoading();
                 this.toasterService.pop('error', 'Erro', 'Tipo pagamento não selecionado');
             }
+        }else if((this.valor_pag + this.payment.desconto) < this.order.total){
+                this.payment.total_pago = (this.valor_pag - this.troco);
+                this.payment.total_original = this.order.total;
+                this.payment.payment_types_id = this.type_id;
+                this.httpService.setAccessToken();
+                if(this.type_id !== null) {
+                    this.httpService.builder()
+                        .insert(this.payment, 'payment')
+                        .then((res) => {
+                            this.httpService.eventEmitter.emit();
+                            this.hideLoading();
+                            this.toasterService.pop('success', 'Sucesso', 'Pagamento parcial ' + res.data.id + ' realizado com sucesso');
+                        });
+                }else{
+                    this.hideLoading();
+                    this.toasterService.pop('error', 'Erro', 'Tipo pagamento não selecionado');
+                }
         }
     }
 

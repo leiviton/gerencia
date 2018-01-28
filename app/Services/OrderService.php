@@ -101,7 +101,10 @@ class OrderService{
 
             if($order->type == 0)
             {
-                $this->productRepository->create($taxa);
+                $taxa['product_id'] = $taxa['id'];
+                $taxa['order_id'] = $order->id;
+                $taxa['qtd'] = 1;
+                $this->itemRepository->create($taxa);
                 $mesa->status = 3;
                 $total += $taxa->price;
             }else{

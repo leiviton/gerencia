@@ -178,7 +178,7 @@ export class EditComponent implements OnInit {
                     jQuery('#successModal').css('z-index', 1040);
                 }else if(res.data.length == 1){
                     this.hideLoading();
-                    this.addItem(res.data);
+                    this.addItem(res.data[0]);
                     let pedido = {
                         items: this.httpService.get().items,
                         order_id: this.order.id
