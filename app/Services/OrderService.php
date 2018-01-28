@@ -101,10 +101,8 @@ class OrderService{
 
             if($order->type == 0)
             {
-                $taxa['product_id'] = $taxa['id'];
-                $taxa['order_id'] = $order->id;
-                $taxa['qtd'] = 1;
-                $this->itemRepository->create($taxa);
+                $atual = new DateTime();
+                DB::insert('insert into order_items (id,product_id,order_id,price,qtd,subtotal,created_at,updated_at) values(?,?,?,?,?,?,?,?)',[null,$taxa->id,$order->id,$taxa->price,1,$taxa->price,$atual,$atual]);
                 $mesa->status = 3;
                 $total += $taxa->price;
             }else{
