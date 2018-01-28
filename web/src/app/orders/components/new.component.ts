@@ -277,8 +277,8 @@ export class NewComponent implements OnInit {
                 {
                     card = 'Não';
                 }else{
-                    card = 'Sim';
-                    bandeira = 'Bandeira do cartão:' + this.bandeira;
+                    card = 'Sim ';
+                    bandeira = '- Bandeira do cartão:' + this.bandeira;
                 }
 
                 if(this.troco > 0)
@@ -298,9 +298,9 @@ export class NewComponent implements OnInit {
                         mesa_id: this.mesa_id,
                         client_id: this.client.id,
                         type: this.tipo,
-                        cartao: card,
+                        cartao: card+bandeira,
                         troco: troco,
-                        observacao: bandeira
+                        observacao: this.observacao
                     };
                     this.httpService.setAccessToken();
                     this.httpService.builder()

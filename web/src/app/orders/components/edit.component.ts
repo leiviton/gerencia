@@ -42,7 +42,8 @@ export class EditComponent implements OnInit {
             data:{
                 id:1
             }
-        }
+        },
+        observacao:''
     };
     client = {
         id:1,
@@ -127,7 +128,8 @@ export class EditComponent implements OnInit {
         let order = {
             'status': this.order.status,
             'mesa_id': this.mesa_id,
-            'mesa_id_ant': this.order.mesa.data.id
+            'mesa_id_ant': this.order.mesa.data.id,
+            'observacao': this.order.observacao
         };
         this.httpService.builder('order')
             .update(this.order.id, order)

@@ -107,6 +107,14 @@
                             </table>
                         </div>
                         <hr>
+                        <div class="col-md-12">
+                            <div class="form-group row">
+                                <label class="col-md-3 col-form-label" for="observacao">Observação</label>
+                                <div class="col-md-9">
+                                    <textarea id="observacao" name="observacao" rows="3" cols="9" [(ngModel)]="order.observacao" class="form-control" placeholder="Observação..."></textarea>
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-md-12 text-center alert alert-success total-pagamento"><p class="qtd">TOTAL: {{ order.total | currency:'BRL':true }}</p></div>
                     </div>
                 </div>

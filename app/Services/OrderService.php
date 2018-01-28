@@ -135,6 +135,7 @@ class OrderService{
         $mesa = $this->mesaRepository->find($data['mesa_id']);
         $order->mesa_id = $data['mesa_id'];
         $mesa->status = 1;
+        $order->observacao = $data['observacao'];
         switch ((int)$data['status']){
             case 1:
                 $order->save();
