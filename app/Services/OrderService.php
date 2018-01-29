@@ -6,6 +6,7 @@ namespace Pedidos\Services;
 
 use Faker\Provider\DateTime;
 use Pedidos\Models\Order;
+use Pedidos\Repositories\ComplementItemRepository;
 use Pedidos\Repositories\CupomRepository;
 use Pedidos\Repositories\MesaRepository;
 use Pedidos\Repositories\OrderItemRepository;
@@ -35,6 +36,10 @@ class OrderService{
      * @var OrderItemRepository
      */
     private $itemRepository;
+    /**
+     * @var ComplementItemRepository
+     */
+    private $complementItemRepository;
 
     /**
      * @var PushProcessor
@@ -47,7 +52,8 @@ class OrderService{
         CupomRepository $cupomRepository,
         ProductRepository $productRepository,
         MesaRepository $mesaRepository,
-        OrderItemRepository $itemRepository
+        OrderItemRepository $itemRepository,
+        ComplementItemRepository $complementItemRepository
         //PushProcessor $pushProcessor
     )
     {
@@ -58,6 +64,7 @@ class OrderService{
         //$this->pushProcessor = $pushProcessor;
         $this->mesaRepository = $mesaRepository;
         $this->itemRepository = $itemRepository;
+        $this->complementItemRepository = $complementItemRepository;
     }
 
     public function create(array $data){
@@ -213,6 +220,62 @@ class OrderService{
             \DB::rollback();
             throw $e;
         }
+    }
+
+    public function addComplement($data)
+    {
+        $order = $this->orderRepository->find($data['order_id']);
+
+        $item = $this->itemRepository->find($data['item_id']);
+
+        $complements = $data['complements'];
+
+        foreach ($complements as $c){
+            $item->complementItems()->create($c);
+            $item['price'] += $c['price'];
+            $order->total += $c['price'];
+        }
+
+        $item->save();
+        $order->save();
+
+        return $order;
+    }
+
+    public function addHistorico($data)
+    {
+        $order = $this->orderRepository->find($data['order_id']);
+
+        $item = $this->itemRepository->find($data['item_id']);
+
+        $item->historico = $data['historico'];
+
+        $item->save();
+        //$this->itemRepository->update(['historico'=>$data['historico']],$item->id);
+        return $order;
+    }
+
+    public function removeItem($id)
+    {
+        $item = $this->itemRepository->find($id);
+
+        $complments = $this->complementItemRepository->findWhere(['order_item_id'=>$item->id]);
+
+        foreach ($complments as $c)
+        {
+            $this->complementItemRepository->delete($c->id);
+        }
+
+        $order = $this->orderRepository->find($item->order_id);
+
+        $order->total -= $item->subtotal;
+
+        $this->itemRepository->delete($item->id);
+
+        $order->save();
+
+        return $order;
+
     }
 }
 

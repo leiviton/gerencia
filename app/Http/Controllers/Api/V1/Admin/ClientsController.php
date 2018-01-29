@@ -11,6 +11,7 @@ namespace Pedidos\Http\Controllers\Api\V1\Admin;
 
 use Pedidos\Http\Controllers\Controller;
 use Pedidos\Http\Requests\AdminProductRequest;
+use Pedidos\Repositories\AuditRepository;
 use Pedidos\Repositories\ClientRepository;
 use Pedidos\Services\ClientService;
 use Illuminate\Http\Request;
@@ -25,11 +26,17 @@ class ClientsController extends Controller
      * @var ClientService
      */
     private $clientService;
+    /**
+     * @var AuditRepository
+     */
+    private $auditRepository;
 
-    public function  __construct(ClientRepository $repository, ClientService $clientService)
+    public function  __construct(ClientRepository $repository, ClientService $clientService,
+                                 AuditRepository $auditRepository)
     {
         $this->repository = $repository;
         $this->clientService = $clientService;
+        $this->auditRepository = $auditRepository;
     }
 
     public function index()
@@ -57,9 +64,24 @@ class ClientsController extends Controller
 
     public function store(Request $request)
     {
+        $user = \Auth::guard('api')->user();
+
         $data = $request->all();
 
         $o = $this->clientService->create($data);
+
+        if($o->id)
+        {
+            $audit = [
+                'type'=>'insert',
+                'user_id'=>$user->id,
+                'user' => $user->email,
+                'entity' => 'cliente',
+                'action' => 'Cadastrou o cliente: '.$o->id
+            ];
+
+            $this->auditRepository->create($audit);
+        }
 
         return $this->repository
             ->skipPresenter(false)
@@ -68,9 +90,24 @@ class ClientsController extends Controller
 
     public function update($id,Request $request)
     {
+        $user = \Auth::guard('api')->user();
+
         $data = $request->all();
 
-        $this->clientService->update($data,$id);
+        $o = $this->clientService->update($data,$id);
+
+        if($o->id)
+        {
+            $audit = [
+                'type'=>'update',
+                'user_id'=>$user->id,
+                'user' => $user->email,
+                'entity' => 'cliente',
+                'action' => 'Atualizou o cliente: '.$o->id
+            ];
+
+            $this->auditRepository->create($audit);
+        }
 
         return $this->repository
             ->skipPresenter(false)

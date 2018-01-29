@@ -41,7 +41,7 @@ class ClientService
         $client['name'] = $data['name'];
         $client['phone'] = $data['phone'];
         $client['address'] = $data['address']['address'].','.$data['address']['numero'];
-        $this->clientRepository->update($client, $id);
+        return $this->clientRepository->update($client, $id);
 
         //$userId = $this->clientRepository->find($id, ['user_id'])->user_id;
 

@@ -95,6 +95,10 @@ class RepositoryServiceProvider extends ServiceProvider
             'Pedidos\Repositories\ComplementItemRepository',
             'Pedidos\Repositories\ComplementItemRepositoryEloquent'
         );
+        $this->app->bind(
+            'Pedidos\Repositories\AuditRepository',
+            'Pedidos\Repositories\AuditRepositoryEloquent'
+        );
     }
 }
 

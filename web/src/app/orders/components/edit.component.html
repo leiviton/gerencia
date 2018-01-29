@@ -91,18 +91,27 @@
                                     <th>Valor</th>
                                     <th>Quantadade</th>
                                     <th>SubTotal</th>
+                                    <th></th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr *ngFor="let i of products.data">
-                                    <td>{{ i.product.data.id }}</td>
-                                    <td>{{ i.product.data.name }}</td>
-                                    <td>{{ i.product.data.price | currency:'BRL':true}}</td>
-                                    <td>{{ i.qtd }}</td>
-                                    <td>
-                                        {{ i.subtotal | currency:'BRL':true }}
-                                    </td>
-                                </tr>
+                                    <tr *ngFor="let i of products.data">
+                                        <td (click)="showInformacao(i.id)">{{ i.product.data.id }}</td>
+                                        <td (click)="showInformacao(i.id)">
+                                            {{ i.product.data.name }}
+                                            <p *ngFor="let c of i.complement.data" style="font-size: 10px; margin-bottom: 0;"> {{ c.complement.data.name }}: {{ c.price | currency:'BRL':true }}</p>
+                                            <p style="font-size: 10px; margin-bottom: 0;">{{ i.historico }}</p>
+                                        </td>
+                                        <td (click)="showInformacao(i.id)">{{ i.product.data.price | currency:'BRL':true}}</td>
+                                        <td (click)="showInformacao(i.id)">{{ i.qtd }}</td>
+                                        <td (click)="showInformacao(i.id)">
+                                            {{ i.subtotal | currency:'BRL':true }}
+                                        </td>
+                                        <td class="text-center">
+                                            <button class="btn btn-sm btn-link" (click)="removeItem(i.id)" tooltip="Remover do pedido"><i class="fa fa-remove text-danger"></i></button>
+                                            <button class="btn btn-sm btn-link" (click)="showComplement(i.id)" tooltip="Gerenciar complementos"><i class="fa fa-plus text-info"></i></button>
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -130,6 +139,70 @@
             </div>
         </div>
         <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+    <div class="modal fade modal_novo" id="complement" role="dialog" aria-hidden="true" aria-labelledby="myModalLabell" style="">
+        <div class="modal-dialog modal-info" role="document">
+            <div class="modal-content">
+                <div class="modal-header novo">
+                    <h5 class="modal-title">Complementos</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="col-md-6" style="height: 400px">
+                        <h5>Lista de adicionais</h5>
+                        <div class="checkbox" *ngFor="let p of complements.data">
+                            <label>
+                                <p class="text-left"> {{ p.name }} - {{ p.price | currency:'BRL':true}}</p>
+                            </label>
+                            <button class="btn btn-default btn-sm" (click)="addComplement(p.id)"><i class="fa fa-plus text-success"></i></button>
+                        </div>
+                    </div>
+                    <div class="col-md-6" style="margin-left: 250px; margin-top: -400px; height: 400px">
+                        <h5>Adcionados ao item</h5>
+                        <div class="checkbox" *ngFor="let p of complement">
+                            <label>
+                                <p class="text-left"> {{ p.name }} - {{ p.price | currency:'BRL':true}}</p>
+                            </label>
+
+                            <button class="btn btn-default btn-sm" (click)="addComplement(p.id)"><i class="fa fa-info text-success"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer cadastro">
+                    <div class="modal-button">
+                        <button class="btn btn-info" (click)="saveComplement()"><i class="fa fa-save"></i> Salvar</button>
+                        <button class="btn btn-danger text-left" type="button" (click)="closeComplement()"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
+                    </div>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+    </div>
+    <!-- /.modal-dialog -->
+    <div class="modal fade modal_novo" id="informacao" role="dialog" aria-hidden="true" aria-labelledby="myModalLabell" style="">
+        <div class="modal-dialog modal-sm modal-info" role="document">
+            <div class="modal-content">
+                <div class="modal-header novo">
+                    <h5 class="modal-title">Observações item</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <div class="col-md-12">
+                                <textarea id="textarea-input" name="observacao" [(ngModel)]="historico" rows="6" class="form-control" placeholder="Digite aqui..." ></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer cadastro">
+                    <div class="modal-button">
+                        <button class="btn btn-info" (click)="addHistorico()"><i class="fa fa-save"></i> Salvar</button>
+                        <button class="btn btn-danger text-left" type="button" (click)="closeInformacao()"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
+                    </div>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
     </div>
     <!-- /.modal-dialog -->
     <div class="modal fade modal_novo" id="pesquisa" role="dialog" aria-hidden="true" aria-labelledby="myModalLabell">

@@ -14,6 +14,7 @@ use Pedidos\Http\Controllers\Controller;
 
 use Pedidos\Http\Requests\CheckoutRequest;
 use Illuminate\Http\Request;
+use Pedidos\Repositories\AuditRepository;
 use Pedidos\Repositories\ComplementItemRepository;
 use Pedidos\Repositories\ComplementRepository;
 use Pedidos\Repositories\MesaRepository;
@@ -58,11 +59,16 @@ class AdminCheckoutController extends Controller
      * @var ComplementItemRepository
      */
     private $complementItemRepository;
+    /**
+     * @var AuditRepository
+     */
+    private $auditRepository;
 
     public function  __construct(OrderRepository $repository, OrderService $orderService
         , ProductRepository $productRepository, MesaRepository $mesaRepository,
                                  PaymentTypesRepository $typesRepository, OrderItemRepository $itemRepository
-        ,ComplementRepository $complementRepository, ComplementItemRepository $complementItemRepository){
+        ,ComplementRepository $complementRepository, ComplementItemRepository $complementItemRepository,
+        AuditRepository $auditRepository){
         $this->repository = $repository;
         $this->orderService = $orderService;
         $this->productRepository = $productRepository;
@@ -71,6 +77,7 @@ class AdminCheckoutController extends Controller
         $this->itemRepository = $itemRepository;
         $this->complementRepository = $complementRepository;
         $this->complementItemRepository = $complementItemRepository;
+        $this->auditRepository = $auditRepository;
     }
 
     public function orders(Request $request)
@@ -85,10 +92,24 @@ class AdminCheckoutController extends Controller
     }
 
     public function store(CheckoutRequest $request){
+        $user = \Auth::guard('api')->user();
         $data = $request->all();
         $o = $this->orderService->create($data);
 
         $this->printer($o->id);
+
+        if($o->id)
+        {
+            $audit = [
+                'type'=>'insert',
+                'user_id'=>$user->id,
+                'user' => $user->email,
+                'entity' => 'pedido',
+                'action' => 'Criou o pedido: '.$o->id
+            ];
+
+            $this->auditRepository->create($audit);
+        }
 
         return $this->repository
             ->skipPresenter(false)
@@ -122,6 +143,7 @@ class AdminCheckoutController extends Controller
 
     public function payment(Request $request)
     {
+        $user = \Auth::guard('api')->user();
         $id = (int) $request->get('order_id');
         $data['total_pago'] = $request->get('total_pago');
         $data['desconto'] = $request->get('desconto');
@@ -130,6 +152,19 @@ class AdminCheckoutController extends Controller
         $data['payment_types_id'] = $request->get('payment_types_id');
 
         $o = $this->orderService->pagyment($id,$data);
+
+        if($o->id)
+        {
+            $audit = [
+                'type'=>'insert',
+                'user_id'=>$user->id,
+                'user' => $user->email,
+                'entity' => 'pagamento/pedidos',
+                'action' => 'Pagou o pedido: '.$o->id
+            ];
+
+            $this->auditRepository->create($audit);
+        }
 
         return $this->repository
             ->skipPresenter(false)
@@ -158,8 +193,30 @@ class AdminCheckoutController extends Controller
         return $result;
     }
 
-    public function excluirItem(Request $request)
+    public function excluirItem($id)
     {
+        $user = \Auth::guard('api')->user();
+
+        $result = $this->orderService->removeItem($id);
+
+        if($result->id)
+        {
+            $audit = [
+                'type'=>'delete',
+                'user_id'=>$user->id,
+                'user' => $user->email,
+                'entity' => 'order_item',
+                'action' => 'Removeu produtos no pedido: '.$result->id
+            ];
+
+            $this->auditRepository->create($audit);
+        }
+
+        return $this->repository
+            ->skipPresenter(false)
+            ->find($result->id);
+
+
 
     }
 
@@ -176,20 +233,98 @@ class AdminCheckoutController extends Controller
 
     public function addItem(Request $request)
     {
+        $user = \Auth::guard('api')->user();
+
         $data = $request->all();
 
         $result = $this->orderService->addItem($data);
+
+        if($result->id)
+        {
+            $audit = [
+                'type'=>'insert',
+                'user_id'=>$user->id,
+                'user' => $user->email,
+                'entity' => 'order_item',
+                'action' => 'Adicionou produtos no pedido: '.$result->id
+            ];
+
+            $this->auditRepository->create($audit);
+        }
 
         return $this->repository
             ->skipPresenter(false)
             ->find($result->id);
     }
 
+    public function addComplent(Request $request)
+    {
+        $user = \Auth::guard('api')->user();
+
+        $data = $request->all();
+
+        //return $data;
+        $result = $this->orderService->addComplement($data);
+
+        if($result->id)
+        {
+            $audit = [
+                'type'=>'insert',
+                'user_id'=>$user->id,
+                'user' => $user->email,
+                'entity' => 'order_item',
+                'action' => 'Adicionou complementos no item: '.$data['item_id'].' , Pedido: '.$result->id
+            ];
+
+            $this->auditRepository->create($audit);
+        }
+        return $this->repository->skipPresenter(false)
+            ->find($result->id);
+    }
+
+    public function addHistorico($id,Request $request)
+    {
+        $user = \Auth::guard('api')->user();
+
+        $data = $request->all();
+
+        $result = $this->orderService->addHistorico($data);
+
+        if($result->id)
+        {
+            $audit = [
+                'type'=>'update',
+                'user_id'=>$user->id,
+                'user' => $user->email,
+                'entity' => 'order_item',
+                'action' => 'Adicionou observação no item: '.$data['item_id'].' , Pedido: '.$result->id
+            ];
+
+            $this->auditRepository->create($audit);
+        }
+        return $this->repository->skipPresenter(false)
+            ->find($result->id);
+    }
     public function update($id, Request $request)
     {
+        $user = \Auth::guard('api')->user();
+
         $data = $request->all();
 
         $this->orderService->updateStatus($data,$id);
+
+        if($id)
+        {
+            $audit = [
+                'type'=>'update',
+                'user_id'=>$user->id,
+                'user' => $user->email,
+                'entity' => 'Pedido',
+                'action' => 'Editou o pedido: '.$id
+            ];
+
+            $this->auditRepository->create($audit);
+        }
 
         return $this->repository
             ->skipPresenter(false)

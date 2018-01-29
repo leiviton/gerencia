@@ -74,11 +74,22 @@ export class EditComponent implements OnInit {
     qtd = 1;
     editar = true;
     imprimir = false;
+    historico = '';
+    idItem = 0;
+    complements = {};
+    complement = [{
+        "id":0,
+        "name":"Sem complemento",
+        "price":0.0,
+        "ativo":"S",
+        "created_at":"",
+        "updated_at":""
+    }];
+
     ngOnInit(): void {
         this.showLoading();
         this.httpService.setAccessToken();
         jQuery('#successModal').on('show.bs.modal').show().addClass('show');
-
         jQuery('name').disabled = false;
         this.route.params
             .subscribe(params => {
@@ -120,6 +131,10 @@ export class EditComponent implements OnInit {
         this.httpService.eventEmitter.emit();
 
         jQuery('#pesquisa').hide();
+
+        this.closeComplement();
+
+        this.closeInformacao();
     }
 
     update()
@@ -198,11 +213,203 @@ export class EditComponent implements OnInit {
             });
     }
 
+    addComplement(id)
+    {
+        this.httpService.builder()
+            .view(id,'complement')
+            .then((res)=>{
+                let cart = this.httpService.get();
+                if(this.complement[0].id == 0){
+                    this.complement[0] = res.data;
+                    this.complement[0]['complement_id'] = res.data.id;
+                    this.complement[0]['qtd'] = 1;
+                }else{
+                    let data = res.data;
+                    data['complement_id'] = res.data.id;
+                    data['qtd'] = 1;
+                    this.complement.push(res.data);
+                }
+                this.toasterService.pop('success','Sucesso','Adicionado complemento '+res.data.name);
+            });
+    }
+
+    saveComplement()
+    {
+        if(this.complement[0].id != 0){
+            let data = {
+                'complements':this.complement,
+                'order_id': this.order.id,
+                'item_id': this.idItem
+            };
+
+            this.httpService.builder()
+                .insert(data,'complements/item')
+                .then((res) =>{
+                    this.httpService.eventEmitter.emit();
+                    this.order = res.data;
+                    if(res.data.client.data.user)
+                    {
+                        this.client.id = res.data.client.data.id;
+                        this.client.name = res.data.client.data.name;
+                        this.client.phone = res.data.client.data.phone;
+                        this.client.email = res.data.client.data.user.data.email;
+                        this.client.address.address = res.data.client.data.addressClient.data.address;
+                        this.client.address.numero = res.data.client.data.addressClient.data.numero;
+                        this.client.address.bairro = res.data.client.data.addressClient.data.bairro;
+                        this.client.address.city_id = res.data.client.data.addressClient.data.city.data.id;
+                    }else{
+                        this.client.id = res.data.client.data.id;
+                        this.client.name = res.data.client.data.name;
+                        this.client.phone = res.data.client.data.phone;
+                        this.client.email = '';
+                        this.client.address.address = res.data.client.data.addressClient.data.address;
+                        this.client.address.numero = res.data.client.data.addressClient.data.numero;
+                        this.client.address.bairro = res.data.client.data.addressClient.data.bairro;
+                        this.client.address.city_id = res.data.client.data.addressClient.data.city.data.id;
+                    }
+                    this.products = res.data.items;
+                    this.mesa = res.data.mesa.data.name
+                    this.mesa_id = res.data.mesa.data.id;
+                    this.complement = [{
+                        "id":0,
+                        "name":"Sem complemento",
+                        "price":0.0,
+                        "ativo":"S",
+                        "created_at":"",
+                        "updated_at":""
+                    }];
+                    this.closeComplement();
+                    this.hideLoading();
+                    this.toasterService.pop('success', 'Sucesso','Complementos salvos com sucesso!');
+                });
+        }
+        else{
+            this.closeComplement();
+            this.hideLoading();
+            this.toasterService.pop('error', 'Erro','Adicionais não inseridos');
+        }
+    }
+
+    addHistorico()
+    {
+        this.showLoading();
+        let data = {
+            'order_id': this.order.id,
+            'item_id': this.idItem,
+            'historico': this.historico
+        };
+        this.httpService.builder('historico')
+            .update(this.idItem,data)
+            .then((res) =>{
+                this.httpService.eventEmitter.emit();
+                this.order = res.data;
+                if(res.data.client.data.user) {
+                    this.client.id = res.data.client.data.id;
+                    this.client.name = res.data.client.data.name;
+                    this.client.phone = res.data.client.data.phone;
+                    this.client.email = res.data.client.data.user.data.email;
+                    this.client.address.address = res.data.client.data.addressClient.data.address;
+                    this.client.address.numero = res.data.client.data.addressClient.data.numero;
+                    this.client.address.bairro = res.data.client.data.addressClient.data.bairro;
+                    this.client.address.city_id = res.data.client.data.addressClient.data.city.data.id;
+                }else{
+                    this.client.id = res.data.client.data.id;
+                    this.client.name = res.data.client.data.name;
+                    this.client.phone = res.data.client.data.phone;
+                    this.client.email = '';
+                    this.client.address.address = res.data.client.data.addressClient.data.address;
+                    this.client.address.numero = res.data.client.data.addressClient.data.numero;
+                    this.client.address.bairro = res.data.client.data.addressClient.data.bairro;
+                    this.client.address.city_id = res.data.client.data.addressClient.data.city.data.id;
+                }
+                this.products = res.data.items;
+                this.mesa = res.data.mesa.data.name;
+                this.mesa_id = res.data.mesa.data.id;
+                this.historico = '';
+                this.idItem = 0;
+                this.toasterService.pop('success', 'Sucesso','Salvo com sucesso!');
+                this.closeInformacao();
+                this.hideLoading();
+            });
+
+    }
+
+    removeItem(i)
+    {
+        this.showLoading();
+        this.httpService.builder('remove/item')
+            .delete(i)
+            .then((res) =>{
+                this.httpService.eventEmitter.emit();
+                this.order = res.data;
+                if(res.data.client.data.user) {
+                    this.client.id = res.data.client.data.id;
+                    this.client.name = res.data.client.data.name;
+                    this.client.phone = res.data.client.data.phone;
+                    this.client.email = res.data.client.data.user.data.email;
+                    this.client.address.address = res.data.client.data.addressClient.data.address;
+                    this.client.address.numero = res.data.client.data.addressClient.data.numero;
+                    this.client.address.bairro = res.data.client.data.addressClient.data.bairro;
+                    this.client.address.city_id = res.data.client.data.addressClient.data.city.data.id;
+                }else{
+                    this.client.id = res.data.client.data.id;
+                    this.client.name = res.data.client.data.name;
+                    this.client.phone = res.data.client.data.phone;
+                    this.client.email = '';
+                    this.client.address.address = res.data.client.data.addressClient.data.address;
+                    this.client.address.numero = res.data.client.data.addressClient.data.numero;
+                    this.client.address.bairro = res.data.client.data.addressClient.data.bairro;
+                    this.client.address.city_id = res.data.client.data.addressClient.data.city.data.id;
+                }
+                this.products = res.data.items;
+                this.mesa = res.data.mesa.data.name;
+                this.mesa_id = res.data.mesa.data.id;
+                this.historico = '';
+                this.idItem = 0;
+                this.toasterService.pop('success', 'success','Removido com sucesso');
+                this.hideLoading();
+            });
+    }
+
+    showInformacao(i)
+    {
+        jQuery('#informacao').show().addClass('show').css('z-index',1050 + 60);
+        jQuery('#new_order').css('z-index', 1040);
+        this.idItem = i;
+    }
+
+    showComplement(i)
+    {
+        jQuery('#complement').show().addClass('show').css('z-index',1050 + 60);
+        jQuery('#new_order').css('z-index', 1040);
+        this.getComplements();
+        this.idItem = i;
+        console.log('index',i);
+    }
+
+    getComplements()
+    {
+        this.httpService.builder()
+            .list({},'complements')
+            .then((res) =>{
+                this.complements = res;
+                console.log('complements',res);
+            })
+    }
     closeMd()
     {
         jQuery('#pesquisa').hide();
     }
 
+    closeInformacao()
+    {
+        jQuery('#informacao').hide();
+    }
+
+    closeComplement()
+    {
+        jQuery('#complement').hide();
+    }
 
     saveItem(item)
     {

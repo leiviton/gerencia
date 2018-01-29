@@ -257,7 +257,6 @@ export class NewComponent implements OnInit {
         this.toasterService.pop('info', 'Informação', 'Item removido.');
     }
 
-
     save()
     {
         let card = '';
@@ -378,9 +377,7 @@ export class NewComponent implements OnInit {
     {
         jQuery('#informacao').show().addClass('show').css('z-index',1050 + 60);
         jQuery('#new_order').css('z-index', 1040);
-        this.getComplements();
         this.idItem = i;
-        console.log('index',i);
     }
 
     getComplements()

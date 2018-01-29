@@ -119,7 +119,7 @@
                                         <td class="text-center" (click)="showObservacao(i)">{{ p.id }}</td>
                                         <td (click)="showObservacao(i)">{{ p.name }}
                                             <p *ngFor="let c of p.complements" style="font-size: 12px; margin-bottom: 0;"> {{ c.name }}: {{ c.price | currency:'BRL':true }}</p>
-                                            <p>{{p.historico}}</p>
+                                            <p style="font-size: 12px; margin-bottom: 0;">{{p.historico}}</p>
                                         </td>
                                         <td class="text-center" (click)="showObservacao(i)">{{ p.price | currency:'BRL':true }}</td>
                                         <td class="text-center" (click)="showObservacao(i)">{{ p.qtd }}</td>

@@ -41,6 +41,9 @@ Route::group(['prefix'=>'api/v1','middleware' => 'auth:api'],function () {
        Route::get('complements', 'AdminCheckoutController@getComplements');
        Route::get('complement/{id}', 'AdminCheckoutController@getComplement');
        Route::get('close', 'AdminCheckoutController@orders');
+       Route::put('historico/{id}', 'AdminCheckoutController@addHistorico');
+       Route::post('complements/item','AdminCheckoutController@addComplent');
+       Route::delete('remove/item/{id}','AdminCheckoutController@excluirItem');
        /*mesas*/
        Route::get('mesas', 'MesaController@index');
         Route::get('mesas/all', 'MesaController@all');
