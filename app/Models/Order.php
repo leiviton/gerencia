@@ -14,6 +14,7 @@ class Order extends Model implements Transformable
         'client_id',
         'user_deliveryman_id',
         'total',
+        'paid_now',
         'status',
         'type',
         'cupom_id',

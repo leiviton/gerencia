@@ -163,21 +163,27 @@ class OrderService{
         try {
             $order = $this->orderRepository->find($id);
             $mesa = $this->mesaRepository->find($order->mesa->id);
-            $order->paymentOrders()->create($data);
-            if($order->total > ($data['total_pago'] + $data['desconto']))
+            if($order->total == $order->paid_now)
             {
-                $order->status = 4;
-            }else{
-                $order->status = 3;
-            }
+                return null;
+            }else {
+                $order->paymentOrders()->create($data);
 
-            if($order->type == 1)
-            {
-                $mesa->status = 0;
-            }
+                if ($order->total > ($data['total_pago'] + $data['desconto'] + $order->paid_now)) {
+                    $order->status = 4;
+                } else {
+                    $order->status = 3;
+                }
 
-            $mesa->save();
-            $order->save();
+                if ($order->type == 1) {
+                    $mesa->status = 0;
+                }
+
+                $order->paid_now += $data['total_pago'];
+
+                $mesa->save();
+                $order->save();
+            }
             \DB::commit();
             return $order;
         } catch (\Exception $e){

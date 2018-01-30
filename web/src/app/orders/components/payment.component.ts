@@ -61,6 +61,12 @@ export class PaymentComponent implements OnInit {
                 this.httpService.builder().view(params['id'],'order')
                     .then((res) => {
                         this.order = res.data;
+                        this.total = res.data.total;
+                        console.log(res.data.payment.data)
+                        for(var i = 0; i < res.data.payment.data.length; i++)
+                        {
+                            this.total -= res.data.payment.data[i].total_pago;
+                        }
                         this.payment.order_id = this.order.id;
                         this.products = res.data.items;
                         this.mesa = res.data.mesa.data.name;
@@ -76,8 +82,8 @@ export class PaymentComponent implements OnInit {
     {
         this.showLoading();
         console.log('troco',this.troco);
-        if(this.valor_pag >= this.order.total){
-            this.payment.total_pago = (this.valor_pag - (this.valor_pag - ((this.order.total + this.payment.acrescimo) - this.payment.desconto)));
+        if(this.valor_pag >= this.total){
+            this.payment.total_pago = (this.valor_pag - (this.valor_pag - ((this.total + this.payment.acrescimo) - this.payment.desconto)));
             this.payment.total_original = this.order.total;
             this.payment.payment_types_id = this.type_id;
             this.httpService.setAccessToken();
@@ -98,7 +104,7 @@ export class PaymentComponent implements OnInit {
                 this.toasterService.pop('error', 'Erro', 'Tipo pagamento não selecionado');
 
             }
-        }else if (this.valor_pag + this.payment.desconto >= this.order.total){
+        }else if (this.valor_pag + this.payment.desconto >= this.total){
             this.payment.total_pago = (this.valor_pag - this.troco);
             this.payment.total_original = this.order.total;
             this.payment.payment_types_id = this.type_id;
@@ -108,6 +114,7 @@ export class PaymentComponent implements OnInit {
                     .insert(this.payment, 'payment')
                     .then((res) => {
                         this.httpService.eventEmitter.emit();
+                        this.valor_pag = 0;
                         this.hideLoading();
                         this.toasterService.pop('success', 'Sucesso', 'Pagamento do pedido ' + res.data.id + ' realizado com sucesso');
                         this.close();
@@ -116,7 +123,7 @@ export class PaymentComponent implements OnInit {
                 this.hideLoading();
                 this.toasterService.pop('error', 'Erro', 'Tipo pagamento não selecionado');
             }
-        }else if((this.valor_pag + this.payment.desconto) < this.order.total){
+        }else if((this.valor_pag + this.payment.desconto) < this.total){
                 this.payment.total_pago = (this.valor_pag - this.troco);
                 this.payment.total_original = this.order.total;
                 this.payment.payment_types_id = this.type_id;
@@ -126,6 +133,12 @@ export class PaymentComponent implements OnInit {
                         .insert(this.payment, 'payment')
                         .then((res) => {
                             this.httpService.eventEmitter.emit();
+                            this.order = res.data;
+                            this.valor_pag = 0;
+                            for(var i = 0; i < res.data.payment.data.length; i++)
+                            {
+                                this.total -= res.data.payment.data[i].total_pago;
+                            }
                             this.hideLoading();
                             this.toasterService.pop('success', 'Sucesso', 'Pagamento parcial ' + res.data.id + ' realizado com sucesso');
                         });

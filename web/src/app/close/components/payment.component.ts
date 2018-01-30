@@ -45,6 +45,10 @@ export class PaymentComponent implements OnInit {
     valor_pag = 0;
     divisao = 1;
     result_div = 0;
+    client = {
+        name:'',
+        address:''
+    };
     ngOnInit(): void {
         this.showLoading();
         jQuery('#payment').show().addClass('show');
@@ -63,6 +67,8 @@ export class PaymentComponent implements OnInit {
                         this.payment.acrescimo = res.data.payment.data[0].acrescimo;
                         this.payment.payment_types = res.data.payment.data[0].type.data.name;
                         this.products = res.data.items;
+                        this.client.name = res.data.client.data.name;
+                        this.client.address = res.data.client.data.endereco;
                         this.mesa = res.data.mesa.data.name;
                         this.hideLoading();
                     });

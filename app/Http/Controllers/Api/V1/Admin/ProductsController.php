@@ -11,6 +11,7 @@ namespace Pedidos\Http\Controllers\Api\V1\Admin;
 
 use Pedidos\Http\Controllers\Controller;
 use Pedidos\Http\Requests\AdminProductRequest;
+use Pedidos\Repositories\AuditRepository;
 use Pedidos\Repositories\ProductRepository;
 use Pedidos\Services\ProductService;
 
@@ -24,11 +25,17 @@ class ProductsController extends Controller
      * @var ProductService
      */
     private $productService;
+    /**
+     * @var AuditRepository
+     */
+    private $auditRepository;
 
-    public function  __construct(ProductRepository $repository, ProductService $productService)
+    public function  __construct(ProductRepository $repository, ProductService $productService,
+        AuditRepository $auditRepository)
     {
         $this->repository = $repository;
         $this->productService = $productService;
+        $this->auditRepository = $auditRepository;
     }
 
     public function index()
@@ -51,8 +58,23 @@ class ProductsController extends Controller
 
     public function store(AdminProductRequest $request)
     {
+        $user = \Auth::guard('api')->user();
+
         $data = $request->all();
         $o = $this->productService->create($data);
+
+        if($o->id)
+        {
+            $audit = [
+                'type'=>'insert',
+                'user_id'=>$user->id,
+                'user' => $user->email,
+                'entity' => 'products',
+                'action' => 'Inseriou o produto: '.$o->id
+            ];
+
+            $this->auditRepository->create($audit);
+        }
 
         return $this->repository
             ->skipPresenter(false)
@@ -61,10 +83,24 @@ class ProductsController extends Controller
 
     public function update($id, AdminProductRequest $request)
     {
+        $user = \Auth::guard('api')->user();
+
         $data = $request->all();
 
-        $this->productService->update($data,$id);
+        $result = $this->productService->update($data,$id);
 
+        if($result->id)
+        {
+            $audit = [
+                'type'=>'insert',
+                'user_id'=>$user->id,
+                'user' => $user->email,
+                'entity' => 'mesas',
+                'action' => 'Inseriou a mesa: '.$result->id
+            ];
+
+            $this->auditRepository->create($audit);
+        }
         return $this->repository
             ->skipPresenter(false)
             ->find($id);

@@ -24,6 +24,7 @@ export class OrdersComponent implements OnInit {
 
   cor = false;
 
+  total = 0;
   orders = {
       data:[]
   };
@@ -41,6 +42,11 @@ export class OrdersComponent implements OnInit {
               this.httpService.builder().list({}, 'orders')
                   .then((res) => {
                       this.orders = res;
+                      for(var i = 0; i < this.orders.data.length; i++)
+                      {
+                          this.total = this.total + this.orders.data[i].total;
+                      }
+
                       this.tamanho = res.data.length;
                       this.hideLoading();
                   });

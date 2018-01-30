@@ -26,7 +26,7 @@ class ProductService
     }
 
     public function update(array $data,$id){
-        $this->repository->update($data, $id);
+        return $this->repository->update($data, $id);
     }
 
     public function create(array $data){

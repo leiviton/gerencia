@@ -1,12 +1,12 @@
 <div tabindex="-1" class="modal fade" id="payment" role="dialog" aria-hidden="true" aria-labelledby="myModalLabel" style="display: block; overflow-y: auto;">
     <div class="modal-dialog modal-lg modal-primary" role="document">
         <div class="modal-content">
-            <div class="modal-header cadastro">
+            <div class="modal-header novo">
                 <h3 class="text-center">Pedido: {{ order.id }} </h3>
                 <h3 class="text-center"> {{ mesa }} </h3>
-                <h3 class="text-center"> Pagamento</h3>
+                <h3 class="text-center"> Total: {{ order.total | currency:'BRL':true}}</h3>
             </div>
-            <div class="modal-body" style="height: 460px; overflow: auto">
+            <div class="modal-body" style="height: 520px; overflow: auto">
                 <div class="col-md-12">
                     <form class="form-inline" #myForm="ngForm">
                         <div class="col-md-12">
@@ -26,7 +26,7 @@
                                 <label for="desconto" class="col-md-2">Acrescimo:</label>
                                 <input class="form-control-lg col-md-4" id="acrescimo" name="acrescimo" currencyMask [(ngModel)]="payment.acrescimo"  [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" placeholder="Acrescimos" type="text">
                                 <label for="troco" class="col-md-2">Troco:</label>
-                                <input class="form-control-lg col-md-4 troco" id="troco" name="troco" [(ngModel)]="troco"  value="{{ valor_pag - ((order.total + payment.acrescimo) - payment.desconto) | currency:'BRL':true }}" placeholder="Troco" type="text" disabled="true">
+                                <input class="form-control-lg col-md-4 troco" id="troco" name="troco" [(ngModel)]="troco"  value="{{ valor_pag - ((total + payment.acrescimo) - payment.desconto) | currency:'BRL':true }}" placeholder="Troco" type="text" disabled="true">
                             </div>
                             <br>
                             <div class="form-row">
@@ -38,15 +38,41 @@
                                     <label for="troco" class="col-md-1">Divisão:</label>
                                     <input class="form-control-lg col-md-1 troco" id="divisao" name="divisao" [(ngModel)]="divisao"  placeholder="Dividir" type="number">
                                     <label for="troco" class="col-md-2">Resultado:</label>
-                                    <input class="form-control-lg col-md-2 troco" id="result_div" name="result_div" [(ngModel)]="result_div"  value="{{ ((order.total + payment.acrescimo) - payment.desconto) / divisao | currency:'BRL':true }}" placeholder="resulado" type="text">
+                                    <input class="form-control-lg col-md-2 troco" id="result_div" name="result_div" [(ngModel)]="result_div"  value="{{ ((total + payment.acrescimo) - payment.desconto) / divisao | currency:'BRL':true }}" placeholder="resulado" type="text">
                             </div>
                         </div>
                     </form>
                 </div>
                 <br>
-                <div class="col-md-12 text-center alert alert-success total-pagamento"><h4 class="qtd">TOTAL À PAGAR: {{ (order.total + payment.acrescimo) - payment.desconto | currency:'BRL':true }}</h4></div>
+                <div class="col-md-12" *ngIf="order.payment">
+                    <div class="table-responsive" style="height: 110px; overflow: auto">
+                        <table class="table scrollbox table-striped">
+                            <thead>
+                            <tr class="th-table title-table">
+                                <th class="text-center">Vr.Pago</th>
+                                <th>Desconto</th>
+                                <th class="text-center">Acrescimo</th>
+                                <th class="text-center">Total</th>
+                                <th class="text-center">Tipo</th>
+                                <th class="text-center">Data</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="th-table" *ngFor="let p of order.payment.data; let i = index">
+                                <td class="text-center">{{ p.total_pago | currency:'BRL':true }}</td>
+                                <td>{{ p.desconto | currency:'BRL':true }}</td>
+                                <td class="text-center">{{ p.acrescimo | currency:'BRL':true }}</td>
+                                <td class="text-center">{{ order.total | currency:'BRL':true }}</td>
+                                <td class="text-center">{{ p.type.data.name }}</td>
+                                <td class="text-center">{{ p.created_at }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-md-12 text-center alert alert-success total-pagamento"><h4 class="qtd">TOTAL À PAGAR: {{ total | currency:'BRL':true }}</h4></div>
                 <div class="col-md-12">
-                    <div class="table-responsive" style="height: 120px; overflow: auto">
+                    <div class="table-responsive" style="height: 100px; overflow: auto">
                         <table class="table scrollbox table-striped">
                             <thead>
                             <tr class="th-table title-table">
@@ -70,11 +96,11 @@
                     </div>
                 </div>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer novo">
                 <div class="modal-button">
-                    <button class="btn btn-danger text-left" type="button" (click)="close()"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
-                    <button class="btn btn-primary text-left" type="button" (click)="edit()"><i class="fa fa-pencil"></i> Editar</button>
-                    <button class="btn btn-success" (click)="save()"><i class="fa fa-save"></i> Salvar (F9)</button>
+                    <button class="btn btn-sm btn-danger text-left" type="button" (click)="close()" [disabled]="total < order.total"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
+                    <button class="btn btn-sm btn-primary text-left" type="button" (click)="edit()"><i class="fa fa-pencil"></i> Editar</button>
+                    <button class="btn btn-sm btn-success" (click)="save()"><i class="fa fa-save"></i> Salvar (F9)</button>
                 </div>
             </div>
         </div>

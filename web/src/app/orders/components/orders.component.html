@@ -41,7 +41,7 @@
                     </td>
                     <td class="text-center" *ngIf="tamanho > 0">{{ o.id }}</td>
                     <td class="text-center" *ngIf="tamanho > 0">{{ o.total | currency:'BRL':true }}</td>
-                    <td *ngIf="tamanho > 0">{{ o.client.data.name }}</td>
+                    <td class="text-capitalize" *ngIf="tamanho > 0">{{ o.client.data.name }}</td>
                     <td class="text-center" *ngIf="tamanho > 0">{{ o.created_at | slice:0:10 }} </td>
                     <td class="text-center" *ngIf="tamanho > 0">{{ o.created_at | slice:11:19}}</td>
                     <td class="text-center" *ngIf="tamanho > 0">{{ o.previsao }} </td>
@@ -55,6 +55,7 @@
                   </tr>
                 </tbody>
               </table>
+              <p class="text-right">Quantidade de pedidos: {{ orders.data.length }}</p>
               <!--nav>
                 <ul class="pagination">
                   <li class="page-item"><a class="page-link" href="#">Prev</a></li>

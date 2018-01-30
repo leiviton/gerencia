@@ -182,35 +182,41 @@ export class EditComponent implements OnInit {
     buscar()
     {
         this.showLoading();
-        this.httpService.setAccessToken();
-        this.httpService.builder('search')
-            .search(this.pesquisa.value)
-            .then((res) => {
-                this.pesquisa.value = null;
-                this.result = res;
-                if(res.data.length > 1)
-                {
-                    this.hideLoading();
-                    jQuery('#pesquisa').show().addClass('show').css('z-index', 1050 + 50);
-                    jQuery('#successModal').css('z-index', 1040);
-                }else if(res.data.length == 1){
-                    this.hideLoading();
-                    this.addItem(res.data[0]);
-                    let pedido = {
-                        items: this.httpService.get().items,
-                        order_id: this.order.id
-                    };
-                    this.httpService.builder()
-                        .insert(pedido,'addItem')
-                        .then((res) => {
-                            this.httpService.eventEmitter.emit();
-                            this.httpService.clear();
-                            this.order = res.data;
-                            this.products = res.data.items;
-                            this.imprimir = true;
-                        });
-                }
-            });
+        if(this.pesquisa.value != 58) {
+            this.httpService.setAccessToken();
+            this.httpService.builder('search')
+                .search(this.pesquisa.value)
+                .then((res) => {
+                    this.pesquisa.value = null;
+                    this.result = res;
+                    if (res.data.length > 1) {
+                        this.hideLoading();
+                        jQuery('#pesquisa').show().addClass('show').css('z-index', 1050 + 50);
+                        jQuery('#successModal').css('z-index', 1040);
+                    } else if (res.data.length == 1) {
+                        //if (res.data.id === 58) {
+                            this.hideLoading();
+                            this.addItem(res.data[0]);
+                            let pedido = {
+                                items: this.httpService.get().items,
+                                order_id: this.order.id
+                            };
+                            this.httpService.builder()
+                                .insert(pedido, 'addItem')
+                                .then((res) => {
+                                    this.httpService.eventEmitter.emit();
+                                    this.httpService.clear();
+                                    this.order = res.data;
+                                    this.products = res.data.items;
+                                    this.imprimir = true;
+                                });
+                        //}
+                    }
+                });
+        }else{
+            this.hideLoading();
+            this.toasterService.pop('error','Erro','Produto não encontrado.');
+        }
     }
 
     addComplement(id)

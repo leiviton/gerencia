@@ -18,7 +18,13 @@ export class DashboardComponent implements OnInit {
     }
 
 
-  mesas = {};
+  mesas = {
+      data:[]
+  };
+  mesaslivres = {
+      data:[]
+  };
+
   public brandPrimary = '#20a8d8';
   public brandSuccess = '#4dbd74';
   public brandInfo = '#63c2de';
@@ -485,14 +491,15 @@ export class DashboardComponent implements OnInit {
           .list({},'mesas')
           .then((res) => {
               this.mesas = res;
+              console.log(res.data.length);
+          });
+      this.httpService.builder()
+          .list({},'mesas/all')
+          .then((res) => {
+              this.mesaslivres = res;
           });
     setTimeout(() => {
         this.hideLoading();
       }, 2000);
-  }
-
-  getMesas()
-  {
-
   }
 }

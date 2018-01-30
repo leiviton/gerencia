@@ -10,6 +10,7 @@ namespace Pedidos\Http\Controllers\Api\V1\Admin;
 
 
 use Pedidos\Http\Controllers\Controller;
+use Pedidos\Repositories\AuditRepository;
 use Pedidos\Repositories\MesaRepository;
 use Pedidos\Repositories\OrderRepository;
 use Pedidos\Repositories\UserRepository;
@@ -31,7 +32,8 @@ class MesaController extends Controller
      */
     private $orderRepository;
 
-    public function __construct(MesaRepository $repository, UserService $service,OrderRepository $orderRepository)
+    public function __construct(MesaRepository $repository, UserService $service,
+                                OrderRepository $orderRepository, AuditRepository $auditRepository)
     {
         $this->repository = $repository;
         $this->service = $service;
@@ -61,9 +63,24 @@ class MesaController extends Controller
     }
     public function store(Request $request)
     {
+        $user = \Auth::guard('api')->user();
+
         $data = $request->all();
 
         $result = $this->repository->create($data);
+
+        if($result->id)
+        {
+            $audit = [
+                'type'=>'insert',
+                'user_id'=>$user->id,
+                'user' => $user->email,
+                'entity' => 'mesas',
+                'action' => 'Inseriou a mesa: '.$result->id
+            ];
+
+            $this->auditRepository->create($audit);
+        }
 
         return $this->repository->skipPresenter(false)->find($result->id);
 
@@ -76,9 +93,24 @@ class MesaController extends Controller
 
     public function update($id,Request $request)
     {
+        $user = \Auth::guard('api')->user();
+
         $data = $request->all();
 
         $result = $this->repository->update($data,$id);
+
+        if($result->id)
+        {
+            $audit = [
+                'type'=>'update',
+                'user_id'=>$user->id,
+                'user' => $user->email,
+                'entity' => 'mesas',
+                'action' => 'Atualizou a mesa: '.$result->id
+            ];
+
+            $this->auditRepository->create($audit);
+        }
 
         return $this->repository->skipPresenter(false)->find($result->id);
     }

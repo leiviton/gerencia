@@ -89,7 +89,7 @@
                                     <th>#</th>
                                     <th>Produto</th>
                                     <th>Valor</th>
-                                    <th>Quantadade</th>
+                                    <th class="text-center">Qtd.</th>
                                     <th>SubTotal</th>
                                     <th></th>
                                 </tr>
@@ -103,13 +103,13 @@
                                             <p style="font-size: 10px; margin-bottom: 0;">{{ i.historico }}</p>
                                         </td>
                                         <td (click)="showInformacao(i.id)">{{ i.product.data.price | currency:'BRL':true}}</td>
-                                        <td (click)="showInformacao(i.id)">{{ i.qtd }}</td>
+                                        <td class="text-center" (click)="showInformacao(i.id)">{{ i.qtd }}</td>
                                         <td (click)="showInformacao(i.id)">
                                             {{ i.subtotal | currency:'BRL':true }}
                                         </td>
                                         <td class="text-center">
                                             <button class="btn btn-sm btn-link" (click)="removeItem(i.id)" tooltip="Remover do pedido"><i class="fa fa-remove text-danger"></i></button>
-                                            <button class="btn btn-sm btn-link" (click)="showComplement(i.id)" tooltip="Gerenciar complementos"><i class="fa fa-plus text-info"></i></button>
+                                            <button class="btn btn-sm btn-link" *ngIf="i.product.data.id != 58" (click)="showComplement(i.id)" tooltip="Gerenciar complementos"><i class="fa fa-plus text-info"></i></button>
                                         </td>
                                     </tr>
                                 </tbody>

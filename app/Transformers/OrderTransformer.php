@@ -27,6 +27,7 @@ class OrderTransformer extends TransformerAbstract
         return [
             'id'         => (int) $model->id,
             'total'      => (float) $model->total,
+            'paid_now'      => (float) $model->paid_now,
             'product_names'    => $this->getArrayProductNames($model->items),
             'status'=>$model->status,
             'type' => (int) $model->type,
@@ -71,6 +72,10 @@ class OrderTransformer extends TransformerAbstract
     }
 
     public function includePayment(Order $model){
-        return $this->collection($model->paymentOrders,new PaymentOrdersTransformer());
+        if(!$model->paymentOrders){
+            return null;
+        }else {
+            return $this->collection($model->paymentOrders, new PaymentOrdersTransformer());
+        }
     }
 }
