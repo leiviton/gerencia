@@ -108,7 +108,7 @@
                                             {{ i.subtotal | currency:'BRL':true }}
                                         </td>
                                         <td class="text-center">
-                                            <button class="btn btn-sm btn-link" (click)="removeItem(i.id)" tooltip="Remover do pedido"><i class="fa fa-remove text-danger"></i></button>
+                                            <button class="btn btn-sm btn-link" *ngIf="i.product.data.id != 58" (click)="removeItem(i.id)" tooltip="Remover do pedido"><i class="fa fa-remove text-danger"></i></button>
                                             <button class="btn btn-sm btn-link" *ngIf="i.product.data.id != 58" (click)="showComplement(i.id)" tooltip="Gerenciar complementos"><i class="fa fa-plus text-info"></i></button>
                                         </td>
                                     </tr>

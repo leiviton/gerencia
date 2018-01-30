@@ -82,16 +82,31 @@ export class EditComponent implements OnInit {
                 this.httpService.builder().view(params['id'],'order')
                     .then((res) => {
                             this.order = res.data;
-                            this.client.id = res.data.client.data.id;
-                            this.client.name = res.data.client.data.name;
-                            this.client.phone = res.data.client.data.phone;
-                            this.client.email = res.data.client.data.user.data.email;
-                            this.client.address.address = res.data.client.data.addressClient.data.address;
-                            this.client.address.numero = res.data.client.data.addressClient.data.numero;
-                            this.client.address.bairro = res.data.client.data.addressClient.data.bairro;
-                            this.client.address.city_id = res.data.client.data.addressClient.data.city.data.id;
-                            this.products = res.data.items;
-                            this.mesa = res.data.mesa.data.name;
+                            if(res.data.client.data.user)
+                            {
+                                this.client.id = res.data.client.data.id;
+                                this.client.name = res.data.client.data.name;
+                                this.client.phone = res.data.client.data.phone;
+                                this.client.email = res.data.client.data.user.data.email;
+                                this.client.address.address = res.data.client.data.addressClient.data.address;
+                                this.client.address.numero = res.data.client.data.addressClient.data.numero;
+                                this.client.address.bairro = res.data.client.data.addressClient.data.bairro;
+                                this.client.address.city_id = res.data.client.data.addressClient.data.city.data.id;
+                                this.products = res.data.items;
+                                this.mesa = res.data.mesa.data.name;
+                            }else{
+                                this.client.id = res.data.client.data.id;
+                                this.client.name = res.data.client.data.name;
+                                this.client.phone = res.data.client.data.phone;
+                                this.client.email = '';
+                                this.client.address.address = res.data.client.data.addressClient.data.address;
+                                this.client.address.numero = res.data.client.data.addressClient.data.numero;
+                                this.client.address.bairro = res.data.client.data.addressClient.data.bairro;
+                                this.client.address.city_id = res.data.client.data.addressClient.data.city.data.id;
+                                this.products = res.data.items;
+                                this.mesa = res.data.mesa.data.name;
+
+                            }
                             this.hideLoading();
                     });
                 this.httpService.setAccessToken();
@@ -120,7 +135,11 @@ export class EditComponent implements OnInit {
                 this.client.id = res.data.client.data.id;
                 this.client.name = res.data.client.data.name;
                 this.client.phone = res.data.client.data.phone;
-                this.client.email = res.data.client.data.user.data.email;
+                if(res.data.client.data.user) {
+                    this.client.email = res.data.client.data.user.data.email;
+                }else{
+                    this.client.email = res.data.client.data.user.data.email;
+                }
                 this.client.address.address = res.data.client.data.addressClient.data.address;
                 this.client.address.numero = res.data.client.data.addressClient.data.numero;
                 this.client.address.bairro = res.data.client.data.addressClient.data.bairro;

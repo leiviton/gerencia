@@ -98,16 +98,30 @@ var EditComponent = (function () {
             _this.httpService.builder().view(params['id'], 'order')
                 .then(function (res) {
                 _this.order = res.data;
-                _this.client.id = res.data.client.data.id;
-                _this.client.name = res.data.client.data.name;
-                _this.client.phone = res.data.client.data.phone;
-                _this.client.email = res.data.client.data.user.data.email;
-                _this.client.address.address = res.data.client.data.addressClient.data.address;
-                _this.client.address.numero = res.data.client.data.addressClient.data.numero;
-                _this.client.address.bairro = res.data.client.data.addressClient.data.bairro;
-                _this.client.address.city_id = res.data.client.data.addressClient.data.city.data.id;
-                _this.products = res.data.items;
-                _this.mesa = res.data.mesa.data.name;
+                if (res.data.client.data.user) {
+                    _this.client.id = res.data.client.data.id;
+                    _this.client.name = res.data.client.data.name;
+                    _this.client.phone = res.data.client.data.phone;
+                    _this.client.email = res.data.client.data.user.data.email;
+                    _this.client.address.address = res.data.client.data.addressClient.data.address;
+                    _this.client.address.numero = res.data.client.data.addressClient.data.numero;
+                    _this.client.address.bairro = res.data.client.data.addressClient.data.bairro;
+                    _this.client.address.city_id = res.data.client.data.addressClient.data.city.data.id;
+                    _this.products = res.data.items;
+                    _this.mesa = res.data.mesa.data.name;
+                }
+                else {
+                    _this.client.id = res.data.client.data.id;
+                    _this.client.name = res.data.client.data.name;
+                    _this.client.phone = res.data.client.data.phone;
+                    _this.client.email = '';
+                    _this.client.address.address = res.data.client.data.addressClient.data.address;
+                    _this.client.address.numero = res.data.client.data.addressClient.data.numero;
+                    _this.client.address.bairro = res.data.client.data.addressClient.data.bairro;
+                    _this.client.address.city_id = res.data.client.data.addressClient.data.city.data.id;
+                    _this.products = res.data.items;
+                    _this.mesa = res.data.mesa.data.name;
+                }
                 _this.hideLoading();
             });
             _this.httpService.setAccessToken();
@@ -134,7 +148,12 @@ var EditComponent = (function () {
             _this.client.id = res.data.client.data.id;
             _this.client.name = res.data.client.data.name;
             _this.client.phone = res.data.client.data.phone;
-            _this.client.email = res.data.client.data.user.data.email;
+            if (res.data.client.data.user) {
+                _this.client.email = res.data.client.data.user.data.email;
+            }
+            else {
+                _this.client.email = res.data.client.data.user.data.email;
+            }
             _this.client.address.address = res.data.client.data.addressClient.data.address;
             _this.client.address.numero = res.data.client.data.addressClient.data.numero;
             _this.client.address.bairro = res.data.client.data.addressClient.data.bairro;
