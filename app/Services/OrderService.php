@@ -111,8 +111,10 @@ class OrderService{
                 DB::insert('insert into order_items (id,product_id,order_id,price,qtd,subtotal,created_at,updated_at) values(?,?,?,?,?,?,?,?)',[null,$taxa->id,$order->id,$taxa->price,1,$taxa->price,$atual,$atual]);
                 $mesa->status = 3;
                 $total += $taxa->price;
-            }else{
+            }else if($order->type == 1){
                 $mesa->status = 1;
+            }else if($order->type == 2){
+                $mesa->status = 3;
             }
 
             $order->total = $total;
