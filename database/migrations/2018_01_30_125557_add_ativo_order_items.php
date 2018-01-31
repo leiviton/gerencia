@@ -15,6 +15,8 @@ class AddAtivoOrderItems extends Migration
     {
         Schema::table('order_items', function (Blueprint $table) {
             $table->string('ativo',1)->default('S');
+            $table->string('user_create')->nullable();
+            $table->string('user_update')->nullable();
         });
     }
 
@@ -27,6 +29,8 @@ class AddAtivoOrderItems extends Migration
     {
         Schema::table('order_items', function (Blueprint $table) {
             $table->dropColumn('ativo');
+            $table->string('user_create')->nullable();
+            $table->string('user_update')->nullable();
         });
     }
 }

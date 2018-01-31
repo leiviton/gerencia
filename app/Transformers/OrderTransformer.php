@@ -36,6 +36,9 @@ class OrderTransformer extends TransformerAbstract
             'cartao' => $model->cartao,
             'observacao' => $model->observacao,
             'link_printer' => $model->link_printer,
+            'address' => $model->address,
+            'user_create' => $model->user_create,
+            'user_update' => $model->user_update,
             'created_at' => (string)date_format($model->created_at,'d/m/Y H:i:s'),
             'previsao' => (string) date('H:i:s',strtotime('+ 20 minutes',strtotime($previsao))),
             'updated_at' => $model->updated_at

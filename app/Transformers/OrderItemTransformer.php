@@ -29,6 +29,9 @@ class OrderItemTransformer extends TransformerAbstract
             'subtotal' => (float) $model->subtotal,
             'impresso' => $model->impresso,
             'historico' => $model->historico,
+            'ativo' => $model->ativo,
+            'user_create' => $model->user_create,
+            'user_update' => $model->user_update,
             /* place your other model properties here */
 
             'created_at' => $model->created_at,

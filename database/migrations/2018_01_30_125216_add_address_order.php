@@ -15,6 +15,8 @@ class AddAddressOrder extends Migration
     {
         Schema::table('orders', function (Blueprint $table) {
             $table->string('address')->nullable();
+            $table->string('user_create')->nullable();
+            $table->string('user_update')->nullable();
         });
     }
 
@@ -27,6 +29,8 @@ class AddAddressOrder extends Migration
     {
         Schema::table('orders', function (Blueprint $table) {
             $table->dropColumn('address');
+            $table->dropColumn('user_create');
+            $table->dropColumn('user_update');
         });
     }
 }
