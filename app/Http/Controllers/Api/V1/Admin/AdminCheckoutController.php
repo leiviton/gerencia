@@ -153,7 +153,7 @@ class AdminCheckoutController extends Controller
 
         $o = $this->orderService->pagyment($id,$data);
 
-        if($o->id)
+        if($o['id'])
         {
             $audit = [
                 'type'=>'insert',

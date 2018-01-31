@@ -48,17 +48,17 @@
                         <tabset>
                             <tab heading="Cliente">
                                 <form name="form" class="form-inline">
-                                    <input type="text" class="form-control col-md-12 name" name="name" [(ngModel)]="client.name" placeholder="Nome Cliente" disabled/>
+                                    <input type="text" class="form-control col-md-12 name text-capitalize" name="name" [(ngModel)]="client.name" placeholder="Nome Cliente" disabled/>
                                     <br><br>
                                     <input ngxPhoneMask type="text" class="form-control col-md-12" name="phone" [(ngModel)]="client.phone" placeholder="Telefone" disabled />
                                     <br><br>
                                     <input type="text" class="form-control col-md-12" name="email" [(ngModel)]="client.email" placeholder="Email" disabled />
                                     <br><br>
-                                    <input type="text" class="form-control col-md-12" name="address.address" [(ngModel)]="client.address.address" placeholder="Rua" [disabled]="editar"/>
+                                    <input type="text" class="form-control col-md-12 text-capitalize" name="address.address" [(ngModel)]="client.address.address" placeholder="Rua" [disabled]="editar"/>
                                     <br><br>
-                                    <input type="text" class="form-control col-md-3" name="address.numero" [(ngModel)]="client.address.numero" placeholder="Numero" [disabled]="editar">
+                                    <input type="text" class="form-control col-md-3 text" name="address.numero" [(ngModel)]="client.address.numero" placeholder="Numero" [disabled]="editar">
                                     <div class="separate1"></div>
-                                    <input type="text" class="form-control col-md-8" name="address.bairro" [(ngModel)]="client.address.bairro" placeholder="Bairro" [disabled]="editar"/>
+                                    <input type="text" class="form-control col-md-8 text-capitalize" name="address.bairro" [(ngModel)]="client.address.bairro" placeholder="Bairro" [disabled]="editar"/>
                                     <br><br>
                                     <select name="cidade" id="cidade" class="form-control col-md-12" [(ngModel)]="client.address.city_id" disabled>
                                         <option value="0">Selecione cidade</option>
@@ -133,8 +133,8 @@
                     <button *ngIf="order.type != 1" class="btn btn-default" (click)="habilitarEdicao()"><i class="fa fa-pencil"></i> Editar endereço</button>
                     <button class="btn btn-primary" (click)="save()"><i class="fa fa-print"></i> Imprimir (F7)</button>
                     <button class="btn btn-success" (click)="update()"><i class="fa fa-save"></i> Salvar(F9)</button>
-                    <button class="btn btn-danger text-left" type="button" (click)="close()"><i class="fa fa-arrow-circle-left"></i> Cancelar (ESC)</button>
-                    <button class="btn btn-info text-left" type="button" (click)="pagar()" tooltip="Pagamento"><i class="fa fa-money"></i> Fechar</button>
+                    <button class="btn btn-danger text-left" type="button" (click)="close()"><i class="fa fa-arrow-circle-left"></i> Sair (ESC)</button>
+                    <button class="btn btn-info text-left" type="button" (click)="pagar()" tooltip="Pagamento"><i class="fa fa-money"></i> Finalizar</button>
                 </div>
             </div>
         </div>

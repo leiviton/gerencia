@@ -238,7 +238,7 @@ class OrderService{
 
         foreach ($complements as $c){
             $item->complementItems()->create($c);
-            $item['price'] += $c['price'];
+            $item->subtotal += $c['price'];
             $order->total += $c['price'];
         }
 
