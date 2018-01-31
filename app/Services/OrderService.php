@@ -165,7 +165,7 @@ class OrderService{
             $mesa = $this->mesaRepository->find($order->mesa->id);
             if($order->total == $order->paid_now)
             {
-                return null;
+                return $order;
             }else {
                 $order->paymentOrders()->create($data);
 
