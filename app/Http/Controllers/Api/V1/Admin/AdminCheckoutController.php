@@ -819,6 +819,14 @@ class AdminCheckoutController extends Controller
                                         padding-top: 0;
                                         margin-left: 7px;
                                     }
+                                    .padding2{
+                                        padding-left: 0;
+                                        padding-right: 10px;
+                                        padding-bottom: 0;
+                                        padding-top: 0;
+                                        margin-left: 7px;
+                                    }
+                                    
                                     .produto{
                                         font-weight: 200;
                                         font-size: 15px;
