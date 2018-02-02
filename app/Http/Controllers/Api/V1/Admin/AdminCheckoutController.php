@@ -839,8 +839,11 @@ class AdminCheckoutController extends Controller
                             <body>
                                 <h5 class='fonte'>---------------------------------------------------------------------</h5>
                                 <h5 class='fonte produto'>Pedido: $order->id | " . $order->mesa->name . "</h5>
-                                <h5 class='fonte'>Data: $data | Hora: $hora | Previsão: ".date('H:i:s',strtotime('+ 20 minutes',strtotime($hora)))."</h5>                              
-                                <h5 class='fonte'>---------------------------------------------------------------------</h5>
+                                <h5 class='fonte'>Data: $data  Hora: $hora | Previsão: ".date('H:i:s',strtotime('+ 30 minutes',strtotime($hora)))."</h5>                              
+                                    <h5 class='fonte'>Hora: $hora | Previsão: ".date('H:i:s',strtotime('+ 30 minutes',strtotime($hora)))."</h5>                              
+                                    <h5 class='fonte'>Previsão: ".date('H:i:s',strtotime('+ 30 minutes',strtotime($hora)))."</h5>                              
+                                    
+                                    <h5 class='fonte'>---------------------------------------------------------------------</h5>
                                 <h5 class='fonte'>ITENS:</h5>
                                 $table
                                 <h5 class='fonte'>---------------------------------------------------------------------</h5>
