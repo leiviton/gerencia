@@ -822,7 +822,8 @@ class AdminCheckoutController extends Controller
                                         margin-left: -100px !important;
                                     }
                                     .produto2{                                   
-                                        word-wrap: break-word;                            
+                                        word-wrap: break-word;
+                                        width: 100px;                            
                                         text-transform: capitalize;
                                     }
                                     .total{
