@@ -770,7 +770,7 @@ class AdminCheckoutController extends Controller
                                         font-size: 10px;
                                     }
                                     .price{
-                                    margin-left: -20px;
+                                    margin-left: -100px;
                                     }
                                 </style>
                             </head>
