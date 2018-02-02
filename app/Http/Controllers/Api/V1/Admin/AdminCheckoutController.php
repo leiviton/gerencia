@@ -771,8 +771,8 @@ class AdminCheckoutController extends Controller
                                 <div class='center'>
                                     <h5 class='fonte'>---------------------------------------------------------------------</h5>
                                     <h5 class='fonte produto'>Pedido: $order->id | " . $order->mesa->name . "</h5>
-                                    <h5 class='fonte'>Data: $data</h5>                              
-                                    <h5 class='fonte'>Hora: $hora</h5>                              
+                                    <h5 class='fonte'>Data: $data  Hora: $hora | Previsão: ".date('H:i:s',strtotime('+ 30 minutes',strtotime($hora)))."</h5>                              
+                                    <h5 class='fonte'>Hora: $hora | Previsão: ".date('H:i:s',strtotime('+ 30 minutes',strtotime($hora)))."</h5>                              
                                     <h5 class='fonte'>Previsão: ".date('H:i:s',strtotime('+ 30 minutes',strtotime($hora)))."</h5>                              
                                     
                                     <h5 class='fonte'>---------------------------------------------------------------------</h5>
@@ -833,17 +833,17 @@ class AdminCheckoutController extends Controller
                                         width: 20em;
                                         text-transform: capitalize;
                                     }
-                                    
+                                    .data{
+                                        font-weight: bold;
+                                        font-size: 10px;
+                                    }
                                 </style>
                             </head>
                             <body>
                                 <h5 class='fonte'>---------------------------------------------------------------------</h5>
                                 <h5 class='fonte produto'>Pedido: $order->id | " . $order->mesa->name . "</h5>
-                                <h5 class='fonte'>Data: $data</h5>
-                                    <h5 class='fonte'>Hora: $hora</h5>
-                                    <h5 class='fonte'>Previsão: ".date('H:i:s',strtotime('+ 30 minutes',strtotime($hora)))."</h5>                              
-                                    
-                                    <h5 class='fonte'>---------------------------------------------------------------------</h5>
+                                <h5 class='data'>Data: $data | Hora: $hora | Previsão: ".date('H:i:s',strtotime('+ 20 minutes',strtotime($hora)))."</h5>                              
+                                <h5 class='fonte'>---------------------------------------------------------------------</h5>
                                 <h5 class='fonte'>ITENS:</h5>
                                 $table
                                 <h5 class='fonte'>---------------------------------------------------------------------</h5>
