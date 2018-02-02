@@ -694,7 +694,7 @@ class AdminCheckoutController extends Controller
                 $produtos .= "<tr class='border'>
                             <td class='fonte produto border produto2'>" . $value->product->name . $com . "<br/>".$value->historico."</td>
                             <td class='fonte padding border produto'>" . $value->qtd . "</td>
-                            <td class='price padding border'> R$" . $value->price . "</td>
+                            <td class='price border'> R$" . $value->subtotal . "</td>
                             </tr>";
                 $this->itemRepository->update(['impresso' => 'S'], $value->id);
                 $contador += $value->qtd;
@@ -818,7 +818,7 @@ class AdminCheckoutController extends Controller
                                     }
                                     .produto2{                                   
                                         word-wrap: break-word;
-                                        width: 8em;                                       
+                                        width: 5em;                                       
                                         text-transform: capitalize;
                                     }
                                     .total{
