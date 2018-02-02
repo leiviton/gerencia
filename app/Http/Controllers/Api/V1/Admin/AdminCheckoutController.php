@@ -745,7 +745,7 @@ class AdminCheckoutController extends Controller
                                     }
                                     .produto2{                                   
                                         word-wrap: break-word;
-                                        width: 8em;                                       
+                                        width: 7em;                                       
                                         text-transform: capitalize;
                                     }
                                     .total{
@@ -824,7 +824,7 @@ class AdminCheckoutController extends Controller
                                     }
                                     .produto2{                                   
                                         word-wrap: break-word;
-                                        width: 8em;                                       
+                                        width: 7em;                                       
                                         text-transform: capitalize;
                                     }
                                     .total{
