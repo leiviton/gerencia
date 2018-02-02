@@ -584,7 +584,8 @@ class AdminCheckoutController extends Controller
                                     <h5 class='fonte'>TOTAL DE ITENS: $contador</h5>
                                     <h5 class='fonte total'>TOTAL DA COMPRA: R$ $order->total</h5>
                                     <h5 class='fonte'>---------------------------------------------------------------------</h5>
-                                    <h5 class='fonte' style='word-wrap: normal'>$order->observacao</h5>
+                                    <h5 class='fonte' style='word-wrap: normal'>".substr($order->observacao,0,15)."<br/>".
+                                    substr($order->observacao,15,count_chars($order->observacao))."</h5>
                                     <h5 class='fonte'>$order->troco</h5>
                                     <h5 class='fonte'>$taxa</h5>
                                 </div>
