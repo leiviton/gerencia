@@ -641,7 +641,7 @@ class AdminCheckoutController extends Controller
                                     <h5 class='fonte'>TOTAL DE ITENS: $contador</h5>
                                     <h5 class='fonte total'>TOTAL DA COMPRA: R$ $order->total</h5>
                                     <h5 class='fonte'>---------------------------------------------------------------------</h5>
-                                    <div class='fonte obs'><p>$order->observacao</p></div>
+                                    <div class='fonte'><p class='obs'>$order->observacao</p></div>
                                     <h5 class='fonte'>$taxa</h5>
                                  </div>
                             </body>
