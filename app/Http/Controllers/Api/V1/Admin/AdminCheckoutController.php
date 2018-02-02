@@ -761,7 +761,7 @@ class AdminCheckoutController extends Controller
                                         font-weight: 500;
                                         font-size: 13px;
                                         word-wrap: break-word;
-                                        width: 8em;
+                                        width: 16em;
                                     }
                                 </style>
                             </head>
@@ -825,7 +825,7 @@ class AdminCheckoutController extends Controller
                                         font-weight: 500;
                                         font-size: 13px;
                                         word-wrap: break-word;
-                                        width: 8em;
+                                        width: 16em;
                                     }
                                     
                                 </style>
