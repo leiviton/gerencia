@@ -152,24 +152,28 @@ class AdminCheckoutController extends Controller
         $data['total_original'] = $request->get('total_original');
         $data['payment_types_id'] = $request->get('payment_types_id');
         $data['user_create'] = $user->email;
-        $o = $this->orderService->pagyment($id,$data);
-
-        if($o->id)
+        if($data['total_pago'] == 0)
         {
-            $audit = [
-                'type'=>'insert',
-                'user_id'=>$user->id,
-                'user' => $user->email,
-                'entity' => 'pagamento/pedidos',
-                'action' => 'Pagou o pedido: '.$o->id
-            ];
+            return 0;
+        }else {
+            $o = $this->orderService->pagyment($id, $data);
 
-            $this->auditRepository->create($audit);
+            if ($o->id) {
+                $audit = [
+                    'type' => 'insert',
+                    'user_id' => $user->id,
+                    'user' => $user->email,
+                    'entity' => 'pagamento/pedidos',
+                    'action' => 'Pagou o pedido: ' . $o->id
+                ];
+
+                $this->auditRepository->create($audit);
+            }
+
+            return $this->repository
+                ->skipPresenter(false)
+                ->find($o->id);
         }
-
-        return $this->repository
-            ->skipPresenter(false)
-            ->find($o->id);
     }
 
     public function getMesas()

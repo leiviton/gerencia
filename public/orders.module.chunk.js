@@ -1107,7 +1107,7 @@ var OrdersCloseComponent = (function () {
 /***/ "../../../../../src/app/orders/components/orders.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"animated fadeIn\">\n    <div class=\"row\">\n        <div class=\"col-lg-12\">\n          <div class=\"card\">\n            <div class=\"card-header\">\n                   <button type=\"button\" class=\"btn btn-default\" (click)=\"showModal()\"><i class=\"fa fa-search\"></i> Pesquisar </button>\n              <a class=\"btn btn-success\" [routerLink]=\"['new']\"><i class=\"fa fa-plus\"></i> Novo</a>\n            </div>\n            <div class=\"card-body\">\n              <table class=\"table table-responsive table-bordered table-striped table-sm\">\n                <thead>\n                  <tr>\n                    <th class=\"title text-center\">Status</th>\n                    <th class=\"title text-center\">Tipo</th>\n                    <th class=\"title text-center\">Codigo</th>\n                    <th class=\"title-table text-center\"> Total</th>\n                    <th class=\"title\"> Cliente</th>\n                    <th class=\"title text-center\">Data</th>\n                    <th class=\"title text-center\">Hora</th>\n                    <th class=\"title text-center\">Previsão</th>\n                    <th class=\"title text-center\">Mesa</th>\n                    <th class=\"title text-center\">Ações</th>\n                  </tr>\n                </thead>\n                <tbody>\n                  <tr *ngIf=\"tamanho == 0\">\n                    <td colspan=\"10\"> Sem dados</td>\n                  </tr>\n                  <tr *ngFor=\"let o of orders.data\" (dblclick)=\"edit(o.id)\">\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">\n                      <span class=\"badge badge-success\" *ngIf=\"o.status === 4\" tooltip=\"Pagamento parcial\"> Pago parcial</span>\n                      <span class=\"badge badge-success\" *ngIf=\"o.status === 3\" tooltip=\"Pagamento realizado\"> Pago</span>\n                      <span class=\"badge badge-info\" *ngIf=\"o.status === 2\" tooltip=\"Em transito\"> Em transito</span>\n                      <span class=\"badge badge-primary\" *ngIf=\"o.status === 1\" tooltip=\"Preparado\"> Preparado</span>\n                      <span class=\"badge badge-danger\" *ngIf=\"o.status === 0\" tooltip=\"Na cozinha\"> Cozinha</span>\n                    </td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">\n                      <i class=\"fa fa-motorcycle\" *ngIf=\"o.type == 0\" tooltip=\"Delivery\"></i>\n                      <i class=\"fa fa-upload\" *ngIf=\"o.type == 2\" tooltip=\"Retirada\"></i>\n                      <i class=\"fa fa fa-cutlery\" *ngIf=\"o.type == 1\" tooltip=\"Mesa\"></i>\n                    </td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.id }}</td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.total | currency:'BRL':true }}</td>\n                    <td class=\"text-capitalize\" *ngIf=\"tamanho > 0\">{{ o.client.data.name }}</td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.created_at | slice:0:10 }} </td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.created_at | slice:11:19}}</td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.previsao }} </td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.mesa.data.name }} </td>\n\n                    <td class=\"text-center\">\n                      <a class=\"btn btn-link text-alert pagamento\" *ngIf=\"o.status == 3\" [routerLink]=\"['payment/'+ o.id]\" tooltip=\"Ver pagamentos\"><i class=\"fa fa-money\"></i></a>\n                      <a class=\"btn btn-link text-success pagamento\" *ngIf=\"o.status != 3\" [routerLink]=\"['payment/'+ o.id]\" tooltip=\"Pagar pedido\"><i class=\"fa fa-dollar\"></i></a>\n                      <a class=\"btn btn-link pagamento\" *ngIf=\"o.status != 3\" [routerLink]=\"['printer/'+ o.id]+'/S'\" tooltip=\"Imprimir pedido\"><i class=\"fa fa-print\"></i></a>\n                    </td>\n                  </tr>\n                </tbody>\n              </table>\n              <p class=\"text-right\">Quantidade de pedidos: {{ orders.data.length }}</p>\n              <!--nav>\n                <ul class=\"pagination\">\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">Prev</a></li>\n                  <li class=\"page-item active\">\n                    <a class=\"page-link\" href=\"#\">1</a>\n                  </li>\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">2</a></li>\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">3</a></li>\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">4</a></li>\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">Next</a></li>\n                </ul>\n              </nav-->\n            </div>\n          </div>\n        </div>\n      </div>\n </div>\n\n<div class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">\n  <div class=\"modal-dialog modal-sm modal-info\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <h6 class=\"modal-title\">Pesquisar</h6>\n      </div>\n      <div class=\"modal-body\">\n        <label for=\"inicio\">De</label>\n        <input type=\"date\" id=\"inicio\" class=\"form-control\" name=\"inicio\" [(ngModel)]=\"pesquisa.inicio\" required>\n\n        <label for=\"fim\">Até</label>\n        <input type=\"date\" id=\"fim\" class=\"form-control\" name=\"fim\" [(ngModel)]=\"pesquisa.fim\" required>\n        <label class=\"col-form-label\" for=\"select\">Status</label>\n        <select name=\"status\" class=\"form-control\" id=\"select\" [(ngModel)]=\"pesquisa.status\" required>\n          <option value=\"null\">Selecione o status</option>\n          <option value=\"0\">Pendentes</option>\n          <option value=\"1\">Em preparo</option>\n          <option value=\"2\">Entrega</option>\n          <option value=\"3\">Fechado</option>\n        </select>\n      </div>\n      <div class=\"modal-footer\">\n        <button type=\"button\" class=\"btn btn-secondary\" (click)=\"hideModal()\">Fechar</button>\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"pesquisar()\"><i class=\"fa fa-search\"></i> Buscar</button>\n      </div>\n    </div><!-- /.modal-content -->\n  </div><!-- /.modal-dialog -->\n</div><!-- /.modal -->\n\n<router-outlet></router-outlet>\n\n"
+module.exports = "<div class=\"animated fadeIn\">\n    <div class=\"row\">\n        <div class=\"col-lg-12\">\n          <div class=\"card\">\n            <div class=\"card-header\">\n                   <button type=\"button\" class=\"btn btn-default\" (click)=\"showModal()\"><i class=\"fa fa-search\"></i> Pesquisar </button>\n              <a class=\"btn btn-success\" [routerLink]=\"['new']\"><i class=\"fa fa-plus\"></i> Novo</a>\n            </div>\n            <div class=\"card-body\">\n              <table class=\"table table-responsive table-bordered table-striped table-sm\">\n                <thead>\n                  <tr>\n                    <th class=\"title text-center\">Status</th>\n                    <th class=\"title text-center\">Tipo</th>\n                    <th class=\"title text-center\">Codigo</th>\n                    <th class=\"title-table text-center\"> Total</th>\n                    <th class=\"title\"> Cliente</th>\n                    <th class=\"title text-center\">Data</th>\n                    <th class=\"title text-center\">Hora</th>\n                    <th class=\"title text-center\">Previsão</th>\n                    <th class=\"title text-center\">Mesa</th>\n                    <th class=\"title text-center\">Ações</th>\n                  </tr>\n                </thead>\n                <tbody>\n                  <tr *ngIf=\"tamanho == 0\">\n                    <td colspan=\"10\"> Sem dados</td>\n                  </tr>\n                  <tr *ngFor=\"let o of orders.data\" (dblclick)=\"edit(o.id)\">\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">\n                      <span class=\"badge badge-pill badge-parcial\" *ngIf=\"o.status === 4\" tooltip=\"Pagamento parcial\"> Pago parcial</span>\n                      <span class=\"badge badge-pill badge-success\" *ngIf=\"o.status === 3\" tooltip=\"Pagamento realizado\"> Pago</span>\n                      <span class=\"badge badge-pill badge-info\" *ngIf=\"o.status === 2\" tooltip=\"Em transito\"> Em transito</span>\n                      <span class=\"badge badge-pill badge-primary\" *ngIf=\"o.status === 1\" tooltip=\"Preparado\"> Preparado</span>\n                      <span class=\"badge badge-pill badge-new\" *ngIf=\"o.status === 0\" tooltip=\"Na cozinha\"> Cozinha</span>\n                    </td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">\n                      <i class=\"fa fa-motorcycle\" *ngIf=\"o.type == 0\" tooltip=\"Delivery\"></i>\n                      <i class=\"fa fa-upload\" *ngIf=\"o.type == 2\" tooltip=\"Retirada\"></i>\n                      <i class=\"fa fa fa-cutlery\" *ngIf=\"o.type == 1\" tooltip=\"Mesa\"></i>\n                    </td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.id }}</td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.total | currency:'BRL':true }}</td>\n                    <td class=\"text-capitalize\" *ngIf=\"tamanho > 0\">{{ o.client.data.name }}</td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.created_at | slice:0:10 }} </td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.created_at | slice:11:19}}</td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.previsao }} </td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.mesa.data.name }} </td>\n\n                    <td class=\"text-center\">\n                      <a class=\"btn btn-link text-alert pagamento\" *ngIf=\"o.status == 3\" [routerLink]=\"['payment/'+ o.id]\" tooltip=\"Ver pagamentos\"><i class=\"fa fa-money\"></i></a>\n                      <a class=\"btn btn-link text-success pagamento\" *ngIf=\"o.status != 3\" [routerLink]=\"['payment/'+ o.id]\" tooltip=\"Pagar pedido\"><i class=\"fa fa-dollar\"></i></a>\n                      <a class=\"btn btn-link pagamento\" *ngIf=\"o.status != 3\" [routerLink]=\"['printer/'+ o.id]+'/S'\" tooltip=\"Imprimir pedido\"><i class=\"fa fa-print\"></i></a>\n                    </td>\n                  </tr>\n                </tbody>\n              </table>\n              <p class=\"text-right\">Quantidade de pedidos: {{ orders.data.length }}</p>\n              <!--nav>\n                <ul class=\"pagination\">\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">Prev</a></li>\n                  <li class=\"page-item active\">\n                    <a class=\"page-link\" href=\"#\">1</a>\n                  </li>\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">2</a></li>\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">3</a></li>\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">4</a></li>\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">Next</a></li>\n                </ul>\n              </nav-->\n            </div>\n          </div>\n        </div>\n      </div>\n </div>\n\n<div class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">\n  <div class=\"modal-dialog modal-sm modal-info\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <h6 class=\"modal-title\">Pesquisar</h6>\n      </div>\n      <div class=\"modal-body\">\n        <label for=\"inicio\">De</label>\n        <input type=\"date\" id=\"inicio\" class=\"form-control\" name=\"inicio\" [(ngModel)]=\"pesquisa.inicio\" required>\n\n        <label for=\"fim\">Até</label>\n        <input type=\"date\" id=\"fim\" class=\"form-control\" name=\"fim\" [(ngModel)]=\"pesquisa.fim\" required>\n        <label class=\"col-form-label\" for=\"select\">Status</label>\n        <select name=\"status\" class=\"form-control\" id=\"select\" [(ngModel)]=\"pesquisa.status\" required>\n          <option value=\"null\">Selecione o status</option>\n          <option value=\"0\">Pendentes</option>\n          <option value=\"1\">Em preparo</option>\n          <option value=\"2\">Entrega</option>\n          <option value=\"3\">Fechado</option>\n        </select>\n      </div>\n      <div class=\"modal-footer\">\n        <button type=\"button\" class=\"btn btn-secondary\" (click)=\"hideModal()\">Fechar</button>\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"pesquisar()\"><i class=\"fa fa-search\"></i> Buscar</button>\n      </div>\n    </div><!-- /.modal-content -->\n  </div><!-- /.modal-dialog -->\n</div><!-- /.modal -->\n\n<router-outlet></router-outlet>\n\n"
 
 /***/ }),
 
@@ -1334,72 +1334,102 @@ var PaymentComponent = (function () {
         var _this = this;
         this.showLoading();
         console.log('troco', this.troco);
-        if (this.valor_pag >= this.total) {
-            this.payment.total_pago = (this.valor_pag - (this.valor_pag - ((this.total + this.payment.acrescimo) - this.payment.desconto)));
-            this.payment.total_original = this.order.total;
-            this.payment.payment_types_id = this.type_id;
-            this.httpService.setAccessToken();
-            if (this.type_id !== null) {
-                this.httpService.builder()
-                    .insert(this.payment, 'payment')
-                    .then(function (res) {
-                    _this.httpService.eventEmitter.emit();
-                    _this.payment.total_realizado = _this.payment.total_pago;
-                    _this.valor_pag = 0;
-                    _this.hideLoading();
-                    _this.toasterService.pop('success', 'Sucesso', 'Pagamento do pedido ' + res.data.id + ' realizado com sucesso');
-                    _this.close();
-                });
+        console.log(this.valor_pag);
+        if (this.valor_pag > 0) {
+            if (this.valor_pag >= this.total) {
+                this.payment.total_pago = (this.valor_pag - (this.valor_pag - ((this.total + this.payment.acrescimo) - this.payment.desconto)));
+                this.payment.total_original = this.order.total;
+                this.payment.payment_types_id = this.type_id;
+                this.httpService.setAccessToken();
+                if (this.type_id !== null) {
+                    this.httpService.builder()
+                        .insert(this.payment, 'payment')
+                        .then(function (res) {
+                        if (res == 0) {
+                            console.log('aqui');
+                            _this.hideLoading();
+                            _this.toasterService.pop('error', 'Ops houve um erro, tente novamente');
+                        }
+                        else {
+                            console.log('aqui');
+                            _this.httpService.eventEmitter.emit();
+                            _this.payment.total_realizado = _this.payment.total_pago;
+                            _this.valor_pag = 0;
+                            _this.hideLoading();
+                            _this.toasterService.pop('success', 'Sucesso', 'Pagamento do pedido ' + res.data.id + ' realizado com sucesso');
+                            _this.close();
+                        }
+                    });
+                }
+                else {
+                    this.hideLoading();
+                    this.toasterService.pop('error', 'Erro', 'Tipo pagamento não selecionado');
+                }
             }
-            else {
-                this.hideLoading();
-                this.toasterService.pop('error', 'Erro', 'Tipo pagamento não selecionado');
+            else if (this.valor_pag + this.payment.desconto >= this.total) {
+                this.payment.total_pago = (this.valor_pag - this.troco);
+                this.payment.total_original = this.order.total;
+                this.payment.payment_types_id = this.type_id;
+                this.httpService.setAccessToken();
+                if (this.type_id !== null) {
+                    this.httpService.builder()
+                        .insert(this.payment, 'payment')
+                        .then(function (res) {
+                        if (res == 0) {
+                            console.log('aqui2');
+                            _this.hideLoading();
+                            _this.toasterService.pop('error', 'Ops houve um erro, tente novamente');
+                        }
+                        else {
+                            console.log('aqui2');
+                            _this.httpService.eventEmitter.emit();
+                            _this.valor_pag = 0;
+                            _this.hideLoading();
+                            _this.toasterService.pop('success', 'Sucesso', 'Pagamento do pedido ' + res.data.id + ' realizado com sucesso');
+                            _this.close();
+                        }
+                    });
+                }
+                else {
+                    this.hideLoading();
+                    this.toasterService.pop('error', 'Erro', 'Tipo pagamento não selecionado');
+                }
+            }
+            else if ((this.valor_pag + this.payment.desconto) < this.total) {
+                this.payment.total_pago = (this.valor_pag - this.troco);
+                this.payment.total_original = this.order.total;
+                this.payment.payment_types_id = this.type_id;
+                this.httpService.setAccessToken();
+                if (this.type_id !== null) {
+                    this.httpService.builder()
+                        .insert(this.payment, 'payment')
+                        .then(function (res) {
+                        if (res == 0) {
+                            console.log("aqui3");
+                            _this.hideLoading();
+                            _this.toasterService.pop('error', 'Ops houve um erro, tente novamente');
+                        }
+                        else {
+                            _this.httpService.eventEmitter.emit();
+                            _this.order = res.data;
+                            _this.valor_pag = 0;
+                            for (var i = 0; i < res.data.payment.data.length; i++) {
+                                _this.total -= res.data.payment.data[i].total_pago;
+                            }
+                            _this.hideLoading();
+                            _this.toasterService.pop('success', 'Sucesso', 'Pagamento parcial ' + res.data.id + ' realizado com sucesso');
+                        }
+                    });
+                }
+                else {
+                    this.hideLoading();
+                    this.toasterService.pop('error', 'Erro', 'Tipo pagamento não selecionado');
+                }
             }
         }
-        else if (this.valor_pag + this.payment.desconto >= this.total) {
-            this.payment.total_pago = (this.valor_pag - this.troco);
-            this.payment.total_original = this.order.total;
-            this.payment.payment_types_id = this.type_id;
-            this.httpService.setAccessToken();
-            if (this.type_id !== null) {
-                this.httpService.builder()
-                    .insert(this.payment, 'payment')
-                    .then(function (res) {
-                    _this.httpService.eventEmitter.emit();
-                    _this.valor_pag = 0;
-                    _this.hideLoading();
-                    _this.toasterService.pop('success', 'Sucesso', 'Pagamento do pedido ' + res.data.id + ' realizado com sucesso');
-                    _this.close();
-                });
-            }
-            else {
-                this.hideLoading();
-                this.toasterService.pop('error', 'Erro', 'Tipo pagamento não selecionado');
-            }
-        }
-        else if ((this.valor_pag + this.payment.desconto) < this.total) {
-            this.payment.total_pago = (this.valor_pag - this.troco);
-            this.payment.total_original = this.order.total;
-            this.payment.payment_types_id = this.type_id;
-            this.httpService.setAccessToken();
-            if (this.type_id !== null) {
-                this.httpService.builder()
-                    .insert(this.payment, 'payment')
-                    .then(function (res) {
-                    _this.httpService.eventEmitter.emit();
-                    _this.order = res.data;
-                    _this.valor_pag = 0;
-                    for (var i = 0; i < res.data.payment.data.length; i++) {
-                        _this.total -= res.data.payment.data[i].total_pago;
-                    }
-                    _this.hideLoading();
-                    _this.toasterService.pop('success', 'Sucesso', 'Pagamento parcial ' + res.data.id + ' realizado com sucesso');
-                });
-            }
-            else {
-                this.hideLoading();
-                this.toasterService.pop('error', 'Erro', 'Tipo pagamento não selecionado');
-            }
+        else {
+            this.hideLoading();
+            this.toasterService.pop('error', 'Erro', 'Pagamento igual a zaro');
         }
     };
     PaymentComponent.prototype.tipos = function () {

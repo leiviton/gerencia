@@ -1,13 +1,13 @@
-webpackJsonp(["orders-close.module"],{
+webpackJsonp(["orders-cancel.module"],{
 
-/***/ "../../../../../src/app/close/components/edit.component.html":
+/***/ "../../../../../src/app/cancel/components/edit.component.html":
 /***/ (function(module, exports) {
 
 module.exports = "<div tabindex=\"-1\" class=\"modal fade modal_novo\" id=\"successModal\" role=\"dialog\" aria-hidden=\"true\" aria-labelledby=\"myModalLabel\">\r\n    <div class=\"modal-dialog modal-lg modal-primary\" role=\"document\">\r\n        <div class=\"modal-content\">\r\n            <div class=\"modal-header novo\">\r\n                <h4 class=\"text-center\">Editar Pedido: {{ order.id }} </h4>\r\n                <h4 class=\"text-center\"> {{ mesa }} </h4>\r\n                <h4 class=\"text-center\">Total: {{ order.total  | currency:'BRL':true}}</h4>\r\n            </div>\r\n            <div class=\"modal-body\">\r\n                <div class=\"col-md-12\">\r\n                    <form #myForm=\"ngForm\" class=\"form-inline\">\r\n                        <div class=\"form-group col-md-12\">\r\n                            <label for=\"tipo\" class=\"label col-md-2\">Tipo: </label>\r\n                            <select id=\"tipo\" name=\"tipo\" class=\"form-control col-md-2\" [(ngModel)]=\"order.type\" disabled>\r\n                                <option value=\"0\"> Delivery</option>\r\n                                <option value=\"1\"> Salão</option>\r\n                                <option value=\"2\"> Retirada</option>\r\n                            </select>\r\n                            <label for=\"mesa\" class=\"label col-md-2\" *ngIf=\"order.type == 1\">Mesa: </label>\r\n                            <select id=\"mesa\" name=\"mesa_id\" class=\"form-control col-md-2\" [(ngModel)]=\"order.mesa.data.id\" *ngIf=\"order.type == 1\" disabled>\r\n                                <option *ngFor=\"let g of mesas.data\" value=\"{{ g.id }}\"> {{ g.name }}</option>\r\n                            </select>\r\n                            <label for=\"status\" class=\"label col-md-2\">Status: </label>\r\n                            <select id=\"status\" name=\"staus\" class=\"form-control col-md-2\" [(ngModel)]=\"order.status\" disabled>\r\n                                <option value=\"3\">Fechada</option>\r\n                            </select>\r\n\r\n                        </div>\r\n                    </form>\r\n                </div>\r\n                <div class=\"col-md-12\" style=\"padding-bottom: 5px;\">\r\n                    <form #myForm=\"ngForm\" class=\"form-inline\">\r\n                        <div class=\"form-group col-md-12\">\r\n                        </div>\r\n                    </form>\r\n                </div>\r\n                <div class=\"row borderdiv\" style=\"height: 370px; overflow: auto\">\r\n                    <div class=\"col-md-6 mb-4 padding\" *ngIf=\"order.type != 1\">\r\n                        <!-- Nav tabs -->\r\n                        <tabset>\r\n                            <tab heading=\"Cliente\">\r\n                                <form name=\"form\" class=\"form-inline\">\r\n                                    <input type=\"text\" class=\"form-control col-md-12 name\" name=\"name\" [(ngModel)]=\"client.name\" placeholder=\"Nome Cliente\" disabled/>\r\n                                    <br><br>\r\n                                    <input ngxPhoneMask type=\"text\" class=\"form-control col-md-12\" name=\"phone\" [(ngModel)]=\"client.phone\" placeholder=\"Telefone\" disabled />\r\n                                    <br><br>\r\n                                    <input type=\"text\" class=\"form-control col-md-12\" name=\"email\" [(ngModel)]=\"client.email\" placeholder=\"Email\" disabled />\r\n                                    <br><br>\r\n                                    <input type=\"text\" class=\"form-control col-md-12\" name=\"address.address\" [(ngModel)]=\"client.address.address\" placeholder=\"Rua\" [disabled]=\"editar\"/>\r\n                                    <br><br>\r\n                                    <input type=\"text\" class=\"form-control col-md-3\" name=\"address.numero\" [(ngModel)]=\"client.address.numero\" placeholder=\"Numero\" [disabled]=\"editar\">\r\n                                    <div class=\"separate1\"></div>\r\n                                    <input type=\"text\" class=\"form-control col-md-8\" name=\"address.bairro\" [(ngModel)]=\"client.address.bairro\" placeholder=\"Bairro\" [disabled]=\"editar\"/>\r\n                                    <br><br>\r\n                                    <select name=\"cidade\" id=\"cidade\" class=\"form-control col-md-12\" [(ngModel)]=\"client.address.city_id\" disabled>\r\n                                        <option value=\"0\">Selecione cidade</option>\r\n                                        <option value=\"3128709\">Guaxupé</option>\r\n                                        <option value=\"3128303\">Guaranésia</option>\r\n                                        <option value=\"3136900\">Juruaia</option>\r\n                                        <option value=\"3144102\">Muzambinho</option>\r\n                                        <option value=\"3163904\">São Pedro da União</option>\r\n                                    </select>\r\n                                    <br><br>\r\n                                    <div class=\"padding\" *ngIf=\"editar == false\">\r\n                                        <button type=\"button\" class=\"btn btn-default btn-info\" (click)=\"saveClient()\">Atualizar endereço</button>\r\n                                    </div>\r\n                                </form>\r\n                            </tab>\r\n                        </tabset>\r\n                    </div><!--/.col-->\r\n                    <div class=\"col-lg-6 padding\" [ngClass]=\"{'col-md-12 col-lg-12': order.type != 0 && order.type != 2, 'col-md-6 col-lg-6': order.type != 1}\">\r\n                        <div class=\"table-responsive\" style=\"height: 160px; overflow: auto\">\r\n                            <table class=\"table scrollbox table-striped\">\r\n                                <thead>\r\n                                <tr class=\"th-table title-table\">\r\n                                    <th>#</th>\r\n                                    <th>Produto</th>\r\n                                    <th>Valor</th>\r\n                                    <th>Quantadade</th>\r\n                                    <th>SubTotal</th>\r\n                                </tr>\r\n                                </thead>\r\n                                <tbody>\r\n                                <tr *ngFor=\"let i of products.data\">\r\n                                    <td>{{ i.product.data.id }}</td>\r\n                                    <td>{{ i.product.data.name }}\r\n                                        <p *ngFor=\"let c of i.complement.data\" style=\"font-size: 10px; margin-bottom: 0;\"> {{ c.complement.data.name }}: {{ c.price | currency:'BRL':true }}</p>\r\n                                        <p style=\"font-size: 10px; margin-bottom: 0;\">{{ i.historico }}</p>\r\n                                    </td>\r\n                                    <td>{{ i.product.data.price | currency:'BRL':true}}</td>\r\n                                    <td>{{ i.qtd }}</td>\r\n                                    <td>\r\n                                        {{ i.subtotal | currency:'BRL':true }}\r\n                                    </td>\r\n                                </tr>\r\n                                </tbody>\r\n                            </table>\r\n                        </div>\r\n                        <hr>\r\n                        <div class=\"col-md-12 text-center alert alert-success total-pagamento\"><p class=\"qtd\">TOTAL: {{ order.total | currency:'BRL':true }}</p></div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"modal-footer cadastro\">\r\n                <div class=\"modal-button\">\r\n                    <button class=\"btn btn-primary\" (click)=\"save()\"><i class=\"fa fa-print\"></i> Imprimir (F7)</button>\r\n                    <button class=\"btn btn-danger text-left\" type=\"button\" (click)=\"close()\"><i class=\"fa fa-arrow-circle-left\"></i> Cancelar (ESC)</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <!-- /.modal-content -->\r\n    </div>\r\n    <!-- /.modal-dialog -->\r\n</div>\r\n"
 
 /***/ }),
 
-/***/ "../../../../../src/app/close/components/edit.component.ts":
+/***/ "../../../../../src/app/cancel/components/edit.component.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -16,7 +16,7 @@ module.exports = "<div tabindex=\"-1\" class=\"modal fade modal_novo\" id=\"succ
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery__ = __webpack_require__("../../../../jquery/dist/jquery.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_jquery__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_orders_service__ = __webpack_require__("../../../../../src/app/close/services/orders.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_orders_service__ = __webpack_require__("../../../../../src/app/cancel/services/orders.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angular2_toaster__ = __webpack_require__("../../../../angular2-toaster/angular2-toaster.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -213,7 +213,7 @@ var EditComponent = (function () {
     };
     EditComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            template: __webpack_require__("../../../../../src/app/close/components/edit.component.html")
+            template: __webpack_require__("../../../../../src/app/cancel/components/edit.component.html")
         }),
         __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__services_orders_service__["a" /* OrdersService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_orders_service__["a" /* OrdersService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4_angular2_toaster__["b" /* ToasterService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4_angular2_toaster__["b" /* ToasterService */]) === "function" && _d || Object])
     ], EditComponent);
@@ -225,22 +225,22 @@ var EditComponent = (function () {
 
 /***/ }),
 
-/***/ "../../../../../src/app/close/components/orders.component.html":
+/***/ "../../../../../src/app/cancel/components/orders.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"animated fadeIn\">\n    <div class=\"row\">\n        <div class=\"col-lg-12\">\n          <div class=\"card\">\n            <div class=\"card-header\">\n                   <button type=\"button\" class=\"btn btn-default\" (click)=\"showModal()\"><i class=\"fa fa-search\"></i> Pesquisar </button>\n            </div>\n            <div class=\"card-body\">\n              <table class=\"table table-responsive table-bordered table-striped table-sm\">\n                <thead>\n                  <tr>\n                    <th class=\"title text-center\">Status</th>\n                    <th class=\"title text-center\">Tipo</th>\n                    <th class=\"title text-center\">Codigo</th>\n                    <th class=\"title-table text-center\"> Total</th>\n                    <th class=\"title\"> Cliente</th>\n                    <th class=\"title text-center\">Data</th>\n                    <th class=\"title text-center\">Hora</th>\n                    <th class=\"title text-center\">Previsão</th>\n                    <th class=\"title text-center\">Mesa</th>\n                    <th class=\"title text-center\">Ações</th>\n                  </tr>\n                </thead>\n                <tbody>\n                  <tr *ngIf=\"tamanho == 0\">\n                    <td colspan=\"10\"> Sem dados</td>\n                  </tr>\n                  <tr *ngFor=\"let o of orders.data\" (dblclick)=\"edit(o.id)\">\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">\n                      <span class=\"badge badge-pill badge-success\" *ngIf=\"o.status === 3\" tooltip=\"Pagamento realizado\"> Pago</span>\n                      <span class=\"badge badge-pill badge-info\" *ngIf=\"o.status === 2\" tooltip=\"Em transito\">Em transito</span>\n                      <span class=\"badge badge-pill badge-primary\" *ngIf=\"o.status === 1\" tooltip=\"Preparado\">Preparado</span>\n                      <span class=\"badge badge-pill badge-new\" *ngIf=\"o.status === 0\" tooltip=\"Na cozinha\">Cozinha</span>\n                    </td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">\n                      <i class=\"fa fa-motorcycle\" *ngIf=\"o.type == 0\" tooltip=\"Delivery\"></i>\n                      <i class=\"fa fa-upload\" *ngIf=\"o.type == 2\" tooltip=\"Retirada\"></i>\n                      <i class=\"fa fa fa-cutlery\" *ngIf=\"o.type == 1\" tooltip=\"Mesa\"></i>\n                    </td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.id }}</td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.total | currency:'BRL':true }}</td>\n                    <td class=\"text-capitalize\" *ngIf=\"tamanho > 0\">{{ o.client.data.name }}</td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.created_at | slice:0:10 }} </td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.created_at | slice:11:19}}</td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.previsao }} </td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.mesa.data.name }} </td>\n                    <td class=\"text-center\">\n                      <a class=\"btn btn-link text-alert pagamento\" *ngIf=\"o.status == 3\" [routerLink]=\"['payment/'+ o.id]\" tooltip=\"Ver pagamentos\"><i class=\"fa fa-money\"></i></a>\n                      <a class=\"btn btn-link text-success pagamento\" *ngIf=\"o.status != 3\" [routerLink]=\"['payment/'+ o.id]\" tooltip=\"Pagar pedido\"><i class=\"fa fa-dollar\"></i></a>\n                      <a class=\"btn btn-link pagamento\" *ngIf=\"o.status != 3\" [routerLink]=\"['printer/'+ o.id]+'/S'\" tooltip=\"Imprimir pedido\"><i class=\"fa fa-print\"></i></a>\n                    </td>\n                  </tr>\n                </tbody>\n              </table>\n              <!--nav>\n                <ul class=\"pagination\">\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">Prev</a></li>\n                  <li class=\"page-item active\">\n                    <a class=\"page-link\" href=\"#\">1</a>\n                  </li>\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">2</a></li>\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">3</a></li>\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">4</a></li>\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">Next</a></li>\n                </ul>\n              </nav-->\n            </div>\n          </div>\n        </div>\n      </div>\n </div>\n\n<div class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">\n  <div class=\"modal-dialog modal-sm modal-info\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <h6 class=\"modal-title\">Pesquisar</h6>\n      </div>\n      <div class=\"modal-body\">\n        <label for=\"inicio\">De</label>\n        <input type=\"date\" id=\"inicio\" class=\"form-control\" name=\"inicio\" [(ngModel)]=\"pesquisa.inicio\" required>\n\n        <label for=\"fim\">Até</label>\n        <input type=\"date\" id=\"fim\" class=\"form-control\" name=\"fim\" [(ngModel)]=\"pesquisa.fim\" required>\n        <label class=\"col-form-label\" for=\"select\">Status</label>\n        <select name=\"status\" class=\"form-control\" id=\"select\" [(ngModel)]=\"pesquisa.status\" required>\n          <option value=\"null\">Selecione o status</option>\n          <option value=\"0\">Pendentes</option>\n          <option value=\"1\">Em preparo</option>\n          <option value=\"2\">Entrega</option>\n          <option value=\"3\">Fechado</option>\n        </select>\n      </div>\n      <div class=\"modal-footer\">\n        <button type=\"button\" class=\"btn btn-secondary\" (click)=\"hideModal()\">Fechar</button>\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"pesquisar()\"><i class=\"fa fa-search\"></i> Buscar</button>\n      </div>\n    </div><!-- /.modal-content -->\n  </div><!-- /.modal-dialog -->\n</div><!-- /.modal -->\n\n<router-outlet></router-outlet>\n\n"
+module.exports = "<div class=\"animated fadeIn\">\n    <div class=\"row\">\n        <div class=\"col-lg-12\">\n          <div class=\"card\">\n            <div class=\"card-header\">\n                   <button type=\"button\" class=\"btn btn-default\" (click)=\"showModal()\"><i class=\"fa fa-search\"></i> Pesquisar </button>\n            </div>\n            <div class=\"card-body\">\n              <table class=\"table table-responsive table-bordered table-striped table-sm\">\n                <thead>\n                  <tr>\n                    <th class=\"title text-center\">Status</th>\n                    <th class=\"title text-center\">Tipo</th>\n                    <th class=\"title text-center\">Codigo</th>\n                    <th class=\"title-table text-center\"> Total</th>\n                    <th class=\"title\"> Cliente</th>\n                    <th class=\"title text-center\">Data</th>\n                    <th class=\"title text-center\">Hora</th>\n                    <th class=\"title text-center\">Previsão</th>\n                    <th class=\"title text-center\">Mesa</th>\n                    <th class=\"title text-center\">Ações</th>\n                  </tr>\n                </thead>\n                <tbody>\n                  <tr *ngIf=\"tamanho == 0\">\n                    <td colspan=\"10\"> Sem dados</td>\n                  </tr>\n                  <tr *ngFor=\"let o of orders.data\" (dblclick)=\"edit(o.id)\">\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">\n                      <span class=\"badge badge-pill badge-success\" *ngIf=\"o.status === 3\" tooltip=\"Pagamento realizado\"> Pago</span>\n                      <span class=\"badge badge-pill badge-info\" *ngIf=\"o.status === 2\" tooltip=\"Em transito\">Em transito</span>\n                      <span class=\"badge badge-pill badge-primary\" *ngIf=\"o.status === 1\" tooltip=\"Preparado\">Preparado</span>\n                      <span class=\"badge badge-pill badge-new\" *ngIf=\"o.status === 0\" tooltip=\"Na cozinha\">Cozinha</span>\n                      <span class=\"badge badge-pill badge-danger\" *ngIf=\"o.status === 5\" tooltip=\"Cancelado\">Cancelado</span>\n                    </td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">\n                      <i class=\"fa fa-motorcycle\" *ngIf=\"o.type == 0\" tooltip=\"Delivery\"></i>\n                      <i class=\"fa fa-upload\" *ngIf=\"o.type == 2\" tooltip=\"Retirada\"></i>\n                      <i class=\"fa fa fa-cutlery\" *ngIf=\"o.type == 1\" tooltip=\"Mesa\"></i>\n                    </td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.id }}</td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.total | currency:'BRL':true }}</td>\n                    <td class=\"text-capitalize\" *ngIf=\"tamanho > 0\">{{ o.client.data.name }}</td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.created_at | slice:0:10 }} </td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.created_at | slice:11:19}}</td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.previsao }} </td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.mesa.data.name }} </td>\n                    <td class=\"text-center\">\n                      <a class=\"btn btn-link text-alert pagamento\" *ngIf=\"o.status == 3\" [routerLink]=\"['payment/'+ o.id]\" tooltip=\"Ver pagamentos\"><i class=\"fa fa-money\"></i></a>\n                      <a class=\"btn btn-link text-success pagamento\" *ngIf=\"o.status != 3\" [routerLink]=\"['payment/'+ o.id]\" tooltip=\"Pagar pedido\"><i class=\"fa fa-dollar\"></i></a>\n                      <a class=\"btn btn-link pagamento\" *ngIf=\"o.status != 3\" [routerLink]=\"['printer/'+ o.id]+'/S'\" tooltip=\"Imprimir pedido\"><i class=\"fa fa-print\"></i></a>\n                    </td>\n                  </tr>\n                </tbody>\n              </table>\n              <!--nav>\n                <ul class=\"pagination\">\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">Prev</a></li>\n                  <li class=\"page-item active\">\n                    <a class=\"page-link\" href=\"#\">1</a>\n                  </li>\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">2</a></li>\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">3</a></li>\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">4</a></li>\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">Next</a></li>\n                </ul>\n              </nav-->\n            </div>\n          </div>\n        </div>\n      </div>\n </div>\n\n<div class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">\n  <div class=\"modal-dialog modal-sm modal-info\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <h6 class=\"modal-title\">Pesquisar</h6>\n      </div>\n      <div class=\"modal-body\">\n        <label for=\"inicio\">De</label>\n        <input type=\"date\" id=\"inicio\" class=\"form-control\" name=\"inicio\" [(ngModel)]=\"pesquisa.inicio\" required>\n\n        <label for=\"fim\">Até</label>\n        <input type=\"date\" id=\"fim\" class=\"form-control\" name=\"fim\" [(ngModel)]=\"pesquisa.fim\" required>\n        <label class=\"col-form-label\" for=\"select\">Status</label>\n        <select name=\"status\" class=\"form-control\" id=\"select\" [(ngModel)]=\"pesquisa.status\" required>\n          <option value=\"null\">Selecione o status</option>\n          <option value=\"0\">Pendentes</option>\n          <option value=\"1\">Em preparo</option>\n          <option value=\"2\">Entrega</option>\n          <option value=\"3\">Fechado</option>\n        </select>\n      </div>\n      <div class=\"modal-footer\">\n        <button type=\"button\" class=\"btn btn-secondary\" (click)=\"hideModal()\">Fechar</button>\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"pesquisar()\"><i class=\"fa fa-search\"></i> Buscar</button>\n      </div>\n    </div><!-- /.modal-content -->\n  </div><!-- /.modal-dialog -->\n</div><!-- /.modal -->\n\n<router-outlet></router-outlet>\n\n"
 
 /***/ }),
 
-/***/ "../../../../../src/app/close/components/orders.component.ts":
+/***/ "../../../../../src/app/cancel/components/orders.component.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return OrdersCloseComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return OrdersCancelComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angular2_toaster__ = __webpack_require__("../../../../angular2-toaster/angular2-toaster.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_orders_service__ = __webpack_require__("../../../../../src/app/close/services/orders.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_orders_service__ = __webpack_require__("../../../../../src/app/cancel/services/orders.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_jquery__ = __webpack_require__("../../../../jquery/dist/jquery.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_jquery__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -257,8 +257,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var OrdersCloseComponent = (function () {
-    function OrdersCloseComponent(httpService, router, toasterService) {
+var OrdersCancelComponent = (function () {
+    function OrdersCancelComponent(httpService, router, toasterService) {
         var _this = this;
         this.httpService = httpService;
         this.router = router;
@@ -279,13 +279,13 @@ var OrdersCloseComponent = (function () {
             }
         });
     }
-    OrdersCloseComponent.prototype.ngOnInit = function () {
+    OrdersCancelComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.showLoading();
         this.httpService.setAccessToken();
         this.httpService.eventEmitter
             .subscribe(function () {
-            _this.httpService.builder().list({}, 'close?status=3')
+            _this.httpService.builder().list({}, 'close?status=5')
                 .then(function (res) {
                 _this.orders = res;
                 _this.tamanho = res.data.length;
@@ -294,26 +294,26 @@ var OrdersCloseComponent = (function () {
         });
         this.httpService.eventEmitter.emit();
     };
-    OrdersCloseComponent.prototype.edit = function (id) {
+    OrdersCancelComponent.prototype.edit = function (id) {
         this.cor = true;
         this.router.navigate(['/close/edit/' + id]);
     };
-    OrdersCloseComponent.prototype.new = function () {
+    OrdersCancelComponent.prototype.new = function () {
         return this.router.navigate(['/orders/new']);
     };
-    OrdersCloseComponent.prototype.hideLoading = function () {
+    OrdersCancelComponent.prototype.hideLoading = function () {
         __WEBPACK_IMPORTED_MODULE_4_jquery__(".container-loading").hide();
     };
-    OrdersCloseComponent.prototype.showLoading = function () {
+    OrdersCancelComponent.prototype.showLoading = function () {
         __WEBPACK_IMPORTED_MODULE_4_jquery__(".container-loading").show();
     };
-    OrdersCloseComponent.prototype.showModal = function () {
+    OrdersCancelComponent.prototype.showModal = function () {
         __WEBPACK_IMPORTED_MODULE_4_jquery__(".modal").show().addClass('show');
     };
-    OrdersCloseComponent.prototype.hideModal = function () {
+    OrdersCancelComponent.prototype.hideModal = function () {
         __WEBPACK_IMPORTED_MODULE_4_jquery__(".modal").hide();
     };
-    OrdersCloseComponent.prototype.pesquisar = function () {
+    OrdersCancelComponent.prototype.pesquisar = function () {
         var _this = this;
         this.showLoading();
         if (this.pesquisa.inicio !== null && this.pesquisa.fim !== null && this.pesquisa.status !== null) {
@@ -339,13 +339,13 @@ var OrdersCloseComponent = (function () {
             this.hideLoading();
         }
     };
-    OrdersCloseComponent = __decorate([
+    OrdersCancelComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            template: __webpack_require__("../../../../../src/app/close/components/orders.component.html")
+            template: __webpack_require__("../../../../../src/app/cancel/components/orders.component.html")
         }),
         __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__services_orders_service__["a" /* OrdersService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_orders_service__["a" /* OrdersService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_angular2_toaster__["b" /* ToasterService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_angular2_toaster__["b" /* ToasterService */]) === "function" && _c || Object])
-    ], OrdersCloseComponent);
-    return OrdersCloseComponent;
+    ], OrdersCancelComponent);
+    return OrdersCancelComponent;
     var _a, _b, _c;
 }());
 
@@ -353,14 +353,14 @@ var OrdersCloseComponent = (function () {
 
 /***/ }),
 
-/***/ "../../../../../src/app/close/components/payment.component.html":
+/***/ "../../../../../src/app/cancel/components/payment.component.html":
 /***/ (function(module, exports) {
 
 module.exports = "<div tabindex=\"-1\" class=\"modal fade\" id=\"payment\" role=\"dialog\" aria-hidden=\"true\" aria-labelledby=\"myModalLabel\" style=\"display: block; overflow-y: auto;\">\r\n    <div class=\"modal-dialog modal-lg modal-primary\" role=\"document\">\r\n        <div class=\"modal-content\">\r\n            <div class=\"modal-header novo\">\r\n                <h4 class=\"text-center\">Pedido: {{ order.id }} </h4>\r\n                <h4 class=\"text-center\"> {{ mesa }} </h4>\r\n                <h4 class=\"text-center\"> Total: {{ order.total | currency:'BRL':true }}</h4>\r\n            </div>\r\n            <div class=\"modal-body\" style=\"height: 500px; overflow: auto\">\r\n                <div class=\"col-md-12\">\r\n                    <div class=\"row col-md-12\">\r\n                        <div class=\"col-md-6\">\r\n                            <h5 class=\"text-capitalize\">{{ client.name }}</h5>\r\n                        </div>\r\n                        <div class=\"col-md-6\">\r\n                            <h5 class=\"text-capitalize\">{{ client.address }}</h5>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-md-12\" *ngIf=\"order.payment\">\r\n                    <div class=\"table-responsive\">\r\n                        <div class=\"card\">\r\n                            <div class=\"card-header\">\r\n                                <i class=\"fa fa-money\"></i> Pagamentos\r\n                            </div>\r\n                            <div class=\"card-body\">\r\n                                <table class=\"table scrollbox table-striped\">\r\n                                    <thead>\r\n                                    <tr class=\"th-table title-table\">\r\n                                        <th class=\"text-center\">Vr.Pago</th>\r\n                                        <th>Desconto</th>\r\n                                        <th class=\"text-center\">Acrescimo</th>\r\n                                        <th class=\"text-center\">Total</th>\r\n                                        <th class=\"text-center\">Tipo</th>\r\n                                        <th class=\"text-center\">Data</th>\r\n                                    </tr>\r\n                                    </thead>\r\n                                    <tbody style=\"height: 250px; overflow: auto\">\r\n                                    <tr class=\"th-table\" *ngFor=\"let p of order.payment.data; let i = index\">\r\n                                        <td class=\"text-center\">{{ p.total_pago | currency:'BRL':true }}</td>\r\n                                        <td>{{ p.desconto | currency:'BRL':true }}</td>\r\n                                        <td class=\"text-center\">{{ p.acrescimo | currency:'BRL':true }}</td>\r\n                                        <td class=\"text-center\">{{ order.total | currency:'BRL':true }}</td>\r\n                                        <td class=\"text-center\">{{ p.type.data.name }}</td>\r\n                                        <td class=\"text-center\">{{ p.created_at }}</td>\r\n                                    </tr>\r\n                                    </tbody>\r\n                                </table>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-md-12\">\r\n                    <div class=\"card\">\r\n                        <div class=\"card-header\">\r\n                            <i class=\"fa fa-shopping-bag\"></i> Produtos\r\n                        </div>\r\n                        <div class=\"card-body\" style=\"padding-bottom: 0px\">\r\n                            <div class=\"table-responsive\">\r\n                                <table class=\"table scrollbox table-striped\">\r\n                                    <thead>\r\n                                    <tr class=\"th-table title-table\">\r\n                                        <th class=\"text-center\">#</th>\r\n                                        <th>Produto</th>\r\n                                        <th class=\"text-center\">Valor</th>\r\n                                        <th class=\"text-center\">Qtd.</th>\r\n                                        <th class=\"text-center\">Subtotal</th>\r\n                                    </tr>\r\n                                    </thead>\r\n                                    <tbody style=\"height: 170px; overflow: auto\">\r\n                                    <tr class=\"th-table\" *ngFor=\"let p of products.data; let i = index\">\r\n                                        <td class=\"text-center\">{{ p.product.data.id }}</td>\r\n                                        <td>{{ p.product.data.name }}\r\n                                            <p *ngFor=\"let c of p.complement.data\" style=\"font-size: 10px; margin-bottom: 0;\"> {{ c.complement.data.name }}: {{ c.price | currency:'BRL':true }}</p>\r\n                                            <p style=\"font-size: 10px; margin-bottom: 0;\">{{ p.historico }}</p>\r\n                                        </td>\r\n                                        <td class=\"text-center\">{{ p.price | currency:'BRL':true }}</td>\r\n                                        <td class=\"text-center\">{{ p.qtd }}</td>\r\n                                        <td class=\"text-center\">{{ p.subtotal | currency:'BRL':true }}</td>\r\n                                    </tr>\r\n                                    </tbody>\r\n                                </table>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"modal-footer novo\">\r\n                <div class=\"modal-button\">\r\n                    <button class=\"btn btn-danger text-left\" type=\"button\" (click)=\"close()\"><i class=\"fa fa-arrow-circle-left\"></i> Fechar</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <!-- /.modal-content -->\r\n    </div>\r\n    <!-- /.modal-dialog -->\r\n</div>\r\n"
 
 /***/ }),
 
-/***/ "../../../../../src/app/close/components/payment.component.ts":
+/***/ "../../../../../src/app/cancel/components/payment.component.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -369,7 +369,7 @@ module.exports = "<div tabindex=\"-1\" class=\"modal fade\" id=\"payment\" role=
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery__ = __webpack_require__("../../../../jquery/dist/jquery.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_jquery__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_orders_service__ = __webpack_require__("../../../../../src/app/close/services/orders.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_orders_service__ = __webpack_require__("../../../../../src/app/cancel/services/orders.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angular2_toaster__ = __webpack_require__("../../../../angular2-toaster/angular2-toaster.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -472,7 +472,7 @@ var PaymentComponent = (function () {
     };
     PaymentComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            template: __webpack_require__("../../../../../src/app/close/components/payment.component.html")
+            template: __webpack_require__("../../../../../src/app/cancel/components/payment.component.html")
         }),
         __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__services_orders_service__["a" /* OrdersService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_orders_service__["a" /* OrdersService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4_angular2_toaster__["b" /* ToasterService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4_angular2_toaster__["b" /* ToasterService */]) === "function" && _d || Object])
     ], PaymentComponent);
@@ -484,14 +484,14 @@ var PaymentComponent = (function () {
 
 /***/ }),
 
-/***/ "../../../../../src/app/close/components/printer.component.html":
+/***/ "../../../../../src/app/cancel/components/printer.component.html":
 /***/ (function(module, exports) {
 
 module.exports = "<div tabindex=\"-1\" class=\"modal fade modal_novo\" id=\"printer\" role=\"dialog\" aria-hidden=\"true\" aria-labelledby=\"myModalLabel\">\r\n    <div class=\"modal-dialog modal-lg modal-default\" role=\"document\">\r\n        <div class=\"modal-content\">\r\n            <div class=\"modal-body\" style=\"height: 530px\">\r\n                <div *ngIf=\"innerHtml\"\r\n                     [innerHTML]=\"innerHtml\">\r\n                </div>\r\n            </div>\r\n\r\n        </div>\r\n        <!-- /.modal-content -->\r\n    </div>\r\n    <!-- /.modal-dialog -->\r\n</div>\r\n"
 
 /***/ }),
 
-/***/ "../../../../../src/app/close/components/printer.component.ts":
+/***/ "../../../../../src/app/cancel/components/printer.component.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -501,7 +501,7 @@ module.exports = "<div tabindex=\"-1\" class=\"modal fade modal_novo\" id=\"prin
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_jquery__ = __webpack_require__("../../../../jquery/dist/jquery.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_jquery__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_orders_service__ = __webpack_require__("../../../../../src/app/close/services/orders.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_orders_service__ = __webpack_require__("../../../../../src/app/cancel/services/orders.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_angular2_toaster__ = __webpack_require__("../../../../angular2-toaster/angular2-toaster.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -578,7 +578,7 @@ var PrinterComponent = (function () {
     };
     PrinterComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            template: __webpack_require__("../../../../../src/app/close/components/printer.component.html")
+            template: __webpack_require__("../../../../../src/app/cancel/components/printer.component.html")
         }),
         __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_4__services_orders_service__["a" /* OrdersService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__services_orders_service__["a" /* OrdersService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* ActivatedRoute */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_5_angular2_toaster__["b" /* ToasterService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5_angular2_toaster__["b" /* ToasterService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__["c" /* DomSanitizer */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__["c" /* DomSanitizer */]) === "function" && _e || Object])
     ], PrinterComponent);
@@ -590,12 +590,12 @@ var PrinterComponent = (function () {
 
 /***/ }),
 
-/***/ "../../../../../src/app/close/orders-close.module.ts":
+/***/ "../../../../../src/app/cancel/orders-cancel.module.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OrdersCloseModule", function() { return OrdersCloseModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OrdersCancelModule", function() { return OrdersCancelModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__("../../../common/@angular/common.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ng2_charts_ng2_charts__ = __webpack_require__("../../../../ng2-charts/ng2-charts.js");
@@ -603,18 +603,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ngx_bootstrap_dropdown__ = __webpack_require__("../../../../ngx-bootstrap/dropdown/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ngx_bootstrap_modal__ = __webpack_require__("../../../../ngx-bootstrap/modal/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_orders_component__ = __webpack_require__("../../../../../src/app/close/components/orders.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_payment_component__ = __webpack_require__("../../../../../src/app/close/components/payment.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__orders_routing_module__ = __webpack_require__("../../../../../src/app/close/orders-routing.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_orders_component__ = __webpack_require__("../../../../../src/app/cancel/components/orders.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_payment_component__ = __webpack_require__("../../../../../src/app/cancel/components/payment.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__orders_routing_module__ = __webpack_require__("../../../../../src/app/cancel/orders-routing.module.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_ngx_bootstrap__ = __webpack_require__("../../../../ngx-bootstrap/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__services_orders_service__ = __webpack_require__("../../../../../src/app/close/services/orders.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__services_orders_service__ = __webpack_require__("../../../../../src/app/cancel/services/orders.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_cuppa_ng2_grid_cuppa_ng2_dataGrid__ = __webpack_require__("../../../../cuppa-ng2-grid/cuppa-ng2-dataGrid.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_ngx_bootstrap_tabs__ = __webpack_require__("../../../../ngx-bootstrap/tabs/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_ng2_currency_mask__ = __webpack_require__("../../../../ng2-currency-mask/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_ng2_currency_mask___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_13_ng2_currency_mask__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_ngx_phone_mask__ = __webpack_require__("../../../../ngx-phone-mask/ngx-phone-mask/ngx-phone-mask.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_printer_component__ = __webpack_require__("../../../../../src/app/close/components/printer.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_edit_component__ = __webpack_require__("../../../../../src/app/close/components/edit.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_printer_component__ = __webpack_require__("../../../../../src/app/cancel/components/printer.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_edit_component__ = __webpack_require__("../../../../../src/app/cancel/components/edit.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -638,14 +638,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var OrdersCloseModule = (function () {
-    function OrdersCloseModule() {
+var OrdersCancelModule = (function () {
+    function OrdersCancelModule() {
     }
-    OrdersCloseModule = __decorate([
+    OrdersCancelModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
             imports: [
                 __WEBPACK_IMPORTED_MODULE_1__angular_common__["CommonModule"],
-                __WEBPACK_IMPORTED_MODULE_8__orders_routing_module__["a" /* OrdersCloseRoutingModule */],
+                __WEBPACK_IMPORTED_MODULE_8__orders_routing_module__["a" /* OrdersCancelRoutingModule */],
                 __WEBPACK_IMPORTED_MODULE_2_ng2_charts_ng2_charts__["ChartsModule"],
                 __WEBPACK_IMPORTED_MODULE_3_ngx_bootstrap_dropdown__["a" /* BsDropdownModule */],
                 __WEBPACK_IMPORTED_MODULE_9_ngx_bootstrap__["b" /* TooltipModule */],
@@ -655,28 +655,28 @@ var OrdersCloseModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_13_ng2_currency_mask__["CurrencyMaskModule"],
                 __WEBPACK_IMPORTED_MODULE_14_ngx_phone_mask__["a" /* NgxPhoneMaskModule */],
             ],
-            declarations: [__WEBPACK_IMPORTED_MODULE_6__components_orders_component__["a" /* OrdersCloseComponent */], __WEBPACK_IMPORTED_MODULE_7__components_payment_component__["a" /* PaymentComponent */], __WEBPACK_IMPORTED_MODULE_15__components_printer_component__["a" /* PrinterComponent */], __WEBPACK_IMPORTED_MODULE_16__components_edit_component__["a" /* EditComponent */]],
+            declarations: [__WEBPACK_IMPORTED_MODULE_6__components_orders_component__["a" /* OrdersCancelComponent */], __WEBPACK_IMPORTED_MODULE_7__components_payment_component__["a" /* PaymentComponent */], __WEBPACK_IMPORTED_MODULE_15__components_printer_component__["a" /* PrinterComponent */], __WEBPACK_IMPORTED_MODULE_16__components_edit_component__["a" /* EditComponent */]],
             providers: [__WEBPACK_IMPORTED_MODULE_10__services_orders_service__["a" /* OrdersService */], __WEBPACK_IMPORTED_MODULE_4_ngx_bootstrap_modal__["a" /* BsModalService */]]
         })
-    ], OrdersCloseModule);
-    return OrdersCloseModule;
+    ], OrdersCancelModule);
+    return OrdersCancelModule;
 }());
 
-//# sourceMappingURL=orders-close.module.js.map
+//# sourceMappingURL=orders-cancel.module.js.map
 
 /***/ }),
 
-/***/ "../../../../../src/app/close/orders-routing.module.ts":
+/***/ "../../../../../src/app/cancel/orders-routing.module.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return OrdersCloseRoutingModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return OrdersCancelRoutingModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_orders_component__ = __webpack_require__("../../../../../src/app/close/components/orders.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_payment_component__ = __webpack_require__("../../../../../src/app/close/components/payment.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_printer_component__ = __webpack_require__("../../../../../src/app/close/components/printer.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_edit_component__ = __webpack_require__("../../../../../src/app/close/components/edit.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_orders_component__ = __webpack_require__("../../../../../src/app/cancel/components/orders.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_payment_component__ = __webpack_require__("../../../../../src/app/cancel/components/payment.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_printer_component__ = __webpack_require__("../../../../../src/app/cancel/components/printer.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_edit_component__ = __webpack_require__("../../../../../src/app/cancel/components/edit.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -692,9 +692,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var routes = [
     {
         path: '',
-        component: __WEBPACK_IMPORTED_MODULE_2__components_orders_component__["a" /* OrdersCloseComponent */],
+        component: __WEBPACK_IMPORTED_MODULE_2__components_orders_component__["a" /* OrdersCancelComponent */],
         data: {
-            title: 'Pedidos Fechados'
+            title: 'Pedidos Cancelados'
         },
         children: [
             {
@@ -721,23 +721,23 @@ var routes = [
         ]
     }
 ];
-var OrdersCloseRoutingModule = (function () {
-    function OrdersCloseRoutingModule() {
+var OrdersCancelRoutingModule = (function () {
+    function OrdersCancelRoutingModule() {
     }
-    OrdersCloseRoutingModule = __decorate([
+    OrdersCancelRoutingModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
             imports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["d" /* RouterModule */].forChild(routes)],
             exports: [__WEBPACK_IMPORTED_MODULE_1__angular_router__["d" /* RouterModule */]]
         })
-    ], OrdersCloseRoutingModule);
-    return OrdersCloseRoutingModule;
+    ], OrdersCancelRoutingModule);
+    return OrdersCancelRoutingModule;
 }());
 
 //# sourceMappingURL=orders-routing.module.js.map
 
 /***/ }),
 
-/***/ "../../../../../src/app/close/services/orders.service.ts":
+/***/ "../../../../../src/app/cancel/services/orders.service.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -854,4 +854,4 @@ var OrdersService = (function (_super) {
 /***/ })
 
 });
-//# sourceMappingURL=orders-close.module.chunk.js.map
+//# sourceMappingURL=orders-cancel.module.chunk.js.map

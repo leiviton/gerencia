@@ -31,6 +31,10 @@ export const routes: Routes = [
             loadChildren: './close/orders-close.module#OrdersCloseModule',
         },
         {
+            path: 'orders/cancel',
+            loadChildren: './cancel/orders-cancel.module#OrdersCancelModule',
+        },
+        {
             path: 'cadastro/produtos',
             loadChildren: './cadastro/produtos/produtos.module#ProdutosModule',
         },

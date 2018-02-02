@@ -82,48 +82,39 @@ export class PaymentComponent implements OnInit {
     {
         this.showLoading();
         console.log('troco',this.troco);
-        if(this.valor_pag >= this.total){
-            this.payment.total_pago = (this.valor_pag - (this.valor_pag - ((this.total + this.payment.acrescimo) - this.payment.desconto)));
-            this.payment.total_original = this.order.total;
-            this.payment.payment_types_id = this.type_id;
-            this.httpService.setAccessToken();
-            if(this.type_id !== null) {
-                    this.httpService.builder()
-                        .insert(this.payment, 'payment')
-                        .then((res) => {
-                            this.httpService.eventEmitter.emit();
-                            this.payment.total_realizado = this.payment.total_pago;
-                            this.valor_pag = 0;
-                            this.hideLoading();
-                            this.toasterService.pop('success', 'Sucesso', 'Pagamento do pedido ' + res.data.id + ' realizado com sucesso');
-                            this.close();
-                        });
+        console.log(this.valor_pag);
+        if(this.valor_pag > 0){
+            if(this.valor_pag >= this.total){
+                this.payment.total_pago = (this.valor_pag - (this.valor_pag - ((this.total + this.payment.acrescimo) - this.payment.desconto)));
+                this.payment.total_original = this.order.total;
+                this.payment.payment_types_id = this.type_id;
+                this.httpService.setAccessToken();
+                if(this.type_id !== null) {
+                        this.httpService.builder()
+                            .insert(this.payment, 'payment')
+                            .then((res) => {
+                                if(res == 0)
+                                {
+                                    console.log('aqui')
+                                    this.hideLoading();
+                                    this.toasterService.pop('error','Ops houve um erro, tente novamente');
+                                }else {
+                                    console.log('aqui')
+                                    this.httpService.eventEmitter.emit();
+                                    this.payment.total_realizado = this.payment.total_pago;
+                                    this.valor_pag = 0;
+                                    this.hideLoading();
+                                    this.toasterService.pop('success', 'Sucesso', 'Pagamento do pedido ' + res.data.id + ' realizado com sucesso');
+                                    this.close();
+                                }
+                            });
 
-            }else{
-                this.hideLoading();
-                this.toasterService.pop('error', 'Erro', 'Tipo pagamento não selecionado');
+                }else{
+                    this.hideLoading();
+                    this.toasterService.pop('error', 'Erro', 'Tipo pagamento não selecionado');
 
-            }
-        }else if (this.valor_pag + this.payment.desconto >= this.total){
-            this.payment.total_pago = (this.valor_pag - this.troco);
-            this.payment.total_original = this.order.total;
-            this.payment.payment_types_id = this.type_id;
-            this.httpService.setAccessToken();
-            if(this.type_id !== null) {
-                this.httpService.builder()
-                    .insert(this.payment, 'payment')
-                    .then((res) => {
-                        this.httpService.eventEmitter.emit();
-                        this.valor_pag = 0;
-                        this.hideLoading();
-                        this.toasterService.pop('success', 'Sucesso', 'Pagamento do pedido ' + res.data.id + ' realizado com sucesso');
-                        this.close();
-                });
-            }else{
-                this.hideLoading();
-                this.toasterService.pop('error', 'Erro', 'Tipo pagamento não selecionado');
-            }
-        }else if((this.valor_pag + this.payment.desconto) < this.total){
+                }
+            }else if (this.valor_pag + this.payment.desconto >= this.total){
                 this.payment.total_pago = (this.valor_pag - this.troco);
                 this.payment.total_original = this.order.total;
                 this.payment.payment_types_id = this.type_id;
@@ -132,20 +123,58 @@ export class PaymentComponent implements OnInit {
                     this.httpService.builder()
                         .insert(this.payment, 'payment')
                         .then((res) => {
-                            this.httpService.eventEmitter.emit();
-                            this.order = res.data;
-                            this.valor_pag = 0;
-                            for(var i = 0; i < res.data.payment.data.length; i++)
+                            if(res == 0)
                             {
-                                this.total -= res.data.payment.data[i].total_pago;
+
+                                console.log('aqui2')
+                                this.hideLoading();
+                                this.toasterService.pop('error','Ops houve um erro, tente novamente');
+                            }else {
+                                console.log('aqui2')
+                                this.httpService.eventEmitter.emit();
+                                this.valor_pag = 0;
+                                this.hideLoading();
+                                this.toasterService.pop('success', 'Sucesso', 'Pagamento do pedido ' + res.data.id + ' realizado com sucesso');
+                                this.close();
                             }
-                            this.hideLoading();
-                            this.toasterService.pop('success', 'Sucesso', 'Pagamento parcial ' + res.data.id + ' realizado com sucesso');
-                        });
+                    });
                 }else{
                     this.hideLoading();
                     this.toasterService.pop('error', 'Erro', 'Tipo pagamento não selecionado');
                 }
+            }else if((this.valor_pag + this.payment.desconto) < this.total) {
+                this.payment.total_pago = (this.valor_pag - this.troco);
+                this.payment.total_original = this.order.total;
+                this.payment.payment_types_id = this.type_id;
+                this.httpService.setAccessToken();
+                if (this.type_id !== null) {
+                    this.httpService.builder()
+                        .insert(this.payment, 'payment')
+                        .then((res) => {
+                            if (res == 0) {
+                                console.log("aqui3")
+                                this.hideLoading();
+                                this.toasterService.pop('error', 'Ops houve um erro, tente novamente');
+                            } else {
+
+                                this.httpService.eventEmitter.emit();
+                                this.order = res.data;
+                                this.valor_pag = 0;
+                                for (var i = 0; i < res.data.payment.data.length; i++) {
+                                    this.total -= res.data.payment.data[i].total_pago;
+                                }
+                                this.hideLoading();
+                                this.toasterService.pop('success', 'Sucesso', 'Pagamento parcial ' + res.data.id + ' realizado com sucesso');
+                            }
+                        });
+                } else {
+                    this.hideLoading();
+                    this.toasterService.pop('error', 'Erro', 'Tipo pagamento não selecionado');
+                }
+            }
+        }else{
+            this.hideLoading();
+            this.toasterService.pop('error','Erro','Pagamento igual a zaro');
         }
     }
 

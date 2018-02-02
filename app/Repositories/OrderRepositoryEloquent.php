@@ -71,7 +71,7 @@ class OrderRepositoryEloquent extends BaseRepository implements OrderRepository
     }
     public function ordersOpen($status=3){
 
-        $result = $this->model->whereRaw('(status <> ?)',[$status])->get();
+        $result = $this->model->whereRaw('(status < ? or status = ?)',[$status,4])->get();
 
         if ($result){
             return $this->parserResult($result);
