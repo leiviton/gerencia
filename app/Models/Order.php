@@ -21,7 +21,9 @@ class Order extends Model implements Transformable
         'troco',
         'cartao',
         'observacao',
-        'link_printer'
+        'link_printer',
+        'user_create',
+        'user_update'
     ];
 
     public function items(){

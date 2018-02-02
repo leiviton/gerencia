@@ -43,7 +43,8 @@ export class EditComponent implements OnInit {
                 id:1
             }
         },
-        observacao:''
+        observacao:'',
+        type:''
     };
     client = {
         id:1,
@@ -85,6 +86,7 @@ export class EditComponent implements OnInit {
         "created_at":"",
         "updated_at":""
     }];
+    typeAnt = '';
 
     ngOnInit(): void {
         this.showLoading();
@@ -115,6 +117,8 @@ export class EditComponent implements OnInit {
                                 this.client.address.bairro = res.data.client.data.addressClient.data.bairro;
                                 this.client.address.city_id = res.data.client.data.addressClient.data.city.data.id;
                             }
+
+                            this.typeAnt = this.order.type;
                             this.products = res.data.items;
                             this.mesa = res.data.mesa.data.name;
                             this.mesa_id = res.data.mesa.data.id;
@@ -144,7 +148,9 @@ export class EditComponent implements OnInit {
             'status': this.order.status,
             'mesa_id': this.mesa_id,
             'mesa_id_ant': this.order.mesa.data.id,
-            'observacao': this.order.observacao
+            'observacao': this.order.observacao,
+            'type': this.order.type,
+            'type_ant': this.typeAnt
         };
         this.httpService.builder('order')
             .update(this.order.id, order)
@@ -174,6 +180,8 @@ export class EditComponent implements OnInit {
                 this.products = res.data.items;
                 this.mesa = res.data.mesa.data.name
                 this.mesa_id = res.data.mesa.data.id;
+                this.typeAnt = res.data.type;
+
                 this.hideLoading();
                 this.toasterService.pop('success', 'Sucesso','Pedido '+this.order.id+' com sucesso!')
             });

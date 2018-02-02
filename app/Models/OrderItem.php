@@ -17,7 +17,9 @@ class OrderItem extends Model implements Transformable
         'qtd',
         'subtotal',
         'impresso',
-        'historico'
+        'historico',
+        'user_create',
+        'user_update'
     ];
 
     public function order(){

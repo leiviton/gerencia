@@ -15,7 +15,7 @@
                             <label class="label qtd col-md-2"> Qtd.</label>
                             <input class="form-control col-md-1" type="number" name="qtd" [(ngModel)]="qtd" min="1"  />
                             <label for="tipo" class="label col-md-2">Tipo: </label>
-                            <select id="tipo" name="tipo" class="form-control col-md-2" [(ngModel)]="order.type" disabled>
+                            <select id="tipo" name="tipo" class="form-control col-md-2" [(ngModel)]="order.type">
                                 <option value="0"> Delivery</option>
                                 <option value="1"> Salão</option>
                                 <option value="2"> Retirada</option>
@@ -96,18 +96,18 @@
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let i of products.data">
-                                        <td (click)="showInformacao(i.id)">{{ i.product.data.id }}</td>
-                                        <td (click)="showInformacao(i.id)">
+                                        <td (click)="showInformacao(i.id)" *ngIf="i.ativo == 'S'">{{ i.product.data.id }}</td>
+                                        <td (click)="showInformacao(i.id)" *ngIf="i.ativo == 'S'">
                                             {{ i.product.data.name }}
                                             <p *ngFor="let c of i.complement.data" style="font-size: 10px; margin-bottom: 0;"> {{ c.complement.data.name }}: {{ c.price | currency:'BRL':true }}</p>
                                             <p style="font-size: 10px; margin-bottom: 0;">{{ i.historico }}</p>
                                         </td>
-                                        <td (click)="showInformacao(i.id)">{{ i.product.data.price | currency:'BRL':true}}</td>
-                                        <td class="text-center" (click)="showInformacao(i.id)">{{ i.qtd }}</td>
-                                        <td (click)="showInformacao(i.id)">
+                                        <td (click)="showInformacao(i.id)" *ngIf="i.ativo == 'S'">{{ i.product.data.price | currency:'BRL':true}}</td>
+                                        <td class="text-center" (click)="showInformacao(i.id)" *ngIf="i.ativo == 'S'">{{ i.qtd }}</td>
+                                        <td (click)="showInformacao(i.id)" *ngIf="i.ativo == 'S'">
                                             {{ i.subtotal | currency:'BRL':true }}
                                         </td>
-                                        <td class="text-center">
+                                        <td class="text-center" *ngIf="i.ativo == 'S'">
                                             <button class="btn btn-sm btn-link" *ngIf="i.product.data.id != 58" (click)="removeItem(i.id)" tooltip="Remover do pedido"><i class="fa fa-remove text-danger"></i></button>
                                             <button class="btn btn-sm btn-link" *ngIf="i.product.data.id != 58" (click)="showComplement(i.id)" tooltip="Gerenciar complementos"><i class="fa fa-plus text-info"></i></button>
                                         </td>

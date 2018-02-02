@@ -86,7 +86,14 @@ class OrderService{
             }
             $items = $data['items'];
             $order = $this->orderRepository->create($data);
+            $order->address = $order->client->addressClient->address.
+                ','.$order->client->addressClient->numero.
+                ','.$order->client->addressClient->bairro.
+                ','.$order->client->addressClient->city->city.
+                '-'.$order->client->addressClient->city->state->state;
             $mesa = $this->mesaRepository->find($data['mesa_id']);
+            $order->user_create = $data['user_create'];
+            $order->user_update = $data['user_create'];
 
             foreach ($items as $item){
                 $complements = '';
@@ -94,6 +101,8 @@ class OrderService{
                 $item['order_id'] = $order->id;
                 $res = $this->itemRepository->create($item);//$order->items()->create($item);
 
+                $res->user_create = $data['user_create'];
+                $res->user_update = $data['user_create'];
                 if($item['complements'] && $item['complements'] != '')
                 {
                     $complements = $item['complements'];
@@ -101,6 +110,7 @@ class OrderService{
                         $res->complementItems()->create($c);
                     }
                 }
+                $res->save();
             }
 
             $total = $data['total'];
@@ -138,6 +148,7 @@ class OrderService{
 
     public function updateStatus($data,$id){
         $order = $this->orderRepository->find($id);
+        $taxa = $this->productRepository->find(58);
         $order->status = $data['status'];
         $mesaAnt = $this->mesaRepository->find($data['mesa_id_ant']);
         $mesaAnt->save();
@@ -145,6 +156,90 @@ class OrderService{
         $order->mesa_id = $data['mesa_id'];
         $mesa->status = 1;
         $order->observacao = $data['observacao'];
+
+        $order->user_update = $data['user_update'];
+        $item = $this->itemRepository->findWhere(['product_id'=>58,'order_id'=>$order->id]);
+        if($order->type != (int)$data['type']){
+            if ((int)$data['type'] == 0)
+            {
+                if(count($item) == 0)
+                {
+                    $order->observacao = ' teste if 2';
+                    $atual = new \DateTime();
+                    DB::insert('insert into order_items (id,product_id,order_id,price,qtd,subtotal,created_at,updated_at) values(?,?,?,?,?,?,?,?)',[null,$taxa->id,$order->id,$taxa->price,1,$taxa->price,$atual,$atual]);
+                }else{
+                    $order->observacao = ' teste if aqui';
+                    $id = 58;
+                    $order_id = $order->id;
+                    $item = $this->itemRepository->scopeQuery(function($query) use($id,$order_id){
+                        return $query->where('product_id',$id)
+                            ->where('order_id',$order_id);
+                    })->all();
+                    DB::update('update order_items set ativo = ? where order_id = ? and product_id = ?',['S',$order->id,58]);
+
+                }
+                $mesa->status = 3;
+                $order->type = $data['type'];
+                $order->total += $taxa->price;
+            }
+
+            if((int) $data['type_ant'] == 0 && (int)$data['type'] == 2)
+            {
+                DB::update('update order_items set ativo = ? where order_id = ? and product_id = ?',['N',$order->id,58]);
+                $mesa->status = 3;
+                $order->type = $data['type'];
+                $order->total -= $taxa->price;
+            }
+
+           /* if((int)$data['type'] == 1 && (int)$data['mesa_id'] != (int)$data['mesa_id_ant'] && (int) $data['type_ant'] == 0)
+            {
+
+                $order->observacao .= ' teste if 1';
+                if($this->itemRepository->findWhere(['product_id'=>58,'order_id'=>$order->id]))
+                {
+
+                    $order->observacao .= ' teste if';
+                    $id = 58;
+                    $order_id = $order->id;
+                    $item = $this->itemRepository->scopeQuery(function($query) use($id,$order_id){
+                        return $query->where('product_id',$id)
+                            ->where('order_id',$order_id);
+                    })->all();
+                    DB::update('update order_items set ativo = ? where order_id = ? and product_id = ?',['N',$order->id,58]);
+                    $order->total -= $taxa->price;
+                }
+
+                $order->type = (int)$data['type'];
+                $order->mesa_id = $data['mesa_id'];
+                $mesa->status = 0;
+                $this->mesaRepository->update(['status'=>1],(int) $data['mesa_id']);
+            }
+
+            if((int)$data['type'] == 1 && (int)$data['mesa_id'] != (int)$data['mesa_id_ant'] && (int) $data['type_ant'] == 2)
+            {
+
+                $order->observacao .= ' teste if 2';
+                if($this->itemRepository->findWhere(['product_id'=>58,'order_id'=>$order->id]))
+                {
+
+                    $order->observacao .= ' teste if';
+                    $id = 58;
+                    $order_id = $order->id;
+                    $item = $this->itemRepository->scopeQuery(function($query) use($id,$order_id){
+                        return $query->where('product_id',$id)
+                            ->where('order_id',$order_id);
+                    })->all();
+                    DB::update('update order_items set ativo = ? where order_id = ? and product_id = ?',['N',$order->id,58]);
+                }
+
+                $order->type = (int)$data['type'];
+                $order->mesa_id = $data['mesa_id'];
+                $mesa->status = 0;
+                $this->mesaRepository->update(['status'=>1],(int) $data['mesa_id']);
+            }
+*/
+
+        }
         switch ((int)$data['status']){
             case 1:
                 $order->save();
@@ -171,6 +266,7 @@ class OrderService{
             }else {
                 $order->paymentOrders()->create($data);
 
+                $order->user_update = $data['user_create'];
                 if ($order->total > ($data['total_pago'] + $data['desconto'] + $order->paid_now)) {
                     $order->status = 4;
                 } else {
@@ -269,16 +365,18 @@ class OrderService{
 
         $complments = $this->complementItemRepository->findWhere(['order_item_id'=>$item->id]);
 
-        foreach ($complments as $c)
+/*        foreach ($complments as $c)
         {
             $this->complementItemRepository->delete($c->id);
         }
-
+*/
         $order = $this->orderRepository->find($item->order_id);
 
         $order->total -= $item->subtotal;
 
-        $this->itemRepository->delete($item->id);
+        $item->ativo = 'N';
+
+        $item->save();
 
         $order->save();
 

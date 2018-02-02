@@ -94,6 +94,7 @@ class AdminCheckoutController extends Controller
     public function store(CheckoutRequest $request){
         $user = \Auth::guard('api')->user();
         $data = $request->all();
+        $data['user_create'] = $user->email;
         $o = $this->orderService->create($data);
 
         $this->printer($o->id);
@@ -150,7 +151,7 @@ class AdminCheckoutController extends Controller
         $data['acrescimo'] = $request->get('acrescimo');
         $data['total_original'] = $request->get('total_original');
         $data['payment_types_id'] = $request->get('payment_types_id');
-
+        $data['user_create'] = $user->email;
         $o = $this->orderService->pagyment($id,$data);
 
         if($o->id)
@@ -236,7 +237,7 @@ class AdminCheckoutController extends Controller
         $user = \Auth::guard('api')->user();
 
         $data = $request->all();
-
+        $data['user_update'] = $user->email;
         $result = $this->orderService->addItem($data);
 
         if($result->id)
@@ -262,7 +263,7 @@ class AdminCheckoutController extends Controller
         $user = \Auth::guard('api')->user();
 
         $data = $request->all();
-
+        $data['user_update'] = $user->email;
         //return $data;
         $result = $this->orderService->addComplement($data);
 
@@ -287,7 +288,7 @@ class AdminCheckoutController extends Controller
         $user = \Auth::guard('api')->user();
 
         $data = $request->all();
-
+        $data['user_update'] = $user->email;
         $result = $this->orderService->addHistorico($data);
 
         if($result->id)
@@ -310,7 +311,7 @@ class AdminCheckoutController extends Controller
         $user = \Auth::guard('api')->user();
 
         $data = $request->all();
-
+        $data['user_update'] = $user->email;
         $this->orderService->updateStatus($data,$id);
 
         if($id)
@@ -405,7 +406,7 @@ class AdminCheckoutController extends Controller
                                 <h5 class='fonte'>---------------------------------------------------------------------</h5>
                                 ";
         }else{
-            $cliente = "<h5 class='fonte'>---------------------------------------------------------------------</h5>";
+            $cliente = "";
         }
         $pdf->loadHTML("<html>
                             <head>
@@ -537,7 +538,7 @@ class AdminCheckoutController extends Controller
                             <head>
                                 <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>
                                 <style>
-                                    .fonte{
+                                    ..fonte{
                                         font-weight: 300;
                                     }
                                     .padding{
@@ -546,10 +547,6 @@ class AdminCheckoutController extends Controller
                                         padding-bottom: 0;
                                         padding-top: 0;
                                         margin-left: 7px;
-                                    }
-                                    .center{
-                                        position: fixed;
-                                        margin-left: 200px;
                                     }
                                     .produto{
                                         font-weight: 400;
@@ -587,7 +584,7 @@ class AdminCheckoutController extends Controller
                                     <h5 class='fonte'>TOTAL DE ITENS: $contador</h5>
                                     <h5 class='fonte total'>TOTAL DA COMPRA: R$ $order->total</h5>
                                     <h5 class='fonte'>---------------------------------------------------------------------</h5>
-                                    <h5 class='fonte'>$order->observacao</h5>
+                                    <h5 class='fonte' style='word-wrap: normal'>$order->observacao</h5>
                                     <h5 class='fonte'>$order->troco</h5>
                                     <h5 class='fonte'>$taxa</h5>
                                 </div>
@@ -600,6 +597,7 @@ class AdminCheckoutController extends Controller
                                 <style>
                                     .fonte{
                                         font-weight: 300;
+                                        word-wrap:  normal;
                                     }
                                     .padding{
                                         padding-left: 10px;
@@ -607,10 +605,6 @@ class AdminCheckoutController extends Controller
                                         padding-bottom: 0;
                                         padding-top: 0;
                                         margin-left: 7px;
-                                    }
-                                    .center{
-                                        position: fixed;
-                                        margin-left: 200px;
                                     }
                                     .produto{
                                         font-weight: 400;
@@ -628,6 +622,11 @@ class AdminCheckoutController extends Controller
                                     .border{
                                          border-bottom: 1px solid #c2cfd6;;
                                     }
+                                    .obs{                                                                       
+                                        width: 11em; 
+                                        word-wrap: break-word;
+                                        font-size: 12px;
+                                    }
                                 </style>
                             </head>
                             <body>
@@ -642,7 +641,7 @@ class AdminCheckoutController extends Controller
                                     <h5 class='fonte'>TOTAL DE ITENS: $contador</h5>
                                     <h5 class='fonte total'>TOTAL DA COMPRA: R$ $order->total</h5>
                                     <h5 class='fonte'>---------------------------------------------------------------------</h5>
-                                    <h5 class='fonte'>$order->observacao</h5>
+                                    <div class='fonte obs'><p>$order->observacao</p></div>
                                     <h5 class='fonte'>$taxa</h5>
                                  </div>
                             </body>
