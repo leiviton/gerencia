@@ -692,7 +692,7 @@ class AdminCheckoutController extends Controller
                 }
 
                 $produtos .= "<tr class='border'>
-                            <td class='fonte produto border'>" . $value->product->name . $com . "<br/>".$value->historico."</td>
+                            <td class='fonte produto border produto2'>" . $value->product->name . $com . "<br/>".$value->historico."</td>
                             <td class='fonte padding border produto'>" . $value->qtd . "</td>
                             <td class='price padding border'> R$" . $value->price . "</td>
                             </tr>";
@@ -743,8 +743,13 @@ class AdminCheckoutController extends Controller
                                         margin-left: 200px;
                                     }
                                     .produto{
-                                        font-weight: 400;
-                                        font-size: 20px;
+                                        font-weight: 300;
+                                        font-size: 18px;
+                                        
+                                    }
+                                    .produto2{                                   
+                                        word-wrap: break-word;
+                                        width: 8em;
                                     }
                                     .total{
                                         font-weight: bold;
@@ -810,8 +815,13 @@ class AdminCheckoutController extends Controller
                                         margin-left: 7px;
                                     }
                                     .produto{
-                                        font-weight: 400;
-                                        font-size: 20px;
+                                        font-weight: 300;
+                                        font-size: 18px;
+                                        
+                                    }
+                                    .produto2{                                   
+                                        word-wrap: break-word;
+                                        width: 8em;
                                     }
                                     .total{
                                         font-weight: bold;
