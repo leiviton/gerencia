@@ -609,7 +609,7 @@ class AdminCheckoutController extends Controller
                                     }
                                     .produto{
                                         font-weight: 400;
-                                        font-size: 20px;
+                                        font-size: 18px;
                                     }
                                     .total{
                                         font-weight: bold;
@@ -635,7 +635,8 @@ class AdminCheckoutController extends Controller
                                 <div class='center'>
                                     <h5 class='fonte'>---------------------------------------------------------------------</h5>
                                     <h5 class='fonte produto'>Pedido: $order->id | " . $order->mesa->name . "</h5>
-                                    <h5 class='fonte'>Data: $data | Hora: $hora</h5>                              
+                                    <h5 class='fonte'>Data: $data</h5>  
+                                    <h5 class='fonte'>Hora: $hora</h5>                            
                                     <h5 class='fonte'>---------------------------------------------------------------------</h5>
                                     <h5 class='fonte'>ITENS:</h5>
                                     $table
