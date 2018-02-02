@@ -762,6 +762,7 @@ class AdminCheckoutController extends Controller
                                         font-size: 16px;
                                         word-wrap: break-word;
                                         width: 20em;
+                                        text-transform: capitalize;
                                     }
                                 </style>
                             </head>
@@ -826,6 +827,7 @@ class AdminCheckoutController extends Controller
                                         font-size: 16px;
                                         word-wrap: break-word;
                                         width: 20em;
+                                        text-transform: capitalize;
                                     }
                                     
                                 </style>
