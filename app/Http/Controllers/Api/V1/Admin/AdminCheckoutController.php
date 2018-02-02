@@ -767,7 +767,7 @@ class AdminCheckoutController extends Controller
                                         font-weight: bold;
                                         font-size: 16px;
                                         word-wrap: break-word;
-                                        width: 20em;
+                                        width: 16em;
                                         text-transform: capitalize;
                                     }
                                 </style>
@@ -840,7 +840,7 @@ class AdminCheckoutController extends Controller
                                         font-weight: bold;
                                         font-size: 16px;
                                         word-wrap: break-word;
-                                        width: 20em;
+                                        width: 16em;
                                         text-transform: capitalize;
                                     }
                                     .data{
