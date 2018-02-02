@@ -729,7 +729,7 @@ class AdminCheckoutController extends Controller
                                         font-weight: 300;
                                     }
                                     .padding{
-                                        padding-left: 2px;
+                                        padding-left: 10px;
                                         padding-right: 10px;
                                         padding-bottom: 0;
                                         padding-top: 0;
@@ -739,6 +739,9 @@ class AdminCheckoutController extends Controller
                                         font-weight: 200;
                                         font-size: 15px;
                                         
+                                    }
+                                    .price{
+                                        margin-left: -20px;
                                     }
                                     .produto2{                                   
                                         word-wrap: break-word;
@@ -768,9 +771,6 @@ class AdminCheckoutController extends Controller
                                     .data{
                                         font-weight: bold;
                                         font-size: 10px;
-                                    }
-                                    .price{
-                                    margin-left: -20px;
                                     }
                                 </style>
                             </head>
