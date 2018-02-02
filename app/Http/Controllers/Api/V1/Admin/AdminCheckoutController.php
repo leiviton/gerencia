@@ -790,8 +790,8 @@ class AdminCheckoutController extends Controller
                                     <h5 class='fonte total'>TOTAL DA COMPRA: R$ $order->total</h5>
                                     <h5 class='fonte'>---------------------------------------------------------------------</h5>
                                     <p class='obs'>$order->observacao</p>
-                                    <h5 class='fonte'>$order->troco</h5>
-                                    <h5 class='fonte'>$taxa</h5>
+                                    <h5 class='obs'>$order->troco</h5>
+                                    <h5 class='obs'>$taxa</h5>
                                 </div>
                             </body>
                         </html>")->save(public_path() . '/printer/' . $order->id . '.pdf');
@@ -857,7 +857,7 @@ class AdminCheckoutController extends Controller
                                 <h5 class='fonte total'>TOTAL DA COMPRA: R$ $order->total</h5>
                                 <h5 class='fonte'>---------------------------------------------------------------------</h5>
                                 <p class='obs'>$order->observacao</p>
-                                <h5 class='fonte'>$taxa</h5>
+                                <h5 class='obs'>$taxa</h5>
                             </body>
                         </html>")->save(public_path() . '/printer/' . $order->id . '.pdf');
         }
