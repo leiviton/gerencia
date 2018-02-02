@@ -736,13 +736,14 @@ class AdminCheckoutController extends Controller
                                         margin-left: 7px;
                                     }
                                     .produto{
-                                        font-weight: 300;
-                                        font-size: 18px;
+                                        font-weight: 200;
+                                        font-size: 15px;
                                         
                                     }
                                     .produto2{                                   
                                         word-wrap: break-word;
-                                        width: 8em;
+                                        width: 8em;                                       
+                                        text-transform: capitalize;
                                     }
                                     .total{
                                         font-weight: bold;
@@ -811,13 +812,14 @@ class AdminCheckoutController extends Controller
                                         margin-left: 7px;
                                     }
                                     .produto{
-                                        font-weight: 300;
-                                        font-size: 18px;
+                                        font-weight: 200;
+                                        font-size: 15px;
                                         
                                     }
                                     .produto2{                                   
                                         word-wrap: break-word;
-                                        width: 8em;
+                                        width: 8em;                                       
+                                        text-transform: capitalize;
                                     }
                                     .total{
                                         font-weight: bold;
