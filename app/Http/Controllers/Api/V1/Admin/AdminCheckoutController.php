@@ -708,9 +708,9 @@ class AdminCheckoutController extends Controller
         $table = "<table>
                     <thead>
                       <tr>
-                        <th class='fonte padding produto obs'>Produto</th>
+                        <th class='fonte padding produto'>Produto</th>
                         <th class='fonte padding produto'>Qtd</th>                     
-                        <th class='price padding2'>Vr.Uni</th>
+                        <th class='price padding'>Vr.Uni</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -729,20 +729,12 @@ class AdminCheckoutController extends Controller
                                         font-weight: 300;
                                     }
                                     .padding{
-                                        padding-left: 10px;
+                                        padding-left: 2px;
                                         padding-right: 10px;
                                         padding-bottom: 0;
                                         padding-top: 0;
                                         margin-left: 7px;
                                     }
-                                    .padding2{
-                                        padding-left: 0;
-                                        padding-right: 10px;
-                                        padding-bottom: 0;
-                                        padding-top: 0;
-                                        margin-left: 7px;
-                                    }
-                                    
                                     .produto{
                                         font-weight: 200;
                                         font-size: 15px;
@@ -819,14 +811,6 @@ class AdminCheckoutController extends Controller
                                         padding-top: 0;
                                         margin-left: 7px;
                                     }
-                                    .padding2{
-                                        padding-left: 0;
-                                        padding-right: 10px;
-                                        padding-bottom: 0;
-                                        padding-top: 0;
-                                        margin-left: 7px;
-                                    }
-                                    
                                     .produto{
                                         font-weight: 200;
                                         font-size: 15px;
