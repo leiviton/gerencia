@@ -823,7 +823,7 @@ class AdminCheckoutController extends Controller
                                     }
                                     .produto2{                                   
                                         word-wrap: break-word;
-                                        width: 100px;                            
+                                        width: 8em;                                       
                                         text-transform: capitalize;
                                     }
                                     .total{
