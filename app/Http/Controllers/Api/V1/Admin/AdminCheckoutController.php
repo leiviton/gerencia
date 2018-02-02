@@ -710,7 +710,7 @@ class AdminCheckoutController extends Controller
                       <tr>
                         <th class='fonte padding produto obs'>Produto</th>
                         <th class='fonte padding produto'>Qtd</th>                     
-                        <th class='price'>Vr.Uni</th>
+                        <th class='price padding2'>Vr.Uni</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -735,6 +735,14 @@ class AdminCheckoutController extends Controller
                                         padding-top: 0;
                                         margin-left: 7px;
                                     }
+                                    .padding2{
+                                        padding-left: 0;
+                                        padding-right: 10px;
+                                        padding-bottom: 0;
+                                        padding-top: 0;
+                                        margin-left: 7px;
+                                    }
+                                    
                                     .produto{
                                         font-weight: 200;
                                         font-size: 15px;
