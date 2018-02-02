@@ -822,10 +822,10 @@ class AdminCheckoutController extends Controller
                                          border-bottom: 1px solid #c2cfd6;;
                                     }
                                     .obs{
-                                        font-weight: 500;
-                                        font-size: 13px;
+                                        font-weight: bold;
+                                        font-size: 16px;
                                         word-wrap: break-word;
-                                        width: 16em;
+                                        width: 20em;
                                     }
                                     
                                 </style>
