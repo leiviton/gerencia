@@ -708,9 +708,9 @@ class AdminCheckoutController extends Controller
         $table = "<table>
                     <thead>
                       <tr>
-                        <th class='fonte padding produto'>Produto</th>
+                        <th class='fonte padding produto obs'>Produto</th>
                         <th class='fonte padding produto'>Qtd</th>                     
-                        <th class='price obs'>Vr.Uni</th>
+                        <th class='price'>Vr.Uni</th>
                       </tr>
                     </thead>
                     <tbody>
