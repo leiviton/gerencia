@@ -336,6 +336,32 @@ class AdminCheckoutController extends Controller
             ->find($id);
     }
 
+    public function cancelOrder($id,Request $request)
+    {
+        $user = \Auth::guard('api')->user();
+
+        $data = $request->all();
+        $data['user_update'] = $user->email;
+        $this->orderService->cancel($data,$id);
+
+        if($id)
+        {
+            $audit = [
+                'type'=>'update',
+                'user_id'=>$user->id,
+                'user' => $user->email,
+                'entity' => 'Pedido',
+                'action' => 'Cancelou o pedido: '.$id.' - Motivo:'.$data['motivo_cancelamento']
+            ];
+
+            $this->auditRepository->create($audit);
+        }
+
+        return $this->repository
+            ->skipPresenter(false)
+            ->find($id);
+
+    }
     public function printerNewItem($id)
     {
         $order = $this->repository->find($id);
@@ -371,7 +397,7 @@ class AdminCheckoutController extends Controller
                 }
 
                 $produtos .= " <tr class='border'>
-                            <td class='fonte padding produto'>" . $value->product->name . $com . "<br/>".$value->historico."</td>
+                            <td class='fonte padding produto produto2'>" . $value->product->name . $com . "<br/>".$value->historico."</td>
                             <td class='fonte padding produto'>" . $value->qtd . "</td>
                             <td class='fonte padding produto'> R$" . $value->price . "</td>
                             </tr>
@@ -434,6 +460,15 @@ class AdminCheckoutController extends Controller
                                         font-weight: 400;
                                         font-size: 20px;
                                     }
+                                    .price{
+                                        margin-left: -20px;
+                                    }
+                                    .produto2{                                   
+                                        word-wrap: break-word;
+                                        width: 6em;                                       
+                                        text-transform: capitalize;
+                                    }
+                                    
                                     .total{
                                         font-weight: bold;
                                         font-size: 18px;
@@ -508,7 +543,7 @@ class AdminCheckoutController extends Controller
                 }else{
                     $com = '';
                 }$produtos .= "<tr class='border'>
-                            <td class='fonte padding produto'>" . $value->product->name . $com . "<br/>".$value->historico."</td>
+                            <td class='fonte padding produto produto2'>" . $value->product->name . $com . "<br/>".$value->historico."</td>
                             <td class='fonte padding produto'>" . $value->qtd . "</td>
                             <td class='price padding produto'> R$" . $value->price . "</td>
                             </tr>
@@ -552,9 +587,18 @@ class AdminCheckoutController extends Controller
                                         padding-top: 0;
                                         margin-left: 7px;
                                     }
+                                    .price{
+                                        margin-left: -20px;
+                                    }
+                                    .produto2{                                   
+                                        word-wrap: break-word;
+                                        width: 6em;                                       
+                                        text-transform: capitalize;
+                                    }
+                                    
                                     .produto{
                                         font-weight: 400;
-                                        font-size: 20px;
+                                        font-size: 15px;
                                     }
                                     .total{
                                         font-weight: bold;
@@ -615,6 +659,15 @@ class AdminCheckoutController extends Controller
                                         font-weight: 400;
                                         font-size: 18px;
                                     }
+                                    .price{
+                                        margin-left: -20px;
+                                    }
+                                    .produto2{                                   
+                                        word-wrap: break-word;
+                                        width: 6em;                                       
+                                        text-transform: capitalize;
+                                    }
+                                    
                                     .total{
                                         font-weight: bold;
                                         font-size: 18px;
@@ -681,7 +734,7 @@ class AdminCheckoutController extends Controller
 
         foreach ($items as $value)
         {
-            if($value->product->id != 58) {
+            if($value->product->id != 58 || $value->product->ativo != 'N') {
                  $com = '';
                  $id = $value->id;
                  $complements = $this->complementItemRepository->scopeQuery(function($query) use($id){
@@ -698,7 +751,7 @@ class AdminCheckoutController extends Controller
                 $produtos .= "<tr class='border'>
                             <td class='fonte produto border produto2'>" . $value->product->name . $com . "<br/>".$value->historico."</td>
                             <td class='fonte padding border produto'>" . $value->qtd . "</td>
-                            <td class='price padding border'> R$" . $value->subtotal . "</td>
+                            <td class='price padding border'>$" . $value->subtotal . "</td>
                             </tr>";
                 $this->itemRepository->update(['impresso' => 'S'], $value->id);
                 $contador += $value->qtd;
@@ -749,7 +802,7 @@ class AdminCheckoutController extends Controller
                                     }
                                     .produto2{                                   
                                         word-wrap: break-word;
-                                        width: 7em;                                       
+                                        width: 6em;                                       
                                         text-transform: capitalize;
                                     }
                                     .total{
@@ -828,7 +881,7 @@ class AdminCheckoutController extends Controller
                                     }
                                     .produto2{                                   
                                         word-wrap: break-word;
-                                        width: 7em;                                       
+                                        width: 6em;                                       
                                         text-transform: capitalize;
                                     }
                                     .total{

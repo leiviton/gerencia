@@ -46,8 +46,6 @@
                     <td class="text-center" *ngIf="tamanho > 0">{{ o.previsao }} </td>
                     <td class="text-center" *ngIf="tamanho > 0">{{ o.mesa.data.name }} </td>
                     <td class="text-center">
-                      <a class="btn btn-link text-alert pagamento" *ngIf="o.status == 3" [routerLink]="['payment/'+ o.id]" tooltip="Ver pagamentos"><i class="fa fa-money"></i></a>
-                      <a class="btn btn-link text-success pagamento" *ngIf="o.status != 3" [routerLink]="['payment/'+ o.id]" tooltip="Pagar pedido"><i class="fa fa-dollar"></i></a>
                       <a class="btn btn-link pagamento" *ngIf="o.status != 3" [routerLink]="['printer/'+ o.id]+'/S'" tooltip="Imprimir pedido"><i class="fa fa-print"></i></a>
                     </td>
                   </tr>

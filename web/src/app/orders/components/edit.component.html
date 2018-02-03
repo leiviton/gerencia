@@ -130,10 +130,11 @@
             </div>
             <div class="modal-footer cadastro">
                 <div class="modal-button">
+                    <button class="btn btn-cancel text-left" type="button" (click)="close()"><i class="fa fa-arrow-circle-left"></i> Sair (ESC)</button>
+                    <button class="btn btn-danger" (click)="showCancelamento()"><i class="fa fa-power-off"></i> Cancelar pedido</button>
                     <button *ngIf="order.type != 1" class="btn btn-default" (click)="habilitarEdicao()"><i class="fa fa-pencil"></i> Editar endereço</button>
                     <button class="btn btn-primary" (click)="save()"><i class="fa fa-print"></i> Imprimir (F7)</button>
                     <button class="btn btn-success" (click)="update()"><i class="fa fa-save"></i> Salvar(F9)</button>
-                    <button class="btn btn-danger text-left" type="button" (click)="close()"><i class="fa fa-arrow-circle-left"></i> Sair (ESC)</button>
                     <button class="btn btn-info text-left" type="button" (click)="pagar()" tooltip="Pagamento"><i class="fa fa-money"></i> Finalizar</button>
                 </div>
             </div>
@@ -198,6 +199,32 @@
                     <div class="modal-button">
                         <button class="btn btn-info" (click)="addHistorico()"><i class="fa fa-save"></i> Salvar</button>
                         <button class="btn btn-danger text-left" type="button" (click)="closeInformacao()"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
+                    </div>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+    </div>
+    <!-- /.modal-dialog -->
+    <div class="modal fade modal_novo" id="cancelamento" role="dialog" aria-hidden="true" aria-labelledby="myModalLabell" style="">
+        <div class="modal-dialog modal-sm modal-info" role="document">
+            <div class="modal-content">
+                <div class="modal-header novo text-center">
+                    <h5 class="modal-title">Motivo Cancelamento</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <div class="col-md-12">
+                                <textarea id="cancel" name="motivo" [(ngModel)]="motivo" rows="6" class="form-control" placeholder="Digite aqui..." ></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer cadastro">
+                    <div class="modal-button">
+                        <button class="btn btn-info" (click)="cancelarPedido()"><i class="fa fa-save"></i> Cancelar Pedido</button>
+                        <button class="btn btn-danger text-left" type="button" (click)="closeCancelar()"><i class="fa fa-arrow-circle-left"></i> Voltar</button>
                     </div>
                 </div>
             </div>

@@ -52,7 +52,7 @@ export class OrdersCancelComponent implements OnInit {
     edit(id)
     {
         this.cor = true;
-        this.router.navigate(['/close/edit/'+ id]);
+        this.router.navigate(['/orders/cancel/edit/'+ id]);
     }
 
     new()

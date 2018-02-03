@@ -19,19 +19,9 @@ export class EditComponent implements OnInit {
         ,private toasterService: ToasterService)
     {
         document.onkeydown = ((e) =>{
-            if(e.keyCode  == 120)
-            {
-                this.update();
-            }
-
             if(e.keyCode == 27)
             {
                 this.close();
-            }
-
-            if(e.keyCode == 118)
-            {
-                this.save();
             }
         });
     }
@@ -189,12 +179,12 @@ export class EditComponent implements OnInit {
 
     close(){
         jQuery('#successModal').on('show.bs.modal').show().removeClass('show');
-        this.router.navigate(['/close']);
+        this.router.navigate(['/orders/cancel']);
     }
 
     save(){
             jQuery('#successModal').on('show.bs.modal').show().removeClass('show');
-            this.router.navigate(['/close/printer/'+ this.order.id+'/N']);
+            this.router.navigate(['/orders/cancel/printer/'+ this.order.id+'/N']);
     }
 
     habilitarEdicao()

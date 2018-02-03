@@ -44,6 +44,7 @@ Route::group(['prefix'=>'api/v1','middleware' => 'auth:api'],function () {
        Route::put('historico/{id}', 'AdminCheckoutController@addHistorico');
        Route::post('complements/item','AdminCheckoutController@addComplent');
        Route::delete('remove/item/{id}','AdminCheckoutController@excluirItem');
+       Route::put('cancelar/pedido/{id}','AdminCheckoutController@cancelOrder');
        /*mesas*/
        Route::get('mesas', 'MesaController@index');
         Route::get('mesas/all', 'MesaController@all');

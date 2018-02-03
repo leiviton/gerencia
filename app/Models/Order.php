@@ -23,7 +23,8 @@ class Order extends Model implements Transformable
         'observacao',
         'link_printer',
         'user_create',
-        'user_update'
+        'user_update',
+        'motivo_cancelamento'
     ];
 
     public function items(){

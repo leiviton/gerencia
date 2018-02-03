@@ -69,14 +69,14 @@
                                     </thead>
                                     <tbody style="height: 170px; overflow: auto">
                                     <tr class="th-table" *ngFor="let p of products.data; let i = index">
-                                        <td class="text-center">{{ p.product.data.id }}</td>
-                                        <td>{{ p.product.data.name }}
+                                        <td class="text-center" *ngIf="p.ativo == 'S'" >{{ p.product.data.id }}</td>
+                                        <td *ngIf="p.ativo == 'S'">{{ p.product.data.name }}
                                             <p *ngFor="let c of p.complement.data" style="font-size: 10px; margin-bottom: 0;"> {{ c.complement.data.name }}: {{ c.price | currency:'BRL':true }}</p>
                                             <p style="font-size: 10px; margin-bottom: 0;">{{ p.historico }}</p>
                                         </td>
-                                        <td class="text-center">{{ p.price | currency:'BRL':true }}</td>
-                                        <td class="text-center">{{ p.qtd }}</td>
-                                        <td class="text-center">{{ p.subtotal | currency:'BRL':true }}</td>
+                                        <td class="text-center" *ngIf="p.ativo == 'S'">{{ p.price | currency:'BRL':true }}</td>
+                                        <td class="text-center" *ngIf="p.ativo == 'S'">{{ p.qtd }}</td>
+                                        <td class="text-center" *ngIf="p.ativo == 'S'">{{ p.subtotal | currency:'BRL':true }}</td>
                                     </tr>
                                     </tbody>
                                 </table>

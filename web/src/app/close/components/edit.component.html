@@ -82,14 +82,14 @@
                                 </thead>
                                 <tbody>
                                 <tr *ngFor="let i of products.data">
-                                    <td>{{ i.product.data.id }}</td>
-                                    <td>{{ i.product.data.name }}
+                                    <td *ngIf="i.ativo == 'S'">{{ i.product.data.id }}</td>
+                                    <td *ngIf="i.ativo == 'S'">{{ i.product.data.name }}
                                         <p *ngFor="let c of i.complement.data" style="font-size: 10px; margin-bottom: 0;"> {{ c.complement.data.name }}: {{ c.price | currency:'BRL':true }}</p>
                                         <p style="font-size: 10px; margin-bottom: 0;">{{ i.historico }}</p>
                                     </td>
-                                    <td>{{ i.product.data.price | currency:'BRL':true}}</td>
-                                    <td>{{ i.qtd }}</td>
-                                    <td>
+                                    <td *ngIf="i.ativo == 'S'">{{ i.product.data.price | currency:'BRL':true}}</td>
+                                    <td *ngIf="i.ativo == 'S'">{{ i.qtd }}</td>
+                                    <td *ngIf="i.ativo == 'S'">
                                         {{ i.subtotal | currency:'BRL':true }}
                                     </td>
                                 </tr>

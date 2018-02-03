@@ -88,6 +88,7 @@ export class EditComponent implements OnInit {
     }];
     typeAnt = '';
 
+    motivo = '';
     ngOnInit(): void {
         this.showLoading();
         this.httpService.setAccessToken();
@@ -136,6 +137,8 @@ export class EditComponent implements OnInit {
 
         jQuery('#pesquisa').hide();
 
+        this.closeCancelar();
+
         this.closeComplement();
 
         this.closeInformacao();
@@ -152,6 +155,7 @@ export class EditComponent implements OnInit {
             'type': this.order.type,
             'type_ant': this.typeAnt
         };
+
         this.httpService.builder('order')
             .update(this.order.id, order)
             .then((res) => {
@@ -185,6 +189,27 @@ export class EditComponent implements OnInit {
                 this.hideLoading();
                 this.toasterService.pop('success', 'Sucesso','Pedido '+this.order.id+' com sucesso!')
             });
+    }
+
+    cancelarPedido()
+    {
+        this.showLoading();
+        let data = {
+            'motivo_cancelamento':this.motivo
+        };
+        if(this.motivo != '' && this.motivo != null && this.motivo.length > 5) {
+            this.httpService.builder('cancelar/pedido')
+                .update(this.order.id, data)
+                .then((res) => {
+                    this.httpService.eventEmitter.emit();
+                    this.hideLoading();
+                    this.toasterService.pop('success', 'Cancelado', 'Pedido: ' + res.data.id + ' canelado com sucesso');
+                    this.close();
+                })
+        }else{
+            this.hideLoading();
+            this.toasterService.pop('error', 'Cancelado', 'Motivo do cancelamento não pode ser vazio e menor que 5 caracteres');
+        }
     }
 
     buscar()
@@ -392,6 +417,12 @@ export class EditComponent implements OnInit {
         this.idItem = i;
     }
 
+    showCancelamento()
+    {
+        jQuery('#cancelamento').show().addClass('show').css('z-index',1050 + 60);
+        jQuery('#new_order').css('z-index', 1040);
+    }
+
     showComplement(i)
     {
         jQuery('#complement').show().addClass('show').css('z-index',1050 + 60);
@@ -413,6 +444,11 @@ export class EditComponent implements OnInit {
     closeMd()
     {
         jQuery('#pesquisa').hide();
+    }
+
+    closeCancelar()
+    {
+        jQuery('#cancelamento').hide();
     }
 
     closeInformacao()

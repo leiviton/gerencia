@@ -383,5 +383,18 @@ class OrderService{
         return $order;
 
     }
+
+    public function cancel($data, $id)
+    {
+        $order = $this->orderRepository->find($id);
+
+        $order->motivo_cancelamento = $data['motivo_cancelamento'];
+        $order->user_update = $data['user_update'];
+        $order->status = 5;
+
+        $order->save();
+
+        return $order;
+    }
 }
 

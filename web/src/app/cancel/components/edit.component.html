@@ -22,7 +22,7 @@
                             </select>
                             <label for="status" class="label col-md-2">Status: </label>
                             <select id="status" name="staus" class="form-control col-md-2" [(ngModel)]="order.status" disabled>
-                                <option value="3">Fechada</option>
+                                <option value="5">Cancelada</option>
                             </select>
 
                         </div>
@@ -82,14 +82,14 @@
                                 </thead>
                                 <tbody>
                                 <tr *ngFor="let i of products.data">
-                                    <td>{{ i.product.data.id }}</td>
-                                    <td>{{ i.product.data.name }}
+                                    <td *ngIf="i.ativo == 'S'">{{ i.product.data.id }}</td>
+                                    <td *ngIf="i.ativo == 'S'">{{ i.product.data.name }}
                                         <p *ngFor="let c of i.complement.data" style="font-size: 10px; margin-bottom: 0;"> {{ c.complement.data.name }}: {{ c.price | currency:'BRL':true }}</p>
                                         <p style="font-size: 10px; margin-bottom: 0;">{{ i.historico }}</p>
                                     </td>
-                                    <td>{{ i.product.data.price | currency:'BRL':true}}</td>
-                                    <td>{{ i.qtd }}</td>
-                                    <td>
+                                    <td *ngIf="i.ativo == 'S'">{{ i.product.data.price | currency:'BRL':true}}</td>
+                                    <td *ngIf="i.ativo == 'S'">{{ i.qtd }}</td>
+                                    <td *ngIf="i.ativo == 'S'">
                                         {{ i.subtotal | currency:'BRL':true }}
                                     </td>
                                 </tr>
@@ -98,13 +98,14 @@
                         </div>
                         <hr>
                         <div class="col-md-12 text-center alert alert-success total-pagamento"><p class="qtd">TOTAL: {{ order.total | currency:'BRL':true }}</p></div>
+                        <div class="col-md-12 text-center alert alert-danger"><p class="qtd">Motivo Cancelamento: {{ order.motivo_cancelametno }}</p></div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer cadastro">
                 <div class="modal-button">
                     <button class="btn btn-primary" (click)="save()"><i class="fa fa-print"></i> Imprimir (F7)</button>
-                    <button class="btn btn-danger text-left" type="button" (click)="close()"><i class="fa fa-arrow-circle-left"></i> Cancelar (ESC)</button>
+                    <button class="btn btn-danger text-left" type="button" (click)="close()"><i class="fa fa-arrow-circle-left"></i> Sair (ESC)</button>
                 </div>
             </div>
         </div>
