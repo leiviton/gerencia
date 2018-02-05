@@ -231,6 +231,7 @@ class OrderService{
         try {
             $order = $this->orderRepository->find($id);
             $mesa = $this->mesaRepository->find($order->mesa->id);
+            $caixa = $this->caixaRepository->find(1);
             if($order->total == $order->paid_now)
             {
                 return $order;
@@ -253,8 +254,9 @@ class OrderService{
 
                 if($payment->paymentTypes->id == 1) {
                     $this->movimentoCaixaRepository->create(['tipo_movimento' => 'credito', 'valor' => $data['total_pago'], 'usuario' => $data['user_create'], 'payment_order_id' => $payment->id, 'caixa_id' => 1]);
-                    $this->caixaRepository->update(['saldo'=>$data['total_pago']],1);
+                    $caixa->saldo += $data['total_pago'];
                 }
+                $caixa->save();
                 $mesa->save();
                 $order->save();
             }

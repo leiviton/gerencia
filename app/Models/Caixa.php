@@ -10,7 +10,7 @@ class Caixa extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table = 'caixa';
+    protected $table = 'caixas';
     protected $fillable = [
         'name',
         'ativo',
