@@ -39,16 +39,29 @@ export class EditComponent implements OnInit {
             .subscribe(params => {
                 this.httpService.builder().view(params['id'],'client')
                     .then((res) => {
-                        this.client.id = res.data.id;
-                        this.client.name = res.data.name;
-                        this.client.phone = res.data.phone;
-                        this.client.email = res.data.user.data.email;
-                        this.client.address.address = res.data.addressClient.data.address;
-                        this.client.address.numero = res.data.addressClient.data.numero;
-                        this.client.address.bairro = res.data.addressClient.data.bairro;
-                        this.client.address.complemento = res.data.addressClient.data.complemento;
-                        this.client.address.city_id = res.data.addressClient.data.city.data.id;
-                        this.hideLoading();
+                        if(res.data.user){
+                            this.client.id = res.data.id;
+                            this.client.name = res.data.name;
+                            this.client.phone = res.data.phone;
+                            this.client.email = res.data.user.data.email;
+                            this.client.address.address = res.data.addressClient.data.address;
+                            this.client.address.numero = res.data.addressClient.data.numero;
+                            this.client.address.bairro = res.data.addressClient.data.bairro;
+                            this.client.address.complemento = res.data.addressClient.data.complemento;
+                            this.client.address.city_id = res.data.addressClient.data.city.data.id;
+                            this.hideLoading();
+                        }else{
+                            this.client.id = res.data.id;
+                            this.client.name = res.data.name;
+                            this.client.phone = res.data.phone;
+                            this.client.email = '';
+                            this.client.address.address = res.data.addressClient.data.address;
+                            this.client.address.numero = res.data.addressClient.data.numero;
+                            this.client.address.bairro = res.data.addressClient.data.bairro;
+                            this.client.address.complemento = res.data.addressClient.data.complemento;
+                            this.client.address.city_id = res.data.addressClient.data.city.data.id;
+                            this.hideLoading();
+                        }
                     });
             });
     }

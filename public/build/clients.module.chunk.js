@@ -277,16 +277,30 @@ var EditComponent = (function () {
             .subscribe(function (params) {
             _this.httpService.builder().view(params['id'], 'client')
                 .then(function (res) {
-                _this.client.id = res.data.id;
-                _this.client.name = res.data.name;
-                _this.client.phone = res.data.phone;
-                _this.client.email = res.data.user.data.email;
-                _this.client.address.address = res.data.addressClient.data.address;
-                _this.client.address.numero = res.data.addressClient.data.numero;
-                _this.client.address.bairro = res.data.addressClient.data.bairro;
-                _this.client.address.complemento = res.data.addressClient.data.complemento;
-                _this.client.address.city_id = res.data.addressClient.data.city.data.id;
-                _this.hideLoading();
+                if (res.data.user) {
+                    _this.client.id = res.data.id;
+                    _this.client.name = res.data.name;
+                    _this.client.phone = res.data.phone;
+                    _this.client.email = res.data.user.data.email;
+                    _this.client.address.address = res.data.addressClient.data.address;
+                    _this.client.address.numero = res.data.addressClient.data.numero;
+                    _this.client.address.bairro = res.data.addressClient.data.bairro;
+                    _this.client.address.complemento = res.data.addressClient.data.complemento;
+                    _this.client.address.city_id = res.data.addressClient.data.city.data.id;
+                    _this.hideLoading();
+                }
+                else {
+                    _this.client.id = res.data.id;
+                    _this.client.name = res.data.name;
+                    _this.client.phone = res.data.phone;
+                    _this.client.email = '';
+                    _this.client.address.address = res.data.addressClient.data.address;
+                    _this.client.address.numero = res.data.addressClient.data.numero;
+                    _this.client.address.bairro = res.data.addressClient.data.bairro;
+                    _this.client.address.complemento = res.data.addressClient.data.complemento;
+                    _this.client.address.city_id = res.data.addressClient.data.city.data.id;
+                    _this.hideLoading();
+                }
             });
         });
     };
