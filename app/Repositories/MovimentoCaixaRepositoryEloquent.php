@@ -14,7 +14,7 @@ use Pedidos\Validators\MovimentoCaixaValidator;
  */
 class MovimentoCaixaRepositoryEloquent extends BaseRepository implements MovimentoCaixaRepository
 {
-    protected $skipCriteria = true;
+    protected $skipPresenter = true;
     /**
      * Specify Model class name
      *

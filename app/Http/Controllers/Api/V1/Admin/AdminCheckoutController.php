@@ -449,7 +449,7 @@ class AdminCheckoutController extends Controller
                                 <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>
                                 <style>
                                     .fonte{
-                                        font-weight: 300;
+                                        font-weight: bold;
                                     }
                                     .padding{
                                         padding-left: 10px;
@@ -459,7 +459,7 @@ class AdminCheckoutController extends Controller
                                         margin-left: 7px;
                                     }
                                     .produto{
-                                        font-weight: 200;
+                                        font-weight: bold;
                                         font-size: 15px;
                                         
                                     }
@@ -498,15 +498,20 @@ class AdminCheckoutController extends Controller
                                     }
                                     .data{
                                         font-weight: bold;
-                                        font-size: 10px;
+                                        font-size: 16px;
+                                    }
+                                    .pedido{
+                                        font-weight: bold;
+                                        font-size: 22px;
                                     }
                                 </style>
                             </head>
                             <body>
                                 <div class='center'>
                                     <h5 class='fonte'>---------------------------------------------------------------------</h5>
-                                    <h5 class='fonte produto'>Pedido: $order->id | " . $order->mesa->name . "</h5>
-                                    <h5 class='data'>Data: $data |  Hora: $hora | Previsão: ".date('H:i:s',strtotime('+ 30 minutes',strtotime($hora)))."</h5>                              
+                                    <h5 class='fonte pedido'>Pedido: $order->id | " . $order->mesa->name . "</h5>
+                                    <h5 class='data'>Data: $data |  Hora: $hora</h5>
+                                    <h5 class='data'>Previsão: ".date('H:i:s',strtotime('+ 30 minutes',strtotime($hora)))."</h5>                              
                                     
                                     <h5 class='fonte'>---------------------------------------------------------------------</h5>
                                     <h5 class='fonte client'>Cliente: " . $order->client->name . "</h5>
@@ -532,8 +537,8 @@ class AdminCheckoutController extends Controller
                             <head>
                                 <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>
                                 <style>
-                                    .fonte{
-                                        font-weight: 300;
+                                     .fonte{
+                                        font-weight: bold;
                                     }
                                     .padding{
                                         padding-left: 10px;
@@ -543,7 +548,7 @@ class AdminCheckoutController extends Controller
                                         margin-left: 7px;
                                     }
                                     .produto{
-                                        font-weight: 200;
+                                        font-weight: bold;
                                         font-size: 15px;
                                         
                                     }
@@ -582,7 +587,11 @@ class AdminCheckoutController extends Controller
                                     }
                                     .data{
                                         font-weight: bold;
-                                        font-size: 10px;
+                                        font-size: 16px;
+                                    }
+                                    .pedido{
+                                        font-weight: bold;
+                                        font-size: 22px;
                                     }
                                 </style>
                             </head>
@@ -677,8 +686,8 @@ class AdminCheckoutController extends Controller
                             <head>
                                 <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>
                                 <style>
-                                    .fonte{
-                                        font-weight: 300;
+                                     .fonte{
+                                        font-weight: bold;
                                     }
                                     .padding{
                                         padding-left: 10px;
@@ -688,7 +697,7 @@ class AdminCheckoutController extends Controller
                                         margin-left: 7px;
                                     }
                                     .produto{
-                                        font-weight: 200;
+                                        font-weight: bold;
                                         font-size: 15px;
                                         
                                     }
@@ -720,16 +729,25 @@ class AdminCheckoutController extends Controller
                                         width: 16em;
                                         text-transform: capitalize;
                                     }
+                                    .client{
+                                        word-wrap: break-word;
+                                        width: 18em;
+                                        text-transform: capitalize;
+                                    }
                                     .data{
                                         font-weight: bold;
-                                        font-size: 10px;
+                                        font-size: 16px;
+                                    }
+                                    .pedido{
+                                        font-weight: bold;
+                                        font-size: 22px;
                                     }
                                 </style>
                             </head>
                             <body>
                                 <div class='center'>
                                     <h5 class='fonte'>---------------------------------------------------------------------</h5>
-                                    <h5 class='fonte produto'>Pedido: $order->id | " . $order->mesa->name . "</h5>
+                                    <h5 class='fonte pedido'>Pedido: $order->id | " . $order->mesa->name . "</h5>
                                     <h5 class='fonte data'>Data: $data | Hora: $hora</h5>                              
                                     <h5 class='fonte'>---------------------------------------------------------------------</h5>
                                     <h5 class='fonte'>Cliente: " . $order->client->name . "</h5>
@@ -756,8 +774,8 @@ class AdminCheckoutController extends Controller
                             <head>
                                 <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>
                                 <style>
-                                    .fonte{
-                                        font-weight: 300;
+                                 .fonte{
+                                        font-weight: bold;
                                     }
                                     .padding{
                                         padding-left: 10px;
@@ -767,7 +785,7 @@ class AdminCheckoutController extends Controller
                                         margin-left: 7px;
                                     }
                                     .produto{
-                                        font-weight: 200;
+                                        font-weight: bold;
                                         font-size: 15px;
                                         
                                     }
@@ -799,9 +817,18 @@ class AdminCheckoutController extends Controller
                                         width: 16em;
                                         text-transform: capitalize;
                                     }
+                                    .client{
+                                        word-wrap: break-word;
+                                        width: 18em;
+                                        text-transform: capitalize;
+                                    }
                                     .data{
                                         font-weight: bold;
-                                        font-size: 10px;
+                                        font-size: 16px;
+                                    }
+                                    .pedido{
+                                        font-weight: bold;
+                                        font-size: 22px;
                                     }
                                 </style>
                             </head>
@@ -899,8 +926,8 @@ class AdminCheckoutController extends Controller
                             <head>
                                 <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>
                                 <style>
-                                    .fonte{
-                                        font-weight: 300;
+                                     .fonte{
+                                        font-weight: bold;
                                     }
                                     .padding{
                                         padding-left: 10px;
@@ -910,7 +937,7 @@ class AdminCheckoutController extends Controller
                                         margin-left: 7px;
                                     }
                                     .produto{
-                                        font-weight: 200;
+                                        font-weight: bold;
                                         font-size: 15px;
                                         
                                     }
@@ -942,18 +969,27 @@ class AdminCheckoutController extends Controller
                                         width: 16em;
                                         text-transform: capitalize;
                                     }
+                                    .client{
+                                        word-wrap: break-word;
+                                        width: 18em;
+                                        text-transform: capitalize;
+                                    }
                                     .data{
                                         font-weight: bold;
-                                        font-size: 10px;
+                                        font-size: 16px;
+                                    }
+                                    .pedido{
+                                        font-weight: bold;
+                                        font-size: 22px;
                                     }
                                 </style>
                             </head>
                             <body>
                                 <div class='center'>
                                     <h5 class='fonte'>---------------------------------------------------------------------</h5>
-                                    <h5 class='fonte produto'>Pedido: $order->id | " . $order->mesa->name . "</h5>
-                                    <h5 class='data'>Data: $data |  Hora: $hora | Previsão: ".date('H:i:s',strtotime('+ 30 minutes',strtotime($hora)))."</h5>                              
-                                    
+                                    <h5 class='fonte pedido'>Pedido: $order->id | " . $order->mesa->name . "</h5>
+                                    <h5 class='data'>Data: $data |  Hora: $hora</h5>                              
+                                    <h5 class='data'>Previsão: ".date('H:i:s',strtotime('+ 20 minutes',strtotime($hora)))."</h5>
                                     <h5 class='fonte'>---------------------------------------------------------------------</h5>
                                     <h5 class='fonte'>Cliente: " . $order->client->name . "</h5>
                                     <h5 class='fonte'>Endereço: " . $order->client->addressClient->address . "," . $order->client->addressClient->numero . "</h5>
@@ -978,8 +1014,8 @@ class AdminCheckoutController extends Controller
                             <head>
                                 <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>
                                 <style>
-                                    .fonte{
-                                        font-weight: 300;
+                                     .fonte{
+                                        font-weight: bold;
                                     }
                                     .padding{
                                         padding-left: 10px;
@@ -989,7 +1025,7 @@ class AdminCheckoutController extends Controller
                                         margin-left: 7px;
                                     }
                                     .produto{
-                                        font-weight: 200;
+                                        font-weight: bold;
                                         font-size: 15px;
                                         
                                     }
@@ -1021,16 +1057,26 @@ class AdminCheckoutController extends Controller
                                         width: 16em;
                                         text-transform: capitalize;
                                     }
+                                    .client{
+                                        word-wrap: break-word;
+                                        width: 18em;
+                                        text-transform: capitalize;
+                                    }
                                     .data{
                                         font-weight: bold;
-                                        font-size: 10px;
+                                        font-size: 16px;
+                                    }
+                                    .pedido{
+                                        font-weight: bold;
+                                        font-size: 22px;
                                     }
                                 </style>
                             </head>
                             <body>
                                 <h5 class='fonte'>---------------------------------------------------------------------</h5>
-                                <h5 class='fonte produto'>Pedido: $order->id | " . $order->mesa->name . "</h5>
-                                <h5 class='data'>Data: $data | Hora: $hora | Previsão: ".date('H:i:s',strtotime('+ 20 minutes',strtotime($hora)))."</h5>                              
+                                <h5 class='fonte pedido'>Pedido: $order->id | " . $order->mesa->name . "</h5>
+                                <h5 class='data'>Data: $data | Hora: $hora</h5>
+                                <h5 class='data'>Previsão: ".date('H:i:s',strtotime('+ 20 minutes',strtotime($hora)))."</h5>                              
                                 <h5 class='fonte'>---------------------------------------------------------------------</h5>
                                 <h5 class='fonte'>ITENS:</h5>
                                 $table

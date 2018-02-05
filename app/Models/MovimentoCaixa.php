@@ -10,16 +10,23 @@ class MovimentoCaixa extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $table = 'movimento_caixa';
+    protected $table = 'movimento_caixas';
 
     protected $fillable = [
         'tipo_movimento',
         'valor',
-        'usuario'
+        'usuario',
+        'payment_order_id',
+        'caixa_id'
     ];
 
     public function caixa()
     {
         return $this->belongsTo(Caixa::class);
+    }
+
+    public function payment()
+    {
+        return $this->belongsTo(PaymentOrders::class);
     }
 }

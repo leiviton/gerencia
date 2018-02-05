@@ -15,7 +15,8 @@ class PaymentOrders extends Model implements Transformable
         'desconto',
         'acrescimo',
         'total_original',
-        'payment_types_id'
+        'payment_types_id',
+        'order_id'
     ];
 
     public function order(){

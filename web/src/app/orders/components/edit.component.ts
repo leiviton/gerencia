@@ -94,6 +94,7 @@ export class EditComponent implements OnInit {
         this.httpService.setAccessToken();
         jQuery('#successModal').on('show.bs.modal').show().addClass('show');
         jQuery('name').disabled = false;
+        this.httpService.initCart();
         this.route.params
             .subscribe(params => {
                 this.httpService.builder().view(params['id'],'order')
@@ -273,6 +274,7 @@ export class EditComponent implements OnInit {
                     } else if (res.data.length == 1) {
                         //if (res.data.id === 58) {
                             this.hideLoading();
+                            console.log(res.data[0]);
                             this.addItem(res.data[0]);
                             let pedido = {
                                 items: this.httpService.get().items,

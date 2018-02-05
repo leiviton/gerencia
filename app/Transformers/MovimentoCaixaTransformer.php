@@ -12,6 +12,7 @@ use Pedidos\Models\MovimentoCaixa;
 class MovimentoCaixaTransformer extends TransformerAbstract
 {
 
+    protected $defaultIncludes = ['caixa', 'payment'];
     /**
      * Transform the MovimentoCaixa entity
      * @param Pedidos\Models\MovimentoCaixa $model
@@ -32,5 +33,18 @@ class MovimentoCaixaTransformer extends TransformerAbstract
         ];
     }
 
+    public function includeCaixa(MovimentoCaixa $model)
+    {
+        return $this->item($model->caixa,new CaixaTransformer());
+    }
+
+    public function includePayment(MovimentoCaixa $model)
+    {
+        if($model->payment) {
+            return $this->item($model->payment, new PaymentOrdersTransformer());
+        }else{
+            return null;
+        }
+    }
 
 }

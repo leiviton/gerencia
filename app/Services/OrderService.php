@@ -5,12 +5,16 @@ namespace Pedidos\Services;
 
 
 use Faker\Provider\DateTime;
+use Pedidos\Models\MovimentoCaixa;
 use Pedidos\Models\Order;
+use Pedidos\Repositories\CaixaRepository;
 use Pedidos\Repositories\ComplementItemRepository;
 use Pedidos\Repositories\CupomRepository;
 use Pedidos\Repositories\MesaRepository;
+use Pedidos\Repositories\MovimentoCaixaRepository;
 use Pedidos\Repositories\OrderItemRepository;
 use Pedidos\Repositories\OrderRepository;
+use Pedidos\Repositories\PaymentOrdersRepository;
 use Pedidos\Repositories\ProductRepository;
 //use Dmitrovskiy\IonicPush\PushProcessor;
 use Illuminate\Support\Facades\DB;
@@ -40,6 +44,18 @@ class OrderService{
      * @var ComplementItemRepository
      */
     private $complementItemRepository;
+    /**
+     * @var MovimentoCaixaRepository
+     */
+    private $movimentoCaixaRepository;
+    /**
+     * @var PaymentOrdersRepository
+     */
+    private $paymentOrdersRepository;
+    /**
+     * @var CaixaRepository
+     */
+    private $caixaRepository;
 
     /**
      * @var PushProcessor
@@ -53,7 +69,10 @@ class OrderService{
         ProductRepository $productRepository,
         MesaRepository $mesaRepository,
         OrderItemRepository $itemRepository,
-        ComplementItemRepository $complementItemRepository
+        ComplementItemRepository $complementItemRepository,
+        MovimentoCaixaRepository $movimentoCaixaRepository,
+        PaymentOrdersRepository $paymentOrdersRepository,
+        CaixaRepository $caixaRepository
         //PushProcessor $pushProcessor
     )
     {
@@ -65,6 +84,9 @@ class OrderService{
         $this->mesaRepository = $mesaRepository;
         $this->itemRepository = $itemRepository;
         $this->complementItemRepository = $complementItemRepository;
+        $this->movimentoCaixaRepository = $movimentoCaixaRepository;
+        $this->paymentOrdersRepository = $paymentOrdersRepository;
+        $this->caixaRepository = $caixaRepository;
     }
 
     public function create(array $data){
@@ -213,7 +235,8 @@ class OrderService{
             {
                 return $order;
             }else {
-                $order->paymentOrders()->create($data);
+                $data['order_id'] = $order->id;
+                $payment = $this->paymentOrdersRepository->create($data);
 
                 $order->user_update = $data['user_create'];
                 if ($order->total > ((float) $data['total_pago'] + (float) $data['desconto'] + $order->paid_now)) {
@@ -228,6 +251,10 @@ class OrderService{
 
                 $order->paid_now += $data['total_pago'];
 
+                if($payment->paymentTypes->id == 1) {
+                    $this->movimentoCaixaRepository->create(['tipo_movimento' => 'credito', 'valor' => $data['total_pago'], 'usuario' => $data['user_create'], 'payment_order_id' => $payment->id, 'caixa_id' => 1]);
+                    $this->caixaRepository->update(['saldo'=>$data['total_pago']],1);
+                }
                 $mesa->save();
                 $order->save();
             }

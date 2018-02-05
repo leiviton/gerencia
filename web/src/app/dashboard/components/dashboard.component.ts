@@ -495,7 +495,6 @@ export class DashboardComponent implements OnInit {
           .list({},'mesas')
           .then((res) => {
               this.mesas = res;
-              console.log(res.data.length);
           });
       this.httpService.builder()
           .list({},'mesas/all')
@@ -503,16 +502,14 @@ export class DashboardComponent implements OnInit {
               this.mesaslivres = res;
           });
       this.httpService.builder()
-          .list({},'contador/?status=3')
-          .then((res) => {
-              if(res > 1){
-                  this.pendentes = res;
-              }
-          });
-      this.httpService.builder()
           .list({},'contador/?type=1')
           .then((res) => {
               this.deliverys = res;
+          });
+      this.httpService.builder()
+          .list({},'orders')
+          .then((res)=>{
+            this.pendentes = res.data.length;
           });
       this.httpService.builder()
           .list({},'contador/?close=3')
