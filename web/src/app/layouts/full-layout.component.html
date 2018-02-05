@@ -1,6 +1,6 @@
 <header class="app-header navbar" *ngIf="user !== '' && user !== null" [ngClass]="{'fundo': !user || user == '' || user == null}">
   <button class="navbar-toggler d-lg-none" type="button" appMobileSidebarToggler>&#9776;</button>
-  <a class="navbar-brand logo" href="#"></a>
+  <a class="navbar-brand logo"></a>
   <button class="navbar-toggler d-md-down-none" type="button" appSidebarToggler>&#9776;</button>
   <ul class="nav navbar-nav ml-auto">
     <li class="nav-item dropdown" dropdown (onToggle)="toggled($event)">

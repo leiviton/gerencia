@@ -24,6 +24,10 @@ export class DashboardComponent implements OnInit {
   mesaslivres = {
       data:[]
   };
+  pendentes = 0;
+  fechado = 0;
+  deliverys = 0;
+  cancelados = 0;
 
   public brandPrimary = '#20a8d8';
   public brandSuccess = '#4dbd74';
@@ -498,7 +502,29 @@ export class DashboardComponent implements OnInit {
           .then((res) => {
               this.mesaslivres = res;
           });
-    setTimeout(() => {
+      this.httpService.builder()
+          .list({},'contador/?status=3')
+          .then((res) => {
+              this.pendentes = res;
+          });
+      this.httpService.builder()
+          .list({},'contador/?type=1')
+          .then((res) => {
+              this.deliverys = res;
+          });
+      this.httpService.builder()
+          .list({},'contador/?close=3')
+          .then((res) => {
+              this.fechado = res;
+          });
+      this.httpService.builder()
+          .list({},'contador/?local=1')
+          .then((res) => {
+              this.cancelados = res;
+          });
+
+
+      setTimeout(() => {
         this.hideLoading();
       }, 2000);
   }

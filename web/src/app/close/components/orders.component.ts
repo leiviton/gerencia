@@ -35,18 +35,8 @@ export class OrdersCloseComponent implements OnInit {
     };
   ngOnInit(): void {
     this.showLoading();
-      this.httpService.setAccessToken();
-      this.httpService.eventEmitter
-          .subscribe(() => {
-              this.httpService.builder().list({}, 'close?status=3')
-                  .then((res) => {
-                      this.orders = res;
-                      this.tamanho = res.data.length;
-                      this.hideLoading();
-                  });
-          });
-
-      this.httpService.eventEmitter.emit();
+    this.httpService.setAccessToken();
+    setTimeout(this.hideLoading(),2000);
   }
 
     edit(id)
@@ -80,11 +70,11 @@ export class OrdersCloseComponent implements OnInit {
     {
 
         this.showLoading();
-            if(this.pesquisa.inicio !== null && this.pesquisa.fim !== null && this.pesquisa.status !== null)
+            if(this.pesquisa.inicio !== null && this.pesquisa.fim !== null)
             {
                 let options = {
                     filters: [
-                        {status: this.pesquisa.status},
+                        {status: 3},
                         {inicio: this.pesquisa.inicio},
                         {fim: this.pesquisa.fim}
                     ]

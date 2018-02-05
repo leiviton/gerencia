@@ -49,12 +49,12 @@
 <script>window.__theme = 'bs4';</script>
 
 <!-- App Loading... -->
-<script type="text/javascript" src="inline.bundle.js"></script>
-<script type="text/javascript" src="polyfills.bundle.js"></script>
-<script type="text/javascript" src="scripts.bundle.js"></script>
-<script type="text/javascript" src="styles.bundle.js"></script>
-<script type="text/javascript" src="vendor.bundle.js"></script>
-<script type="text/javascript" src="main.bundle.js"></script>
+<script type="text/javascript" src="{{ URL::asset('inline.bundle.js')}}"></script>
+<script type="text/javascript" src="{{ URL::asset('polyfills.bundle.js')}}"></script>
+<script type="text/javascript" src="{{ URL::asset('scripts.bundle.js')}}"></script>
+<script type="text/javascript" src="{{ URL::asset('styles.bundle.js')}}"></script>
+<script type="text/javascript" src="{{ URL::asset('vendor.bundle.js')}}"></script>
+<script type="text/javascript" src="{{ URL::asset('main.bundle.js')}}"></script>
 </body>
 
 </html>

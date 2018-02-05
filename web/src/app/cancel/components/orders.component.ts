@@ -36,17 +36,7 @@ export class OrdersCancelComponent implements OnInit {
   ngOnInit(): void {
     this.showLoading();
       this.httpService.setAccessToken();
-      this.httpService.eventEmitter
-          .subscribe(() => {
-              this.httpService.builder().list({}, 'close?status=5')
-                  .then((res) => {
-                      this.orders = res;
-                      this.tamanho = res.data.length;
-                      this.hideLoading();
-                  });
-          });
-
-      this.httpService.eventEmitter.emit();
+      setTimeout(this.hideLoading(),2000)
   }
 
     edit(id)
@@ -80,11 +70,11 @@ export class OrdersCancelComponent implements OnInit {
     {
 
         this.showLoading();
-            if(this.pesquisa.inicio !== null && this.pesquisa.fim !== null && this.pesquisa.status !== null)
+            if(this.pesquisa.inicio !== null && this.pesquisa.fim !== null)
             {
                 let options = {
                     filters: [
-                        {status: this.pesquisa.status},
+                        {status: 5},
                         {inicio: this.pesquisa.inicio},
                         {fim: this.pesquisa.fim}
                     ]

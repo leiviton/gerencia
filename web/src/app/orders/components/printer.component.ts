@@ -42,7 +42,7 @@ export class PrinterComponent implements OnInit {
                 let url = '';
                 if(params['i'] == 'S'){
                     url = 'printer';
-                }else{
+                }else if(params['i'] == 'N'){
                     url = 'printer/new'
                 }
                 this.httpService.builder().view(params['id'],url)

@@ -45,6 +45,7 @@ Route::group(['prefix'=>'api/v1','middleware' => 'auth:api'],function () {
        Route::post('complements/item','AdminCheckoutController@addComplent');
        Route::delete('remove/item/{id}','AdminCheckoutController@excluirItem');
        Route::put('cancelar/pedido/{id}','AdminCheckoutController@cancelOrder');
+       Route::get('contador','AdminCheckoutController@contadores');
        /*mesas*/
        Route::get('mesas', 'MesaController@index');
         Route::get('mesas/all', 'MesaController@all');

@@ -117,6 +117,23 @@ class AdminCheckoutController extends Controller
             ->find($o->id);
     }
 
+    public function contadores(Request $request)
+    {
+        if ($request->get('status'))
+        {
+            return $this->repository->contarStatus($request->get('status'));
+        }else if ($request->get('type'))
+        {
+            return $this->repository->contarType($request->get('type'));
+        }else if($request->get('close'))
+        {
+            return $this->repository->contarClose($request->get('close'));
+        }else if($request->get('local'))
+        {
+            return $this->repository->contarLocal($request->get('local'));
+        }
+    }
+
     public function search(Request $request)
     {
         $pesquisa = $request->get('value');
@@ -366,13 +383,13 @@ class AdminCheckoutController extends Controller
     {
         $order = $this->repository->find($id);
 
-        $data = date_format($order->created_at, 'd/m/Y');
+        $data = date_format($order->created_at,'d/m/Y');
 
-        $hora = date_format($order->created_at, 'H:i:s');
+        $hora = date_format($order->created_at,'H:i:s');
 
         $items = $this->itemRepository
-            ->scopeQuery(function ($query) use ($id) {
-                return $query->where('order_id', $id)->where('impresso', 'N');
+            ->scopeQuery(function($query) use($id){
+                return $query->where('order_id',$id)->where('impresso','N');
             })->all();
 
         $produtos = '';
@@ -381,8 +398,9 @@ class AdminCheckoutController extends Controller
 
         $taxa = '';
 
-        foreach ($items as $value) {
-            if ($value->product->id != 58) {
+        foreach ($items as $value)
+        {
+            if($value->product->id != 58 || $value->product->ativo != 'N') {
                 $com = '';
                 $id = $value->id;
                 $complements = $this->complementItemRepository->scopeQuery(function($query) use($id){
@@ -390,24 +408,23 @@ class AdminCheckoutController extends Controller
                 })->all();
                 if($complements) {
                     foreach ($complements as $v) {
-                        $com = "<br />" . $v->complement->name. " - R$". $v->price;
+                        $com .= "<br />" . $v->complement->name. " - $". $v->price;
                     }
                 }else{
                     $com = '';
                 }
 
-                $produtos .= " <tr class='border'>
-                            <td class='fonte padding produto produto2'>" . $value->product->name . $com . "<br/>".$value->historico."</td>
-                            <td class='fonte padding produto'>" . $value->qtd . "</td>
-                            <td class='fonte padding produto'> R$" . $value->price . "</td>
-                            </tr>
-                          ";
+                $produtos .= "<tr class='border'>
+                            <td class='fonte produto border produto2'>" . $value->product->name . $com . "<br/>".$value->historico."</td>
+                            <td class='fonte padding border produto'>" . $value->qtd . "</td>
+                            <td class='price padding border'>$" . $value->subtotal . "</td>
+                            </tr>";
                 $this->itemRepository->update(['impresso' => 'S'], $value->id);
                 $contador += $value->qtd;
             }
 
-            if ($value->product->id == 58) {
-                $taxa = 'Taxa de entrega: R$ ' . $value->product->price;
+            if($value->product->id == 58){
+                $taxa = 'Taxa de entrega: R$'.$value->product->price ;
             }
         }
 
@@ -415,30 +432,19 @@ class AdminCheckoutController extends Controller
                     <thead>
                       <tr>
                         <th class='fonte padding produto'>Produto</th>
-                        <th class='fonte padding produto'>Qtd</th>
-                        <th class='fonte padding produto'>Valor</th>
+                        <th class='fonte padding produto'>Qtd</th>                     
+                        <th class='price padding'>Vr.Uni</th>
                       </tr>
                     </thead>
                     <tbody>
-                     $produtos*
+                     $produtos
                     </tbody>
                   </table>";
 
         $pdf = App::make('dompdf.wrapper');
 
-        if ($order->type != 1)
-        {
-            $cliente = "<h5 class='fonte'>Cliente: ".$order->client->name."</h5>
-                                <h5 class='fonte'>Endereço: ".$order->client->addressClient->address.",".$order->client->addressClient->numero."</h5>
-                                <h5 class='fonte'>Complemento: ".$order->client->addressClient->complemento."</h5>
-                                <h5 class='fonte'>Bairro: ".$order->client->addressClient->bairro."</h5>
-                                <h5 class='fonte'>Cidade: Guaxupé UF: MG</h5>
-                                <h5 class='fonte'>---------------------------------------------------------------------</h5>
-                                ";
-        }else{
-            $cliente = "";
-        }
-        $pdf->loadHTML("<html>
+        if($order->type != 1) {
+            $pdf->loadHTML("<html>
                             <head>
                                 <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>
                                 <style>
@@ -452,13 +458,10 @@ class AdminCheckoutController extends Controller
                                         padding-top: 0;
                                         margin-left: 7px;
                                     }
-                                    .center{
-                                        position: fixed;
-                                        margin-left: 200px;
-                                    }
                                     .produto{
-                                        font-weight: 400;
-                                        font-size: 20px;
+                                        font-weight: 200;
+                                        font-size: 15px;
+                                        
                                     }
                                     .price{
                                         margin-left: -20px;
@@ -468,7 +471,6 @@ class AdminCheckoutController extends Controller
                                         width: 6em;                                       
                                         text-transform: capitalize;
                                     }
-                                    
                                     .total{
                                         font-weight: bold;
                                         font-size: 18px;
@@ -478,30 +480,128 @@ class AdminCheckoutController extends Controller
                                         color: #3e515b;
                                         font-size: 10px;
                                     }
+                                    
                                     .border{
                                          border-bottom: 1px solid #c2cfd6;;
+                                    }
+                                    .obs{
+                                        font-weight: bold;
+                                        font-size: 16px;
+                                        word-wrap: break-word;
+                                        width: 16em;
+                                        text-transform: capitalize;
+                                    }
+                                    .client{
+                                        word-wrap: break-word;
+                                        width: 18em;
+                                        text-transform: capitalize;
+                                    }
+                                    .data{
+                                        font-weight: bold;
+                                        font-size: 10px;
                                     }
                                 </style>
                             </head>
                             <body>
                                 <div class='center'>
                                     <h5 class='fonte'>---------------------------------------------------------------------</h5>
-                                    <h5 class='fonte produto'>Pedido: $order->id | Mesa: ".$order->mesa->name."</h5>
-                                    <h5 class='fonte'>Data: $data | Hora: $hora</h5>                              
+                                    <h5 class='fonte produto'>Pedido: $order->id | " . $order->mesa->name . "</h5>
+                                    <h5 class='data'>Data: $data |  Hora: $hora | Previsão: ".date('H:i:s',strtotime('+ 30 minutes',strtotime($hora)))."</h5>                              
+                                    
                                     <h5 class='fonte'>---------------------------------------------------------------------</h5>
-                                    $cliente
+                                    <h5 class='fonte client'>Cliente: " . $order->client->name . "</h5>
+                                    <h5 class='fonte client'>Endereço: " . $order->client->addressClient->address . "," . $order->client->addressClient->numero . "</h5>
+                                    <h5 class='fonte client'>Complemento: " . $order->client->addressClient->complemento . "</h5>
+                                    <h5 class='fonte client'>Bairro: " . $order->client->addressClient->bairro . "</h5>
+                                    <h5 class='fonte client'>Cidade:    Guaxupé UF: MG</h5>
+                                    <h5 class='fonte'>---------------------------------------------------------------------</h5>
                                     <h5 class='fonte'>ITENS:</h5>
                                     $table
                                     <h5 class='fonte'>---------------------------------------------------------------------</h5>
                                     <h5 class='fonte'>TOTAL DE ITENS: $contador</h5>
                                     <h5 class='fonte total'>TOTAL DA COMPRA: R$ $order->total</h5>
                                     <h5 class='fonte'>---------------------------------------------------------------------</h5>
-                                    <h5 class='fonte'>$order->observacao</h5>
-                                    <h5 class='fonte'>$taxa</h5>
-                                 </div>
+                                    <p class='obs'>$order->observacao</p>
+                                    <h5 class='obs'>$order->troco</h5>
+                                    <h5 class='obs'>$taxa</h5>
+                                </div>
                             </body>
-                        </html>")->save(public_path().'/printer/'.$order->id.'.pdf');
-
+                        </html>")->save(public_path() . '/printer/' . $order->id . '.pdf');
+        }else{
+            $pdf->loadHTML("<html>
+                            <head>
+                                <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>
+                                <style>
+                                    .fonte{
+                                        font-weight: 300;
+                                    }
+                                    .padding{
+                                        padding-left: 10px;
+                                        padding-right: 10px;
+                                        padding-bottom: 0;
+                                        padding-top: 0;
+                                        margin-left: 7px;
+                                    }
+                                    .produto{
+                                        font-weight: 200;
+                                        font-size: 15px;
+                                        
+                                    }
+                                    .price{
+                                        margin-left: -20px;
+                                    }
+                                    .produto2{                                   
+                                        word-wrap: break-word;
+                                        width: 6em;                                       
+                                        text-transform: capitalize;
+                                    }
+                                    .total{
+                                        font-weight: bold;
+                                        font-size: 18px;
+                                    }
+                                    .divd{
+                                        font-weight: 100;
+                                        color: #3e515b;
+                                        font-size: 10px;
+                                    }
+                                    
+                                    .border{
+                                         border-bottom: 1px solid #c2cfd6;;
+                                    }
+                                    .obs{
+                                        font-weight: bold;
+                                        font-size: 16px;
+                                        word-wrap: break-word;
+                                        width: 16em;
+                                        text-transform: capitalize;
+                                    }
+                                    .client{
+                                        word-wrap: break-word;
+                                        width: 18em;
+                                        text-transform: capitalize;
+                                    }
+                                    .data{
+                                        font-weight: bold;
+                                        font-size: 10px;
+                                    }
+                                </style>
+                            </head>
+                            <body>
+                                <h5 class='fonte'>---------------------------------------------------------------------</h5>
+                                <h5 class='fonte produto'>Pedido: $order->id | " . $order->mesa->name. "</h5>
+                                <h5 class='data'>Data: $data | Hora: $hora | Previsão: ".date('H:i:s',strtotime('+ 20 minutes',strtotime($hora)))."</h5>                              
+                                <h5 class='fonte'>---------------------------------------------------------------------</h5>
+                                <h5 class='fonte'>ITENS:</h5>
+                                $table
+                                <h5 class='fonte'>---------------------------------------------------------------------</h5>
+                                <h5 class='fonte'>TOTAL DE ITENS: $contador</h5>
+                                <h5 class='fonte total'>TOTAL DA COMPRA: R$ $order->total</h5>
+                                <h5 class='fonte'>---------------------------------------------------------------------</h5>
+                                <p class='obs'>$order->observacao</p>
+                                <h5 class='obs'>$taxa</h5>
+                            </body>
+                        </html>")->save(public_path() . '/printer/' . $order->id . '.pdf');
+        }
         $order->link_printer = 'http://108.61.155.169/printer/'.$order->id.'.pdf';
 
         $order->save();
@@ -577,7 +677,7 @@ class AdminCheckoutController extends Controller
                             <head>
                                 <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>
                                 <style>
-                                    ..fonte{
+                                    .fonte{
                                         font-weight: 300;
                                     }
                                     .padding{
@@ -587,6 +687,11 @@ class AdminCheckoutController extends Controller
                                         padding-top: 0;
                                         margin-left: 7px;
                                     }
+                                    .produto{
+                                        font-weight: 200;
+                                        font-size: 15px;
+                                        
+                                    }
                                     .price{
                                         margin-left: -20px;
                                     }
@@ -594,11 +699,6 @@ class AdminCheckoutController extends Controller
                                         word-wrap: break-word;
                                         width: 6em;                                       
                                         text-transform: capitalize;
-                                    }
-                                    
-                                    .produto{
-                                        font-weight: 400;
-                                        font-size: 15px;
                                     }
                                     .total{
                                         font-weight: bold;
@@ -609,8 +709,20 @@ class AdminCheckoutController extends Controller
                                         color: #3e515b;
                                         font-size: 10px;
                                     }
+                                    
                                     .border{
                                          border-bottom: 1px solid #c2cfd6;;
+                                    }
+                                    .obs{
+                                        font-weight: bold;
+                                        font-size: 16px;
+                                        word-wrap: break-word;
+                                        width: 16em;
+                                        text-transform: capitalize;
+                                    }
+                                    .data{
+                                        font-weight: bold;
+                                        font-size: 10px;
                                     }
                                 </style>
                             </head>
@@ -618,7 +730,7 @@ class AdminCheckoutController extends Controller
                                 <div class='center'>
                                     <h5 class='fonte'>---------------------------------------------------------------------</h5>
                                     <h5 class='fonte produto'>Pedido: $order->id | " . $order->mesa->name . "</h5>
-                                    <h5 class='fonte'>Data: $data | Hora: $hora</h5>                              
+                                    <h5 class='fonte data'>Data: $data | Hora: $hora</h5>                              
                                     <h5 class='fonte'>---------------------------------------------------------------------</h5>
                                     <h5 class='fonte'>Cliente: " . $order->client->name . "</h5>
                                     <h5 class='fonte'>Endereço: " . $order->client->addressClient->address . "," . $order->client->addressClient->numero . "</h5>
@@ -646,7 +758,6 @@ class AdminCheckoutController extends Controller
                                 <style>
                                     .fonte{
                                         font-weight: 300;
-                                        word-wrap:  normal;
                                     }
                                     .padding{
                                         padding-left: 10px;
@@ -656,8 +767,9 @@ class AdminCheckoutController extends Controller
                                         margin-left: 7px;
                                     }
                                     .produto{
-                                        font-weight: 400;
-                                        font-size: 18px;
+                                        font-weight: 200;
+                                        font-size: 15px;
+                                        
                                     }
                                     .price{
                                         margin-left: -20px;
@@ -667,7 +779,6 @@ class AdminCheckoutController extends Controller
                                         width: 6em;                                       
                                         text-transform: capitalize;
                                     }
-                                    
                                     .total{
                                         font-weight: bold;
                                         font-size: 18px;
@@ -677,14 +788,20 @@ class AdminCheckoutController extends Controller
                                         color: #3e515b;
                                         font-size: 10px;
                                     }
+                                    
                                     .border{
                                          border-bottom: 1px solid #c2cfd6;;
                                     }
-                                    .obs{                                                                       
-                                        width: 5em; 
+                                    .obs{
+                                        font-weight: bold;
+                                        font-size: 16px;
                                         word-wrap: break-word;
-                                        font-size: 12px;
-                                        font-weight: 400;
+                                        width: 16em;
+                                        text-transform: capitalize;
+                                    }
+                                    .data{
+                                        font-weight: bold;
+                                        font-size: 10px;
                                     }
                                 </style>
                             </head>

@@ -108,7 +108,7 @@
                                             {{ i.subtotal | currency:'BRL':true }}
                                         </td>
                                         <td class="text-center" *ngIf="i.ativo == 'S'">
-                                            <button class="btn btn-sm btn-link" *ngIf="i.product.data.id != 58" (click)="removeItem(i.id)" tooltip="Remover do pedido"><i class="fa fa-remove text-danger"></i></button>
+                                            <button class="btn btn-sm btn-link" *ngIf="i.product.data.id != 58" (click)="showExcluir(i.id)" tooltip="Remover do pedido"><i class="fa fa-remove text-danger"></i></button>
                                             <button class="btn btn-sm btn-link" *ngIf="i.product.data.id != 58" (click)="showComplement(i.id)" tooltip="Gerenciar complementos"><i class="fa fa-plus text-info"></i></button>
                                         </td>
                                     </tr>
@@ -225,6 +225,27 @@
                     <div class="modal-button">
                         <button class="btn btn-info" (click)="cancelarPedido()"><i class="fa fa-save"></i> Cancelar Pedido</button>
                         <button class="btn btn-danger text-left" type="button" (click)="closeCancelar()"><i class="fa fa-arrow-circle-left"></i> Voltar</button>
+                    </div>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+    </div>
+    <!-- /.modal-dialog -->
+    <div class="modal fade modal_novo" id="excluir" role="dialog" aria-hidden="true" aria-labelledby="myModalLabell" style="">
+        <div class="modal-dialog modal-sm modal-info" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <div class="col-md-12">
+                                <h6 class="text-center">Deseja excluir esse produto? <br />Isso não poderá ser revertido</h6>
+                                <div class="btn-center">
+                                    <button class="btn btn-sm btn-success" (click)="removeItem()">Excluir</button>
+                                    <button class="btn btn-sm btn-danger" (click)="closeExcluir()">Voltar</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

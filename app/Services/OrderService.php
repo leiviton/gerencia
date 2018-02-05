@@ -164,11 +164,9 @@ class OrderService{
             {
                 if(count($item) == 0)
                 {
-                    $order->observacao = ' teste if 2';
                     $atual = new \DateTime();
                     DB::insert('insert into order_items (id,product_id,order_id,price,qtd,subtotal,created_at,updated_at) values(?,?,?,?,?,?,?,?)',[null,$taxa->id,$order->id,$taxa->price,1,$taxa->price,$atual,$atual]);
                 }else{
-                    $order->observacao = ' teste if aqui';
                     $id = 58;
                     $order_id = $order->id;
                     $item = $this->itemRepository->scopeQuery(function($query) use($id,$order_id){
@@ -190,55 +188,6 @@ class OrderService{
                 $order->type = $data['type'];
                 $order->total -= $taxa->price;
             }
-
-           /* if((int)$data['type'] == 1 && (int)$data['mesa_id'] != (int)$data['mesa_id_ant'] && (int) $data['type_ant'] == 0)
-            {
-
-                $order->observacao .= ' teste if 1';
-                if($this->itemRepository->findWhere(['product_id'=>58,'order_id'=>$order->id]))
-                {
-
-                    $order->observacao .= ' teste if';
-                    $id = 58;
-                    $order_id = $order->id;
-                    $item = $this->itemRepository->scopeQuery(function($query) use($id,$order_id){
-                        return $query->where('product_id',$id)
-                            ->where('order_id',$order_id);
-                    })->all();
-                    DB::update('update order_items set ativo = ? where order_id = ? and product_id = ?',['N',$order->id,58]);
-                    $order->total -= $taxa->price;
-                }
-
-                $order->type = (int)$data['type'];
-                $order->mesa_id = $data['mesa_id'];
-                $mesa->status = 0;
-                $this->mesaRepository->update(['status'=>1],(int) $data['mesa_id']);
-            }
-
-            if((int)$data['type'] == 1 && (int)$data['mesa_id'] != (int)$data['mesa_id_ant'] && (int) $data['type_ant'] == 2)
-            {
-
-                $order->observacao .= ' teste if 2';
-                if($this->itemRepository->findWhere(['product_id'=>58,'order_id'=>$order->id]))
-                {
-
-                    $order->observacao .= ' teste if';
-                    $id = 58;
-                    $order_id = $order->id;
-                    $item = $this->itemRepository->scopeQuery(function($query) use($id,$order_id){
-                        return $query->where('product_id',$id)
-                            ->where('order_id',$order_id);
-                    })->all();
-                    DB::update('update order_items set ativo = ? where order_id = ? and product_id = ?',['N',$order->id,58]);
-                }
-
-                $order->type = (int)$data['type'];
-                $order->mesa_id = $data['mesa_id'];
-                $mesa->status = 0;
-                $this->mesaRepository->update(['status'=>1],(int) $data['mesa_id']);
-            }
-*/
-
         }
         switch ((int)$data['status']){
             case 1:
@@ -267,7 +216,7 @@ class OrderService{
                 $order->paymentOrders()->create($data);
 
                 $order->user_update = $data['user_create'];
-                if ($order->total > ($data['total_pago'] + $data['desconto'] + $order->paid_now)) {
+                if ($order->total > ((float) $data['total_pago'] + (float) $data['desconto'] + $order->paid_now)) {
                     $order->status = 4;
                 } else {
                     $order->status = 3;

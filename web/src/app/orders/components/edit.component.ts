@@ -86,7 +86,7 @@ export class EditComponent implements OnInit {
         "created_at":"",
         "updated_at":""
     }];
-    typeAnt = '';
+    typeAnt:number;
 
     motivo = '';
     ngOnInit(): void {
@@ -119,7 +119,7 @@ export class EditComponent implements OnInit {
                                 this.client.address.city_id = res.data.client.data.addressClient.data.city.data.id;
                             }
 
-                            this.typeAnt = this.order.type;
+                            this.typeAnt = Number(this.order.type);
                             this.products = res.data.items;
                             this.mesa = res.data.mesa.data.name;
                             this.mesa_id = res.data.mesa.data.id;
@@ -135,7 +135,9 @@ export class EditComponent implements OnInit {
             });
         this.httpService.eventEmitter.emit();
 
-        jQuery('#pesquisa').hide();
+        this.closeMd();
+
+        this.closeExcluir();
 
         this.closeCancelar();
 
@@ -152,43 +154,85 @@ export class EditComponent implements OnInit {
             'mesa_id': this.mesa_id,
             'mesa_id_ant': this.order.mesa.data.id,
             'observacao': this.order.observacao,
-            'type': this.order.type,
-            'type_ant': this.typeAnt
+            'type': Number(this.order.type),
+            'type_ant': Number(this.typeAnt)
         };
 
-        this.httpService.builder('order')
-            .update(this.order.id, order)
-            .then((res) => {
-                this.httpService.eventEmitter.emit();
-                this.order = res.data;
-                if(res.data.client.data.user)
-                {
-                    this.client.id = res.data.client.data.id;
-                    this.client.name = res.data.client.data.name;
-                    this.client.phone = res.data.client.data.phone;
-                    this.client.email = res.data.client.data.user.data.email;
-                    this.client.address.address = res.data.client.data.addressClient.data.address;
-                    this.client.address.numero = res.data.client.data.addressClient.data.numero;
-                    this.client.address.bairro = res.data.client.data.addressClient.data.bairro;
-                    this.client.address.city_id = res.data.client.data.addressClient.data.city.data.id;
-                }else{
-                    this.client.id = res.data.client.data.id;
-                    this.client.name = res.data.client.data.name;
-                    this.client.phone = res.data.client.data.phone;
-                    this.client.email = '';
-                    this.client.address.address = res.data.client.data.addressClient.data.address;
-                    this.client.address.numero = res.data.client.data.addressClient.data.numero;
-                    this.client.address.bairro = res.data.client.data.addressClient.data.bairro;
-                    this.client.address.city_id = res.data.client.data.addressClient.data.city.data.id;
-                }
-                this.products = res.data.items;
-                this.mesa = res.data.mesa.data.name
-                this.mesa_id = res.data.mesa.data.id;
-                this.typeAnt = res.data.type;
+        if(order.type_ant == order.type) {
 
+            this.httpService.builder('order')
+                .update(this.order.id, order)
+                .then((res) => {
+                    this.httpService.eventEmitter.emit();
+                    this.order = res.data;
+                    if (res.data.client.data.user) {
+                        this.client.id = res.data.client.data.id;
+                        this.client.name = res.data.client.data.name;
+                        this.client.phone = res.data.client.data.phone;
+                        this.client.email = res.data.client.data.user.data.email;
+                        this.client.address.address = res.data.client.data.addressClient.data.address;
+                        this.client.address.numero = res.data.client.data.addressClient.data.numero;
+                        this.client.address.bairro = res.data.client.data.addressClient.data.bairro;
+                        this.client.address.city_id = res.data.client.data.addressClient.data.city.data.id;
+                    } else {
+                        this.client.id = res.data.client.data.id;
+                        this.client.name = res.data.client.data.name;
+                        this.client.phone = res.data.client.data.phone;
+                        this.client.email = '';
+                        this.client.address.address = res.data.client.data.addressClient.data.address;
+                        this.client.address.numero = res.data.client.data.addressClient.data.numero;
+                        this.client.address.bairro = res.data.client.data.addressClient.data.bairro;
+                        this.client.address.city_id = res.data.client.data.addressClient.data.city.data.id;
+                    }
+                    this.products = res.data.items;
+                    this.mesa = res.data.mesa.data.name
+                    this.mesa_id = res.data.mesa.data.id;
+                    this.typeAnt = res.data.type;
+                    this.hideLoading();
+                    this.toasterService.pop('success', 'Sucesso', 'Pedido ' + this.order.id + ' com sucesso!')
+                });
+        }else if(order.type_ant != 1 && order.type != 1) {
+
+            this.httpService.builder('order')
+                .update(this.order.id, order)
+                .then((res) => {
+                    this.httpService.eventEmitter.emit();
+                    this.order = res.data;
+                    if (res.data.client.data.user) {
+                        this.client.id = res.data.client.data.id;
+                        this.client.name = res.data.client.data.name;
+                        this.client.phone = res.data.client.data.phone;
+                        this.client.email = res.data.client.data.user.data.email;
+                        this.client.address.address = res.data.client.data.addressClient.data.address;
+                        this.client.address.numero = res.data.client.data.addressClient.data.numero;
+                        this.client.address.bairro = res.data.client.data.addressClient.data.bairro;
+                        this.client.address.city_id = res.data.client.data.addressClient.data.city.data.id;
+                    } else {
+                        this.client.id = res.data.client.data.id;
+                        this.client.name = res.data.client.data.name;
+                        this.client.phone = res.data.client.data.phone;
+                        this.client.email = '';
+                        this.client.address.address = res.data.client.data.addressClient.data.address;
+                        this.client.address.numero = res.data.client.data.addressClient.data.numero;
+                        this.client.address.bairro = res.data.client.data.addressClient.data.bairro;
+                        this.client.address.city_id = res.data.client.data.addressClient.data.city.data.id;
+                    }
+                    this.products = res.data.items;
+                    this.mesa = res.data.mesa.data.name
+                    this.mesa_id = res.data.mesa.data.id;
+                    this.typeAnt = res.data.type;
+
+                    this.hideLoading();
+                    this.toasterService.pop('success', 'Sucesso', 'Pedido ' + this.order.id + ' com sucesso!')
+                });
+        }else if(order.type_ant != 1 && order.type == 1){
                 this.hideLoading();
-                this.toasterService.pop('success', 'Sucesso','Pedido '+this.order.id+' com sucesso!')
-            });
+                this.toasterService.pop('error', 'Erro', 'Pedido de mesa não pode ser mudado pra delivery e/ou retirada');
+        }else if(order.type_ant == 1 && order.type != 1){
+            this.hideLoading();
+            this.toasterService.pop('error', 'Erro', 'Pedido de mesa não pode ser mudado pra delivery e/ou retirada');
+        }
+
     }
 
     cancelarPedido()
@@ -373,14 +417,15 @@ export class EditComponent implements OnInit {
 
     }
 
-    removeItem(i)
+    removeItem()
     {
         this.showLoading();
         this.httpService.builder('remove/item')
-            .delete(i)
+            .delete(this.idItem)
             .then((res) =>{
                 this.httpService.eventEmitter.emit();
                 this.order = res.data;
+                this.closeExcluir();
                 if(res.data.client.data.user) {
                     this.client.id = res.data.client.data.id;
                     this.client.name = res.data.client.data.name;
@@ -417,6 +462,13 @@ export class EditComponent implements OnInit {
         this.idItem = i;
     }
 
+    showExcluir(i)
+    {
+        jQuery('#excluir').show().addClass('show').css('z-index',1050 + 60);
+        jQuery('#new_order').css('z-index', 1040);
+        this.idItem = i;
+    }
+
     showCancelamento()
     {
         jQuery('#cancelamento').show().addClass('show').css('z-index',1050 + 60);
@@ -449,6 +501,11 @@ export class EditComponent implements OnInit {
     closeCancelar()
     {
         jQuery('#cancelamento').hide();
+    }
+
+    closeExcluir()
+    {
+        jQuery('#excluir').hide();
     }
 
     closeInformacao()

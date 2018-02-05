@@ -73,7 +73,7 @@
 <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog modal-sm modal-info" role="document">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header novo">
         <h6 class="modal-title">Pesquisar</h6>
       </div>
       <div class="modal-body">
@@ -82,16 +82,8 @@
 
         <label for="fim">Até</label>
         <input type="date" id="fim" class="form-control" name="fim" [(ngModel)]="pesquisa.fim" required>
-        <label class="col-form-label" for="select">Status</label>
-        <select name="status" class="form-control" id="select" [(ngModel)]="pesquisa.status" required>
-          <option value="null">Selecione o status</option>
-          <option value="0">Pendentes</option>
-          <option value="1">Em preparo</option>
-          <option value="2">Entrega</option>
-          <option value="3">Fechado</option>
-        </select>
       </div>
-      <div class="modal-footer">
+      <div class="modal-footer novo">
         <button type="button" class="btn btn-secondary" (click)="hideModal()">Fechar</button>
         <button type="button" class="btn btn-primary" (click)="pesquisar()"><i class="fa fa-search"></i> Buscar</button>
       </div>

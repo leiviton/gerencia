@@ -96,6 +96,26 @@ class OrderRepositoryEloquent extends BaseRepository implements OrderRepository
         }
         throw (new ModelNotFoundException())->setModel(get_class($this->model));
     }
+    public function contarType($where)
+    {
+         return $this->model->where('type','<>',$where)->get()->count();
+    }
+
+    public function contarStatus($where)
+    {
+        return $this->model->where('status','<',$where)->get()->count();
+    }
+
+    public function contarClose($where)
+    {
+        return $this->model->where('status',$where)->get()->count();
+    }
+
+    public function contarLocal($where)
+    {
+        return $this->model->where('type',$where)->get()->count();
+    }
+
     /**
      * Specify Model class name
      *
