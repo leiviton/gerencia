@@ -498,7 +498,12 @@ var DashboardComponent = (function () {
         this.httpService.builder()
             .list({}, 'contador/?status=3')
             .then(function (res) {
-            _this.pendentes = res;
+            if (res < 1) {
+                _this.pendentes = 0;
+            }
+            else {
+                _this.pendentes = res;
+            }
         });
         this.httpService.builder()
             .list({}, 'contador/?type=1')

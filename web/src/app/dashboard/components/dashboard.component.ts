@@ -505,7 +505,11 @@ export class DashboardComponent implements OnInit {
       this.httpService.builder()
           .list({},'contador/?status=3')
           .then((res) => {
-              this.pendentes = res;
+              if(res < 1){
+                  this.pendentes = 0;
+              }else {
+                  this.pendentes = res;
+              }
           });
       this.httpService.builder()
           .list({},'contador/?type=1')
