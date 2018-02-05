@@ -24,10 +24,10 @@ export class DashboardComponent implements OnInit {
   mesaslivres = {
       data:[]
   };
-  pendentes:number;
-  fechado:number;
-  deliverys:number;
-  cancelados:number;
+  pendentes:number = 0;
+  fechado:number = 0;
+  deliverys:number = 0;
+  cancelados:number = 0;
 
   public brandPrimary = '#20a8d8';
   public brandSuccess = '#4dbd74';
@@ -505,9 +505,7 @@ export class DashboardComponent implements OnInit {
       this.httpService.builder()
           .list({},'contador/?status=3')
           .then((res) => {
-              if(res < 1){
-                  this.pendentes = 0;
-              }else {
+              if(res > 1){
                   this.pendentes = res;
               }
           });

@@ -40,6 +40,10 @@ var DashboardComponent = (function () {
         this.mesaslivres = {
             data: []
         };
+        this.pendentes = 0;
+        this.fechado = 0;
+        this.deliverys = 0;
+        this.cancelados = 0;
         this.brandPrimary = '#20a8d8';
         this.brandSuccess = '#4dbd74';
         this.brandInfo = '#63c2de';
@@ -498,10 +502,7 @@ var DashboardComponent = (function () {
         this.httpService.builder()
             .list({}, 'contador/?status=3')
             .then(function (res) {
-            if (res < 1) {
-                _this.pendentes = 0;
-            }
-            else {
+            if (res > 1) {
                 _this.pendentes = res;
             }
         });
