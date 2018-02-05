@@ -70,7 +70,9 @@
                         </table>
                     </div>
                 </div>
-                <div class="col-md-12 text-center alert alert-success total-pagamento"><h4 class="qtd">TOTAL À PAGAR: {{ total | currency:'BRL':true }}</h4></div>
+                <div class="col-md-12 text-center alert alert-success total-pagamento">
+                    <h4 class="qtd">TOTAL À PAGAR: {{ total - payment.desconto | currency:'BRL':true }}</h4>
+                </div>
                 <div class="col-md-12">
                     <div class="table-responsive" style="height: 100px; overflow: auto">
                         <table class="table scrollbox table-striped">
