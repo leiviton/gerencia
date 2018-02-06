@@ -37,9 +37,20 @@
           <ul class="nav-dropdown-items">
             <li class="nav-item">
               <a class="nav-link" routerLinkActive="active" [routerLink]="['/orders']"><i class="fa fa-edit"></i> Pedidos</a>
-
               <a class="nav-link" routerLinkActive="active" [routerLink]="['/close']"><i class="fa fa-edit"></i> Pedidos fechados</a>
               <a class="nav-link" routerLinkActive="active" [routerLink]="['/orders/cancel']"><i class="fa fa-edit"></i> Pedidos Cancelados</a>
+            </li>
+          </ul>
+        </li>
+        <li class="divider"></li>
+        <li class="nav-title">
+          Financeiro
+        </li>
+        <li class="nav-item nav-dropdown" appNavDropdown>
+          <a class="nav-link nav-dropdown-toggle" href="#" appNavDropdownToggle><i class="fa fa-credit-card"></i> Caixa</a>
+          <ul class="nav-dropdown-items">
+            <li class="nav-item">
+              <a class="nav-link" routerLinkActive="active" [routerLink]="['/financeiro/caixas']"><i class="fa fa-credit-card"></i> Caixas</a>
             </li>
           </ul>
         </li>
@@ -80,18 +91,6 @@
           <ul class="nav-dropdown-items">
             <li class="nav-item">
               <a class="nav-link" routerLinkActive="active" [routerLink]="['/cadastro/users']"><i class="fa fa-user-plus"></i> Gerenciar usuários</a>
-            </li>
-          </ul>
-        </li>
-        <li class="divider"></li>
-        <li class="nav-title" *ngIf="user.role == 'admin'">
-          Financeiro
-        </li>
-        <li class="nav-item nav-dropdown" appNavDropdown *ngIf="user.role == 'admin'">
-          <a class="nav-link nav-dropdown-toggle" href="#" appNavDropdownToggle><i class="fa fa-credit-card"></i> Caixa</a>
-          <ul class="nav-dropdown-items">
-            <li class="nav-item">
-              <a class="nav-link" routerLinkActive="active" [routerLink]="['/financeiro/caixas']"><i class="fa fa-credit-card"></i> Caixas</a>
             </li>
           </ul>
         </li>
