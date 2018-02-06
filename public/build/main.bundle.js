@@ -29,7 +29,7 @@ var map = {
 		"common"
 	],
 	"./close/orders-close.module": [
-		"../../../../../src/app/close/orders-close.module.ts",
+		"../../../../../src/app/close/caixas.module.ts",
 		"orders-close.module",
 		"common"
 	],

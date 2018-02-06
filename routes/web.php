@@ -48,7 +48,7 @@ Route::group(['prefix'=>'api/v1','middleware' => 'auth:api'],function () {
        Route::get('contador','AdminCheckoutController@contadores');
        /*mesas*/
        Route::get('mesas', 'MesaController@index');
-        Route::get('mesas/all', 'MesaController@all');
+       Route::get('mesas/all', 'MesaController@all');
        Route::get('mesa/{id}', 'MesaController@edit');
        Route::put('mesa/{id}','MesaController@update');
        Route::post('mesa','MesaController@store');
@@ -73,6 +73,12 @@ Route::group(['prefix'=>'api/v1','middleware' => 'auth:api'],function () {
        Route::post('client', 'ClientsController@store');
        Route::get('client/{id}','ClientsController@edit');
        Route::put('client/{id}', 'ClientsController@update');
+       /*caixas*/
+        Route::get('search/caixa','CaixasController@search');
+        Route::get('caixas','CaixasController@index');
+        Route::post('caixa', 'CaixasController@store');
+        Route::get('caixa/{id}','CaixasController@edit');
+        Route::put('caixa/{id}', 'CaixasController@update');
     });
     Route::get('user','Api\UserController@authenticated');
 });

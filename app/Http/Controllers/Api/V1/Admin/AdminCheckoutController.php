@@ -928,6 +928,7 @@ class AdminCheckoutController extends Controller
                                 <style>
                                      .fonte{
                                         font-weight: bold;
+                                        font-size: 16px;
                                     }
                                     .padding{
                                         padding-left: 10px;
