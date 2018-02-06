@@ -30,7 +30,7 @@ export class OrdersService extends AppHttpService {
         var cart = this.get(),itemAux,exists = false;
         item.qtd = qtd;
         item.complements = [];
-        for (var index in cart.items){
+        /*for (var index in cart.items){
             itemAux = cart.items[index];
             if (itemAux.id == item.id){
                 itemAux.qtd = itemAux.qtd + item.qtd;
@@ -38,12 +38,10 @@ export class OrdersService extends AppHttpService {
                 exists = true;
                 break;
             }
-        }
+        }*/
         item.product_id = item.id;
-        if(exists === false){
-            item.subtotal = this.calculateSubtotal(item);
-            cart.items.push(item);
-        }
+        item.subtotal = this.calculateSubtotal(item);
+        cart.items.push(item);
         cart.total = this.getTotal(cart.items);
         localStorage.setItem(this.key,JSON.stringify(cart));
     }

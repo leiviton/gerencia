@@ -39,4 +39,4 @@ import { OrdersCloseComponent } from "./components/orders-close.component"
   declarations: [ OrdersComponent,EditComponent,NewComponent,PaymentComponent,PrinterComponent,ComplementComponent,OrdersCloseComponent ],
   providers: [ OrdersService, BsModalService ]
 })
-export class OrdersModule { }
+export class OrdersModule {}

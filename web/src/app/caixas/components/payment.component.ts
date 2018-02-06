@@ -3,7 +3,7 @@ import * as jQuery from 'jquery';
 
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgForOf } from '@angular/common';
-import { OrdersService } from '../services/caixas.service';
+import { CaixasService } from '../services/caixas.service';
 import { FormsModule } from '@angular/forms';
 
 import {ToasterService} from 'angular2-toaster';
@@ -11,9 +11,10 @@ import {ToasterService} from 'angular2-toaster';
 @Component({
     templateUrl: 'payment.component.html'
 })
+
 export class PaymentComponent implements OnInit {
 
-    constructor(private httpService: OrdersService, private router: Router, private route: ActivatedRoute,private toasterService: ToasterService) {
+    constructor(private httpService: CaixasService, private router: Router, private route: ActivatedRoute,private toasterService: ToasterService) {
         document.onkeydown = ((e) =>{
 
             if(e.keyCode == 27)

@@ -11,7 +11,7 @@ import * as jQuery from 'jquery';
 @Component({
   templateUrl: 'caixas.component.html'
 })
-export class OrdersCloseComponent implements OnInit {
+export class CaixasComponent implements OnInit {
 
   constructor(private httpService: CaixasService, private router: Router, private toasterService: ToasterService) {
       document.onkeydown = ((e) =>{

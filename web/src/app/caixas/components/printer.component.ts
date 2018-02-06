@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import * as jQuery from 'jquery';
 import { Router, ActivatedRoute } from '@angular/router';
-import { OrdersService } from '../services/caixas.service';
+import { CaixasService } from '../services/caixas.service';
 
 
 import {ToasterService} from 'angular2-toaster';
@@ -12,7 +12,7 @@ import {ToasterService} from 'angular2-toaster';
 })
 export class PrinterComponent implements OnInit {
 
-    constructor(private httpService: OrdersService, private router: Router, private route: ActivatedRoute
+    constructor(private httpService: CaixasService, private router: Router, private route: ActivatedRoute
         ,private toasterService: ToasterService,public sanitizer: DomSanitizer)
     {
 

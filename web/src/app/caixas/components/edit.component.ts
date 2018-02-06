@@ -4,7 +4,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgForOf } from '@angular/common';
-import { OrdersService } from '../services/caixas.service';
+import { CaixasService } from '../services/caixas.service';
 import { FormsModule } from '@angular/forms';
 
 
@@ -15,7 +15,7 @@ import {ToasterService} from 'angular2-toaster';
 })
 export class EditComponent implements OnInit {
 
-    constructor(private httpService: OrdersService, private router: Router, private route: ActivatedRoute
+    constructor(private httpService: CaixasService, private router: Router, private route: ActivatedRoute
         ,private toasterService: ToasterService)
     {
         document.onkeydown = ((e) =>{
@@ -150,43 +150,6 @@ export class EditComponent implements OnInit {
                 this.toasterService.pop('success', 'Sucesso','Pedido '+this.order.id+' com sucesso!')
             });
     }
-
-    buscar()
-    {
-        this.showLoading();
-        this.httpService.setAccessToken();
-        this.httpService.builder('search')
-            .search(this.pesquisa.value)
-            .then((res) => {
-                this.pesquisa.value = null;
-                this.result = res.data;
-                this.hideLoading();
-                this.addItem(this.result[0]);
-
-                let pedido = {
-                    items: this.httpService.get().items,
-                    order_id: this.order.id
-                };
-
-                this.httpService.builder()
-                    .insert(pedido,'addItem')
-                    .then((res) => {
-                        this.httpService.eventEmitter.emit();
-                        this.httpService.clear();
-                        this.order = res.data;
-                        this.products = res.data.items;
-                        this.imprimir = true;
-                    });
-               });
-    }
-
-    addItem(item)
-    {
-        this.httpService.addItem(item,this.qtd);
-        this.toasterService.pop('success', 'Sucesso', 'Item codigo '+item.id+' adicionado.');
-    }
-
-
     close(){
         jQuery('#successModal').on('show.bs.modal').show().removeClass('show');
         this.router.navigate(['/close']);

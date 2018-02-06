@@ -492,7 +492,6 @@ var DashboardComponent = (function () {
             .list({}, 'mesas')
             .then(function (res) {
             _this.mesas = res;
-            console.log(res.data.length);
         });
         this.httpService.builder()
             .list({}, 'mesas/all')
@@ -500,16 +499,14 @@ var DashboardComponent = (function () {
             _this.mesaslivres = res;
         });
         this.httpService.builder()
-            .list({}, 'contador/?status=3')
-            .then(function (res) {
-            if (res > 1) {
-                _this.pendentes = res;
-            }
-        });
-        this.httpService.builder()
             .list({}, 'contador/?type=1')
             .then(function (res) {
             _this.deliverys = res;
+        });
+        this.httpService.builder()
+            .list({}, 'orders')
+            .then(function (res) {
+            _this.pendentes = res.data.length;
         });
         this.httpService.builder()
             .list({}, 'contador/?close=3')

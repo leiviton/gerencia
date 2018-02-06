@@ -5,10 +5,10 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { FormsModule} from '@angular/forms'
 
-import { OrdersCloseComponent } from './components/caixas.component';
+import { CaixasComponent } from './components/caixas.component';
 import { PaymentComponent } from "./components/payment.component";
 
-import { OrdersCloseRoutingModule } from './caixas-routing.module';
+import { CaixasRoutingModule } from './caixas-routing.module';
 import { TooltipModule } from 'ngx-bootstrap';
 import { CaixasService } from './services/caixas.service';
 import { CuppaDataGridModule } from 'cuppa-ng2-grid/cuppa-ng2-dataGrid';
@@ -23,7 +23,7 @@ import { EditComponent} from "./components/edit.component";
 @NgModule({
   imports: [
     CommonModule,
-    OrdersCloseRoutingModule,
+    CaixasRoutingModule,
     ChartsModule,
     BsDropdownModule,
     TooltipModule,
@@ -33,7 +33,7 @@ import { EditComponent} from "./components/edit.component";
       CurrencyMaskModule,
       NgxPhoneMaskModule,
   ],
-  declarations: [ OrdersCloseComponent,PaymentComponent,PrinterComponent,EditComponent ],
+  declarations: [ CaixasComponent,PaymentComponent,PrinterComponent,EditComponent ],
   providers: [ CaixasService, BsModalService ]
 })
-export class OrdersCloseModule { }
+export class CaixasModule { }

@@ -52,7 +52,12 @@ export const routes: Routes = [
         {
             path: 'user',
             loadChildren: './user/user.module#UserModule',
-        }
+        },
+        {
+            path: 'financeiro/caixas',
+            loadChildren: './caixas/caixas.module#CaixasModule',
+        },
+
     ]
   },
   {

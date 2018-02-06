@@ -12,13 +12,6 @@
                     <th class="title text-center">Status</th>
                     <th class="title text-center">Tipo</th>
                     <th class="title text-center">Codigo</th>
-                    <th class="title-table text-center"> Total</th>
-                    <th class="title"> Cliente</th>
-                    <th class="title text-center">Data</th>
-                    <th class="title text-center">Hora</th>
-                    <th class="title text-center">Previsão</th>
-                    <th class="title text-center">Mesa</th>
-                    <th class="title text-center">Ações</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -31,22 +24,8 @@
                       <span class="badge badge-pill badge-danger" *ngIf="o.ativo === 'N'" tooltip="Desativado"> Desativado</span>
                     </td>
                     <td class="text-center" *ngIf="tamanho > 0">
-                      <i class="fa fa-motorcycle" *ngIf="o.type == 0" tooltip="Delivery"></i>
-                      <i class="fa fa-upload" *ngIf="o.type == 2" tooltip="Retirada"></i>
-                      <i class="fa fa fa-cutlery" *ngIf="o.type == 1" tooltip="Mesa"></i>
-                    </td>
+                      </td>
                     <td class="text-center" *ngIf="tamanho > 0">{{ o.id }}</td>
-                    <td class="text-center" *ngIf="tamanho > 0">{{ o.total | currency:'BRL':true }}</td>
-                    <td class="text-capitalize" *ngIf="tamanho > 0">{{ o.client.data.name }}</td>
-                    <td class="text-center" *ngIf="tamanho > 0">{{ o.created_at | slice:0:10 }} </td>
-                    <td class="text-center" *ngIf="tamanho > 0">{{ o.created_at | slice:11:19}}</td>
-                    <td class="text-center" *ngIf="tamanho > 0">{{ o.previsao }} </td>
-                    <td class="text-center" *ngIf="tamanho > 0">{{ o.mesa.data.name }} </td>
-                    <td class="text-center">
-                      <a class="btn btn-link text-alert pagamento" *ngIf="o.status == 3" [routerLink]="['payment/'+ o.id]" tooltip="Ver pagamentos"><i class="fa fa-money"></i></a>
-                      <a class="btn btn-link text-success pagamento" *ngIf="o.status != 3" [routerLink]="['payment/'+ o.id]" tooltip="Pagar pedido"><i class="fa fa-dollar"></i></a>
-                      <a class="btn btn-link pagamento" *ngIf="o.status != 3" [routerLink]="['printer/'+ o.id]+'/S'" tooltip="Imprimir pedido"><i class="fa fa-print"></i></a>
-                    </td>
                   </tr>
                 </tbody>
               </table>
