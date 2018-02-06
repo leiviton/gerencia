@@ -17,7 +17,16 @@ const routes: Routes = [
     component: CaixasComponent,
     data: {
       title: 'Pedidos Fechados'
-    }
+    },
+      children: [
+          {
+              path: 'edit/:id',
+              component: EditComponent,
+              data: {
+                  title: 'Editar'
+              }
+          }
+      ]
   }
 ];
 

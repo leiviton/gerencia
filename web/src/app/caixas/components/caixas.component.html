@@ -3,15 +3,18 @@
         <div class="col-lg-12">
           <div class="card">
             <div class="card-header">
-                   <button type="button" class="btn btn-default" (click)="showModal()"><i class="fa fa-search"></i> Pesquisar </button>
+                   <button type="button" class="btn btn-default" ><i class="fa fa-search"></i> Pesquisar </button>
             </div>
             <div class="card-body">
               <table class="table table-responsive table-bordered table-striped table-sm">
                 <thead>
                   <tr>
                     <th class="title text-center">Status</th>
-                    <th class="title text-center">Tipo</th>
                     <th class="title text-center">Codigo</th>
+                    <th class="title text-center">Caixa</th>
+                    <th class="title text-center">Saldo</th>
+                    <th class="title text-center">Criado</th>
+                    <th class="title text-center">Atualizado</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -23,9 +26,11 @@
                       <span class="badge badge-pill badge-success" *ngIf="o.ativo === 'S'" tooltip="Ativo"> Ativo</span>
                       <span class="badge badge-pill badge-danger" *ngIf="o.ativo === 'N'" tooltip="Desativado"> Desativado</span>
                     </td>
-                    <td class="text-center" *ngIf="tamanho > 0">
-                      </td>
                     <td class="text-center" *ngIf="tamanho > 0">{{ o.id }}</td>
+                    <td class="text-center" *ngIf="tamanho > 0">{{o.name}}</td>
+                    <td class="text-center" *ngIf="tamanho > 0">{{ o.saldo | currency:'BRL':true }}</td>
+                    <td class="text-center" *ngIf="tamanho > 0">{{ o.created_at }}</td>
+                    <td class="text-center" *ngIf="tamanho > 0">{{ o.updated_at }}</td>
                   </tr>
                 </tbody>
               </table>

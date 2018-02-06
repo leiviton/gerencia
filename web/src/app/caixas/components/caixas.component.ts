@@ -34,20 +34,31 @@ export class CaixasComponent implements OnInit {
         status:null
     };
   ngOnInit(): void {
-    this.showLoading();
-    this.httpService.setAccessToken();
-    this.httpService.builder()
-        .list({},'caixas')
-        .then((res)=>{
-            this.caixas = res;
-        });
-    setTimeout(this.hideLoading(),2000);
+      this.showLoading();
+      let u = {role:null};
+      u = JSON.parse(localStorage.getItem('user') || null);
+      if(u.role !== 'gerente' && u.role !== 'admin')
+      {
+          this.toasterService.pop('error','Sem permissão','Usuário sem acesso, contate o administrador');
+          this.router.navigate(['/dashboard']);
+      }
+      this.httpService.setAccessToken();
+      this.httpService.eventEmitter
+          .subscribe(() => {
+              this.httpService.builder().list({}, 'caixas')
+                  .then((res) => {
+                      this.caixas = res;
+                      this.tamanho = res.data.length;
+                      this.hideLoading();
+                  });
+          });
+      this.httpService.eventEmitter.emit();
   }
 
     edit(id)
     {
         this.cor = true;
-        this.router.navigate(['/close/edit/'+ id]);
+        this.router.navigate(['/financeiro/caixas/edit/'+ id]);
     }
 
     new()

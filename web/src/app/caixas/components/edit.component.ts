@@ -19,48 +19,17 @@ export class EditComponent implements OnInit {
         ,private toasterService: ToasterService)
     {
         document.onkeydown = ((e) =>{
-            if(e.keyCode  == 120)
-            {
-                this.update();
-            }
 
             if(e.keyCode == 27)
             {
                 this.close();
             }
-
-            if(e.keyCode == 118)
-            {
-                this.save();
-            }
         });
     }
-    order = {
+    caixa = {
         id:0,
-        status:0,
-        mesa:{
-            data:{
-                id:1
-            }
-        }
+        name:''
     };
-    client = {
-        id:1,
-        name:'',
-        phone:'',
-        address:{
-            address:null,
-            numero:null,
-            bairro:null,
-            city_id:0
-        },
-        email:''
-    };
-    products = {};
-    mesas = {
-        data:null
-    };
-    mesa = '';
     pesquisa = {
         value:null,
         telefone:null
@@ -75,89 +44,40 @@ export class EditComponent implements OnInit {
         this.showLoading();
         this.httpService.setAccessToken();
         jQuery('#successModal').on('show.bs.modal').show().addClass('show');
-
         jQuery('name').disabled = false;
         this.route.params
             .subscribe(params => {
-                this.httpService.builder().view(params['id'],'order')
+                this.httpService.builder().view(params['id'],'caixa')
                     .then((res) => {
-                            this.order = res.data;
-                            if(res.data.client.data.user)
-                            {
-                                this.client.id = res.data.client.data.id;
-                                this.client.name = res.data.client.data.name;
-                                this.client.phone = res.data.client.data.phone;
-                                this.client.email = res.data.client.data.user.data.email;
-                                this.client.address.address = res.data.client.data.addressClient.data.address;
-                                this.client.address.numero = res.data.client.data.addressClient.data.numero;
-                                this.client.address.bairro = res.data.client.data.addressClient.data.bairro;
-                                this.client.address.city_id = res.data.client.data.addressClient.data.city.data.id;
-                                this.products = res.data.items;
-                                this.mesa = res.data.mesa.data.name;
-                            }else{
-                                this.client.id = res.data.client.data.id;
-                                this.client.name = res.data.client.data.name;
-                                this.client.phone = res.data.client.data.phone;
-                                this.client.email = '';
-                                this.client.address.address = res.data.client.data.addressClient.data.address;
-                                this.client.address.numero = res.data.client.data.addressClient.data.numero;
-                                this.client.address.bairro = res.data.client.data.addressClient.data.bairro;
-                                this.client.address.city_id = res.data.client.data.addressClient.data.city.data.id;
-                                this.products = res.data.items;
-                                this.mesa = res.data.mesa.data.name;
-
-                            }
+                            this.caixa = res.data;
                             this.hideLoading();
                     });
                 this.httpService.setAccessToken();
-                this.httpService.builder()
-                    .list({},'mesas/all')
-                    .then((res) => {
-                        this.mesas = res;
-                    });
 
             });
-        this.httpService.eventEmitter.emit();
     }
 
-    update()
+    save(e)
     {
-        this.showLoading();
-        let order = {
-            'status': this.order.status,
-            'mesa_id': this.order.mesa.data.id
-        };
-        this.httpService.builder('order')
-            .update(this.order.id, order)
-            .then((res) => {
-                this.httpService.eventEmitter.emit();
-                this.order = res.data;
-                this.client.id = res.data.client.data.id;
-                this.client.name = res.data.client.data.name;
-                this.client.phone = res.data.client.data.phone;
-                if(res.data.client.data.user) {
-                    this.client.email = res.data.client.data.user.data.email;
-                }else{
-                    this.client.email = res.data.client.data.user.data.email;
-                }
-                this.client.address.address = res.data.client.data.addressClient.data.address;
-                this.client.address.numero = res.data.client.data.addressClient.data.numero;
-                this.client.address.bairro = res.data.client.data.addressClient.data.bairro;
-                this.client.address.city_id = res.data.client.data.addressClient.data.city.data.id;
-                this.products = res.data.items;
-                this.mesa = res.data.mesa.data.name;
-                this.hideLoading();
-                this.toasterService.pop('success', 'Sucesso','Pedido '+this.order.id+' com sucesso!')
-            });
-    }
-    close(){
-        jQuery('#successModal').on('show.bs.modal').show().removeClass('show');
-        this.router.navigate(['/close']);
+        if(this.caixa.name != null && this.caixa.name.length > 4){
+            this.showLoading();
+            this.httpService.setAccessToken();
+            this.httpService.builder('caixa')
+                .update(this.caixa.id, e)
+                .then(() => {
+                    this.httpService.eventEmitter.emit();
+                    this.toasterService.pop('success', 'Sucesso', 'Caixa salvo com sucesso');
+                    this.hideLoading();
+                    this.close();
+                });
+        }else{
+            this.toasterService.pop('error', 'Erro', 'Verifique se todos os campos foram preenchidos.');
+        }
     }
 
-    save(){
-            jQuery('#successModal').on('show.bs.modal').show().removeClass('show');
-            this.router.navigate(['/close/printer/'+ this.order.id+'/N']);
+    close(){
+        jQuery('#successModal').hide();
+        this.router.navigate(['/financeiro/caixas']);
     }
 
     habilitarEdicao()

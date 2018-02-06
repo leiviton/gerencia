@@ -31,6 +31,10 @@ class MesaController extends Controller
      * @var OrderRepository
      */
     private $orderRepository;
+    /**
+     * @var AuditRepository
+     */
+    private $auditRepository;
 
     public function __construct(MesaRepository $repository, UserService $service,
                                 OrderRepository $orderRepository, AuditRepository $auditRepository)
@@ -38,6 +42,7 @@ class MesaController extends Controller
         $this->repository = $repository;
         $this->service = $service;
         $this->orderRepository = $orderRepository;
+        $this->auditRepository = $auditRepository;
     }
 
     public function index()

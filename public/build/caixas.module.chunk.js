@@ -8,6 +8,7 @@ webpackJsonp(["caixas.module"],{
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_caixas_component__ = __webpack_require__("../../../../../src/app/caixas/components/caixas.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_edit_component__ = __webpack_require__("../../../../../src/app/caixas/components/edit.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -17,13 +18,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
 var routes = [
     {
         path: '',
         component: __WEBPACK_IMPORTED_MODULE_2__components_caixas_component__["a" /* CaixasComponent */],
         data: {
             title: 'Pedidos Fechados'
-        }
+        },
+        children: [
+            {
+                path: 'edit/:id',
+                component: __WEBPACK_IMPORTED_MODULE_3__components_edit_component__["a" /* EditComponent */],
+                data: {
+                    title: 'Editar'
+                }
+            }
+        ]
     }
 ];
 var CaixasRoutingModule = (function () {
@@ -121,7 +132,7 @@ var CaixasModule = (function () {
 /***/ "../../../../../src/app/caixas/components/caixas.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"animated fadeIn\">\n    <div class=\"row\">\n        <div class=\"col-lg-12\">\n          <div class=\"card\">\n            <div class=\"card-header\">\n                   <button type=\"button\" class=\"btn btn-default\" (click)=\"showModal()\"><i class=\"fa fa-search\"></i> Pesquisar </button>\n            </div>\n            <div class=\"card-body\">\n              <table class=\"table table-responsive table-bordered table-striped table-sm\">\n                <thead>\n                  <tr>\n                    <th class=\"title text-center\">Status</th>\n                    <th class=\"title text-center\">Tipo</th>\n                    <th class=\"title text-center\">Codigo</th>\n                  </tr>\n                </thead>\n                <tbody>\n                  <tr *ngIf=\"tamanho == 0\">\n                    <td colspan=\"10\"> Sem dados</td>\n                  </tr>\n                  <tr *ngFor=\"let o of caixas.data\" (dblclick)=\"edit(o.id)\">\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">\n                      <span class=\"badge badge-pill badge-success\" *ngIf=\"o.ativo === 'S'\" tooltip=\"Ativo\"> Ativo</span>\n                      <span class=\"badge badge-pill badge-danger\" *ngIf=\"o.ativo === 'N'\" tooltip=\"Desativado\"> Desativado</span>\n                    </td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">\n                      </td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.id }}</td>\n                  </tr>\n                </tbody>\n              </table>\n              <!--nav>\n                <ul class=\"pagination\">\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">Prev</a></li>\n                  <li class=\"page-item active\">\n                    <a class=\"page-link\" href=\"#\">1</a>\n                  </li>\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">2</a></li>\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">3</a></li>\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">4</a></li>\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">Next</a></li>\n                </ul>\n              </nav-->\n            </div>\n          </div>\n        </div>\n      </div>\n </div>\n\n<div class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">\n  <div class=\"modal-dialog modal-sm modal-info\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header novo\">\n        <h6 class=\"modal-title\">Pesquisar</h6>\n      </div>\n      <div class=\"modal-body\">\n        <label for=\"inicio\">De</label>\n        <input type=\"date\" id=\"inicio\" class=\"form-control\" name=\"inicio\" [(ngModel)]=\"pesquisa.inicio\" required>\n\n        <label for=\"fim\">Até</label>\n        <input type=\"date\" id=\"fim\" class=\"form-control\" name=\"fim\" [(ngModel)]=\"pesquisa.fim\" required>\n      </div>\n      <div class=\"modal-footer novo\">\n        <button type=\"button\" class=\"btn btn-secondary\" (click)=\"hideModal()\">Fechar</button>\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"pesquisar()\"><i class=\"fa fa-search\"></i> Buscar</button>\n      </div>\n    </div><!-- /.modal-content -->\n  </div><!-- /.modal-dialog -->\n</div><!-- /.modal -->\n\n<router-outlet></router-outlet>\n\n"
+module.exports = "<div class=\"animated fadeIn\">\n    <div class=\"row\">\n        <div class=\"col-lg-12\">\n          <div class=\"card\">\n            <div class=\"card-header\">\n                   <button type=\"button\" class=\"btn btn-default\" ><i class=\"fa fa-search\"></i> Pesquisar </button>\n            </div>\n            <div class=\"card-body\">\n              <table class=\"table table-responsive table-bordered table-striped table-sm\">\n                <thead>\n                  <tr>\n                    <th class=\"title text-center\">Status</th>\n                    <th class=\"title text-center\">Codigo</th>\n                    <th class=\"title text-center\">Caixa</th>\n                    <th class=\"title text-center\">Saldo</th>\n                    <th class=\"title text-center\">Criado</th>\n                    <th class=\"title text-center\">Atualizado</th>\n                  </tr>\n                </thead>\n                <tbody>\n                  <tr *ngIf=\"tamanho == 0\">\n                    <td colspan=\"10\"> Sem dados</td>\n                  </tr>\n                  <tr *ngFor=\"let o of caixas.data\" (dblclick)=\"edit(o.id)\">\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">\n                      <span class=\"badge badge-pill badge-success\" *ngIf=\"o.ativo === 'S'\" tooltip=\"Ativo\"> Ativo</span>\n                      <span class=\"badge badge-pill badge-danger\" *ngIf=\"o.ativo === 'N'\" tooltip=\"Desativado\"> Desativado</span>\n                    </td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.id }}</td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{o.name}}</td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.saldo | currency:'BRL':true }}</td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.created_at }}</td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.updated_at }}</td>\n                  </tr>\n                </tbody>\n              </table>\n              <!--nav>\n                <ul class=\"pagination\">\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">Prev</a></li>\n                  <li class=\"page-item active\">\n                    <a class=\"page-link\" href=\"#\">1</a>\n                  </li>\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">2</a></li>\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">3</a></li>\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">4</a></li>\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">Next</a></li>\n                </ul>\n              </nav-->\n            </div>\n          </div>\n        </div>\n      </div>\n </div>\n\n<div class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">\n  <div class=\"modal-dialog modal-sm modal-info\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header novo\">\n        <h6 class=\"modal-title\">Pesquisar</h6>\n      </div>\n      <div class=\"modal-body\">\n        <label for=\"inicio\">De</label>\n        <input type=\"date\" id=\"inicio\" class=\"form-control\" name=\"inicio\" [(ngModel)]=\"pesquisa.inicio\" required>\n\n        <label for=\"fim\">Até</label>\n        <input type=\"date\" id=\"fim\" class=\"form-control\" name=\"fim\" [(ngModel)]=\"pesquisa.fim\" required>\n      </div>\n      <div class=\"modal-footer novo\">\n        <button type=\"button\" class=\"btn btn-secondary\" (click)=\"hideModal()\">Fechar</button>\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"pesquisar()\"><i class=\"fa fa-search\"></i> Buscar</button>\n      </div>\n    </div><!-- /.modal-content -->\n  </div><!-- /.modal-dialog -->\n</div><!-- /.modal -->\n\n<router-outlet></router-outlet>\n\n"
 
 /***/ }),
 
@@ -175,17 +186,27 @@ var CaixasComponent = (function () {
     CaixasComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.showLoading();
+        var u = { role: null };
+        u = JSON.parse(localStorage.getItem('user') || null);
+        if (u.role !== 'gerente' && u.role !== 'admin') {
+            this.toasterService.pop('error', 'Sem permissão', 'Usuário sem acesso, contate o administrador');
+            this.router.navigate(['/dashboard']);
+        }
         this.httpService.setAccessToken();
-        this.httpService.builder()
-            .list({}, 'caixas')
-            .then(function (res) {
-            _this.caixas = res;
+        this.httpService.eventEmitter
+            .subscribe(function () {
+            _this.httpService.builder().list({}, 'caixas')
+                .then(function (res) {
+                _this.caixas = res;
+                _this.tamanho = res.data.length;
+                _this.hideLoading();
+            });
         });
-        setTimeout(this.hideLoading(), 2000);
+        this.httpService.eventEmitter.emit();
     };
     CaixasComponent.prototype.edit = function (id) {
         this.cor = true;
-        this.router.navigate(['/close/edit/' + id]);
+        this.router.navigate(['/financeiro/caixas/edit/' + id]);
     };
     CaixasComponent.prototype.new = function () {
         return this.router.navigate(['/orders/new']);
@@ -219,7 +240,7 @@ var CaixasComponent = (function () {
 /***/ "../../../../../src/app/caixas/components/edit.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div tabindex=\"-1\" class=\"modal fade modal_novo\" id=\"successModal\" role=\"dialog\" aria-hidden=\"true\" aria-labelledby=\"myModalLabel\">\r\n    <div class=\"modal-dialog modal-lg modal-primary\" role=\"document\">\r\n        <div class=\"modal-content\">\r\n            <div class=\"modal-header novo\">\r\n                <h4 class=\"text-center\">Editar Pedido: {{ order.id }} </h4>\r\n                <h4 class=\"text-center\"> {{ mesa }} </h4>\r\n                <h4 class=\"text-center\">Total: {{ order.total  | currency:'BRL':true}}</h4>\r\n            </div>\r\n            <div class=\"modal-body\">\r\n                <div class=\"col-md-12\">\r\n                    <form #myForm=\"ngForm\" class=\"form-inline\">\r\n                        <div class=\"form-group col-md-12\">\r\n                            <label for=\"tipo\" class=\"label col-md-2\">Tipo: </label>\r\n                            <select id=\"tipo\" name=\"tipo\" class=\"form-control col-md-2\" [(ngModel)]=\"order.type\" disabled>\r\n                                <option value=\"0\"> Delivery</option>\r\n                                <option value=\"1\"> Salão</option>\r\n                                <option value=\"2\"> Retirada</option>\r\n                            </select>\r\n                            <label for=\"mesa\" class=\"label col-md-2\" *ngIf=\"order.type == 1\">Mesa: </label>\r\n                            <select id=\"mesa\" name=\"mesa_id\" class=\"form-control col-md-2\" [(ngModel)]=\"order.mesa.data.id\" *ngIf=\"order.type == 1\" disabled>\r\n                                <option *ngFor=\"let g of mesas.data\" value=\"{{ g.id }}\"> {{ g.name }}</option>\r\n                            </select>\r\n                            <label for=\"status\" class=\"label col-md-2\">Status: </label>\r\n                            <select id=\"status\" name=\"staus\" class=\"form-control col-md-2\" [(ngModel)]=\"order.status\" disabled>\r\n                                <option value=\"3\">Fechada</option>\r\n                            </select>\r\n\r\n                        </div>\r\n                    </form>\r\n                </div>\r\n                <div class=\"col-md-12\" style=\"padding-bottom: 5px;\">\r\n                    <form #myForm=\"ngForm\" class=\"form-inline\">\r\n                        <div class=\"form-group col-md-12\">\r\n                        </div>\r\n                    </form>\r\n                </div>\r\n                <div class=\"row borderdiv\" style=\"height: 370px; overflow: auto\">\r\n                    <div class=\"col-md-6 mb-4 padding\" *ngIf=\"order.type != 1\">\r\n                        <!-- Nav tabs -->\r\n                        <tabset>\r\n                            <tab heading=\"Cliente\">\r\n                                <form name=\"form\" class=\"form-inline\">\r\n                                    <input type=\"text\" class=\"form-control col-md-12 name\" name=\"name\" [(ngModel)]=\"client.name\" placeholder=\"Nome Cliente\" disabled/>\r\n                                    <br><br>\r\n                                    <input ngxPhoneMask type=\"text\" class=\"form-control col-md-12\" name=\"phone\" [(ngModel)]=\"client.phone\" placeholder=\"Telefone\" disabled />\r\n                                    <br><br>\r\n                                    <input type=\"text\" class=\"form-control col-md-12\" name=\"email\" [(ngModel)]=\"client.email\" placeholder=\"Email\" disabled />\r\n                                    <br><br>\r\n                                    <input type=\"text\" class=\"form-control col-md-12\" name=\"address.address\" [(ngModel)]=\"client.address.address\" placeholder=\"Rua\" [disabled]=\"editar\"/>\r\n                                    <br><br>\r\n                                    <input type=\"text\" class=\"form-control col-md-3\" name=\"address.numero\" [(ngModel)]=\"client.address.numero\" placeholder=\"Numero\" [disabled]=\"editar\">\r\n                                    <div class=\"separate1\"></div>\r\n                                    <input type=\"text\" class=\"form-control col-md-8\" name=\"address.bairro\" [(ngModel)]=\"client.address.bairro\" placeholder=\"Bairro\" [disabled]=\"editar\"/>\r\n                                    <br><br>\r\n                                    <select name=\"cidade\" id=\"cidade\" class=\"form-control col-md-12\" [(ngModel)]=\"client.address.city_id\" disabled>\r\n                                        <option value=\"0\">Selecione cidade</option>\r\n                                        <option value=\"3128709\">Guaxupé</option>\r\n                                        <option value=\"3128303\">Guaranésia</option>\r\n                                        <option value=\"3136900\">Juruaia</option>\r\n                                        <option value=\"3144102\">Muzambinho</option>\r\n                                        <option value=\"3163904\">São Pedro da União</option>\r\n                                    </select>\r\n                                    <br><br>\r\n                                    <div class=\"padding\" *ngIf=\"editar == false\">\r\n                                        <button type=\"button\" class=\"btn btn-default btn-info\" (click)=\"saveClient()\">Atualizar endereço</button>\r\n                                    </div>\r\n                                </form>\r\n                            </tab>\r\n                        </tabset>\r\n                    </div><!--/.col-->\r\n                    <div class=\"col-lg-6 padding\" [ngClass]=\"{'col-md-12 col-lg-12': order.type != 0 && order.type != 2, 'col-md-6 col-lg-6': order.type != 1}\">\r\n                        <div class=\"table-responsive\" style=\"height: 160px; overflow: auto\">\r\n                            <table class=\"table scrollbox table-striped\">\r\n                                <thead>\r\n                                <tr class=\"th-table title-table\">\r\n                                    <th>#</th>\r\n                                    <th>Produto</th>\r\n                                    <th>Valor</th>\r\n                                    <th>Quantadade</th>\r\n                                    <th>SubTotal</th>\r\n                                </tr>\r\n                                </thead>\r\n                                <tbody>\r\n                                <tr *ngFor=\"let i of products.data\">\r\n                                    <td *ngIf=\"i.ativo == 'S'\">{{ i.product.data.id }}</td>\r\n                                    <td *ngIf=\"i.ativo == 'S'\">{{ i.product.data.name }}\r\n                                        <p *ngFor=\"let c of i.complement.data\" style=\"font-size: 10px; margin-bottom: 0;\"> {{ c.complement.data.name }}: {{ c.price | currency:'BRL':true }}</p>\r\n                                        <p style=\"font-size: 10px; margin-bottom: 0;\">{{ i.historico }}</p>\r\n                                    </td>\r\n                                    <td *ngIf=\"i.ativo == 'S'\">{{ i.product.data.price | currency:'BRL':true}}</td>\r\n                                    <td *ngIf=\"i.ativo == 'S'\">{{ i.qtd }}</td>\r\n                                    <td *ngIf=\"i.ativo == 'S'\">\r\n                                        {{ i.subtotal | currency:'BRL':true }}\r\n                                    </td>\r\n                                </tr>\r\n                                </tbody>\r\n                            </table>\r\n                        </div>\r\n                        <hr>\r\n                        <div class=\"col-md-12 text-center alert alert-success total-pagamento\"><p class=\"qtd\">TOTAL: {{ order.total | currency:'BRL':true }}</p></div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"modal-footer cadastro\">\r\n                <div class=\"modal-button\">\r\n                    <button class=\"btn btn-primary\" (click)=\"save()\"><i class=\"fa fa-print\"></i> Imprimir (F7)</button>\r\n                    <button class=\"btn btn-danger text-left\" type=\"button\" (click)=\"close()\"><i class=\"fa fa-arrow-circle-left\"></i> Cancelar (ESC)</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <!-- /.modal-content -->\r\n    </div>\r\n    <!-- /.modal-dialog -->\r\n</div>\r\n"
+module.exports = "<div tabindex=\"-1\" class=\"modal fade\" id=\"successModal\" role=\"dialog\" aria-hidden=\"true\" aria-labelledby=\"myModalLabel\" style=\"display: none;\">\r\n    <div class=\"modal-dialog modal-sm modal-info\" role=\"document\">\r\n        <div class=\"modal-content\">\r\n            <div class=\"modal-header cadastro\">\r\n                <h6 class=\"modal-title\">Editar Caixa</h6>\r\n                <button class=\"close\" aria-label=\"Close\" type=\"button\" data-dismiss=\"modal\" (click)=\"close()\">\r\n                    <span aria-hidden=\"true\">×</span>\r\n                </button>\r\n            </div>\r\n            <div class=\"modal-body\">\r\n                <form>\r\n                    <div class=\"form-group row\">\r\n                        <label class=\"col-md-4 col-form-label\" for=\"name\">Caixa: <span class=\"text-danger\">*</span></label>\r\n                        <div class=\"col-md-8\">\r\n                            <input type=\"text\" id=\"name\" name=\"name\" [(ngModel)]=\"caixa.name\" class=\"form-control\" placeholder=\"Nome Caixa\">\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"form-group row\">\r\n                        <label class=\"col-md-4 col-form-label\" for=\"saldo\">Saldo:</label>\r\n                        <div class=\"col-md-8\">\r\n                            <input type=\"text\" id=\"saldo\" name=\"phone\" currencyMask [(ngModel)]=\"caixa.saldo\" [options]=\"{ prefix: 'R$ ', thousands: '.', decimal: ',' }\" class=\"form-control\" placeholder=\"Saldo\" disabled>\r\n                        </div>\r\n                    </div>\r\n                </form>\r\n            </div>\r\n            <div class=\"modal-footer cadastro\">\r\n                <div class=\"modal-button\">\r\n                    <button class=\"btn btn-danger\" type=\"button\" (click)=\"close()\"><i class=\"fa fa-arrow-circle-left\"></i> Cancelar</button>\r\n                    <button class=\"btn btn-success\" type=\"button\" (click)=\"save(caixa)\"><i class=\"fa fa-save\"></i> Salvar</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <!-- /.modal-content -->\r\n    </div>\r\n    <!-- /.modal-dialog -->\r\n</div>"
 
 /***/ }),
 
@@ -255,32 +276,10 @@ var EditComponent = (function () {
         this.router = router;
         this.route = route;
         this.toasterService = toasterService;
-        this.order = {
+        this.caixa = {
             id: 0,
-            status: 0,
-            mesa: {
-                data: {
-                    id: 1
-                }
-            }
+            name: ''
         };
-        this.client = {
-            id: 1,
-            name: '',
-            phone: '',
-            address: {
-                address: null,
-                numero: null,
-                bairro: null,
-                city_id: 0
-            },
-            email: ''
-        };
-        this.products = {};
-        this.mesas = {
-            data: null
-        };
-        this.mesa = '';
         this.pesquisa = {
             value: null,
             telefone: null
@@ -292,14 +291,8 @@ var EditComponent = (function () {
         this.editar = true;
         this.imprimir = false;
         document.onkeydown = (function (e) {
-            if (e.keyCode == 120) {
-                _this.update();
-            }
             if (e.keyCode == 27) {
                 _this.close();
-            }
-            if (e.keyCode == 118) {
-                _this.save();
             }
         });
     }
@@ -311,82 +304,35 @@ var EditComponent = (function () {
         __WEBPACK_IMPORTED_MODULE_1_jquery__('name').disabled = false;
         this.route.params
             .subscribe(function (params) {
-            _this.httpService.builder().view(params['id'], 'order')
+            _this.httpService.builder().view(params['id'], 'caixa')
                 .then(function (res) {
-                _this.order = res.data;
-                if (res.data.client.data.user) {
-                    _this.client.id = res.data.client.data.id;
-                    _this.client.name = res.data.client.data.name;
-                    _this.client.phone = res.data.client.data.phone;
-                    _this.client.email = res.data.client.data.user.data.email;
-                    _this.client.address.address = res.data.client.data.addressClient.data.address;
-                    _this.client.address.numero = res.data.client.data.addressClient.data.numero;
-                    _this.client.address.bairro = res.data.client.data.addressClient.data.bairro;
-                    _this.client.address.city_id = res.data.client.data.addressClient.data.city.data.id;
-                    _this.products = res.data.items;
-                    _this.mesa = res.data.mesa.data.name;
-                }
-                else {
-                    _this.client.id = res.data.client.data.id;
-                    _this.client.name = res.data.client.data.name;
-                    _this.client.phone = res.data.client.data.phone;
-                    _this.client.email = '';
-                    _this.client.address.address = res.data.client.data.addressClient.data.address;
-                    _this.client.address.numero = res.data.client.data.addressClient.data.numero;
-                    _this.client.address.bairro = res.data.client.data.addressClient.data.bairro;
-                    _this.client.address.city_id = res.data.client.data.addressClient.data.city.data.id;
-                    _this.products = res.data.items;
-                    _this.mesa = res.data.mesa.data.name;
-                }
+                _this.caixa = res.data;
                 _this.hideLoading();
             });
             _this.httpService.setAccessToken();
-            _this.httpService.builder()
-                .list({}, 'mesas/all')
-                .then(function (res) {
-                _this.mesas = res;
-            });
         });
-        this.httpService.eventEmitter.emit();
     };
-    EditComponent.prototype.update = function () {
+    EditComponent.prototype.save = function (e) {
         var _this = this;
-        this.showLoading();
-        var order = {
-            'status': this.order.status,
-            'mesa_id': this.order.mesa.data.id
-        };
-        this.httpService.builder('order')
-            .update(this.order.id, order)
-            .then(function (res) {
-            _this.httpService.eventEmitter.emit();
-            _this.order = res.data;
-            _this.client.id = res.data.client.data.id;
-            _this.client.name = res.data.client.data.name;
-            _this.client.phone = res.data.client.data.phone;
-            if (res.data.client.data.user) {
-                _this.client.email = res.data.client.data.user.data.email;
-            }
-            else {
-                _this.client.email = res.data.client.data.user.data.email;
-            }
-            _this.client.address.address = res.data.client.data.addressClient.data.address;
-            _this.client.address.numero = res.data.client.data.addressClient.data.numero;
-            _this.client.address.bairro = res.data.client.data.addressClient.data.bairro;
-            _this.client.address.city_id = res.data.client.data.addressClient.data.city.data.id;
-            _this.products = res.data.items;
-            _this.mesa = res.data.mesa.data.name;
-            _this.hideLoading();
-            _this.toasterService.pop('success', 'Sucesso', 'Pedido ' + _this.order.id + ' com sucesso!');
-        });
+        if (this.caixa.name != null && this.caixa.name.length > 4) {
+            this.showLoading();
+            this.httpService.setAccessToken();
+            this.httpService.builder('caixa')
+                .update(this.caixa.id, e)
+                .then(function () {
+                _this.httpService.eventEmitter.emit();
+                _this.toasterService.pop('success', 'Sucesso', 'Caixa salvo com sucesso');
+                _this.hideLoading();
+                _this.close();
+            });
+        }
+        else {
+            this.toasterService.pop('error', 'Erro', 'Verifique se todos os campos foram preenchidos.');
+        }
     };
     EditComponent.prototype.close = function () {
-        __WEBPACK_IMPORTED_MODULE_1_jquery__('#successModal').on('show.bs.modal').show().removeClass('show');
-        this.router.navigate(['/close']);
-    };
-    EditComponent.prototype.save = function () {
-        __WEBPACK_IMPORTED_MODULE_1_jquery__('#successModal').on('show.bs.modal').show().removeClass('show');
-        this.router.navigate(['/close/printer/' + this.order.id + '/N']);
+        __WEBPACK_IMPORTED_MODULE_1_jquery__('#successModal').hide();
+        this.router.navigate(['/financeiro/caixas']);
     };
     EditComponent.prototype.habilitarEdicao = function () {
         this.editar = !this.editar;
