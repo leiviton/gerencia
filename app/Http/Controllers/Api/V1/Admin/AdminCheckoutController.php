@@ -928,7 +928,7 @@ class AdminCheckoutController extends Controller
                                 <style>
                                      .fonte{
                                         font-weight: bold;
-                                        font-size: 16px;
+                                        font-size: 18px;
                                     }
                                     .padding{
                                         padding-left: 10px;
@@ -939,7 +939,7 @@ class AdminCheckoutController extends Controller
                                     }
                                     .produto{
                                         font-weight: bold;
-                                        font-size: 15px;
+                                        font-size: 18px;
                                         
                                     }
                                     .price{
@@ -993,7 +993,7 @@ class AdminCheckoutController extends Controller
                                     <h5 class='data'>Previsão: ".date('H:i:s',strtotime('+ 20 minutes',strtotime($hora)))."</h5>
                                     <h5 class='fonte'>---------------------------------------------------------------------</h5>
                                     <h5 class='fonte'>Cliente: " . $order->client->name . "</h5>
-                                    <h5 class='fonte'>Endereço: " . $order->client->addressClient->address . "," . $order->client->addressClient->numero . "</h5>
+                                    <h5 class='fonte client'>Endereço: " . $order->client->addressClient->address . "," . $order->client->addressClient->numero . "</h5>
                                     <h5 class='fonte'>Complemento: " . $order->client->addressClient->complemento . "</h5>
                                     <h5 class='fonte'>Bairro: " . $order->client->addressClient->bairro . "</h5>
                                     <h5 class='fonte'>Cidade:    Guaxupé UF: MG</h5>
@@ -1017,6 +1017,7 @@ class AdminCheckoutController extends Controller
                                 <style>
                                      .fonte{
                                         font-weight: bold;
+                                        font-size: 18px;
                                     }
                                     .padding{
                                         padding-left: 10px;
@@ -1027,7 +1028,7 @@ class AdminCheckoutController extends Controller
                                     }
                                     .produto{
                                         font-weight: bold;
-                                        font-size: 15px;
+                                        font-size: 18px;
                                         
                                     }
                                     .price{
