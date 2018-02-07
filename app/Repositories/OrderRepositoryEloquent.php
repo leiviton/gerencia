@@ -25,7 +25,7 @@ class OrderRepositoryEloquent extends BaseRepository implements OrderRepository
             $order = explode(',',$order);
         }
         $order[0] = $order[0] ?? 'id';
-        $order[1] = $order[1] ?? 'asc';
+        $order[1] = $order[1] ?? 'desc';
 
         $where = $data['where'] ?? [];
         $inicio = null;

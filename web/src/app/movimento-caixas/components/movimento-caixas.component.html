@@ -1,0 +1,87 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-header">
+                   <button type="button" class="btn btn-default" (click)="showModal()"><i class="fa fa-search"></i> Pesquisar </button>
+            </div>
+            <div class="card-body">
+              <table class="table table-responsive table-bordered table-striped table-sm">
+                <thead>
+                  <tr>
+                    <th class="title text-center">#</th>
+                    <th class="title text-center">Tipo</th>
+                    <th class="title text-center">Caixa</th>
+                    <th class="title text-center">Valor</th>
+                    <th class="title text-center">Documento</th>
+                    <th class="title text-center">Criado</th>
+                    <th class="title text-center">Atualizado</th>
+                    <th class="title text-center">Usuário</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngIf="tamanho == 0">
+                    <td colspan="10"> Sem dados</td>
+                  </tr>
+                  <tr *ngFor="let o of movimentos.data" (dblclick)="edit(o.id)">
+                    <td class="text-center" *ngIf="tamanho > 0">{{ o.id }}</td>
+                    <td class="text-center" *ngIf="tamanho > 0">
+                      <span class="badge badge-pill badge-success" *ngIf="o.tipo_movimento === 'credito'" tooltip="Crédito"><i class="fa fa-arrow-down"></i> Crédito</span>
+                      <span class="badge badge-pill badge-danger" *ngIf="o.tipo_movimento === 'debito'" tooltip="Débito"><i class="fa fa-arrow-up"></i> Débito</span>
+                    </td>
+                    <td class="text-center" *ngIf="tamanho > 0">{{ o.caixa.data.name}}</td>
+                    <td class="text-center" *ngIf="tamanho > 0">{{ o.valor | currency:'BRL':true }}</td>
+                    <td class="text-center" *ngIf="tamanho > 0">{{ o.payment.data.id}}</td>
+                    <td class="text-center" *ngIf="tamanho > 0">{{ o.created_at }}</td>
+                    <td class="text-center" *ngIf="tamanho > 0">{{ o.updated_at }}</td>
+                    <td class="text-center" *ngIf="tamanho > 0">{{ o.usuario }}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <!--nav>
+                <ul class="pagination">
+                  <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+                  <li class="page-item active">
+                    <a class="page-link" href="#">1</a>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item"><a class="page-link" href="#">4</a></li>
+                  <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                </ul>
+              </nav-->
+            </div>
+            <h4 class="text-title text-center">Total: {{ total | currency:'BRL':true }}</h4>
+          </div>
+        </div>
+      </div>
+ </div>
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-sm modal-info" role="document">
+    <div class="modal-content">
+      <div class="modal-header novo">
+        <h6 class="modal-title">Pesquisar</h6>
+      </div>
+      <div class="modal-body">
+        <label for="inicio">De</label>
+        <input type="date" id="inicio" class="form-control" name="inicio" [(ngModel)]="pesquisa.inicio" required>
+
+        <label for="fim">Até</label>
+        <input type="date" id="fim" class="form-control" name="fim" [(ngModel)]="pesquisa.fim" required>
+
+        <label class="col-form-label" for="select">Status</label>
+        <select name="status" class="form-control" id="select" [(ngModel)]="pesquisa.caixa_id" required>
+          <option *ngFor="let g of caixas.data" value="{{ g.id }}"> {{ g.name }}</option>
+        </select>
+      </div>
+      <div class="modal-footer novo">
+        <button type="button" class="btn btn-secondary" (click)="hideModal()">Fechar</button>
+        <button type="button" class="btn btn-primary" (click)="pesquisar()"><i class="fa fa-search"></i> Buscar</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<router-outlet></router-outlet>
+

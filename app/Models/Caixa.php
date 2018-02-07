@@ -21,5 +21,4 @@ class Caixa extends Model implements Transformable
     {
         return $this->hasMany(MovimentoCaixa::class);
     }
-
 }

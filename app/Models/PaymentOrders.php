@@ -20,10 +20,11 @@ class PaymentOrders extends Model implements Transformable
     ];
 
     public function order(){
-        return $this->belongsTo(Order::class);
+        return $this->belongsTo(Order::class,'order_id','id');
     }
 
     public function paymentTypes(){
         return $this->belongsTo(PaymentTypes::class);
     }
 }
+

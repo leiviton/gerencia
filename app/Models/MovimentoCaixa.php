@@ -27,6 +27,6 @@ class MovimentoCaixa extends Model implements Transformable
 
     public function payment()
     {
-        return $this->belongsTo(PaymentOrders::class);
+        return $this->belongsTo(PaymentOrders::class,'payment_order_id','id');
     }
 }

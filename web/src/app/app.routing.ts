@@ -57,6 +57,10 @@ export const routes: Routes = [
             path: 'financeiro/caixas',
             loadChildren: './caixas/caixas.module#CaixasModule',
         },
+        {
+            path: 'financeiro/movimento/caixas',
+            loadChildren: './movimento-caixas/movimento-caixas.module#MovimentoCaixasModule'
+        }
 
     ]
   },

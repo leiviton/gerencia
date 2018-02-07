@@ -23,6 +23,9 @@ use Pedidos\Repositories\OrderRepository;
 use Pedidos\Repositories\PaymentTypesRepository;
 use Pedidos\Repositories\ProductRepository;
 use Pedidos\Services\OrderService;
+use Mike42\Escpos\Printer;
+use Mike42\Escpos\PrintConnectors\NetworkPrintConnector;
+
 
 class AdminCheckoutController extends Controller
 {
@@ -431,9 +434,9 @@ class AdminCheckoutController extends Controller
         $table = "<table>
                     <thead>
                       <tr>
-                        <th class='fonte padding produto'>Produto</th>
-                        <th class='fonte padding produto'>Qtd</th>                     
-                        <th class='price padding'>Vr.Uni</th>
+                        <th class='fonte padding produto item'>Produto</th>
+                        <th class='fonte padding produto item'>Qtd</th>                     
+                        <th class='price padding item'>Vr.Uni</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -504,31 +507,35 @@ class AdminCheckoutController extends Controller
                                         font-weight: bold;
                                         font-size: 22px;
                                     }
+                                    .item{
+										margin:0;
+										padding:0;
+									}
                                 </style>
                             </head>
                             <body>
-                                <div class='center'>
-                                    <h5 class='fonte'>---------------------------------------------------------------------</h5>
-                                    <h5 class='fonte pedido'>Pedido: $order->id | " . $order->mesa->name . "</h5>
-                                    <h5 class='data'>Data: $data |  Hora: $hora</h5>
-                                    <h5 class='data'>Previsão: ".date('H:i:s',strtotime('+ 30 minutes',strtotime($hora)))."</h5>                              
+                                <div class='center item'>
+                                    <h5 class='fonte item'>---------------------------------------------------------------------</h5>
+                                    <h5 class='fonte pedido item'>Pedido: $order->id | " . $order->mesa->name . "</h5>
+                                    <h5 class='data item'>Data: $data |  Hora: $hora</h5>
+                                    <h5 class='data item'>Previsão: ".date('H:i:s',strtotime('+ 30 minutes',strtotime($hora)))."</h5>                              
                                     
-                                    <h5 class='fonte'>---------------------------------------------------------------------</h5>
-                                    <h5 class='fonte client'>Cliente: " . $order->client->name . "</h5>
-                                    <h5 class='fonte client'>Endereço: " . $order->client->addressClient->address . "," . $order->client->addressClient->numero . "</h5>
-                                    <h5 class='fonte client'>Complemento: " . $order->client->addressClient->complemento . "</h5>
-                                    <h5 class='fonte client'>Bairro: " . $order->client->addressClient->bairro . "</h5>
-                                    <h5 class='fonte client'>Cidade:    Guaxupé UF: MG</h5>
-                                    <h5 class='fonte'>---------------------------------------------------------------------</h5>
-                                    <h5 class='fonte'>ITENS:</h5>
+                                    <h5 class='fonte item'>---------------------------------------------------------------------</h5>
+                                    <h5 class='fonte client item'>Cliente: " . $order->client->name . "</h5>
+                                    <h5 class='fonte client item'>Endereço: " . $order->client->addressClient->address . "," . $order->client->addressClient->numero . "</h5>
+                                    <h5 class='fonte client item '>Complemento: " . $order->client->addressClient->complemento . "</h5>
+                                    <h5 class='fonte client item'>Bairro: " . $order->client->addressClient->bairro . "</h5>
+                                    <h5 class='fonte client item'>Cidade:    Guaxupé UF: MG</h5>
+                                    <h5 class='fonte item'>---------------------------------------------------------------------</h5>
+                                    <h5 class='fonte item'>ITENS:</h5>
                                     $table
-                                    <h5 class='fonte'>---------------------------------------------------------------------</h5>
-                                    <h5 class='fonte'>TOTAL DE ITENS: $contador</h5>
-                                    <h5 class='fonte total'>TOTAL DA COMPRA: R$ $order->total</h5>
-                                    <h5 class='fonte'>---------------------------------------------------------------------</h5>
-                                    <p class='obs'>$order->observacao</p>
-                                    <h5 class='obs'>$order->troco</h5>
-                                    <h5 class='obs'>$taxa</h5>
+                                    <h5 class='fonte item'>---------------------------------------------------------------------</h5>
+                                    <h5 class='fonte item'>TOTAL DE ITENS: $contador</h5>
+                                    <h5 class='fonte total item'>TOTAL DA COMPRA: R$ $order->total</h5>
+                                    <h5 class='fonte item'>---------------------------------------------------------------------</h5>
+                                    <p class='obs item'>$order->observacao</p>
+                                    <h5 class='obs item'>$order->troco</h5>
+                                    <h5 class='obs item'>$taxa</h5>
                                 </div>
                             </body>
                         </html>")->save(public_path() . '/printer/' . $order->id . '.pdf');
@@ -856,6 +863,38 @@ class AdminCheckoutController extends Controller
         $order->save();
 
         return $this->repository->skipPresenter(false)->find($order->id);
+    }
+
+    public function printer2($id)
+    {
+        $order = $this->repository->find($id);
+
+        $data = date_format($order->created_at,'d/m/Y');
+
+        $hora = date_format($order->created_at,'H:i:s');
+
+        $items = $this->itemRepository
+            ->scopeQuery(function($query) use($id){
+                return $query->where('order_id',$id);
+            })->all();
+
+        $produtos = '';
+
+        $contador = 0;
+
+        $taxa = '';
+
+        try {
+            $connector = new NetworkPrintConnector("192.168.0.199", 9100);
+            $printer = new Printer($connector);
+            $printer -> text("-------------------------------------------!\n
+                    Pedido: $order->id | $order->mesa->mesa
+            ");
+            $printer -> cut();
+            $printer -> close();
+        } catch (\Exception $e) {
+            echo "Couldn't print to this printer: " . $e -> getMessage() . "\n";
+        }
     }
     public function printer($id)
     {

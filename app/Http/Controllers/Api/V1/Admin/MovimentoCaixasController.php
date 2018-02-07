@@ -44,6 +44,12 @@ class MovimentoCaixasController extends Controller
             ->all();
     }
 
+    public function getFiltros(Request $request)
+    {
+        return $this->repository->skipPresenter(false)
+            ->filter($request->all());
+    }
+
     public function search(Request $request)
     {
         $pesquisa = $request->get('value');

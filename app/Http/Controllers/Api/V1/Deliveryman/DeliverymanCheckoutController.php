@@ -60,6 +60,7 @@ class DeliverymanCheckoutController extends Controller
         return $this->repository->skipPresenter(false)
             ->orderFilter($request->all());
     }
+
     public function getProducts(){
         $products = $this->productRepository
             ->skipPresenter(false)

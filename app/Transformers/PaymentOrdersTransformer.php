@@ -37,4 +37,10 @@ class PaymentOrdersTransformer extends TransformerAbstract
     {
         return $this->item($model->paymentTypes, new PaymentTypesTransformer());
     }
+
+    public function includeOrder(PaymentOrders $model)
+    {
+        return $this->item($model->order,new OrderTransformer());
+    }
+
 }

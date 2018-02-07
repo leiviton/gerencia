@@ -1,0 +1,36 @@
+<div tabindex="-1" class="modal fade" id="successModal" role="dialog" aria-hidden="true" aria-labelledby="myModalLabel" style="display: none;">
+    <div class="modal-dialog modal-sm modal-info" role="document">
+        <div class="modal-content">
+            <div class="modal-header cadastro">
+                <h6 class="modal-title">Editar Caixa</h6>
+                <button class="close" aria-label="Close" type="button" data-dismiss="modal" (click)="close()">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group row">
+                        <label class="col-md-4 col-form-label" for="name">Caixa: <span class="text-danger">*</span></label>
+                        <div class="col-md-8">
+                            <input type="text" id="name" name="name" [(ngModel)]="caixa.name" class="form-control" placeholder="Nome Caixa">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-4 col-form-label" for="saldo">Saldo:</label>
+                        <div class="col-md-8">
+                            <input type="text" id="saldo" name="phone" currencyMask [(ngModel)]="caixa.saldo" [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" class="form-control" placeholder="Saldo" disabled>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer cadastro">
+                <div class="modal-button">
+                    <button class="btn btn-danger" type="button" (click)="close()"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
+                    <button class="btn btn-success" type="button" (click)="save(caixa)"><i class="fa fa-save"></i> Salvar</button>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
