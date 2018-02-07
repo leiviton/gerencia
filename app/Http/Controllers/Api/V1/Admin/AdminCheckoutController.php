@@ -878,27 +878,30 @@ class AdminCheckoutController extends Controller
 
         foreach ($items as $value)
         {
-            if($value->product->id != 58 || $value->product->ativo != 'N') {
-                 $com = '';
-                 $id = $value->id;
-                 $complements = $this->complementItemRepository->scopeQuery(function($query) use($id){
-                     return $query->where('order_item_id',$id);
-                 })->all();
-                if($complements) {
-                    foreach ($complements as $v) {
-                        $com .= "<br />" . $v->complement->name. " - R$". $v->price;
-                    }
-                }else{
+            if($value->product->id != 58) {
+                if ($value->product->ativo != 'N') {
                     $com = '';
-                }
+                    $id = $value->id;
+                    $complements = $this->complementItemRepository->scopeQuery(function ($query) use ($id) {
+                        return $query->where('order_item_id', $id);
+                    })->all();
+                    if ($complements) {
+                        foreach ($complements as $v) {
+                            $com .= "<br />" . $v->complement->name . " - R$" . $v->price;
+                        }
+                    } else {
+                        $com = '';
+                    }
 
-                $produtos .= "<tr class='border'>
-                            <td class='fonte produto border produto2'>" . $value->product->name . $com . "<br/>".$value->historico."</td>
+                    $produtos .= "<tr class='border'>
+                            <td class='fonte produto border produto2'>" . $value->product->name . $com . "<br/>" . $value->historico . "</td>
                             <td class='fonte padding border produto'>" . $value->qtd . "</td>
                             <td class='price padding border'>$" . $value->subtotal . "</td>
                             </tr>";
-                $this->itemRepository->update(['impresso' => 'S'], $value->id);
-                $contador += $value->qtd;
+                    $this->itemRepository->update(['impresso' => 'S'], $value->id);
+                    $contador += $value->qtd;
+
+                }
             }
 
             if($value->product->id == 58){
@@ -906,9 +909,9 @@ class AdminCheckoutController extends Controller
             }
         }
 
-        $table = "<table>
+        $table = "<table class='item'>
                     <thead>
-                      <tr>
+                      <tr class='item'>
                         <th class='fonte padding produto'>Produto</th>
                         <th class='fonte padding produto'>Qtd</th>                     
                         <th class='price padding'>Vr.Uni</th>
@@ -983,30 +986,34 @@ class AdminCheckoutController extends Controller
                                         font-weight: bold;
                                         font-size: 22px;
                                     }
+                                    .item{
+										margin:0;
+										padding:0;
+									}
                                 </style>
                             </head>
                             <body>
-                                <div class='center'>
-                                    <h5 class='fonte'>---------------------------------------------------------------------</h5>
-                                    <h5 class='fonte pedido'>Pedido: $order->id | " . $order->mesa->name . "</h5>
-                                    <h5 class='data'>Data: $data |  Hora: $hora</h5>                              
-                                    <h5 class='data'>Previsão: ".date('H:i:s',strtotime('+ 20 minutes',strtotime($hora)))."</h5>
-                                    <h5 class='fonte'>---------------------------------------------------------------------</h5>
-                                    <h5 class='fonte'>Cliente: " . $order->client->name . "</h5>
-                                    <h5 class='fonte client'>Endereço: " . $order->client->addressClient->address . "," . $order->client->addressClient->numero . "</h5>
-                                    <h5 class='fonte'>Complemento: " . $order->client->addressClient->complemento . "</h5>
-                                    <h5 class='fonte'>Bairro: " . $order->client->addressClient->bairro . "</h5>
-                                    <h5 class='fonte'>Cidade:    Guaxupé UF: MG</h5>
-                                    <h5 class='fonte'>---------------------------------------------------------------------</h5>
-                                    <h5 class='fonte'>ITENS:</h5>
+                                <div class='item'>
+                                    <h5 class='fonte item'>---------------------------------------------------------------------</h5>
+                                    <h5 class='fonte pedido item'>Pedido: $order->id | " . $order->mesa->name . "</h5>
+                                    <h5 class='data item'>Data: $data |  Hora: $hora</h5>                              
+                                    <h5 class='data item'>Previsão: ".date('H:i:s',strtotime('+ 20 minutes',strtotime($hora)))."</h5>
+                                    <h5 class='fonte item'>---------------------------------------------------------------------</h5>
+                                    <h5 class='fonte item'>Cliente: " . $order->client->name . "</h5>
+                                    <h5 class='fonte client item'>Endereço: " . $order->client->addressClient->address . "," . $order->client->addressClient->numero . "</h5>
+                                    <h5 class='fonte item'>Complemento: " . $order->client->addressClient->complemento . "</h5>
+                                    <h5 class='fonte item'>Bairro: " . $order->client->addressClient->bairro . "</h5>
+                                    <h5 class='fonte item'>Cidade:    Guaxupé UF: MG</h5>
+                                    <h5 class='fonte item'>---------------------------------------------------------------------</h5>
+                                    <h5 class='fonte item'>ITENS:</h5>
                                     $table
-                                    <h5 class='fonte'>---------------------------------------------------------------------</h5>
-                                    <h5 class='fonte'>TOTAL DE ITENS: $contador</h5>
-                                    <h5 class='fonte total'>TOTAL DA COMPRA: R$ $order->total</h5>
-                                    <h5 class='fonte'>---------------------------------------------------------------------</h5>
-                                    <p class='obs'>$order->observacao</p>
-                                    <h5 class='obs'>$order->troco</h5>
-                                    <h5 class='obs'>$taxa</h5>
+                                    <h5 class='fonte item'>---------------------------------------------------------------------</h5>
+                                    <h5 class='fonte item'>TOTAL DE ITENS: $contador</h5>
+                                    <h5 class='fonte total item'>TOTAL DA COMPRA: R$ $order->total</h5>
+                                    <h5 class='fonte item'>---------------------------------------------------------------------</h5>
+                                    <p class='obs item'>$order->observacao</p>
+                                    <h5 class='obs item'>$order->troco</h5>
+                                    <h5 class='obs item'>$taxa</h5>
                                 </div>
                             </body>
                         </html>")->save(public_path() . '/printer/' . $order->id . '.pdf');
@@ -1072,22 +1079,26 @@ class AdminCheckoutController extends Controller
                                         font-weight: bold;
                                         font-size: 22px;
                                     }
+                                    .item{
+                                        margin: 0;
+                                        padding: 0;
+                                    }
                                 </style>
                             </head>
                             <body>
-                                <h5 class='fonte'>---------------------------------------------------------------------</h5>
-                                <h5 class='fonte pedido'>Pedido: $order->id | " . $order->mesa->name . "</h5>
-                                <h5 class='data'>Data: $data | Hora: $hora</h5>
-                                <h5 class='data'>Previsão: ".date('H:i:s',strtotime('+ 20 minutes',strtotime($hora)))."</h5>                              
-                                <h5 class='fonte'>---------------------------------------------------------------------</h5>
-                                <h5 class='fonte'>ITENS:</h5>
+                                <h5 class='fonte item'>---------------------------------------------------------------------</h5>
+                                <h5 class='fonte pedido item'>Pedido: $order->id | " . $order->mesa->name . "</h5>
+                                <h5 class='data item'>Data: $data | Hora: $hora</h5>
+                                <h5 class='data item'>Previsão: ".date('H:i:s',strtotime('+ 20 minutes',strtotime($hora)))."</h5>                              
+                                <h5 class='fonte item'>---------------------------------------------------------------------</h5>
+                                <h5 class='fonte item' style='padding: 0;margin: 0'>ITENS:</h5>
                                 $table
-                                <h5 class='fonte'>---------------------------------------------------------------------</h5>
-                                <h5 class='fonte'>TOTAL DE ITENS: $contador</h5>
-                                <h5 class='fonte total'>TOTAL DA COMPRA: R$ $order->total</h5>
-                                <h5 class='fonte'>---------------------------------------------------------------------</h5>
-                                <p class='obs'>$order->observacao</p>
-                                <h5 class='obs'>$taxa</h5>
+                                <h5 class='fonte item'>---------------------------------------------------------------------</h5>
+                                <h5 class='fonte item'>TOTAL DE ITENS: $contador</h5>
+                                <h5 class='fonte total item'>TOTAL DA COMPRA: R$ $order->total</h5>
+                                <h5 class='fonte item'>---------------------------------------------------------------------</h5>
+                                <p class='obs item'>$order->observacao</p>
+                                <h5 class='obs item'>$taxa</h5>
                             </body>
                         </html>")->save(public_path() . '/printer/' . $order->id . '.pdf');
         }

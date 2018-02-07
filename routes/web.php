@@ -79,6 +79,14 @@ Route::group(['prefix'=>'api/v1','middleware' => 'auth:api'],function () {
         Route::post('caixa', 'CaixasController@store');
         Route::get('caixa/{id}','CaixasController@edit');
         Route::put('caixa/{id}', 'CaixasController@update');
+
+        /*movimento caixas*/
+        Route::get('search/caixa','MovimentoCaixasController@search');
+        Route::get('movimento/caixas','MovimentoCaixasController@index');
+        Route::post('movimento/caixa', 'MovimentoCaixasController@store');
+        Route::get('movimento/caixa/{id}','MovimentoCaixasController@edit');
+        Route::put('movimento/caixa/{id}', 'MovimentoCaixasController@update');
+
     });
     Route::get('user','Api\UserController@authenticated');
 });
