@@ -44,17 +44,35 @@ class MovimentoCaixaRepositoryEloquent extends BaseRepository implements Movimen
             $like[0] = $key;
             $like[1] = '%'.$like[$key].'%';
         }
-        $results = $this->model
-            ->where(function ($query) use ($like) {
-                if ($like){
-                    return $query->where($like[0],'like',$like[1]);
-                }
-                return $query;
-            })
-            ->whereBetween("created_at",
-                [$inicio,$fim])
-            ->where('caixa_id',$status['caixa_id'])
-            ->get();
+
+        $results = [];
+
+        if(isset($where['user']) !== 'todos'){
+            $results = $this->model
+                ->where(function ($query) use ($like) {
+                    if ($like){
+                        return $query->where($like[0],'like',$like[1]);
+                    }
+                    return $query;
+                })
+                ->whereBetween("created_at",
+                    [$inicio,$fim])
+                ->where('caixa_id',$status['caixa_id'])
+                ->where('usuario',$where['user'])
+                ->get();
+        }else{
+            $results = $this->model
+                ->where(function ($query) use ($like) {
+                    if ($like){
+                        return $query->where($like[0],'like',$like[1]);
+                    }
+                    return $query;
+                })
+                ->whereBetween("created_at",
+                    [$inicio,$fim])
+                ->where('caixa_id',$status['caixa_id'])
+                ->get();
+        }
         if ($results){
             return $this->parserResult($results);
         }

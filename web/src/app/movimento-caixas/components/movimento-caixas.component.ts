@@ -31,12 +31,16 @@ export class MovimentoCaixasComponent implements OnInit {
     pesquisa:any = {
         inicio:null,
         fim:null,
-        caixa_id:1
+        caixa_id:1,
+        user:'todos'
     };
     movimentos = {
         data:[]
     };
     total = 0;
+    usuarios = {
+        data:[]
+    };
   ngOnInit(): void {
       this.showLoading();
       let u = {role:null};
@@ -49,6 +53,8 @@ export class MovimentoCaixasComponent implements OnInit {
       this.httpService.setAccessToken();
       setTimeout(this.hideLoading(),2000);
       this.getCaixas();
+      this.getUser();
+
   }
 
     edit(id)
@@ -66,6 +72,15 @@ export class MovimentoCaixasComponent implements OnInit {
             });
     }
 
+    getUser()
+    {
+        this.httpService.builder()
+            .list({},'users')
+            .then((res) => {
+                this.usuarios = res;
+            });
+    }
+
     pesquisar()
     {
 
@@ -75,6 +90,7 @@ export class MovimentoCaixasComponent implements OnInit {
             this.total = 0;
             let options = {
                 filters: [
+                    {user: this.pesquisa.user},
                     {caixa_id: this.pesquisa.caixa_id},
                     {inicio: this.pesquisa.inicio},
                     {fim: this.pesquisa.fim}

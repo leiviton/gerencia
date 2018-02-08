@@ -70,9 +70,14 @@
         <label for="fim">Até</label>
         <input type="date" id="fim" class="form-control" name="fim" [(ngModel)]="pesquisa.fim" required>
 
-        <label class="col-form-label" for="select">Status</label>
+        <label class="col-form-label" for="select">Caixa</label>
         <select name="status" class="form-control" id="select" [(ngModel)]="pesquisa.caixa_id" required>
           <option *ngFor="let g of caixas.data" value="{{ g.id }}"> {{ g.name }}</option>
+        </select>
+        <label class="col-form-label" for="user">Usuário</label>
+        <select name="status" class="form-control" id="user" [(ngModel)]="pesquisa.user" required>
+          <option value="todos">Todos</option>
+          <option *ngFor="let g of usuarios.data" value="{{ g.email }}"> {{ g.name }}</option>
         </select>
       </div>
       <div class="modal-footer novo">
