@@ -46,8 +46,9 @@ class MovimentoCaixaRepositoryEloquent extends BaseRepository implements Movimen
         }
 
         $results = [];
+        $user = (string) $where['user'];
 
-        if(isset($where['user']) !== 'todos'){
+        if(strnatcasecmp($user,'todos')){
             $results = $this->model
                 ->where(function ($query) use ($like) {
                     if ($like){
