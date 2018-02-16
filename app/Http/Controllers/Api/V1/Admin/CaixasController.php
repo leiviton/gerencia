@@ -117,4 +117,26 @@ class CaixasController extends Controller
             ->find($id);
     }
 
+    public function transferenciaCaixa(Request $request)
+    {
+        $user = \Auth::guard('api')->user();
+
+        $data = $request->all();
+
+        $data['user_create'] = $user->email;
+
+        $this->service->transferenciaCaixa($data);
+
+        $audit = [
+            'type'=>'update',
+            'user_id'=>$user->id,
+            'user' => $user->email,
+            'entity' => 'caixa',
+            'action' => 'Atualizou o caixa: '.$data['caixa1'].','.$data['caixa2'].', no valor de '.$data['valor']
+        ];
+
+        $this->auditRepository->create($audit);
+
+        return $this->index();
+    }
 }

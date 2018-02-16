@@ -16,6 +16,7 @@ class MovimentoCaixa extends Model implements Transformable
         'tipo_movimento',
         'valor',
         'usuario',
+        'historico',
         'payment_order_id',
         'caixa_id'
     ];

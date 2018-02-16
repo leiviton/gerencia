@@ -253,7 +253,7 @@ class OrderService{
                 $order->paid_now += $data['total_pago'];
 
                 if($payment->paymentTypes->id == 1) {
-                    $this->movimentoCaixaRepository->create(['tipo_movimento' => 'credito', 'valor' => $data['total_pago'], 'usuario' => $data['user_create'], 'payment_order_id' => $payment->id, 'caixa_id' => 1]);
+                    $this->movimentoCaixaRepository->create(['tipo_movimento' => 'credito', 'valor' => $data['total_pago'], 'usuario' => $data['user_create'], 'payment_order_id' => $payment->id,'historico'=>'Movimento gerado pelo recebimento do pedido:'.$order->id, 'caixa_id' => 1]);
                     $caixa->saldo += $data['total_pago'];
                 }
                 $caixa->save();

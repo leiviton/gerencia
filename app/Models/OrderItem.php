@@ -18,6 +18,7 @@ class OrderItem extends Model implements Transformable
         'subtotal',
         'impresso',
         'historico',
+        'ativo',
         'user_create',
         'user_update'
     ];

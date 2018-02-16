@@ -99,6 +99,10 @@ class RepositoryServiceProvider extends ServiceProvider
             'Pedidos\Repositories\AuditRepository',
             'Pedidos\Repositories\AuditRepositoryEloquent'
         );
+        $this->app->bind(
+            'Pedidos\Repositories\OpenCloseCaixasRepository',
+            'Pedidos\Repositories\OpenCloseCaixasRepositoryEloquent'
+        );
     }
 }
 

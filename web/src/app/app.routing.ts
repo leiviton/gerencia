@@ -45,7 +45,8 @@ export const routes: Routes = [
         {
             path: 'cadastro/users',
             loadChildren: './cadastro/users/users.module#UsersModule',
-        },{
+        },
+        {
             path: 'cadastro/mesas',
             loadChildren: './cadastro/mesas/mesas.module#MesasModule',
         },
@@ -61,7 +62,6 @@ export const routes: Routes = [
             path: 'financeiro/movimento/caixas',
             loadChildren: './movimento-caixas/movimento-caixas.module#MovimentoCaixasModule'
         }
-
     ]
   },
   {
@@ -78,15 +78,15 @@ export const routes: Routes = [
     ]
   },
   {
-        path: 'users',
+        path: 'relatorios',
         component: SimpleLayoutComponent,
         data: {
-            title: 'Login'
+            title: 'Relatorios'
         },
         children: [
             {
                 path: '',
-                loadChildren: './user/user.module#UserModule',
+                loadChildren: './relatorios/relatorios.module#RelatoriosModule',
             }
         ]
     }

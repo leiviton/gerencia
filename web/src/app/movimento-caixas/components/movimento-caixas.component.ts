@@ -17,7 +17,7 @@ export class MovimentoCaixasComponent implements OnInit {
       document.onkeydown = ((e) =>{
           if(e.keyCode == 113)
           {
-              return this.showModal();
+              return this.showModal('#mov');
           }
       });
   }
@@ -45,12 +45,18 @@ export class MovimentoCaixasComponent implements OnInit {
       this.showLoading();
       let u = {role:null};
       u = JSON.parse(localStorage.getItem('user') || null);
-      if(u.role !== 'gerente' && u.role !== 'admin')
+      if(u == null){
+          this.toasterService.pop('error','Sem permissão','Usuário sem acesso, contate o administrador');
+          this.router.navigate(['/dashboard']);
+      }
+
+      if(u.role !== 'gerente' && u.role !== 'admin' )
       {
           this.toasterService.pop('error','Sem permissão','Usuário sem acesso, contate o administrador');
           this.router.navigate(['/dashboard']);
       }
       this.httpService.setAccessToken();
+      this.tamanho = 0;
       setTimeout(this.hideLoading(),2000);
       this.getCaixas();
       this.getUser();
@@ -111,20 +117,50 @@ export class MovimentoCaixasComponent implements OnInit {
                             this.total -= res.data[i].valor;
                         }
                     }
-                    this.hideModal();
+                    this.hideModal('#mov');
                     this.hideLoading();
                     this.toasterService.pop('success', 'Sucesso', 'Dados carregados com sucesso');
 
                 });
         }else  {
             this.toasterService.pop('error', 'Erro', 'Preencha inicio, fim e status para pesquisar.');
-
             this.hideLoading();
         }
     }
     new()
     {
        return this.router.navigate(['/orders/new']);
+    }
+
+    openReal() {
+        this.hideModal('#rel');
+        window.open('/#/relatorios/relatorio-movimento-caixa', '_blank');
+    }
+    gerarRel()
+    {
+        this.showLoading();
+        if(this.pesquisa.inicio != null && this.pesquisa.inicio != '' && this.pesquisa.fim != null && this.pesquisa.fim != '')
+        {
+            let options = {
+                filters: [
+                    {user: this.pesquisa.user},
+                    {caixa_id: this.pesquisa.caixa_id},
+                    {inicio: this.pesquisa.inicio},
+                    {fim: this.pesquisa.inicio}
+                ]
+            };
+            this.httpService.builder()
+                .list(options,'relatorio/fechamento/caixa')
+                .then((res)=>{
+                    this.hideLoading();
+                    this.movimentos = res;
+                    localStorage.setItem('mov_caixa_rel',JSON.stringify(res));
+                    this.openReal();
+                    this.toasterService.pop('success','Sucesso','Relátorio gerado com sucesso');
+                });
+        }else{
+            this.showLoading();
+        }
     }
 
 
@@ -135,12 +171,12 @@ export class MovimentoCaixasComponent implements OnInit {
         jQuery(".container-loading").show();
     }
 
-    showModal()
+    showModal(id)
     {
-        jQuery(".modal").show().addClass('show');
+        jQuery(id).show().addClass('show');
     }
-    hideModal()
+    hideModal(id)
     {
-        jQuery(".modal").hide();
+        jQuery(id).hide();
     }
 }

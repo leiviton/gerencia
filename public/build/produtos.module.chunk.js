@@ -125,7 +125,7 @@ var EditComponent = (function () {
     };
     EditComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            template: __webpack_require__("../../../../../src/app/cadastro/produtos/components/edit.component.html")
+            template: __webpack_require__("../../../../../src/app/cadastro/produtos/components/relatorio-mov-caixa.component.html")
         }),
         __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__services_produtos_service__["a" /* ProdutosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_produtos_service__["a" /* ProdutosService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4_angular2_toaster__["b" /* ToasterService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4_angular2_toaster__["b" /* ToasterService */]) === "function" && _d || Object])
     ], EditComponent);
@@ -366,7 +366,7 @@ var ProdutosComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_produtos_component__ = __webpack_require__("../../../../../src/app/cadastro/produtos/components/produtos.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_new_component__ = __webpack_require__("../../../../../src/app/cadastro/produtos/components/new.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_edit_component__ = __webpack_require__("../../../../../src/app/cadastro/produtos/components/edit.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_edit_component__ = __webpack_require__("../../../../../src/app/cadastro/produtos/components/relatorio-mov-caixa.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -433,7 +433,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ngx_bootstrap_dropdown__ = __webpack_require__("../../../../ngx-bootstrap/dropdown/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_produtos_component__ = __webpack_require__("../../../../../src/app/cadastro/produtos/components/produtos.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_new_component__ = __webpack_require__("../../../../../src/app/cadastro/produtos/components/new.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_edit_component__ = __webpack_require__("../../../../../src/app/cadastro/produtos/components/edit.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_edit_component__ = __webpack_require__("../../../../../src/app/cadastro/produtos/components/relatorio-mov-caixa.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__produtos_routing_module__ = __webpack_require__("../../../../../src/app/cadastro/produtos/produtos-routing.module.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__services_produtos_service__ = __webpack_require__("../../../../../src/app/cadastro/produtos/services/produtos.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_ng2_currency_mask__ = __webpack_require__("../../../../ng2-currency-mask/index.js");

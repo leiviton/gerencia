@@ -3,7 +3,9 @@
         <div class="col-lg-12">
           <div class="card">
             <div class="card-header">
-                   <button type="button" class="btn btn-default" (click)="showModal()"><i class="fa fa-search"></i> Pesquisar </button>
+                   <button type="button" class="btn btn-default" (click)="showModal('#mov')"><i class="fa fa-search"></i> Pesquisar </button>
+                   <button type="button" class="btn btn-success"><i class="fa fa-plus"></i> Novo </button>
+                   <button type="button" class="btn btn-info" (click)="showModal('#rel')"><i class="fa fa-bar-chart"></i> Relatorio </button>
             </div>
             <div class="card-body">
               <table class="table table-responsive table-bordered table-striped table-sm">
@@ -14,7 +16,8 @@
                     <th class="title text-center">Caixa</th>
                     <th class="title text-center">Valor</th>
                     <th class="title text-center">Documento</th>
-                    <th class="title text-center">Criado</th>
+                    <th class="title text-center">Histórico</th>
+                    <th class="title text-center">Data/Hora</th>
                     <th class="title text-center">Atualizado</th>
                     <th class="title text-center">Usuário</th>
                   </tr>
@@ -23,7 +26,7 @@
                   <tr *ngIf="tamanho == 0">
                     <td colspan="10"> Sem dados</td>
                   </tr>
-                  <tr *ngFor="let o of movimentos.data" (dblclick)="edit(o.id)">
+                  <tr *ngFor="let o of movimentos.data">
                     <td class="text-center" *ngIf="tamanho > 0">{{ o.id }}</td>
                     <td class="text-center" *ngIf="tamanho > 0">
                       <span class="badge badge-pill badge-success" *ngIf="o.tipo_movimento === 'credito'" tooltip="Crédito"><i class="fa fa-arrow-down"></i> Crédito</span>
@@ -31,7 +34,8 @@
                     </td>
                     <td class="text-center" *ngIf="tamanho > 0">{{ o.caixa.data.name}}</td>
                     <td class="text-center" *ngIf="tamanho > 0">{{ o.valor | currency:'BRL':true }}</td>
-                    <td class="text-center" *ngIf="tamanho > 0">{{ o.payment.data.id}}</td>
+                    <td class="text-center" *ngIf="tamanho > 0">{{ o.payment.data.order_id}}</td>
+                    <td class="text-center" *ngIf="tamanho > 0">{{ o.historico}}</td>
                     <td class="text-center" *ngIf="tamanho > 0">{{ o.created_at }}</td>
                     <td class="text-center" *ngIf="tamanho > 0">{{ o.updated_at }}</td>
                     <td class="text-center" *ngIf="tamanho > 0">{{ o.usuario }}</td>
@@ -57,14 +61,14 @@
       </div>
  </div>
 
-<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="mov" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog modal-sm modal-info" role="document">
     <div class="modal-content">
       <div class="modal-header novo">
         <h6 class="modal-title">Pesquisar</h6>
       </div>
       <div class="modal-body">
-        <label for="inicio">De</label>
+        <label for="inicio">Dia</label>
         <input type="date" id="inicio" class="form-control" name="inicio" [(ngModel)]="pesquisa.inicio" required>
 
         <label for="fim">Até</label>
@@ -81,8 +85,36 @@
         </select>
       </div>
       <div class="modal-footer novo">
-        <button type="button" class="btn btn-secondary" (click)="hideModal()">Fechar</button>
+        <button type="button" class="btn btn-secondary" (click)="hideModal('#mov')">Fechar</button>
         <button type="button" class="btn btn-primary" (click)="pesquisar()"><i class="fa fa-search"></i> Buscar</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<div class="modal fade" id="rel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-sm modal-success" role="document">
+    <div class="modal-content">
+      <div class="modal-header novo">
+        <h6 class="modal-title">Gerar Relátorio</h6>
+      </div>
+      <div class="modal-body">
+        <label for="inicio">Dia</label>
+        <input type="date" id="iniciorel" class="form-control" name="inicio" [(ngModel)]="pesquisa.inicio" required>
+        <label class="col-form-label" for="caixa">Caixa</label>
+        <select name="status" class="form-control" id="caixa" [(ngModel)]="pesquisa.caixa_id" required>
+          <option *ngFor="let g of caixas.data" value="{{ g.id }}"> {{ g.name }}</option>
+        </select>
+        <label class="col-form-label" for="userrel">Usuário</label>
+        <select name="status" class="form-control" id="userrel" [(ngModel)]="pesquisa.user" required>
+          <option value="todos">Todos</option>
+          <option *ngFor="let g of usuarios.data" value="{{ g.email }}"> {{ g.name }}</option>
+        </select>
+      </div>
+      <div class="modal-footer novo">
+        <button type="button" class="btn btn-secondary" (click)="hideModal('#rel')">Fechar</button>
+        <button type="button" class="btn btn-primary" (click)="gerarRel()"><i class="fa fa-search"></i> Buscar</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

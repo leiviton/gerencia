@@ -403,7 +403,7 @@ class AdminCheckoutController extends Controller
 
         foreach ($items as $value)
         {
-            if($value->product->id != 58 || $value->product->ativo != 'N') {
+            if($value->product->id != 58 && $value->ativo != 'N') {
                 $com = '';
                 $id = $value->id;
                 $complements = $this->complementItemRepository->scopeQuery(function($query) use($id){
@@ -646,7 +646,7 @@ class AdminCheckoutController extends Controller
 
         foreach ($items as $value)
         {
-            if($value->product->id != 58) {
+            if($value->product->id != 58 && $value->ativo <> 'N') {
                 $com = '';
                 $id = $value->id;
                 $complements = $this->complementItemRepository->scopeQuery(function($query) use($id){
@@ -917,8 +917,8 @@ class AdminCheckoutController extends Controller
 
         foreach ($items as $value)
         {
-            if($value->product->id != 58) {
-                if ($value->product->ativo != 'N') {
+            if($value->product->id != 58 && $value->ativo <> 'N') {
+                
                     $com = '';
                     $id = $value->id;
                     $complements = $this->complementItemRepository->scopeQuery(function ($query) use ($id) {
@@ -940,7 +940,7 @@ class AdminCheckoutController extends Controller
                     $this->itemRepository->update(['impresso' => 'S'], $value->id);
                     $contador += $value->qtd;
 
-                }
+
             }
 
             if($value->product->id == 58){

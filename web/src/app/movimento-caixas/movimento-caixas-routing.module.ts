@@ -25,6 +25,13 @@ const routes: Routes = [
               data: {
                   title: 'Editar'
               }
+          },
+          {
+              path: 'printer/:url/:arquivo',
+              component: PrinterComponent,
+              data: {
+                  title: 'Editar'
+              }
           }
       ]
   }

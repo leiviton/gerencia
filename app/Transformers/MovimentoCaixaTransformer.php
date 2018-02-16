@@ -26,6 +26,7 @@ class MovimentoCaixaTransformer extends TransformerAbstract
             'tipo_movimento' => $model->tipo_movimento,
             'valor'=>(float) $model->valor,
             'usuario'=>$model->usuario,
+            'historico'=>$model->historico,
             /* place your other model properties here */
             'created_at' => (string)date_format($model->created_at,'d/m/Y H:i:s'),
             'updated_at' => (string)date_format($model->updated_at,'d/m/Y H:i:s')

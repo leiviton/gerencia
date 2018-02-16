@@ -27,6 +27,7 @@ class PaymentOrdersTransformer extends TransformerAbstract
             'desconto' => (float) $model->desconto,
             'acrescimo' => (float) $model->acrescimo,
             'total_original' => (float) $model->total_original,
+            'order_id' => (int) $model->order_id,
             /* place your other model properties here */
             'created_at' => (string)date_format($model->created_at,'d/m/Y H:i:s'),
             'updated_at' => $model->updated_at
@@ -37,10 +38,4 @@ class PaymentOrdersTransformer extends TransformerAbstract
     {
         return $this->item($model->paymentTypes, new PaymentTypesTransformer());
     }
-
-    public function includeOrder(PaymentOrders $model)
-    {
-        return $this->item($model->order,new OrderTransformer());
-    }
-
 }

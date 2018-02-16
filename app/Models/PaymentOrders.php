@@ -20,8 +20,9 @@ class PaymentOrders extends Model implements Transformable
     ];
 
     public function order(){
-        return $this->belongsTo(Order::class,'order_id','id');
+        return $this->hasOne(Order::class,'id','order_id');
     }
+
 
     public function paymentTypes(){
         return $this->belongsTo(PaymentTypes::class);

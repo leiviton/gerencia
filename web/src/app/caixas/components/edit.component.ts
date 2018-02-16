@@ -49,8 +49,11 @@ export class EditComponent implements OnInit {
             .subscribe(params => {
                 this.httpService.builder().view(params['id'],'caixa')
                     .then((res) => {
-                            this.caixa = res.data;
-                            this.hideLoading();
+                            if(res) {
+                                this.caixa = res.data;
+                            }
+                                this.hideLoading();
+
                     });
                 this.httpService.setAccessToken();
 

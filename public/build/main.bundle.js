@@ -44,7 +44,7 @@ var map = {
 		"common"
 	],
 	"./movimento-caixas/movimento-caixas.module": [
-		"../../../../../src/app/movimento-caixas/movimento-caixas.module.ts",
+		"../../../../../src/app/movimento-caixas/relatorios.module.ts",
 		"movimento-caixas.module",
 		"common"
 	],

@@ -38,35 +38,18 @@ export class PrinterComponent implements OnInit {
         jQuery('#printer').on('show.bs.modal').show().addClass('show');
         this.route.params
             .subscribe(params => {
-                let url = '';
-                if(params['i'] == 'S'){
-                    url = 'printer';
-                }else{
-                    url = 'printer'
-                }
-                this.httpService.builder().view(params['id'],url)
-                    .then((res) => {
-                            this.innerHtml = this.sanitizer.bypassSecurityTrustHtml(
-                                "<object data='"+res.data.link_printer+"' name='my_iframe' onload='window.option();window.print();window.close()' type='application/pdf' height='500' width='780' class='embed-responsive-item'>" +
-                                "Object " + res.data.link_printer + " failed" +
-                                "</object>");
-                            this.link_printer = 'http://108.61.155.169' + res.data.link_printer;
-                            this.hideLoading();
-
-                    });
+                let url = params['url'] + '/printer/' + params['arquivo'];
+                    this.innerHtml = this.sanitizer.bypassSecurityTrustHtml(
+                   "<object data='"+ url +"' name='my_iframe' onload='window.option();window.print();window.close()' type='application/pdf' height='500' width='780' class='embed-responsive-item'>" +
+                    "Object " + params['url'] + " failed" +
+                    "</object>");
+                this.hideLoading();
             });
-        this.httpService.eventEmitter.emit();
-    }
-
-    imprimir(num, id)
-    {
-        window.focus();
-        window.print();
     }
 
     close(){
         jQuery('#printer').on('show.bs.modal').show().removeClass('show');
-        this.router.navigate(['/close']);
+        this.router.navigate(['/financeiro/movimento/caixas']);
     }
 
     hideLoading(){

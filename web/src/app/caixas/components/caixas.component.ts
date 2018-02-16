@@ -47,8 +47,10 @@ export class CaixasComponent implements OnInit {
           .subscribe(() => {
               this.httpService.builder().list({}, 'caixas')
                   .then((res) => {
-                      this.caixas = res;
-                      this.tamanho = res.data.length;
+                      if(res) {
+                          this.caixas = res;
+                          this.tamanho = res.data.length;
+                      }
                       this.hideLoading();
                   });
           });

@@ -56,6 +56,7 @@ class MovimentoCaixaRepositoryEloquent extends BaseRepository implements Movimen
                     }
                     return $query;
                 })
+                ->orderBy('id','asc')
                 ->whereBetween("created_at",
                     [$inicio,$fim])
                 ->where('caixa_id',$status['caixa_id'])
@@ -69,6 +70,7 @@ class MovimentoCaixaRepositoryEloquent extends BaseRepository implements Movimen
                     }
                     return $query;
                 })
+                ->orderBy('id','asc')
                 ->whereBetween("created_at",
                     [$inicio,$fim])
                 ->where('caixa_id',$status['caixa_id'])

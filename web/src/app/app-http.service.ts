@@ -102,9 +102,9 @@ export class AppHttpService{
                 let message = 'Algo deu errado, informe o erro' + err.status + 'ao administrador';
                 if(err.status === 401)
                 {
-                    message = 'Você não tem permissão para acessar isso, informe um usuario e senha validos';
+                    message = 'Você não tem permissão para acessar, informe um usuario e senha validos';
                     this.toaster.pop('error', 'Erro', message);
-                    localStorage.removeItem('user');
+                    localStorage.setItem('user','');
                     this.router.navigate(['/user/login']);
                 }
                 if (err.status === 500)

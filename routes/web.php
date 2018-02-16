@@ -86,6 +86,7 @@ Route::group(['prefix'=>'api/v1','middleware' => 'auth:api'],function () {
         Route::get('movimento/caixa/{id}','MovimentoCaixasController@edit');
         Route::put('movimento/caixa/{id}', 'MovimentoCaixasController@update');
         Route::get('movimento/caixas/filters','MovimentoCaixasController@getFiltros');
+        Route::get('relatorio/fechamento/caixa','RelatoriosController@gerarRelMovCaixa');
 
     });
     Route::get('user','Api\UserController@authenticated');
