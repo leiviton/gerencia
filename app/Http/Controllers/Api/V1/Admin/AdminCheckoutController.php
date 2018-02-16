@@ -918,7 +918,7 @@ class AdminCheckoutController extends Controller
         foreach ($items as $value)
         {
             if($value->product->id != 58 && $value->ativo <> 'N') {
-                
+
                     $com = '';
                     $id = $value->id;
                     $complements = $this->complementItemRepository->scopeQuery(function ($query) use ($id) {

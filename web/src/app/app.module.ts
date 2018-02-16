@@ -68,4 +68,4 @@ import { AppHttpService } from './app-http.service';
 })
 export class AppModule { }
 
-//ng build --output-path=./../public
+//ng build --output-path=./../public/build

@@ -16,7 +16,7 @@ module.exports = "<div tabindex=\"-1\" class=\"modal fade\" id=\"successModal\" 
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery__ = __webpack_require__("../../../../jquery/dist/jquery.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_jquery__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_movimento_caixas_service__ = __webpack_require__("../../../../../src/app/movimento-caixas/services/relatorios.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_movimento_caixas_service__ = __webpack_require__("../../../../../src/app/movimento-caixas/services/movimento-caixas.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angular2_toaster__ = __webpack_require__("../../../../angular2-toaster/angular2-toaster.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -108,7 +108,7 @@ var EditComponent = (function () {
     };
     EditComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            template: __webpack_require__("../../../../../src/app/movimento-caixas/components/relatorio-mov-caixa.component.html")
+            template: __webpack_require__("../../../../../src/app/movimento-caixas/components/edit.component.html")
         }),
         __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__services_movimento_caixas_service__["a" /* MovimentoCaixasService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_movimento_caixas_service__["a" /* MovimentoCaixasService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4_angular2_toaster__["b" /* ToasterService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4_angular2_toaster__["b" /* ToasterService */]) === "function" && _d || Object])
     ], EditComponent);
@@ -123,7 +123,7 @@ var EditComponent = (function () {
 /***/ "../../../../../src/app/movimento-caixas/components/movimento-caixas.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"animated fadeIn\">\n    <div class=\"row\">\n        <div class=\"col-lg-12\">\n          <div class=\"card\">\n            <div class=\"card-header\">\n                   <button type=\"button\" class=\"btn btn-default\" (click)=\"showModal()\"><i class=\"fa fa-search\"></i> Pesquisar </button>\n            </div>\n            <div class=\"card-body\">\n              <table class=\"table table-responsive table-bordered table-striped table-sm\">\n                <thead>\n                  <tr>\n                    <th class=\"title text-center\">#</th>\n                    <th class=\"title text-center\">Tipo</th>\n                    <th class=\"title text-center\">Caixa</th>\n                    <th class=\"title text-center\">Valor</th>\n                    <th class=\"title text-center\">Documento</th>\n                    <th class=\"title text-center\">Criado</th>\n                    <th class=\"title text-center\">Atualizado</th>\n                    <th class=\"title text-center\">Usuário</th>\n                  </tr>\n                </thead>\n                <tbody>\n                  <tr *ngIf=\"tamanho == 0\">\n                    <td colspan=\"10\"> Sem dados</td>\n                  </tr>\n                  <tr *ngFor=\"let o of movimentos.data\" (dblclick)=\"edit(o.id)\">\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.id }}</td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">\n                      <span class=\"badge badge-pill badge-success\" *ngIf=\"o.tipo_movimento === 'credito'\" tooltip=\"Crédito\"><i class=\"fa fa-arrow-down\"></i> Crédito</span>\n                      <span class=\"badge badge-pill badge-danger\" *ngIf=\"o.tipo_movimento === 'debito'\" tooltip=\"Débito\"><i class=\"fa fa-arrow-up\"></i> Débito</span>\n                    </td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.caixa.data.name}}</td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.valor | currency:'BRL':true }}</td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.payment.data.id}}</td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.created_at }}</td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.updated_at }}</td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.usuario }}</td>\n                  </tr>\n                </tbody>\n              </table>\n              <!--nav>\n                <ul class=\"pagination\">\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">Prev</a></li>\n                  <li class=\"page-item active\">\n                    <a class=\"page-link\" href=\"#\">1</a>\n                  </li>\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">2</a></li>\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">3</a></li>\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">4</a></li>\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">Next</a></li>\n                </ul>\n              </nav-->\n            </div>\n            <h4 class=\"text-title text-center\">Total: {{ total | currency:'BRL':true }}</h4>\n          </div>\n        </div>\n      </div>\n </div>\n\n<div class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">\n  <div class=\"modal-dialog modal-sm modal-info\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header novo\">\n        <h6 class=\"modal-title\">Pesquisar</h6>\n      </div>\n      <div class=\"modal-body\">\n        <label for=\"inicio\">De</label>\n        <input type=\"date\" id=\"inicio\" class=\"form-control\" name=\"inicio\" [(ngModel)]=\"pesquisa.inicio\" required>\n\n        <label for=\"fim\">Até</label>\n        <input type=\"date\" id=\"fim\" class=\"form-control\" name=\"fim\" [(ngModel)]=\"pesquisa.fim\" required>\n\n        <label class=\"col-form-label\" for=\"select\">Caixa</label>\n        <select name=\"status\" class=\"form-control\" id=\"select\" [(ngModel)]=\"pesquisa.caixa_id\" required>\n          <option *ngFor=\"let g of caixas.data\" value=\"{{ g.id }}\"> {{ g.name }}</option>\n        </select>\n        <label class=\"col-form-label\" for=\"user\">Usuário</label>\n        <select name=\"status\" class=\"form-control\" id=\"user\" [(ngModel)]=\"pesquisa.user\" required>\n          <option value=\"todos\">Todos</option>\n          <option *ngFor=\"let g of usuarios.data\" value=\"{{ g.email }}\"> {{ g.name }}</option>\n        </select>\n      </div>\n      <div class=\"modal-footer novo\">\n        <button type=\"button\" class=\"btn btn-secondary\" (click)=\"hideModal()\">Fechar</button>\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"pesquisar()\"><i class=\"fa fa-search\"></i> Buscar</button>\n      </div>\n    </div><!-- /.modal-content -->\n  </div><!-- /.modal-dialog -->\n</div><!-- /.modal -->\n\n<router-outlet></router-outlet>\n\n"
+module.exports = "<div class=\"animated fadeIn\">\n    <div class=\"row\">\n        <div class=\"col-lg-12\">\n          <div class=\"card\">\n            <div class=\"card-header\">\n                   <button type=\"button\" class=\"btn btn-default\" (click)=\"showModal('#mov')\"><i class=\"fa fa-search\"></i> Pesquisar </button>\n                   <button type=\"button\" class=\"btn btn-success\"><i class=\"fa fa-plus\"></i> Novo </button>\n                   <button type=\"button\" class=\"btn btn-info\" (click)=\"showModal('#rel')\"><i class=\"fa fa-bar-chart\"></i> Relatorio </button>\n            </div>\n            <div class=\"card-body\">\n              <table class=\"table table-responsive table-bordered table-striped table-sm\">\n                <thead>\n                  <tr>\n                    <th class=\"title text-center\">#</th>\n                    <th class=\"title text-center\">Tipo</th>\n                    <th class=\"title text-center\">Caixa</th>\n                    <th class=\"title text-center\">Valor</th>\n                    <th class=\"title text-center\">Documento</th>\n                    <th class=\"title text-center\">Histórico</th>\n                    <th class=\"title text-center\">Data/Hora</th>\n                    <th class=\"title text-center\">Atualizado</th>\n                    <th class=\"title text-center\">Usuário</th>\n                  </tr>\n                </thead>\n                <tbody>\n                  <tr *ngIf=\"tamanho == 0\">\n                    <td colspan=\"10\"> Sem dados</td>\n                  </tr>\n                  <tr *ngFor=\"let o of movimentos.data\">\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.id }}</td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">\n                      <span class=\"badge badge-pill badge-success\" *ngIf=\"o.tipo_movimento === 'credito'\" tooltip=\"Crédito\"><i class=\"fa fa-arrow-down\"></i> Crédito</span>\n                      <span class=\"badge badge-pill badge-danger\" *ngIf=\"o.tipo_movimento === 'debito'\" tooltip=\"Débito\"><i class=\"fa fa-arrow-up\"></i> Débito</span>\n                    </td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.caixa.data.name}}</td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.valor | currency:'BRL':true }}</td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.payment.data.order_id}}</td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.historico}}</td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.created_at }}</td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.updated_at }}</td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.usuario }}</td>\n                  </tr>\n                </tbody>\n              </table>\n              <!--nav>\n                <ul class=\"pagination\">\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">Prev</a></li>\n                  <li class=\"page-item active\">\n                    <a class=\"page-link\" href=\"#\">1</a>\n                  </li>\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">2</a></li>\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">3</a></li>\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">4</a></li>\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">Next</a></li>\n                </ul>\n              </nav-->\n            </div>\n            <h4 class=\"text-title text-center\">Total: {{ total | currency:'BRL':true }}</h4>\n          </div>\n        </div>\n      </div>\n </div>\n\n<div class=\"modal fade\" id=\"mov\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">\n  <div class=\"modal-dialog modal-sm modal-info\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header novo\">\n        <h6 class=\"modal-title\">Pesquisar</h6>\n      </div>\n      <div class=\"modal-body\">\n        <label for=\"inicio\">Dia</label>\n        <input type=\"date\" id=\"inicio\" class=\"form-control\" name=\"inicio\" [(ngModel)]=\"pesquisa.inicio\" required>\n\n        <label for=\"fim\">Até</label>\n        <input type=\"date\" id=\"fim\" class=\"form-control\" name=\"fim\" [(ngModel)]=\"pesquisa.fim\" required>\n\n        <label class=\"col-form-label\" for=\"select\">Caixa</label>\n        <select name=\"status\" class=\"form-control\" id=\"select\" [(ngModel)]=\"pesquisa.caixa_id\" required>\n          <option *ngFor=\"let g of caixas.data\" value=\"{{ g.id }}\"> {{ g.name }}</option>\n        </select>\n        <label class=\"col-form-label\" for=\"user\">Usuário</label>\n        <select name=\"status\" class=\"form-control\" id=\"user\" [(ngModel)]=\"pesquisa.user\" required>\n          <option value=\"todos\">Todos</option>\n          <option *ngFor=\"let g of usuarios.data\" value=\"{{ g.email }}\"> {{ g.name }}</option>\n        </select>\n      </div>\n      <div class=\"modal-footer novo\">\n        <button type=\"button\" class=\"btn btn-secondary\" (click)=\"hideModal('#mov')\">Fechar</button>\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"pesquisar()\"><i class=\"fa fa-search\"></i> Buscar</button>\n      </div>\n    </div><!-- /.modal-content -->\n  </div><!-- /.modal-dialog -->\n</div><!-- /.modal -->\n\n\n<div class=\"modal fade\" id=\"rel\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">\n  <div class=\"modal-dialog modal-sm modal-success\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header novo\">\n        <h6 class=\"modal-title\">Gerar Relátorio</h6>\n      </div>\n      <div class=\"modal-body\">\n        <label for=\"inicio\">Dia</label>\n        <input type=\"date\" id=\"iniciorel\" class=\"form-control\" name=\"inicio\" [(ngModel)]=\"pesquisa.inicio\" required>\n        <label class=\"col-form-label\" for=\"caixa\">Caixa</label>\n        <select name=\"status\" class=\"form-control\" id=\"caixa\" [(ngModel)]=\"pesquisa.caixa_id\" required>\n          <option *ngFor=\"let g of caixas.data\" value=\"{{ g.id }}\"> {{ g.name }}</option>\n        </select>\n        <label class=\"col-form-label\" for=\"userrel\">Usuário</label>\n        <select name=\"status\" class=\"form-control\" id=\"userrel\" [(ngModel)]=\"pesquisa.user\" required>\n          <option value=\"todos\">Todos</option>\n          <option *ngFor=\"let g of usuarios.data\" value=\"{{ g.email }}\"> {{ g.name }}</option>\n        </select>\n      </div>\n      <div class=\"modal-footer novo\">\n        <button type=\"button\" class=\"btn btn-secondary\" (click)=\"hideModal('#rel')\">Fechar</button>\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"gerarRel()\"><i class=\"fa fa-search\"></i> Buscar</button>\n      </div>\n    </div><!-- /.modal-content -->\n  </div><!-- /.modal-dialog -->\n</div><!-- /.modal -->\n\n<router-outlet></router-outlet>\n\n"
 
 /***/ }),
 
@@ -135,7 +135,7 @@ module.exports = "<div class=\"animated fadeIn\">\n    <div class=\"row\">\n    
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angular2_toaster__ = __webpack_require__("../../../../angular2-toaster/angular2-toaster.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_movimento_caixas_service__ = __webpack_require__("../../../../../src/app/movimento-caixas/services/relatorios.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_movimento_caixas_service__ = __webpack_require__("../../../../../src/app/movimento-caixas/services/movimento-caixas.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_jquery__ = __webpack_require__("../../../../jquery/dist/jquery.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_jquery__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -178,7 +178,7 @@ var MovimentoCaixasComponent = (function () {
         };
         document.onkeydown = (function (e) {
             if (e.keyCode == 113) {
-                return _this.showModal();
+                return _this.showModal('#mov');
             }
         });
     }
@@ -186,11 +186,16 @@ var MovimentoCaixasComponent = (function () {
         this.showLoading();
         var u = { role: null };
         u = JSON.parse(localStorage.getItem('user') || null);
+        if (u == null) {
+            this.toasterService.pop('error', 'Sem permissão', 'Usuário sem acesso, contate o administrador');
+            this.router.navigate(['/dashboard']);
+        }
         if (u.role !== 'gerente' && u.role !== 'admin') {
             this.toasterService.pop('error', 'Sem permissão', 'Usuário sem acesso, contate o administrador');
             this.router.navigate(['/dashboard']);
         }
         this.httpService.setAccessToken();
+        this.tamanho = 0;
         setTimeout(this.hideLoading(), 2000);
         this.getCaixas();
         this.getUser();
@@ -242,7 +247,7 @@ var MovimentoCaixasComponent = (function () {
                         _this.total -= res.data[i].valor;
                     }
                 }
-                _this.hideModal();
+                _this.hideModal('#mov');
                 _this.hideLoading();
                 _this.toasterService.pop('success', 'Sucesso', 'Dados carregados com sucesso');
             });
@@ -255,17 +260,47 @@ var MovimentoCaixasComponent = (function () {
     MovimentoCaixasComponent.prototype.new = function () {
         return this.router.navigate(['/orders/new']);
     };
+    MovimentoCaixasComponent.prototype.openReal = function () {
+        this.hideModal('#rel');
+        window.open('/#/relatorios/relatorio-movimento-caixa', '_blank');
+    };
+    MovimentoCaixasComponent.prototype.gerarRel = function () {
+        var _this = this;
+        this.showLoading();
+        if (this.pesquisa.inicio != null && this.pesquisa.inicio != '' && this.pesquisa.fim != null && this.pesquisa.fim != '') {
+            var options = {
+                filters: [
+                    { user: this.pesquisa.user },
+                    { caixa_id: this.pesquisa.caixa_id },
+                    { inicio: this.pesquisa.inicio },
+                    { fim: this.pesquisa.inicio }
+                ]
+            };
+            this.httpService.builder()
+                .list(options, 'relatorio/fechamento/caixa')
+                .then(function (res) {
+                _this.hideLoading();
+                _this.movimentos = res;
+                localStorage.setItem('mov_caixa_rel', JSON.stringify(res));
+                _this.openReal();
+                _this.toasterService.pop('success', 'Sucesso', 'Relátorio gerado com sucesso');
+            });
+        }
+        else {
+            this.showLoading();
+        }
+    };
     MovimentoCaixasComponent.prototype.hideLoading = function () {
         __WEBPACK_IMPORTED_MODULE_4_jquery__(".container-loading").hide();
     };
     MovimentoCaixasComponent.prototype.showLoading = function () {
         __WEBPACK_IMPORTED_MODULE_4_jquery__(".container-loading").show();
     };
-    MovimentoCaixasComponent.prototype.showModal = function () {
-        __WEBPACK_IMPORTED_MODULE_4_jquery__(".modal").show().addClass('show');
+    MovimentoCaixasComponent.prototype.showModal = function (id) {
+        __WEBPACK_IMPORTED_MODULE_4_jquery__(id).show().addClass('show');
     };
-    MovimentoCaixasComponent.prototype.hideModal = function () {
-        __WEBPACK_IMPORTED_MODULE_4_jquery__(".modal").hide();
+    MovimentoCaixasComponent.prototype.hideModal = function (id) {
+        __WEBPACK_IMPORTED_MODULE_4_jquery__(id).hide();
     };
     MovimentoCaixasComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
@@ -297,7 +332,7 @@ module.exports = "<div tabindex=\"-1\" class=\"modal fade\" id=\"payment\" role=
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery__ = __webpack_require__("../../../../jquery/dist/jquery.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_jquery__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_movimento_caixas_service__ = __webpack_require__("../../../../../src/app/movimento-caixas/services/relatorios.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_movimento_caixas_service__ = __webpack_require__("../../../../../src/app/movimento-caixas/services/movimento-caixas.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angular2_toaster__ = __webpack_require__("../../../../angular2-toaster/angular2-toaster.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -415,7 +450,7 @@ var PaymentComponent = (function () {
 /***/ "../../../../../src/app/movimento-caixas/components/printer.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div tabindex=\"-1\" class=\"modal fade modal_novo\" id=\"printer\" role=\"dialog\" aria-hidden=\"true\" aria-labelledby=\"myModalLabel\">\r\n    <div class=\"modal-dialog modal-lg modal-default\" role=\"document\">\r\n        <div class=\"modal-content\">\r\n            <div class=\"modal-body\" style=\"height: 530px\">\r\n                <div *ngIf=\"innerHtml\"\r\n                     [innerHTML]=\"innerHtml\">\r\n                </div>\r\n            </div>\r\n\r\n        </div>\r\n        <!-- /.modal-content -->\r\n    </div>\r\n    <!-- /.modal-dialog -->\r\n</div>\r\n"
+module.exports = "<div tabindex=\"-1\" class=\"modal fade modal_novo\" id=\"printer\" role=\"dialog\" aria-hidden=\"true\" aria-labelledby=\"myModalLabel\">\r\n    <div class=\"modal-dialog modal-lg modal-success\" role=\"document\">\r\n        <div class=\"modal-content\">\r\n            <div class=\"modal-body\" style=\"height: 530px\">\r\n                <div *ngIf=\"innerHtml\"\r\n                     [innerHTML]=\"innerHtml\">\r\n                </div>\r\n            </div>\r\n\r\n        </div>\r\n        <!-- /.modal-content -->\r\n    </div>\r\n    <!-- /.modal-dialog -->\r\n</div>\r\n"
 
 /***/ }),
 
@@ -429,7 +464,7 @@ module.exports = "<div tabindex=\"-1\" class=\"modal fade modal_novo\" id=\"prin
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_jquery__ = __webpack_require__("../../../../jquery/dist/jquery.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_jquery__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_movimento_caixas_service__ = __webpack_require__("../../../../../src/app/movimento-caixas/services/relatorios.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_movimento_caixas_service__ = __webpack_require__("../../../../../src/app/movimento-caixas/services/movimento-caixas.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_angular2_toaster__ = __webpack_require__("../../../../angular2-toaster/angular2-toaster.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -472,31 +507,16 @@ var PrinterComponent = (function () {
         __WEBPACK_IMPORTED_MODULE_2_jquery__('#printer').on('show.bs.modal').show().addClass('show');
         this.route.params
             .subscribe(function (params) {
-            var url = '';
-            if (params['i'] == 'S') {
-                url = 'printer';
-            }
-            else {
-                url = 'printer';
-            }
-            _this.httpService.builder().view(params['id'], url)
-                .then(function (res) {
-                _this.innerHtml = _this.sanitizer.bypassSecurityTrustHtml("<object data='" + res.data.link_printer + "' name='my_iframe' onload='window.option();window.print();window.close()' type='application/pdf' height='500' width='780' class='embed-responsive-item'>" +
-                    "Object " + res.data.link_printer + " failed" +
-                    "</object>");
-                _this.link_printer = 'http://108.61.155.169' + res.data.link_printer;
-                _this.hideLoading();
-            });
+            var url = params['url'] + '/printer/' + params['arquivo'];
+            _this.innerHtml = _this.sanitizer.bypassSecurityTrustHtml("<object data='" + url + "' name='my_iframe' onload='window.option();window.print();window.close()' type='application/pdf' height='500' width='780' class='embed-responsive-item'>" +
+                "Object " + params['url'] + " failed" +
+                "</object>");
+            _this.hideLoading();
         });
-        this.httpService.eventEmitter.emit();
-    };
-    PrinterComponent.prototype.imprimir = function (num, id) {
-        window.focus();
-        window.print();
     };
     PrinterComponent.prototype.close = function () {
         __WEBPACK_IMPORTED_MODULE_2_jquery__('#printer').on('show.bs.modal').show().removeClass('show');
-        this.router.navigate(['/close']);
+        this.router.navigate(['/financeiro/movimento/caixas']);
     };
     PrinterComponent.prototype.hideLoading = function () {
         __WEBPACK_IMPORTED_MODULE_2_jquery__(".container-loading").hide();
@@ -526,13 +546,15 @@ var PrinterComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_movimento_caixas_component__ = __webpack_require__("../../../../../src/app/movimento-caixas/components/movimento-caixas.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_edit_component__ = __webpack_require__("../../../../../src/app/movimento-caixas/components/relatorio-mov-caixa.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_printer_component__ = __webpack_require__("../../../../../src/app/movimento-caixas/components/printer.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_edit_component__ = __webpack_require__("../../../../../src/app/movimento-caixas/components/edit.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -547,7 +569,14 @@ var routes = [
         children: [
             {
                 path: 'edit/:id',
-                component: __WEBPACK_IMPORTED_MODULE_3__components_edit_component__["a" /* EditComponent */],
+                component: __WEBPACK_IMPORTED_MODULE_4__components_edit_component__["a" /* EditComponent */],
+                data: {
+                    title: 'Editar'
+                }
+            },
+            {
+                path: 'printer/:url/:arquivo',
+                component: __WEBPACK_IMPORTED_MODULE_3__components_printer_component__["a" /* PrinterComponent */],
                 data: {
                     title: 'Editar'
                 }
@@ -586,16 +615,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_movimento_caixas_component__ = __webpack_require__("../../../../../src/app/movimento-caixas/components/movimento-caixas.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_payment_component__ = __webpack_require__("../../../../../src/app/movimento-caixas/components/payment.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__movimento_caixas_routing_module__ = __webpack_require__("../../../../../src/app/movimento-caixas/relatorios-routing.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__movimento_caixas_routing_module__ = __webpack_require__("../../../../../src/app/movimento-caixas/movimento-caixas-routing.module.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_ngx_bootstrap__ = __webpack_require__("../../../../ngx-bootstrap/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__services_movimento_caixas_service__ = __webpack_require__("../../../../../src/app/movimento-caixas/services/relatorios.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__services_movimento_caixas_service__ = __webpack_require__("../../../../../src/app/movimento-caixas/services/movimento-caixas.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_cuppa_ng2_grid_cuppa_ng2_dataGrid__ = __webpack_require__("../../../../cuppa-ng2-grid/cuppa-ng2-dataGrid.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_ngx_bootstrap_tabs__ = __webpack_require__("../../../../ngx-bootstrap/tabs/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_ng2_currency_mask__ = __webpack_require__("../../../../ng2-currency-mask/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_ng2_currency_mask___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_13_ng2_currency_mask__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_ngx_phone_mask__ = __webpack_require__("../../../../ngx-phone-mask/ngx-phone-mask/ngx-phone-mask.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_printer_component__ = __webpack_require__("../../../../../src/app/movimento-caixas/components/printer.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_edit_component__ = __webpack_require__("../../../../../src/app/movimento-caixas/components/relatorio-mov-caixa.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_edit_component__ = __webpack_require__("../../../../../src/app/movimento-caixas/components/edit.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);

@@ -44,7 +44,7 @@ var map = {
 		"common"
 	],
 	"./movimento-caixas/movimento-caixas.module": [
-		"../../../../../src/app/movimento-caixas/relatorios.module.ts",
+		"../../../../../src/app/movimento-caixas/movimento-caixas.module.ts",
 		"movimento-caixas.module",
 		"common"
 	],
@@ -56,6 +56,11 @@ var map = {
 	"./pages/pages.module": [
 		"../../../../../src/app/pages/pages.module.ts",
 		"pages.module",
+		"common"
+	],
+	"./relatorios/relatorios.module": [
+		"../../../../../src/app/relatorios/relatorios.module.ts",
+		"relatorios.module",
 		"common"
 	],
 	"./user/user.module": [
@@ -185,9 +190,9 @@ var AppHttpService = (function () {
             console.log('erro', err);
             var message = 'Algo deu errado, informe o erro' + err.status + 'ao administrador';
             if (err.status === 401) {
-                message = 'Você não tem permissão para acessar isso, informe um usuario e senha validos';
+                message = 'Você não tem permissão para acessar, informe um usuario e senha validos';
                 _this.toaster.pop('error', 'Erro', message);
-                localStorage.removeItem('user');
+                localStorage.setItem('user', '');
                 _this.router.navigate(['/user/login']);
             }
             if (err.status === 500) {
@@ -370,7 +375,7 @@ var AppModule = (function () {
     return AppModule;
 }());
 
-//ng build --output-path=./../public 
+//ng build --output-path=./../public/build 
 //# sourceMappingURL=app.module.js.map
 
 /***/ }),
@@ -436,7 +441,8 @@ var routes = [
             {
                 path: 'cadastro/users',
                 loadChildren: './cadastro/users/users.module#UsersModule',
-            }, {
+            },
+            {
                 path: 'cadastro/mesas',
                 loadChildren: './cadastro/mesas/mesas.module#MesasModule',
             },
@@ -468,15 +474,15 @@ var routes = [
         ]
     },
     {
-        path: 'users',
+        path: 'relatorios',
         component: __WEBPACK_IMPORTED_MODULE_3__layouts_simple_layout_component__["a" /* SimpleLayoutComponent */],
         data: {
-            title: 'Login'
+            title: 'Relatorios'
         },
         children: [
             {
                 path: '',
-                loadChildren: './user/user.module#UserModule',
+                loadChildren: './relatorios/relatorios.module#RelatoriosModule',
             }
         ]
     }
@@ -571,6 +577,13 @@ var FullLayoutComponent = (function () {
 
 /***/ }),
 
+/***/ "../../../../../src/app/layouts/simple-layout.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<router-outlet></router-outlet>"
+
+/***/ }),
+
 /***/ "../../../../../src/app/layouts/simple-layout.component.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -594,7 +607,7 @@ var SimpleLayoutComponent = (function () {
     SimpleLayoutComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-dashboard',
-            template: '<router-outlet></router-outlet>',
+            template: __webpack_require__("../../../../../src/app/layouts/simple-layout.component.html"),
         }),
         __metadata("design:paramtypes", [])
     ], SimpleLayoutComponent);
