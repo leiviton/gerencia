@@ -665,6 +665,8 @@ class AdminCheckoutController extends Controller
                                 <h5 class='fonte produto'>Pedido: $order->id | " . $order->mesa->name. "</h5>
                                 <h5 class='data'>Data: $data | Hora: $hora | Previsão: ".date('H:i:s',strtotime('+ 20 minutes',strtotime($hora)))."</h5>                              
                                 <h5 class='fonte'>---------------------------------------------------------------------</h5>
+                                <h5 class='fonte client item'>Cliente: " . $order->client->name . "</h5>    
+                                <h5 class='fonte'>---------------------------------------------------------------------</h5>
                                 <h5 class='fonte'>ITENS:</h5>
                                 $table
                                 <h5 class='fonte'>---------------------------------------------------------------------</h5>
@@ -903,6 +905,9 @@ class AdminCheckoutController extends Controller
                                     <h5 class='fonte produto'>Pedido: $order->id | " . $order->mesa->name . "</h5>
                                     <h5 class='fonte'>Data: $data</h5>  
                                     <h5 class='fonte'>Hora: $hora</h5>                            
+                                    <h5 class='fonte item'>---------------------------------------------------------------------</h5>
+                                    <h5 class='fonte client item'>Cliente: " . $order->client->name . "</h5>
+                                   
                                     <h5 class='fonte'>---------------------------------------------------------------------</h5>
                                     <h5 class='fonte'>ITENS:</h5>
                                     $table
@@ -1187,6 +1192,8 @@ class AdminCheckoutController extends Controller
                                 <h5 class='fonte pedido item'>Pedido: $order->id | " . $order->mesa->name . "</h5>
                                 <h5 class='data item'>Data: $data | Hora: $hora</h5>
                                 <h5 class='data item'>Previsão: ".date('H:i:s',strtotime('+ 20 minutes',strtotime($hora)))."</h5>                              
+                                <h5 class='fonte item'>---------------------------------------------------------------------</h5>
+                                <h5 class='fonte client item'>Cliente: " . $order->client->name . "</h5>    
                                 <h5 class='fonte item'>---------------------------------------------------------------------</h5>
                                 <h5 class='fonte item' style='padding: 0;margin: 0'>ITENS:</h5>
                                 $table
