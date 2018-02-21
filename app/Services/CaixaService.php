@@ -104,7 +104,7 @@ class CaixaService
             'tipo_movimento' => 'debito',
             'valor' => $data['valor'],
             'usuario' => $data['user_create'],
-            'historico' => 'Debito gerado pelo saque: '.$caixa->name,
+            'historico' => $data['historico'],
             'caixa_id' => $caixa->id
         ];
 
