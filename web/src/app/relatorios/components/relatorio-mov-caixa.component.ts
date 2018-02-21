@@ -46,7 +46,7 @@ export class RelatorioMovCaixaComponent implements OnInit {
         this.filtros = JSON.parse(localStorage.getItem('filtros_rel') || null);
         let data = this.filtros.filters[2].inicio;
 
-        this.data_caixa = new Date(this.filtros.filters[2].inicio).toLocaleDateString();
+        this.data_caixa = new Date(data).toISOString().substr(0, 10).split('-').reverse().join('/');
 
         this.httpService.builder()
             .view(this.filtros.filters[1].caixa_id,'caixa')
