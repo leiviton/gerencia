@@ -40,7 +40,12 @@ class MovimentoCaixaTransformer extends TransformerAbstract
 
     public function includePayment(MovimentoCaixa $model)
     {
-        return $this->item($model->payment, new PaymentOrdersTransformer());
+        if(!$model->payment){
+            return null;
+        }else{
+            return $this->item($model->payment, new PaymentOrdersTransformer());
+        }
+
     }
 
 }

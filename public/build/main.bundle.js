@@ -6,13 +6,13 @@ webpackJsonp(["main"],{
 var map = {
 	"./cadastro/clients/clients.module": [
 		"../../../../../src/app/cadastro/clients/clients.module.ts",
-		"clients.module",
-		"common"
+		"common",
+		"clients.module"
 	],
 	"./cadastro/mesas/mesas.module": [
 		"../../../../../src/app/cadastro/mesas/mesas.module.ts",
-		"mesas.module",
-		"common"
+		"common",
+		"mesas.module"
 	],
 	"./cadastro/produtos/produtos.module": [
 		"../../../../../src/app/cadastro/produtos/produtos.module.ts",
@@ -20,33 +20,38 @@ var map = {
 	],
 	"./cadastro/users/users.module": [
 		"../../../../../src/app/cadastro/users/users.module.ts",
-		"users.module",
-		"common"
+		"common",
+		"users.module"
 	],
 	"./caixas/caixas.module": [
 		"../../../../../src/app/caixas/caixas.module.ts",
-		"caixas.module",
-		"common"
+		"common",
+		"caixas.module"
 	],
 	"./cancel/orders-cancel.module": [
 		"../../../../../src/app/cancel/orders-cancel.module.ts",
-		"orders-cancel.module",
-		"common"
+		"common",
+		"orders-cancel.module"
 	],
 	"./close/orders-close.module": [
 		"../../../../../src/app/close/orders-close.module.ts",
-		"orders-close.module",
-		"common"
+		"common",
+		"orders-close.module"
 	],
 	"./dashboard/dashboard.module": [
 		"../../../../../src/app/dashboard/dashboard.module.ts",
-		"dashboard.module",
-		"common"
+		"common",
+		"dashboard.module"
 	],
 	"./movimento-caixas/movimento-caixas.module": [
 		"../../../../../src/app/movimento-caixas/movimento-caixas.module.ts",
-		"movimento-caixas.module",
-		"common"
+		"common",
+		"movimento-caixas.module"
+	],
+	"./open-close-caixas/open-close-caixas.module": [
+		"../../../../../src/app/open-close-caixas/open-close-caixas.module.ts",
+		"common",
+		"open-close-caixas.module"
 	],
 	"./orders/orders.module": [
 		"../../../../../src/app/orders/orders.module.ts",
@@ -55,18 +60,18 @@ var map = {
 	],
 	"./pages/pages.module": [
 		"../../../../../src/app/pages/pages.module.ts",
-		"pages.module",
-		"common"
+		"common",
+		"pages.module"
 	],
 	"./relatorios/relatorios.module": [
 		"../../../../../src/app/relatorios/relatorios.module.ts",
-		"relatorios.module",
-		"common"
+		"common",
+		"relatorios.module"
 	],
 	"./user/user.module": [
 		"../../../../../src/app/user/user.module.ts",
-		"user.module",
-		"common"
+		"common",
+		"user.module"
 	]
 };
 function webpackAsyncContext(req) {
@@ -295,18 +300,16 @@ var AppComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16_ng2_currency_mask__ = __webpack_require__("../../../../ng2-currency-mask/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16_ng2_currency_mask___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_16_ng2_currency_mask__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17_angular2_toaster__ = __webpack_require__("../../../../angular2-toaster/angular2-toaster.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18_cuppa_ng2_grid_cuppa_ng2_dataGrid__ = __webpack_require__("../../../../cuppa-ng2-grid/cuppa-ng2-dataGrid.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__app_routing__ = __webpack_require__("../../../../../src/app/app.routing.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__layouts_full_layout_component__ = __webpack_require__("../../../../../src/app/layouts/full-layout.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__layouts_simple_layout_component__ = __webpack_require__("../../../../../src/app/layouts/simple-layout.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__app_http_service__ = __webpack_require__("../../../../../src/app/app-http.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__app_routing__ = __webpack_require__("../../../../../src/app/app.routing.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__layouts_full_layout_component__ = __webpack_require__("../../../../../src/app/layouts/full-layout.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__layouts_simple_layout_component__ = __webpack_require__("../../../../../src/app/layouts/simple-layout.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__app_http_service__ = __webpack_require__("../../../../../src/app/app-http.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-
 
 
 
@@ -343,7 +346,7 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_animations__["a" /* BrowserAnimationsModule */],
                 __WEBPACK_IMPORTED_MODULE_3__angular_http__["c" /* HttpModule */],
                 __WEBPACK_IMPORTED_MODULE_4__angular_forms__["FormsModule"],
-                __WEBPACK_IMPORTED_MODULE_19__app_routing__["a" /* AppRoutingModule */],
+                __WEBPACK_IMPORTED_MODULE_18__app_routing__["a" /* AppRoutingModule */],
                 __WEBPACK_IMPORTED_MODULE_8_ngx_bootstrap_dropdown__["a" /* BsDropdownModule */].forRoot(),
                 __WEBPACK_IMPORTED_MODULE_10_ngx_bootstrap_tabs__["a" /* TabsModule */].forRoot(),
                 __WEBPACK_IMPORTED_MODULE_9_ngx_bootstrap__["b" /* TooltipModule */].forRoot(),
@@ -351,13 +354,12 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_16_ng2_currency_mask__["CurrencyMaskModule"],
                 __WEBPACK_IMPORTED_MODULE_17_angular2_toaster__["a" /* ToasterModule */],
                 __WEBPACK_IMPORTED_MODULE_5_ngx_loading__["a" /* LoadingModule */],
-                __WEBPACK_IMPORTED_MODULE_12_ng2_charts_ng2_charts__["ChartsModule"],
-                __WEBPACK_IMPORTED_MODULE_18_cuppa_ng2_grid_cuppa_ng2_dataGrid__["a" /* CuppaDataGridModule */]
+                __WEBPACK_IMPORTED_MODULE_12_ng2_charts_ng2_charts__["ChartsModule"]
             ],
             declarations: [
                 __WEBPACK_IMPORTED_MODULE_7__app_component__["a" /* AppComponent */],
-                __WEBPACK_IMPORTED_MODULE_20__layouts_full_layout_component__["a" /* FullLayoutComponent */],
-                __WEBPACK_IMPORTED_MODULE_21__layouts_simple_layout_component__["a" /* SimpleLayoutComponent */],
+                __WEBPACK_IMPORTED_MODULE_19__layouts_full_layout_component__["a" /* FullLayoutComponent */],
+                __WEBPACK_IMPORTED_MODULE_20__layouts_simple_layout_component__["a" /* SimpleLayoutComponent */],
                 __WEBPACK_IMPORTED_MODULE_11__shared_nav_dropdown_directive__["a" /* NAV_DROPDOWN_DIRECTIVES */],
                 __WEBPACK_IMPORTED_MODULE_15__shared_breadcrumb_component__["a" /* BreadcrumbsComponent */],
                 __WEBPACK_IMPORTED_MODULE_13__shared_sidebar_directive__["a" /* SIDEBAR_TOGGLE_DIRECTIVES */],
@@ -367,7 +369,7 @@ var AppModule = (function () {
                     provide: __WEBPACK_IMPORTED_MODULE_6__angular_common__["LocationStrategy"],
                     useClass: __WEBPACK_IMPORTED_MODULE_6__angular_common__["HashLocationStrategy"]
                 },
-                __WEBPACK_IMPORTED_MODULE_22__app_http_service__["a" /* AppHttpService */]
+                __WEBPACK_IMPORTED_MODULE_21__app_http_service__["a" /* AppHttpService */]
             ],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_7__app_component__["a" /* AppComponent */]]
         })
@@ -457,6 +459,10 @@ var routes = [
             {
                 path: 'financeiro/movimento/caixas',
                 loadChildren: './movimento-caixas/movimento-caixas.module#MovimentoCaixasModule'
+            },
+            {
+                path: 'financeiro/open/close/caixas',
+                loadChildren: './open-close-caixas/open-close-caixas.module#OpenCloseCaixasModule'
             }
         ]
     },
@@ -506,7 +512,7 @@ var AppRoutingModule = (function () {
 /***/ "../../../../../src/app/layouts/full-layout.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<header class=\"app-header navbar\" *ngIf=\"user !== '' && user !== null\" [ngClass]=\"{'fundo': !user || user == '' || user == null}\">\n  <button class=\"navbar-toggler d-lg-none\" type=\"button\" appMobileSidebarToggler>&#9776;</button>\n  <a class=\"navbar-brand logo\"></a>\n  <button class=\"navbar-toggler d-md-down-none\" type=\"button\" appSidebarToggler>&#9776;</button>\n  <ul class=\"nav navbar-nav ml-auto\">\n    <li class=\"nav-item dropdown\" dropdown (onToggle)=\"toggled($event)\">\n      <a href class=\"nav-link dropdown-toggle\" dropdownToggle (click)=\"false\">\n        <img src=\"../../assets/img/logo_eguis.png\" class=\"img-avatar\" alt=\"{{ user.email }}\">\n        <span class=\"d-md-down-none\"></span>\n      </a>\n      <div class=\"dropdown-menu dropdown-menu-right\" *dropdownMenu aria-labelledby=\"simple-dropdown\">\n\n        <div class=\"dropdown-header text-center\"><i class=\"fa fa-user\"></i> <strong>{{ user.name }}</strong></div>\n        <a class=\"dropdown-item\" [routerLink]=\"['/dashboard/password']\"><i class=\"fa fa-bell-o\"></i> Trocar senha</a>\n        <a class=\"dropdown-item\" [routerLink]=\"['/user/logout']\"><i class=\"fa fa-power-off\"></i> Sair</a>\n      </div>\n    </li>\n  </ul>\n</header>\n\n<header class=\"app-header navbar\" *ngIf=\"user == '' && user == null || !user\" [ngClass]=\"{'fundo': !user || user == '' || user == null}\">\n</header>\n\n<div class=\"app-body\" [ngClass]=\"{'fundo': !user || user == '' || user == null}\">\n  <div class=\"sidebar\" *ngIf=\"user !== '' && user !== null\">\n    <nav class=\"sidebar-nav\">\n      <ul class=\"nav\">\n        <li class=\"nav-item\">\n          <a class=\"nav-link\" routerLinkActive=\"active\" [routerLink]=\"['/dashboard']\"><i class=\"icon-speedometer\"></i> Dashboard </a>\n        </li>\n        <li class=\"divider\"></li>\n        <li class=\"nav-title\">\n          Gerencia\n        </li>\n        <li class=\"nav-item nav-dropdown\" routerLinkActive=\"open\" appNavDropdown>\n          <a class=\"nav-link nav-dropdown-toggle\" href=\"#\" appNavDropdownToggle><i class=\"fa fa-edit\"></i> Gerenciar pedidos</a>\n          <ul class=\"nav-dropdown-items\">\n            <li class=\"nav-item\">\n              <a class=\"nav-link\" routerLinkActive=\"active\" [routerLink]=\"['/orders']\"><i class=\"fa fa-edit\"></i> Pedidos</a>\n              <a class=\"nav-link\" routerLinkActive=\"active\" [routerLink]=\"['/close']\"><i class=\"fa fa-edit\"></i> Pedidos fechados</a>\n              <a class=\"nav-link\" routerLinkActive=\"active\" [routerLink]=\"['/orders/cancel']\"><i class=\"fa fa-edit\"></i> Pedidos Cancelados</a>\n            </li>\n          </ul>\n        </li>\n        <li class=\"divider\"></li>\n        <li class=\"nav-title\">\n          Financeiro\n        </li>\n        <li class=\"nav-item nav-dropdown\" appNavDropdown>\n          <a class=\"nav-link nav-dropdown-toggle\" href=\"#\" appNavDropdownToggle><i class=\"fa fa-credit-card\"></i> Caixa</a>\n          <ul class=\"nav-dropdown-items\">\n            <li class=\"nav-item\">\n              <a class=\"nav-link\" routerLinkActive=\"active\" [routerLink]=\"['/financeiro/caixas']\"><i class=\"fa fa-credit-card\"></i> Caixas</a>\n            </li>\n            <li class=\"nav-item\">\n              <a class=\"nav-link\" routerLinkActive=\"active\" [routerLink]=\"['/financeiro/movimento/caixas']\"><i class=\"fa fa-exchange\"></i>Movimentos Caixas</a>\n            </li>\n          </ul>\n        </li>\n        <li class=\"divider\"></li>\n        <li class=\"nav-title\">\n          Cadastros\n        </li>\n        <li class=\"nav-item nav-dropdown\" appNavDropdown>\n          <a class=\"nav-link nav-dropdown-toggle\" href=\"#\" appNavDropdownToggle><i class=\"fa fa-product-hunt\"></i> Produtos</a>\n          <ul class=\"nav-dropdown-items\">\n            <li class=\"nav-item\">\n              <a class=\"nav-link\" routerLinkActive=\"active\" [routerLink]=\"['/cadastro/produtos']\"><i class=\"fa fa-plus\"></i> Gerenciar Produtos</a>\n            </li>\n          </ul>\n        </li>\n        <li class=\"nav-item nav-dropdown\" appNavDropdown>\n          <a class=\"nav-link nav-dropdown-toggle\" href=\"#\" appNavDropdownToggle><i class=\"fa fa-check-square\"></i> Clientes</a>\n          <ul class=\"nav-dropdown-items\">\n            <li class=\"nav-item\">\n              <a class=\"nav-link\" routerLinkActive=\"active\" [routerLink]=\"['/cadastro/clients']\"><i class=\"fa fa-plus\"></i> Gerenciar Clientes</a>\n            </li>\n          </ul>\n        </li>\n        <li class=\"nav-item nav-dropdown\" appNavDropdown *ngIf=\"user.role === 'admin' || user.role === 'gerente' || user.role === 'caixa'\">\n          <a class=\"nav-link nav-dropdown-toggle\" href=\"#\" appNavDropdownToggle><i class=\"fa fa-table\"></i> Mesas</a>\n          <ul class=\"nav-dropdown-items\">\n            <li class=\"nav-item\">\n              <a class=\"nav-link\" routerLinkActive=\"active\" [routerLink]=\"['/cadastro/mesas']\"><i class=\"fa fa-plus\"></i> Cadastro de mesa</a>\n            </li>\n          </ul>\n        </li>\n        <li class=\"divider\"></li>\n        <li class=\"nav-title\" *ngIf=\"user.role === 'admin' || user.role === 'gerente'\">\n          Controle de acessos\n        </li>\n        <li class=\"nav-item nav-dropdown\" appNavDropdown *ngIf=\"user.role === 'admin' || user.role === 'gerente'\">\n          <a class=\"nav-link nav-dropdown-toggle\" href=\"#\" appNavDropdownToggle><i class=\"fa fa-user\"></i> Usuários</a>\n          <ul class=\"nav-dropdown-items\">\n            <li class=\"nav-item\">\n              <a class=\"nav-link\" routerLinkActive=\"active\" [routerLink]=\"['/cadastro/users']\"><i class=\"fa fa-user-plus\"></i> Gerenciar usuários</a>\n            </li>\n          </ul>\n        </li>\n      </ul>\n    </nav>\n  </div>\n\n  <!-- Main content -->\n  <main class=\"main\">\n    <div class=\"container-fluid\" style=\"padding: 15px\">\n      <router-outlet></router-outlet>\n    </div><!-- /.conainer-fluid -->\n  </main>\n</div>\n\n<footer class=\"app-footer\" *ngIf=\"user !== '' && user !== null\">\n  <span class=\"float-center\">Versão: 1.12.8.17</span>\n  <span class=\"float-right\">\n    <a href=\"http://leiviton.com.br\">Gerencia Pedidos</a> &copy; {{ ano }} | Powered by\n    <a href=\"http://leiviton.com.br\">Leiviton Software</a>\n  </span>\n</footer>\n"
+module.exports = "<header class=\"app-header navbar\" *ngIf=\"user !== '' && user !== null\" [ngClass]=\"{'fundo': !user || user == '' || user == null}\">\n  <button class=\"navbar-toggler d-lg-none\" type=\"button\" appMobileSidebarToggler>&#9776;</button>\n  <a class=\"navbar-brand logo\"></a>\n  <button class=\"navbar-toggler d-md-down-none\" type=\"button\" appSidebarToggler>&#9776;</button>\n  <ul class=\"nav navbar-nav ml-auto\">\n    <li class=\"nav-item dropdown\" dropdown (onToggle)=\"toggled($event)\">\n      <a href class=\"nav-link dropdown-toggle\" dropdownToggle (click)=\"false\">\n        <img src=\"../../assets/img/logo_eguis.png\" class=\"img-avatar\" alt=\"{{ user.email }}\">\n        <span class=\"d-md-down-none\"></span>\n      </a>\n      <div class=\"dropdown-menu dropdown-menu-right\" *dropdownMenu aria-labelledby=\"simple-dropdown\">\n\n        <div class=\"dropdown-header text-center\"><i class=\"fa fa-user\"></i> <strong>{{ user.name }}</strong></div>\n        <a class=\"dropdown-item\" [routerLink]=\"['/dashboard/password']\"><i class=\"fa fa-bell-o\"></i> Trocar senha</a>\n        <a class=\"dropdown-item\" [routerLink]=\"['/user/logout']\"><i class=\"fa fa-power-off\"></i> Sair</a>\n      </div>\n    </li>\n  </ul>\n</header>\n\n<header class=\"app-header navbar\" *ngIf=\"user == '' && user == null || !user\" [ngClass]=\"{'fundo': !user || user == '' || user == null}\">\n</header>\n\n<div class=\"app-body\" [ngClass]=\"{'fundo': !user || user == '' || user == null}\">\n  <div class=\"sidebar\" *ngIf=\"user !== '' && user !== null\">\n    <nav class=\"sidebar-nav\">\n      <ul class=\"nav\">\n        <li class=\"nav-item\">\n          <a class=\"nav-link\" routerLinkActive=\"active\" [routerLink]=\"['/dashboard']\"><i class=\"icon-speedometer\"></i> Dashboard </a>\n        </li>\n        <li class=\"divider\"></li>\n        <li class=\"nav-title\">\n          Gerencia\n        </li>\n        <li class=\"nav-item nav-dropdown\" routerLinkActive=\"open\" appNavDropdown>\n          <a class=\"nav-link nav-dropdown-toggle\" href=\"#\" appNavDropdownToggle><i class=\"fa fa-edit\"></i> Gerenciar pedidos</a>\n          <ul class=\"nav-dropdown-items\">\n            <li class=\"nav-item\">\n              <a class=\"nav-link\" routerLinkActive=\"active\" [routerLink]=\"['/orders']\"><i class=\"fa fa-edit\"></i> Pedidos</a>\n              <a class=\"nav-link\" routerLinkActive=\"active\" [routerLink]=\"['/close']\"><i class=\"fa fa-edit\"></i> Pedidos fechados</a>\n              <a class=\"nav-link\" routerLinkActive=\"active\" [routerLink]=\"['/orders/cancel']\"><i class=\"fa fa-edit\"></i> Pedidos Cancelados</a>\n            </li>\n          </ul>\n        </li>\n        <li class=\"divider\"></li>\n        <li class=\"nav-title\">\n          Financeiro\n        </li>\n        <li class=\"nav-item nav-dropdown\" appNavDropdown>\n          <a class=\"nav-link nav-dropdown-toggle\" href=\"#\" appNavDropdownToggle><i class=\"fa fa-credit-card\"></i> Caixa</a>\n          <ul class=\"nav-dropdown-items\">\n            <li class=\"nav-item\">\n              <a class=\"nav-link\" routerLinkActive=\"active\" [routerLink]=\"['/financeiro/caixas']\"><i class=\"fa fa-credit-card\"></i> Caixas</a>\n            </li>\n            <li class=\"nav-item\">\n              <a class=\"nav-link\" routerLinkActive=\"active\" [routerLink]=\"['/financeiro/movimento/caixas']\"><i class=\"fa fa-exchange\"></i>Movimentos Caixas</a>\n            </li>\n            <li class=\"nav-item\">\n              <a class=\"nav-link\" routerLinkActive=\"active\" [routerLink]=\"['/financeiro/open/close/caixas']\"><i class=\"icon-lock-open\"></i>Abrir / Fechar Caixas</a>\n            </li>\n          </ul>\n        </li>\n        <li class=\"divider\"></li>\n        <li class=\"nav-title\">\n          Cadastros\n        </li>\n        <li class=\"nav-item nav-dropdown\" appNavDropdown>\n          <a class=\"nav-link nav-dropdown-toggle\" href=\"#\" appNavDropdownToggle><i class=\"fa fa-product-hunt\"></i> Produtos</a>\n          <ul class=\"nav-dropdown-items\">\n            <li class=\"nav-item\">\n              <a class=\"nav-link\" routerLinkActive=\"active\" [routerLink]=\"['/cadastro/produtos']\"><i class=\"fa fa-plus\"></i> Gerenciar Produtos</a>\n            </li>\n          </ul>\n        </li>\n        <li class=\"nav-item nav-dropdown\" appNavDropdown>\n          <a class=\"nav-link nav-dropdown-toggle\" href=\"#\" appNavDropdownToggle><i class=\"fa fa-check-square\"></i> Clientes</a>\n          <ul class=\"nav-dropdown-items\">\n            <li class=\"nav-item\">\n              <a class=\"nav-link\" routerLinkActive=\"active\" [routerLink]=\"['/cadastro/clients']\"><i class=\"fa fa-plus\"></i> Gerenciar Clientes</a>\n            </li>\n          </ul>\n        </li>\n        <li class=\"nav-item nav-dropdown\" appNavDropdown *ngIf=\"user.role === 'admin' || user.role === 'gerente' || user.role === 'caixa'\">\n          <a class=\"nav-link nav-dropdown-toggle\" href=\"#\" appNavDropdownToggle><i class=\"fa fa-table\"></i> Mesas</a>\n          <ul class=\"nav-dropdown-items\">\n            <li class=\"nav-item\">\n              <a class=\"nav-link\" routerLinkActive=\"active\" [routerLink]=\"['/cadastro/mesas']\"><i class=\"fa fa-plus\"></i> Cadastro de mesa</a>\n            </li>\n          </ul>\n        </li>\n        <li class=\"divider\"></li>\n        <li class=\"nav-title\" *ngIf=\"user.role === 'admin' || user.role === 'gerente'\">\n          Controle de acessos\n        </li>\n        <li class=\"nav-item nav-dropdown\" appNavDropdown *ngIf=\"user.role === 'admin' || user.role === 'gerente'\">\n          <a class=\"nav-link nav-dropdown-toggle\" href=\"#\" appNavDropdownToggle><i class=\"fa fa-user\"></i> Usuários</a>\n          <ul class=\"nav-dropdown-items\">\n            <li class=\"nav-item\">\n              <a class=\"nav-link\" routerLinkActive=\"active\" [routerLink]=\"['/cadastro/users']\"><i class=\"fa fa-user-plus\"></i> Gerenciar usuários</a>\n            </li>\n          </ul>\n        </li>\n      </ul>\n    </nav>\n  </div>\n\n  <!-- Main content -->\n  <main class=\"main\">\n    <div class=\"container-fluid\" style=\"padding: 15px\">\n      <router-outlet></router-outlet>\n    </div><!-- /.conainer-fluid -->\n  </main>\n</div>\n\n<footer class=\"app-footer\" *ngIf=\"user !== '' && user !== null\">\n  <span class=\"float-center\">Versão: 1.12.8.17 | {{data}}</span>\n  <span class=\"float-right\">\n    <a href=\"http://leiviton.com.br\">Gerencia Pedidos</a> &copy; {{ ano }} | Powered by\n    <a href=\"http://leiviton.com.br\">Leiviton Software</a>\n  </span>\n</footer>\n"
 
 /***/ }),
 
@@ -538,6 +544,7 @@ var FullLayoutComponent = (function () {
         this.user = JSON.parse(localStorage.getItem('user') || null);
         this.show = false;
         this.ano = new Date().getFullYear();
+        this.data = '';
         this.mesas = {};
         this.disabled = false;
         this.status = { isopen: false };
@@ -561,6 +568,13 @@ var FullLayoutComponent = (function () {
             this.toasterService.pop('warning', 'Atenção', 'É necessário logar no sistema');
             this.route.navigateByUrl('/user/login');
         }
+        this.data = this.getData();
+    };
+    FullLayoutComponent.prototype.getData = function () {
+        var dayNme = new Array("Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado");
+        var nomName = new Array("Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Agosto", "Outubro", "Novembro", "Dezembro");
+        var now = new Date();
+        return "Hoje é " + dayNme[now.getDay()] + "," + now.getDate() + " de " + nomName[now.getMonth()] + " de " + now.getFullYear();
     };
     FullLayoutComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({

@@ -3,7 +3,7 @@ webpackJsonp(["relatorios.module"],{
 /***/ "../../../../../src/app/relatorios/components/relatorio-mov-caixa.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<html>\r\n<head>\r\n    <meta http-equiv=\\\"Content-Type\\\" content=\\\"text/html; charset=utf-8\\\"/>\r\n    <style>\r\n        .fonte{\r\n            font-weight: 300;\r\n        }\r\n        .padding{\r\n            padding-left: 10px;\r\n            padding-right: 10px;\r\n            padding-bottom: 0;\r\n            padding-top: 0;\r\n            margin-left: 7px;\r\n        }\r\n        .produto{\r\n            font-weight: 200;\r\n            font-size: 15px;\r\n\r\n        }\r\n        .price{\r\n            margin-left: -20px;\r\n        }\r\n        .produto2{\r\n            word-wrap: break-word;\r\n            width: 6em;\r\n            text-transform: capitalize;\r\n        }\r\n        .total{\r\n            font-weight: bold;\r\n            font-size: 18px;\r\n        }\r\n        .divd{\r\n            font-weight: 100;\r\n            color: #3e515b;\r\n            font-size: 10px;\r\n        }\r\n\r\n        .border{\r\n            border-bottom: 1px solid #c2cfd6;;\r\n        }\r\n        .obs{\r\n            font-weight: bold;\r\n            font-size: 16px;\r\n            word-wrap: break-word;\r\n            width: 16em;\r\n            text-transform: capitalize;\r\n        }\r\n        .data{\r\n            font-weight: bold;\r\n            font-size: 10px;\r\n        }\r\n        .item{\r\n            margin:0;\r\n            padding:0;\r\n        }\r\n        .header{\r\n            padding:10px;\r\n            border: 1px solid #222;\r\n            border-bottom: 0 solid transparent;\r\n        }\r\n        .center{\r\n            position: relative;\r\n            margin-left:40%;\r\n        }\r\n        .body{\r\n            background-color: #FFFFFF !important;\r\n        }\r\n        .td{\r\n            bolder: 1px solid #222;\r\n        }\r\n        .table th, .table td, .th-table {\r\n            padding: 0.2rem !important;\r\n        }\r\n        .table-bordered th, .table-bordered td{\r\n            border: 1px solid #222 !important;\r\n            border-left: 0 solid transparent !important;\r\n            border-right: 0 solid transparent !important;\r\n        }\r\n        .table-bordered th{\r\n            background:#c2cfd6 !important;\r\n        }\r\n\r\n        .table {\r\n            width: 100% !important;\r\n            max-width: 100% !important;\r\n            margin-bottom: 1rem !important;\r\n            background-color: transparent !important;\r\n        }\r\n        table {\r\n            border-collapse: collapse !important;\r\n            border: 1px solid #222 !important;\r\n        }\r\n        table {\r\n            display: table !important;\r\n        }\r\n        .text-center {\r\n            text-align: center !important;\r\n        }\r\n        .sumario{\r\n            width: 250px;\r\n            padding: 22px;\r\n            margin-left: 76%;\r\n            font-weight: bold;\r\n            border: 1px solid #222;\r\n        }\r\n        .saldos{\r\n            font-size: 18px;\r\n            font-weight: bold;\r\n        }\r\n    </style>\r\n</head>\r\n<body class=\"body\">\r\n<div class='header text-center'>\r\n    <h3 class='item'>Relatório Movimentação de caixa</h3>\r\n    <p class='item'>Data Relatório: 15/02/2018 | Usuário Gerou Relatório: Leiviton | Usuário Caixa: Todos | Caixa: Caixa 1 | Data do caixa: 14/02/2018 | Empresa: Eguis</p>\r\n</div>\r\n<table class='table table-bordered'>\r\n    <thead>\r\n    <tr class='text-center'>\r\n        <th class='fonte text-center saldos'>Tipo</th>\r\n        <th class='fonte text-center saldos'>Caixa</th>\r\n        <th class='fonte text-center saldos'>Usuário</th>\r\n        <th class='fonte text-center saldos'>Documento</th>\r\n        <th class='fonte text-center saldos'>Histórico</th>\r\n        <th class='fonte text-center saldos'>Data/Hora</th>\r\n        <th class='fonte text-center saldos'>Valor</th>\r\n    </tr>\r\n    </thead>\r\n    <tbody>\r\n    <tr>\r\n        <td colspan='6' class='fonte saldos'>saldo inicial</td>\r\n        <td colspan='1' class='fonte text-center saldos'>R$ 500,00</td>\r\n    </tr>\r\n    <tr class='text-center' *ngFor=\"let m of movimentos.data\">\r\n        <td class='fonte'>{{ m.tipo_movimento }}</td>\r\n        <td class='fonte'>{{ m.caixa.data.name }}</td>\r\n        <td class='fonte'>{{ m.usuario }}</td>\r\n        <td class='fonte'> {{ m.payment.data.order_id }}</td>\r\n        <td class='fonte'> {{ m.historico }}</td>\r\n        <td class='fonte'> {{ m.created_at}}</td>\r\n        <td class='fonte'> {{ m.valor | currency:'BRL':true }}</td>\r\n    </tr>\r\n    <tr>\r\n        <td colspan='6' class='fonte saldos'>saldo final</td>\r\n        <td colspan='1' class='fonte text-center saldos'>R$ 500,00</td>\r\n    </tr>\r\n    </tbody>\r\n</table>\r\n<div class='sumario'>\r\n    <h5 class='item saldos'>Total Crédito: R$ 100,00</h5>\r\n    <h5 class='item saldos'>Total Débito: R$ 100,00</h5>\r\n</div>\r\n</body>\r\n</html>"
+module.exports = "<html>\r\n<head>\r\n    <meta http-equiv=\\\"Content-Type\\\" content=\\\"text/html; charset=utf-8\\\"/>\r\n    <style>\r\n        .fonte{\r\n            font-weight: 300;\r\n        }\r\n        .padding{\r\n            padding-left: 10px;\r\n            padding-right: 10px;\r\n            padding-bottom: 0;\r\n            padding-top: 0;\r\n            margin-left: 7px;\r\n        }\r\n        .produto{\r\n            font-weight: 200;\r\n            font-size: 15px;\r\n\r\n        }\r\n        .price{\r\n            margin-left: -20px;\r\n        }\r\n        .produto2{\r\n            word-wrap: break-word;\r\n            width: 6em;\r\n            text-transform: capitalize;\r\n        }\r\n        .total{\r\n            font-weight: bold;\r\n            font-size: 18px;\r\n        }\r\n        .divd{\r\n            font-weight: 100;\r\n            color: #3e515b;\r\n            font-size: 10px;\r\n        }\r\n\r\n        .border{\r\n            border-bottom: 1px solid #c2cfd6;;\r\n        }\r\n        .obs{\r\n            font-weight: bold;\r\n            font-size: 16px;\r\n            word-wrap: break-word;\r\n            width: 16em;\r\n            text-transform: capitalize;\r\n        }\r\n        .data{\r\n            font-weight: bold;\r\n            font-size: 10px;\r\n        }\r\n        .item{\r\n            margin:0;\r\n            padding:0;\r\n        }\r\n        .header{\r\n            padding:10px;\r\n            border: 1px solid #222;\r\n            border-bottom: 0 solid transparent;\r\n        }\r\n        .center{\r\n            position: relative;\r\n            margin-left:40%;\r\n        }\r\n        .body{\r\n            background-color: #FFFFFF !important;\r\n        }\r\n        .td{\r\n            bolder: 1px solid #222;\r\n        }\r\n        .table th, .table td, .th-table {\r\n            padding: 0.2rem !important;\r\n        }\r\n        .table-bordered th, .table-bordered td{\r\n            border: 1px solid #222 !important;\r\n            border-left: 0 solid transparent !important;\r\n            border-right: 0 solid transparent !important;\r\n        }\r\n        .table-bordered th{\r\n            background:#c2cfd6 !important;\r\n        }\r\n\r\n        .table {\r\n            width: 100% !important;\r\n            max-width: 100% !important;\r\n            margin-bottom: 1rem !important;\r\n            background-color: transparent !important;\r\n        }\r\n        table {\r\n            border-collapse: collapse !important;\r\n            border: 1px solid #222 !important;\r\n        }\r\n        table {\r\n            display: table !important;\r\n        }\r\n        .text-center {\r\n            text-align: center !important;\r\n        }\r\n        .sumario{\r\n            width: 250px;\r\n            padding: 22px;\r\n            margin-left: 76%;\r\n            font-weight: bold;\r\n            border: 1px solid #222;\r\n        }\r\n        .saldos{\r\n            font-size: 18px;\r\n            font-weight: bold;\r\n        }\r\n    </style>\r\n</head>\r\n<body class=\"body\">\r\n<div class='header text-center'>\r\n    <h3 class='item'>Relatório Movimentação de caixa</h3>\r\n    <p class='item'>Data Relatório: {{ data }} | Usuário Caixa: {{ filtros.filters[0].user }} | Caixa: {{ caixa }} | Data do caixa: {{ data_caixa }} | Empresa: Eguis</p>\r\n</div>\r\n<table class='table table-bordered'>\r\n    <thead>\r\n    <tr class='text-center'>\r\n        <th class='fonte text-center saldos'>Tipo</th>\r\n        <th class='fonte text-center saldos'>Caixa</th>\r\n        <th class='fonte text-center saldos'>Usuário</th>\r\n        <th class='fonte text-center saldos'>Documento</th>\r\n        <th class='fonte text-center saldos'>Histórico</th>\r\n        <th class='fonte text-center saldos'>Data/Hora</th>\r\n        <th class='fonte text-center saldos'>Valor</th>\r\n    </tr>\r\n    </thead>\r\n    <tbody>\r\n    <tr>\r\n        <td colspan='6' class='fonte saldos'>saldo inicial</td>\r\n        <td colspan='1' class='fonte text-center saldos'>{{ saldo_inicial | currency:'BRL':true}}</td>\r\n    </tr>\r\n    <tr *ngIf=\"tamanho == 0\">\r\n        <td colspan=\"7\"> Sem movimento</td>\r\n    </tr>\r\n    <tr class='text-center' *ngFor=\"let m of movimentos.data\">\r\n        <td class='fonte'>{{ m.tipo_movimento }}</td>\r\n        <td class='fonte'>{{ m.caixa.data.name }}</td>\r\n        <td class='fonte'>{{ m.usuario }}</td>\r\n        <td class='fonte' *ngIf=\"m.payment\"> {{ m.payment.data.order_id }}</td>\r\n        <td class='fonte' *ngIf=\"!m.payment\"></td>\r\n        <td class='fonte'> {{ m.historico }}</td>\r\n        <td class='fonte'> {{ m.created_at}}</td>\r\n        <td class='fonte'> {{ m.valor | currency:'BRL':true }}</td>\r\n    </tr>\r\n    <tr>\r\n        <td colspan='6' class='fonte saldos'>saldo final</td>\r\n        <td colspan='1' class='fonte text-center saldos' *ngIf=\"tamanho == 0\">{{ saldo_inicial | currency:'BRL':true}}</td>\r\n        <td colspan='1' class='fonte text-center saldos' *ngIf=\"tamanho > 0\">{{ total | currency:'BRL':true}}</td>\r\n    </tr>\r\n    </tbody>\r\n</table>\r\n<div class='sumario'>\r\n    <h5 class='item saldos'>Total Crédito: {{ total_credito | currency:'BRL':true}}</h5>\r\n    <h5 class='item saldos'>Total Débito: {{ total_debito | currency:'BRL':true}}</h5>\r\n</div>\r\n</body>\r\n</html>"
 
 /***/ }),
 
@@ -13,11 +13,9 @@ module.exports = "<html>\r\n<head>\r\n    <meta http-equiv=\\\"Content-Type\\\" 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RelatorioMovCaixaComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery__ = __webpack_require__("../../../../jquery/dist/jquery.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_jquery__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_relatorios_service__ = __webpack_require__("../../../../../src/app/relatorios/services/relatorios.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angular2_toaster__ = __webpack_require__("../../../../angular2-toaster/angular2-toaster.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_relatorios_service__ = __webpack_require__("../../../../../src/app/relatorios/services/relatorios.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angular2_toaster__ = __webpack_require__("../../../../angular2-toaster/angular2-toaster.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -31,7 +29,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
 var RelatorioMovCaixaComponent = (function () {
     function RelatorioMovCaixaComponent(httpService, router, route, toasterService) {
         this.httpService = httpService;
@@ -39,27 +36,62 @@ var RelatorioMovCaixaComponent = (function () {
         this.route = route;
         this.toasterService = toasterService;
         this.movimentos = {
-            data: {}
+            data: []
         };
-        document.onkeydown = (function (e) {
-        });
+        this.saldo_inicial = 0;
+        this.tamanho = 0;
+        this.total = 0;
+        this.total_credito = 0;
+        this.total_debito = 0;
+        this.filtros = {
+            filters: []
+        };
+        this.data = new Date().toLocaleDateString();
+        this.data_caixa = '';
+        this.caixa = '';
     }
     RelatorioMovCaixaComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.filtros = JSON.parse(localStorage.getItem('filtros_rel') || null);
+        var data = this.filtros.filters[2].inicio;
+        this.data_caixa = new Date(this.filtros.filters[2].inicio).toLocaleDateString();
+        this.httpService.builder()
+            .view(this.filtros.filters[1].caixa_id, 'caixa')
+            .then(function (res) {
+            _this.caixa = res.data.name;
+        });
+        this.httpService.builder()
+            .list({}, 'open/?data=' + data)
+            .then(function (res) {
+            for (var i in res.data) {
+                if (res.data[i].tipo == 'A') {
+                    _this.saldo_inicial = res.data[i].saldo;
+                }
+            }
+        });
         this.movimentos = JSON.parse(localStorage.getItem('mov_caixa_rel') || null);
+        this.tamanho = this.movimentos.data.length;
+        this.total = this.saldo_inicial;
+        for (var i in this.movimentos.data) {
+            if (this.movimentos.data[i].tipo_movimento === 'credito') {
+                this.total += this.movimentos.data[i].valor;
+                this.total_credito += this.movimentos.data[i].valor;
+            }
+            else if (this.movimentos.data[i].tipo_movimento === 'debito') {
+                this.total -= this.movimentos.data[i].valor;
+                this.total_debito += this.movimentos.data[i].valor;
+            }
+        }
         console.log(this.movimentos);
-        window.print();
-    };
-    RelatorioMovCaixaComponent.prototype.hideLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_1_jquery__(".container-loading").hide();
-    };
-    RelatorioMovCaixaComponent.prototype.showLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_1_jquery__(".container-loading").show();
+        setTimeout(function () {
+            window.print();
+        }, 4000);
     };
     RelatorioMovCaixaComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             template: __webpack_require__("../../../../../src/app/relatorios/components/relatorio-mov-caixa.component.html")
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__services_relatorios_service__["a" /* RelatoriosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_relatorios_service__["a" /* RelatoriosService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4_angular2_toaster__["b" /* ToasterService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4_angular2_toaster__["b" /* ToasterService */]) === "function" && _d || Object])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__services_relatorios_service__["a" /* RelatoriosService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_relatorios_service__["a" /* RelatoriosService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["a" /* ActivatedRoute */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3_angular2_toaster__["b" /* ToasterService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_angular2_toaster__["b" /* ToasterService */]) === "function" && _d || Object])
     ], RelatorioMovCaixaComponent);
     return RelatorioMovCaixaComponent;
     var _a, _b, _c, _d;

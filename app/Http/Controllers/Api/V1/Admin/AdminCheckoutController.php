@@ -15,9 +15,11 @@ use Pedidos\Http\Controllers\Controller;
 use Pedidos\Http\Requests\CheckoutRequest;
 use Illuminate\Http\Request;
 use Pedidos\Repositories\AuditRepository;
+use Pedidos\Repositories\CaixaRepository;
 use Pedidos\Repositories\ComplementItemRepository;
 use Pedidos\Repositories\ComplementRepository;
 use Pedidos\Repositories\MesaRepository;
+use Pedidos\Repositories\OpenCloseCaixasRepository;
 use Pedidos\Repositories\OrderItemRepository;
 use Pedidos\Repositories\OrderRepository;
 use Pedidos\Repositories\PaymentTypesRepository;
@@ -66,12 +68,20 @@ class AdminCheckoutController extends Controller
      * @var AuditRepository
      */
     private $auditRepository;
+    /**
+     * @var CaixaRepository
+     */
+    private $caixaRepository;
+    /**
+     * @var OpenCloseCaixasRepository
+     */
+    private $openCloseCaixasRepository;
 
     public function  __construct(OrderRepository $repository, OrderService $orderService
         , ProductRepository $productRepository, MesaRepository $mesaRepository,
                                  PaymentTypesRepository $typesRepository, OrderItemRepository $itemRepository
         ,ComplementRepository $complementRepository, ComplementItemRepository $complementItemRepository,
-        AuditRepository $auditRepository){
+        AuditRepository $auditRepository,CaixaRepository $caixaRepository, OpenCloseCaixasRepository $openCloseCaixasRepository){
         $this->repository = $repository;
         $this->orderService = $orderService;
         $this->productRepository = $productRepository;
@@ -81,6 +91,8 @@ class AdminCheckoutController extends Controller
         $this->complementRepository = $complementRepository;
         $this->complementItemRepository = $complementItemRepository;
         $this->auditRepository = $auditRepository;
+        $this->caixaRepository = $caixaRepository;
+        $this->openCloseCaixasRepository = $openCloseCaixasRepository;
     }
 
     public function orders(Request $request)
@@ -172,27 +184,62 @@ class AdminCheckoutController extends Controller
         $data['total_original'] = $request->get('total_original');
         $data['payment_types_id'] = $request->get('payment_types_id');
         $data['user_create'] = $user->email;
-        if($data['total_pago'] == 0)
-        {
-            return 0;
-        }else {
-            $o = $this->orderService->pagyment($id, $data);
+        $caixa = $this->caixaRepository->find(1);
 
-            if ($o->id) {
-                $audit = [
-                    'type' => 'insert',
-                    'user_id' => $user->id,
-                    'user' => $user->email,
-                    'entity' => 'pagamento/pedidos',
-                    'action' => 'Pagou o pedido: ' . $o->id
-                ];
+        $open = $this->openCloseCaixasRepository->findWhere(['data_caixa'=>date('Y-m-d'),'tipo'=>'F']);
 
-                $this->auditRepository->create($audit);
+        $open_a = $this->openCloseCaixasRepository->findWhere(['data_caixa'=>date('Y-m-d'),'tipo'=>'A']);
+
+        if($data['payment_types_id'] == 1) {
+            if($caixa->open_close == 'F' && count($open_a) == 0){
+                return response()->json('fechado');
+            }elseif ($caixa->open_close == 'F' && count($open) > 0) {
+                return response()->json('fechado');
+            } else {
+                if ($data['total_pago'] == 0) {
+                    return 0;
+                } else {
+                    $o = $this->orderService->pagyment($id, $data);
+
+                    if ($o->id) {
+                        $audit = [
+                            'type' => 'insert',
+                            'user_id' => $user->id,
+                            'user' => $user->email,
+                            'entity' => 'pagamento/pedidos',
+                            'action' => 'Pagou o pedido: ' . $o->id
+                        ];
+
+                        $this->auditRepository->create($audit);
+                    }
+
+                    return $this->repository
+                        ->skipPresenter(false)
+                        ->find($o->id);
+                }
             }
+        }else{
+            if ($data['total_pago'] == 0) {
+                return 0;
+            } else {
+                $o = $this->orderService->pagyment($id, $data);
 
-            return $this->repository
-                ->skipPresenter(false)
-                ->find($o->id);
+                if ($o->id) {
+                    $audit = [
+                        'type' => 'insert',
+                        'user_id' => $user->id,
+                        'user' => $user->email,
+                        'entity' => 'pagamento/pedidos',
+                        'action' => 'Pagou o pedido: ' . $o->id
+                    ];
+
+                    $this->auditRepository->create($audit);
+                }
+
+                return $this->repository
+                    ->skipPresenter(false)
+                    ->find($o->id);
+            }
         }
     }
 
@@ -254,6 +301,17 @@ class AdminCheckoutController extends Controller
             })
             ->all();
         return $result;
+    }
+
+    public function openOrder(Request $request)
+    {
+        $data = $request->get('order_id');
+
+        $result = $this->orderService->openOrder($data);
+
+        return $this->repository
+            ->skipPresenter(false)
+            ->find($result->id);
     }
 
     public function addItem(Request $request)

@@ -17,7 +17,7 @@ export class DashboardComponent implements OnInit {
         jQuery(".container-loading").show();
     }
 
-
+  data = '';
   mesas = {
       data:[]
   };
@@ -522,9 +522,10 @@ export class DashboardComponent implements OnInit {
               this.cancelados = res;
           });
 
-
       setTimeout(() => {
         this.hideLoading();
       }, 2000);
   }
+
+
 }

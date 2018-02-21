@@ -34,6 +34,7 @@ var DashboardComponent = (function () {
     function DashboardComponent(route, httpService) {
         this.route = route;
         this.httpService = httpService;
+        this.data = '';
         this.mesas = {
             data: []
         };

@@ -43,6 +43,7 @@ export class MovimentoCaixasComponent implements OnInit {
     };
   ngOnInit(): void {
       this.showLoading();
+
       let u = {role:null};
       u = JSON.parse(localStorage.getItem('user') || null);
       if(u == null){
@@ -55,8 +56,8 @@ export class MovimentoCaixasComponent implements OnInit {
           this.toasterService.pop('error','Sem permissão','Usuário sem acesso, contate o administrador');
           this.router.navigate(['/dashboard']);
       }
+
       this.httpService.setAccessToken();
-      this.tamanho = 0;
       setTimeout(this.hideLoading(),2000);
       this.getCaixas();
       this.getUser();
@@ -89,6 +90,7 @@ export class MovimentoCaixasComponent implements OnInit {
 
     pesquisar()
     {
+
 
         this.showLoading();
         if(this.pesquisa.inicio !== null && this.pesquisa.fim !== null)
@@ -136,10 +138,11 @@ export class MovimentoCaixasComponent implements OnInit {
         this.hideModal('#rel');
         window.open('/#/relatorios/relatorio-movimento-caixa', '_blank');
     }
+
     gerarRel()
     {
         this.showLoading();
-        if(this.pesquisa.inicio != null && this.pesquisa.inicio != '' && this.pesquisa.fim != null && this.pesquisa.fim != '')
+        if(this.pesquisa.inicio != null && this.pesquisa.inicio != '')
         {
             let options = {
                 filters: [
@@ -153,8 +156,8 @@ export class MovimentoCaixasComponent implements OnInit {
                 .list(options,'relatorio/fechamento/caixa')
                 .then((res)=>{
                     this.hideLoading();
-                    this.movimentos = res;
                     localStorage.setItem('mov_caixa_rel',JSON.stringify(res));
+                    localStorage.setItem('filtros_rel',JSON.stringify(options));
                     this.openReal();
                     this.toasterService.pop('success','Sucesso','Relátorio gerado com sucesso');
                 });

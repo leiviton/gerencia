@@ -42,7 +42,8 @@ export class EditComponent implements OnInit {
             data:{
                 id:1
             }
-        }
+        },
+        payment:{data:{type:{data:{id:0}}}}
     };
     client = {
         id:1,
@@ -180,6 +181,42 @@ export class EditComponent implements OnInit {
                });
     }
 
+    openOrder()
+    {
+        let type_payment;
+        let data_payment;
+        let paymets = this.order.payment.data;
+        let di = new Date();
+
+        for(let i in paymets)
+        {
+            if(paymets[i].ativo == 'S') {
+                if (paymets[i].type.data.id == 1) {
+                    type_payment = 1;
+                    data_payment = paymets[i].data.date;
+                    console.log(paymets[i].data.date)
+                }
+            }
+        }
+
+        if(type_payment == 1 && (new Date(data_payment).toDateString() < new Date(di).toDateString()))
+        {
+            this.toasterService.pop('error','Erro','Existem pagamentos em dinheiro, caixa da data está fechado.')
+        }else{
+            this.showLoading();
+            let data = {
+                order_id:this.order.id
+            };
+
+            this.httpService.builder()
+                .insert(data,'order/open')
+                .then((res)=>{
+                    this.hideLoading();
+                    this.toasterService.pop('success', 'Sucesso', 'Pedido '+res.data.id+' reaberto.');
+                    this.router.navigate(['/orders/edit/'+res.data.id]);
+                });
+        }
+    }
     addItem(item)
     {
         this.httpService.addItem(item,this.qtd);

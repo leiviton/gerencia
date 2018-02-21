@@ -24,7 +24,7 @@ class CaixaTransformer extends TransformerAbstract
             'name' => $model->name,
             'saldo' => $model->saldo,
             'ativo' => $model->ativo,
-
+            'open_close' => $model->open_close,
             /* place your other model properties here */
 
             'created_at' => (string)date_format($model->created_at,'d/m/Y H:i:s'),

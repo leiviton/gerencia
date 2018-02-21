@@ -46,6 +46,7 @@ Route::group(['prefix'=>'api/v1','middleware' => 'auth:api'],function () {
        Route::delete('remove/item/{id}','AdminCheckoutController@excluirItem');
        Route::put('cancelar/pedido/{id}','AdminCheckoutController@cancelOrder');
        Route::get('contador','AdminCheckoutController@contadores');
+       Route::post('order/open','AdminCheckoutController@openOrder');
        /*mesas*/
        Route::get('mesas', 'MesaController@index');
        Route::get('mesas/all', 'MesaController@all');
@@ -79,6 +80,8 @@ Route::group(['prefix'=>'api/v1','middleware' => 'auth:api'],function () {
         Route::post('caixa', 'CaixasController@store');
         Route::get('caixa/{id}','CaixasController@edit');
         Route::put('caixa/{id}', 'CaixasController@update');
+        Route::post('transferencia','CaixasController@transferencia');
+        Route::post('saque','CaixasController@saque');
         /*movimento caixas*/
         Route::get('search/movimento/caixa','MovimentoCaixasController@search');
         Route::get('movimento/caixas','MovimentoCaixasController@index');
@@ -87,7 +90,10 @@ Route::group(['prefix'=>'api/v1','middleware' => 'auth:api'],function () {
         Route::put('movimento/caixa/{id}', 'MovimentoCaixasController@update');
         Route::get('movimento/caixas/filters','MovimentoCaixasController@getFiltros');
         Route::get('relatorio/fechamento/caixa','RelatoriosController@gerarRelMovCaixa');
-
+        /*open_close_caixa*/
+        Route::get('open/close/caixa','OpenCloseCaixasController@index');
+        Route::get('open','OpenCloseCaixasController@getDateCaixa');
+        Route::post('open/close', 'OpenCloseCaixasController@store');
     });
     Route::get('user','Api\UserController@authenticated');
 });

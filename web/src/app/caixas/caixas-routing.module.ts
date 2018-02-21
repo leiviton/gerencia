@@ -6,9 +6,11 @@ import { CaixasComponent } from './components/caixas.component';
 
 import { PaymentComponent } from "./components/payment.component";
 
-import { PrinterComponent} from "./components/printer.component";
+import { SaqueComponent } from "./components/saque.component";
 
 import { EditComponent} from "./components/edit.component";
+
+import { TransferenciaComponent } from "./components/transferencia.component"
 
 
 const routes: Routes = [
@@ -24,6 +26,20 @@ const routes: Routes = [
               component: EditComponent,
               data: {
                   title: 'Editar'
+              }
+          },
+          {
+              path: 'saque',
+              component: SaqueComponent,
+              data: {
+                  title: 'Saque'
+              }
+          },
+          {
+              path: 'transferencia',
+              component: TransferenciaComponent,
+              data: {
+                  title: 'Transferencia'
               }
           }
       ]

@@ -16,7 +16,8 @@ class OpenCloseCaixas extends Model implements Transformable
         'tipo',
         'usuario',
         'saldo',
-        'caixa_id'
+        'caixa_id',
+        'data_caixa'
     ];
 
     public function caixa()

@@ -55,6 +55,9 @@
             <li class="nav-item">
               <a class="nav-link" routerLinkActive="active" [routerLink]="['/financeiro/movimento/caixas']"><i class="fa fa-exchange"></i>Movimentos Caixas</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLinkActive="active" [routerLink]="['/financeiro/open/close/caixas']"><i class="icon-lock-open"></i>Abrir / Fechar Caixas</a>
+            </li>
           </ul>
         </li>
         <li class="divider"></li>
@@ -110,7 +113,7 @@
 </div>
 
 <footer class="app-footer" *ngIf="user !== '' && user !== null">
-  <span class="float-center">Versão: 1.12.8.17</span>
+  <span class="float-center">Versão: 1.12.8.17 | {{data}}</span>
   <span class="float-right">
     <a href="http://leiviton.com.br">Gerencia Pedidos</a> &copy; {{ ano }} | Powered by
     <a href="http://leiviton.com.br">Leiviton Software</a>

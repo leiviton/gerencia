@@ -28,7 +28,9 @@ class PaymentOrdersTransformer extends TransformerAbstract
             'acrescimo' => (float) $model->acrescimo,
             'total_original' => (float) $model->total_original,
             'order_id' => (int) $model->order_id,
+            'ativo' => (string) $model->ativo,
             /* place your other model properties here */
+            'data' => $model->created_at,
             'created_at' => (string)date_format($model->created_at,'d/m/Y H:i:s'),
             'updated_at' => $model->updated_at
         ];

@@ -56,11 +56,12 @@ class MovimentoCaixaRepositoryEloquent extends BaseRepository implements Movimen
                     }
                     return $query;
                 })
-                ->orderBy('id','asc')
+                ->orderBy('id','desc')
                 ->whereBetween("created_at",
                     [$inicio,$fim])
                 ->where('caixa_id',$status['caixa_id'])
                 ->where('usuario',$where['user'])
+                ->where('ativo','S')
                 ->get();
         }else{
             $results = $this->model
@@ -70,10 +71,11 @@ class MovimentoCaixaRepositoryEloquent extends BaseRepository implements Movimen
                     }
                     return $query;
                 })
-                ->orderBy('id','asc')
+                ->orderBy('id','desc')
                 ->whereBetween("created_at",
                     [$inicio,$fim])
                 ->where('caixa_id',$status['caixa_id'])
+                ->where('ativo','S')
                 ->get();
         }
         if ($results){

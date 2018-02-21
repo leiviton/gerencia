@@ -23,6 +23,8 @@ export class FullLayoutComponent implements OnInit {
         }
       }, 1000);
   }
+
+  data = '';
   mesas = {};
   public disabled = false;
   public status: {isopen: boolean} = {isopen: false};
@@ -42,5 +44,15 @@ export class FullLayoutComponent implements OnInit {
         this.toasterService.pop('warning','Atenção','É necessário logar no sistema');
         this.route.navigateByUrl('/user/login');
       }
+
+      this.data = this.getData();
   }
+
+    getData()
+    {
+        let dayNme = new Array("Domingo","Segunda","Terça","Quarta","Quinta","Sexta","Sábado");
+        let nomName = new Array("Janeiro","Fevereiro","Março","Abril","Maio","Junho","Agosto","Outubro","Novembro","Dezembro");
+        let now = new Date();
+        return "Hoje é "+ dayNme[now.getDay()] +","+ now.getDate() +" de "+ nomName[now.getMonth()] +" de "+ now.getFullYear();
+    }
 }

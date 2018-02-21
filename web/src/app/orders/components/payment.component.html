@@ -6,7 +6,7 @@
                 <h3 class="text-center"> {{ mesa }} </h3>
                 <h3 class="text-center"> Total: {{ order.total | currency:'BRL':true}}</h3>
             </div>
-            <div class="modal-body" style="height: 520px; overflow: auto">
+            <div class="modal-body" style="height: 500px; overflow: auto">
                 <div class="col-md-12">
                     <form class="form-inline" #myForm="ngForm">
                         <div class="col-md-12">
@@ -59,12 +59,12 @@
                             </thead>
                             <tbody>
                             <tr class="th-table" *ngFor="let p of order.payment.data; let i = index">
-                                <td class="text-center">{{ p.total_pago | currency:'BRL':true }}</td>
-                                <td>{{ p.desconto | currency:'BRL':true }}</td>
-                                <td class="text-center">{{ p.acrescimo | currency:'BRL':true }}</td>
-                                <td class="text-center">{{ order.total | currency:'BRL':true }}</td>
-                                <td class="text-center">{{ p.type.data.name }}</td>
-                                <td class="text-center">{{ p.created_at }}</td>
+                                <td class="text-center" *ngIf="p.ativo == 'S'">{{ p.total_pago | currency:'BRL':true }}</td>
+                                <td *ngIf="p.ativo == 'S'">{{ p.desconto | currency:'BRL':true }}</td>
+                                <td class="text-center" *ngIf="p.ativo == 'S'">{{ p.acrescimo | currency:'BRL':true }}</td>
+                                <td class="text-center" *ngIf="p.ativo == 'S'">{{ order.total | currency:'BRL':true }}</td>
+                                <td class="text-center" *ngIf="p.ativo == 'S'">{{ p.type.data.name }}</td>
+                                <td class="text-center" *ngIf="p.ativo == 'S'">{{ p.created_at }}</td>
                             </tr>
                             </tbody>
                         </table>

@@ -2,6 +2,7 @@
 
 namespace Pedidos\Transformers;
 
+use DateTime;
 use League\Fractal\TransformerAbstract;
 use Pedidos\Models\OpenCloseCaixas;
 
@@ -25,11 +26,12 @@ class OpenCloseCaixasTransformer extends TransformerAbstract
             'id'         => (int) $model->id,
             'tipo'      => (string) $model->tipo,
             'usuario'  => (string) $model->usuario,
-            'saldo' => $model->saldo,
+            'saldo' => (float)$model->saldo,
+            'data_caixa' => (string) date_format(new DateTime($model->data_caixa),'d/m/Y'),
             /* place your other model properties here */
 
-            'created_at' => $model->created_at,
-            'updated_at' => $model->updated_at
+            'created_at' => (string)date_format($model->created_at,'d/m/Y H:i:s'),
+            'updated_at' => (string)date_format($model->updated_at,'d/m/Y H:i:s')
         ];
     }
 

@@ -14,13 +14,13 @@ import { TooltipModule } from 'ngx-bootstrap';
 import { NAV_DROPDOWN_DIRECTIVES } from './shared/nav-dropdown.directive';
 
 import { ChartsModule } from 'ng2-charts/ng2-charts';
+
 import { SIDEBAR_TOGGLE_DIRECTIVES } from './shared/sidebar.directive';
 import { AsideToggleDirective } from './shared/aside.directive';
 import { BreadcrumbsComponent } from './shared/breadcrumb.component';
 import { CurrencyMaskModule } from "ng2-currency-mask";
 
 import { ToasterModule } from 'angular2-toaster';
-import { CuppaDataGridModule } from 'cuppa-ng2-grid/cuppa-ng2-dataGrid';
 
 // Routing Module
 import { AppRoutingModule } from './app.routing';
@@ -46,8 +46,7 @@ import { AppHttpService } from './app-http.service';
     CurrencyMaskModule,
     ToasterModule,
     LoadingModule,
-    ChartsModule,
-    CuppaDataGridModule
+    ChartsModule
   ],
   declarations: [
     AppComponent,

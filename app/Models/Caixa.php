@@ -14,7 +14,8 @@ class Caixa extends Model implements Transformable
     protected $fillable = [
         'name',
         'ativo',
-        'saldo'
+        'saldo',
+        'open_close'
     ];
 
     public function movimentoCaixa()

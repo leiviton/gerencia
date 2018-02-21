@@ -5,9 +5,9 @@ import { NgForOf } from '@angular/common';
 import { CaixasService } from '../services/caixas.service';
 import { FormsModule } from '@angular/forms';
 
-
-
 import * as jQuery from 'jquery';
+
+
 @Component({
   templateUrl: 'caixas.component.html'
 })
@@ -51,6 +51,7 @@ export class CaixasComponent implements OnInit {
                           this.caixas = res;
                           this.tamanho = res.data.length;
                       }
+
                       this.hideLoading();
                   });
           });
@@ -61,6 +62,17 @@ export class CaixasComponent implements OnInit {
     {
         this.cor = true;
         this.router.navigate(['/financeiro/caixas/edit/'+ id]);
+    }
+
+
+    saque()
+    {
+        this.router.navigate(['/financeiro/caixas/saque']);
+    }
+
+    transfer()
+    {
+        this.router.navigate(['/financeiro/caixas/transferencia']);
     }
 
     new()

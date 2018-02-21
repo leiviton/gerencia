@@ -10,6 +10,8 @@ import { PrinterComponent} from "./components/printer.component";
 
 import { EditComponent} from "./components/edit.component";
 
+import { NewComponent} from "./components/new.component";
+
 
 const routes: Routes = [
   {
@@ -20,15 +22,15 @@ const routes: Routes = [
     },
       children: [
           {
-              path: 'edit/:id',
-              component: EditComponent,
+              path: 'new',
+              component: NewComponent,
               data: {
-                  title: 'Editar'
+                  title: 'Novo'
               }
           },
           {
-              path: 'printer/:url/:arquivo',
-              component: PrinterComponent,
+              path: 'edit/:id',
+              component: EditComponent,
               data: {
                   title: 'Editar'
               }

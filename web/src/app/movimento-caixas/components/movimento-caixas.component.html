@@ -18,13 +18,12 @@
                     <th class="title text-center">Documento</th>
                     <th class="title text-center">Histórico</th>
                     <th class="title text-center">Data/Hora</th>
-                    <th class="title text-center">Atualizado</th>
                     <th class="title text-center">Usuário</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr *ngIf="tamanho == 0">
-                    <td colspan="10"> Sem dados</td>
+                    <td colspan="8"> Sem dados</td>
                   </tr>
                   <tr *ngFor="let o of movimentos.data">
                     <td class="text-center" *ngIf="tamanho > 0">{{ o.id }}</td>
@@ -34,10 +33,10 @@
                     </td>
                     <td class="text-center" *ngIf="tamanho > 0">{{ o.caixa.data.name}}</td>
                     <td class="text-center" *ngIf="tamanho > 0">{{ o.valor | currency:'BRL':true }}</td>
-                    <td class="text-center" *ngIf="tamanho > 0">{{ o.payment.data.order_id}}</td>
+                    <td class="text-center" *ngIf="tamanho > 0 && o.payment">{{ o.payment.data.order_id}}</td>
+                    <td class="text-center" *ngIf="tamanho > 0 && !o.payment"></td>
                     <td class="text-center" *ngIf="tamanho > 0">{{ o.historico}}</td>
                     <td class="text-center" *ngIf="tamanho > 0">{{ o.created_at }}</td>
-                    <td class="text-center" *ngIf="tamanho > 0">{{ o.updated_at }}</td>
                     <td class="text-center" *ngIf="tamanho > 0">{{ o.usuario }}</td>
                   </tr>
                 </tbody>

@@ -4,13 +4,14 @@
           <div class="card">
             <div class="card-header">
                    <button type="button" class="btn btn-default" ><i class="fa fa-search"></i> Pesquisar </button>
-                   <button type="button" class="btn btn-danger" ><i class="fa fa-exchange"></i> Transferencia </button>
-                   <button type="button" class="btn btn-info" ><i class="fa fa-arrow-up"></i> Saque </button>
+                   <button type="button" class="btn btn-danger" (click)="transfer()"><i class="fa fa-exchange"></i> Transferencia </button>
+                   <button type="button" class="btn btn-info" (click)="saque()"><i class="fa fa-arrow-up"></i> Saque </button>
             </div>
             <div class="card-body">
-              <table class="table table-responsive table-bordered table-striped table-sm">
+              <table class="table table-responsive table-bordered table-striped table-sm" id="dt">
                 <thead>
                   <tr>
+                    <th class="title text-center"></th>
                     <th class="title text-center">Status</th>
                     <th class="title text-center">Codigo</th>
                     <th class="title text-center">Caixa</th>
@@ -21,12 +22,16 @@
                 </thead>
                 <tbody>
                   <tr *ngIf="tamanho == 0">
-                    <td colspan="10"> Sem dados</td>
+                    <td colspan="7"> Sem dados</td>
                   </tr>
                   <tr *ngFor="let o of caixas.data" (dblclick)="edit(o.id)">
+                    <td class="text-center">
+                      <span class="badge badge-pill badge-success" tooltip="Aberto"><i class="length-icon icon-lock-open" *ngIf="o.open_close === 'A'"></i></span>
+                      <span class="badge badge-pill badge-danger" tooltip="Fechado"><i class="length-icon icon-lock" *ngIf="o.open_close === 'F'"></i></span>
+                    </td>
                     <td class="text-center" *ngIf="tamanho > 0">
                       <span class="badge badge-pill badge-success" *ngIf="o.ativo === 'S'" tooltip="Ativo"> Ativo</span>
-                      <span class="badge badge-pill badge-danger" *ngIf="o.ativo === 'N'" tooltip="Desativado"> Desativado</span>
+                      <span class="badge badge-pill badge-danger" *ngIf="o.ativo === 'N'" tooltip="Desativado"> Inativado</span>
                     </td>
                     <td class="text-center" *ngIf="tamanho > 0">{{ o.id }}</td>
                     <td class="text-center" *ngIf="tamanho > 0">{{o.name}}</td>

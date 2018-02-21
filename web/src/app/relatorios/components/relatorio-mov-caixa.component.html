@@ -112,7 +112,7 @@
 <body class="body">
 <div class='header text-center'>
     <h3 class='item'>Relatório Movimentação de caixa</h3>
-    <p class='item'>Data Relatório: 15/02/2018 | Usuário Gerou Relatório: Leiviton | Usuário Caixa: Todos | Caixa: Caixa 1 | Data do caixa: 14/02/2018 | Empresa: Eguis</p>
+    <p class='item'>Data Relatório: {{ data }} | Usuário Caixa: {{ filtros.filters[0].user }} | Caixa: {{ caixa }} | Data do caixa: {{ data_caixa }} | Empresa: Eguis</p>
 </div>
 <table class='table table-bordered'>
     <thead>
@@ -129,26 +129,31 @@
     <tbody>
     <tr>
         <td colspan='6' class='fonte saldos'>saldo inicial</td>
-        <td colspan='1' class='fonte text-center saldos'>R$ 500,00</td>
+        <td colspan='1' class='fonte text-center saldos'>{{ saldo_inicial | currency:'BRL':true}}</td>
+    </tr>
+    <tr *ngIf="tamanho == 0">
+        <td colspan="7"> Sem movimento</td>
     </tr>
     <tr class='text-center' *ngFor="let m of movimentos.data">
         <td class='fonte'>{{ m.tipo_movimento }}</td>
         <td class='fonte'>{{ m.caixa.data.name }}</td>
         <td class='fonte'>{{ m.usuario }}</td>
-        <td class='fonte'> {{ m.payment.data.order_id }}</td>
+        <td class='fonte' *ngIf="m.payment"> {{ m.payment.data.order_id }}</td>
+        <td class='fonte' *ngIf="!m.payment"></td>
         <td class='fonte'> {{ m.historico }}</td>
         <td class='fonte'> {{ m.created_at}}</td>
         <td class='fonte'> {{ m.valor | currency:'BRL':true }}</td>
     </tr>
     <tr>
         <td colspan='6' class='fonte saldos'>saldo final</td>
-        <td colspan='1' class='fonte text-center saldos'>R$ 500,00</td>
+        <td colspan='1' class='fonte text-center saldos' *ngIf="tamanho == 0">{{ saldo_inicial | currency:'BRL':true}}</td>
+        <td colspan='1' class='fonte text-center saldos' *ngIf="tamanho > 0">{{ total | currency:'BRL':true}}</td>
     </tr>
     </tbody>
 </table>
 <div class='sumario'>
-    <h5 class='item saldos'>Total Crédito: R$ 100,00</h5>
-    <h5 class='item saldos'>Total Débito: R$ 100,00</h5>
+    <h5 class='item saldos'>Total Crédito: {{ total_credito | currency:'BRL':true}}</h5>
+    <h5 class='item saldos'>Total Débito: {{ total_debito | currency:'BRL':true}}</h5>
 </div>
 </body>
 </html>

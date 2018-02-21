@@ -93,4 +93,27 @@ class CaixaService
 
         $caixa2->save();
     }
+
+    public function saque($data)
+    {
+        $caixa = $this->caixaRepository->find($data['caixa_id']);
+
+        $caixa->saldo -= $data['valor'];
+
+        $movimento = [
+            'tipo_movimento' => 'debito',
+            'valor' => $data['valor'],
+            'usuario' => $data['user_create'],
+            'historico' => 'Debito gerado pelo saque: '.$caixa->name,
+            'caixa_id' => $caixa->id
+        ];
+
+        $this->movimentoCaixaService->create($movimento);
+
+        $caixa->save();
+
+        return $caixa;
+
+    }
+
 }

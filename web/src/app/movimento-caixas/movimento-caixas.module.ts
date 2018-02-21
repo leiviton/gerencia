@@ -19,6 +19,8 @@ import { NgxPhoneMaskModule } from 'ngx-phone-mask';
 import {PrinterComponent} from "./components/printer.component";
 import { EditComponent} from "./components/edit.component";
 
+import { NewComponent} from "./components/new.component";
+
 
 @NgModule({
   imports: [
@@ -33,7 +35,7 @@ import { EditComponent} from "./components/edit.component";
       CurrencyMaskModule,
       NgxPhoneMaskModule,
   ],
-  declarations: [ MovimentoCaixasComponent,PaymentComponent,PrinterComponent,EditComponent ],
+  declarations: [ MovimentoCaixasComponent,PaymentComponent,PrinterComponent,EditComponent,NewComponent ],
   providers: [ MovimentoCaixasService, BsModalService ]
 })
 export class MovimentoCaixasModule { }

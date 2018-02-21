@@ -374,5 +374,41 @@ class OrderService{
 
         return $order;
     }
+
+    public function openOrder($data)
+    {
+        $order = $this->orderRepository->find($data);
+
+        $order->motivo_cancelamento = 'Pedido reaberto';
+
+        $order->status = 0;
+
+        $order->paid_now = 0;
+
+        $payments = $this->paymentOrdersRepository->findWhere(['order_id'=>$order->id]);
+
+        $caixa = $this->caixaRepository->find(1);
+
+        for($i = 0; $i < sizeof($payments); $i++){
+            $movimento = $this->movimentoCaixaRepository->findWhere(['payment_order_id'=>$payments[$i]->id,'ativo'=>'S']);
+            for($j = 0; $j < sizeof($movimento); $j++) {
+                $movimento[$j]->ativo = 'N';
+                $movimento[$j]->save();
+            }
+
+            if($payments[$i]->paymentTypes->id == 1 && $payments[$i]->ativo == 'S')
+            {
+                $caixa->saldo -= $payments[$i]->total_pago;
+            }
+
+            $payments[$i]->ativo = 'N';
+            $payments[$i]->save();
+        }
+
+        $order->save();
+        $caixa->save();
+
+        return $order;
+    }
 }
 

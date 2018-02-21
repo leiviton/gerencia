@@ -62,10 +62,11 @@ export class PaymentComponent implements OnInit {
                     .then((res) => {
                         this.order = res.data;
                         this.total = res.data.total;
-                        console.log(res.data.payment.data)
                         for(var i = 0; i < res.data.payment.data.length; i++)
                         {
-                            this.total -= res.data.payment.data[i].total_pago;
+                            if(res.data.payment.data[i].ativo == 'S') {
+                                this.total -= res.data.payment.data[i].total_pago;
+                            }
                         }
                         this.payment.order_id = this.order.id;
                         this.products = res.data.items;
@@ -93,19 +94,23 @@ export class PaymentComponent implements OnInit {
                         this.httpService.builder()
                             .insert(this.payment, 'payment')
                             .then((res) => {
-                                if(res == 0)
-                                {
-                                    console.log('aqui')
+                                if(res == 'fechado'){
                                     this.hideLoading();
-                                    this.toasterService.pop('error','Ops houve um erro, tente novamente');
+                                    this.toasterService.pop('error','Error','Caixa está fechado');
                                 }else {
-                                    console.log('aqui')
-                                    this.httpService.eventEmitter.emit();
-                                    this.payment.total_realizado = this.payment.total_pago;
-                                    this.valor_pag = 0;
-                                    this.hideLoading();
-                                    this.toasterService.pop('success', 'Sucesso', 'Pagamento do pedido ' + res.data.id + ' realizado com sucesso');
-                                    this.close();
+                                    if (res == 0) {
+                                        console.log('aqui')
+                                        this.hideLoading();
+                                        this.toasterService.pop('error', 'Ops houve um erro, tente novamente');
+                                    } else {
+                                        console.log('aqui')
+                                        this.httpService.eventEmitter.emit();
+                                        this.payment.total_realizado = this.payment.total_pago;
+                                        this.valor_pag = 0;
+                                        this.hideLoading();
+                                        this.toasterService.pop('success', 'Sucesso', 'Pagamento do pedido ' + res.data.id + ' realizado com sucesso');
+                                        this.close();
+                                    }
                                 }
                             });
 
@@ -123,19 +128,23 @@ export class PaymentComponent implements OnInit {
                     this.httpService.builder()
                         .insert(this.payment, 'payment')
                         .then((res) => {
-                            if(res == 0)
-                            {
-
-                                console.log('aqui2')
+                            if(res=='fechado'){
                                 this.hideLoading();
-                                this.toasterService.pop('error','Ops houve um erro, tente novamente');
+                                this.toasterService.pop('error','Error','Caixa está fechado');
                             }else {
-                                console.log('aqui2')
-                                this.httpService.eventEmitter.emit();
-                                this.valor_pag = 0;
-                                this.hideLoading();
-                                this.toasterService.pop('success', 'Sucesso', 'Pagamento do pedido ' + res.data.id + ' realizado com sucesso');
-                                this.close();
+                                if (res == 0) {
+
+                                    console.log('aqui2')
+                                    this.hideLoading();
+                                    this.toasterService.pop('error', 'Ops houve um erro, tente novamente');
+                                } else {
+                                    console.log('aqui2')
+                                    this.httpService.eventEmitter.emit();
+                                    this.valor_pag = 0;
+                                    this.hideLoading();
+                                    this.toasterService.pop('success', 'Sucesso', 'Pagamento do pedido ' + res.data.id + ' realizado com sucesso');
+                                    this.close();
+                                }
                             }
                     });
                 }else{
@@ -151,20 +160,25 @@ export class PaymentComponent implements OnInit {
                     this.httpService.builder()
                         .insert(this.payment, 'payment')
                         .then((res) => {
-                            if (res == 0) {
-                                console.log("aqui3")
+                            if(res=='fechado'){
                                 this.hideLoading();
-                                this.toasterService.pop('error', 'Ops houve um erro, tente novamente');
-                            } else {
+                                this.toasterService.pop('error','Error','Caixa está fechado');
+                            }else {
+                                if (res == 0) {
+                                    console.log("aqui3")
+                                    this.hideLoading();
+                                    this.toasterService.pop('error', 'Ops houve um erro, tente novamente');
+                                } else {
 
-                                this.httpService.eventEmitter.emit();
-                                this.order = res.data;
-                                this.valor_pag = 0;
-                                for (var i = 0; i < res.data.payment.data.length; i++) {
-                                    this.total -= res.data.payment.data[i].total_pago;
+                                    this.httpService.eventEmitter.emit();
+                                    this.order = res.data;
+                                    this.valor_pag = 0;
+                                    for (var i = 0; i < res.data.payment.data.length; i++) {
+                                        this.total -= res.data.payment.data[i].total_pago;
+                                    }
+                                    this.hideLoading();
+                                    this.toasterService.pop('success', 'Sucesso', 'Pagamento parcial ' + res.data.id + ' realizado com sucesso');
                                 }
-                                this.hideLoading();
-                                this.toasterService.pop('success', 'Sucesso', 'Pagamento parcial ' + res.data.id + ' realizado com sucesso');
                             }
                         });
                 } else {
