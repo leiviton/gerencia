@@ -68,20 +68,20 @@ var RelatorioMovCaixaComponent = (function () {
                     _this.saldo_inicial = res.data[i].saldo;
                 }
             }
+            _this.movimentos = JSON.parse(localStorage.getItem('mov_caixa_rel') || null);
+            _this.tamanho = _this.movimentos.data.length;
+            _this.total = _this.saldo_inicial;
+            for (var i in _this.movimentos.data) {
+                if (_this.movimentos.data[i].tipo_movimento === 'credito') {
+                    _this.total += _this.movimentos.data[i].valor;
+                    _this.total_credito += _this.movimentos.data[i].valor;
+                }
+                else if (_this.movimentos.data[i].tipo_movimento === 'debito') {
+                    _this.total -= _this.movimentos.data[i].valor;
+                    _this.total_debito += _this.movimentos.data[i].valor;
+                }
+            }
         });
-        this.movimentos = JSON.parse(localStorage.getItem('mov_caixa_rel') || null);
-        this.tamanho = this.movimentos.data.length;
-        this.total = this.saldo_inicial;
-        for (var i in this.movimentos.data) {
-            if (this.movimentos.data[i].tipo_movimento === 'credito') {
-                this.total += this.movimentos.data[i].valor;
-                this.total_credito += this.movimentos.data[i].valor;
-            }
-            else if (this.movimentos.data[i].tipo_movimento === 'debito') {
-                this.total -= this.movimentos.data[i].valor;
-                this.total_debito += this.movimentos.data[i].valor;
-            }
-        }
         console.log(this.movimentos);
         setTimeout(function () {
             window.print();

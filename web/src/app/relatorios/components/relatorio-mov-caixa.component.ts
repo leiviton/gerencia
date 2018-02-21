@@ -63,21 +63,24 @@ export class RelatorioMovCaixaComponent implements OnInit {
                        this.saldo_inicial = res.data[i].saldo;
                    }
                }
-            });
 
-        this.movimentos = JSON.parse(localStorage.getItem('mov_caixa_rel') || null);
-        this.tamanho = this.movimentos.data.length;
-        this.total = this.saldo_inicial;
-        for(let i in this.movimentos.data)
-        {
-            if(this.movimentos.data[i].tipo_movimento === 'credito') {
-                this.total += this.movimentos.data[i].valor;
-                this.total_credito += this.movimentos.data[i].valor;
-            }else if(this.movimentos.data[i].tipo_movimento === 'debito'){
-                this.total -= this.movimentos.data[i].valor;
-                this.total_debito += this.movimentos.data[i].valor;
-            }
-        }
+                this.movimentos = JSON.parse(localStorage.getItem('mov_caixa_rel') || null);
+                this.tamanho = this.movimentos.data.length;
+
+                this.total = this.saldo_inicial;
+
+                for(let i in this.movimentos.data)
+                {
+                    if(this.movimentos.data[i].tipo_movimento === 'credito') {
+                        this.total += this.movimentos.data[i].valor;
+                        this.total_credito += this.movimentos.data[i].valor;
+                    }else if(this.movimentos.data[i].tipo_movimento === 'debito'){
+                        this.total -= this.movimentos.data[i].valor;
+                        this.total_debito += this.movimentos.data[i].valor;
+                    }
+                }
+
+            });
 
         console.log(this.movimentos);
 
