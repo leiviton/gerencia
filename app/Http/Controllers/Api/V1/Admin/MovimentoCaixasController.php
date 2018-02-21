@@ -72,26 +72,31 @@ class MovimentoCaixasController extends Controller
 
         $data = $request->all();
 
+        $data['usuario'] = $user->email;
+
         $o = $this->service->create($data);
 
-        if($o->id)
-        {
-            $audit = [
-                'type'=>'insert',
-                'user_id'=>$user->id,
-                'user' => $user->email,
-                'entity' => 'movimento caixa',
-                'action' => 'Criou um movimento no caixa de codigo: '.$o->id
-            ];
+        if ($o == 'fechado') {
+            return response()->json($o);
+        } else {
+            if ($o->id) {
+                $audit = [
+                    'type' => 'insert',
+                    'user_id' => $user->id,
+                    'user' => $user->email,
+                    'entity' => 'movimento caixa',
+                    'action' => 'Criou um movimento no caixa de codigo: ' . $o->id
+                ];
 
-            $this->auditRepository->create($audit);
+                $this->auditRepository->create($audit);
+            }
+
+            return $this->repository
+                ->skipPresenter(false)
+                ->find($o->id);
+
         }
-
-        return $this->repository
-            ->skipPresenter(false)
-            ->find($o->id);
     }
-
     public function update($id,Request $request)
     {
         $user = \Auth::guard('api')->user();

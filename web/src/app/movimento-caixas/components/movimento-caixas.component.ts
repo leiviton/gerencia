@@ -88,10 +88,13 @@ export class MovimentoCaixasComponent implements OnInit {
             });
     }
 
+    new()
+    {
+        this.router.navigate(['/financeiro/movimento/caixas/new']);
+    }
+
     pesquisar()
     {
-
-
         this.showLoading();
         if(this.pesquisa.inicio !== null && this.pesquisa.fim !== null)
         {
@@ -128,10 +131,6 @@ export class MovimentoCaixasComponent implements OnInit {
             this.toasterService.pop('error', 'Erro', 'Preencha inicio, fim e status para pesquisar.');
             this.hideLoading();
         }
-    }
-    new()
-    {
-       return this.router.navigate(['/orders/new']);
     }
 
     openReal() {

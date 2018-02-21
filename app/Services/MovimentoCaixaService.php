@@ -9,6 +9,7 @@
 namespace Pedidos\Services;
 
 
+use Pedidos\Repositories\CaixaRepository;
 use Pedidos\Repositories\MovimentoCaixaRepository;
 use Pedidos\Repositories\UserRepository;
 
@@ -22,11 +23,17 @@ class MovimentoCaixaService
      * @var MovimentoCaixaRepository
      */
     private $movimentoCaixaRepository;
+    /**
+     * @var CaixaRepository
+     */
+    private $caixaRepository;
 
-    public function __construct(MovimentoCaixaRepository $movimentoCaixaRepository, UserRepository $userRepository)
+    public function __construct(MovimentoCaixaRepository $movimentoCaixaRepository, UserRepository $userRepository
+    ,CaixaRepository $caixaRepository)
     {
         $this->userRepository = $userRepository;
         $this->movimentoCaixaRepository = $movimentoCaixaRepository;
+        $this->caixaRepository = $caixaRepository;
     }
 
     public function update(array $data,$id){
@@ -36,7 +43,22 @@ class MovimentoCaixaService
     public function create($data){
         \DB::beginTransaction();
         try {
-            $result = $this->movimentoCaixaRepository->create($data);
+            $caixa = $this->caixaRepository->find($data['caixa_id']);
+
+            if($caixa->open_close == 'F')
+            {
+                $result = 'fechado';
+            }else {
+                if ($data['tipo_movimento'] == 'credito') {
+                    $caixa->saldo += $data['valor'];
+                } else {
+                    $caixa->saldo -= $data['valor'];
+                }
+
+                $result = $this->movimentoCaixaRepository->create($data);
+            }
+            $caixa->save();
+
             \DB::commit();
             return $result;
         } catch (\Exception $e){

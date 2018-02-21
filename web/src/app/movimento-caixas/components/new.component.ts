@@ -16,39 +16,71 @@ export class NewComponent implements OnInit {
         ,private toasterService: ToasterService
     ) {}
 
-    client = {
-        name:null,
-        phone:null,
-        address:{
-            address:null,
-            numero:null,
-            bairro:null,
-            city_id:0,
-            complemento:null
-        },
-        email:null
+    movimento = {
+        tipo_movimento:'credito',
+        valor:0,
+        historico:null,
+        caixa_id:1
     };
+    caixas = {data:[]};
     ngOnInit(): void {
        this.showLoading();
         jQuery('#infoModal').show().addClass('show');
+        this.getCaixas();
         setTimeout(() => {
             this.hideLoading();
         },300)
     }
 
-    save(e)
+    tipos_mov = [
+        {
+           value:'credito',
+           label:'Crédito'
+        },
+        {
+            value: 'debito',
+            label:'Débito'
+        }
+    ];
+
+    save()
     {
-        if(this.client.name != null && this.client.name.length > 4){
+        this.showLoading();
+        if(this.movimento.tipo_movimento != null && this.movimento.valor > 0 &&
+            this.movimento.historico != null && this.movimento.historico.length > 6){
+
+            this.httpService.builder()
+                .insert(this.movimento,'movimento/caixa')
+                .then((res) => {
+                    this.hideLoading();
+                    if(res == 'fechado')
+                    {
+                        this.toasterService.pop('error', 'Erro', 'Caixa está fechado.');
+                    }else {
+                        this.toasterService.pop('success', 'Salvo', 'Movimento salvo com sucesso.');
+                        this.close();
+                    }
+                })
 
         }else{
+            this.hideLoading();
             this.toasterService.pop('error', 'Erro', 'Verifique se todos os campos foram preenchidos.');
         }
 
     }
 
+    getCaixas()
+    {
+        this.httpService.builder()
+            .list({},'caixas')
+            .then((res)=>{
+                this.caixas = res;
+            });
+    }
+
     close(){
         jQuery('#infoModal').hide();
-        this.router.navigate(['/cadastro/clients']);
+        this.router.navigate(['/financeiro/movimento/caixas']);
     }
 
     hideLoading(){

@@ -94,6 +94,7 @@ class CaixaService
         $caixa2->save();
     }
 
+
     public function saque($data)
     {
         $caixa = $this->caixaRepository->find($data['caixa_id']);
@@ -113,7 +114,5 @@ class CaixaService
         $caixa->save();
 
         return $caixa;
-
     }
-
 }
