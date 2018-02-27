@@ -94,7 +94,7 @@ Route::group(['prefix'=>'api/v1','middleware' => 'auth:api'],function () {
         Route::get('open/close/caixa','OpenCloseCaixasController@index');
         Route::get('open','OpenCloseCaixasController@getDateCaixa');
         Route::post('open/close', 'OpenCloseCaixasController@store');
-        Route::get('movimento/caixas/filters','OpenCloseCaixasController@getFiltros');
+        Route::get('open/close','OpenCloseCaixasController@getFiltros');
     });
     Route::get('user','Api\UserController@authenticated');
 });
