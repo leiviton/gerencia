@@ -112,7 +112,7 @@ export class OpenCloseCaixasComponent implements OnInit {
                         {fim: this.pesquisa.fim}
                     ]
                 };
-                this.httpService.builder().list(options, 'movimento/caixas/filters')
+                this.httpService.builder().list(options, 'open/close')
                     .then((res) => {
                         this.movimentos = res;
                         console.log(this.movimentos);

@@ -52,7 +52,7 @@ class ClientsController extends Controller
 
         $result = $this->repository->skipPresenter(false)
             ->scopeQuery(function($query) use($pesquisa){
-                return $query->where('id',$pesquisa);
+                return $query->orderBy('name','asc')->where('id',$pesquisa);
             })
             ->all();
 
@@ -61,19 +61,10 @@ class ClientsController extends Controller
             $result = $this->repository->skipPresenter(false)
                 ->scopeQuery(function($query) use($pesquisa){
                     $like = '%'.$pesquisa.'%';
-                    return $query->where('name','like',$like);
+                    return $query->orderBy('name','asc')->where('name','like',$like)
+                        ->orWhere('phone','like',$like);
                 })
-                ->all() ?? null;
-
-            if(count($result['data'] == 0))
-            {
-                $result = $this->repository->skipPresenter(false)
-                    ->scopeQuery(function($query) use($pesquisa){
-                        $like = '%'.$pesquisa.'%';
-                        return $query->where('phone','like',$like);
-                    })
-                    ->all();
-            }
+                ->all();
         }
 
         return $result;
