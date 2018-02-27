@@ -125,20 +125,30 @@ class CaixasController extends Controller
 
         $data['user_create'] = $user->email;
 
-        $this->service->transferenciaCaixa($data);
+        $result = $this->service->transferenciaCaixa($data);
 
-        $audit = [
-            'type'=>'update',
-            'user_id'=>$user->id,
-            'user' => $user->email,
-            'entity' => 'caixa',
-            'action' => 'Atualizou o caixa: '.$data['caixa1'].','.$data['caixa2'].', no valor de '.$data['valor']
-        ];
+        if ($result == 'ok')
+        {
+            $audit = [
+                'type' => 'update',
+                'user_id' => $user->id,
+                'user' => $user->email,
+                'entity' => 'caixa',
+                'action' => 'Transferiu do caixa: ' . $data['caixa1'] . 'para o caixa' . $data['caixa2'] . ', o valor de ' . $data['valor']
+            ];
 
-        $this->auditRepository->create($audit);
+            $this->auditRepository->create($audit);
 
-        return $this->index();
+            return $this->index();
+        }else if ($result == 'fechado_origem')
+        {
+            return response()->json('fechado_origem');
+        }else if ($result == 'fechado_destino')
+        {
+            return response()->json('fechado_destino');
+        }
     }
+
     public function saque(Request $request)
     {
         $user = \Auth::guard('api')->user();
@@ -149,16 +159,20 @@ class CaixasController extends Controller
 
         $result = $this->service->saque($data);
 
-        $audit = [
-            'type'=>'update',
-            'user_id'=>$user->id,
-            'user' => $user->email,
-            'entity' => 'caixa',
-            'action' => 'Realizou saque no caixa: '.$data['caixa_id'].', no valor de '.$data['valor']
-        ];
+        if ($result == 'fechado') {
+            return response()->json($result);
+        } else {
+            $audit = [
+                'type' => 'update',
+                'user_id' => $user->id,
+                'user' => $user->email,
+                'entity' => 'caixa',
+                'action' => 'Realizou saque no caixa: ' . $data['caixa_id'] . ', no valor de ' . $data['valor']
+            ];
 
-        $this->auditRepository->create($audit);
+            $this->auditRepository->create($audit);
 
-        return $result;
+            return $result;
+        }
     }
 }

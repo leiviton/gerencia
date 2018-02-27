@@ -701,11 +701,16 @@ var SaqueComponent = (function () {
                 this.httpService.setAccessToken();
                 this.httpService.builder()
                     .insert(data, 'saque')
-                    .then(function () {
+                    .then(function (res) {
                     _this.httpService.eventEmitter.emit();
-                    _this.toasterService.pop('success', 'Sucesso', 'Saque salvo com sucesso');
-                    _this.hideLoading();
-                    _this.close();
+                    if (res == 'fechado') {
+                        _this.toasterService.pop('error', 'Erro', 'Caixa fechado');
+                    }
+                    else {
+                        _this.toasterService.pop('success', 'Sucesso', 'Saque salvo com sucesso');
+                        _this.hideLoading();
+                        _this.close();
+                    }
                 });
             }
             else {
@@ -817,11 +822,19 @@ var TransferenciaComponent = (function () {
                 this.httpService.setAccessToken();
                 this.httpService.builder()
                     .insert(data, 'transferencia')
-                    .then(function () {
+                    .then(function (res) {
                     _this.httpService.eventEmitter.emit();
-                    _this.toasterService.pop('success', 'Sucesso', 'Transferencia salva com sucesso');
-                    _this.hideLoading();
-                    _this.close();
+                    if (res == 'fechado_origem') {
+                        _this.toasterService.pop('error', 'Erro', 'Caixa origem fechado');
+                    }
+                    else if (res == 'fechado_destino') {
+                        _this.toasterService.pop('error', 'Erro', 'Caixa destino fechado');
+                    }
+                    else {
+                        _this.toasterService.pop('success', 'Sucesso', 'Transferencia salva com sucesso');
+                        _this.hideLoading();
+                        _this.close();
+                    }
                 });
             }
             else {

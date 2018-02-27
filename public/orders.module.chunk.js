@@ -1419,8 +1419,6 @@ var PaymentComponent = (function () {
     PaymentComponent.prototype.save = function () {
         var _this = this;
         this.showLoading();
-        console.log('troco', this.troco);
-        console.log(this.valor_pag);
         if (this.valor_pag > 0) {
             if (this.valor_pag >= this.total) {
                 this.payment.total_pago = (this.valor_pag - (this.valor_pag - ((this.total + this.payment.acrescimo) - this.payment.desconto)));
@@ -1437,12 +1435,10 @@ var PaymentComponent = (function () {
                         }
                         else {
                             if (res == 0) {
-                                console.log('aqui');
                                 _this.hideLoading();
                                 _this.toasterService.pop('error', 'Ops houve um erro, tente novamente');
                             }
                             else {
-                                console.log('aqui');
                                 _this.httpService.eventEmitter.emit();
                                 _this.payment.total_realizado = _this.payment.total_pago;
                                 _this.valor_pag = 0;
@@ -1473,12 +1469,10 @@ var PaymentComponent = (function () {
                         }
                         else {
                             if (res == 0) {
-                                console.log('aqui2');
                                 _this.hideLoading();
                                 _this.toasterService.pop('error', 'Ops houve um erro, tente novamente');
                             }
                             else {
-                                console.log('aqui2');
                                 _this.httpService.eventEmitter.emit();
                                 _this.valor_pag = 0;
                                 _this.hideLoading();
@@ -1494,7 +1488,7 @@ var PaymentComponent = (function () {
                 }
             }
             else if ((this.valor_pag + this.payment.desconto) < this.total) {
-                this.payment.total_pago = (this.valor_pag - this.troco);
+                this.payment.total_pago = (this.valor_pag - (-1 * this.troco));
                 this.payment.total_original = this.order.total;
                 this.payment.payment_types_id = this.type_id;
                 this.httpService.setAccessToken();
@@ -1508,16 +1502,18 @@ var PaymentComponent = (function () {
                         }
                         else {
                             if (res == 0) {
-                                console.log("aqui3");
                                 _this.hideLoading();
                                 _this.toasterService.pop('error', 'Ops houve um erro, tente novamente');
                             }
                             else {
                                 _this.httpService.eventEmitter.emit();
+                                _this.total = res.data.total;
                                 _this.order = res.data;
                                 _this.valor_pag = 0;
                                 for (var i = 0; i < res.data.payment.data.length; i++) {
-                                    _this.total -= res.data.payment.data[i].total_pago;
+                                    if (res.data.payment.data[i].ativo === 'S') {
+                                        _this.total -= res.data.payment.data[i].total_pago;
+                                    }
                                 }
                                 _this.hideLoading();
                                 _this.toasterService.pop('success', 'Sucesso', 'Pagamento parcial ' + res.data.id + ' realizado com sucesso');

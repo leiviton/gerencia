@@ -55,21 +55,34 @@ class OpenCloseCaixaService
         try {
             $caixa = $this->caixaRepository->find($data['caixa_id']);
 
-            if($caixa->open_close == 'A'){
-                $data['tipo'] = 'F';
-                $data['saldo'] = $caixa->saldo;
-            }elseif ($caixa->open_close == 'F'){
-                $data['tipo'] = 'A';
-                $data['saldo'] = $caixa->saldo;
-            }else{
-                $data['tipo'] = 'A';
-                $data['saldo'] = $caixa->saldo;
+            $open = $this->repository->countF('A');
+            $close = $this->repository->countF('F');
+            if($open == 1){
+                if ($close == 1)
+                {
+                    $result = 'fechado';
+                }else{
+                    if($caixa->open_close == 'A'){
+                        $data['tipo'] = 'F';
+                        $data['saldo'] = $caixa->saldo;
+                        $caixa->open_close = 'F';
+                    }
+                    $result = $this->repository->create($data);
+                }
+            }elseif ($open == 0)
+            {
+                if ($caixa->open_close == 'A'){
+                    $result = 'caixa_aberto_data';
+                }else{
+                    $data['tipo'] = 'A';
+                    $data['saldo'] = $caixa->saldo;
+                    $caixa->open_close = 'A';
+
+                    $result = $this->repository->create($data);
+                }
             }
 
-            $caixa->open_close = $data['tipo'];
             $caixa->save();
-            $result = $this->repository->create($data);
-
             \DB::commit();
             return $result;
         } catch (\Exception $e){

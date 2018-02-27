@@ -113,37 +113,40 @@ var OpenCloseCaixasComponent = (function () {
     OpenCloseCaixasComponent.prototype.pesquisar = function () {
         var _this = this;
         this.showLoading();
-        if (this.pesquisa.inicio !== null && this.pesquisa.fim !== null) {
-            this.total = 0;
-            var options = {
-                filters: [
-                    { user: this.pesquisa.user },
-                    { caixa_id: this.pesquisa.caixa_id },
-                    { inicio: this.pesquisa.inicio },
-                    { fim: this.pesquisa.fim }
-                ]
-            };
-            this.httpService.builder().list(options, 'movimento/caixas/filters')
-                .then(function (res) {
-                _this.movimentos = res;
-                console.log(_this.movimentos);
-                _this.tamanho = res.data.length;
-                var i;
-                for (i = 0; i < res.data.length; i++) {
-                    if (res.data[i].tipo_movimento === 'credito') {
-                        _this.total += res.data[i].valor;
+        if (this.pesquisa.inicio !== null) {
+            if (this.pesquisa.fim == null) {
+                this.pesquisa = this.pesquisa.inicio;
+                this.total = 0;
+                var options = {
+                    filters: [
+                        { user: this.pesquisa.user },
+                        { caixa_id: this.pesquisa.caixa_id },
+                        { inicio: this.pesquisa.inicio },
+                        { fim: this.pesquisa.fim }
+                    ]
+                };
+                this.httpService.builder().list(options, 'movimento/caixas/filters')
+                    .then(function (res) {
+                    _this.movimentos = res;
+                    console.log(_this.movimentos);
+                    _this.tamanho = res.data.length;
+                    var i;
+                    for (i = 0; i < res.data.length; i++) {
+                        if (res.data[i].tipo_movimento === 'credito') {
+                            _this.total += res.data[i].valor;
+                        }
+                        else if (res.data[i].tipo_movimento === 'debito') {
+                            _this.total -= res.data[i].valor;
+                        }
                     }
-                    else if (res.data[i].tipo_movimento === 'debito') {
-                        _this.total -= res.data[i].valor;
-                    }
-                }
-                _this.hideModal('#mov');
-                _this.hideLoading();
-                _this.toasterService.pop('success', 'Sucesso', 'Dados carregados com sucesso');
-            });
+                    _this.hideModal('#mov');
+                    _this.hideLoading();
+                    _this.toasterService.pop('success', 'Sucesso', 'Dados carregados com sucesso');
+                });
+            }
         }
         else {
-            this.toasterService.pop('error', 'Erro', 'Preencha inicio, fim e status para pesquisar.');
+            this.toasterService.pop('error', 'Erro', 'Preencha inicio e caixa para pesquisar.');
             this.hideLoading();
         }
     };
@@ -284,17 +287,19 @@ var OpenCloseComponent = (function () {
                         _this.hideLoading();
                         _this.toasterService.pop('error', 'Erro', 'Data diferente da data atual');
                     }
-                    else {
-                        if (res === 'fechado') {
-                            _this.toasterService.pop('error', 'Erro', 'Caixa está fechado');
-                            _this.hideLoading();
-                        }
-                        else {
-                            _this.httpService.eventEmitter.emit();
-                            _this.toasterService.pop('success', 'Sucesso', 'Saque salvo com sucesso');
-                            _this.hideLoading();
-                            _this.close();
-                        }
+                    else if (res === 'fechado') {
+                        _this.toasterService.pop('error', 'Erro', 'Caixa está fechado');
+                        _this.hideLoading();
+                    }
+                    else if (res === 'caixa_aberto_o_data') {
+                        _this.toasterService.pop('error', 'Erro', 'Caixa está aberto em outra data');
+                        _this.hideLoading();
+                    }
+                    else if (res == 'ok') {
+                        _this.httpService.eventEmitter.emit();
+                        _this.toasterService.pop('success', 'Sucesso', 'Saque salvo com sucesso');
+                        _this.hideLoading();
+                        _this.close();
                     }
                 });
             }

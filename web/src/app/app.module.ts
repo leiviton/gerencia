@@ -31,6 +31,7 @@ import { SimpleLayoutComponent } from './layouts/simple-layout.component';
 
 // Services
 import { AppHttpService } from './app-http.service';
+import {ToastyModule} from "ng2-toasty";
 
 @NgModule({
   imports: [
@@ -46,7 +47,8 @@ import { AppHttpService } from './app-http.service';
     CurrencyMaskModule,
     ToasterModule,
     LoadingModule,
-    ChartsModule
+    ChartsModule,
+      ToastyModule.forRoot()
   ],
   declarations: [
     AppComponent,

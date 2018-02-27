@@ -251,24 +251,35 @@ var AppHttpService = (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ng2_toasty__ = __webpack_require__("../../../../ng2-toasty/index.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
 
 var AppComponent = (function () {
-    function AppComponent() {
+    function AppComponent(toasty) {
+        this.toasty = toasty;
+        this.toasty.theme = 'bootstrap';
+        this.toasty.position = 'top-center';
+        this.toasty.timeout = 6000;
     }
     AppComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             // tslint:disable-next-line
             selector: 'body',
-            template: '<div class="container-loading"><img class="img-loading" src="assets/img/loading.gif" /></div><toaster-container></toaster-container><router-outlet></router-outlet>'
-        })
+            template: '<div class="container-loading"><img class="img-loading" src="assets/img/loading.gif" /></div><toaster-container></toaster-container><ng2-toasty></ng2-toasty><router-outlet></router-outlet>'
+        }),
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ng2_toasty__["b" /* ToastyConfig */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ng2_toasty__["b" /* ToastyConfig */]) === "function" && _a || Object])
     ], AppComponent);
     return AppComponent;
+    var _a;
 }());
 
 //# sourceMappingURL=app.component.js.map
@@ -304,6 +315,7 @@ var AppComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__layouts_full_layout_component__ = __webpack_require__("../../../../../src/app/layouts/full-layout.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__layouts_simple_layout_component__ = __webpack_require__("../../../../../src/app/layouts/simple-layout.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__app_http_service__ = __webpack_require__("../../../../../src/app/app-http.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22_ng2_toasty__ = __webpack_require__("../../../../ng2-toasty/index.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -336,6 +348,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 // Services
 
+
 var AppModule = (function () {
     function AppModule() {
     }
@@ -354,7 +367,8 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_16_ng2_currency_mask__["CurrencyMaskModule"],
                 __WEBPACK_IMPORTED_MODULE_17_angular2_toaster__["a" /* ToasterModule */],
                 __WEBPACK_IMPORTED_MODULE_5_ngx_loading__["a" /* LoadingModule */],
-                __WEBPACK_IMPORTED_MODULE_12_ng2_charts_ng2_charts__["ChartsModule"]
+                __WEBPACK_IMPORTED_MODULE_12_ng2_charts_ng2_charts__["ChartsModule"],
+                __WEBPACK_IMPORTED_MODULE_22_ng2_toasty__["c" /* ToastyModule */].forRoot()
             ],
             declarations: [
                 __WEBPACK_IMPORTED_MODULE_7__app_component__["a" /* AppComponent */],

@@ -99,39 +99,41 @@ export class OpenCloseCaixasComponent implements OnInit {
     {
 
         this.showLoading();
-        if(this.pesquisa.inicio !== null && this.pesquisa.fim !== null)
+        if(this.pesquisa.inicio !== null)
         {
-            this.total = 0;
-            let options = {
-                filters: [
-                    {user: this.pesquisa.user},
-                    {caixa_id: this.pesquisa.caixa_id},
-                    {inicio: this.pesquisa.inicio},
-                    {fim: this.pesquisa.fim}
-                ]
-            };
-            this.httpService.builder().list(options, 'movimento/caixas/filters')
-                .then((res) => {
-                    this.movimentos = res;
-                    console.log(this.movimentos);
-                    this.tamanho = res.data.length;
-                    let i;
+            if(this.pesquisa.fim == null) {
+                this.pesquisa = this.pesquisa.inicio;
+                this.total = 0;
+                let options = {
+                    filters: [
+                        {user: this.pesquisa.user},
+                        {caixa_id: this.pesquisa.caixa_id},
+                        {inicio: this.pesquisa.inicio},
+                        {fim: this.pesquisa.fim}
+                    ]
+                };
+                this.httpService.builder().list(options, 'movimento/caixas/filters')
+                    .then((res) => {
+                        this.movimentos = res;
+                        console.log(this.movimentos);
+                        this.tamanho = res.data.length;
+                        let i;
 
-                    for(i = 0; i < res.data.length; i++)
-                    {
-                        if(res.data[i].tipo_movimento === 'credito') {
-                            this.total += res.data[i].valor;
-                        }else if(res.data[i].tipo_movimento === 'debito'){
-                            this.total -= res.data[i].valor;
+                        for (i = 0; i < res.data.length; i++) {
+                            if (res.data[i].tipo_movimento === 'credito') {
+                                this.total += res.data[i].valor;
+                            } else if (res.data[i].tipo_movimento === 'debito') {
+                                this.total -= res.data[i].valor;
+                            }
                         }
-                    }
-                    this.hideModal('#mov');
-                    this.hideLoading();
-                    this.toasterService.pop('success', 'Sucesso', 'Dados carregados com sucesso');
+                        this.hideModal('#mov');
+                        this.hideLoading();
+                        this.toasterService.pop('success', 'Sucesso', 'Dados carregados com sucesso');
 
-                });
+                    });
+            }
         }else  {
-            this.toasterService.pop('error', 'Erro', 'Preencha inicio, fim e status para pesquisar.');
+            this.toasterService.pop('error', 'Erro', 'Preencha inicio e caixa para pesquisar.');
             this.hideLoading();
         }
     }

@@ -2,6 +2,7 @@
 
 namespace Pedidos\Repositories;
 
+use Carbon\Carbon;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Pedidos\Repositories\OpenCloseCaixasRepository;
@@ -15,6 +16,11 @@ use Pedidos\Validators\OpenCloseCaixasValidator;
 class OpenCloseCaixasRepositoryEloquent extends BaseRepository implements OpenCloseCaixasRepository
 {
     protected $skipPresenter = true;
+
+    public function countF($tipo)
+    {
+        return $this->model->where('data_caixa','>=',Carbon::now()->startOfDay())->where('tipo',$tipo)->count();
+    }
     /**
      * Specify Model class name
      *

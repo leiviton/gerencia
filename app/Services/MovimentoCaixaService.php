@@ -11,6 +11,7 @@ namespace Pedidos\Services;
 
 use Pedidos\Repositories\CaixaRepository;
 use Pedidos\Repositories\MovimentoCaixaRepository;
+use Pedidos\Repositories\OpenCloseCaixasRepository;
 use Pedidos\Repositories\UserRepository;
 
 class MovimentoCaixaService
@@ -27,13 +28,18 @@ class MovimentoCaixaService
      * @var CaixaRepository
      */
     private $caixaRepository;
+    /**
+     * @var OpenCloseCaixasRepository
+     */
+    private $openCloseCaixasRepository;
 
     public function __construct(MovimentoCaixaRepository $movimentoCaixaRepository, UserRepository $userRepository
-    ,CaixaRepository $caixaRepository)
+    ,CaixaRepository $caixaRepository,OpenCloseCaixasRepository $openCloseCaixasRepository)
     {
         $this->userRepository = $userRepository;
         $this->movimentoCaixaRepository = $movimentoCaixaRepository;
         $this->caixaRepository = $caixaRepository;
+        $this->openCloseCaixasRepository = $openCloseCaixasRepository;
     }
 
     public function update(array $data,$id){
@@ -45,20 +51,31 @@ class MovimentoCaixaService
         try {
             $caixa = $this->caixaRepository->find($data['caixa_id']);
 
-            if($caixa->open_close == 'F')
-            {
-                $result = 'fechado';
-            }else {
-                if ($data['tipo_movimento'] == 'credito') {
-                    $caixa->saldo += $data['valor'];
-                } else {
-                    $caixa->saldo -= $data['valor'];
-                }
+            $open = $this->openCloseCaixasRepository->countF('A');
+            $close = $this->openCloseCaixasRepository->countF('F');
 
-                $result = $this->movimentoCaixaRepository->create($data);
+            if($open == 1)
+            {
+                if ($close == 1)
+                {
+                    $result = 'fechado';
+                }else{
+                    if($caixa->open_close == 'F')
+                    {
+                        $result = 'fechado';
+                    }else {
+                        if ($data['tipo_movimento'] == 'credito') {
+                            $caixa->saldo += $data['valor'];
+                        } else {
+                            $caixa->saldo -= $data['valor'];
+                        }
+                        $result = $this->movimentoCaixaRepository->create($data);
+                    }
+                }
+            }else{
+                $result = 'fechado';
             }
             $caixa->save();
-
             \DB::commit();
             return $result;
         } catch (\Exception $e){

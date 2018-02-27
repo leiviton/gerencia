@@ -63,16 +63,17 @@ export class OpenCloseComponent implements OnInit {
                         if(res == 'data_diverge') {
                             this.hideLoading();
                             this.toasterService.pop('error','Erro','Data diferente da data atual');
-                        }else{
-                            if (res === 'fechado') {
+                        }else if (res === 'fechado') {
                                 this.toasterService.pop('error', 'Erro', 'Caixa está fechado');
                                 this.hideLoading();
-                            } else {
-                                this.httpService.eventEmitter.emit();
-                                this.toasterService.pop('success', 'Sucesso', 'Saque salvo com sucesso');
+                        } else if(res === 'caixa_aberto_o_data') {
+                                this.toasterService.pop('error', 'Erro', 'Caixa está aberto em outra data');
                                 this.hideLoading();
-                                this.close();
-                            }
+                        }else if(res == 'ok') {
+                            this.httpService.eventEmitter.emit();
+                            this.toasterService.pop('success', 'Sucesso', 'Saque salvo com sucesso');
+                            this.hideLoading();
+                            this.close();
                         }
                     });
             } else {

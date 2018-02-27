@@ -64,11 +64,18 @@ export class TransferenciaComponent implements OnInit {
                 this.httpService.setAccessToken();
                 this.httpService.builder()
                     .insert(data, 'transferencia')
-                    .then(() => {
+                    .then((res) => {
                         this.httpService.eventEmitter.emit();
-                        this.toasterService.pop('success', 'Sucesso', 'Transferencia salva com sucesso');
-                        this.hideLoading();
-                        this.close();
+                        if(res == 'fechado_origem')
+                        {
+                            this.toasterService.pop('error', 'Erro', 'Caixa origem fechado');
+                        }else if (res == 'fechado_destino') {
+                            this.toasterService.pop('error', 'Erro', 'Caixa destino fechado');
+                        }else{
+                            this.toasterService.pop('success', 'Sucesso', 'Transferencia salva com sucesso');
+                            this.hideLoading();
+                            this.close();
+                        }
                     });
             } else {
                 this.toasterService.pop('error', 'Erro', 'Verifique se todos os campos foram preenchidos.');

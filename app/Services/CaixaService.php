@@ -85,13 +85,22 @@ class CaixaService
             'caixa_id' => $caixa2->id
         ];
 
-        $this->movimentoCaixaService->create($movimento1);
+        $status1 = $this->movimentoCaixaService->create($movimento1);
 
-        $this->movimentoCaixaService->create($movimento2);
-
-        $caixa1->save();
-
-        $caixa2->save();
+        if($status1 == 'fechado')
+        {
+            return 'fechado_origem';
+        }else{
+            $status2 = $this->movimentoCaixaService->create($movimento2);
+            if($status2 == 'fechado')
+            {
+                return 'fechado_destino';
+            }else{
+                $caixa1->save();
+                $caixa2->save();
+                return 'ok';
+            }
+        }
     }
 
 
@@ -109,10 +118,14 @@ class CaixaService
             'caixa_id' => $caixa->id
         ];
 
-        $this->movimentoCaixaService->create($movimento);
+        $r = $this->movimentoCaixaService->create($movimento);
 
-        $caixa->save();
-
-        return $caixa;
+        if ($r == 'fechado')
+        {
+            return 'fechado';
+        }else{
+            $caixa->save();
+            return $caixa;
+        }
     }
 }

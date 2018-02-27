@@ -60,11 +60,16 @@ export class SaqueComponent implements OnInit {
                 this.httpService.setAccessToken();
                 this.httpService.builder()
                     .insert(data, 'saque')
-                    .then(() => {
+                    .then((res) => {
                         this.httpService.eventEmitter.emit();
-                        this.toasterService.pop('success', 'Sucesso', 'Saque salvo com sucesso');
-                        this.hideLoading();
-                        this.close();
+                        if(res == 'fechado')
+                        {
+                            this.toasterService.pop('error', 'Erro', 'Caixa fechado');
+                        }else {
+                            this.toasterService.pop('success', 'Sucesso', 'Saque salvo com sucesso');
+                            this.hideLoading();
+                            this.close();
+                        }
                     });
             } else {
                 this.toasterService.pop('error', 'Erro', 'Verifique se todos os campos foram preenchidos.');

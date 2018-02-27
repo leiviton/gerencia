@@ -51,7 +51,31 @@ class ClientsController extends Controller
         $pesquisa = $request->get('value');
 
         $result = $this->repository->skipPresenter(false)
-            ->search($pesquisa);
+            ->scopeQuery(function($query) use($pesquisa){
+                return $query->where('id',$pesquisa);
+            })
+            ->all();
+
+        if(count($result['data']) == 0)
+        {
+            $result = $this->repository->skipPresenter(false)
+                ->scopeQuery(function($query) use($pesquisa){
+                    $like = '%'.$pesquisa.'%';
+                    return $query->where('name','like',$like);
+                })
+                ->all() ?? null;
+
+            if(count($result['data'] == 0))
+            {
+                $result = $this->repository->skipPresenter(false)
+                    ->scopeQuery(function($query) use($pesquisa){
+                        $like = '%'.$pesquisa.'%';
+                        return $query->where('phone','like',$like);
+                    })
+                    ->all();
+            }
+        }
+
         return $result;
     }
 

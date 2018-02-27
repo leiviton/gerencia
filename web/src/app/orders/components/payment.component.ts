@@ -82,8 +82,6 @@ export class PaymentComponent implements OnInit {
     save()
     {
         this.showLoading();
-        console.log('troco',this.troco);
-        console.log(this.valor_pag);
         if(this.valor_pag > 0){
             if(this.valor_pag >= this.total){
                 this.payment.total_pago = (this.valor_pag - (this.valor_pag - ((this.total + this.payment.acrescimo) - this.payment.desconto)));
@@ -99,11 +97,9 @@ export class PaymentComponent implements OnInit {
                                     this.toasterService.pop('error','Error','Caixa está fechado');
                                 }else {
                                     if (res == 0) {
-                                        console.log('aqui')
                                         this.hideLoading();
                                         this.toasterService.pop('error', 'Ops houve um erro, tente novamente');
                                     } else {
-                                        console.log('aqui')
                                         this.httpService.eventEmitter.emit();
                                         this.payment.total_realizado = this.payment.total_pago;
                                         this.valor_pag = 0;
@@ -133,12 +129,9 @@ export class PaymentComponent implements OnInit {
                                 this.toasterService.pop('error','Error','Caixa está fechado');
                             }else {
                                 if (res == 0) {
-
-                                    console.log('aqui2')
                                     this.hideLoading();
                                     this.toasterService.pop('error', 'Ops houve um erro, tente novamente');
                                 } else {
-                                    console.log('aqui2')
                                     this.httpService.eventEmitter.emit();
                                     this.valor_pag = 0;
                                     this.hideLoading();
@@ -152,7 +145,7 @@ export class PaymentComponent implements OnInit {
                     this.toasterService.pop('error', 'Erro', 'Tipo pagamento não selecionado');
                 }
             }else if((this.valor_pag + this.payment.desconto) < this.total) {
-                this.payment.total_pago = (this.valor_pag - this.troco);
+                this.payment.total_pago = (this.valor_pag - (-1 * this.troco));
                 this.payment.total_original = this.order.total;
                 this.payment.payment_types_id = this.type_id;
                 this.httpService.setAccessToken();
@@ -165,16 +158,19 @@ export class PaymentComponent implements OnInit {
                                 this.toasterService.pop('error','Error','Caixa está fechado');
                             }else {
                                 if (res == 0) {
-                                    console.log("aqui3")
                                     this.hideLoading();
                                     this.toasterService.pop('error', 'Ops houve um erro, tente novamente');
                                 } else {
 
                                     this.httpService.eventEmitter.emit();
+                                    this.total = res.data.total;
                                     this.order = res.data;
                                     this.valor_pag = 0;
+
                                     for (var i = 0; i < res.data.payment.data.length; i++) {
-                                        this.total -= res.data.payment.data[i].total_pago;
+                                        if(res.data.payment.data[i].ativo === 'S') {
+                                            this.total -= res.data.payment.data[i].total_pago;
+                                        }
                                     }
                                     this.hideLoading();
                                     this.toasterService.pop('success', 'Sucesso', 'Pagamento parcial ' + res.data.id + ' realizado com sucesso');

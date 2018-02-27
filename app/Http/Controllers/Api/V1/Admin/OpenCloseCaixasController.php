@@ -84,30 +84,34 @@ class OpenCloseCaixasController extends Controller
         $d = date('Y-m-d');
 
         if($data['data_caixa'] == $d) {
-            $open = $this->repository->findWhere(['data_caixa' => $data['data_caixa'], 'tipo' => 'F']);
 
-            if (count($open) > 0) {
-                //return response()->json($open);
-                return response()->json('fechado');
-            } else {
                 $o = $this->service->create($data);
+            if ($o == 'fechado') {
 
-                if ($o->id) {
-                    $audit = [
-                        'type' => 'insert',
-                        'user_id' => $user->id,
-                        'user' => $user->email,
-                        'entity' => 'open_close_caixas',
-                        'action' => 'Abriu/Fechou o caixa: ' . $o->id
-                    ];
+                return response()->json($o);
 
-                    $this->auditRepository->create($audit);
-                }
+            } elseif ($o == 'caixa_aberto_data'){
 
-                return $this->index();
+                return response()->json('caixa_aberto_o_data');
+
+            }elseif ($o->id) {
+
+                $audit = [
+                    'type' => 'insert',
+                    'user_id' => $user->id,
+                    'user' => $user->email,
+                    'entity' => 'open_close_caixas',
+                    'action' => 'Abriu/Fechou o caixa: ' . $o->id
+                ];
+
+                $this->auditRepository->create($audit);
+
+                return response()->json('ok');
             }
         }else{
+
             return response()->json('data_diverge');
+
         }
     }
 
