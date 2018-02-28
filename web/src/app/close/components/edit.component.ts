@@ -213,7 +213,7 @@ export class EditComponent implements OnInit {
                 .then((res)=>{
                     this.hideLoading();
                     this.toasterService.pop('success', 'Sucesso', 'Pedido '+res.data.id+' reaberto.');
-                    this.router.navigate(['/orders/edit/'+res.data.id]);
+                    this.router.navigate(['/orders/payment/'+res.data.id]);
                 });
         }
     }
