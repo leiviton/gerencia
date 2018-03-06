@@ -125,7 +125,7 @@ var OpenCloseCaixasComponent = (function () {
                         { fim: this.pesquisa.fim }
                     ]
                 };
-                this.httpService.builder().list(options, 'movimento/caixas/filters')
+                this.httpService.builder().list(options, 'open/close')
                     .then(function (res) {
                     _this.movimentos = res;
                     console.log(_this.movimentos);

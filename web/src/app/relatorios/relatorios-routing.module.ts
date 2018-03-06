@@ -5,11 +5,12 @@ import { Routes,
 
 import { RelatorioMovCaixaComponent } from "./components/relatorio-mov-caixa.component";
 
+import { RelatorioPedidosPeriodoComponent } from "./components/relatorio-pedidos-periodo.component";
+
 
 const routes: Routes = [
   {
     path: '',
-    component: RelatorioMovCaixaComponent,
     data: {
       title: 'Movimento de Caixa'
     },
@@ -19,6 +20,13 @@ const routes: Routes = [
               component: RelatorioMovCaixaComponent,
               data: {
                   title: 'Relatorio Movimento de caixa'
+              }
+          },
+          {
+              path: 'relatorio-pedidos-periodo',
+              component: RelatorioPedidosPeriodoComponent,
+              data: {
+                  title: 'Relatorio Pedidos'
               }
           }
       ]

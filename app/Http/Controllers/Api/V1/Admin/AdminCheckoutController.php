@@ -9,6 +9,7 @@
 namespace Pedidos\Http\Controllers\Api\V1\Admin;
 
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\App;
 use Pedidos\Http\Controllers\Controller;
 
@@ -101,9 +102,16 @@ class AdminCheckoutController extends Controller
         $status = $request->get('status');
         return $this->repository->skipPresenter(false)
             ->scopeQuery(function($query) use($status){
-                return $query->where('status',$status);
+                return $query->where('status',$status)->where('created_at','>=',Carbon::now()->startOfDay());
             })
             ->all();
+    }
+
+    public function reportOrders(Request $request)
+    {
+        $data = $request->get('data');
+        $o = $this->orderService->report($data);
+        return response()->json($o);
     }
 
     public function store(CheckoutRequest $request){
@@ -287,9 +295,6 @@ class AdminCheckoutController extends Controller
         return $this->repository
             ->skipPresenter(false)
             ->find($result->id);
-
-
-
     }
 
     public function getTypePayments()

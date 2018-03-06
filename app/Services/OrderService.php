@@ -372,10 +372,16 @@ class OrderService{
     {
         $order = $this->orderRepository->find($id);
 
+        $mesa = $this->mesaRepository->find($order->mesa_id);
+
         $order->motivo_cancelamento = $data['motivo_cancelamento'];
         $order->user_update = $data['user_update'];
         $order->status = 5;
 
+        if($order->type == 1) {
+            $mesa->status = 0;
+        }
+        $mesa->save();
         $order->save();
 
         return $order;
@@ -415,6 +421,23 @@ class OrderService{
         $caixa->save();
 
         return $order;
+    }
+
+    public function report($data)
+    {
+        if($data['cliente'] === 'todos' && $data['tipo'] === 'todos')
+        {
+            $result = DB::select('select * from report_orders_types_payments where ativo = ? and (data BETWEEN ? AND ? )', [$data['ativo'], $data['inicio'], $data['fim']]);
+        }elseif ($data['cliente'] !== 'todos' && $data['tipo'] === 'todos')
+        {
+            $result = DB::select('select * from report_orders_types_payments where ativo = ? and cliente_id = ? and (data BETWEEN ? AND ? )', [$data['ativo'], $data['cliente'], $data['inicio'], $data['fim']]);
+        }elseif ($data['cliente'] === 'todos' && $data['tipo'] !== 'todos')
+        {
+            $result = DB::select('select * from report_orders_types_payments where ativo = ? and tipo_id = ? and (data BETWEEN ? AND ? )', [$data['ativo'], $data['tipo'], $data['inicio'], $data['fim']]);
+        }else {
+            $result = DB::select('select * from report_orders_types_payments where ativo = ? and cliente_id = ? and tipo_id = ? and (data BETWEEN ? AND ? )', [$data['ativo'], $data['cliente'], $data['tipo'], $data['inicio'], $data['fim']]);
+        }
+        return $result;
     }
 }
 

@@ -117,43 +117,39 @@
 <table class='table table-bordered'>
     <thead>
     <tr class='text-center'>
-        <th class='fonte text-center saldos'>Tipo</th>
-        <th class='fonte text-center saldos'>Caixa</th>
-        <th class='fonte text-center saldos'>Usuário</th>
-        <th class='fonte text-center saldos'>Documento</th>
-        <th class='fonte text-center saldos'>Histórico</th>
+        <th class='fonte text-center saldos'>Pedido</th>
+        <th class='fonte text-center saldos'>Cliente</th>
+        <th class='fonte text-center saldos'>Observação</th>
+        <th class='fonte text-center saldos'>Total</th>
+        <th class='fonte text-center saldos'>Pago</th>
+        <th class='fonte text-center saldos'>Tipo Pagamento</th>
         <th class='fonte text-center saldos'>Data/Hora</th>
-        <th class='fonte text-center saldos'>Valor</th>
+        <th class='fonte text-center saldos'>Ativo</th>
     </tr>
     </thead>
     <tbody>
-    <tr>
-        <td colspan='6' class='fonte saldos'>saldo inicial</td>
-        <td colspan='1' class='fonte text-center saldos'>{{ saldo_inicial | currency:'BRL':true}}</td>
-    </tr>
-    <tr *ngIf="tamanho == 0">
-        <td colspan="7"> Sem movimento</td>
-    </tr>
-    <tr class='text-center' *ngFor="let m of movimentos.data">
-        <td class='fonte'>{{ m.tipo_movimento }}</td>
-        <td class='fonte'>{{ m.caixa.data.name }}</td>
-        <td class='fonte'>{{ m.usuario }}</td>
-        <td class='fonte' *ngIf="m.payment"> {{ m.payment.data.order_id }}</td>
-        <td class='fonte' *ngIf="!m.payment"></td>
-        <td class='fonte'> {{ m.historico }}</td>
-        <td class='fonte'> {{ m.created_at}}</td>
-        <td class='fonte'> {{ m.valor | currency:'BRL':true }}</td>
-    </tr>
-    <tr>
-        <td colspan='6' class='fonte saldos'>saldo final</td>
-        <td colspan='1' class='fonte text-center saldos' *ngIf="tamanho == 0">{{ saldo_inicial | currency:'BRL':true}}</td>
-        <td colspan='1' class='fonte text-center saldos' *ngIf="tamanho > 0">{{ total | currency:'BRL':true}}</td>
-    </tr>
-    </tbody>
+        <tr *ngIf="tamanho == 0">
+            <td colspan="7"> Sem movimento</td>
+        </tr>
+        <tr class='text-center' *ngFor="let m of movimentos.data">
+            <td class='fonte'>{{ m.pedido }}</td>
+            <td class='fonte'>{{ m.cliente }}</td>
+            <td class='fonte'>{{ m.observacao }}</td>
+            <td class='fonte'> {{ m.total | currency:'BRL':true }}</td>
+            <td class='fonte'> {{ m.valor | currency:'BRL':true}}</td>
+            <td class='fonte'> {{ m.tipo }}</td>
+            <td class='fonte'> {{ m.data }}</td>
+            <td class='fonte'> {{ m.ativo }}</td>
+        </tr>
+        </tbody>
 </table>
 <div class='sumario'>
-    <h5 class='item saldos'>Total Crédito: {{ total_credito | currency:'BRL':true}}</h5>
-    <h5 class='item saldos'>Total Débito: {{ total_debito | currency:'BRL':true}}</h5>
+    <h5 class='item saldos'>Dinheiro: {{ total_dinheiro | currency:'BRL':true}}</h5>
+    <h5 class='item saldos'>Credito: {{ total_cartao_credito | currency:'BRL':true}}</h5>
+    <h5 class='item saldos'>Debito: {{ total_cartao_debito | currency:'BRL':true}}</h5>
+    <h5 class='item saldos'>Prazo: {{ total_prazo | currency:'BRL':true}}</h5>
+    <h5 class='item saldos'>Consumo: {{ total_consumo | currency:'BRL':true}}</h5>
+    <h5 class='item saldos'>Total: {{ (total_consumo + total_dinheiro + total_cartao_debito + total_prazo + total_cartao_debito) | currency:'BRL':true}}</h5>
 </div>
 </body>
 </html>

@@ -13,6 +13,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { CurrencyMaskModule } from "ng2-currency-mask";
 import { NgxPhoneMaskModule } from 'ngx-phone-mask';
 import { RelatorioMovCaixaComponent} from "./components/relatorio-mov-caixa.component";
+import { RelatorioPedidosPeriodoComponent} from "./components/relatorio-pedidos-periodo.component";
 
 
 @NgModule({
@@ -28,7 +29,7 @@ import { RelatorioMovCaixaComponent} from "./components/relatorio-mov-caixa.comp
       CurrencyMaskModule,
       NgxPhoneMaskModule,
   ],
-  declarations: [ RelatorioMovCaixaComponent ],
+  declarations: [ RelatorioMovCaixaComponent, RelatorioPedidosPeriodoComponent ],
   providers: [ RelatoriosService, BsModalService ]
 })
 export class RelatoriosModule { }

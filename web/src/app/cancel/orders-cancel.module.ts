@@ -18,6 +18,7 @@ import { CurrencyMaskModule } from "ng2-currency-mask";
 import { NgxPhoneMaskModule } from 'ngx-phone-mask';
 import {PrinterComponent} from "./components/printer.component";
 import { EditComponent} from "./components/edit.component";
+import {ToastOptions} from "ng2-toasty";
 
 
 @NgModule({
@@ -34,6 +35,6 @@ import { EditComponent} from "./components/edit.component";
       NgxPhoneMaskModule,
   ],
   declarations: [ OrdersCancelComponent,PaymentComponent,PrinterComponent,EditComponent ],
-  providers: [ OrdersService, BsModalService ]
+  providers: [ OrdersService, BsModalService,ToastOptions ]
 })
 export class OrdersCancelModule { }

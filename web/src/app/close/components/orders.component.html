@@ -3,7 +3,8 @@
         <div class="col-lg-12">
           <div class="card">
             <div class="card-header">
-                   <button type="button" class="btn btn-default" (click)="showModal()"><i class="fa fa-search"></i> Pesquisar </button>
+                   <button type="button" class="btn btn-default" (click)="showModal('#search')"><i class="fa fa-search"></i> Pesquisar </button>
+                   <button type="button" class="btn btn-info" (click)="showModal('#rel')"><i class="fa fa-bar-chart"></i> Relatorio </button>
             </div>
             <div class="card-body">
               <table class="table table-responsive table-bordered table-striped table-sm">
@@ -70,7 +71,7 @@
       </div>
  </div>
 
-<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="search" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog modal-sm modal-info" role="document">
     <div class="modal-content">
       <div class="modal-header novo">
@@ -84,8 +85,47 @@
         <input type="date" id="fim" class="form-control" name="fim" [(ngModel)]="pesquisa.fim" required>
       </div>
       <div class="modal-footer novo">
-        <button type="button" class="btn btn-secondary" (click)="hideModal()">Fechar</button>
+        <button type="button" class="btn btn-secondary" (click)="hideModal('#search')">Fechar</button>
         <button type="button" class="btn btn-primary" (click)="pesquisar()"><i class="fa fa-search"></i> Buscar</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="rel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-sm modal-success" role="document">
+    <div class="modal-content">
+      <div class="modal-header novo">
+        <h6 class="modal-title text-center">Gerar Relatorio de pedidos</h6>
+      </div>
+      <div class="modal-body">
+        <label for="inicior">De</label>
+        <input type="date" id="inicior" class="form-control" name="inicio" [(ngModel)]="pesquisa.inicio" required>
+
+        <label for="fimr">Até</label>
+        <input type="date" id="fimr" class="form-control" name="fim" [(ngModel)]="pesquisa.fim" required>
+
+        <label class="col-form-label" for="select">Cliente</label>
+        <select name="status" class="form-control" id="select" [(ngModel)]="pesquisa.cliente" required>
+          <option value="todos"> Todos</option>
+          <option *ngFor="let g of clients.data" value="{{ g.id }}"> {{ g.name }}</option>
+        </select>
+
+        <label class="col-form-label" for="tipo">Tipo</label>
+        <select name="status" class="form-control" id="tipo" [(ngModel)]="pesquisa.tipo" required>
+          <option value="todos"> Todos</option>
+          <option *ngFor="let g of types_payments.data" value="{{ g.id }}"> {{ g.name }}</option>
+        </select>
+
+        <label class="col-form-label" for="ativo">Ativo</label>
+        <select name="status" class="form-control" id="ativo" [(ngModel)]="pesquisa.ativo" required>
+          <option value="S"> Sim</option>
+          <option value="N"> Não</option>
+        </select>
+      </div>
+      <div class="modal-footer novo">
+        <button type="button" class="btn btn-secondary" (click)="hideModal('#rel')">Fechar</button>
+        <button type="button" class="btn btn-primary" (click)="report()"><i class="fa fa-search"></i> Buscar</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

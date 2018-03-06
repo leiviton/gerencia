@@ -21,7 +21,6 @@ import { EditComponent} from "./components/edit.component";
 import {ToastOptions} from "ng2-toasty";
 
 
-
 @NgModule({
   imports: [
     CommonModule,
@@ -33,7 +32,7 @@ import {ToastOptions} from "ng2-toasty";
       CuppaDataGridModule,
       TabsModule,
       CurrencyMaskModule,
-      NgxPhoneMaskModule,
+      NgxPhoneMaskModule
   ],
   declarations: [ OrdersCloseComponent,PaymentComponent,PrinterComponent,EditComponent ],
   providers: [ OrdersService, BsModalService,ToastOptions ]

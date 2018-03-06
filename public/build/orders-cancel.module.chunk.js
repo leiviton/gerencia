@@ -232,9 +232,9 @@ module.exports = "<div class=\"animated fadeIn\">\n    <div class=\"row\">\n    
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return OrdersCancelComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angular2_toaster__ = __webpack_require__("../../../../angular2-toaster/angular2-toaster.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_orders_service__ = __webpack_require__("../../../../../src/app/cancel/services/orders.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_orders_service__ = __webpack_require__("../../../../../src/app/cancel/services/orders.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ng2_toasty__ = __webpack_require__("../../../../ng2-toasty/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_jquery__ = __webpack_require__("../../../../jquery/dist/jquery.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_jquery__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -252,11 +252,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var OrdersCancelComponent = (function () {
-    function OrdersCancelComponent(httpService, router, toasterService) {
+    function OrdersCancelComponent(httpService, router, tosty, toastyOptions, toastyConfig) {
         var _this = this;
         this.httpService = httpService;
         this.router = router;
-        this.toasterService = toasterService;
+        this.tosty = tosty;
+        this.toastyOptions = toastyOptions;
+        this.toastyConfig = toastyConfig;
         this.cor = false;
         this.orders = {
             data: []
@@ -274,9 +276,23 @@ var OrdersCancelComponent = (function () {
         });
     }
     OrdersCancelComponent.prototype.ngOnInit = function () {
+        var _this = this;
         this.showLoading();
         this.httpService.setAccessToken();
-        setTimeout(this.hideLoading(), 2000);
+        this.httpService.builder().list({}, 'close/?status=5')
+            .then(function (res) {
+            _this.orders = res;
+            console.log(_this.orders);
+            _this.tamanho = res.data.length;
+            _this.hideModal();
+            _this.hideLoading();
+            if (_this.tamanho > 0) {
+                _this.message('Sucesso', 'Dados carregados com sucesso', 5000, 'success');
+            }
+            else if (_this.tamanho == 0) {
+                _this.message('Informação', 'Sem pedidos fechados com data de hoje', 5000, 'info');
+            }
+        });
     };
     OrdersCancelComponent.prototype.edit = function (id) {
         this.cor = true;
@@ -315,22 +331,49 @@ var OrdersCancelComponent = (function () {
                 _this.tamanho = res.data.length;
                 _this.hideModal();
                 _this.hideLoading();
-                _this.toasterService.pop('success', 'Sucesso', 'Dados carregados com sucesso');
+                _this.message('Sucesso', 'Dados carregados com sucesso', 5000, 'success');
             });
         }
         else {
-            this.toasterService.pop('error', 'Erro', 'Preencha inicio, fim e status para pesquisar.');
+            this.message('Sucesso', 'Preencha inicio, fim e status para pesquisar.', 5000, 'success');
             this.hideLoading();
+        }
+    };
+    OrdersCancelComponent.prototype.message = function (titulo, message, time, type) {
+        this.toastyOptions = {
+            title: titulo,
+            msg: message,
+            timeout: time,
+        };
+        switch (type) {
+            case 'default':
+                this.tosty.default(this.toastyOptions);
+                break;
+            case 'info':
+                this.tosty.info(this.toastyOptions);
+                break;
+            case 'success':
+                this.tosty.success(this.toastyOptions);
+                break;
+            case 'wait':
+                this.tosty.wait(this.toastyOptions);
+                break;
+            case 'error':
+                this.tosty.error(this.toastyOptions);
+                break;
+            case 'warning':
+                this.tosty.warning(this.toastyOptions);
+                break;
         }
     };
     OrdersCancelComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             template: __webpack_require__("../../../../../src/app/cancel/components/orders.component.html")
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__services_orders_service__["a" /* OrdersService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_orders_service__["a" /* OrdersService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_angular2_toaster__["b" /* ToasterService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_angular2_toaster__["b" /* ToasterService */]) === "function" && _c || Object])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__services_orders_service__["a" /* OrdersService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_orders_service__["a" /* OrdersService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3_ng2_toasty__["d" /* ToastyService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_ng2_toasty__["d" /* ToastyService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3_ng2_toasty__["a" /* ToastOptions */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_ng2_toasty__["a" /* ToastOptions */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3_ng2_toasty__["b" /* ToastyConfig */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_ng2_toasty__["b" /* ToastyConfig */]) === "function" && _e || Object])
     ], OrdersCancelComponent);
     return OrdersCancelComponent;
-    var _a, _b, _c;
+    var _a, _b, _c, _d, _e;
 }());
 
 //# sourceMappingURL=orders.component.js.map
@@ -599,12 +642,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_ngx_phone_mask__ = __webpack_require__("../../../../ngx-phone-mask/ngx-phone-mask/ngx-phone-mask.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_printer_component__ = __webpack_require__("../../../../../src/app/cancel/components/printer.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_edit_component__ = __webpack_require__("../../../../../src/app/cancel/components/edit.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17_ng2_toasty__ = __webpack_require__("../../../../ng2-toasty/index.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -640,7 +685,7 @@ var OrdersCancelModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_14_ngx_phone_mask__["a" /* NgxPhoneMaskModule */],
             ],
             declarations: [__WEBPACK_IMPORTED_MODULE_6__components_orders_component__["a" /* OrdersCancelComponent */], __WEBPACK_IMPORTED_MODULE_7__components_payment_component__["a" /* PaymentComponent */], __WEBPACK_IMPORTED_MODULE_15__components_printer_component__["a" /* PrinterComponent */], __WEBPACK_IMPORTED_MODULE_16__components_edit_component__["a" /* EditComponent */]],
-            providers: [__WEBPACK_IMPORTED_MODULE_10__services_orders_service__["a" /* OrdersService */], __WEBPACK_IMPORTED_MODULE_4_ngx_bootstrap_modal__["a" /* BsModalService */]]
+            providers: [__WEBPACK_IMPORTED_MODULE_10__services_orders_service__["a" /* OrdersService */], __WEBPACK_IMPORTED_MODULE_4_ngx_bootstrap_modal__["a" /* BsModalService */], __WEBPACK_IMPORTED_MODULE_17_ng2_toasty__["a" /* ToastOptions */]]
         })
     ], OrdersCancelModule);
     return OrdersCancelModule;

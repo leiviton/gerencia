@@ -12,39 +12,94 @@ import { ToastyService, ToastOptions, ToastyConfig } from "ng2-toasty";
 })
 export class OrdersCloseComponent implements OnInit {
 
-  constructor(
-      private httpService: OrdersService,
-              private router: Router,
-              private tosty: ToastyService,
-              private toastyOptions: ToastOptions,
-              private toastyConfig: ToastyConfig
-    ) {
-      this.toastyConfig.position = 'top-right';
-      document.onkeydown = ((e) =>{
-          if(e.keyCode == 113)
-          {
-              return this.showModal();
-          }
-      });
-  }
+      constructor(
+          private httpService: OrdersService,
+                  private router: Router,
+                  private tosty: ToastyService,
+                  private toastyOptions: ToastOptions,
+                  private toastyConfig: ToastyConfig
+        ) {
+          this.toastyConfig.position = 'top-right';
+          document.onkeydown = ((e) =>{
+              if(e.keyCode == 113)
+              {
+                  return this.showModal('#search');
+              }
+          });
+      }
 
-  cor = false;
+      cor = false;
 
-  orders = {
-      data:[]
-  };
-  tamanho = 0;
-    pesquisa:any = {
-        inicio:null,
-        fim:null,
-        status:null
-    };
-  ngOnInit(): void {
-    this.showLoading();
-    this.httpService.setAccessToken();
-    setTimeout(this.hideLoading(),2000);
-  }
+      orders = {
+          data:[]
+      };
+      tamanho = 0;
+      pesquisa:any = {
+            inicio:null,
+            fim:null,
+            status:null,
+            cliente:'todos',
+            ativo:'S',
+            tipo:'todos'
+      };
+      en:any = {};
+      clients = {
+          data:[]
+      };
+      types_payments = {
+          data:[]
+      };
+      ngOnInit(): void {
+        this.showLoading();
+        this.httpService.setAccessToken();
+        this.httpService.builder().list({}, 'close/?status=3')
+              .then((res) => {
+                  this.orders = res;
+                  this.tamanho = res.data.length;
+                  this.hideLoading();
+                  if(this.tamanho > 0) {
+                      this.message('Sucesso', 'Dados carregados com sucesso', 'success');
+                  }else if(this.tamanho == 0)
+                  {
+                      this.message('Informação', 'Sem pedidos fechados com data de hoje', 'info');
+                  }
+              });
+          this.en = {
+              firstDayOfWeek: 0,
+              dayNames: ["Domingo","Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"],
+              dayNamesShort: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+              dayNamesMin: ["Do","Sg","Te","Qa","Qi","Sx","Sa"],
+              monthNames: [ "Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro" ],
+              monthNamesShort: [ "Jan", "Fev", "Mar", "Abr", "Mai", "Jun","Jul", "Ago", "Sep", "Out", "Nov", "Dez" ],
+              today: 'Today',
+              clear: 'Clear'
+          };
 
+          this.getClients();
+
+          this.getTypesPayments();
+
+          jQuery('.modal').hide()
+      }
+
+    getTypesPayments()
+    {
+        this.httpService.setAccessToken();
+        this.httpService.builder()
+            .list({},'typepayment')
+            .then((res)=>{
+                this.types_payments = res;
+            })
+    }
+    getClients()
+    {
+        this.httpService.setAccessToken();
+        this.httpService.builder()
+            .list({},'clients')
+            .then((res) => {
+                this.clients = res;
+            });
+    }
     edit(id)
     {
         this.cor = true;
@@ -64,13 +119,13 @@ export class OrdersCloseComponent implements OnInit {
         jQuery(".container-loading").show();
     }
 
-    showModal()
+    showModal(id)
     {
-        jQuery(".modal").show().addClass('show');
+        jQuery(id).show().addClass('show');
     }
-    hideModal()
+    hideModal(id)
     {
-        jQuery(".modal").hide();
+        jQuery(id).hide();
     }
     pesquisar()
     {
@@ -81,8 +136,8 @@ export class OrdersCloseComponent implements OnInit {
                 let options = {
                     filters: [
                         {status: 3},
-                        {inicio: this.pesquisa.inicio},
-                        {fim: this.pesquisa.fim}
+                        {inicio: this.pesquisa.inicio.toString()},
+                        {fim: this.pesquisa.fim.toString()}
                     ]
                 };
                 this.httpService.builder().list(options, 'filters')
@@ -90,18 +145,58 @@ export class OrdersCloseComponent implements OnInit {
                         this.orders = res;
                         console.log(this.orders);
                         this.tamanho = res.data.length;
-                        this.hideModal();
+                        this.hideModal('#search');
                         this.hideLoading();
-                        //this.toasterService.pop('success', 'Sucesso', 'Dados carregados com sucesso');
-                        this.message('Sucesso','Pesquisa feita com sucesso',5000,'success');
+                        if(this.tamanho > 0) {
+                            this.message('Sucesso', 'Dados carregados com sucesso', 'success');
+                        }else if(this.tamanho == 0)
+                        {
+                            this.message('Informação', 'Sem pedidos fechados com data a data selecionada', 'info');
+                        }
                     });
             }else  {
-                this.message('Erro','Preencha inicio, fim e status para pesquisar.',5000,'error');
+                this.message('Erro','Preencha inicio, fim e status para pesquisar.','error');
+                this.hideLoading();
+            }
+    }
+    openReal() {
+        this.hideModal('#rel');
+        window.open('/#/relatorios/relatorio-pedidos-periodo', '_blank');
+    }
+
+    report()
+    {
+
+        this.showLoading();
+            if(this.pesquisa.inicio !== null && this.pesquisa.fim !== null)
+            {
+                let data = new Array();
+                data['ativo'] = this.pesquisa.ativo;
+                data['cliente'] = this.pesquisa.cliente;
+                data['inicio'] = this.pesquisa.inicio;
+                data['fim'] = this.pesquisa.fim;
+                data['tipo'] = this.pesquisa.tipo;
+                this.httpService.builder().list({}, "orders/report/?data[cliente]="+this.pesquisa.cliente+"&data[inicio]="+this.pesquisa.inicio+
+                    "&data[fim]="+this.pesquisa.fim+"&data[tipo]="+this.pesquisa.tipo+"&data[ativo]="+this.pesquisa.ativo)
+                    .then((res) => {
+                        localStorage.setItem('rel_pedidos_filtros',JSON.stringify({data:res}));
+                        this.openReal();
+                        this.hideModal('#rel');
+                        this.hideLoading();
+                        if(res.length > 0) {
+                            this.message('Sucesso', 'Relatorio gerado com sucesso', 'success');
+                        }else if(res.length == 0)
+                        {
+                            this.message('Informação', 'Sem pedidos fechados com data a data selecionada', 'info');
+                        }
+                    });
+            }else  {
+                this.message('Erro','Preencha inicio, fim e status para pesquisar.','error');
                 this.hideLoading();
             }
     }
 
-    message(titulo:string,message:string,time:number,type:string)
+    message(titulo:string,message:string,type:string='default',time:number=5000)
     {
         this.toastyOptions = {
             title:titulo,

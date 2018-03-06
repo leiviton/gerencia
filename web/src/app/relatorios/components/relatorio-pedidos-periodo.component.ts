@@ -11,9 +11,9 @@ import { FormsModule } from '@angular/forms';
 import {ToasterService} from 'angular2-toaster';
 
 @Component({
-    templateUrl: 'relatorio-mov-caixa.component.html'
+    templateUrl: 'relatorio-pedidos-periodo.component.html'
 })
-export class RelatorioMovCaixaComponent implements OnInit {
+export class RelatorioPedidosPeriodoComponent implements OnInit {
 
     constructor(private httpService: RelatoriosService, private router: Router, private route: ActivatedRoute
         ,private toasterService: ToasterService)
@@ -30,7 +30,15 @@ export class RelatorioMovCaixaComponent implements OnInit {
 
     total_credito = 0;
 
-    total_debito = 0;
+    total_dinheiro = 0;
+
+    total_cartao_debito = 0;
+
+    total_cartao_credito = 0;
+
+    total_prazo = 0;
+
+    total_consumo = 0;
 
     filtros = {
         filters:[]
@@ -40,34 +48,24 @@ export class RelatorioMovCaixaComponent implements OnInit {
     ngOnInit(): void {
 
         this.filtros = JSON.parse(localStorage.getItem('filtros_rel') || null);
-        let data = this.filtros.filters[2].inicio;
+        this.movimentos = JSON.parse(localStorage.getItem('rel_pedidos_filtros') || null);
 
-        this.httpService.builder()
-            .list({},'open/?data=['+data+']')
-            .then((res) => {
-               for (let i in res.data)
-               {
-                   if(res.data[i].tipo == 'A'){
-                       this.saldo_inicial = res.data[i].saldo;
-                   }
-               }
-                this.movimentos = JSON.parse(localStorage.getItem('mov_caixa_rel') || null);
-                this.tamanho = this.movimentos.data.length;
-                this.total = this.saldo_inicial;
-                for(let i in this.movimentos.data)
-                {
-                    if(this.movimentos.data[i].tipo_movimento === 'credito') {
-                        this.total += this.movimentos.data[i].valor;
-                        this.total_credito += this.movimentos.data[i].valor;
-                    }else if(this.movimentos.data[i].tipo_movimento === 'debito'){
-                        this.total -= this.movimentos.data[i].valor;
-                        this.total_debito += this.movimentos.data[i].valor;
-                    }
-                }
+        this.tamanho = this.movimentos.data.length;
 
-
-            });
-
+        for(let i in this.movimentos.data)
+        {
+            if(this.movimentos.data[i].tipo_id == 1) {
+                this.total_dinheiro += Number(this.movimentos.data[i].valor);
+            }else if(this.movimentos.data[i].tipo_id == 2) {
+                this.total_cartao_credito += Number(this.movimentos.data[i].valor);
+            }else if(this.movimentos.data[i].tipo_id == 3) {
+                this.total_cartao_debito += Number(this.movimentos.data[i].valor);
+            }else if(this.movimentos.data[i].tipo_id == 4) {
+                this.total_prazo += Number(this.movimentos.data[i].valor);
+            }else if(this.movimentos.data[i].tipo_id == 5) {
+                this.total_consumo += Number(this.movimentos.data[i].valor);
+            }
+        }
         setTimeout(() => {
             window.print();
         }, 4000);

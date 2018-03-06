@@ -5,6 +5,7 @@ import { NgForOf } from '@angular/common';
 import { OrdersService } from '../services/orders.service';
 import { FormsModule } from '@angular/forms';
 
+import { ToastyService, ToastOptions, ToastyConfig } from "ng2-toasty";
 
 
 import * as jQuery from 'jquery';
@@ -13,7 +14,12 @@ import * as jQuery from 'jquery';
 })
 export class OrdersCancelComponent implements OnInit {
 
-  constructor(private httpService: OrdersService, private router: Router, private toasterService: ToasterService) {
+  constructor(private httpService: OrdersService,
+              private router: Router,
+              private tosty: ToastyService,
+              private toastyOptions: ToastOptions,
+              private toastyConfig: ToastyConfig
+) {
       document.onkeydown = ((e) =>{
           if(e.keyCode == 113)
           {
@@ -36,7 +42,21 @@ export class OrdersCancelComponent implements OnInit {
   ngOnInit(): void {
     this.showLoading();
       this.httpService.setAccessToken();
-      setTimeout(this.hideLoading(),2000)
+      this.httpService.builder().list({}, 'close/?status=5')
+          .then((res) => {
+              this.orders = res;
+              console.log(this.orders);
+              this.tamanho = res.data.length;
+              this.hideModal();
+              this.hideLoading();
+              if(this.tamanho > 0) {
+                  this.message('Sucesso', 'Dados carregados com sucesso', 5000, 'success');
+              }else if(this.tamanho == 0)
+              {
+                  this.message('Informação', 'Sem pedidos fechados com data de hoje', 5000, 'info');
+              }
+          });
+
   }
 
     edit(id)
@@ -86,13 +106,30 @@ export class OrdersCancelComponent implements OnInit {
                         this.tamanho = res.data.length;
                         this.hideModal();
                         this.hideLoading();
-                        this.toasterService.pop('success', 'Sucesso', 'Dados carregados com sucesso');
+                        this.message('Sucesso', 'Dados carregados com sucesso', 5000, 'success');
 
                     });
             }else  {
-                this.toasterService.pop('error', 'Erro', 'Preencha inicio, fim e status para pesquisar.');
-
+                this.message('Sucesso', 'Preencha inicio, fim e status para pesquisar.', 5000, 'success');
                 this.hideLoading();
             }
+    }
+
+    message(titulo:string,message:string,time:number,type:string)
+    {
+        this.toastyOptions = {
+            title:titulo,
+            msg:message,
+            timeout:time,
+        }
+
+        switch (type) {
+            case 'default': this.tosty.default(this.toastyOptions); break;
+            case 'info': this.tosty.info(this.toastyOptions); break;
+            case 'success': this.tosty.success(this.toastyOptions); break;
+            case 'wait': this.tosty.wait(this.toastyOptions); break;
+            case 'error': this.tosty.error(this.toastyOptions); break;
+            case 'warning': this.tosty.warning(this.toastyOptions); break;
+        }
     }
 }
