@@ -40,6 +40,8 @@ export class RelatorioPedidosPeriodoComponent implements OnInit {
 
     total_consumo = 0;
 
+    total_cheque = 0;
+
     filtros = {
         filters:[]
     };
@@ -61,9 +63,11 @@ export class RelatorioPedidosPeriodoComponent implements OnInit {
             }else if(this.movimentos.data[i].tipo_id == 3) {
                 this.total_cartao_debito += Number(this.movimentos.data[i].valor);
             }else if(this.movimentos.data[i].tipo_id == 4) {
-                this.total_prazo += Number(this.movimentos.data[i].valor);
+                this.total_cheque += Number(this.movimentos.data[i].valor);
             }else if(this.movimentos.data[i].tipo_id == 5) {
                 this.total_consumo += Number(this.movimentos.data[i].valor);
+            }else if(this.movimentos.data[i].tipo_id == 6) {
+                this.total_prazo += Number(this.movimentos.data[i].valor);
             }
         }
         setTimeout(() => {
