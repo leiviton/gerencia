@@ -149,7 +149,7 @@
     <h5 class='item saldos'>Debito: {{ total_cartao_debito | currency:'BRL':true}}</h5>
     <h5 class='item saldos'>Prazo: {{ total_prazo | currency:'BRL':true}}</h5>
     <h5 class='item saldos'>Consumo: {{ total_consumo | currency:'BRL':true}}</h5>
-    <h5 class='item saldos'>Consumo: {{ total_cheque | currency:'BRL':true}}</h5>
+    <h5 class='item saldos'>Cheque: {{ total_cheque | currency:'BRL':true}}</h5>
     <h5 class='item saldos'>Total: {{ (total_consumo + total_dinheiro + total_cartao_debito + total_prazo + total_cartao_debito + total_cheque) | currency:'BRL':true}}</h5>
 </div>
 </body>
