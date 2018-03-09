@@ -6,8 +6,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NgForOf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import {ToasterService} from 'angular2-toaster';
 import {MesasService} from "../services/mesas.service";
+import {AppMessageService} from "../../../app-message.service";
 
 @Component({
     templateUrl: 'edit.component.html'
@@ -15,7 +15,7 @@ import {MesasService} from "../services/mesas.service";
 export class EditComponent implements OnInit {
 
     constructor(private httpService: MesasService, private router: Router, private route: ActivatedRoute
-        ,private toasterService: ToasterService
+        ,private notification: AppMessageService
     ) {}
 
     mesa = {
@@ -29,8 +29,8 @@ export class EditComponent implements OnInit {
         u = JSON.parse(localStorage.getItem('user') || null);
         if(u.role !== 'gerente' && u.role !== 'admin')
         {
-            this.toasterService.pop('error','Sem permissão','Usuário sem acesso, contate o administrador');
-            this.router.navigate(['/dashboard']);
+            this.notification.message('Erro','Sem permissão, contate o administrador','error');
+            this.router.navigate(['/user/login']);
         }
         jQuery('#infoModal').show().addClass('show');
         this.httpService.setAccessToken();
@@ -58,11 +58,11 @@ export class EditComponent implements OnInit {
                 .then(() => {
                     this.httpService.eventEmitter.emit();
                     this.hideLoading();
-                    this.toasterService.pop('success', 'Sucesso', 'Mesa salva com sucesso');
+                    this.notification.message('Sucesso', 'Mesa salva com sucesso', 'success');
                     this.close();
                 });
         }else{
-            this.toasterService.pop('error', 'Erro', 'Verifique se todos os campos foram preenchidos.');
+            this.notification.message('Error', 'Verifique se todos os campos foram preenchidos.', 'error');
         }
 
     }

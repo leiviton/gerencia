@@ -31,7 +31,8 @@ import { SimpleLayoutComponent } from './layouts/simple-layout.component';
 
 // Services
 import { AppHttpService } from './app-http.service';
-import {ToastyModule} from "ng2-toasty";
+import {ToastyModule,ToastOptions} from "ng2-toasty";
+import {AppMessageService} from "./app-message.service";
 
 @NgModule({
   imports: [
@@ -63,7 +64,9 @@ import {ToastyModule} from "ng2-toasty";
     provide: LocationStrategy,
     useClass: HashLocationStrategy
   },
-  AppHttpService
+  AppHttpService,
+      AppMessageService,
+      ToastOptions
   ],
   bootstrap: [ AppComponent ]
 })

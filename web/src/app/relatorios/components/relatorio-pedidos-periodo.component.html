@@ -113,36 +113,39 @@
 <div class='header text-center'>
     <h3 class='item'>Relatório Pedidos Por Periodo</h3>
     <p class='item'>Data Relatório: {{ data }}</p>
+    <button type="button" class="btn btn-link" (click)="gerarExcel()">Excel</button>
 </div>
-<table class='table table-bordered'>
-    <thead>
-    <tr class='text-center'>
-        <th class='fonte text-center saldos'>Pedido</th>
-        <th class='fonte text-center saldos'>Cliente</th>
-        <th class='fonte text-center saldos'>Observação</th>
-        <th class='fonte text-center saldos'>Total</th>
-        <th class='fonte text-center saldos'>Pago</th>
-        <th class='fonte text-center saldos'>Tipo Pagamento</th>
-        <th class='fonte text-center saldos'>Data/Hora</th>
-        <th class='fonte text-center saldos'>Ativo</th>
-    </tr>
-    </thead>
-    <tbody>
-        <tr *ngIf="tamanho == 0">
-            <td colspan="7"> Sem movimento</td>
-        </tr>
-        <tr class='text-center' *ngFor="let m of movimentos.data">
-            <td class='fonte'>{{ m.pedido }}</td>
-            <td class='fonte'>{{ m.cliente }}</td>
-            <td class='fonte'>{{ m.observacao }}</td>
-            <td class='fonte'> {{ m.total | currency:'BRL':true }}</td>
-            <td class='fonte'> {{ m.valor | currency:'BRL':true}}</td>
-            <td class='fonte'> {{ m.tipo }}</td>
-            <td class='fonte'> {{ m.data }}</td>
-            <td class='fonte'> {{ m.ativo }}</td>
-        </tr>
-        </tbody>
-</table>
+<div id="relexc">
+    <table class='table table-bordered'>
+        <thead>
+            <tr class='text-center'>
+                <th class='fonte text-center saldos'>Pedido</th>
+                <th class='fonte text-center saldos'>Cliente</th>
+                <th class='fonte text-center saldos'>Observação</th>
+                <th class='fonte text-center saldos'>Total</th>
+                <th class='fonte text-center saldos'>Pago</th>
+                <th class='fonte text-center saldos'>Tipo Pagamento</th>
+                <th class='fonte text-center saldos'>Data/Hora</th>
+                <th class='fonte text-center saldos'>Ativo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngIf="tamanho == 0">
+                <td colspan="7"> Sem movimento</td>
+            </tr>
+            <tr class='text-center' *ngFor="let m of movimentos.data">
+                <td class='fonte'>{{ m.pedido }}</td>
+                <td class='fonte'>{{ m.cliente }}</td>
+                <td class='fonte'>{{ m.observacao }}</td>
+                <td class='fonte'> {{ m.total | currency:'BRL':true }}</td>
+                <td class='fonte'> {{ m.valor | currency:'BRL':true}}</td>
+                <td class='fonte'> {{ m.tipo }}</td>
+                <td class='fonte'> {{ m.data }}</td>
+                <td class='fonte'> {{ m.ativo }}</td>
+            </tr>
+            </tbody>
+    </table>
+</div>
 <div class='sumario'>
     <h5 class='item saldos'>Dinheiro: {{ total_dinheiro | currency:'BRL':true}}</h5>
     <h5 class='item saldos'>Credito: {{ total_cartao_credito | currency:'BRL':true}}</h5>

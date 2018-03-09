@@ -6,8 +6,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NgForOf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import {ToasterService} from 'angular2-toaster';
 import {ClientsService} from "../services/clients.service";
+import {AppMessageService} from "../../../app-message.service";
 
 @Component({
     templateUrl: 'edit.component.html'
@@ -15,7 +15,7 @@ import {ClientsService} from "../services/clients.service";
 export class EditComponent implements OnInit {
 
     constructor(private httpService: ClientsService, private router: Router, private route: ActivatedRoute
-        ,private toasterService: ToasterService
+        ,private notification: AppMessageService
     ) {}
 
     client = {
@@ -81,11 +81,11 @@ export class EditComponent implements OnInit {
                 .then(() => {
                     this.httpService.eventEmitter.emit();
                     this.hideLoading();
-                    this.toasterService.pop('success', 'Sucesso', 'Cliente salvo com sucesso');
+                    this.notification.message('Sucesso', 'Cliente salvo com sucesso', 'success');
                     this.close();
                 });
         }else{
-            this.toasterService.pop('error', 'Erro', 'Verifique se todos os campos foram preenchidos.');
+            this.notification.message('Error', 'Verifique se todos os campos foram preenchidos.', 'error');
         }
 
     }

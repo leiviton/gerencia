@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {ToasterService} from 'angular2-toaster';
 import * as jQuery from 'jquery';
 
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgForOf } from '@angular/common';
 import { MesasService } from '../services/mesas.service';
 import { FormsModule } from '@angular/forms';
+import {ToastyService} from "ng2-toasty";
 
 @Component({
     templateUrl: 'new.component.html'
@@ -13,7 +13,7 @@ import { FormsModule } from '@angular/forms';
 export class NewComponent implements OnInit {
 
     constructor(private httpService: MesasService, private router: Router, private route: ActivatedRoute
-        ,private toasterService: ToasterService
+        ,private notification: ToastyService
     ) {}
     mesa = {
         name:null,
@@ -25,8 +25,8 @@ export class NewComponent implements OnInit {
         u = JSON.parse(localStorage.getItem('user') || null);
         if(u.role !== 'gerente' && u.role !== 'admin')
         {
-            this.toasterService.pop('error','Sem permissão','Usuário sem acesso, contate o administrador');
-            this.router.navigate(['/dashboard']);
+            this.notification.error('Sem permissão, contate o administrador');
+            this.router.navigate(['/user/login']);
         }
         jQuery('#infoModal').show().addClass('show');
         setTimeout(() => {
@@ -45,11 +45,11 @@ export class NewComponent implements OnInit {
                 .then(() => {
                     this.httpService.eventEmitter.emit();
                     this.hideLoading();
-                    this.toasterService.pop('success', 'Sucesso', 'Mesa salva com sucesso');
+                    this.notification.success('Cliente salvo com sucesso');
                     this.close();
                 });
         }else{
-            this.toasterService.pop('error', 'Erro', 'Verifique se todos os campos foram preenchidos.');
+            this.notification.error('Verifique se todos os campos foram preenchidos.');
         }
 
     }

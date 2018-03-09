@@ -5,10 +5,8 @@ import { NgForOf } from '@angular/common';
 import { OrdersService } from '../services/orders.service';
 import { FormsModule } from '@angular/forms';
 
-import { ToastyService, ToastOptions, ToastyConfig } from "ng2-toasty";
-
-
 import * as jQuery from 'jquery';
+import {AppMessageService} from "../../app-message.service";
 @Component({
   templateUrl: 'orders.component.html'
 })
@@ -16,9 +14,7 @@ export class OrdersCancelComponent implements OnInit {
 
   constructor(private httpService: OrdersService,
               private router: Router,
-              private tosty: ToastyService,
-              private toastyOptions: ToastOptions,
-              private toastyConfig: ToastyConfig
+              private notification: AppMessageService
 ) {
       document.onkeydown = ((e) =>{
           if(e.keyCode == 113)
@@ -50,10 +46,10 @@ export class OrdersCancelComponent implements OnInit {
               this.hideModal();
               this.hideLoading();
               if(this.tamanho > 0) {
-                  this.message('Sucesso', 'Dados carregados com sucesso', 5000, 'success');
+                  this.notification.message('Sucesso', 'Dados carregados com sucesso', 'success');
               }else if(this.tamanho == 0)
               {
-                  this.message('Informação', 'Sem pedidos fechados com data de hoje', 5000, 'info');
+                  this.notification.message('Informação', 'Sem pedidos fechados com data de hoje', 'info');
               }
           });
 
@@ -106,30 +102,16 @@ export class OrdersCancelComponent implements OnInit {
                         this.tamanho = res.data.length;
                         this.hideModal();
                         this.hideLoading();
-                        this.message('Sucesso', 'Dados carregados com sucesso', 5000, 'success');
-
-                    });
+                        if(this.tamanho > 0) {
+                            this.notification.message('Sucesso', 'Dados carregados com sucesso', 'success');
+                        }else if(this.tamanho == 0)
+                        {
+                            this.notification.message('Informação', 'Sem pedidos fechados com data de hoje', 'info');
+                        }
+                });
             }else  {
-                this.message('Sucesso', 'Preencha inicio, fim e status para pesquisar.', 5000, 'success');
+                this.notification.message('Sucesso', 'Preencha inicio, fim e status para pesquisar.', 'success');
                 this.hideLoading();
             }
-    }
-
-    message(titulo:string,message:string,time:number,type:string)
-    {
-        this.toastyOptions = {
-            title:titulo,
-            msg:message,
-            timeout:time,
-        }
-
-        switch (type) {
-            case 'default': this.tosty.default(this.toastyOptions); break;
-            case 'info': this.tosty.info(this.toastyOptions); break;
-            case 'success': this.tosty.success(this.toastyOptions); break;
-            case 'wait': this.tosty.wait(this.toastyOptions); break;
-            case 'error': this.tosty.error(this.toastyOptions); break;
-            case 'warning': this.tosty.warning(this.toastyOptions); break;
-        }
     }
 }

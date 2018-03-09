@@ -143,6 +143,94 @@ body{
   border-color: #3ba05e;
 }
 
+/*loading*/
+#bifrostBarSpinner{
+  z-index: 9999999;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  cursor: wait;
+  display: none;
+}
+.bifrost-spinner-container{
+  position:fixed;
+  background:#fff;
+  opacity:.7;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  z-index:999;
+}
+.bifrost-spinner-loader{
+  margin:0 auto;
+  width:60px;
+  height:50px;
+  text-align:center;
+  font-size:10px;
+  position:absolute;
+  top:50%;
+  left:50%;
+  -webkit-transform:translateY(-50%) translateX(-50%);
+  z-index:1000;
+}
+.bifrost-spinner-loader > div{
+  height:100%;
+  width:8px;
+  display:inline-block;
+  float:left;
+  margin-left:2px;
+  -webkit-animation:a .8s infinite ease-in-out;animation:a .8s infinite ease-in-out;
+}
+.bifrost-spinner-loader .bifrost-spinner-bar1{
+  background-color:#bec923;
+}
+.bifrost-spinner-loader .bifrost-spinner-bar2{
+  background-color:#ed3694;
+  -webkit-animation-delay:-.7s;
+  animation-delay:-.7s;
+}
+.bifrost-spinner-loader .bifrost-spinner-bar3{
+  background-color:#416eb3;
+  -webkit-animation-delay:-.6s;
+  animation-delay:-.6s;
+}
+.bifrost-spinner-loader .bifrost-spinner-bar4{
+  background-color:#00b286;
+  -webkit-animation-delay:-.5s;
+  animation-delay:-.5s;
+}
+.bifrost-spinner-loader .bifrost-spinner-bar5{
+  background-color:#f4a82b;
+  -webkit-animation-delay:-.4s;
+  animation-delay:-.4s;
+}
+.bifrost-spinner-loader .bifrost-spinner-bar6{
+  background-color:#702784;
+  -webkit-animation-delay:-.3s;
+  animation-delay:-.3s;
+}
+@-webkit-keyframes a{
+  0%,40%,to{
+    -webkit-transform:scaleY(.05)
+  }
+  20%{
+    -webkit-transform:scaleY(1)
+  }
+}
+@keyframes a{
+  0%,40%,to{
+    transform:scaleY(.05);
+    -webkit-transform:scaleY(.05);
+  }
+  20%{
+    transform:scaleY(1);
+    -webkit-transform:scaleY(1)
+  }
+}
+
 .truncate{
   display: block;
   white-space: nowrap;

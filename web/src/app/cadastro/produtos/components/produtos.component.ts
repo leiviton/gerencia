@@ -1,5 +1,4 @@
 import { Component, ViewChild, OnInit,ViewContainerRef } from '@angular/core';
-import {ToasterService} from 'angular2-toaster';
 import { Router } from '@angular/router';
 import { NgForOf } from '@angular/common';
 import { ProdutosService } from '../services/produtos.service';
@@ -7,13 +6,15 @@ import { FormsModule } from '@angular/forms';
 
 
 import * as jQuery from 'jquery';
+import {AppMessageService} from "../../../app-message.service";
+
 @Component({
   templateUrl: 'produtos.component.html'
 })
 export class ProdutosComponent implements OnInit {
 
   constructor(private httpService: ProdutosService, private router: Router
-      ,private toasterService: ToasterService) {}
+      ,private notification: AppMessageService) {}
   cor = false;
   pesquisa:any = {
       inicio:null,

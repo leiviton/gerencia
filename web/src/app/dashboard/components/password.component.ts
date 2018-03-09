@@ -70,11 +70,11 @@ export class PasswordComponent{
         this.router.navigate(['/dashboard']);
     }
     hideLoading(){
-        jQuery(".container-loading").hide();
+        jQuery("#bifrostBarSpinner").hide();
     }
 
     showLoading(){
-        jQuery(".container-loading").show();
+        jQuery("#bifrostBarSpinner").show();
     }
 
 }

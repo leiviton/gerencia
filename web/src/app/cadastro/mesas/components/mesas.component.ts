@@ -5,15 +5,15 @@ import { NgForOf } from '@angular/common';
 import { MesasService } from '../services/mesas.service';
 import { FormsModule } from '@angular/forms';
 
-import {ToasterService} from 'angular2-toaster';
 
 import * as jQuery from 'jquery';
+import {AppMessageService} from "../../../app-message.service";
 @Component({
   templateUrl: 'mesas.component.html'
 })
 export class MesasComponent implements OnInit {
   constructor(private httpService: MesasService, private router: Router
-  ,private toasterService: ToasterService) {}
+  ,private notification: AppMessageService) {}
   cor = false;
   pesquisa:any = {
       inicio:null,
@@ -28,8 +28,8 @@ export class MesasComponent implements OnInit {
       u = JSON.parse(localStorage.getItem('user') || null);
       if(u.role !== 'gerente' && u.role !== 'admin')
       {
-          this.toasterService.pop('error','Sem permissão','Usuário sem acesso, contate o administrador');
-          this.router.navigate(['/dashboard']);
+          this.notification.message('Erro','Sem permissão, contate o administrador','error');
+          this.router.navigate(['/user/login']);
       }
       this.httpService.setAccessToken();
       this.httpService.eventEmitter

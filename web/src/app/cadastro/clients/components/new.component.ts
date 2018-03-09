@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {ToasterService} from 'angular2-toaster';
 import * as jQuery from 'jquery';
 
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgForOf } from '@angular/common';
 import { ClientsService } from '../services/clients.service';
 import { FormsModule } from '@angular/forms';
+import {AppMessageService} from "../../../app-message.service";
 
 @Component({
     templateUrl: 'new.component.html'
@@ -13,7 +13,7 @@ import { FormsModule } from '@angular/forms';
 export class NewComponent implements OnInit {
 
     constructor(private httpService: ClientsService, private router: Router, private route: ActivatedRoute
-        ,private toasterService: ToasterService
+        , private notification: AppMessageService
     ) {}
 
     client = {
@@ -51,11 +51,11 @@ export class NewComponent implements OnInit {
                 .then(() => {
                     this.httpService.eventEmitter.emit();
                     this.hideLoading();
-                    this.toasterService.pop('success', 'Sucesso', 'Cliente salvo com sucesso');
+                    this.notification.message('Sucesso', 'Cliente salvo com sucesso', 'success');
                     this.close();
                 });
         }else{
-            this.toasterService.pop('error', 'Erro', 'Verifique se todos os campos foram preenchidos.');
+            this.notification.message('Erro', 'Verifique se todos os campos foram preenchidos.', 'error');
         }
 
     }

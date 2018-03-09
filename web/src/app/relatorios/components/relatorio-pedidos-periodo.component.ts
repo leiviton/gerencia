@@ -74,4 +74,9 @@ export class RelatorioPedidosPeriodoComponent implements OnInit {
             window.print();
         }, 4000);
     }
+
+    gerarExcel()
+    {
+        window.open('data:application/vnd.ms-excel,' + jQuery('#relexc').html);
+    }
 }

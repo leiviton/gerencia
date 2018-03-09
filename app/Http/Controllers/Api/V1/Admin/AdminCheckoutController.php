@@ -11,6 +11,7 @@ namespace Pedidos\Http\Controllers\Api\V1\Admin;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\DB;
 use Pedidos\Http\Controllers\Controller;
 
 use Pedidos\Http\Requests\CheckoutRequest;
@@ -110,7 +111,13 @@ class AdminCheckoutController extends Controller
     public function reportOrders(Request $request)
     {
         $data = $request->get('data');
-        $o = $this->orderService->report($data);
+        $o = Array($this->orderService->report($data));
+
+        \Excel::create('rel', function ($excel) use ($o){
+            $excel->sheet('relatorio',function ($sheet) use ($o){
+               $sheet->fromArray($o);
+            });
+        })->download('xls');
         return response()->json($o);
     }
 

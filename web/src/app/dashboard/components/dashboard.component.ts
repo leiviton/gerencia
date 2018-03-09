@@ -11,10 +11,10 @@ export class DashboardComponent implements OnInit {
 
     constructor(private route: Router, private httpService: DashboardService) { }
     hideLoading(){
-        jQuery(".container-loading").hide();
+        jQuery("#bifrostBarSpinner").hide();
     }
     showLoading(){
-        jQuery(".container-loading").show();
+        jQuery("#bifrostBarSpinner").show();
     }
 
   data = '';

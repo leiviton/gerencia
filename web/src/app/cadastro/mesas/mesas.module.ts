@@ -27,7 +27,7 @@ import { NgxPhoneMaskModule } from 'ngx-phone-mask';
     NgxPhoneMaskModule
   ],
   declarations: [ MesasComponent, NewComponent, EditComponent ],
-  providers: [ MesasService ]
+  providers: [ MesasService]
 })
 export class MesasModule { }
 
