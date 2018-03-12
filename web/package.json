@@ -26,7 +26,6 @@
     "@angular/platform-browser-dynamic": "^4.2.4",
     "@angular/router": "^4.2.4",
     "@angular/upgrade": "4.3.4",
-    "angular4-notify": "^1.2.0",
     "chart.js": "2.6.0",
     "core-js": "^2.4.1",
     "cuppa-ng2-grid": "^1.0.5",

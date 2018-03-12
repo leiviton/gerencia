@@ -18,7 +18,6 @@
       "prefix": "app",
       "styles": [
         "scss/style.scss",
-        "../node_modules/angular2-toaster/toaster.css",
         "../node_modules/ng2-toasty/style-bootstrap.css",
         "../node_modules/primeng/resources/themes/bootstrap/theme.css",
         "../node_modules/primeng/resources/primeng.min.css"

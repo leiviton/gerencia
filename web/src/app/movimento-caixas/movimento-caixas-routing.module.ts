@@ -4,8 +4,6 @@ import { Routes,
 
 import { MovimentoCaixasComponent } from './components/movimento-caixas.component';
 
-import { PrinterComponent} from "./components/printer.component";
-
 import { EditComponent} from "./components/edit.component";
 
 import { NewComponent} from "./components/new.component";

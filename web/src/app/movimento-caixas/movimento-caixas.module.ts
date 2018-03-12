@@ -15,7 +15,6 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 
 import { CurrencyMaskModule } from "ng2-currency-mask";
 import { NgxPhoneMaskModule } from 'ngx-phone-mask';
-import {PrinterComponent} from "./components/printer.component";
 import { EditComponent} from "./components/edit.component";
 
 import { NewComponent} from "./components/new.component";
@@ -34,7 +33,7 @@ import { NewComponent} from "./components/new.component";
       CurrencyMaskModule,
       NgxPhoneMaskModule,
   ],
-  declarations: [ MovimentoCaixasComponent,PrinterComponent,EditComponent,NewComponent ],
+  declarations: [ MovimentoCaixasComponent,EditComponent,NewComponent ],
   providers: [ MovimentoCaixasService, BsModalService ]
 })
 export class MovimentoCaixasModule { }

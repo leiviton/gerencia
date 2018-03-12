@@ -22,6 +22,22 @@ export class DashboardComponent implements OnInit {
     deliverys:number = 0;
     cancelados:number = 0;
 
+    // barChart
+    public barChartOptions: any = {
+        scaleShowVerticalLines: false,
+        responsive: true
+    };
+    public barChartLabels: string[] = ['Janeiro', 'Fevereiro', 'Março'];
+    public barChartType = 'bar';
+    public barChartLegend = true;
+
+    public barChartData: any[] = [
+        {data: [65, 59, 80, 81, 56, 55, 40], label: 'Pedidos'},
+        {data: [65, 59, 80, 81, 56, 55, 40], label: 'Pedidos'},
+        {data: [65, 59, 80, 81, 56, 55, 40], label: 'Pedidos'}
+    ];
+
+
     ngOnInit(): void {
       this.showLoading();
       // generate random values for mainChart

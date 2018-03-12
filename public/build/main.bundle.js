@@ -45,8 +45,8 @@ var map = {
 	],
 	"./movimento-caixas/movimento-caixas.module": [
 		"../../../../../src/app/movimento-caixas/movimento-caixas.module.ts",
-		"movimento-caixas.module",
-		"common"
+		"common",
+		"movimento-caixas.module"
 	],
 	"./open-close-caixas/open-close-caixas.module": [
 		"../../../../../src/app/open-close-caixas/open-close-caixas.module.ts",
