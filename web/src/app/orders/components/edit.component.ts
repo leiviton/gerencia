@@ -7,8 +7,7 @@ import { NgForOf } from '@angular/common';
 import { OrdersService } from '../services/orders.service';
 import { FormsModule } from '@angular/forms';
 
-
-import {ToasterService} from 'angular2-toaster';
+import {AppMessageService} from "../../app-message.service";
 
 @Component({
     templateUrl: 'edit.component.html'
@@ -16,7 +15,7 @@ import {ToasterService} from 'angular2-toaster';
 export class EditComponent implements OnInit {
 
     constructor(private httpService: OrdersService, private router: Router, private route: ActivatedRoute
-        ,private toasterService: ToasterService)
+        ,private toasterService: AppMessageService)
     {
         document.onkeydown = ((e) =>{
             if(e.keyCode  == 120)
@@ -190,7 +189,7 @@ export class EditComponent implements OnInit {
                     this.mesa_id = res.data.mesa.data.id;
                     this.typeAnt = res.data.type;
                     this.hideLoading();
-                    this.toasterService.pop('success', 'Sucesso', 'Pedido ' + this.order.id + ' com sucesso!')
+                    this.toasterService.message('Sucesso','Pedido ' + this.order.id + ' com sucesso!', 'success')
                 });
         }else if(order.type_ant != 1 && order.type != 1) {
 
@@ -224,14 +223,14 @@ export class EditComponent implements OnInit {
                     this.typeAnt = res.data.type;
 
                     this.hideLoading();
-                    this.toasterService.pop('success', 'Sucesso', 'Pedido ' + this.order.id + ' com sucesso!')
+                    this.toasterService.message('Sucesso','Pedido ' + this.order.id + ' com sucesso!', 'success')
                 });
         }else if(order.type_ant != 1 && order.type == 1){
                 this.hideLoading();
-                this.toasterService.pop('error', 'Erro', 'Pedido de mesa não pode ser mudado pra delivery e/ou retirada');
+                this.toasterService.message('Erro','Pedido de mesa não pode ser mudado pra delivery e/ou retirada','error');
         }else if(order.type_ant == 1 && order.type != 1){
             this.hideLoading();
-            this.toasterService.pop('error', 'Erro', 'Pedido de mesa não pode ser mudado pra delivery e/ou retirada');
+            this.toasterService.message('Erro','Pedido de mesa não pode ser mudado pra delivery e/ou retirada','error');
         }
 
     }
@@ -248,12 +247,12 @@ export class EditComponent implements OnInit {
                 .then((res) => {
                     this.httpService.eventEmitter.emit();
                     this.hideLoading();
-                    this.toasterService.pop('success', 'Cancelado', 'Pedido: ' + res.data.id + ' canelado com sucesso');
+                    this.toasterService.message('Cancelado','Pedido: ' + res.data.id + ' canelado com sucesso', 'success')
                     this.close();
                 })
         }else{
             this.hideLoading();
-            this.toasterService.pop('error', 'Cancelado', 'Motivo do cancelamento não pode ser vazio e menor que 5 caracteres');
+            this.toasterService.message('Erro','Motivo do cancelamento não pode ser vazio e menor que 5 caracteres', 'error')
         }
     }
 
@@ -294,7 +293,7 @@ export class EditComponent implements OnInit {
                 });
         }else{
             this.hideLoading();
-            this.toasterService.pop('error','Erro','Produto não encontrado.');
+            this.toasterService.message('Erro','Produto não encontrado.','error');
         }
     }
 
@@ -314,7 +313,7 @@ export class EditComponent implements OnInit {
                     data['qtd'] = 1;
                     this.complement.push(res.data);
                 }
-                this.toasterService.pop('success','Sucesso','Adicionado complemento '+res.data.name);
+                this.toasterService.message('Sucesso','Adicionado complemento '+res.data.name,'success');
             });
     }
 
@@ -365,13 +364,13 @@ export class EditComponent implements OnInit {
                     }];
                     this.closeComplement();
                     this.hideLoading();
-                    this.toasterService.pop('success', 'Sucesso','Complementos salvos com sucesso!');
+                    this.toasterService.message('Sucesso','Complementos salvos com sucesso!','success');
                 });
         }
         else{
             this.closeComplement();
             this.hideLoading();
-            this.toasterService.pop('error', 'Erro','Adicionais não inseridos');
+            this.toasterService.message( 'Erro','Adicionais não inseridos','error');
         }
     }
 
@@ -412,7 +411,7 @@ export class EditComponent implements OnInit {
                 this.mesa_id = res.data.mesa.data.id;
                 this.historico = '';
                 this.idItem = 0;
-                this.toasterService.pop('success', 'Sucesso','Salvo com sucesso!');
+                this.toasterService.message( 'Sucesso','Salvo com sucesso!','success');
                 this.closeInformacao();
                 this.hideLoading();
             });
@@ -452,7 +451,7 @@ export class EditComponent implements OnInit {
                 this.mesa_id = res.data.mesa.data.id;
                 this.historico = '';
                 this.idItem = 0;
-                this.toasterService.pop('success', 'success','Removido com sucesso');
+                this.toasterService.message( 'Sucesso','Removido com sucesso','success');
                 this.hideLoading();
             });
     }
@@ -544,7 +543,7 @@ export class EditComponent implements OnInit {
     addItem(item)
     {
         this.httpService.addItem(item,this.qtd);
-        this.toasterService.pop('success', 'Sucesso', 'Item codigo '+item.id+' adicionado.');
+        this.toasterService.message('Sucesso', 'Item codigo '+item.id+' adicionado.','success');
     }
 
 
@@ -563,7 +562,7 @@ export class EditComponent implements OnInit {
             jQuery('#successModal').on('show.bs.modal').show().removeClass('show');
             this.router.navigate(['/orders/printer/'+ this.order.id+'/N']);
         }else{
-            this.toasterService.pop('error', 'Erro', 'Para imprimir é necessário ter adicionado novos itens.');
+            this.toasterService.message('Erro', 'Para imprimir é necessário ter adicionado novos itens.','error');
         }
     }
 
@@ -572,11 +571,11 @@ export class EditComponent implements OnInit {
         this.editar = !this.editar;
     }
     hideLoading(){
-        jQuery(".container-loading").hide();
+        jQuery("#bifrostBarSpinner").hide();
     }
 
     showLoading(){
-        jQuery(".container-loading").show();
+        jQuery("#bifrostBarSpinner").show();
     }
 
 }

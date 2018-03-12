@@ -6,7 +6,6 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { FormsModule} from '@angular/forms'
 
 import { MovimentoCaixasComponent } from './components/movimento-caixas.component';
-import { PaymentComponent } from "./components/payment.component";
 
 import { MovimentoCaixasRoutingModule } from './movimento-caixas-routing.module';
 import { TooltipModule } from 'ngx-bootstrap';
@@ -35,7 +34,7 @@ import { NewComponent} from "./components/new.component";
       CurrencyMaskModule,
       NgxPhoneMaskModule,
   ],
-  declarations: [ MovimentoCaixasComponent,PaymentComponent,PrinterComponent,EditComponent,NewComponent ],
+  declarations: [ MovimentoCaixasComponent,PrinterComponent,EditComponent,NewComponent ],
   providers: [ MovimentoCaixasService, BsModalService ]
 })
 export class MovimentoCaixasModule { }

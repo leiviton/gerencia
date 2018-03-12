@@ -8,15 +8,12 @@ import { RelatoriosService } from '../services/relatorios.service';
 import { FormsModule } from '@angular/forms';
 
 
-import {ToasterService} from 'angular2-toaster';
-
 @Component({
     templateUrl: 'relatorio-mov-caixa.component.html'
 })
 export class RelatorioMovCaixaComponent implements OnInit {
 
-    constructor(private httpService: RelatoriosService, private router: Router, private route: ActivatedRoute
-        ,private toasterService: ToasterService)
+    constructor(private httpService: RelatoriosService, private router: Router, private route: ActivatedRoute)
     {}
     movimentos = {
         data:[]

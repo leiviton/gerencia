@@ -6,9 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NgForOf } from '@angular/common';
 import { CaixasService } from '../services/caixas.service';
 import { FormsModule } from '@angular/forms';
-
-
-import {ToasterService} from 'angular2-toaster';
+import {AppMessageService} from "../../app-message.service";
 
 @Component({
     templateUrl: 'transferencia.component.html'
@@ -16,7 +14,7 @@ import {ToasterService} from 'angular2-toaster';
 export class TransferenciaComponent implements OnInit {
 
     constructor(private httpService: CaixasService, private router: Router, private route: ActivatedRoute
-        ,private toasterService: ToasterService)
+        ,private toasterService: AppMessageService)
     {
         document.onkeydown = ((e) =>{
 
@@ -68,20 +66,20 @@ export class TransferenciaComponent implements OnInit {
                         this.httpService.eventEmitter.emit();
                         if(res == 'fechado_origem')
                         {
-                            this.toasterService.pop('error', 'Erro', 'Caixa origem fechado');
+                            this.toasterService.message('Erro', 'Caixa origem fechado','error');
                         }else if (res == 'fechado_destino') {
-                            this.toasterService.pop('error', 'Erro', 'Caixa destino fechado');
+                            this.toasterService.message('Erro', 'Caixa destino fechado','error');
                         }else{
-                            this.toasterService.pop('success', 'Sucesso', 'Transferencia salva com sucesso');
+                            this.toasterService.message('Sucesso', 'Transferencia salva com sucesso','success');
                             this.hideLoading();
                             this.close();
                         }
                     });
             } else {
-                this.toasterService.pop('error', 'Erro', 'Verifique se todos os campos foram preenchidos.');
+                this.toasterService.message('Erro', 'Verifique se todos os campos foram preenchidos.','error');
             }
         } else {
-            this.toasterService.pop('error', 'Erro', 'Valor não pode ser menor ou igual a zero.');
+            this.toasterService.message('Erro', 'Valor não pode ser menor ou igual a zero.','error');
         }
 
     }
@@ -93,11 +91,11 @@ export class TransferenciaComponent implements OnInit {
 
 
     hideLoading(){
-        jQuery(".container-loading").hide();
+        jQuery("#bifrostBarSpinner").hide();
     }
 
     showLoading(){
-        jQuery(".container-loading").show();
+        jQuery("#bifrostBarSpinner").show();
     }
 
 }

@@ -6,14 +6,15 @@ import { NgForOf } from '@angular/common';
 import { OrdersService } from '../services/orders.service';
 import { FormsModule } from '@angular/forms';
 
-import {ToasterService} from 'angular2-toaster';
+import {AppMessageService} from "../../app-message.service";
 
 @Component({
     templateUrl: 'new.component.html'
 })
 export class NewComponent implements OnInit {
 
-    constructor(private httpService: OrdersService, private router: Router, private route: ActivatedRoute,private toasterService: ToasterService) {
+    constructor(private httpService: OrdersService, private router: Router,
+                private route: ActivatedRoute,private toasterService: AppMessageService) {
         document.onkeydown = ((e) =>{
             if(e.keyCode  == 120)
             {
@@ -132,7 +133,7 @@ export class NewComponent implements OnInit {
                         this.client.address.bairro = null;
                         this.client.address.city_id = 0;
                         this.novo = true;
-                        this.toasterService.pop('info', 'Nenhum cliente encontrado, cadastre o cliente');
+                        this.toasterService.message('Informação', 'Nenhum cliente encontrado, cadastre o cliente','info');
                     }else if (res.data.length == 1){
                         if(this.client.user){
                             this.client.id = res.data[0].id;
@@ -205,7 +206,7 @@ export class NewComponent implements OnInit {
                 this.hideLoading();
                 if(res.data.length == 0 || res.data[0].id == 58)
                 {
-                    this.toasterService.pop('error', 'Atenção', 'Item não localizado');
+                    this.toasterService.message('Erro', 'Item não localizado','error');
 
                 }else{
                     if(res.data.length > 1){
@@ -230,7 +231,7 @@ export class NewComponent implements OnInit {
         this.items = this.httpService.get();
         this.total = this.httpService.get().total;
         jQuery('#pesquisa').hide();
-        this.toasterService.pop('success', 'Sucesso', 'Item '+item.name+' adicionado.');
+        this.toasterService.message('Sucesso', 'Item '+item.name+' adicionado.','success');
     }
 
     saveObserve(o)
@@ -238,7 +239,7 @@ export class NewComponent implements OnInit {
         this.httpService.obs(o,this.idItem);
         this.items = this.httpService.get();
         jQuery('#informacao').hide();
-        this.toasterService.pop('success', 'Sucesso', 'Observção salva');
+        this.toasterService.message('Sucesso', 'Observção salva','success');
     }
 
     removeItem(i)
@@ -254,7 +255,7 @@ export class NewComponent implements OnInit {
             "created_at":"",
             "updated_at":""
         }];
-        this.toasterService.pop('info', 'Informação', 'Item removido.');
+        this.toasterService.message('Informação', 'Item removido.','info');
     }
 
     save()
@@ -268,7 +269,7 @@ export class NewComponent implements OnInit {
 
         if(this.tipo != 1 && this.novo == true)
         {
-            this.toasterService.pop('error', 'É necessário cadastrar um cliente ou selecionar');
+            this.toasterService.message('Erro', 'É necessário cadastrar um cliente ou selecionar','error');
         }else {
             if (this.mesa_id != null) {
                 let troco = null;
@@ -308,15 +309,15 @@ export class NewComponent implements OnInit {
                             this.httpService.clear();
                             this.httpService.eventEmitter.emit();
                             this.hideLoading();
-                            this.toasterService.pop('success', 'Sucesso', 'Pedido ' + res.data.id + ' salvo com sucesso');
+                            this.toasterService.message('Sucesso', 'Pedido ' + res.data.id + ' salvo com sucesso','success');
                             this.close(res.data.id);
                         });
                 } else {
                     this.hideLoading();
-                    this.toasterService.pop('error', 'Erro', 'É necessário adicionar ao menos um produto');
+                    this.toasterService.message('Erro', 'É necessário adicionar ao menos um produto','error');
                 }
             } else {
-                this.toasterService.pop('error', 'Erro', 'É necessário escolher uma mesa');
+                this.toasterService.message('Erro', 'É necessário escolher uma mesa','error');
             }
         }
     }
@@ -325,13 +326,13 @@ export class NewComponent implements OnInit {
     {
         if(this.client.name == null || this.client.phone == null)
         {
-            this.toasterService.pop('error', 'Verifique nome e telefone do cliente');
+            this.toasterService.message('Erro', 'Verifique nome e telefone do cliente','error');
         }else if(this.client.address.address == null || this.client.address.bairro == null || this.client.address.numero == null)
         {
-            this.toasterService.pop('error', 'Campos do endereço vazio, verifique');
+            this.toasterService.message('Erro', 'Campos do endereço vazio, verifique','error');
         }else if(this.client.address.city_id == 0)
         {
-            this.toasterService.pop('error', 'Selecione uma cidade');
+            this.toasterService.message('Erro', 'Selecione uma cidade','error');
         }else{
             this.client.id = null;
             this.httpService.builder()
@@ -347,7 +348,7 @@ export class NewComponent implements OnInit {
                     this.client.address.bairro = res.data.addressClient.data.bairro;
                     this.client.address.city_id = res.data.addressClient.data.city.data.id;
                     this.novo = false;
-                    this.toasterService.pop('success','Cliente '+ this.client.name+' cadastrado com sucesso, codigo:' + this.client.id);
+                    this.toasterService.message('Sucesso','Cliente '+ this.client.name+' cadastrado com sucesso, codigo:' + this.client.id,'success');
                 })
         }
     }
@@ -401,7 +402,7 @@ export class NewComponent implements OnInit {
                 }else{
                     this.complement.push(res.data);
                 }
-                this.toasterService.pop('success','Sucesso','Adicionado complemento '+res.data.name);
+                this.toasterService.message('Sucesso','Adicionado complemento '+res.data.name,'success');
             });
     }
 
@@ -423,7 +424,7 @@ export class NewComponent implements OnInit {
             this.closeComplement();
         }
         else{
-            this.toasterService.pop('error', 'Erro','Adicionais não inseridos');
+            this.toasterService.message('Erro','Adicionais não inseridos','error');
         }
     }
     closeComplement()
@@ -448,10 +449,10 @@ export class NewComponent implements OnInit {
     }
 
     hideLoading(){
-        jQuery(".container-loading").hide();
+        jQuery("#bifrostBarSpinner").hide();
     }
     showLoading(){
-        jQuery(".container-loading").show();
+        jQuery("#bifrostBarSpinner").show();
     }
 }
 

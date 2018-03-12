@@ -45,449 +45,11 @@ var DashboardComponent = (function () {
         this.fechado = 0;
         this.deliverys = 0;
         this.cancelados = 0;
-        this.brandPrimary = '#20a8d8';
-        this.brandSuccess = '#4dbd74';
-        this.brandInfo = '#63c2de';
-        this.brandWarning = '#f8cb00';
-        this.brandDanger = '#f86c6b';
-        // dropdown buttons
-        this.status = { isopen: false };
-        // lineChart1
-        this.lineChart1Data = [
-            {
-                data: [65, 59, 84, 84, 51, 55, 40],
-                label: 'Series A'
-            }
-        ];
-        this.lineChart1Labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-        this.lineChart1Options = {
-            maintainAspectRatio: false,
-            scales: {
-                xAxes: [{
-                        gridLines: {
-                            color: 'transparent',
-                            zeroLineColor: 'transparent'
-                        },
-                        ticks: {
-                            fontSize: 2,
-                            fontColor: 'transparent',
-                        }
-                    }],
-                yAxes: [{
-                        display: false,
-                        ticks: {
-                            display: false,
-                            min: 40 - 5,
-                            max: 84 + 5,
-                        }
-                    }],
-            },
-            elements: {
-                line: {
-                    borderWidth: 1
-                },
-                point: {
-                    radius: 4,
-                    hitRadius: 10,
-                    hoverRadius: 4,
-                },
-            },
-            legend: {
-                display: false
-            }
-        };
-        this.lineChart1Colours = [
-            {
-                backgroundColor: this.brandPrimary,
-                borderColor: 'rgba(255,255,255,.55)'
-            }
-        ];
-        this.lineChart1Legend = false;
-        this.lineChart1Type = 'line';
-        // lineChart2
-        this.lineChart2Data = [
-            {
-                data: [1, 18, 9, 17, 34, 22, 11],
-                label: 'Series A'
-            }
-        ];
-        this.lineChart2Labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-        this.lineChart2Options = {
-            maintainAspectRatio: false,
-            scales: {
-                xAxes: [{
-                        gridLines: {
-                            color: 'transparent',
-                            zeroLineColor: 'transparent'
-                        },
-                        ticks: {
-                            fontSize: 2,
-                            fontColor: 'transparent',
-                        }
-                    }],
-                yAxes: [{
-                        display: false,
-                        ticks: {
-                            display: false,
-                            min: 1 - 5,
-                            max: 34 + 5,
-                        }
-                    }],
-            },
-            elements: {
-                line: {
-                    tension: 0.00001,
-                    borderWidth: 1
-                },
-                point: {
-                    radius: 4,
-                    hitRadius: 10,
-                    hoverRadius: 4,
-                },
-            },
-            legend: {
-                display: false
-            }
-        };
-        this.lineChart2Colours = [
-            {
-                backgroundColor: this.brandInfo,
-                borderColor: 'rgba(255,255,255,.55)'
-            }
-        ];
-        this.lineChart2Legend = false;
-        this.lineChart2Type = 'line';
-        // lineChart3
-        this.lineChart3Data = [
-            {
-                data: [78, 81, 80, 45, 34, 12, 40],
-                label: 'Series A'
-            }
-        ];
-        this.lineChart3Labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-        this.lineChart3Options = {
-            maintainAspectRatio: false,
-            scales: {
-                xAxes: [{
-                        display: false
-                    }],
-                yAxes: [{
-                        display: false
-                    }]
-            },
-            elements: {
-                line: {
-                    borderWidth: 2
-                },
-                point: {
-                    radius: 0,
-                    hitRadius: 10,
-                    hoverRadius: 4,
-                },
-            },
-            legend: {
-                display: false
-            }
-        };
-        this.lineChart3Colours = [
-            {
-                backgroundColor: 'rgba(255,255,255,.2)',
-                borderColor: 'rgba(255,255,255,.55)',
-            }
-        ];
-        this.lineChart3Legend = false;
-        this.lineChart3Type = 'line';
-        // barChart1
-        this.barChart1Data = [
-            {
-                data: [78, 81, 80, 45, 34, 12, 40, 78, 81, 80, 45, 34, 12, 40, 12, 40],
-                label: 'Series A'
-            }
-        ];
-        this.barChart1Labels = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16'];
-        this.barChart1Options = {
-            maintainAspectRatio: false,
-            scales: {
-                xAxes: [{
-                        display: false,
-                        barPercentage: 0.6,
-                    }],
-                yAxes: [{
-                        display: false
-                    }]
-            },
-            legend: {
-                display: false
-            }
-        };
-        this.barChart1Colours = [
-            {
-                backgroundColor: 'rgba(255,255,255,.3)',
-                borderWidth: 0
-            }
-        ];
-        this.barChart1Legend = false;
-        this.barChart1Type = 'bar';
-        this.mainChartElements = 27;
-        this.mainChartData1 = [];
-        this.mainChartData2 = [];
-        this.mainChartData3 = [];
-        this.mainChartData = [
-            {
-                data: this.mainChartData1,
-                label: 'Current'
-            },
-            {
-                data: this.mainChartData2,
-                label: 'Previous'
-            },
-            {
-                data: this.mainChartData3,
-                label: 'BEP'
-            }
-        ];
-        /* tslint:disable:max-line-length */
-        this.mainChartLabels = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday', 'Thursday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-        /* tslint:enable:max-line-length */
-        this.mainChartOptions = {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                xAxes: [{
-                        gridLines: {
-                            drawOnChartArea: false,
-                        },
-                        ticks: {
-                            callback: function (value) {
-                                return value.charAt(0);
-                            }
-                        }
-                    }],
-                yAxes: [{
-                        ticks: {
-                            beginAtZero: true,
-                            maxTicksLimit: 5,
-                            stepSize: Math.ceil(250 / 5),
-                            max: 250
-                        }
-                    }]
-            },
-            elements: {
-                line: {
-                    borderWidth: 2
-                },
-                point: {
-                    radius: 0,
-                    hitRadius: 10,
-                    hoverRadius: 4,
-                    hoverBorderWidth: 3,
-                }
-            },
-            legend: {
-                display: false
-            }
-        };
-        this.mainChartColours = [
-            {
-                backgroundColor: this.convertHex(this.brandInfo, 10),
-                borderColor: this.brandInfo,
-                pointHoverBackgroundColor: '#fff'
-            },
-            {
-                backgroundColor: 'transparent',
-                borderColor: this.brandSuccess,
-                pointHoverBackgroundColor: '#fff'
-            },
-            {
-                backgroundColor: 'transparent',
-                borderColor: this.brandDanger,
-                pointHoverBackgroundColor: '#fff',
-                borderWidth: 1,
-                borderDash: [8, 5]
-            }
-        ];
-        this.mainChartLegend = false;
-        this.mainChartType = 'line';
-        // social box charts
-        this.socialChartData1 = [
-            {
-                data: [65, 59, 84, 84, 51, 55, 40],
-                label: 'Facebook'
-            }
-        ];
-        this.socialChartData2 = [
-            {
-                data: [1, 13, 9, 17, 34, 41, 38],
-                label: 'Twitter'
-            }
-        ];
-        this.socialChartData3 = [
-            {
-                data: [78, 81, 80, 45, 34, 12, 40],
-                label: 'LinkedIn'
-            }
-        ];
-        this.socialChartData4 = [
-            {
-                data: [35, 23, 56, 22, 97, 23, 64],
-                label: 'Google+'
-            }
-        ];
-        this.socialChartLabels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-        this.socialChartOptions = {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                xAxes: [{
-                        display: false,
-                    }],
-                yAxes: [{
-                        display: false,
-                    }]
-            },
-            elements: {
-                line: {
-                    borderWidth: 2
-                },
-                point: {
-                    radius: 0,
-                    hitRadius: 10,
-                    hoverRadius: 4,
-                    hoverBorderWidth: 3,
-                }
-            },
-            legend: {
-                display: false
-            }
-        };
-        this.socialChartColours = [
-            {
-                backgroundColor: 'rgba(255,255,255,.1)',
-                borderColor: 'rgba(255,255,255,.55)',
-                pointHoverBackgroundColor: '#fff'
-            }
-        ];
-        this.socialChartLegend = false;
-        this.socialChartType = 'line';
-        // sparkline charts
-        this.sparklineChartData1 = [
-            {
-                data: [35, 23, 56, 22, 97, 23, 64],
-                label: 'Clients'
-            }
-        ];
-        this.sparklineChartData2 = [
-            {
-                data: [65, 59, 84, 84, 51, 55, 40],
-                label: 'Clients'
-            }
-        ];
-        this.sparklineChartLabels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-        this.sparklineChartOptions = {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                xAxes: [{
-                        display: false,
-                    }],
-                yAxes: [{
-                        display: false,
-                    }]
-            },
-            elements: {
-                line: {
-                    borderWidth: 2
-                },
-                point: {
-                    radius: 0,
-                    hitRadius: 10,
-                    hoverRadius: 4,
-                    hoverBorderWidth: 3,
-                }
-            },
-            legend: {
-                display: false
-            }
-        };
-        this.sparklineChartDefault = [
-            {
-                backgroundColor: 'transparent',
-                borderColor: '#d1d4d7',
-            }
-        ];
-        this.sparklineChartPrimary = [
-            {
-                backgroundColor: 'transparent',
-                borderColor: this.brandPrimary,
-            }
-        ];
-        this.sparklineChartInfo = [
-            {
-                backgroundColor: 'transparent',
-                borderColor: this.brandInfo,
-            }
-        ];
-        this.sparklineChartDanger = [
-            {
-                backgroundColor: 'transparent',
-                borderColor: this.brandDanger,
-            }
-        ];
-        this.sparklineChartWarning = [
-            {
-                backgroundColor: 'transparent',
-                borderColor: this.brandWarning,
-            }
-        ];
-        this.sparklineChartSuccess = [
-            {
-                backgroundColor: 'transparent',
-                borderColor: this.brandSuccess,
-            }
-        ];
-        this.sparklineChartLegend = false;
-        this.sparklineChartType = 'line';
     }
-    DashboardComponent.prototype.hideLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_2_jquery__(".container-loading").hide();
-    };
-    DashboardComponent.prototype.showLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_2_jquery__(".container-loading").show();
-    };
-    DashboardComponent.prototype.toggleDropdown = function ($event) {
-        $event.preventDefault();
-        $event.stopPropagation();
-        this.status.isopen = !this.status.isopen;
-    };
-    // convert Hex to RGBA
-    DashboardComponent.prototype.convertHex = function (hex, opacity) {
-        hex = hex.replace('#', '');
-        var r = parseInt(hex.substring(0, 2), 16);
-        var g = parseInt(hex.substring(2, 4), 16);
-        var b = parseInt(hex.substring(4, 6), 16);
-        var rgba = 'rgba(' + r + ', ' + g + ', ' + b + ', ' + opacity / 100 + ')';
-        return rgba;
-    };
-    // events
-    DashboardComponent.prototype.chartClicked = function (e) {
-        console.log(e);
-    };
-    DashboardComponent.prototype.chartHovered = function (e) {
-        console.log(e);
-    };
-    // mainChart
-    DashboardComponent.prototype.random = function (min, max) {
-        return Math.floor(Math.random() * (max - min + 1) + min);
-    };
     DashboardComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.showLoading();
         // generate random values for mainChart
-        for (var i = 0; i <= this.mainChartElements; i++) {
-            this.mainChartData1.push(this.random(50, 200));
-            this.mainChartData2.push(this.random(80, 100));
-            this.mainChartData3.push(65);
-        }
         this.httpService.setAccessToken();
         this.httpService.builder()
             .list({}, 'mesas')
@@ -521,7 +83,13 @@ var DashboardComponent = (function () {
         });
         setTimeout(function () {
             _this.hideLoading();
-        }, 2000);
+        }, 3000);
+    };
+    DashboardComponent.prototype.hideLoading = function () {
+        __WEBPACK_IMPORTED_MODULE_2_jquery__("#bifrostBarSpinner").hide();
+    };
+    DashboardComponent.prototype.showLoading = function () {
+        __WEBPACK_IMPORTED_MODULE_2_jquery__("#bifrostBarSpinner").show();
     };
     DashboardComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
@@ -552,11 +120,11 @@ module.exports = "<div tabindex=\"-1\" class=\"modal fade\" id=\"infoModal\" rol
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_dashboard_service__ = __webpack_require__("../../../../../src/app/dashboard/services/dashboard.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angular2_toaster__ = __webpack_require__("../../../../angular2-toaster/angular2-toaster.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_jquery__ = __webpack_require__("../../../../jquery/dist/jquery.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_jquery__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__environments_environment__ = __webpack_require__("../../../../../src/environments/environment.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__user_services_auth_service__ = __webpack_require__("../../../../../src/app/user/services/auth.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jquery__ = __webpack_require__("../../../../jquery/dist/jquery.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_jquery__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__environments_environment__ = __webpack_require__("../../../../../src/environments/environment.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__user_services_auth_service__ = __webpack_require__("../../../../../src/app/user/services/auth.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_message_service__ = __webpack_require__("../../../../../src/app/app-message.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -591,7 +159,7 @@ var PasswordComponent = (function () {
         u = JSON.parse(localStorage.getItem('user') || null);
         this.id = u.id;
         this.showLoading();
-        __WEBPACK_IMPORTED_MODULE_4_jquery__('#infoModal').on('show.bs.modal').show().addClass('show');
+        __WEBPACK_IMPORTED_MODULE_3_jquery__('#infoModal').on('show.bs.modal').show().addClass('show');
         setTimeout(function () {
             _this.hideLoading();
         }, 300);
@@ -603,12 +171,12 @@ var PasswordComponent = (function () {
             this.authService.builder('password').update(this.id, this.user)
                 .then(function () {
                 _this.hideLoading();
-                _this.toast.pop('success', 'Salvo', 'Nova senha definida com sucesso');
+                _this.toast.message('Sucesso', 'Nova senha definida com sucesso', 'success');
                 _this.router.navigate(['dashboard']);
             });
         }
         else {
-            this.toast.pop('error', 'Error', 'Não foi possivel salvar');
+            this.toast.message('Erro', 'Não foi possivel salvar', 'error');
         }
     };
     PasswordComponent.prototype.valid = function () {
@@ -616,8 +184,8 @@ var PasswordComponent = (function () {
         var u = JSON.parse(localStorage.getItem('user') || null);
         var data = {
             grant_type: 'password',
-            client_id: __WEBPACK_IMPORTED_MODULE_5__environments_environment__["a" /* environment */].client_id,
-            client_secret: __WEBPACK_IMPORTED_MODULE_5__environments_environment__["a" /* environment */].client_secret,
+            client_id: __WEBPACK_IMPORTED_MODULE_4__environments_environment__["a" /* environment */].client_id,
+            client_secret: __WEBPACK_IMPORTED_MODULE_4__environments_environment__["a" /* environment */].client_secret,
             username: u.email,
             password: this.password_at,
             scope: ''
@@ -626,24 +194,24 @@ var PasswordComponent = (function () {
             _this.validar = true;
         }).catch(function () {
             _this.validar = false;
-            _this.toast.pop('error', 'Error', 'Senha invalida');
+            _this.toast.message('Erro', 'Senha incorreta', 'error');
         });
     };
     PasswordComponent.prototype.close = function () {
-        __WEBPACK_IMPORTED_MODULE_4_jquery__('#successModal').hide();
+        __WEBPACK_IMPORTED_MODULE_3_jquery__('#successModal').hide();
         this.router.navigate(['/dashboard']);
     };
     PasswordComponent.prototype.hideLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_4_jquery__(".container-loading").hide();
+        __WEBPACK_IMPORTED_MODULE_3_jquery__("#bifrostBarSpinner").hide();
     };
     PasswordComponent.prototype.showLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_4_jquery__(".container-loading").show();
+        __WEBPACK_IMPORTED_MODULE_3_jquery__("#bifrostBarSpinner").show();
     };
     PasswordComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             template: __webpack_require__("../../../../../src/app/dashboard/components/password.component.html")
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_dashboard_service__["a" /* DashboardService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_dashboard_service__["a" /* DashboardService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_6__user_services_auth_service__["a" /* AuthService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__user_services_auth_service__["a" /* AuthService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3_angular2_toaster__["b" /* ToasterService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_angular2_toaster__["b" /* ToasterService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */]) === "function" && _d || Object])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__services_dashboard_service__["a" /* DashboardService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_dashboard_service__["a" /* DashboardService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_5__user_services_auth_service__["a" /* AuthService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__user_services_auth_service__["a" /* AuthService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_6__app_message_service__["a" /* AppMessageService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__app_message_service__["a" /* AppMessageService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */]) === "function" && _d || Object])
     ], PasswordComponent);
     return PasswordComponent;
     var _a, _b, _c, _d;

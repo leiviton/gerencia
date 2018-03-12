@@ -17,7 +17,7 @@ module.exports = "<div tabindex=\"-1\" class=\"modal fade modal_novo\" id=\"succ
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_jquery__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_orders_service__ = __webpack_require__("../../../../../src/app/close/services/orders.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angular2_toaster__ = __webpack_require__("../../../../angular2-toaster/angular2-toaster.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_message_service__ = __webpack_require__("../../../../../src/app/app-message.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -77,9 +77,6 @@ var EditComponent = (function () {
         this.editar = true;
         this.imprimir = false;
         document.onkeydown = (function (e) {
-            if (e.keyCode == 120) {
-                _this.update();
-            }
             if (e.keyCode == 27) {
                 _this.close();
             }
@@ -134,63 +131,6 @@ var EditComponent = (function () {
         });
         this.httpService.eventEmitter.emit();
     };
-    EditComponent.prototype.update = function () {
-        var _this = this;
-        this.showLoading();
-        var order = {
-            'status': this.order.status,
-            'mesa_id': this.order.mesa.data.id
-        };
-        this.httpService.builder('order')
-            .update(this.order.id, order)
-            .then(function (res) {
-            _this.httpService.eventEmitter.emit();
-            _this.order = res.data;
-            _this.client.id = res.data.client.data.id;
-            _this.client.name = res.data.client.data.name;
-            _this.client.phone = res.data.client.data.phone;
-            if (res.data.client.data.user) {
-                _this.client.email = res.data.client.data.user.data.email;
-            }
-            else {
-                _this.client.email = res.data.client.data.user.data.email;
-            }
-            _this.client.address.address = res.data.client.data.addressClient.data.address;
-            _this.client.address.numero = res.data.client.data.addressClient.data.numero;
-            _this.client.address.bairro = res.data.client.data.addressClient.data.bairro;
-            _this.client.address.city_id = res.data.client.data.addressClient.data.city.data.id;
-            _this.products = res.data.items;
-            _this.mesa = res.data.mesa.data.name;
-            _this.hideLoading();
-            _this.toasterService.pop('success', 'Sucesso', 'Pedido ' + _this.order.id + ' com sucesso!');
-        });
-    };
-    EditComponent.prototype.buscar = function () {
-        var _this = this;
-        this.showLoading();
-        this.httpService.setAccessToken();
-        this.httpService.builder('search')
-            .search(this.pesquisa.value)
-            .then(function (res) {
-            _this.pesquisa.value = null;
-            _this.result = res.data;
-            _this.hideLoading();
-            _this.addItem(_this.result[0]);
-            var pedido = {
-                items: _this.httpService.get().items,
-                order_id: _this.order.id
-            };
-            _this.httpService.builder()
-                .insert(pedido, 'addItem')
-                .then(function (res) {
-                _this.httpService.eventEmitter.emit();
-                _this.httpService.clear();
-                _this.order = res.data;
-                _this.products = res.data.items;
-                _this.imprimir = true;
-            });
-        });
-    };
     EditComponent.prototype.openOrder = function () {
         var _this = this;
         var type_payment;
@@ -207,7 +147,7 @@ var EditComponent = (function () {
             }
         }
         if (type_payment == 1 && (new Date(data_payment).toDateString() < new Date(di).toDateString())) {
-            this.toasterService.pop('error', 'Erro', 'Existem pagamentos em dinheiro, caixa da data está fechado.');
+            this.toasterService.message('Erro', 'Existem pagamentos em dinheiro, caixa da data está fechado.', 'error');
         }
         else {
             this.showLoading();
@@ -218,14 +158,10 @@ var EditComponent = (function () {
                 .insert(data, 'order/open')
                 .then(function (res) {
                 _this.hideLoading();
-                _this.toasterService.pop('success', 'Sucesso', 'Pedido ' + res.data.id + ' reaberto.');
+                _this.toasterService.message('Sucesso', 'Pedido ' + res.data.id + ' reaberto.', 'success');
                 _this.router.navigate(['/orders/payment/' + res.data.id]);
             });
         }
-    };
-    EditComponent.prototype.addItem = function (item) {
-        this.httpService.addItem(item, this.qtd);
-        this.toasterService.pop('success', 'Sucesso', 'Item codigo ' + item.id + ' adicionado.');
     };
     EditComponent.prototype.close = function () {
         __WEBPACK_IMPORTED_MODULE_1_jquery__('#successModal').on('show.bs.modal').show().removeClass('show');
@@ -239,16 +175,16 @@ var EditComponent = (function () {
         this.editar = !this.editar;
     };
     EditComponent.prototype.hideLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_1_jquery__(".container-loading").hide();
+        __WEBPACK_IMPORTED_MODULE_1_jquery__("#bifrostBarSpinner").hide();
     };
     EditComponent.prototype.showLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_1_jquery__(".container-loading").show();
+        __WEBPACK_IMPORTED_MODULE_1_jquery__("#bifrostBarSpinner").show();
     };
     EditComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             template: __webpack_require__("../../../../../src/app/close/components/edit.component.html")
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__services_orders_service__["a" /* OrdersService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_orders_service__["a" /* OrdersService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4_angular2_toaster__["b" /* ToasterService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4_angular2_toaster__["b" /* ToasterService */]) === "function" && _d || Object])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__services_orders_service__["a" /* OrdersService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_orders_service__["a" /* OrdersService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__app_message_service__["a" /* AppMessageService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__app_message_service__["a" /* AppMessageService */]) === "function" && _d || Object])
     ], EditComponent);
     return EditComponent;
     var _a, _b, _c, _d;
@@ -275,7 +211,7 @@ module.exports = "<div class=\"animated fadeIn\">\n    <div class=\"row\">\n    
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_orders_service__ = __webpack_require__("../../../../../src/app/close/services/orders.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jquery__ = __webpack_require__("../../../../jquery/dist/jquery.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_jquery__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ng2_toasty__ = __webpack_require__("../../../../ng2-toasty/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_message_service__ = __webpack_require__("../../../../../src/app/app-message.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -291,13 +227,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var OrdersCloseComponent = (function () {
-    function OrdersCloseComponent(httpService, router, tosty, toastyOptions, toastyConfig) {
+    function OrdersCloseComponent(httpService, router, notification) {
         var _this = this;
         this.httpService = httpService;
         this.router = router;
-        this.tosty = tosty;
-        this.toastyOptions = toastyOptions;
-        this.toastyConfig = toastyConfig;
+        this.notification = notification;
         this.cor = false;
         this.orders = {
             data: []
@@ -318,7 +252,6 @@ var OrdersCloseComponent = (function () {
         this.types_payments = {
             data: []
         };
-        this.toastyConfig.position = 'top-right';
         document.onkeydown = (function (e) {
             if (e.keyCode == 113) {
                 return _this.showModal('#search');
@@ -335,10 +268,10 @@ var OrdersCloseComponent = (function () {
             _this.tamanho = res.data.length;
             _this.hideLoading();
             if (_this.tamanho > 0) {
-                _this.message('Sucesso', 'Dados carregados com sucesso', 'success');
+                _this.notification.message('Sucesso', 'Dados carregados com sucesso', 'success');
             }
             else if (_this.tamanho == 0) {
-                _this.message('Informação', 'Sem pedidos fechados com data de hoje', 'info');
+                _this.notification.message('Informação', 'Sem pedidos fechados com data de hoje', 'info');
             }
         });
         this.en = {
@@ -380,18 +313,6 @@ var OrdersCloseComponent = (function () {
     OrdersCloseComponent.prototype.new = function () {
         return this.router.navigate(['/orders/new']);
     };
-    OrdersCloseComponent.prototype.hideLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_3_jquery__(".container-loading").hide();
-    };
-    OrdersCloseComponent.prototype.showLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_3_jquery__(".container-loading").show();
-    };
-    OrdersCloseComponent.prototype.showModal = function (id) {
-        __WEBPACK_IMPORTED_MODULE_3_jquery__(id).show().addClass('show');
-    };
-    OrdersCloseComponent.prototype.hideModal = function (id) {
-        __WEBPACK_IMPORTED_MODULE_3_jquery__(id).hide();
-    };
     OrdersCloseComponent.prototype.pesquisar = function () {
         var _this = this;
         this.showLoading();
@@ -411,15 +332,15 @@ var OrdersCloseComponent = (function () {
                 _this.hideModal('#search');
                 _this.hideLoading();
                 if (_this.tamanho > 0) {
-                    _this.message('Sucesso', 'Dados carregados com sucesso', 'success');
+                    _this.notification.message('Sucesso', 'Dados carregados com sucesso', 'success');
                 }
                 else if (_this.tamanho == 0) {
-                    _this.message('Informação', 'Sem pedidos fechados com data a data selecionada', 'info');
+                    _this.notification.message('Informação', 'Sem pedidos fechados com data a data selecionada', 'info');
                 }
             });
         }
         else {
-            this.message('Erro', 'Preencha inicio, fim e status para pesquisar.', 'error');
+            this.notification.message('Erro', 'Preencha inicio, fim e status para pesquisar.', 'error');
             this.hideLoading();
         }
     };
@@ -445,55 +366,38 @@ var OrdersCloseComponent = (function () {
                 _this.hideModal('#rel');
                 _this.hideLoading();
                 if (res.length > 0) {
-                    _this.message('Sucesso', 'Relatorio gerado com sucesso', 'success');
+                    _this.notification.message('Sucesso', 'Relatorio gerado com sucesso', 'success');
                 }
                 else if (res.length == 0) {
-                    _this.message('Informação', 'Sem pedidos fechados com data a data selecionada', 'info');
+                    _this.notification.message('Informação', 'Sem pedidos fechados com data a data selecionada', 'info');
                 }
             });
         }
         else {
-            this.message('Erro', 'Preencha inicio, fim e status para pesquisar.', 'error');
+            this.notification.message('Erro', 'Preencha inicio, fim e status para pesquisar.', 'error');
             this.hideLoading();
         }
     };
-    OrdersCloseComponent.prototype.message = function (titulo, message, type, time) {
-        if (type === void 0) { type = 'default'; }
-        if (time === void 0) { time = 5000; }
-        this.toastyOptions = {
-            title: titulo,
-            msg: message,
-            timeout: time,
-        };
-        switch (type) {
-            case 'default':
-                this.tosty.default(this.toastyOptions);
-                break;
-            case 'info':
-                this.tosty.info(this.toastyOptions);
-                break;
-            case 'success':
-                this.tosty.success(this.toastyOptions);
-                break;
-            case 'wait':
-                this.tosty.wait(this.toastyOptions);
-                break;
-            case 'error':
-                this.tosty.error(this.toastyOptions);
-                break;
-            case 'warning':
-                this.tosty.warning(this.toastyOptions);
-                break;
-        }
+    OrdersCloseComponent.prototype.hideLoading = function () {
+        __WEBPACK_IMPORTED_MODULE_3_jquery__("#bifrostBarSpinner").hide();
+    };
+    OrdersCloseComponent.prototype.showLoading = function () {
+        __WEBPACK_IMPORTED_MODULE_3_jquery__("#bifrostBarSpinner").show();
+    };
+    OrdersCloseComponent.prototype.showModal = function (id) {
+        __WEBPACK_IMPORTED_MODULE_3_jquery__(id).show().addClass('show');
+    };
+    OrdersCloseComponent.prototype.hideModal = function (id) {
+        __WEBPACK_IMPORTED_MODULE_3_jquery__(id).hide();
     };
     OrdersCloseComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             template: __webpack_require__("../../../../../src/app/close/components/orders.component.html")
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__services_orders_service__["a" /* OrdersService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_orders_service__["a" /* OrdersService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4_ng2_toasty__["d" /* ToastyService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4_ng2_toasty__["d" /* ToastyService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4_ng2_toasty__["a" /* ToastOptions */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4_ng2_toasty__["a" /* ToastOptions */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_4_ng2_toasty__["b" /* ToastyConfig */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4_ng2_toasty__["b" /* ToastyConfig */]) === "function" && _e || Object])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__services_orders_service__["a" /* OrdersService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_orders_service__["a" /* OrdersService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__app_message_service__["a" /* AppMessageService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__app_message_service__["a" /* AppMessageService */]) === "function" && _c || Object])
     ], OrdersCloseComponent);
     return OrdersCloseComponent;
-    var _a, _b, _c, _d, _e;
+    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=orders.component.js.map
@@ -517,7 +421,7 @@ module.exports = "<div tabindex=\"-1\" class=\"modal fade\" id=\"payment\" role=
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_jquery__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_orders_service__ = __webpack_require__("../../../../../src/app/close/services/orders.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angular2_toaster__ = __webpack_require__("../../../../angular2-toaster/angular2-toaster.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_message_service__ = __webpack_require__("../../../../../src/app/app-message.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -612,16 +516,16 @@ var PaymentComponent = (function () {
         this.router.navigate(['/close']);
     };
     PaymentComponent.prototype.hideLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_1_jquery__(".container-loading").hide();
+        __WEBPACK_IMPORTED_MODULE_1_jquery__("#bifrostBarSpinner").hide();
     };
     PaymentComponent.prototype.showLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_1_jquery__(".container-loading").show();
+        __WEBPACK_IMPORTED_MODULE_1_jquery__("#bifrostBarSpinner").show();
     };
     PaymentComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             template: __webpack_require__("../../../../../src/app/close/components/payment.component.html")
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__services_orders_service__["a" /* OrdersService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_orders_service__["a" /* OrdersService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4_angular2_toaster__["b" /* ToasterService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4_angular2_toaster__["b" /* ToasterService */]) === "function" && _d || Object])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__services_orders_service__["a" /* OrdersService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_orders_service__["a" /* OrdersService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__app_message_service__["a" /* AppMessageService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__app_message_service__["a" /* AppMessageService */]) === "function" && _d || Object])
     ], PaymentComponent);
     return PaymentComponent;
     var _a, _b, _c, _d;
@@ -649,7 +553,6 @@ module.exports = "<div tabindex=\"-1\" class=\"modal fade modal_novo\" id=\"prin
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_jquery__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_orders_service__ = __webpack_require__("../../../../../src/app/close/services/orders.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_angular2_toaster__ = __webpack_require__("../../../../angular2-toaster/angular2-toaster.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -664,14 +567,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
 var PrinterComponent = (function () {
-    function PrinterComponent(httpService, router, route, toasterService, sanitizer) {
+    function PrinterComponent(httpService, router, route, sanitizer) {
         var _this = this;
         this.httpService = httpService;
         this.router = router;
         this.route = route;
-        this.toasterService = toasterService;
         this.sanitizer = sanitizer;
         this.order = {
             id: 0,
@@ -718,19 +619,19 @@ var PrinterComponent = (function () {
         this.router.navigate(['/close']);
     };
     PrinterComponent.prototype.hideLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_2_jquery__(".container-loading").hide();
+        __WEBPACK_IMPORTED_MODULE_2_jquery__("#bifrostBarSpinner").hide();
     };
     PrinterComponent.prototype.showLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_2_jquery__(".container-loading").show();
+        __WEBPACK_IMPORTED_MODULE_2_jquery__("#bifrostBarSpinner").show();
     };
     PrinterComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             template: __webpack_require__("../../../../../src/app/close/components/printer.component.html")
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_4__services_orders_service__["a" /* OrdersService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__services_orders_service__["a" /* OrdersService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* ActivatedRoute */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_5_angular2_toaster__["b" /* ToasterService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5_angular2_toaster__["b" /* ToasterService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__["c" /* DomSanitizer */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__["c" /* DomSanitizer */]) === "function" && _e || Object])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_4__services_orders_service__["a" /* OrdersService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__services_orders_service__["a" /* OrdersService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* ActivatedRoute */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__["c" /* DomSanitizer */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__["c" /* DomSanitizer */]) === "function" && _d || Object])
     ], PrinterComponent);
     return PrinterComponent;
-    var _a, _b, _c, _d, _e;
+    var _a, _b, _c, _d;
 }());
 
 //# sourceMappingURL=printer.component.js.map
@@ -762,7 +663,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_ngx_phone_mask__ = __webpack_require__("../../../../ngx-phone-mask/ngx-phone-mask/ngx-phone-mask.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_printer_component__ = __webpack_require__("../../../../../src/app/close/components/printer.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_edit_component__ = __webpack_require__("../../../../../src/app/close/components/edit.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17_ng2_toasty__ = __webpack_require__("../../../../ng2-toasty/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__app_message_service__ = __webpack_require__("../../../../../src/app/app-message.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -805,7 +706,7 @@ var OrdersCloseModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_14_ngx_phone_mask__["a" /* NgxPhoneMaskModule */]
             ],
             declarations: [__WEBPACK_IMPORTED_MODULE_6__components_orders_component__["a" /* OrdersCloseComponent */], __WEBPACK_IMPORTED_MODULE_7__components_payment_component__["a" /* PaymentComponent */], __WEBPACK_IMPORTED_MODULE_15__components_printer_component__["a" /* PrinterComponent */], __WEBPACK_IMPORTED_MODULE_16__components_edit_component__["a" /* EditComponent */]],
-            providers: [__WEBPACK_IMPORTED_MODULE_10__services_orders_service__["a" /* OrdersService */], __WEBPACK_IMPORTED_MODULE_4_ngx_bootstrap_modal__["a" /* BsModalService */], __WEBPACK_IMPORTED_MODULE_17_ng2_toasty__["a" /* ToastOptions */]]
+            providers: [__WEBPACK_IMPORTED_MODULE_10__services_orders_service__["a" /* OrdersService */], __WEBPACK_IMPORTED_MODULE_4_ngx_bootstrap_modal__["a" /* BsModalService */], __WEBPACK_IMPORTED_MODULE_17__app_message_service__["a" /* AppMessageService */]]
         })
     ], OrdersCloseModule);
     return OrdersCloseModule;

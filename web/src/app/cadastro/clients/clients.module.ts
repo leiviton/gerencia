@@ -15,7 +15,6 @@ import { ClientsService } from './services/clients.service';
 import { CurrencyMaskModule } from "ng2-currency-mask";
 
 import { NgxPhoneMaskModule } from 'ngx-phone-mask';
-import {AppMessageService} from "../../app-message.service";
 
 @NgModule({
   imports: [

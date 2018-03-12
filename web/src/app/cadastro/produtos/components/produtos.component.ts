@@ -4,7 +4,6 @@ import { NgForOf } from '@angular/common';
 import { ProdutosService } from '../services/produtos.service';
 import { FormsModule } from '@angular/forms';
 
-
 import * as jQuery from 'jquery';
 import {AppMessageService} from "../../../app-message.service";
 
@@ -55,10 +54,10 @@ export class ProdutosComponent implements OnInit {
     }
 
     hideLoading(){
-        jQuery(".container-loading").hide();
+        jQuery("#bifrostBarSpinner").hide();
     }
     showLoading(){
-        jQuery(".container-loading").show();
+        jQuery("#bifrostBarSpinner").show();
     }
 
     pesquisar(fields)

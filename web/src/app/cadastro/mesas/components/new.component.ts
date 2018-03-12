@@ -5,7 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NgForOf } from '@angular/common';
 import { MesasService } from '../services/mesas.service';
 import { FormsModule } from '@angular/forms';
-import {ToastyService} from "ng2-toasty";
+import {AppMessageService} from "../../../app-message.service";
 
 @Component({
     templateUrl: 'new.component.html'
@@ -13,7 +13,7 @@ import {ToastyService} from "ng2-toasty";
 export class NewComponent implements OnInit {
 
     constructor(private httpService: MesasService, private router: Router, private route: ActivatedRoute
-        ,private notification: ToastyService
+        ,private notification: AppMessageService
     ) {}
     mesa = {
         name:null,
@@ -25,7 +25,7 @@ export class NewComponent implements OnInit {
         u = JSON.parse(localStorage.getItem('user') || null);
         if(u.role !== 'gerente' && u.role !== 'admin')
         {
-            this.notification.error('Sem permissão, contate o administrador');
+            this.notification.message('Erro','Sem permissão, contate o administrador','error');
             this.router.navigate(['/user/login']);
         }
         jQuery('#infoModal').show().addClass('show');
@@ -45,11 +45,11 @@ export class NewComponent implements OnInit {
                 .then(() => {
                     this.httpService.eventEmitter.emit();
                     this.hideLoading();
-                    this.notification.success('Cliente salvo com sucesso');
+                    this.notification.message('Sucesso','Cliente salvo com sucesso','success');
                     this.close();
                 });
         }else{
-            this.notification.error('Verifique se todos os campos foram preenchidos.');
+            this.notification.message('Erro','Verifique se todos os campos foram preenchidos.','error');
         }
 
     }
@@ -60,11 +60,10 @@ export class NewComponent implements OnInit {
     }
 
     hideLoading(){
-        jQuery(".container-loading").hide();
+        jQuery("#bifrostBarSpinner").hide();
     }
 
     showLoading(){
-        jQuery(".container-loading").show();
+        jQuery("#bifrostBarSpinner").show();
     }
-
 }

@@ -1,17 +1,18 @@
 import { Component, ViewChild, OnInit,ViewContainerRef } from '@angular/core';
-import {ToasterService} from 'angular2-toaster';
 import { Router } from '@angular/router';
 import { NgForOf } from '@angular/common';
 import { UsersService } from '../services/users.service';
 import { FormsModule } from '@angular/forms';
 
-
 import * as jQuery from 'jquery';
+import {AppMessageService} from "../../../app-message.service";
+
 @Component({
   templateUrl: 'users.component.html'
 })
 export class UsersComponent implements OnInit {
-  constructor(private httpService: UsersService, private router: Router,private toasterService: ToasterService) {}
+  constructor(private httpService: UsersService, private router: Router,
+              private toasterService: AppMessageService) {}
   cor = false;
   pesquisa:any = {
       inicio:null,
@@ -27,7 +28,7 @@ export class UsersComponent implements OnInit {
       u = JSON.parse(localStorage.getItem('user') || null);
       if(u.role !== 'gerente' && u.role !== 'admin')
       {
-          this.toasterService.pop('error','Sem permissão','Usuário sem acesso, contate o administrador');
+          this.toasterService.message('Sem permissão','Usuário sem acesso, contate o administrador','error');
           this.router.navigate(['/dashboard']);
       }
       this.httpService.setAccessToken();
@@ -59,10 +60,11 @@ export class UsersComponent implements OnInit {
     }
 
     hideLoading(){
-        jQuery(".container-loading").hide();
+        jQuery("#bifrostBarSpinner").hide();
     }
+
     showLoading(){
-        jQuery(".container-loading").show();
+        jQuery("#bifrostBarSpinner").show();
     }
 
     pesquisar(fields)

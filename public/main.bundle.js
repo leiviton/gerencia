@@ -45,8 +45,8 @@ var map = {
 	],
 	"./movimento-caixas/movimento-caixas.module": [
 		"../../../../../src/app/movimento-caixas/movimento-caixas.module.ts",
-		"common",
-		"movimento-caixas.module"
+		"movimento-caixas.module",
+		"common"
 	],
 	"./open-close-caixas/open-close-caixas.module": [
 		"../../../../../src/app/open-close-caixas/open-close-caixas.module.ts",
@@ -55,8 +55,8 @@ var map = {
 	],
 	"./orders/orders.module": [
 		"../../../../../src/app/orders/orders.module.ts",
-		"orders.module",
-		"common"
+		"common",
+		"orders.module"
 	],
 	"./pages/pages.module": [
 		"../../../../../src/app/pages/pages.module.ts",
@@ -99,9 +99,9 @@ webpackAsyncContext.id = "../../../../../src/$$_gendir lazy recursive";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__environments_environment__ = __webpack_require__("../../../../../src/environments/environment.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angular2_toaster__ = __webpack_require__("../../../../angular2-toaster/angular2-toaster.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_jquery__ = __webpack_require__("../../../../jquery/dist/jquery.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_jquery__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_jquery__ = __webpack_require__("../../../../jquery/dist/jquery.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_jquery__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_message_service__ = __webpack_require__("../../../../../src/app/app-message.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_add_operator_toPromise__ = __webpack_require__("../../../../rxjs/add/operator/toPromise.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_rxjs_add_operator_toPromise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_rxjs_add_operator_toPromise__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -191,27 +191,26 @@ var AppHttpService = (function () {
             return res.json() || {};
         })
             .catch(function (err) {
-            __WEBPACK_IMPORTED_MODULE_5_jquery__(".container-loading").hide();
-            console.log('erro', err);
+            __WEBPACK_IMPORTED_MODULE_4_jquery__(".container-loading").hide();
             var message = 'Algo deu errado, informe o erro' + err.status + 'ao administrador';
             if (err.status === 401) {
                 message = 'Você não tem permissão para acessar, informe um usuario e senha validos';
-                _this.toaster.pop('error', 'Erro', message);
+                _this.toaster.message('Error', message, 'error');
                 localStorage.setItem('user', '');
                 _this.router.navigate(['/user/login']);
             }
             if (err.status === 500) {
                 message = 'Ops não foi possivel realizar opeção';
-                _this.toaster.pop('error', 'Erro', message);
+                _this.toaster.message('Error', message, 'error');
                 _this.router.navigate(['/pages/500']);
             }
             if (err.status === 422) {
                 message = 'Erro de validação, verifique os campos';
-                _this.toaster.pop('error', 'Erro', message);
+                _this.toaster.message('Error', message, 'error');
             }
             if (err.status === 404) {
                 message = 'Verifique sua conexão ou tente novamente';
-                _this.toaster.pop('error', 'Erro', message);
+                _this.toaster.message('Error', message, 'error');
                 _this.router.navigate(['/pages/404']);
             }
         });
@@ -235,13 +234,84 @@ var AppHttpService = (function () {
     };
     AppHttpService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4_angular2_toaster__["b" /* ToasterService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4_angular2_toaster__["b" /* ToasterService */]) === "function" && _c || Object])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_5__app_message_service__["a" /* AppMessageService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__app_message_service__["a" /* AppMessageService */]) === "function" && _c || Object])
     ], AppHttpService);
     return AppHttpService;
     var _a, _b, _c;
 }());
 
 //# sourceMappingURL=app-http.service.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/app-message.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppMessageService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ng2_toasty__ = __webpack_require__("../../../../ng2-toasty/index.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var AppMessageService = (function () {
+    function AppMessageService(toastyOptions, tosty) {
+        this.toastyOptions = toastyOptions;
+        this.tosty = tosty;
+    }
+    AppMessageService.prototype.message = function (titulo, message, type, time) {
+        if (type === void 0) { type = 'default'; }
+        if (time === void 0) { time = 5000; }
+        this.toastyOptions = {
+            title: titulo,
+            msg: message,
+            timeout: time,
+        };
+        switch (type) {
+            case 'default':
+                this.tosty.default(this.toastyOptions);
+                break;
+            case 'info':
+                this.tosty.info(this.toastyOptions);
+                break;
+            case 'success':
+                this.tosty.success(this.toastyOptions);
+                break;
+            case 'wait':
+                this.tosty.wait(this.toastyOptions);
+                break;
+            case 'error':
+                this.tosty.error(this.toastyOptions);
+                break;
+            case 'warning':
+                this.tosty.warning(this.toastyOptions);
+                break;
+        }
+    };
+    AppMessageService = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(),
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ng2_toasty__["a" /* ToastOptions */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ng2_toasty__["a" /* ToastOptions */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ng2_toasty__["d" /* ToastyService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ng2_toasty__["d" /* ToastyService */]) === "function" && _b || Object])
+    ], AppMessageService);
+    return AppMessageService;
+    var _a, _b;
+}());
+
+//# sourceMappingURL=app-message.service.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/app.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div id=\"bifrostBarSpinner\">\r\n    <div class=\"bifrost-spinner-container\"></div>\r\n    <div class=\"bifrost-spinner-loader\">\r\n        <div class=\"bifrost-spinner-bar1\"></div>\r\n        <div class=\"bifrost-spinner-bar2\"></div>\r\n        <div class=\"bifrost-spinner-bar3\"></div>\r\n        <div class=\"bifrost-spinner-bar4\"></div>\r\n        <div class=\"bifrost-spinner-bar5\"></div>\r\n        <div class=\"bifrost-spinner-bar6\"></div>\r\n    </div>\r\n</div>\r\n<ng2-toasty></ng2-toasty>\r\n<router-outlet></router-outlet>"
 
 /***/ }),
 
@@ -274,7 +344,7 @@ var AppComponent = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             // tslint:disable-next-line
             selector: 'body',
-            template: '<div class="container-loading"><img class="img-loading" src="assets/img/loading.gif" /></div><toaster-container></toaster-container><ng2-toasty></ng2-toasty><router-outlet></router-outlet>'
+            template: __webpack_require__("../../../../../src/app/app.component.html")
         }),
         __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ng2_toasty__["b" /* ToastyConfig */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ng2_toasty__["b" /* ToastyConfig */]) === "function" && _a || Object])
     ], AppComponent);
@@ -310,19 +380,18 @@ var AppComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__shared_breadcrumb_component__ = __webpack_require__("../../../../../src/app/shared/breadcrumb.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16_ng2_currency_mask__ = __webpack_require__("../../../../ng2-currency-mask/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16_ng2_currency_mask___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_16_ng2_currency_mask__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17_angular2_toaster__ = __webpack_require__("../../../../angular2-toaster/angular2-toaster.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__app_routing__ = __webpack_require__("../../../../../src/app/app.routing.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__layouts_full_layout_component__ = __webpack_require__("../../../../../src/app/layouts/full-layout.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__layouts_simple_layout_component__ = __webpack_require__("../../../../../src/app/layouts/simple-layout.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__app_http_service__ = __webpack_require__("../../../../../src/app/app-http.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22_ng2_toasty__ = __webpack_require__("../../../../ng2-toasty/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__app_routing__ = __webpack_require__("../../../../../src/app/app.routing.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__layouts_full_layout_component__ = __webpack_require__("../../../../../src/app/layouts/full-layout.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__layouts_simple_layout_component__ = __webpack_require__("../../../../../src/app/layouts/simple-layout.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__app_http_service__ = __webpack_require__("../../../../../src/app/app-http.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21_ng2_toasty__ = __webpack_require__("../../../../ng2-toasty/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__app_message_service__ = __webpack_require__("../../../../../src/app/app-message.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-
 
 
 
@@ -349,6 +418,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 // Services
 
 
+
 var AppModule = (function () {
     function AppModule() {
     }
@@ -359,21 +429,20 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_animations__["a" /* BrowserAnimationsModule */],
                 __WEBPACK_IMPORTED_MODULE_3__angular_http__["c" /* HttpModule */],
                 __WEBPACK_IMPORTED_MODULE_4__angular_forms__["FormsModule"],
-                __WEBPACK_IMPORTED_MODULE_18__app_routing__["a" /* AppRoutingModule */],
+                __WEBPACK_IMPORTED_MODULE_17__app_routing__["a" /* AppRoutingModule */],
                 __WEBPACK_IMPORTED_MODULE_8_ngx_bootstrap_dropdown__["a" /* BsDropdownModule */].forRoot(),
                 __WEBPACK_IMPORTED_MODULE_10_ngx_bootstrap_tabs__["a" /* TabsModule */].forRoot(),
                 __WEBPACK_IMPORTED_MODULE_9_ngx_bootstrap__["b" /* TooltipModule */].forRoot(),
                 __WEBPACK_IMPORTED_MODULE_9_ngx_bootstrap__["a" /* ModalModule */].forRoot(),
                 __WEBPACK_IMPORTED_MODULE_16_ng2_currency_mask__["CurrencyMaskModule"],
-                __WEBPACK_IMPORTED_MODULE_17_angular2_toaster__["a" /* ToasterModule */],
                 __WEBPACK_IMPORTED_MODULE_5_ngx_loading__["a" /* LoadingModule */],
                 __WEBPACK_IMPORTED_MODULE_12_ng2_charts_ng2_charts__["ChartsModule"],
-                __WEBPACK_IMPORTED_MODULE_22_ng2_toasty__["c" /* ToastyModule */].forRoot()
+                __WEBPACK_IMPORTED_MODULE_21_ng2_toasty__["c" /* ToastyModule */].forRoot()
             ],
             declarations: [
                 __WEBPACK_IMPORTED_MODULE_7__app_component__["a" /* AppComponent */],
-                __WEBPACK_IMPORTED_MODULE_19__layouts_full_layout_component__["a" /* FullLayoutComponent */],
-                __WEBPACK_IMPORTED_MODULE_20__layouts_simple_layout_component__["a" /* SimpleLayoutComponent */],
+                __WEBPACK_IMPORTED_MODULE_18__layouts_full_layout_component__["a" /* FullLayoutComponent */],
+                __WEBPACK_IMPORTED_MODULE_19__layouts_simple_layout_component__["a" /* SimpleLayoutComponent */],
                 __WEBPACK_IMPORTED_MODULE_11__shared_nav_dropdown_directive__["a" /* NAV_DROPDOWN_DIRECTIVES */],
                 __WEBPACK_IMPORTED_MODULE_15__shared_breadcrumb_component__["a" /* BreadcrumbsComponent */],
                 __WEBPACK_IMPORTED_MODULE_13__shared_sidebar_directive__["a" /* SIDEBAR_TOGGLE_DIRECTIVES */],
@@ -383,7 +452,9 @@ var AppModule = (function () {
                     provide: __WEBPACK_IMPORTED_MODULE_6__angular_common__["LocationStrategy"],
                     useClass: __WEBPACK_IMPORTED_MODULE_6__angular_common__["HashLocationStrategy"]
                 },
-                __WEBPACK_IMPORTED_MODULE_21__app_http_service__["a" /* AppHttpService */]
+                __WEBPACK_IMPORTED_MODULE_20__app_http_service__["a" /* AppHttpService */],
+                __WEBPACK_IMPORTED_MODULE_22__app_message_service__["a" /* AppMessageService */],
+                __WEBPACK_IMPORTED_MODULE_21_ng2_toasty__["a" /* ToastOptions */]
             ],
             bootstrap: [__WEBPACK_IMPORTED_MODULE_7__app_component__["a" /* AppComponent */]]
         })
@@ -537,7 +608,7 @@ module.exports = "<header class=\"app-header navbar\" *ngIf=\"user !== '' && use
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FullLayoutComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angular2_toaster__ = __webpack_require__("../../../../angular2-toaster/angular2-toaster.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_message_service__ = __webpack_require__("../../../../../src/app/app-message.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -579,7 +650,7 @@ var FullLayoutComponent = (function () {
     };
     FullLayoutComponent.prototype.ngOnInit = function () {
         if (!this.user) {
-            this.toasterService.pop('warning', 'Atenção', 'É necessário logar no sistema');
+            this.toasterService.message('Atenção', 'É necessário logar no sistema', 'warning');
             this.route.navigateByUrl('/user/login');
         }
         this.data = this.getData();
@@ -595,7 +666,7 @@ var FullLayoutComponent = (function () {
             selector: 'app-dashboard',
             template: __webpack_require__("../../../../../src/app/layouts/full-layout.component.html")
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* Router */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2_angular2_toaster__["b" /* ToasterService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_angular2_toaster__["b" /* ToasterService */]) === "function" && _b || Object])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* Router */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__app_message_service__["a" /* AppMessageService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__app_message_service__["a" /* AppMessageService */]) === "function" && _b || Object])
     ], FullLayoutComponent);
     return FullLayoutComponent;
     var _a, _b;

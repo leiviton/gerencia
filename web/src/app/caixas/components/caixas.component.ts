@@ -1,19 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import {ToasterService} from 'angular2-toaster';
 import { Router } from '@angular/router';
 import { NgForOf } from '@angular/common';
 import { CaixasService } from '../services/caixas.service';
 import { FormsModule } from '@angular/forms';
 
 import * as jQuery from 'jquery';
-
+import {AppMessageService} from "../../app-message.service";
 
 @Component({
   templateUrl: 'caixas.component.html'
 })
 export class CaixasComponent implements OnInit {
 
-  constructor(private httpService: CaixasService, private router: Router, private toasterService: ToasterService) {
+  constructor(private httpService: CaixasService, private router: Router, private toasterService: AppMessageService) {
       document.onkeydown = ((e) =>{
           if(e.keyCode == 113)
           {
@@ -39,7 +38,7 @@ export class CaixasComponent implements OnInit {
       u = JSON.parse(localStorage.getItem('user') || null);
       if(u.role !== 'gerente' && u.role !== 'admin')
       {
-          this.toasterService.pop('error','Sem permissão','Usuário sem acesso, contate o administrador');
+          this.toasterService.message('Sem permissão','Usuário sem acesso, contate o administrador','error');
           this.router.navigate(['/dashboard']);
       }
       this.httpService.setAccessToken();
@@ -82,10 +81,10 @@ export class CaixasComponent implements OnInit {
 
 
     hideLoading(){
-        jQuery(".container-loading").hide();
+        jQuery("#bifrostBarSpinner").hide();
     }
     showLoading(){
-        jQuery(".container-loading").show();
+        jQuery("#bifrostBarSpinner").show();
     }
 
     showModal()

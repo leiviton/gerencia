@@ -1,48 +1,5 @@
 webpackJsonp(["orders.module"],{
 
-/***/ "../../../../../src/app/orders/components/complement.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<div tabindex=\"-1\" class=\"modal fade modal_novo\" id=\"new_order\" role=\"dialog\" aria-hidden=\"true\" aria-labelledby=\"myModalLabel\" style=\"z-index: 9999\">\r\n    <div class=\"modal-dialog modal-lg modal-primary\" role=\"document\">\r\n        <div class=\"modal-content\">\r\n            <div class=\"modal-header novo\">\r\n                <h5 class=\"modal-title\">Novo Pedido</h5>\r\n                <button class=\"close\" aria-label=\"Close\" type=\"button\" data-dismiss=\"modal\" (click)=\"close()\">\r\n                    <span aria-hidden=\"true\">×</span>\r\n                </button>\r\n            </div>\r\n            <div class=\"modal-body padding\">\r\n                <p>Teste</p>\r\n            </div>\r\n            <div class=\"modal-footer cadastro\">\r\n                <div class=\"modal-button\">\r\n                    <button class=\"btn btn-info\" (click)=\"save()\"><i class=\"fa fa-save\"></i> Salvar pedido (F9)</button>\r\n                    <button class=\"btn btn-danger text-left\" type=\"button\" (click)=\"close()\"><i class=\"fa fa-arrow-circle-left\"></i> Cancelar</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <!-- /.modal-content -->\r\n    </div>\r\n    <!-- /.modal-dialog -->\r\n</div>\r\n\r\n\r\n"
-
-/***/ }),
-
-/***/ "../../../../../src/app/orders/components/complement.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ComplementComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery__ = __webpack_require__("../../../../jquery/dist/jquery.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_jquery__);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-
-
-var ComplementComponent = (function () {
-    function ComplementComponent() {
-    }
-    ComplementComponent.prototype.ngOnInit = function () {
-        __WEBPACK_IMPORTED_MODULE_1_jquery__('#complement').show().addClass('show');
-    };
-    ComplementComponent.prototype.close = function () {
-    };
-    ComplementComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            template: __webpack_require__("../../../../../src/app/orders/components/complement.component.html")
-        })
-    ], ComplementComponent);
-    return ComplementComponent;
-}());
-
-//# sourceMappingURL=complement.component.js.map
-
-/***/ }),
-
 /***/ "../../../../../src/app/orders/components/edit.component.html":
 /***/ (function(module, exports) {
 
@@ -60,7 +17,7 @@ module.exports = "<div tabindex=\"-1\" class=\"modal fade modal_novo\" id=\"succ
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_jquery__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_orders_service__ = __webpack_require__("../../../../../src/app/orders/services/orders.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angular2_toaster__ = __webpack_require__("../../../../angular2-toaster/angular2-toaster.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_message_service__ = __webpack_require__("../../../../../src/app/app-message.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -239,7 +196,7 @@ var EditComponent = (function () {
                 _this.mesa_id = res.data.mesa.data.id;
                 _this.typeAnt = res.data.type;
                 _this.hideLoading();
-                _this.toasterService.pop('success', 'Sucesso', 'Pedido ' + _this.order.id + ' com sucesso!');
+                _this.toasterService.message('Sucesso', 'Pedido ' + _this.order.id + ' com sucesso!', 'success');
             });
         }
         else if (order.type_ant != 1 && order.type != 1) {
@@ -273,16 +230,16 @@ var EditComponent = (function () {
                 _this.mesa_id = res.data.mesa.data.id;
                 _this.typeAnt = res.data.type;
                 _this.hideLoading();
-                _this.toasterService.pop('success', 'Sucesso', 'Pedido ' + _this.order.id + ' com sucesso!');
+                _this.toasterService.message('Sucesso', 'Pedido ' + _this.order.id + ' com sucesso!', 'success');
             });
         }
         else if (order.type_ant != 1 && order.type == 1) {
             this.hideLoading();
-            this.toasterService.pop('error', 'Erro', 'Pedido de mesa não pode ser mudado pra delivery e/ou retirada');
+            this.toasterService.message('Erro', 'Pedido de mesa não pode ser mudado pra delivery e/ou retirada', 'error');
         }
         else if (order.type_ant == 1 && order.type != 1) {
             this.hideLoading();
-            this.toasterService.pop('error', 'Erro', 'Pedido de mesa não pode ser mudado pra delivery e/ou retirada');
+            this.toasterService.message('Erro', 'Pedido de mesa não pode ser mudado pra delivery e/ou retirada', 'error');
         }
     };
     EditComponent.prototype.cancelarPedido = function () {
@@ -297,13 +254,13 @@ var EditComponent = (function () {
                 .then(function (res) {
                 _this.httpService.eventEmitter.emit();
                 _this.hideLoading();
-                _this.toasterService.pop('success', 'Cancelado', 'Pedido: ' + res.data.id + ' canelado com sucesso');
+                _this.toasterService.message('Cancelado', 'Pedido: ' + res.data.id + ' canelado com sucesso', 'success');
                 _this.close();
             });
         }
         else {
             this.hideLoading();
-            this.toasterService.pop('error', 'Cancelado', 'Motivo do cancelamento não pode ser vazio e menor que 5 caracteres');
+            this.toasterService.message('Erro', 'Motivo do cancelamento não pode ser vazio e menor que 5 caracteres', 'error');
         }
     };
     EditComponent.prototype.buscar = function () {
@@ -345,7 +302,7 @@ var EditComponent = (function () {
         }
         else {
             this.hideLoading();
-            this.toasterService.pop('error', 'Erro', 'Produto não encontrado.');
+            this.toasterService.message('Erro', 'Produto não encontrado.', 'error');
         }
     };
     EditComponent.prototype.addComplement = function (id) {
@@ -365,7 +322,7 @@ var EditComponent = (function () {
                 data['qtd'] = 1;
                 _this.complement.push(res.data);
             }
-            _this.toasterService.pop('success', 'Sucesso', 'Adicionado complemento ' + res.data.name);
+            _this.toasterService.message('Sucesso', 'Adicionado complemento ' + res.data.name, 'success');
         });
     };
     EditComponent.prototype.saveComplement = function () {
@@ -414,13 +371,13 @@ var EditComponent = (function () {
                     }];
                 _this.closeComplement();
                 _this.hideLoading();
-                _this.toasterService.pop('success', 'Sucesso', 'Complementos salvos com sucesso!');
+                _this.toasterService.message('Sucesso', 'Complementos salvos com sucesso!', 'success');
             });
         }
         else {
             this.closeComplement();
             this.hideLoading();
-            this.toasterService.pop('error', 'Erro', 'Adicionais não inseridos');
+            this.toasterService.message('Erro', 'Adicionais não inseridos', 'error');
         }
     };
     EditComponent.prototype.addHistorico = function () {
@@ -461,7 +418,7 @@ var EditComponent = (function () {
             _this.mesa_id = res.data.mesa.data.id;
             _this.historico = '';
             _this.idItem = 0;
-            _this.toasterService.pop('success', 'Sucesso', 'Salvo com sucesso!');
+            _this.toasterService.message('Sucesso', 'Salvo com sucesso!', 'success');
             _this.closeInformacao();
             _this.hideLoading();
         });
@@ -500,7 +457,7 @@ var EditComponent = (function () {
             _this.mesa_id = res.data.mesa.data.id;
             _this.historico = '';
             _this.idItem = 0;
-            _this.toasterService.pop('success', 'success', 'Removido com sucesso');
+            _this.toasterService.message('Sucesso', 'Removido com sucesso', 'success');
             _this.hideLoading();
         });
     };
@@ -571,7 +528,7 @@ var EditComponent = (function () {
     };
     EditComponent.prototype.addItem = function (item) {
         this.httpService.addItem(item, this.qtd);
-        this.toasterService.pop('success', 'Sucesso', 'Item codigo ' + item.id + ' adicionado.');
+        this.toasterService.message('Sucesso', 'Item codigo ' + item.id + ' adicionado.', 'success');
     };
     EditComponent.prototype.close = function () {
         __WEBPACK_IMPORTED_MODULE_1_jquery__('#successModal').on('show.bs.modal').show().removeClass('show');
@@ -587,23 +544,23 @@ var EditComponent = (function () {
             this.router.navigate(['/orders/printer/' + this.order.id + '/N']);
         }
         else {
-            this.toasterService.pop('error', 'Erro', 'Para imprimir é necessário ter adicionado novos itens.');
+            this.toasterService.message('Erro', 'Para imprimir é necessário ter adicionado novos itens.', 'error');
         }
     };
     EditComponent.prototype.habilitarEdicao = function () {
         this.editar = !this.editar;
     };
     EditComponent.prototype.hideLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_1_jquery__(".container-loading").hide();
+        __WEBPACK_IMPORTED_MODULE_1_jquery__("#bifrostBarSpinner").hide();
     };
     EditComponent.prototype.showLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_1_jquery__(".container-loading").show();
+        __WEBPACK_IMPORTED_MODULE_1_jquery__("#bifrostBarSpinner").show();
     };
     EditComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             template: __webpack_require__("../../../../../src/app/orders/components/edit.component.html")
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__services_orders_service__["a" /* OrdersService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_orders_service__["a" /* OrdersService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4_angular2_toaster__["b" /* ToasterService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4_angular2_toaster__["b" /* ToasterService */]) === "function" && _d || Object])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__services_orders_service__["a" /* OrdersService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_orders_service__["a" /* OrdersService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__app_message_service__["a" /* AppMessageService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__app_message_service__["a" /* AppMessageService */]) === "function" && _d || Object])
     ], EditComponent);
     return EditComponent;
     var _a, _b, _c, _d;
@@ -630,7 +587,7 @@ module.exports = "<div tabindex=\"-1\" class=\"modal fade modal_novo\" id=\"new_
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_jquery__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_orders_service__ = __webpack_require__("../../../../../src/app/orders/services/orders.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angular2_toaster__ = __webpack_require__("../../../../angular2-toaster/angular2-toaster.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_message_service__ = __webpack_require__("../../../../../src/app/app-message.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -757,7 +714,7 @@ var NewComponent = (function () {
                     _this.client.address.bairro = null;
                     _this.client.address.city_id = 0;
                     _this.novo = true;
-                    _this.toasterService.pop('info', 'Nenhum cliente encontrado, cadastre o cliente');
+                    _this.toasterService.message('Informação', 'Nenhum cliente encontrado, cadastre o cliente', 'info');
                 }
                 else if (res.data.length == 1) {
                     if (_this.client.user) {
@@ -829,7 +786,7 @@ var NewComponent = (function () {
             _this.result = res;
             _this.hideLoading();
             if (res.data.length == 0 || res.data[0].id == 58) {
-                _this.toasterService.pop('error', 'Atenção', 'Item não localizado');
+                _this.toasterService.message('Erro', 'Item não localizado', 'error');
             }
             else {
                 if (res.data.length > 1) {
@@ -852,13 +809,13 @@ var NewComponent = (function () {
         this.items = this.httpService.get();
         this.total = this.httpService.get().total;
         __WEBPACK_IMPORTED_MODULE_1_jquery__('#pesquisa').hide();
-        this.toasterService.pop('success', 'Sucesso', 'Item ' + item.name + ' adicionado.');
+        this.toasterService.message('Sucesso', 'Item ' + item.name + ' adicionado.', 'success');
     };
     NewComponent.prototype.saveObserve = function (o) {
         this.httpService.obs(o, this.idItem);
         this.items = this.httpService.get();
         __WEBPACK_IMPORTED_MODULE_1_jquery__('#informacao').hide();
-        this.toasterService.pop('success', 'Sucesso', 'Observção salva');
+        this.toasterService.message('Sucesso', 'Observção salva', 'success');
     };
     NewComponent.prototype.removeItem = function (i) {
         this.httpService.removeItem(i);
@@ -872,7 +829,7 @@ var NewComponent = (function () {
                 "created_at": "",
                 "updated_at": ""
             }];
-        this.toasterService.pop('info', 'Informação', 'Item removido.');
+        this.toasterService.message('Informação', 'Item removido.', 'info');
     };
     NewComponent.prototype.save = function () {
         var _this = this;
@@ -883,7 +840,7 @@ var NewComponent = (function () {
             this.mesa_id = 1;
         }
         if (this.tipo != 1 && this.novo == true) {
-            this.toasterService.pop('error', 'É necessário cadastrar um cliente ou selecionar');
+            this.toasterService.message('Erro', 'É necessário cadastrar um cliente ou selecionar', 'error');
         }
         else {
             if (this.mesa_id != null) {
@@ -922,30 +879,30 @@ var NewComponent = (function () {
                         _this.httpService.clear();
                         _this.httpService.eventEmitter.emit();
                         _this.hideLoading();
-                        _this.toasterService.pop('success', 'Sucesso', 'Pedido ' + res.data.id + ' salvo com sucesso');
+                        _this.toasterService.message('Sucesso', 'Pedido ' + res.data.id + ' salvo com sucesso', 'success');
                         _this.close(res.data.id);
                     });
                 }
                 else {
                     this.hideLoading();
-                    this.toasterService.pop('error', 'Erro', 'É necessário adicionar ao menos um produto');
+                    this.toasterService.message('Erro', 'É necessário adicionar ao menos um produto', 'error');
                 }
             }
             else {
-                this.toasterService.pop('error', 'Erro', 'É necessário escolher uma mesa');
+                this.toasterService.message('Erro', 'É necessário escolher uma mesa', 'error');
             }
         }
     };
     NewComponent.prototype.saveClient = function () {
         var _this = this;
         if (this.client.name == null || this.client.phone == null) {
-            this.toasterService.pop('error', 'Verifique nome e telefone do cliente');
+            this.toasterService.message('Erro', 'Verifique nome e telefone do cliente', 'error');
         }
         else if (this.client.address.address == null || this.client.address.bairro == null || this.client.address.numero == null) {
-            this.toasterService.pop('error', 'Campos do endereço vazio, verifique');
+            this.toasterService.message('Erro', 'Campos do endereço vazio, verifique', 'error');
         }
         else if (this.client.address.city_id == 0) {
-            this.toasterService.pop('error', 'Selecione uma cidade');
+            this.toasterService.message('Erro', 'Selecione uma cidade', 'error');
         }
         else {
             this.client.id = null;
@@ -962,7 +919,7 @@ var NewComponent = (function () {
                 _this.client.address.bairro = res.data.addressClient.data.bairro;
                 _this.client.address.city_id = res.data.addressClient.data.city.data.id;
                 _this.novo = false;
-                _this.toasterService.pop('success', 'Cliente ' + _this.client.name + ' cadastrado com sucesso, codigo:' + _this.client.id);
+                _this.toasterService.message('Sucesso', 'Cliente ' + _this.client.name + ' cadastrado com sucesso, codigo:' + _this.client.id, 'success');
             });
         }
     };
@@ -1007,7 +964,7 @@ var NewComponent = (function () {
             else {
                 _this.complement.push(res.data);
             }
-            _this.toasterService.pop('success', 'Sucesso', 'Adicionado complemento ' + res.data.name);
+            _this.toasterService.message('Sucesso', 'Adicionado complemento ' + res.data.name, 'success');
         });
     };
     NewComponent.prototype.saveComplement = function () {
@@ -1026,7 +983,7 @@ var NewComponent = (function () {
             this.closeComplement();
         }
         else {
-            this.toasterService.pop('error', 'Erro', 'Adicionais não inseridos');
+            this.toasterService.message('Erro', 'Adicionais não inseridos', 'error');
         }
     };
     NewComponent.prototype.closeComplement = function () {
@@ -1042,150 +999,22 @@ var NewComponent = (function () {
         __WEBPACK_IMPORTED_MODULE_1_jquery__('#cliente').hide();
     };
     NewComponent.prototype.hideLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_1_jquery__(".container-loading").hide();
+        __WEBPACK_IMPORTED_MODULE_1_jquery__("#bifrostBarSpinner").hide();
     };
     NewComponent.prototype.showLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_1_jquery__(".container-loading").show();
+        __WEBPACK_IMPORTED_MODULE_1_jquery__("#bifrostBarSpinner").show();
     };
     NewComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             template: __webpack_require__("../../../../../src/app/orders/components/new.component.html")
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__services_orders_service__["a" /* OrdersService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_orders_service__["a" /* OrdersService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4_angular2_toaster__["b" /* ToasterService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4_angular2_toaster__["b" /* ToasterService */]) === "function" && _d || Object])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__services_orders_service__["a" /* OrdersService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_orders_service__["a" /* OrdersService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__app_message_service__["a" /* AppMessageService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__app_message_service__["a" /* AppMessageService */]) === "function" && _d || Object])
     ], NewComponent);
     return NewComponent;
     var _a, _b, _c, _d;
 }());
 
 //# sourceMappingURL=new.component.js.map
-
-/***/ }),
-
-/***/ "../../../../../src/app/orders/components/orders-close.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"animated fadeIn\">\n    <div class=\"row\">\n        <div class=\"col-lg-12\">\n          <div class=\"card\">\n            <div class=\"card-header\">\n                   <button type=\"button\" class=\"btn btn-default\" (click)=\"showModal()\"><i class=\"fa fa-search\"></i> Pesquisar </button>\n            </div>\n            <div class=\"card-body\">\n              <table class=\"table table-responsive table-bordered table-striped table-sm\">\n                <thead>\n                  <tr>\n                    <th class=\"title text-center\">Status</th>\n                    <th class=\"title text-center\">Tipo</th>\n                    <th class=\"title text-center\">Codigo</th>\n                    <th class=\"title-table text-center\"> Total</th>\n                    <th class=\"title\"> Cliente</th>\n                    <th class=\"title text-center\">Data</th>\n                    <th class=\"title text-center\">Hora</th>\n                    <th class=\"title text-center\">Previsão</th>\n                    <th class=\"title text-center\">Mesa</th>\n                    <th class=\"title text-center\">Ações</th>\n                  </tr>\n                </thead>\n                <tbody>\n                  <tr *ngIf=\"tamanho == 0\">\n                    <td colspan=\"10\"> Sem dados</td>\n                  </tr>\n                  <tr *ngFor=\"let o of orders.data\" (dblclick)=\"edit(o.id)\">\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">\n                      <span class=\"badge badge-success\" *ngIf=\"o.status === 3\" tooltip=\"Pagamento realizado\"> Pago</span>\n                      <span class=\"badge badge-info\" *ngIf=\"o.status === 2\" tooltip=\"Em transito\">Em transito</span>\n                      <span class=\"badge badge-primary\" *ngIf=\"o.status === 1\" tooltip=\"Preparado\">Preparado</span>\n                      <span class=\"badge badge-danger\" *ngIf=\"o.status === 0\" tooltip=\"Na cozinha\">Cozinha</span>\n                    </td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">\n                      <i class=\"fa fa-motorcycle\" *ngIf=\"o.type == 0\" tooltip=\"Delivery\"></i>\n                      <i class=\"fa fa-upload\" *ngIf=\"o.type == 2\" tooltip=\"Retirada\"></i>\n                      <i class=\"fa fa fa-cutlery\" *ngIf=\"o.type == 1\" tooltip=\"Mesa\"></i>\n                    </td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.id }}</td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.total | currency:'BRL':true }}</td>\n                    <td *ngIf=\"tamanho > 0\">{{ o.client.data.name }}</td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.created_at | slice:0:10 }} </td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.created_at | slice:11:19}}</td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.previsao }} </td>\n                    <td class=\"text-center\" *ngIf=\"tamanho > 0\">{{ o.mesa.data.name }} </td>\n                    <td class=\"text-center\">\n                      <a class=\"btn btn-link text-alert pagamento\" *ngIf=\"o.status == 3\" [routerLink]=\"['payment/'+ o.id]\" tooltip=\"Ver pagamentos\"><i class=\"fa fa-money\"></i></a>\n                      <a class=\"btn btn-link text-success pagamento\" *ngIf=\"o.status != 3\" [routerLink]=\"['payment/'+ o.id]\" tooltip=\"Pagar pedido\"><i class=\"fa fa-dollar\"></i></a>\n                      <a class=\"btn btn-link pagamento\" *ngIf=\"o.status != 3\" [routerLink]=\"['printer/'+ o.id]+'/S'\" tooltip=\"Imprimir pedido\"><i class=\"fa fa-print\"></i></a>\n                    </td>\n                  </tr>\n                </tbody>\n              </table>\n              <!--nav>\n                <ul class=\"pagination\">\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">Prev</a></li>\n                  <li class=\"page-item active\">\n                    <a class=\"page-link\" href=\"#\">1</a>\n                  </li>\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">2</a></li>\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">3</a></li>\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">4</a></li>\n                  <li class=\"page-item\"><a class=\"page-link\" href=\"#\">Next</a></li>\n                </ul>\n              </nav-->\n            </div>\n          </div>\n        </div>\n      </div>\n </div>\n\n<div class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">\n  <div class=\"modal-dialog modal-sm modal-info\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <h6 class=\"modal-title\">Pesquisar</h6>\n      </div>\n      <div class=\"modal-body\">\n        <label for=\"inicio\">De</label>\n        <input type=\"date\" id=\"inicio\" class=\"form-control\" name=\"inicio\" [(ngModel)]=\"pesquisa.inicio\" required>\n\n        <label for=\"fim\">Até</label>\n        <input type=\"date\" id=\"fim\" class=\"form-control\" name=\"fim\" [(ngModel)]=\"pesquisa.fim\" required>\n        <label class=\"col-form-label\" for=\"select\">Status</label>\n        <select name=\"status\" class=\"form-control\" id=\"select\" [(ngModel)]=\"pesquisa.status\" required>\n          <option value=\"null\">Selecione o status</option>\n          <option value=\"0\">Pendentes</option>\n          <option value=\"1\">Em preparo</option>\n          <option value=\"2\">Entrega</option>\n          <option value=\"3\">Fechado</option>\n        </select>\n      </div>\n      <div class=\"modal-footer\">\n        <button type=\"button\" class=\"btn btn-secondary\" (click)=\"hideModal()\">Fechar</button>\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"pesquisar()\"><i class=\"fa fa-search\"></i> Buscar</button>\n      </div>\n    </div><!-- /.modal-content -->\n  </div><!-- /.modal-dialog -->\n</div><!-- /.modal -->\n\n<router-outlet></router-outlet>\n\n"
-
-/***/ }),
-
-/***/ "../../../../../src/app/orders/components/orders-close.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return OrdersCloseComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angular2_toaster__ = __webpack_require__("../../../../angular2-toaster/angular2-toaster.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_orders_service__ = __webpack_require__("../../../../../src/app/orders/services/orders.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_jquery__ = __webpack_require__("../../../../jquery/dist/jquery.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_jquery__);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-var OrdersCloseComponent = (function () {
-    function OrdersCloseComponent(httpService, router, toasterService) {
-        var _this = this;
-        this.httpService = httpService;
-        this.router = router;
-        this.toasterService = toasterService;
-        this.cor = false;
-        this.orders = {
-            data: []
-        };
-        this.tamanho = 0;
-        this.pesquisa = {
-            inicio: null,
-            fim: null,
-            status: null
-        };
-        document.onkeydown = (function (e) {
-            if (e.keyCode == 113) {
-                return _this.showModal();
-            }
-        });
-    }
-    OrdersCloseComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.showLoading();
-        this.httpService.setAccessToken();
-        this.httpService.eventEmitter
-            .subscribe(function () {
-            _this.httpService.builder().list({}, 'orders')
-                .then(function (res) {
-                _this.orders = res;
-                _this.tamanho = res.data.length;
-                _this.hideLoading();
-            });
-        });
-        this.httpService.eventEmitter.emit();
-    };
-    OrdersCloseComponent.prototype.edit = function (id) {
-        this.cor = true;
-        this.router.navigate(['/orders/edit/' + id]);
-    };
-    OrdersCloseComponent.prototype.new = function () {
-        return this.router.navigate(['/orders/new']);
-    };
-    OrdersCloseComponent.prototype.hideLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_4_jquery__(".container-loading").hide();
-    };
-    OrdersCloseComponent.prototype.showLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_4_jquery__(".container-loading").show();
-    };
-    OrdersCloseComponent.prototype.showModal = function () {
-        __WEBPACK_IMPORTED_MODULE_4_jquery__(".modal").show().addClass('show');
-    };
-    OrdersCloseComponent.prototype.hideModal = function () {
-        __WEBPACK_IMPORTED_MODULE_4_jquery__(".modal").hide();
-    };
-    OrdersCloseComponent.prototype.pesquisar = function () {
-        var _this = this;
-        this.showLoading();
-        if (this.pesquisa.inicio !== null && this.pesquisa.fim !== null && this.pesquisa.status !== null) {
-            var options = {
-                filters: [
-                    { status: this.pesquisa.status },
-                    { inicio: this.pesquisa.inicio },
-                    { fim: this.pesquisa.fim }
-                ]
-            };
-            this.httpService.builder().list(options, 'filters')
-                .then(function (res) {
-                _this.orders = res;
-                console.log(_this.orders);
-                _this.tamanho = res.data.length;
-                _this.hideModal();
-                _this.hideLoading();
-                _this.toasterService.pop('success', 'Sucesso', 'Dados carregados com sucesso');
-            });
-        }
-        else {
-            this.toasterService.pop('error', 'Erro', 'Preencha inicio, fim e status para pesquisar.');
-            this.hideLoading();
-        }
-    };
-    OrdersCloseComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            template: __webpack_require__("../../../../../src/app/orders/components/orders-close.component.html")
-        }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__services_orders_service__["a" /* OrdersService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_orders_service__["a" /* OrdersService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_angular2_toaster__["b" /* ToasterService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_angular2_toaster__["b" /* ToasterService */]) === "function" && _c || Object])
-    ], OrdersCloseComponent);
-    return OrdersCloseComponent;
-    var _a, _b, _c;
-}());
-
-//# sourceMappingURL=orders-close.component.js.map
 
 /***/ }),
 
@@ -1202,11 +1031,11 @@ module.exports = "<div class=\"animated fadeIn\">\n    <div class=\"row\">\n    
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return OrdersComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angular2_toaster__ = __webpack_require__("../../../../angular2-toaster/angular2-toaster.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_orders_service__ = __webpack_require__("../../../../../src/app/orders/services/orders.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_jquery__ = __webpack_require__("../../../../jquery/dist/jquery.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_jquery__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_orders_service__ = __webpack_require__("../../../../../src/app/orders/services/orders.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jquery__ = __webpack_require__("../../../../jquery/dist/jquery.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_jquery__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_message_service__ = __webpack_require__("../../../../../src/app/app-message.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1269,18 +1098,6 @@ var OrdersComponent = (function () {
     OrdersComponent.prototype.new = function () {
         return this.router.navigate(['/orders/new']);
     };
-    OrdersComponent.prototype.hideLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_4_jquery__(".container-loading").hide();
-    };
-    OrdersComponent.prototype.showLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_4_jquery__(".container-loading").show();
-    };
-    OrdersComponent.prototype.showModal = function () {
-        __WEBPACK_IMPORTED_MODULE_4_jquery__(".modal").show().addClass('show');
-    };
-    OrdersComponent.prototype.hideModal = function () {
-        __WEBPACK_IMPORTED_MODULE_4_jquery__(".modal").hide();
-    };
     OrdersComponent.prototype.pesquisar = function () {
         var _this = this;
         this.showLoading();
@@ -1299,19 +1116,31 @@ var OrdersComponent = (function () {
                 _this.tamanho = res.data.length;
                 _this.hideModal();
                 _this.hideLoading();
-                _this.toasterService.pop('success', 'Sucesso', 'Dados carregados com sucesso');
+                _this.toasterService.message('Sucesso', 'Dados carregados com sucesso', 'success');
             });
         }
         else {
-            this.toasterService.pop('error', 'Erro', 'Preencha inicio, fim e status para pesquisar.');
+            this.toasterService.message('Erro', 'Preencha inicio, fim e status para pesquisar.', 'error');
             this.hideLoading();
         }
+    };
+    OrdersComponent.prototype.hideLoading = function () {
+        __WEBPACK_IMPORTED_MODULE_3_jquery__("#bifrostBarSpinner").hide();
+    };
+    OrdersComponent.prototype.showLoading = function () {
+        __WEBPACK_IMPORTED_MODULE_3_jquery__("#bifrostBarSpinner").show();
+    };
+    OrdersComponent.prototype.showModal = function () {
+        __WEBPACK_IMPORTED_MODULE_3_jquery__(".modal").show().addClass('show');
+    };
+    OrdersComponent.prototype.hideModal = function () {
+        __WEBPACK_IMPORTED_MODULE_3_jquery__(".modal").hide();
     };
     OrdersComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             template: __webpack_require__("../../../../../src/app/orders/components/orders.component.html")
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__services_orders_service__["a" /* OrdersService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_orders_service__["a" /* OrdersService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_angular2_toaster__["b" /* ToasterService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_angular2_toaster__["b" /* ToasterService */]) === "function" && _c || Object])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__services_orders_service__["a" /* OrdersService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_orders_service__["a" /* OrdersService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__app_message_service__["a" /* AppMessageService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__app_message_service__["a" /* AppMessageService */]) === "function" && _c || Object])
     ], OrdersComponent);
     return OrdersComponent;
     var _a, _b, _c;
@@ -1338,7 +1167,7 @@ module.exports = "<div tabindex=\"-1\" class=\"modal fade\" id=\"payment\" role=
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_jquery__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_orders_service__ = __webpack_require__("../../../../../src/app/orders/services/orders.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angular2_toaster__ = __webpack_require__("../../../../angular2-toaster/angular2-toaster.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_message_service__ = __webpack_require__("../../../../../src/app/app-message.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1353,6 +1182,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
++6;
 var PaymentComponent = (function () {
     function PaymentComponent(httpService, router, route, toasterService) {
         var _this = this;
@@ -1431,19 +1261,19 @@ var PaymentComponent = (function () {
                         .then(function (res) {
                         if (res == 'fechado') {
                             _this.hideLoading();
-                            _this.toasterService.pop('error', 'Error', 'Caixa está fechado');
+                            _this.toasterService.message('Error', 'Caixa está fechado', 'error');
                         }
                         else {
                             if (res == 0) {
                                 _this.hideLoading();
-                                _this.toasterService.pop('error', 'Ops houve um erro, tente novamente');
+                                _this.toasterService.message('Erro', 'Ops houve um erro, tente novamente', 'error');
                             }
                             else {
                                 _this.httpService.eventEmitter.emit();
                                 _this.payment.total_realizado = _this.payment.total_pago;
                                 _this.valor_pag = 0;
                                 _this.hideLoading();
-                                _this.toasterService.pop('success', 'Sucesso', 'Pagamento do pedido ' + res.data.id + ' realizado com sucesso');
+                                _this.toasterService.message('Sucesso', 'Pagamento do pedido ' + res.data.id + ' realizado com sucesso', 'success');
                                 _this.close();
                             }
                         }
@@ -1451,7 +1281,7 @@ var PaymentComponent = (function () {
                 }
                 else {
                     this.hideLoading();
-                    this.toasterService.pop('error', 'Erro', 'Tipo pagamento não selecionado');
+                    this.toasterService.message('Erro', 'Tipo pagamento não selecionado', 'error');
                 }
             }
             else if (this.valor_pag + this.payment.desconto >= this.total) {
@@ -1465,18 +1295,18 @@ var PaymentComponent = (function () {
                         .then(function (res) {
                         if (res == 'fechado') {
                             _this.hideLoading();
-                            _this.toasterService.pop('error', 'Error', 'Caixa está fechado');
+                            _this.toasterService.message('Erro', 'Caixa está fechado', 'error');
                         }
                         else {
                             if (res == 0) {
                                 _this.hideLoading();
-                                _this.toasterService.pop('error', 'Ops houve um erro, tente novamente');
+                                _this.toasterService.message('Erro', 'Ops houve um erro, tente novamente', 'error');
                             }
                             else {
                                 _this.httpService.eventEmitter.emit();
                                 _this.valor_pag = 0;
                                 _this.hideLoading();
-                                _this.toasterService.pop('success', 'Sucesso', 'Pagamento do pedido ' + res.data.id + ' realizado com sucesso');
+                                _this.toasterService.message('Sucesso', 'Pagamento do pedido ' + res.data.id + ' realizado com sucesso', 'success');
                                 _this.close();
                             }
                         }
@@ -1484,7 +1314,7 @@ var PaymentComponent = (function () {
                 }
                 else {
                     this.hideLoading();
-                    this.toasterService.pop('error', 'Erro', 'Tipo pagamento não selecionado');
+                    this.toasterService.message('Erro', 'Tipo pagamento não selecionado', 'error');
                 }
             }
             else if ((this.valor_pag + this.payment.desconto) < this.total) {
@@ -1498,12 +1328,12 @@ var PaymentComponent = (function () {
                         .then(function (res) {
                         if (res == 'fechado') {
                             _this.hideLoading();
-                            _this.toasterService.pop('error', 'Error', 'Caixa está fechado');
+                            _this.toasterService.message('Error', 'Caixa está fechado', 'error');
                         }
                         else {
                             if (res == 0) {
                                 _this.hideLoading();
-                                _this.toasterService.pop('error', 'Ops houve um erro, tente novamente');
+                                _this.toasterService.message('Erro', 'Ops houve um erro, tente novamente', 'error');
                             }
                             else {
                                 _this.httpService.eventEmitter.emit();
@@ -1516,20 +1346,20 @@ var PaymentComponent = (function () {
                                     }
                                 }
                                 _this.hideLoading();
-                                _this.toasterService.pop('success', 'Sucesso', 'Pagamento parcial ' + res.data.id + ' realizado com sucesso');
+                                _this.toasterService.message('Sucesso', 'Pagamento parcial ' + res.data.id + ' realizado com sucesso', 'success');
                             }
                         }
                     });
                 }
                 else {
                     this.hideLoading();
-                    this.toasterService.pop('error', 'Erro', 'Tipo pagamento não selecionado');
+                    this.toasterService.message('Erro', 'Tipo pagamento não selecionado', 'error');
                 }
             }
         }
         else {
             this.hideLoading();
-            this.toasterService.pop('error', 'Erro', 'Pagamento igual a zaro');
+            this.toasterService.message('Erro', 'Pagamento igual a zaro', 'error');
         }
     };
     PaymentComponent.prototype.tipos = function () {
@@ -1550,16 +1380,16 @@ var PaymentComponent = (function () {
         this.router.navigate(['/orders/edit/' + this.order.id]);
     };
     PaymentComponent.prototype.hideLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_1_jquery__(".container-loading").hide();
+        __WEBPACK_IMPORTED_MODULE_1_jquery__("#bifrostBarSpinner").hide();
     };
     PaymentComponent.prototype.showLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_1_jquery__(".container-loading").show();
+        __WEBPACK_IMPORTED_MODULE_1_jquery__("#bifrostBarSpinner").show();
     };
     PaymentComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             template: __webpack_require__("../../../../../src/app/orders/components/payment.component.html")
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__services_orders_service__["a" /* OrdersService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_orders_service__["a" /* OrdersService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4_angular2_toaster__["b" /* ToasterService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4_angular2_toaster__["b" /* ToasterService */]) === "function" && _d || Object])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__services_orders_service__["a" /* OrdersService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_orders_service__["a" /* OrdersService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__app_message_service__["a" /* AppMessageService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__app_message_service__["a" /* AppMessageService */]) === "function" && _d || Object])
     ], PaymentComponent);
     return PaymentComponent;
     var _a, _b, _c, _d;
@@ -1587,7 +1417,6 @@ module.exports = "<div tabindex=\"-1\" class=\"modal fade modal_novo\" id=\"prin
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_jquery__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_orders_service__ = __webpack_require__("../../../../../src/app/orders/services/orders.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_angular2_toaster__ = __webpack_require__("../../../../angular2-toaster/angular2-toaster.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1602,14 +1431,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
 var PrinterComponent = (function () {
-    function PrinterComponent(httpService, router, route, toasterService, sanitizer) {
+    function PrinterComponent(httpService, router, route, sanitizer) {
         var _this = this;
         this.httpService = httpService;
         this.router = router;
         this.route = route;
-        this.toasterService = toasterService;
         this.sanitizer = sanitizer;
         this.order = {
             id: 0,
@@ -1655,19 +1482,19 @@ var PrinterComponent = (function () {
         this.router.navigate(['/orders']);
     };
     PrinterComponent.prototype.hideLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_2_jquery__(".container-loading").hide();
+        __WEBPACK_IMPORTED_MODULE_2_jquery__("#bifrostBarSpinner").hide();
     };
     PrinterComponent.prototype.showLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_2_jquery__(".container-loading").show();
+        __WEBPACK_IMPORTED_MODULE_2_jquery__("#bifrostBarSpinner").show();
     };
     PrinterComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             template: __webpack_require__("../../../../../src/app/orders/components/printer.component.html")
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_4__services_orders_service__["a" /* OrdersService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__services_orders_service__["a" /* OrdersService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* ActivatedRoute */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_5_angular2_toaster__["b" /* ToasterService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5_angular2_toaster__["b" /* ToasterService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__["c" /* DomSanitizer */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__["c" /* DomSanitizer */]) === "function" && _e || Object])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_4__services_orders_service__["a" /* OrdersService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__services_orders_service__["a" /* OrdersService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* ActivatedRoute */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__["c" /* DomSanitizer */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__["c" /* DomSanitizer */]) === "function" && _d || Object])
     ], PrinterComponent);
     return PrinterComponent;
-    var _a, _b, _c, _d, _e;
+    var _a, _b, _c, _d;
 }());
 
 //# sourceMappingURL=printer.component.js.map
@@ -1686,16 +1513,12 @@ var PrinterComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_new_component__ = __webpack_require__("../../../../../src/app/orders/components/new.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_payment_component__ = __webpack_require__("../../../../../src/app/orders/components/payment.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_printer_component__ = __webpack_require__("../../../../../src/app/orders/components/printer.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_complement_component__ = __webpack_require__("../../../../../src/app/orders/components/complement.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_orders_close_component__ = __webpack_require__("../../../../../src/app/orders/components/orders-close.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-
-
 
 
 
@@ -1730,16 +1553,7 @@ var routes = [
                 component: __WEBPACK_IMPORTED_MODULE_4__components_new_component__["a" /* NewComponent */],
                 data: {
                     title: 'Novo'
-                },
-                children: [
-                    {
-                        path: 'component/:id',
-                        component: __WEBPACK_IMPORTED_MODULE_7__components_complement_component__["a" /* ComplementComponent */],
-                        data: {
-                            title: 'Component'
-                        }
-                    }
-                ]
+                }
             },
             {
                 path: 'payment/:id',
@@ -1749,13 +1563,6 @@ var routes = [
                 }
             }
         ]
-    },
-    {
-        path: "orders/close",
-        component: __WEBPACK_IMPORTED_MODULE_8__components_orders_close_component__["a" /* OrdersCloseComponent */],
-        data: {
-            title: 'Pedidos fechados'
-        }
     }
 ];
 var OrdersRoutingModule = (function () {
@@ -1800,16 +1607,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_ng2_currency_mask___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_15_ng2_currency_mask__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16_ngx_phone_mask__ = __webpack_require__("../../../../ngx-phone-mask/ngx-phone-mask/ngx-phone-mask.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_printer_component__ = __webpack_require__("../../../../../src/app/orders/components/printer.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_complement_component__ = __webpack_require__("../../../../../src/app/orders/components/complement.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__components_orders_close_component__ = __webpack_require__("../../../../../src/app/orders/components/orders-close.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-
-
 
 
 
@@ -1845,7 +1648,13 @@ var OrdersModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_15_ng2_currency_mask__["CurrencyMaskModule"],
                 __WEBPACK_IMPORTED_MODULE_16_ngx_phone_mask__["a" /* NgxPhoneMaskModule */],
             ],
-            declarations: [__WEBPACK_IMPORTED_MODULE_6__components_orders_component__["a" /* OrdersComponent */], __WEBPACK_IMPORTED_MODULE_7__components_edit_component__["a" /* EditComponent */], __WEBPACK_IMPORTED_MODULE_8__components_new_component__["a" /* NewComponent */], __WEBPACK_IMPORTED_MODULE_9__components_payment_component__["a" /* PaymentComponent */], __WEBPACK_IMPORTED_MODULE_17__components_printer_component__["a" /* PrinterComponent */], __WEBPACK_IMPORTED_MODULE_18__components_complement_component__["a" /* ComplementComponent */], __WEBPACK_IMPORTED_MODULE_19__components_orders_close_component__["a" /* OrdersCloseComponent */]],
+            declarations: [
+                __WEBPACK_IMPORTED_MODULE_6__components_orders_component__["a" /* OrdersComponent */],
+                __WEBPACK_IMPORTED_MODULE_7__components_edit_component__["a" /* EditComponent */],
+                __WEBPACK_IMPORTED_MODULE_8__components_new_component__["a" /* NewComponent */],
+                __WEBPACK_IMPORTED_MODULE_9__components_payment_component__["a" /* PaymentComponent */],
+                __WEBPACK_IMPORTED_MODULE_17__components_printer_component__["a" /* PrinterComponent */]
+            ],
             providers: [__WEBPACK_IMPORTED_MODULE_12__services_orders_service__["a" /* OrdersService */], __WEBPACK_IMPORTED_MODULE_4_ngx_bootstrap_modal__["a" /* BsModalService */]]
         })
     ], OrdersModule);

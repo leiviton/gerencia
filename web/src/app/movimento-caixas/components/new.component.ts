@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import {ToasterService} from 'angular2-toaster';
 import * as jQuery from 'jquery';
 
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgForOf } from '@angular/common';
 import { MovimentoCaixasService } from '../services/movimento-caixas.service';
 import { FormsModule } from '@angular/forms';
+import {AppMessageService} from "../../app-message.service";
 
 @Component({
     templateUrl: 'new.component.html'
 })
 export class NewComponent implements OnInit {
 
-    constructor(private httpService: MovimentoCaixasService, private router: Router, private route: ActivatedRoute
-        ,private toasterService: ToasterService
+    constructor(private httpService: MovimentoCaixasService, private router: Router,
+                private route: ActivatedRoute,private toasterService: AppMessageService
     ) {}
 
     movimento = {
@@ -55,18 +55,17 @@ export class NewComponent implements OnInit {
                     this.hideLoading();
                     if(res == 'fechado')
                     {
-                        this.toasterService.pop('error', 'Erro', 'Caixa está fechado.');
+                        this.toasterService.message('Erro', 'Caixa está fechado.','error');
                     }else {
-                        this.toasterService.pop('success', 'Salvo', 'Movimento salvo com sucesso.');
+                        this.toasterService.message( 'Salvo', 'Movimento salvo com sucesso.','success');
                         this.close();
                     }
                 })
 
         }else{
             this.hideLoading();
-            this.toasterService.pop('error', 'Erro', 'Verifique se todos os campos foram preenchidos.');
+            this.toasterService.message('Erro', 'Verifique se todos os campos foram preenchidos.','error');
         }
-
     }
 
     getCaixas()
@@ -84,11 +83,11 @@ export class NewComponent implements OnInit {
     }
 
     hideLoading(){
-        jQuery(".container-loading").hide();
+        jQuery("#bifrostBarSpinner").hide();
     }
 
     showLoading(){
-        jQuery(".container-loading").show();
+        jQuery("#bifrostBarSpinner").show();
     }
 
 }

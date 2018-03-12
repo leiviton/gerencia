@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardService } from '../services/dashboard.service';
 import { Router } from '@angular/router';
-import {ToasterService} from 'angular2-toaster';
 import * as jQuery from 'jquery';
 
 import { environment } from '../../../environments/environment';
 import {AuthService} from "../../user/services/auth.service";
+import {AppMessageService} from "../../app-message.service";
 @Component({
     templateUrl: './password.component.html'
 })
 export class PasswordComponent{
 
-    constructor(private authService: DashboardService,private service: AuthService, private toast: ToasterService, private router: Router){}
+    constructor(private authService: DashboardService,private service: AuthService, private toast: AppMessageService, private router: Router){}
 
     user: any = {
         password: null,
@@ -37,11 +37,11 @@ export class PasswordComponent{
             this.authService.builder('password').update(this.id,this.user)
                 .then(() => {
                     this.hideLoading();
-                    this.toast.pop('success','Salvo','Nova senha definida com sucesso');
+                    this.toast.message('Sucesso','Nova senha definida com sucesso','success');
                     this.router.navigate(['dashboard']);
                 });
         } else {
-            this.toast.pop('error','Error','Não foi possivel salvar');
+            this.toast.message('Erro','Não foi possivel salvar','error');
         }
     }
 
@@ -62,7 +62,7 @@ export class PasswordComponent{
             this.validar = true;
         }).catch(() => {
             this.validar = false;
-            this.toast.pop('error','Error','Senha invalida');
+            this.toast.message('Erro','Senha incorreta','error');
         })
     }
     close(){

@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { OrdersService} from "../orders/services/orders.service"
-
-import {ToasterService} from 'angular2-toaster';
-
+import {AppMessageService} from "../app-message.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -14,7 +12,7 @@ export class FullLayoutComponent implements OnInit {
   user = JSON.parse(localStorage.getItem('user') || null);
   show = false;
   ano = new Date().getFullYear();
-  constructor(private route: Router, private toasterService: ToasterService) {
+  constructor(private route: Router, private toasterService: AppMessageService) {
     setInterval(() => {
         this.user = JSON.parse(localStorage.getItem('user') || null);
         if (this.user != null)
@@ -41,7 +39,7 @@ export class FullLayoutComponent implements OnInit {
 
   ngOnInit(): void {
       if (!this.user){
-        this.toasterService.pop('warning','Atenção','É necessário logar no sistema');
+        this.toasterService.message('Atenção','É necessário logar no sistema','warning');
         this.route.navigateByUrl('/user/login');
       }
 

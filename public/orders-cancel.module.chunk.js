@@ -17,7 +17,7 @@ module.exports = "<div tabindex=\"-1\" class=\"modal fade modal_novo\" id=\"succ
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_jquery__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_orders_service__ = __webpack_require__("../../../../../src/app/cancel/services/orders.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angular2_toaster__ = __webpack_require__("../../../../angular2-toaster/angular2-toaster.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_message_service__ = __webpack_require__("../../../../../src/app/app-message.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -155,7 +155,7 @@ var EditComponent = (function () {
             _this.products = res.data.items;
             _this.mesa = res.data.mesa.data.name;
             _this.hideLoading();
-            _this.toasterService.pop('success', 'Sucesso', 'Pedido ' + _this.order.id + ' com sucesso!');
+            _this.toasterService.message('Sucesso', 'Pedido ' + _this.order.id + ' com sucesso!');
         });
     };
     EditComponent.prototype.buscar = function () {
@@ -186,7 +186,7 @@ var EditComponent = (function () {
     };
     EditComponent.prototype.addItem = function (item) {
         this.httpService.addItem(item, this.qtd);
-        this.toasterService.pop('success', 'Sucesso', 'Item codigo ' + item.id + ' adicionado.');
+        this.toasterService.message('Sucesso', 'Item codigo ' + item.id + ' adicionado.', 'success');
     };
     EditComponent.prototype.close = function () {
         __WEBPACK_IMPORTED_MODULE_1_jquery__('#successModal').on('show.bs.modal').show().removeClass('show');
@@ -200,16 +200,16 @@ var EditComponent = (function () {
         this.editar = !this.editar;
     };
     EditComponent.prototype.hideLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_1_jquery__(".container-loading").hide();
+        __WEBPACK_IMPORTED_MODULE_1_jquery__("#bifrostBarSpinner").hide();
     };
     EditComponent.prototype.showLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_1_jquery__(".container-loading").show();
+        __WEBPACK_IMPORTED_MODULE_1_jquery__("#bifrostBarSpinner").show();
     };
     EditComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             template: __webpack_require__("../../../../../src/app/cancel/components/edit.component.html")
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__services_orders_service__["a" /* OrdersService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_orders_service__["a" /* OrdersService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4_angular2_toaster__["b" /* ToasterService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4_angular2_toaster__["b" /* ToasterService */]) === "function" && _d || Object])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__services_orders_service__["a" /* OrdersService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_orders_service__["a" /* OrdersService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__app_message_service__["a" /* AppMessageService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__app_message_service__["a" /* AppMessageService */]) === "function" && _d || Object])
     ], EditComponent);
     return EditComponent;
     var _a, _b, _c, _d;
@@ -234,9 +234,9 @@ module.exports = "<div class=\"animated fadeIn\">\n    <div class=\"row\">\n    
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_orders_service__ = __webpack_require__("../../../../../src/app/cancel/services/orders.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ng2_toasty__ = __webpack_require__("../../../../ng2-toasty/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_jquery__ = __webpack_require__("../../../../jquery/dist/jquery.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_jquery__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jquery__ = __webpack_require__("../../../../jquery/dist/jquery.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_jquery__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_message_service__ = __webpack_require__("../../../../../src/app/app-message.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -252,13 +252,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var OrdersCancelComponent = (function () {
-    function OrdersCancelComponent(httpService, router, tosty, toastyOptions, toastyConfig) {
+    function OrdersCancelComponent(httpService, router, notification) {
         var _this = this;
         this.httpService = httpService;
         this.router = router;
-        this.tosty = tosty;
-        this.toastyOptions = toastyOptions;
-        this.toastyConfig = toastyConfig;
+        this.notification = notification;
         this.cor = false;
         this.orders = {
             data: []
@@ -287,10 +285,10 @@ var OrdersCancelComponent = (function () {
             _this.hideModal();
             _this.hideLoading();
             if (_this.tamanho > 0) {
-                _this.message('Sucesso', 'Dados carregados com sucesso', 5000, 'success');
+                _this.notification.message('Sucesso', 'Dados carregados com sucesso', 'success');
             }
             else if (_this.tamanho == 0) {
-                _this.message('Informação', 'Sem pedidos fechados com data de hoje', 5000, 'info');
+                _this.notification.message('Informação', 'Sem pedidos cancelados com data de hoje', 'info');
             }
         });
     };
@@ -300,18 +298,6 @@ var OrdersCancelComponent = (function () {
     };
     OrdersCancelComponent.prototype.new = function () {
         return this.router.navigate(['/orders/new']);
-    };
-    OrdersCancelComponent.prototype.hideLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_4_jquery__(".container-loading").hide();
-    };
-    OrdersCancelComponent.prototype.showLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_4_jquery__(".container-loading").show();
-    };
-    OrdersCancelComponent.prototype.showModal = function () {
-        __WEBPACK_IMPORTED_MODULE_4_jquery__(".modal").show().addClass('show');
-    };
-    OrdersCancelComponent.prototype.hideModal = function () {
-        __WEBPACK_IMPORTED_MODULE_4_jquery__(".modal").hide();
     };
     OrdersCancelComponent.prototype.pesquisar = function () {
         var _this = this;
@@ -331,183 +317,42 @@ var OrdersCancelComponent = (function () {
                 _this.tamanho = res.data.length;
                 _this.hideModal();
                 _this.hideLoading();
-                _this.message('Sucesso', 'Dados carregados com sucesso', 5000, 'success');
+                if (_this.tamanho > 0) {
+                    _this.notification.message('Sucesso', 'Dados carregados com sucesso', 'success');
+                }
+                else if (_this.tamanho == 0) {
+                    _this.notification.message('Informação', 'Sem pedidos cancelados com data de hoje', 'info');
+                }
             });
         }
         else {
-            this.message('Sucesso', 'Preencha inicio, fim e status para pesquisar.', 5000, 'success');
+            this.notification.message('Sucesso', 'Preencha inicio, fim e status para pesquisar.', 'success');
             this.hideLoading();
         }
     };
-    OrdersCancelComponent.prototype.message = function (titulo, message, time, type) {
-        this.toastyOptions = {
-            title: titulo,
-            msg: message,
-            timeout: time,
-        };
-        switch (type) {
-            case 'default':
-                this.tosty.default(this.toastyOptions);
-                break;
-            case 'info':
-                this.tosty.info(this.toastyOptions);
-                break;
-            case 'success':
-                this.tosty.success(this.toastyOptions);
-                break;
-            case 'wait':
-                this.tosty.wait(this.toastyOptions);
-                break;
-            case 'error':
-                this.tosty.error(this.toastyOptions);
-                break;
-            case 'warning':
-                this.tosty.warning(this.toastyOptions);
-                break;
-        }
+    OrdersCancelComponent.prototype.hideLoading = function () {
+        __WEBPACK_IMPORTED_MODULE_3_jquery__("#bifrostBarSpinner").hide();
+    };
+    OrdersCancelComponent.prototype.showLoading = function () {
+        __WEBPACK_IMPORTED_MODULE_3_jquery__("#bifrostBarSpinner").show();
+    };
+    OrdersCancelComponent.prototype.showModal = function () {
+        __WEBPACK_IMPORTED_MODULE_3_jquery__(".modal").show().addClass('show');
+    };
+    OrdersCancelComponent.prototype.hideModal = function () {
+        __WEBPACK_IMPORTED_MODULE_3_jquery__(".modal").hide();
     };
     OrdersCancelComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             template: __webpack_require__("../../../../../src/app/cancel/components/orders.component.html")
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__services_orders_service__["a" /* OrdersService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_orders_service__["a" /* OrdersService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3_ng2_toasty__["d" /* ToastyService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_ng2_toasty__["d" /* ToastyService */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3_ng2_toasty__["a" /* ToastOptions */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_ng2_toasty__["a" /* ToastOptions */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_3_ng2_toasty__["b" /* ToastyConfig */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_ng2_toasty__["b" /* ToastyConfig */]) === "function" && _e || Object])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__services_orders_service__["a" /* OrdersService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_orders_service__["a" /* OrdersService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__app_message_service__["a" /* AppMessageService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__app_message_service__["a" /* AppMessageService */]) === "function" && _c || Object])
     ], OrdersCancelComponent);
     return OrdersCancelComponent;
-    var _a, _b, _c, _d, _e;
+    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=orders.component.js.map
-
-/***/ }),
-
-/***/ "../../../../../src/app/cancel/components/payment.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<div tabindex=\"-1\" class=\"modal fade\" id=\"payment\" role=\"dialog\" aria-hidden=\"true\" aria-labelledby=\"myModalLabel\" style=\"display: block; overflow-y: auto;\">\r\n    <div class=\"modal-dialog modal-lg modal-primary\" role=\"document\">\r\n        <div class=\"modal-content\">\r\n            <div class=\"modal-header novo\">\r\n                <h4 class=\"text-center\">Pedido: {{ order.id }} </h4>\r\n                <h4 class=\"text-center\"> {{ mesa }} </h4>\r\n                <h4 class=\"text-center\"> Total: {{ order.total | currency:'BRL':true }}</h4>\r\n            </div>\r\n            <div class=\"modal-body\" style=\"height: 500px; overflow: auto\">\r\n                <div class=\"col-md-12\">\r\n                    <div class=\"row col-md-12\">\r\n                        <div class=\"col-md-6\">\r\n                            <h5 class=\"text-capitalize\">{{ client.name }}</h5>\r\n                        </div>\r\n                        <div class=\"col-md-6\">\r\n                            <h5 class=\"text-capitalize\">{{ client.address }}</h5>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-md-12\" *ngIf=\"order.payment\">\r\n                    <div class=\"table-responsive\">\r\n                        <div class=\"card\">\r\n                            <div class=\"card-header\">\r\n                                <i class=\"fa fa-money\"></i> Pagamentos\r\n                            </div>\r\n                            <div class=\"card-body\">\r\n                                <table class=\"table scrollbox table-striped\">\r\n                                    <thead>\r\n                                    <tr class=\"th-table title-table\">\r\n                                        <th class=\"text-center\">Vr.Pago</th>\r\n                                        <th>Desconto</th>\r\n                                        <th class=\"text-center\">Acrescimo</th>\r\n                                        <th class=\"text-center\">Total</th>\r\n                                        <th class=\"text-center\">Tipo</th>\r\n                                        <th class=\"text-center\">Data</th>\r\n                                    </tr>\r\n                                    </thead>\r\n                                    <tbody style=\"height: 250px; overflow: auto\">\r\n                                    <tr class=\"th-table\" *ngFor=\"let p of order.payment.data; let i = index\">\r\n                                        <td class=\"text-center\">{{ p.total_pago | currency:'BRL':true }}</td>\r\n                                        <td>{{ p.desconto | currency:'BRL':true }}</td>\r\n                                        <td class=\"text-center\">{{ p.acrescimo | currency:'BRL':true }}</td>\r\n                                        <td class=\"text-center\">{{ order.total | currency:'BRL':true }}</td>\r\n                                        <td class=\"text-center\">{{ p.type.data.name }}</td>\r\n                                        <td class=\"text-center\">{{ p.created_at }}</td>\r\n                                    </tr>\r\n                                    </tbody>\r\n                                </table>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-md-12\">\r\n                    <div class=\"card\">\r\n                        <div class=\"card-header\">\r\n                            <i class=\"fa fa-shopping-bag\"></i> Produtos\r\n                        </div>\r\n                        <div class=\"card-body\" style=\"padding-bottom: 0px\">\r\n                            <div class=\"table-responsive\">\r\n                                <table class=\"table scrollbox table-striped\">\r\n                                    <thead>\r\n                                    <tr class=\"th-table title-table\">\r\n                                        <th class=\"text-center\">#</th>\r\n                                        <th>Produto</th>\r\n                                        <th class=\"text-center\">Valor</th>\r\n                                        <th class=\"text-center\">Qtd.</th>\r\n                                        <th class=\"text-center\">Subtotal</th>\r\n                                    </tr>\r\n                                    </thead>\r\n                                    <tbody style=\"height: 170px; overflow: auto\">\r\n                                    <tr class=\"th-table\" *ngFor=\"let p of products.data; let i = index\">\r\n                                        <td class=\"text-center\" *ngIf=\"p.ativo == 'S'\">{{ p.product.data.id }}</td>\r\n                                        <td *ngIf=\"p.ativo == 'S'\">{{ p.product.data.name }}\r\n                                            <p *ngFor=\"let c of p.complement.data\" style=\"font-size: 10px; margin-bottom: 0;\"> {{ c.complement.data.name }}: {{ c.price | currency:'BRL':true }}</p>\r\n                                            <p style=\"font-size: 10px; margin-bottom: 0;\">{{ p.historico }}</p>\r\n                                        </td>\r\n                                        <td class=\"text-center\" *ngIf=\"p.ativo == 'S'\">{{ p.price | currency:'BRL':true }}</td>\r\n                                        <td class=\"text-center\" *ngIf=\"p.ativo == 'S'\">{{ p.qtd }}</td>\r\n                                        <td class=\"text-center\" *ngIf=\"p.ativo == 'S'\">{{ p.subtotal | currency:'BRL':true }}</td>\r\n                                    </tr>\r\n                                    </tbody>\r\n                                </table>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"modal-footer novo\">\r\n                <div class=\"modal-button\">\r\n                    <button class=\"btn btn-danger text-left\" type=\"button\" (click)=\"close()\"><i class=\"fa fa-arrow-circle-left\"></i> Fechar</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <!-- /.modal-content -->\r\n    </div>\r\n    <!-- /.modal-dialog -->\r\n</div>\r\n"
-
-/***/ }),
-
-/***/ "../../../../../src/app/cancel/components/payment.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PaymentComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery__ = __webpack_require__("../../../../jquery/dist/jquery.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_jquery__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_orders_service__ = __webpack_require__("../../../../../src/app/cancel/services/orders.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angular2_toaster__ = __webpack_require__("../../../../angular2-toaster/angular2-toaster.js");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-var PaymentComponent = (function () {
-    function PaymentComponent(httpService, router, route, toasterService) {
-        var _this = this;
-        this.httpService = httpService;
-        this.router = router;
-        this.route = route;
-        this.toasterService = toasterService;
-        this.order = {
-            id: 0,
-            total: 0
-        };
-        this.mesa = '';
-        this.products = {};
-        this.total = 0;
-        this.type_id = null;
-        this.payment = {
-            'order_id': null,
-            'total_pago': 0,
-            'desconto': 0,
-            'acrescimo': 0,
-            'total_original': 0,
-            'payment_types': '',
-            'data_pagamento': ''
-        };
-        this.troco = 0;
-        this.tipo = {};
-        this.valor_pag = 0;
-        this.divisao = 1;
-        this.result_div = 0;
-        this.client = {
-            name: '',
-            address: ''
-        };
-        document.onkeydown = (function (e) {
-            if (e.keyCode == 27) {
-                _this.close();
-            }
-        });
-    }
-    PaymentComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.showLoading();
-        __WEBPACK_IMPORTED_MODULE_1_jquery__('#payment').show().addClass('show');
-        this.tipos();
-        this.httpService.setAccessToken();
-        this.route.params
-            .subscribe(function (params) {
-            _this.httpService.builder().view(params['id'], 'order')
-                .then(function (res) {
-                _this.order = res.data;
-                _this.payment.order_id = _this.order.id;
-                _this.payment.total_pago = res.data.payment.data[0].total_pago;
-                _this.payment.total_original = res.data.total;
-                _this.payment.data_pagamento = res.data.payment.data[0].created_at;
-                _this.payment.desconto = res.data.payment.data[0].desconto;
-                _this.payment.acrescimo = res.data.payment.data[0].acrescimo;
-                _this.payment.payment_types = res.data.payment.data[0].type.data.name;
-                _this.products = res.data.items;
-                _this.client.name = res.data.client.data.name;
-                _this.client.address = res.data.client.data.endereco;
-                _this.mesa = res.data.mesa.data.name;
-                _this.hideLoading();
-            });
-        });
-        this.httpService.eventEmitter.emit();
-    };
-    PaymentComponent.prototype.tipos = function () {
-        var _this = this;
-        this.httpService.setAccessToken();
-        this.httpService.builder()
-            .list({}, 'typepayment')
-            .then(function (res) {
-            _this.tipo = res;
-        });
-    };
-    PaymentComponent.prototype.close = function () {
-        __WEBPACK_IMPORTED_MODULE_1_jquery__('#payment').hide();
-        this.router.navigate(['/close']);
-    };
-    PaymentComponent.prototype.hideLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_1_jquery__(".container-loading").hide();
-    };
-    PaymentComponent.prototype.showLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_1_jquery__(".container-loading").show();
-    };
-    PaymentComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            template: __webpack_require__("../../../../../src/app/cancel/components/payment.component.html")
-        }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__services_orders_service__["a" /* OrdersService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_orders_service__["a" /* OrdersService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4_angular2_toaster__["b" /* ToasterService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4_angular2_toaster__["b" /* ToasterService */]) === "function" && _d || Object])
-    ], PaymentComponent);
-    return PaymentComponent;
-    var _a, _b, _c, _d;
-}());
-
-//# sourceMappingURL=payment.component.js.map
 
 /***/ }),
 
@@ -529,7 +374,6 @@ module.exports = "<div tabindex=\"-1\" class=\"modal fade modal_novo\" id=\"prin
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_jquery__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_orders_service__ = __webpack_require__("../../../../../src/app/cancel/services/orders.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_angular2_toaster__ = __webpack_require__("../../../../angular2-toaster/angular2-toaster.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -544,14 +388,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
 var PrinterComponent = (function () {
-    function PrinterComponent(httpService, router, route, toasterService, sanitizer) {
+    function PrinterComponent(httpService, router, route, sanitizer) {
         var _this = this;
         this.httpService = httpService;
         this.router = router;
         this.route = route;
-        this.toasterService = toasterService;
         this.sanitizer = sanitizer;
         this.order = {
             id: 0,
@@ -595,22 +437,22 @@ var PrinterComponent = (function () {
     };
     PrinterComponent.prototype.close = function () {
         __WEBPACK_IMPORTED_MODULE_2_jquery__('#printer').on('show.bs.modal').show().removeClass('show');
-        this.router.navigate(['/close']);
+        this.router.navigate(['/cancel']);
     };
     PrinterComponent.prototype.hideLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_2_jquery__(".container-loading").hide();
+        __WEBPACK_IMPORTED_MODULE_2_jquery__("#bifrostBarSpinner").hide();
     };
     PrinterComponent.prototype.showLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_2_jquery__(".container-loading").show();
+        __WEBPACK_IMPORTED_MODULE_2_jquery__("#bifrostBarSpinner").show();
     };
     PrinterComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             template: __webpack_require__("../../../../../src/app/cancel/components/printer.component.html")
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_4__services_orders_service__["a" /* OrdersService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__services_orders_service__["a" /* OrdersService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* ActivatedRoute */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_5_angular2_toaster__["b" /* ToasterService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5_angular2_toaster__["b" /* ToasterService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__["c" /* DomSanitizer */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__["c" /* DomSanitizer */]) === "function" && _e || Object])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_4__services_orders_service__["a" /* OrdersService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__services_orders_service__["a" /* OrdersService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* ActivatedRoute */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__["c" /* DomSanitizer */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__["c" /* DomSanitizer */]) === "function" && _d || Object])
     ], PrinterComponent);
     return PrinterComponent;
-    var _a, _b, _c, _d, _e;
+    var _a, _b, _c, _d;
 }());
 
 //# sourceMappingURL=printer.component.js.map
@@ -631,25 +473,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ngx_bootstrap_modal__ = __webpack_require__("../../../../ngx-bootstrap/modal/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_orders_component__ = __webpack_require__("../../../../../src/app/cancel/components/orders.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_payment_component__ = __webpack_require__("../../../../../src/app/cancel/components/payment.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__orders_routing_module__ = __webpack_require__("../../../../../src/app/cancel/orders-routing.module.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_ngx_bootstrap__ = __webpack_require__("../../../../ngx-bootstrap/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__services_orders_service__ = __webpack_require__("../../../../../src/app/cancel/services/orders.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_cuppa_ng2_grid_cuppa_ng2_dataGrid__ = __webpack_require__("../../../../cuppa-ng2-grid/cuppa-ng2-dataGrid.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_ngx_bootstrap_tabs__ = __webpack_require__("../../../../ngx-bootstrap/tabs/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_ng2_currency_mask__ = __webpack_require__("../../../../ng2-currency-mask/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_ng2_currency_mask___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_13_ng2_currency_mask__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_ngx_phone_mask__ = __webpack_require__("../../../../ngx-phone-mask/ngx-phone-mask/ngx-phone-mask.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_printer_component__ = __webpack_require__("../../../../../src/app/cancel/components/printer.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_edit_component__ = __webpack_require__("../../../../../src/app/cancel/components/edit.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17_ng2_toasty__ = __webpack_require__("../../../../ng2-toasty/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__orders_routing_module__ = __webpack_require__("../../../../../src/app/cancel/orders-routing.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_ngx_bootstrap__ = __webpack_require__("../../../../ngx-bootstrap/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__services_orders_service__ = __webpack_require__("../../../../../src/app/cancel/services/orders.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_cuppa_ng2_grid_cuppa_ng2_dataGrid__ = __webpack_require__("../../../../cuppa-ng2-grid/cuppa-ng2-dataGrid.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_ngx_bootstrap_tabs__ = __webpack_require__("../../../../ngx-bootstrap/tabs/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_ng2_currency_mask__ = __webpack_require__("../../../../ng2-currency-mask/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_ng2_currency_mask___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12_ng2_currency_mask__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_ngx_phone_mask__ = __webpack_require__("../../../../ngx-phone-mask/ngx-phone-mask/ngx-phone-mask.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_printer_component__ = __webpack_require__("../../../../../src/app/cancel/components/printer.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_edit_component__ = __webpack_require__("../../../../../src/app/cancel/components/edit.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__app_message_service__ = __webpack_require__("../../../../../src/app/app-message.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-
 
 
 
@@ -674,18 +514,18 @@ var OrdersCancelModule = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
             imports: [
                 __WEBPACK_IMPORTED_MODULE_1__angular_common__["CommonModule"],
-                __WEBPACK_IMPORTED_MODULE_8__orders_routing_module__["a" /* OrdersCancelRoutingModule */],
+                __WEBPACK_IMPORTED_MODULE_7__orders_routing_module__["a" /* OrdersCancelRoutingModule */],
                 __WEBPACK_IMPORTED_MODULE_2_ng2_charts_ng2_charts__["ChartsModule"],
                 __WEBPACK_IMPORTED_MODULE_3_ngx_bootstrap_dropdown__["a" /* BsDropdownModule */],
-                __WEBPACK_IMPORTED_MODULE_9_ngx_bootstrap__["b" /* TooltipModule */],
+                __WEBPACK_IMPORTED_MODULE_8_ngx_bootstrap__["b" /* TooltipModule */],
                 __WEBPACK_IMPORTED_MODULE_5__angular_forms__["FormsModule"],
-                __WEBPACK_IMPORTED_MODULE_11_cuppa_ng2_grid_cuppa_ng2_dataGrid__["a" /* CuppaDataGridModule */],
-                __WEBPACK_IMPORTED_MODULE_12_ngx_bootstrap_tabs__["a" /* TabsModule */],
-                __WEBPACK_IMPORTED_MODULE_13_ng2_currency_mask__["CurrencyMaskModule"],
-                __WEBPACK_IMPORTED_MODULE_14_ngx_phone_mask__["a" /* NgxPhoneMaskModule */],
+                __WEBPACK_IMPORTED_MODULE_10_cuppa_ng2_grid_cuppa_ng2_dataGrid__["a" /* CuppaDataGridModule */],
+                __WEBPACK_IMPORTED_MODULE_11_ngx_bootstrap_tabs__["a" /* TabsModule */],
+                __WEBPACK_IMPORTED_MODULE_12_ng2_currency_mask__["CurrencyMaskModule"],
+                __WEBPACK_IMPORTED_MODULE_13_ngx_phone_mask__["a" /* NgxPhoneMaskModule */],
             ],
-            declarations: [__WEBPACK_IMPORTED_MODULE_6__components_orders_component__["a" /* OrdersCancelComponent */], __WEBPACK_IMPORTED_MODULE_7__components_payment_component__["a" /* PaymentComponent */], __WEBPACK_IMPORTED_MODULE_15__components_printer_component__["a" /* PrinterComponent */], __WEBPACK_IMPORTED_MODULE_16__components_edit_component__["a" /* EditComponent */]],
-            providers: [__WEBPACK_IMPORTED_MODULE_10__services_orders_service__["a" /* OrdersService */], __WEBPACK_IMPORTED_MODULE_4_ngx_bootstrap_modal__["a" /* BsModalService */], __WEBPACK_IMPORTED_MODULE_17_ng2_toasty__["a" /* ToastOptions */]]
+            declarations: [__WEBPACK_IMPORTED_MODULE_6__components_orders_component__["a" /* OrdersCancelComponent */], __WEBPACK_IMPORTED_MODULE_14__components_printer_component__["a" /* PrinterComponent */], __WEBPACK_IMPORTED_MODULE_15__components_edit_component__["a" /* EditComponent */]],
+            providers: [__WEBPACK_IMPORTED_MODULE_9__services_orders_service__["a" /* OrdersService */], __WEBPACK_IMPORTED_MODULE_4_ngx_bootstrap_modal__["a" /* BsModalService */], __WEBPACK_IMPORTED_MODULE_16__app_message_service__["a" /* AppMessageService */]]
         })
     ], OrdersCancelModule);
     return OrdersCancelModule;
@@ -703,16 +543,14 @@ var OrdersCancelModule = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_orders_component__ = __webpack_require__("../../../../../src/app/cancel/components/orders.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_payment_component__ = __webpack_require__("../../../../../src/app/cancel/components/payment.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_printer_component__ = __webpack_require__("../../../../../src/app/cancel/components/printer.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_edit_component__ = __webpack_require__("../../../../../src/app/cancel/components/edit.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_printer_component__ = __webpack_require__("../../../../../src/app/cancel/components/printer.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_edit_component__ = __webpack_require__("../../../../../src/app/cancel/components/edit.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-
 
 
 
@@ -728,23 +566,16 @@ var routes = [
         children: [
             {
                 path: 'edit/:id',
-                component: __WEBPACK_IMPORTED_MODULE_5__components_edit_component__["a" /* EditComponent */],
+                component: __WEBPACK_IMPORTED_MODULE_4__components_edit_component__["a" /* EditComponent */],
                 data: {
                     title: 'Editar'
                 }
             },
             {
                 path: 'printer/:id/:i',
-                component: __WEBPACK_IMPORTED_MODULE_4__components_printer_component__["a" /* PrinterComponent */],
+                component: __WEBPACK_IMPORTED_MODULE_3__components_printer_component__["a" /* PrinterComponent */],
                 data: {
                     title: 'Printer'
-                }
-            },
-            {
-                path: 'payment/:id',
-                component: __WEBPACK_IMPORTED_MODULE_3__components_payment_component__["a" /* PaymentComponent */],
-                data: {
-                    title: 'Editar'
                 }
             }
         ]

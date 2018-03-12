@@ -4,10 +4,7 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { FormsModule} from '@angular/forms'
-
 import { OrdersCancelComponent } from './components/orders.component';
-import { PaymentComponent } from "./components/payment.component";
-
 import { OrdersCancelRoutingModule } from './orders-routing.module';
 import { TooltipModule } from 'ngx-bootstrap';
 import { OrdersService } from './services/orders.service';
@@ -35,7 +32,7 @@ import {AppMessageService} from "../app-message.service";
       CurrencyMaskModule,
       NgxPhoneMaskModule,
   ],
-  declarations: [ OrdersCancelComponent,PaymentComponent,PrinterComponent,EditComponent ],
+  declarations: [ OrdersCancelComponent,PrinterComponent,EditComponent ],
   providers: [ OrdersService, BsModalService,AppMessageService ]
 })
 export class OrdersCancelModule { }

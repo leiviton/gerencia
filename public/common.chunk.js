@@ -72,10 +72,10 @@ var LoginComponent = (function () {
         });
     };
     LoginComponent.prototype.hideLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_4_jquery__(".container-loading").hide();
+        __WEBPACK_IMPORTED_MODULE_4_jquery__("#bifrostBarSpinner").hide();
     };
     LoginComponent.prototype.showLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_4_jquery__(".container-loading").show();
+        __WEBPACK_IMPORTED_MODULE_4_jquery__("#bifrostBarSpinner").show();
     };
     LoginComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({

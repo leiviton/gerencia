@@ -9,6 +9,7 @@
 namespace Pedidos\Http\Controllers\Api\V1\Admin;
 
 
+use Carbon\Carbon;
 use Pedidos\Http\Controllers\Controller;
 use Pedidos\Http\Requests\AdminProductRequest;
 use Pedidos\Repositories\AuditRepository;
@@ -41,6 +42,9 @@ class MovimentoCaixasController extends Controller
     {
         return $this->repository
             ->skipPresenter(false)
+            ->scopeQuery(function($query){
+                return $query->where('created_at','>=',Carbon::now()->startOfDay());
+            })
             ->all();
     }
 

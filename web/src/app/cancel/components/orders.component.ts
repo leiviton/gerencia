@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {ToasterService} from 'angular2-toaster';
 import { Router } from '@angular/router';
 import { NgForOf } from '@angular/common';
 import { OrdersService } from '../services/orders.service';
@@ -49,7 +48,7 @@ export class OrdersCancelComponent implements OnInit {
                   this.notification.message('Sucesso', 'Dados carregados com sucesso', 'success');
               }else if(this.tamanho == 0)
               {
-                  this.notification.message('Informação', 'Sem pedidos fechados com data de hoje', 'info');
+                  this.notification.message('Informação', 'Sem pedidos cancelados com data de hoje', 'info');
               }
           });
 
@@ -67,21 +66,6 @@ export class OrdersCancelComponent implements OnInit {
     }
 
 
-    hideLoading(){
-        jQuery(".container-loading").hide();
-    }
-    showLoading(){
-        jQuery(".container-loading").show();
-    }
-
-    showModal()
-    {
-        jQuery(".modal").show().addClass('show');
-    }
-    hideModal()
-    {
-        jQuery(".modal").hide();
-    }
     pesquisar()
     {
 
@@ -106,7 +90,7 @@ export class OrdersCancelComponent implements OnInit {
                             this.notification.message('Sucesso', 'Dados carregados com sucesso', 'success');
                         }else if(this.tamanho == 0)
                         {
-                            this.notification.message('Informação', 'Sem pedidos fechados com data de hoje', 'info');
+                            this.notification.message('Informação', 'Sem pedidos cancelados com data de hoje', 'info');
                         }
                 });
             }else  {
@@ -114,4 +98,20 @@ export class OrdersCancelComponent implements OnInit {
                 this.hideLoading();
             }
     }
+    hideLoading(){
+        jQuery("#bifrostBarSpinner").hide();
+    }
+    showLoading(){
+        jQuery("#bifrostBarSpinner").show();
+    }
+
+    showModal()
+    {
+        jQuery(".modal").show().addClass('show');
+    }
+    hideModal()
+    {
+        jQuery(".modal").hide();
+    }
+
 }

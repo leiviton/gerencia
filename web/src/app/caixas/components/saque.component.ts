@@ -6,9 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NgForOf } from '@angular/common';
 import { CaixasService } from '../services/caixas.service';
 import { FormsModule } from '@angular/forms';
-
-
-import {ToasterService} from 'angular2-toaster';
+import {AppMessageService} from "../../app-message.service";
 
 @Component({
     templateUrl: 'saque.component.html'
@@ -16,7 +14,7 @@ import {ToasterService} from 'angular2-toaster';
 export class SaqueComponent implements OnInit {
 
     constructor(private httpService: CaixasService, private router: Router, private route: ActivatedRoute
-        ,private toasterService: ToasterService)
+        ,private toasterService: AppMessageService)
     {
         document.onkeydown = ((e) =>{
 
@@ -62,20 +60,20 @@ export class SaqueComponent implements OnInit {
                     .insert(data, 'saque')
                     .then((res) => {
                         this.httpService.eventEmitter.emit();
+                        this.hideLoading();
                         if(res == 'fechado')
                         {
-                            this.toasterService.pop('error', 'Erro', 'Caixa fechado');
+                            this.toasterService.message('Erro', 'Caixa fechado','error');
                         }else {
-                            this.toasterService.pop('success', 'Sucesso', 'Saque salvo com sucesso');
-                            this.hideLoading();
+                            this.toasterService.message('Sucesso', 'Saque salvo com sucesso','success');
                             this.close();
                         }
                     });
             } else {
-                this.toasterService.pop('error', 'Erro', 'Verifique se todos os campos foram preenchidos.');
+                this.toasterService.message('Erro', 'Verifique se todos os campos foram preenchidos.','success');
             }
         }else{
-            this.toasterService.pop('error', 'Erro', 'Valor não pode ser menor ou igual a zero');
+            this.toasterService.message('Erro', 'Valor não pode ser menor ou igual a zero','error');
         }
     }
 
@@ -86,11 +84,11 @@ export class SaqueComponent implements OnInit {
 
 
     hideLoading(){
-        jQuery(".container-loading").hide();
+        jQuery("#bifrostBarSpinner").hide();
     }
 
     showLoading(){
-        jQuery(".container-loading").show();
+        jQuery("#bifrostBarSpinner").show();
     }
 
 }

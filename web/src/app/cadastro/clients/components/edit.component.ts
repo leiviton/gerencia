@@ -69,11 +69,7 @@ export class EditComponent implements OnInit {
     save(e)
     {
         if(this.client.name != null && this.client.name.length > 4
-            && this.client.email != null && this.client.email.length > 4
-            && this.client.phone != null && this.client.phone > 10
-            && this.client.address.bairro != null && this.client.address.bairro.length > 4
-            && this.client.address.address != null && this.client.address.address.length > 4
-            && this.client.address.numero != null && this.client.address.city_id != null) {
+            && this.client.phone != null && this.client.phone > 10) {
             this.showLoading();
             this.httpService.setAccessToken();
             this.httpService.builder('client')
@@ -96,11 +92,11 @@ export class EditComponent implements OnInit {
     }
 
     hideLoading(){
-        jQuery(".container-loading").hide();
+        jQuery("#bifrostBarSpinner").hide();
     }
 
     showLoading(){
-        jQuery(".container-loading").show();
+        jQuery("#bifrostBarSpinner").show();
     }
 
 }

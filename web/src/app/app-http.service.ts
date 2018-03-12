@@ -5,9 +5,9 @@ import { environment } from '../environments/environment';
 
 import { Router } from '@angular/router';
 
-import {ToasterService} from 'angular2-toaster';
-
 import * as jQuery from 'jquery';
+
+import {AppMessageService} from "./app-message.service";
 
 import 'rxjs/add/operator/toPromise';
 
@@ -21,7 +21,7 @@ export class AppHttpService{
         return this.http;
     }
 
-    constructor (protected http: Http, private router: Router, private toaster: ToasterService) {
+    constructor (protected http: Http, private router: Router, private toaster: AppMessageService) {
         this.setAccessToken();
     }
 
@@ -98,30 +98,29 @@ export class AppHttpService{
             })
             .catch((err) =>{
                 jQuery(".container-loading").hide();
-            console.log('erro',err);
                 let message = 'Algo deu errado, informe o erro' + err.status + 'ao administrador';
                 if(err.status === 401)
                 {
                     message = 'Você não tem permissão para acessar, informe um usuario e senha validos';
-                    this.toaster.pop('error', 'Erro', message);
+                    this.toaster.message('Error', message,'error');
                     localStorage.setItem('user','');
                     this.router.navigate(['/user/login']);
                 }
                 if (err.status === 500)
                 {
                     message = 'Ops não foi possivel realizar opeção';
-                    this.toaster.pop('error', 'Erro', message);
+                    this.toaster.message('Error', message,'error');
                     this.router.navigate(['/pages/500']);
                 }
                 if (err.status === 422)
                 {
                     message = 'Erro de validação, verifique os campos';
-                    this.toaster.pop('error', 'Erro', message);
+                    this.toaster.message('Error', message,'error');
                 }
                 if (err.status === 404)
                 {
                     message = 'Verifique sua conexão ou tente novamente';
-                    this.toaster.pop('error', 'Erro', message);
+                    this.toaster.message('Error', message,'error');
                     this.router.navigate(['/pages/404']);
                 }
         });

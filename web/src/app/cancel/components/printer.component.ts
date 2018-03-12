@@ -4,16 +4,13 @@ import * as jQuery from 'jquery';
 import { Router, ActivatedRoute } from '@angular/router';
 import { OrdersService } from '../services/orders.service';
 
-
-import {ToasterService} from 'angular2-toaster';
-
 @Component({
     templateUrl: 'printer.component.html'
 })
 export class PrinterComponent implements OnInit {
 
-    constructor(private httpService: OrdersService, private router: Router, private route: ActivatedRoute
-        ,private toasterService: ToasterService,public sanitizer: DomSanitizer)
+    constructor(private httpService: OrdersService, private router: Router,
+                private route: ActivatedRoute,public sanitizer: DomSanitizer)
     {
 
         document.onkeydown = ((e) =>{
@@ -66,15 +63,14 @@ export class PrinterComponent implements OnInit {
 
     close(){
         jQuery('#printer').on('show.bs.modal').show().removeClass('show');
-        this.router.navigate(['/close']);
+        this.router.navigate(['/cancel']);
     }
 
     hideLoading(){
-        jQuery(".container-loading").hide();
+        jQuery("#bifrostBarSpinner").hide();
     }
-
     showLoading(){
-        jQuery(".container-loading").show();
+        jQuery("#bifrostBarSpinner").show();
     }
 
 }

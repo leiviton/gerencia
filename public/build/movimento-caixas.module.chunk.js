@@ -17,7 +17,7 @@ module.exports = "<div tabindex=\"-1\" class=\"modal fade\" id=\"successModal\" 
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_jquery__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_movimento_caixas_service__ = __webpack_require__("../../../../../src/app/movimento-caixas/services/movimento-caixas.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angular2_toaster__ = __webpack_require__("../../../../angular2-toaster/angular2-toaster.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_message_service__ = __webpack_require__("../../../../../src/app/app-message.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -84,13 +84,13 @@ var EditComponent = (function () {
                 .update(this.caixa.id, e)
                 .then(function () {
                 _this.httpService.eventEmitter.emit();
-                _this.toasterService.pop('success', 'Sucesso', 'Caixa salvo com sucesso');
+                _this.toasterService.message('Sucesso', 'Caixa salvo com sucesso', 'success');
                 _this.hideLoading();
                 _this.close();
             });
         }
         else {
-            this.toasterService.pop('error', 'Erro', 'Verifique se todos os campos foram preenchidos.');
+            this.toasterService.message('Erro', 'Verifique se todos os campos foram preenchidos.', 'error');
         }
     };
     EditComponent.prototype.close = function () {
@@ -101,16 +101,16 @@ var EditComponent = (function () {
         this.editar = !this.editar;
     };
     EditComponent.prototype.hideLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_1_jquery__(".container-loading").hide();
+        __WEBPACK_IMPORTED_MODULE_1_jquery__("#bifrostBarSpinner").hide();
     };
     EditComponent.prototype.showLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_1_jquery__(".container-loading").show();
+        __WEBPACK_IMPORTED_MODULE_1_jquery__("#bifrostBarSpinner").show();
     };
     EditComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             template: __webpack_require__("../../../../../src/app/movimento-caixas/components/edit.component.html")
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__services_movimento_caixas_service__["a" /* MovimentoCaixasService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_movimento_caixas_service__["a" /* MovimentoCaixasService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4_angular2_toaster__["b" /* ToasterService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4_angular2_toaster__["b" /* ToasterService */]) === "function" && _d || Object])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__services_movimento_caixas_service__["a" /* MovimentoCaixasService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_movimento_caixas_service__["a" /* MovimentoCaixasService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__app_message_service__["a" /* AppMessageService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__app_message_service__["a" /* AppMessageService */]) === "function" && _d || Object])
     ], EditComponent);
     return EditComponent;
     var _a, _b, _c, _d;
@@ -133,11 +133,11 @@ module.exports = "<div class=\"animated fadeIn\">\n    <div class=\"row\">\n    
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MovimentoCaixasComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angular2_toaster__ = __webpack_require__("../../../../angular2-toaster/angular2-toaster.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_movimento_caixas_service__ = __webpack_require__("../../../../../src/app/movimento-caixas/services/movimento-caixas.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_jquery__ = __webpack_require__("../../../../jquery/dist/jquery.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_jquery__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_movimento_caixas_service__ = __webpack_require__("../../../../../src/app/movimento-caixas/services/movimento-caixas.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jquery__ = __webpack_require__("../../../../jquery/dist/jquery.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_jquery__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_message_service__ = __webpack_require__("../../../../../src/app/app-message.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -183,19 +183,37 @@ var MovimentoCaixasComponent = (function () {
         });
     }
     MovimentoCaixasComponent.prototype.ngOnInit = function () {
+        var _this = this;
         this.showLoading();
         var u = { role: null };
         u = JSON.parse(localStorage.getItem('user') || null);
         if (u == null) {
-            this.toasterService.pop('error', 'Sem permissão', 'Usuário sem acesso, contate o administrador');
-            this.router.navigate(['/dashboard']);
+            this.toasterService.message('Sem permissão', 'Usuário sem acesso, contate o administrador', 'error');
+            this.router.navigate(['/user/login']);
         }
         if (u.role !== 'gerente' && u.role !== 'admin') {
-            this.toasterService.pop('error', 'Sem permissão', 'Usuário sem acesso, contate o administrador');
+            this.toasterService.message('Sem permissão', 'Usuário sem acesso, contate o administrador', 'error');
             this.router.navigate(['/dashboard']);
         }
         this.httpService.setAccessToken();
-        setTimeout(this.hideLoading(), 2000);
+        this.httpService.builder()
+            .list({}, 'movimento/caixas')
+            .then(function (res) {
+            _this.movimentos = res;
+            console.log(_this.movimentos);
+            _this.tamanho = res.data.length;
+            var i;
+            for (i = 0; i < res.data.length; i++) {
+                if (res.data[i].tipo_movimento === 'credito') {
+                    _this.total += res.data[i].valor;
+                }
+                else if (res.data[i].tipo_movimento === 'debito') {
+                    _this.total -= res.data[i].valor;
+                }
+            }
+            _this.hideLoading();
+            _this.toasterService.message('Sucesso', 'Dados carregados com sucesso', 'success');
+        });
         this.getCaixas();
         this.getUser();
     };
@@ -251,11 +269,11 @@ var MovimentoCaixasComponent = (function () {
                 }
                 _this.hideModal('#mov');
                 _this.hideLoading();
-                _this.toasterService.pop('success', 'Sucesso', 'Dados carregados com sucesso');
+                _this.toasterService.message('Sucesso', 'Dados carregados com sucesso', 'success');
             });
         }
         else {
-            this.toasterService.pop('error', 'Erro', 'Preencha inicio, fim e status para pesquisar.');
+            this.toasterService.message('Erro', 'Preencha inicio, fim e status para pesquisar.', 'error');
             this.hideLoading();
         }
     };
@@ -282,7 +300,7 @@ var MovimentoCaixasComponent = (function () {
                 localStorage.setItem('mov_caixa_rel', JSON.stringify(res));
                 localStorage.setItem('filtros_rel', JSON.stringify(options_1));
                 _this.openReal();
-                _this.toasterService.pop('success', 'Sucesso', 'Relátorio gerado com sucesso');
+                _this.toasterService.message('Sucesso', 'Relátorio gerado com sucesso', 'success');
             });
         }
         else {
@@ -290,22 +308,22 @@ var MovimentoCaixasComponent = (function () {
         }
     };
     MovimentoCaixasComponent.prototype.hideLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_4_jquery__(".container-loading").hide();
+        __WEBPACK_IMPORTED_MODULE_3_jquery__("#bifrostBarSpinner").hide();
     };
     MovimentoCaixasComponent.prototype.showLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_4_jquery__(".container-loading").show();
+        __WEBPACK_IMPORTED_MODULE_3_jquery__("#bifrostBarSpinner").show();
     };
     MovimentoCaixasComponent.prototype.showModal = function (id) {
-        __WEBPACK_IMPORTED_MODULE_4_jquery__(id).show().addClass('show');
+        __WEBPACK_IMPORTED_MODULE_3_jquery__(id).show().addClass('show');
     };
     MovimentoCaixasComponent.prototype.hideModal = function (id) {
-        __WEBPACK_IMPORTED_MODULE_4_jquery__(id).hide();
+        __WEBPACK_IMPORTED_MODULE_3_jquery__(id).hide();
     };
     MovimentoCaixasComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             template: __webpack_require__("../../../../../src/app/movimento-caixas/components/movimento-caixas.component.html")
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__services_movimento_caixas_service__["a" /* MovimentoCaixasService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_movimento_caixas_service__["a" /* MovimentoCaixasService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_angular2_toaster__["b" /* ToasterService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_angular2_toaster__["b" /* ToasterService */]) === "function" && _c || Object])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__services_movimento_caixas_service__["a" /* MovimentoCaixasService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_movimento_caixas_service__["a" /* MovimentoCaixasService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__app_message_service__["a" /* AppMessageService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__app_message_service__["a" /* AppMessageService */]) === "function" && _c || Object])
     ], MovimentoCaixasComponent);
     return MovimentoCaixasComponent;
     var _a, _b, _c;
@@ -328,11 +346,11 @@ module.exports = "<div tabindex=\"-1\" class=\"modal fade\" id=\"infoModal\" rol
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NewComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angular2_toaster__ = __webpack_require__("../../../../angular2-toaster/angular2-toaster.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_jquery__ = __webpack_require__("../../../../jquery/dist/jquery.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_jquery__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_movimento_caixas_service__ = __webpack_require__("../../../../../src/app/movimento-caixas/services/movimento-caixas.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery__ = __webpack_require__("../../../../jquery/dist/jquery.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_jquery__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_movimento_caixas_service__ = __webpack_require__("../../../../../src/app/movimento-caixas/services/movimento-caixas.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_message_service__ = __webpack_require__("../../../../../src/app/app-message.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -374,7 +392,7 @@ var NewComponent = (function () {
     NewComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.showLoading();
-        __WEBPACK_IMPORTED_MODULE_2_jquery__('#infoModal').show().addClass('show');
+        __WEBPACK_IMPORTED_MODULE_1_jquery__('#infoModal').show().addClass('show');
         this.getCaixas();
         setTimeout(function () {
             _this.hideLoading();
@@ -390,17 +408,17 @@ var NewComponent = (function () {
                 .then(function (res) {
                 _this.hideLoading();
                 if (res == 'fechado') {
-                    _this.toasterService.pop('error', 'Erro', 'Caixa está fechado.');
+                    _this.toasterService.message('Erro', 'Caixa está fechado.', 'error');
                 }
                 else {
-                    _this.toasterService.pop('success', 'Salvo', 'Movimento salvo com sucesso.');
+                    _this.toasterService.message('Salvo', 'Movimento salvo com sucesso.', 'success');
                     _this.close();
                 }
             });
         }
         else {
             this.hideLoading();
-            this.toasterService.pop('error', 'Erro', 'Verifique se todos os campos foram preenchidos.');
+            this.toasterService.message('Erro', 'Verifique se todos os campos foram preenchidos.', 'error');
         }
     };
     NewComponent.prototype.getCaixas = function () {
@@ -412,157 +430,26 @@ var NewComponent = (function () {
         });
     };
     NewComponent.prototype.close = function () {
-        __WEBPACK_IMPORTED_MODULE_2_jquery__('#infoModal').hide();
+        __WEBPACK_IMPORTED_MODULE_1_jquery__('#infoModal').hide();
         this.router.navigate(['/financeiro/movimento/caixas']);
     };
     NewComponent.prototype.hideLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_2_jquery__(".container-loading").hide();
+        __WEBPACK_IMPORTED_MODULE_1_jquery__("#bifrostBarSpinner").hide();
     };
     NewComponent.prototype.showLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_2_jquery__(".container-loading").show();
+        __WEBPACK_IMPORTED_MODULE_1_jquery__("#bifrostBarSpinner").show();
     };
     NewComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             template: __webpack_require__("../../../../../src/app/movimento-caixas/components/new.component.html")
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_4__services_movimento_caixas_service__["a" /* MovimentoCaixasService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__services_movimento_caixas_service__["a" /* MovimentoCaixasService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* ActivatedRoute */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_angular2_toaster__["b" /* ToasterService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_angular2_toaster__["b" /* ToasterService */]) === "function" && _d || Object])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__services_movimento_caixas_service__["a" /* MovimentoCaixasService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_movimento_caixas_service__["a" /* MovimentoCaixasService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__app_message_service__["a" /* AppMessageService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__app_message_service__["a" /* AppMessageService */]) === "function" && _d || Object])
     ], NewComponent);
     return NewComponent;
     var _a, _b, _c, _d;
 }());
 
 //# sourceMappingURL=new.component.js.map
-
-/***/ }),
-
-/***/ "../../../../../src/app/movimento-caixas/components/payment.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<div tabindex=\"-1\" class=\"modal fade\" id=\"payment\" role=\"dialog\" aria-hidden=\"true\" aria-labelledby=\"myModalLabel\" style=\"display: block; overflow-y: auto;\">\r\n    <div class=\"modal-dialog modal-lg modal-primary\" role=\"document\">\r\n        <div class=\"modal-content\">\r\n            <div class=\"modal-header novo\">\r\n                <h4 class=\"text-center\">Pedido: {{ order.id }} </h4>\r\n                <h4 class=\"text-center\"> {{ mesa }} </h4>\r\n                <h4 class=\"text-center\"> Total: {{ order.total | currency:'BRL':true }}</h4>\r\n            </div>\r\n            <div class=\"modal-body\" style=\"height: 500px; overflow: auto\">\r\n                <div class=\"col-md-12\">\r\n                    <div class=\"row col-md-12\">\r\n                        <div class=\"col-md-6\">\r\n                            <h5 class=\"text-capitalize\">{{ client.name }}</h5>\r\n                        </div>\r\n                        <div class=\"col-md-6\">\r\n                            <h5 class=\"text-capitalize\">{{ client.address }}</h5>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-md-12\" *ngIf=\"order.payment\">\r\n                    <div class=\"table-responsive\">\r\n                        <div class=\"card\">\r\n                            <div class=\"card-header\">\r\n                                <i class=\"fa fa-money\"></i> Pagamentos\r\n                            </div>\r\n                            <div class=\"card-body\">\r\n                                <div class=\"talbe-responsive\">\r\n                                    <table class=\"table scrollbox table-striped\">\r\n                                        <thead>\r\n                                        <tr class=\"th-table title-table\">\r\n                                            <th class=\"text-center\">Vr.Pago</th>\r\n                                            <th>Desconto</th>\r\n                                            <th class=\"text-center\">Acrescimo</th>\r\n                                            <th class=\"text-center\">Total</th>\r\n                                            <th class=\"text-center\">Tipo</th>\r\n                                            <th class=\"text-center\">Data</th>\r\n                                        </tr>\r\n                                        </thead>\r\n                                        <tbody style=\"height: 250px; overflow: auto\">\r\n                                        <tr class=\"th-table\" *ngFor=\"let p of order.payment.data; let i = index\">\r\n                                            <td class=\"text-center\">{{ p.total_pago | currency:'BRL':true }}</td>\r\n                                            <td>{{ p.desconto | currency:'BRL':true }}</td>\r\n                                            <td class=\"text-center\">{{ p.acrescimo | currency:'BRL':true }}</td>\r\n                                            <td class=\"text-center\">{{ order.total | currency:'BRL':true }}</td>\r\n                                            <td class=\"text-center\">{{ p.type.data.name }}</td>\r\n                                            <td class=\"text-center\">{{ p.created_at }}</td>\r\n                                        </tr>\r\n                                        </tbody>\r\n                                    </table>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-md-12\">\r\n                    <div class=\"card\">\r\n                        <div class=\"card-header\">\r\n                            <i class=\"fa fa-shopping-bag\"></i> Produtos\r\n                        </div>\r\n                        <div class=\"card-body\" style=\"padding-bottom: 0px\">\r\n                            <div class=\"table-responsive\">\r\n                                <table class=\"table scrollbox table-striped\">\r\n                                    <thead>\r\n                                    <tr class=\"th-table title-table\">\r\n                                        <th class=\"text-center\">#</th>\r\n                                        <th>Produto</th>\r\n                                        <th class=\"text-center\">Valor</th>\r\n                                        <th class=\"text-center\">Qtd.</th>\r\n                                        <th class=\"text-center\">Subtotal</th>\r\n                                    </tr>\r\n                                    </thead>\r\n                                    <tbody style=\"height: 170px; overflow: auto\">\r\n                                    <tr class=\"th-table\" *ngFor=\"let p of products.data; let i = index\">\r\n                                        <td class=\"text-center\" *ngIf=\"p.ativo == 'S'\" >{{ p.product.data.id }}</td>\r\n                                        <td *ngIf=\"p.ativo == 'S'\">{{ p.product.data.name }}\r\n                                            <p *ngFor=\"let c of p.complement.data\" style=\"font-size: 10px; margin-bottom: 0;\"> {{ c.complement.data.name }}: {{ c.price | currency:'BRL':true }}</p>\r\n                                            <p style=\"font-size: 10px; margin-bottom: 0;\">{{ p.historico }}</p>\r\n                                        </td>\r\n                                        <td class=\"text-center\" *ngIf=\"p.ativo == 'S'\">{{ p.price | currency:'BRL':true }}</td>\r\n                                        <td class=\"text-center\" *ngIf=\"p.ativo == 'S'\">{{ p.qtd }}</td>\r\n                                        <td class=\"text-center\" *ngIf=\"p.ativo == 'S'\">{{ p.subtotal | currency:'BRL':true }}</td>\r\n                                    </tr>\r\n                                    </tbody>\r\n                                </table>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"modal-footer novo\">\r\n                <div class=\"modal-button\">\r\n                    <button class=\"btn btn-danger text-left\" type=\"button\" (click)=\"close()\"><i class=\"fa fa-arrow-circle-left\"></i> Fechar</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <!-- /.modal-content -->\r\n    </div>\r\n    <!-- /.modal-dialog -->\r\n</div>\r\n"
-
-/***/ }),
-
-/***/ "../../../../../src/app/movimento-caixas/components/payment.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PaymentComponent; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery__ = __webpack_require__("../../../../jquery/dist/jquery.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_jquery__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_movimento_caixas_service__ = __webpack_require__("../../../../../src/app/movimento-caixas/services/movimento-caixas.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angular2_toaster__ = __webpack_require__("../../../../angular2-toaster/angular2-toaster.js");
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-var PaymentComponent = (function () {
-    function PaymentComponent(httpService, router, route, toasterService) {
-        var _this = this;
-        this.httpService = httpService;
-        this.router = router;
-        this.route = route;
-        this.toasterService = toasterService;
-        this.order = {
-            id: 0,
-            total: 0
-        };
-        this.mesa = '';
-        this.products = {};
-        this.total = 0;
-        this.type_id = null;
-        this.payment = {
-            'order_id': null,
-            'total_pago': 0,
-            'desconto': 0,
-            'acrescimo': 0,
-            'total_original': 0,
-            'payment_types': '',
-            'data_pagamento': ''
-        };
-        this.troco = 0;
-        this.tipo = {};
-        this.valor_pag = 0;
-        this.divisao = 1;
-        this.result_div = 0;
-        this.client = {
-            name: '',
-            address: ''
-        };
-        document.onkeydown = (function (e) {
-            if (e.keyCode == 27) {
-                _this.close();
-            }
-        });
-    }
-    PaymentComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.showLoading();
-        __WEBPACK_IMPORTED_MODULE_1_jquery__('#payment').show().addClass('show');
-        this.tipos();
-        this.httpService.setAccessToken();
-        this.route.params
-            .subscribe(function (params) {
-            _this.httpService.builder().view(params['id'], 'order')
-                .then(function (res) {
-                _this.order = res.data;
-                _this.payment.order_id = _this.order.id;
-                _this.payment.total_pago = res.data.payment.data[0].total_pago;
-                _this.payment.total_original = res.data.total;
-                _this.payment.data_pagamento = res.data.payment.data[0].created_at;
-                _this.payment.desconto = res.data.payment.data[0].desconto;
-                _this.payment.acrescimo = res.data.payment.data[0].acrescimo;
-                _this.payment.payment_types = res.data.payment.data[0].type.data.name;
-                _this.products = res.data.items;
-                _this.client.name = res.data.client.data.name;
-                _this.client.address = res.data.client.data.endereco;
-                _this.mesa = res.data.mesa.data.name;
-                _this.hideLoading();
-            });
-        });
-        this.httpService.eventEmitter.emit();
-    };
-    PaymentComponent.prototype.tipos = function () {
-        var _this = this;
-        this.httpService.setAccessToken();
-        this.httpService.builder()
-            .list({}, 'typepayment')
-            .then(function (res) {
-            _this.tipo = res;
-        });
-    };
-    PaymentComponent.prototype.close = function () {
-        __WEBPACK_IMPORTED_MODULE_1_jquery__('#payment').hide();
-        this.router.navigate(['/close']);
-    };
-    PaymentComponent.prototype.hideLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_1_jquery__(".container-loading").hide();
-    };
-    PaymentComponent.prototype.showLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_1_jquery__(".container-loading").show();
-    };
-    PaymentComponent = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            template: __webpack_require__("../../../../../src/app/movimento-caixas/components/payment.component.html")
-        }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__services_movimento_caixas_service__["a" /* MovimentoCaixasService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_movimento_caixas_service__["a" /* MovimentoCaixasService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4_angular2_toaster__["b" /* ToasterService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4_angular2_toaster__["b" /* ToasterService */]) === "function" && _d || Object])
-    ], PaymentComponent);
-    return PaymentComponent;
-    var _a, _b, _c, _d;
-}());
-
-//# sourceMappingURL=payment.component.js.map
 
 /***/ }),
 
@@ -647,7 +534,7 @@ var PrinterComponent = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             template: __webpack_require__("../../../../../src/app/movimento-caixas/components/printer.component.html")
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_4__services_movimento_caixas_service__["a" /* MovimentoCaixasService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__services_movimento_caixas_service__["a" /* MovimentoCaixasService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* ActivatedRoute */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_5_angular2_toaster__["b" /* ToasterService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5_angular2_toaster__["b" /* ToasterService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__["c" /* DomSanitizer */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__["c" /* DomSanitizer */]) === "function" && _e || Object])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_4__services_movimento_caixas_service__["a" /* MovimentoCaixasService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__services_movimento_caixas_service__["a" /* MovimentoCaixasService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* ActivatedRoute */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_5_angular2_toaster__["a" /* ToasterService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5_angular2_toaster__["a" /* ToasterService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__["c" /* DomSanitizer */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__["c" /* DomSanitizer */]) === "function" && _e || Object])
     ], PrinterComponent);
     return PrinterComponent;
     var _a, _b, _c, _d, _e;
@@ -733,25 +620,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ngx_bootstrap_modal__ = __webpack_require__("../../../../ngx-bootstrap/modal/index.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_movimento_caixas_component__ = __webpack_require__("../../../../../src/app/movimento-caixas/components/movimento-caixas.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_payment_component__ = __webpack_require__("../../../../../src/app/movimento-caixas/components/payment.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__movimento_caixas_routing_module__ = __webpack_require__("../../../../../src/app/movimento-caixas/movimento-caixas-routing.module.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_ngx_bootstrap__ = __webpack_require__("../../../../ngx-bootstrap/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__services_movimento_caixas_service__ = __webpack_require__("../../../../../src/app/movimento-caixas/services/movimento-caixas.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_cuppa_ng2_grid_cuppa_ng2_dataGrid__ = __webpack_require__("../../../../cuppa-ng2-grid/cuppa-ng2-dataGrid.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_ngx_bootstrap_tabs__ = __webpack_require__("../../../../ngx-bootstrap/tabs/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_ng2_currency_mask__ = __webpack_require__("../../../../ng2-currency-mask/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_ng2_currency_mask___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_13_ng2_currency_mask__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_ngx_phone_mask__ = __webpack_require__("../../../../ngx-phone-mask/ngx-phone-mask/ngx-phone-mask.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_printer_component__ = __webpack_require__("../../../../../src/app/movimento-caixas/components/printer.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_edit_component__ = __webpack_require__("../../../../../src/app/movimento-caixas/components/edit.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_new_component__ = __webpack_require__("../../../../../src/app/movimento-caixas/components/new.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__movimento_caixas_routing_module__ = __webpack_require__("../../../../../src/app/movimento-caixas/movimento-caixas-routing.module.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_ngx_bootstrap__ = __webpack_require__("../../../../ngx-bootstrap/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__services_movimento_caixas_service__ = __webpack_require__("../../../../../src/app/movimento-caixas/services/movimento-caixas.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_cuppa_ng2_grid_cuppa_ng2_dataGrid__ = __webpack_require__("../../../../cuppa-ng2-grid/cuppa-ng2-dataGrid.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_ngx_bootstrap_tabs__ = __webpack_require__("../../../../ngx-bootstrap/tabs/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_ng2_currency_mask__ = __webpack_require__("../../../../ng2-currency-mask/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_ng2_currency_mask___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12_ng2_currency_mask__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_ngx_phone_mask__ = __webpack_require__("../../../../ngx-phone-mask/ngx-phone-mask/ngx-phone-mask.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_printer_component__ = __webpack_require__("../../../../../src/app/movimento-caixas/components/printer.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_edit_component__ = __webpack_require__("../../../../../src/app/movimento-caixas/components/edit.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_new_component__ = __webpack_require__("../../../../../src/app/movimento-caixas/components/new.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-
 
 
 
@@ -776,18 +661,18 @@ var MovimentoCaixasModule = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
             imports: [
                 __WEBPACK_IMPORTED_MODULE_1__angular_common__["CommonModule"],
-                __WEBPACK_IMPORTED_MODULE_8__movimento_caixas_routing_module__["a" /* MovimentoCaixasRoutingModule */],
+                __WEBPACK_IMPORTED_MODULE_7__movimento_caixas_routing_module__["a" /* MovimentoCaixasRoutingModule */],
                 __WEBPACK_IMPORTED_MODULE_2_ng2_charts_ng2_charts__["ChartsModule"],
                 __WEBPACK_IMPORTED_MODULE_3_ngx_bootstrap_dropdown__["a" /* BsDropdownModule */],
-                __WEBPACK_IMPORTED_MODULE_9_ngx_bootstrap__["b" /* TooltipModule */],
+                __WEBPACK_IMPORTED_MODULE_8_ngx_bootstrap__["b" /* TooltipModule */],
                 __WEBPACK_IMPORTED_MODULE_5__angular_forms__["FormsModule"],
-                __WEBPACK_IMPORTED_MODULE_11_cuppa_ng2_grid_cuppa_ng2_dataGrid__["a" /* CuppaDataGridModule */],
-                __WEBPACK_IMPORTED_MODULE_12_ngx_bootstrap_tabs__["a" /* TabsModule */],
-                __WEBPACK_IMPORTED_MODULE_13_ng2_currency_mask__["CurrencyMaskModule"],
-                __WEBPACK_IMPORTED_MODULE_14_ngx_phone_mask__["a" /* NgxPhoneMaskModule */],
+                __WEBPACK_IMPORTED_MODULE_10_cuppa_ng2_grid_cuppa_ng2_dataGrid__["a" /* CuppaDataGridModule */],
+                __WEBPACK_IMPORTED_MODULE_11_ngx_bootstrap_tabs__["a" /* TabsModule */],
+                __WEBPACK_IMPORTED_MODULE_12_ng2_currency_mask__["CurrencyMaskModule"],
+                __WEBPACK_IMPORTED_MODULE_13_ngx_phone_mask__["a" /* NgxPhoneMaskModule */],
             ],
-            declarations: [__WEBPACK_IMPORTED_MODULE_6__components_movimento_caixas_component__["a" /* MovimentoCaixasComponent */], __WEBPACK_IMPORTED_MODULE_7__components_payment_component__["a" /* PaymentComponent */], __WEBPACK_IMPORTED_MODULE_15__components_printer_component__["a" /* PrinterComponent */], __WEBPACK_IMPORTED_MODULE_16__components_edit_component__["a" /* EditComponent */], __WEBPACK_IMPORTED_MODULE_17__components_new_component__["a" /* NewComponent */]],
-            providers: [__WEBPACK_IMPORTED_MODULE_10__services_movimento_caixas_service__["a" /* MovimentoCaixasService */], __WEBPACK_IMPORTED_MODULE_4_ngx_bootstrap_modal__["a" /* BsModalService */]]
+            declarations: [__WEBPACK_IMPORTED_MODULE_6__components_movimento_caixas_component__["a" /* MovimentoCaixasComponent */], __WEBPACK_IMPORTED_MODULE_14__components_printer_component__["a" /* PrinterComponent */], __WEBPACK_IMPORTED_MODULE_15__components_edit_component__["a" /* EditComponent */], __WEBPACK_IMPORTED_MODULE_16__components_new_component__["a" /* NewComponent */]],
+            providers: [__WEBPACK_IMPORTED_MODULE_9__services_movimento_caixas_service__["a" /* MovimentoCaixasService */], __WEBPACK_IMPORTED_MODULE_4_ngx_bootstrap_modal__["a" /* BsModalService */]]
         })
     ], MovimentoCaixasModule);
     return MovimentoCaixasModule;
@@ -840,6 +725,586 @@ var MovimentoCaixasService = (function (_super) {
 }(__WEBPACK_IMPORTED_MODULE_1__app_http_service__["a" /* AppHttpService */]));
 
 //# sourceMappingURL=movimento-caixas.service.js.map
+
+/***/ }),
+
+/***/ "../../../../angular2-toaster/angular2-toaster.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__src_toast_component__ = __webpack_require__("../../../../angular2-toaster/src/toast.component.js");
+/* unused harmony reexport ToastComponent */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__src_toaster_container_component__ = __webpack_require__("../../../../angular2-toaster/src/toaster-container.component.js");
+/* unused harmony reexport ToasterContainerComponent */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__src_toaster_service__ = __webpack_require__("../../../../angular2-toaster/src/toaster.service.js");
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_2__src_toaster_service__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__src_toaster_config__ = __webpack_require__("../../../../angular2-toaster/src/toaster-config.js");
+/* unused harmony reexport ToasterConfig */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__src_bodyOutputType__ = __webpack_require__("../../../../angular2-toaster/src/bodyOutputType.js");
+/* unused harmony reexport BodyOutputType */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__src_toaster_module__ = __webpack_require__("../../../../angular2-toaster/src/toaster.module.js");
+/* unused harmony reexport ToasterModule */
+
+
+
+
+
+
+//# sourceMappingURL=angular2-toaster.js.map
+
+/***/ }),
+
+/***/ "../../../../angular2-toaster/src/bodyOutputType.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return BodyOutputType; });
+var BodyOutputType;
+(function (BodyOutputType) {
+    BodyOutputType[BodyOutputType["Default"] = 0] = "Default";
+    BodyOutputType[BodyOutputType["TrustedHtml"] = 1] = "TrustedHtml";
+    BodyOutputType[BodyOutputType["Component"] = 2] = "Component";
+})(BodyOutputType || (BodyOutputType = {}));
+//# sourceMappingURL=bodyOutputType.js.map
+
+/***/ }),
+
+/***/ "../../../../angular2-toaster/src/toast.component.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ToastComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__ = __webpack_require__("../../../platform-browser/@angular/platform-browser.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__bodyOutputType__ = __webpack_require__("../../../../angular2-toaster/src/bodyOutputType.js");
+
+
+
+var ToastComponent = (function () {
+    function ToastComponent(sanitizer, componentFactoryResolver, changeDetectorRef) {
+        this.sanitizer = sanitizer;
+        this.componentFactoryResolver = componentFactoryResolver;
+        this.changeDetectorRef = changeDetectorRef;
+        this.bodyOutputType = __WEBPACK_IMPORTED_MODULE_2__bodyOutputType__["a" /* BodyOutputType */];
+        this.clickEvent = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"]();
+    }
+    ToastComponent.prototype.ngOnInit = function () {
+        if (this.toast.closeHtml) {
+            this.safeCloseHtml = this.sanitizer.bypassSecurityTrustHtml(this.toast.closeHtml);
+        }
+    };
+    ToastComponent.prototype.ngAfterViewInit = function () {
+        if (this.toast.bodyOutputType === this.bodyOutputType.Component) {
+            var component = this.componentFactoryResolver.resolveComponentFactory(this.toast.body);
+            var componentInstance = this.componentBody.createComponent(component, undefined, this.componentBody.injector);
+            componentInstance.instance.toast = this.toast;
+            this.changeDetectorRef.detectChanges();
+        }
+    };
+    ToastComponent.prototype.click = function (event, toast) {
+        event.stopPropagation();
+        this.clickEvent.emit({
+            value: { toast: toast, isCloseButton: true }
+        });
+    };
+    return ToastComponent;
+}());
+
+ToastComponent.decorators = [
+    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"], args: [{
+                selector: '[toastComp]',
+                template: "\n        <i class=\"toaster-icon\" [ngClass]=\"iconClass\"></i>\n        <div class=\"toast-content\">\n            <div [ngClass]=\"toast.toasterConfig?.titleClass\">{{toast.title}}</div>\n            <div [ngClass]=\"toast.toasterConfig?.messageClass\" [ngSwitch]=\"toast.bodyOutputType\">\n                <div *ngSwitchCase=\"bodyOutputType.Component\" #componentBody></div>\n                <div *ngSwitchCase=\"bodyOutputType.TrustedHtml\" [innerHTML]=\"toast.body\"></div>\n                <div *ngSwitchCase=\"bodyOutputType.Default\">{{toast.body}}</div>\n            </div>\n        </div>\n        <div class=\"toast-close-button\" *ngIf=\"toast.showCloseButton\" (click)=\"click($event, toast)\"\n            [innerHTML]=\"safeCloseHtml\">\n        </div>"
+            },] },
+];
+/** @nocollapse */
+ToastComponent.ctorParameters = function () { return [
+    { type: __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__["c" /* DomSanitizer */], },
+    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ComponentFactoryResolver"], },
+    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectorRef"], },
+]; };
+ToastComponent.propDecorators = {
+    'toast': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
+    'iconClass': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
+    'componentBody': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"], args: ['componentBody', { read: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewContainerRef"] },] },],
+    'clickEvent': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Output"] },],
+};
+//# sourceMappingURL=toast.component.js.map
+
+/***/ }),
+
+/***/ "../../../../angular2-toaster/src/toaster-config.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ToasterConfig; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__bodyOutputType__ = __webpack_require__("../../../../angular2-toaster/src/bodyOutputType.js");
+
+var ToasterConfig = (function () {
+    function ToasterConfig(configOverrides) {
+        configOverrides = configOverrides || {};
+        this.limit = configOverrides.limit || null;
+        this.tapToDismiss = configOverrides.tapToDismiss != null ? configOverrides.tapToDismiss : true;
+        this.showCloseButton = configOverrides.showCloseButton != null ? configOverrides.showCloseButton : false;
+        this.closeHtml = configOverrides.closeHtml || '<button class="toast-close-button" type="button">&times;</button>';
+        this.newestOnTop = configOverrides.newestOnTop != null ? configOverrides.newestOnTop : true;
+        this.timeout = configOverrides.timeout != null ? configOverrides.timeout : 5000;
+        this.typeClasses = configOverrides.typeClasses || {
+            error: 'toast-error',
+            info: 'toast-info',
+            wait: 'toast-wait',
+            success: 'toast-success',
+            warning: 'toast-warning'
+        };
+        this.iconClasses = configOverrides.iconClasses || {
+            error: 'icon-error',
+            info: 'icon-info',
+            wait: 'icon-wait',
+            success: 'icon-success',
+            warning: 'icon-warning'
+        };
+        this.bodyOutputType = configOverrides.bodyOutputType || __WEBPACK_IMPORTED_MODULE_0__bodyOutputType__["a" /* BodyOutputType */].Default;
+        this.bodyTemplate = configOverrides.bodyTemplate || 'toasterBodyTmpl.html';
+        this.defaultTypeClass = configOverrides.defaultTypeClass || 'toast-info';
+        this.positionClass = configOverrides.positionClass || 'toast-top-right';
+        this.titleClass = configOverrides.titleClass || 'toast-title';
+        this.messageClass = configOverrides.messageClass || 'toast-message';
+        this.animation = configOverrides.animation || '';
+        this.preventDuplicates = configOverrides.preventDuplicates != null ? configOverrides.preventDuplicates : false;
+        this.mouseoverTimerStop = configOverrides.mouseoverTimerStop != null ? configOverrides.mouseoverTimerStop : false;
+        this.toastContainerId = configOverrides.toastContainerId != null ? configOverrides.toastContainerId : null;
+    }
+    return ToasterConfig;
+}());
+
+//# sourceMappingURL=toaster-config.js.map
+
+/***/ }),
+
+/***/ "../../../../angular2-toaster/src/toaster-container.component.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ToasterContainerComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_animations__ = __webpack_require__("../../../animations/@angular/animations.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__toaster_config__ = __webpack_require__("../../../../angular2-toaster/src/toaster-config.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__toaster_service__ = __webpack_require__("../../../../angular2-toaster/src/toaster.service.js");
+
+
+
+
+var ToasterContainerComponent = (function () {
+    function ToasterContainerComponent(toasterService, ref, ngZone) {
+        this.ref = ref;
+        this.ngZone = ngZone;
+        this.toasts = [];
+        this.toasterService = toasterService;
+    }
+    ToasterContainerComponent.prototype.ngOnInit = function () {
+        this.registerSubscribers();
+        if (this.toasterconfig === null || typeof this.toasterconfig === 'undefined') {
+            this.toasterconfig = new __WEBPACK_IMPORTED_MODULE_2__toaster_config__["a" /* ToasterConfig */]();
+        }
+    };
+    // event handlers
+    ToasterContainerComponent.prototype.click = function (toast, isCloseButton) {
+        if (this.toasterconfig.tapToDismiss || (toast.showCloseButton && isCloseButton)) {
+            var removeToast = true;
+            if (toast.clickHandler) {
+                if (typeof toast.clickHandler === 'function') {
+                    removeToast = toast.clickHandler(toast, isCloseButton);
+                }
+                else {
+                    console.log('The toast click handler is not a callable function.');
+                    return false;
+                }
+            }
+            if (removeToast) {
+                this.removeToast(toast);
+            }
+        }
+    };
+    ToasterContainerComponent.prototype.childClick = function ($event) {
+        this.click($event.value.toast, $event.value.isCloseButton);
+    };
+    ToasterContainerComponent.prototype.stopTimer = function (toast) {
+        if (this.toasterconfig.mouseoverTimerStop) {
+            if (toast.timeoutId) {
+                window.clearTimeout(toast.timeoutId);
+                toast.timeoutId = null;
+            }
+        }
+    };
+    ToasterContainerComponent.prototype.restartTimer = function (toast) {
+        if (this.toasterconfig.mouseoverTimerStop) {
+            if (!toast.timeoutId) {
+                this.configureTimer(toast);
+            }
+        }
+        else if (toast.timeoutId === null) {
+            this.removeToast(toast);
+        }
+    };
+    // private functions
+    ToasterContainerComponent.prototype.registerSubscribers = function () {
+        var _this = this;
+        this.addToastSubscriber = this.toasterService.addToast.subscribe(function (toast) {
+            _this.addToast(toast);
+        });
+        this.clearToastsSubscriber = this.toasterService.clearToasts.subscribe(function (clearWrapper) {
+            _this.clearToasts(clearWrapper);
+        });
+    };
+    ToasterContainerComponent.prototype.addToast = function (toast) {
+        toast.toasterConfig = this.toasterconfig;
+        if (toast.toastContainerId && this.toasterconfig.toastContainerId
+            && toast.toastContainerId !== this.toasterconfig.toastContainerId) {
+            return;
+        }
+        ;
+        if (!toast.type) {
+            toast.type = this.toasterconfig.defaultTypeClass;
+        }
+        if (this.toasterconfig.preventDuplicates && this.toasts.length > 0) {
+            if (toast.toastId && this.toasts.some(function (t) { return t.toastId === toast.toastId; })) {
+                return;
+            }
+            else if (this.toasts.some(function (t) { return t.body === toast.body; })) {
+                return;
+            }
+        }
+        if (toast.showCloseButton === null || typeof toast.showCloseButton === 'undefined') {
+            if (typeof this.toasterconfig.showCloseButton === 'object') {
+                toast.showCloseButton = this.toasterconfig.showCloseButton[toast.type];
+            }
+            else if (typeof this.toasterconfig.showCloseButton === 'boolean') {
+                toast.showCloseButton = this.toasterconfig.showCloseButton;
+            }
+        }
+        if (toast.showCloseButton) {
+            toast.closeHtml = toast.closeHtml || this.toasterconfig.closeHtml;
+        }
+        toast.bodyOutputType = toast.bodyOutputType || this.toasterconfig.bodyOutputType;
+        this.configureTimer(toast);
+        if (this.toasterconfig.newestOnTop) {
+            this.toasts.unshift(toast);
+            if (this.isLimitExceeded()) {
+                this.toasts.pop();
+            }
+        }
+        else {
+            this.toasts.push(toast);
+            if (this.isLimitExceeded()) {
+                this.toasts.shift();
+            }
+        }
+        if (toast.onShowCallback) {
+            toast.onShowCallback(toast);
+        }
+    };
+    ToasterContainerComponent.prototype.configureTimer = function (toast) {
+        var _this = this;
+        var timeout = (typeof toast.timeout === 'number')
+            ? toast.timeout : this.toasterconfig.timeout;
+        if (typeof timeout === 'object') {
+            timeout = timeout[toast.type];
+        }
+        ;
+        if (timeout > 0) {
+            this.ngZone.runOutsideAngular(function () {
+                toast.timeoutId = window.setTimeout(function () {
+                    _this.ngZone.run(function () {
+                        _this.ref.markForCheck();
+                        _this.removeToast(toast);
+                    });
+                }, timeout);
+            });
+        }
+    };
+    ToasterContainerComponent.prototype.isLimitExceeded = function () {
+        return this.toasterconfig.limit && this.toasts.length > this.toasterconfig.limit;
+    };
+    ToasterContainerComponent.prototype.removeToast = function (toast) {
+        var index = this.toasts.indexOf(toast);
+        if (index < 0) {
+            return;
+        }
+        ;
+        this.toasts.splice(index, 1);
+        if (toast.timeoutId) {
+            window.clearTimeout(toast.timeoutId);
+            toast.timeoutId = null;
+        }
+        if (toast.onHideCallback) {
+            toast.onHideCallback(toast);
+        }
+        this.toasterService._removeToastSubject.next({ toastId: toast.toastId, toastContainerId: toast.toastContainerId });
+    };
+    ToasterContainerComponent.prototype.removeAllToasts = function () {
+        for (var i = this.toasts.length - 1; i >= 0; i--) {
+            this.removeToast(this.toasts[i]);
+        }
+    };
+    ToasterContainerComponent.prototype.clearToasts = function (clearWrapper) {
+        var toastId = clearWrapper.toastId;
+        var toastContainerId = clearWrapper.toastContainerId;
+        if (toastContainerId === null || typeof toastContainerId === 'undefined') {
+            this.clearToastsAction(toastId);
+        }
+        else if (toastContainerId === this.toasterconfig.toastContainerId) {
+            this.clearToastsAction(toastId);
+        }
+    };
+    ToasterContainerComponent.prototype.clearToastsAction = function (toastId) {
+        if (toastId) {
+            this.removeToast(this.toasts.filter(function (t) { return t.toastId === toastId; })[0]);
+        }
+        else {
+            this.removeAllToasts();
+        }
+    };
+    ToasterContainerComponent.prototype.ngOnDestroy = function () {
+        if (this.addToastSubscriber) {
+            this.addToastSubscriber.unsubscribe();
+        }
+        if (this.clearToastsSubscriber) {
+            this.clearToastsSubscriber.unsubscribe();
+        }
+    };
+    return ToasterContainerComponent;
+}());
+
+ToasterContainerComponent.decorators = [
+    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"], args: [{
+                selector: 'toaster-container',
+                template: "\n        <div id=\"toast-container\" [ngClass]=\"[toasterconfig.positionClass]\">\n            <div toastComp *ngFor=\"let toast of toasts\" class=\"toast\" [toast]=\"toast\"\n                [@toastState]=\"toasterconfig.animation\"\n                [iconClass]=\"toasterconfig.iconClasses[toast.type]\"\n                [ngClass]=\"toasterconfig.typeClasses[toast.type]\"\n                (click)=\"click(toast)\" (clickEvent)=\"childClick($event)\"\n                (mouseover)=\"stopTimer(toast)\" (mouseout)=\"restartTimer(toast)\">\n            </div>\n        </div>\n        ",
+                // TODO: use styleUrls once Angular 2 supports the use of relative paths
+                // https://github.com/angular/angular/issues/2383
+                // styleUrls: ['./toaster.css']
+                animations: [
+                    Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["j" /* trigger */])('toastState', [
+                        Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["g" /* state */])('flyRight, flyLeft, slideDown, slideUp, fade', Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["h" /* style */])({ opacity: 1, transform: 'translate(0,0)' })),
+                        Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["i" /* transition */])('void => flyRight', [
+                            Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["h" /* style */])({
+                                opacity: 0, transform: 'translateX(100%)'
+                            }),
+                            Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["e" /* animate */])('0.25s ease-in')
+                        ]),
+                        Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["i" /* transition */])('flyRight => void', [
+                            Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["e" /* animate */])('0.25s 10ms ease-out', Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["h" /* style */])({
+                                opacity: 0, transform: 'translateX(100%)'
+                            }))
+                        ]),
+                        Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["i" /* transition */])('void => flyLeft', [
+                            Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["h" /* style */])({
+                                opacity: 0, transform: 'translateX(-100%)'
+                            }),
+                            Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["e" /* animate */])('0.25s ease-in')
+                        ]),
+                        Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["i" /* transition */])('flyLeft => void', [
+                            Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["e" /* animate */])('0.25s 10ms ease-out', Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["h" /* style */])({
+                                opacity: 0, transform: 'translateX(-100%)'
+                            }))
+                        ]),
+                        Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["i" /* transition */])('void => slideDown', [
+                            Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["h" /* style */])({
+                                opacity: 0, transform: 'translateY(-200%)'
+                            }),
+                            Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["e" /* animate */])('0.3s ease-in')
+                        ]),
+                        Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["i" /* transition */])('slideDown => void', [
+                            Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["e" /* animate */])('0.3s 10ms ease-out', Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["h" /* style */])({
+                                opacity: 0, transform: 'translateY(200%)'
+                            }))
+                        ]),
+                        Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["i" /* transition */])('void => slideUp', [
+                            Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["h" /* style */])({
+                                opacity: 0, transform: 'translateY(200%)'
+                            }),
+                            Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["e" /* animate */])('0.3s ease-in')
+                        ]),
+                        Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["i" /* transition */])('slideUp => void', [
+                            Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["e" /* animate */])('0.3s 10ms ease-out', Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["h" /* style */])({
+                                opacity: 0, transform: 'translateY(-200%)'
+                            }))
+                        ]),
+                        Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["i" /* transition */])('void => fade', [
+                            Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["h" /* style */])({
+                                opacity: 0,
+                            }),
+                            Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["e" /* animate */])('0.3s ease-in')
+                        ]),
+                        Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["i" /* transition */])('fade => void', [
+                            Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["e" /* animate */])('0.3s 10ms ease-out', Object(__WEBPACK_IMPORTED_MODULE_1__angular_animations__["h" /* style */])({
+                                opacity: 0,
+                            }))
+                        ])
+                    ]),
+                ]
+            },] },
+];
+/** @nocollapse */
+ToasterContainerComponent.ctorParameters = function () { return [
+    { type: __WEBPACK_IMPORTED_MODULE_3__toaster_service__["a" /* ToasterService */], },
+    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectorRef"], },
+    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["NgZone"], },
+]; };
+ToasterContainerComponent.propDecorators = {
+    'toasterconfig': [{ type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"] },],
+};
+//# sourceMappingURL=toaster-container.component.js.map
+
+/***/ }),
+
+/***/ "../../../../angular2-toaster/src/toaster.module.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony export ToasterModule */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_common__ = __webpack_require__("../../../common/@angular/common.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__toast_component__ = __webpack_require__("../../../../angular2-toaster/src/toast.component.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__toaster_container_component__ = __webpack_require__("../../../../angular2-toaster/src/toaster-container.component.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__toaster_service__ = __webpack_require__("../../../../angular2-toaster/src/toaster.service.js");
+
+
+
+
+
+var ToasterModule = (function () {
+    function ToasterModule() {
+    }
+    return ToasterModule;
+}());
+
+ToasterModule.decorators = [
+    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"], args: [{
+                imports: [__WEBPACK_IMPORTED_MODULE_1__angular_common__["CommonModule"]],
+                declarations: [
+                    __WEBPACK_IMPORTED_MODULE_2__toast_component__["a" /* ToastComponent */],
+                    __WEBPACK_IMPORTED_MODULE_3__toaster_container_component__["a" /* ToasterContainerComponent */]
+                ],
+                providers: [__WEBPACK_IMPORTED_MODULE_4__toaster_service__["a" /* ToasterService */]],
+                exports: [
+                    __WEBPACK_IMPORTED_MODULE_3__toaster_container_component__["a" /* ToasterContainerComponent */],
+                    __WEBPACK_IMPORTED_MODULE_2__toast_component__["a" /* ToastComponent */]
+                ]
+            },] },
+];
+/** @nocollapse */
+ToasterModule.ctorParameters = function () { return []; };
+//# sourceMappingURL=toaster.module.js.map
+
+/***/ }),
+
+/***/ "../../../../angular2-toaster/src/toaster.service.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ToasterService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__ = __webpack_require__("../../../../rxjs/Observable.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_share__ = __webpack_require__("../../../../rxjs/add/operator/share.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_share___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_share__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Subject__ = __webpack_require__("../../../../rxjs/Subject.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Subject___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_Subject__);
+
+
+
+
+var ToasterService = (function () {
+    /**
+     * Creates an instance of ToasterService.
+     */
+    function ToasterService() {
+        var _this = this;
+        this.addToast = new __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__["Observable"](function (observer) { return _this._addToast = observer; }).share();
+        this.clearToasts = new __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__["Observable"](function (observer) { return _this._clearToasts = observer; }).share();
+        this._removeToastSubject = new __WEBPACK_IMPORTED_MODULE_3_rxjs_Subject__["Subject"]();
+        this.removeToast = this._removeToastSubject.share();
+    }
+    /**
+     * Synchronously create and show a new toast instance.
+     *
+     * @param {(string | Toast)} type The type of the toast, or a Toast object.
+     * @param {string=} title The toast title.
+     * @param {string=} body The toast body.
+     * @returns {Toast}
+     *          The newly created Toast instance with a randomly generated GUID Id.
+     */
+    ToasterService.prototype.pop = function (type, title, body) {
+        var toast = typeof type === 'string' ? { type: type, title: title, body: body } : type;
+        toast.toastId = Guid.newGuid();
+        if (!this._addToast) {
+            throw new Error('No Toaster Containers have been initialized to receive toasts.');
+        }
+        this._addToast.next(toast);
+        return toast;
+    };
+    /**
+     * Asynchronously create and show a new toast instance.
+     *
+     * @param {(string | Toast)} type The type of the toast, or a Toast object.
+     * @param {string=} title The toast title.
+     * @param {string=} body The toast body.
+     * @returns {Observable<Toast>}
+     *          A hot Observable that can be subscribed to in order to receive the Toast instance
+     *          with a randomly generated GUID Id.
+     */
+    ToasterService.prototype.popAsync = function (type, title, body) {
+        var _this = this;
+        setTimeout(function () {
+            _this.pop(type, title, body);
+        }, 0);
+        return this.addToast;
+    };
+    /**
+     * Clears a toast by toastId and/or toastContainerId.
+     *
+     * @param {string} toastId The toastId to clear.
+     * @param {number=} toastContainerId
+     *        The toastContainerId of the container to remove toasts from.
+     */
+    ToasterService.prototype.clear = function (toastId, toastContainerId) {
+        var clearWrapper = {
+            toastId: toastId, toastContainerId: toastContainerId
+        };
+        this._clearToasts.next(clearWrapper);
+    };
+    return ToasterService;
+}());
+
+ToasterService.decorators = [
+    { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"] },
+];
+/** @nocollapse */
+ToasterService.ctorParameters = function () { return []; };
+// http://stackoverflow.com/questions/26501688/a-typescript-guid-class
+var Guid = (function () {
+    function Guid() {
+    }
+    Guid.newGuid = function () {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+            var r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
+        });
+    };
+    return Guid;
+}());
+//# sourceMappingURL=toaster.service.js.map
+
+/***/ }),
+
+/***/ "../../../../rxjs/add/operator/share.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var Observable_1 = __webpack_require__("../../../../rxjs/Observable.js");
+var share_1 = __webpack_require__("../../../../rxjs/operator/share.js");
+Observable_1.Observable.prototype.share = share_1.share;
+//# sourceMappingURL=share.js.map
 
 /***/ })
 

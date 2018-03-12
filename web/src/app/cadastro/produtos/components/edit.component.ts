@@ -7,7 +7,7 @@ import { NgForOf } from '@angular/common';
 import { ProdutosService } from '../services/produtos.service';
 import { FormsModule } from '@angular/forms';
 
-import {ToasterService} from 'angular2-toaster';
+import {AppMessageService} from "../../../app-message.service";
 
 @Component({
     templateUrl: 'edit.component.html'
@@ -15,7 +15,7 @@ import {ToasterService} from 'angular2-toaster';
 export class EditComponent implements OnInit {
 
     constructor(private httpService: ProdutosService, private router: Router, private route: ActivatedRoute
-        ,private toasterService: ToasterService
+        ,private toasterService: AppMessageService
     ) {}
 
     client = '';
@@ -36,7 +36,7 @@ export class EditComponent implements OnInit {
         if(u.role !== 'gerente' && u.role !== 'admin')
         {
             this.hideLoading();
-            this.toasterService.pop('error','Sem permissão','Usuário sem acesso, contate o administrador');
+            this.toasterService.message('Sem permissão','Usuário sem acesso, contate o administrador','error');
             this.router.navigate(['/cadastro/produtos']);
         }
         this.httpService.setAccessToken();
@@ -68,8 +68,6 @@ export class EditComponent implements OnInit {
             })
     }
 
-
-
     save(e)
     {
         this.showLoading();
@@ -79,7 +77,7 @@ export class EditComponent implements OnInit {
             .then(() => {
                 this.httpService.eventEmitter.emit();
                 this.hideLoading();
-                this.toasterService.pop('success','Sucesso','Produto salvo com sucesso');
+                this.toasterService.message('Sucesso','Produto salvo com sucesso','success');
                 this.close();
             })
 
@@ -95,7 +93,7 @@ export class EditComponent implements OnInit {
             .then((res) =>{
                 this.httpService.eventEmitter.emit();
                 this.hideLoading();
-                this.toasterService.pop('warning','informação','Produto inativado');
+                this.toasterService.message('informação','Produto inativado','warning');
                 this.close();
             })
     }
@@ -106,10 +104,10 @@ export class EditComponent implements OnInit {
     }
 
     hideLoading(){
-        jQuery(".container-loading").hide();
+        jQuery("#bifrostBarSpinner").hide();
     }
 
     showLoading(){
-        jQuery(".container-loading").show();
+        jQuery("#bifrostBarSpinner").show();
     }
 }

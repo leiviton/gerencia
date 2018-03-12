@@ -142,6 +142,7 @@ module.exports = "<div class=\"animated fadeIn\">\n    <div class=\"row\">\n    
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_clients_service__ = __webpack_require__("../../../../../src/app/cadastro/clients/services/clients.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jquery__ = __webpack_require__("../../../../jquery/dist/jquery.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_jquery__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_message_service__ = __webpack_require__("../../../../../src/app/app-message.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -155,10 +156,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var ClientsComponent = (function () {
-    function ClientsComponent(httpService, router) {
+    function ClientsComponent(httpService, router, notification) {
         this.httpService = httpService;
         this.router = router;
+        this.notification = notification;
         this.cor = false;
         this.pesquisa = {
             inicio: null,
@@ -194,10 +197,10 @@ var ClientsComponent = (function () {
         __WEBPACK_IMPORTED_MODULE_3_jquery__(".modal").hide();
     };
     ClientsComponent.prototype.hideLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_3_jquery__(".container-loading").hide();
+        __WEBPACK_IMPORTED_MODULE_3_jquery__("#bifrostBarSpinner").hide();
     };
     ClientsComponent.prototype.showLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_3_jquery__(".container-loading").show();
+        __WEBPACK_IMPORTED_MODULE_3_jquery__("#bifrostBarSpinner").show();
     };
     ClientsComponent.prototype.pesquisar = function (fields) {
         console.log(fields);
@@ -206,10 +209,10 @@ var ClientsComponent = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             template: __webpack_require__("../../../../../src/app/cadastro/clients/components/clients.component.html")
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__services_clients_service__["a" /* ClientsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_clients_service__["a" /* ClientsService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* Router */]) === "function" && _b || Object])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__services_clients_service__["a" /* ClientsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_clients_service__["a" /* ClientsService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__app_message_service__["a" /* AppMessageService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__app_message_service__["a" /* AppMessageService */]) === "function" && _c || Object])
     ], ClientsComponent);
     return ClientsComponent;
-    var _a, _b;
+    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=clients.component.js.map
@@ -232,8 +235,8 @@ module.exports = "<div tabindex=\"-1\" class=\"modal fade\" id=\"infoModal\" rol
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery__ = __webpack_require__("../../../../jquery/dist/jquery.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_jquery__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angular2_toaster__ = __webpack_require__("../../../../angular2-toaster/angular2-toaster.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_clients_service__ = __webpack_require__("../../../../../src/app/cadastro/clients/services/clients.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_clients_service__ = __webpack_require__("../../../../../src/app/cadastro/clients/services/clients.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_message_service__ = __webpack_require__("../../../../../src/app/app-message.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -249,11 +252,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var EditComponent = (function () {
-    function EditComponent(httpService, router, route, toasterService) {
+    function EditComponent(httpService, router, route, notification) {
         this.httpService = httpService;
         this.router = router;
         this.route = route;
-        this.toasterService = toasterService;
+        this.notification = notification;
         this.client = {
             id: null,
             name: null,
@@ -307,11 +310,7 @@ var EditComponent = (function () {
     EditComponent.prototype.save = function (e) {
         var _this = this;
         if (this.client.name != null && this.client.name.length > 4
-            && this.client.email != null && this.client.email.length > 4
-            && this.client.phone != null && this.client.phone > 10
-            && this.client.address.bairro != null && this.client.address.bairro.length > 4
-            && this.client.address.address != null && this.client.address.address.length > 4
-            && this.client.address.numero != null && this.client.address.city_id != null) {
+            && this.client.phone != null && this.client.phone > 10) {
             this.showLoading();
             this.httpService.setAccessToken();
             this.httpService.builder('client')
@@ -319,12 +318,12 @@ var EditComponent = (function () {
                 .then(function () {
                 _this.httpService.eventEmitter.emit();
                 _this.hideLoading();
-                _this.toasterService.pop('success', 'Sucesso', 'Cliente salvo com sucesso');
+                _this.notification.message('Sucesso', 'Cliente salvo com sucesso', 'success');
                 _this.close();
             });
         }
         else {
-            this.toasterService.pop('error', 'Erro', 'Verifique se todos os campos foram preenchidos.');
+            this.notification.message('Error', 'Verifique se todos os campos foram preenchidos.', 'error');
         }
     };
     EditComponent.prototype.close = function () {
@@ -332,16 +331,16 @@ var EditComponent = (function () {
         this.router.navigate(['/cadastro/clients']);
     };
     EditComponent.prototype.hideLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_1_jquery__(".container-loading").hide();
+        __WEBPACK_IMPORTED_MODULE_1_jquery__("#bifrostBarSpinner").hide();
     };
     EditComponent.prototype.showLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_1_jquery__(".container-loading").show();
+        __WEBPACK_IMPORTED_MODULE_1_jquery__("#bifrostBarSpinner").show();
     };
     EditComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             template: __webpack_require__("../../../../../src/app/cadastro/clients/components/edit.component.html")
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_4__services_clients_service__["a" /* ClientsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__services_clients_service__["a" /* ClientsService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3_angular2_toaster__["b" /* ToasterService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_angular2_toaster__["b" /* ToasterService */]) === "function" && _d || Object])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__services_clients_service__["a" /* ClientsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_clients_service__["a" /* ClientsService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__app_message_service__["a" /* AppMessageService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__app_message_service__["a" /* AppMessageService */]) === "function" && _d || Object])
     ], EditComponent);
     return EditComponent;
     var _a, _b, _c, _d;
@@ -364,11 +363,11 @@ module.exports = "<div tabindex=\"-1\" class=\"modal fade\" id=\"infoModal\" rol
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NewComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angular2_toaster__ = __webpack_require__("../../../../angular2-toaster/angular2-toaster.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_jquery__ = __webpack_require__("../../../../jquery/dist/jquery.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_jquery__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_clients_service__ = __webpack_require__("../../../../../src/app/cadastro/clients/services/clients.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery__ = __webpack_require__("../../../../jquery/dist/jquery.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_jquery__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_clients_service__ = __webpack_require__("../../../../../src/app/cadastro/clients/services/clients.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_message_service__ = __webpack_require__("../../../../../src/app/app-message.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -384,11 +383,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var NewComponent = (function () {
-    function NewComponent(httpService, router, route, toasterService) {
+    function NewComponent(httpService, router, route, notification) {
         this.httpService = httpService;
         this.router = router;
         this.route = route;
-        this.toasterService = toasterService;
+        this.notification = notification;
         this.client = {
             name: null,
             phone: null,
@@ -405,7 +404,7 @@ var NewComponent = (function () {
     NewComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.showLoading();
-        __WEBPACK_IMPORTED_MODULE_2_jquery__('#infoModal').show().addClass('show');
+        __WEBPACK_IMPORTED_MODULE_1_jquery__('#infoModal').show().addClass('show');
         setTimeout(function () {
             _this.hideLoading();
         }, 300);
@@ -425,29 +424,29 @@ var NewComponent = (function () {
                 .then(function () {
                 _this.httpService.eventEmitter.emit();
                 _this.hideLoading();
-                _this.toasterService.pop('success', 'Sucesso', 'Cliente salvo com sucesso');
+                _this.notification.message('Sucesso', 'Cliente salvo com sucesso', 'success');
                 _this.close();
             });
         }
         else {
-            this.toasterService.pop('error', 'Erro', 'Verifique se todos os campos foram preenchidos.');
+            this.notification.message('Erro', 'Verifique se todos os campos foram preenchidos.', 'error');
         }
     };
     NewComponent.prototype.close = function () {
-        __WEBPACK_IMPORTED_MODULE_2_jquery__('#infoModal').hide();
+        __WEBPACK_IMPORTED_MODULE_1_jquery__('#infoModal').hide();
         this.router.navigate(['/cadastro/clients']);
     };
     NewComponent.prototype.hideLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_2_jquery__(".container-loading").hide();
+        __WEBPACK_IMPORTED_MODULE_1_jquery__("#bifrostBarSpinner").hide();
     };
     NewComponent.prototype.showLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_2_jquery__(".container-loading").show();
+        __WEBPACK_IMPORTED_MODULE_1_jquery__("#bifrostBarSpinner").show();
     };
     NewComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             template: __webpack_require__("../../../../../src/app/cadastro/clients/components/new.component.html")
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_4__services_clients_service__["a" /* ClientsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__services_clients_service__["a" /* ClientsService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_router__["a" /* ActivatedRoute */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_angular2_toaster__["b" /* ToasterService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_angular2_toaster__["b" /* ToasterService */]) === "function" && _d || Object])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__services_clients_service__["a" /* ClientsService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_clients_service__["a" /* ClientsService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__app_message_service__["a" /* AppMessageService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__app_message_service__["a" /* AppMessageService */]) === "function" && _d || Object])
     ], NewComponent);
     return NewComponent;
     var _a, _b, _c, _d;

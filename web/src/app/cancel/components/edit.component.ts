@@ -6,17 +6,15 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NgForOf } from '@angular/common';
 import { OrdersService } from '../services/orders.service';
 import { FormsModule } from '@angular/forms';
-
-
-import {ToasterService} from 'angular2-toaster';
+import {AppMessageService} from "../../app-message.service";
 
 @Component({
     templateUrl: 'edit.component.html'
 })
 export class EditComponent implements OnInit {
 
-    constructor(private httpService: OrdersService, private router: Router, private route: ActivatedRoute
-        ,private toasterService: ToasterService)
+    constructor(private httpService: OrdersService, private router: Router,
+                private route: ActivatedRoute,private toasterService: AppMessageService)
     {
         document.onkeydown = ((e) =>{
             if(e.keyCode == 27)
@@ -137,7 +135,7 @@ export class EditComponent implements OnInit {
                 this.products = res.data.items;
                 this.mesa = res.data.mesa.data.name;
                 this.hideLoading();
-                this.toasterService.pop('success', 'Sucesso','Pedido '+this.order.id+' com sucesso!')
+                this.toasterService.message('Sucesso','Pedido '+this.order.id+' com sucesso!')
             });
     }
 
@@ -173,7 +171,7 @@ export class EditComponent implements OnInit {
     addItem(item)
     {
         this.httpService.addItem(item,this.qtd);
-        this.toasterService.pop('success', 'Sucesso', 'Item codigo '+item.id+' adicionado.');
+        this.toasterService.message('Sucesso', 'Item codigo '+item.id+' adicionado.','success');
     }
 
 
@@ -192,11 +190,11 @@ export class EditComponent implements OnInit {
         this.editar = !this.editar;
     }
     hideLoading(){
-        jQuery(".container-loading").hide();
+        jQuery("#bifrostBarSpinner").hide();
     }
 
     showLoading(){
-        jQuery(".container-loading").show();
+        jQuery("#bifrostBarSpinner").show();
     }
 
 }

@@ -1,19 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import {ToasterService} from 'angular2-toaster';
 import { Router } from '@angular/router';
 import { NgForOf } from '@angular/common';
 import { MovimentoCaixasService } from '../services/movimento-caixas.service';
 import { FormsModule } from '@angular/forms';
-
-
-
 import * as jQuery from 'jquery';
+import {AppMessageService} from "../../app-message.service";
+
 @Component({
   templateUrl: 'movimento-caixas.component.html'
 })
 export class MovimentoCaixasComponent implements OnInit {
 
-  constructor(private httpService: MovimentoCaixasService, private router: Router, private toasterService: ToasterService) {
+  constructor(private httpService: MovimentoCaixasService, private router: Router,
+              private toasterService: AppMessageService) {
       document.onkeydown = ((e) =>{
           if(e.keyCode == 113)
           {
@@ -41,24 +40,43 @@ export class MovimentoCaixasComponent implements OnInit {
     usuarios = {
         data:[]
     };
+
   ngOnInit(): void {
       this.showLoading();
-
       let u = {role:null};
       u = JSON.parse(localStorage.getItem('user') || null);
       if(u == null){
-          this.toasterService.pop('error','Sem permissão','Usuário sem acesso, contate o administrador');
-          this.router.navigate(['/dashboard']);
+          this.toasterService.message('Sem permissão',
+              'Usuário sem acesso, contate o administrador','error');
+          this.router.navigate(['/user/login']);
       }
 
       if(u.role !== 'gerente' && u.role !== 'admin' )
       {
-          this.toasterService.pop('error','Sem permissão','Usuário sem acesso, contate o administrador');
+          this.toasterService.message('Sem permissão',
+              'Usuário sem acesso, contate o administrador','error');
           this.router.navigate(['/dashboard']);
       }
 
       this.httpService.setAccessToken();
-      setTimeout(this.hideLoading(),2000);
+      this.httpService.builder()
+          .list({},'movimento/caixas')
+          .then((res) => {
+              this.movimentos = res;
+              console.log(this.movimentos);
+              this.tamanho = res.data.length;
+              let i;
+              for(i = 0; i < res.data.length; i++)
+              {
+                  if(res.data[i].tipo_movimento === 'credito') {
+                      this.total += res.data[i].valor;
+                  }else if(res.data[i].tipo_movimento === 'debito'){
+                      this.total -= res.data[i].valor;
+                  }
+              }
+              this.hideLoading();
+              this.toasterService.message('Sucesso', 'Dados carregados com sucesso','success');
+          });
       this.getCaixas();
       this.getUser();
 
@@ -124,11 +142,11 @@ export class MovimentoCaixasComponent implements OnInit {
                     }
                     this.hideModal('#mov');
                     this.hideLoading();
-                    this.toasterService.pop('success', 'Sucesso', 'Dados carregados com sucesso');
+                    this.toasterService.message('Sucesso', 'Dados carregados com sucesso','success');
 
                 });
         }else  {
-            this.toasterService.pop('error', 'Erro', 'Preencha inicio, fim e status para pesquisar.');
+            this.toasterService.message('Erro', 'Preencha inicio, fim e status para pesquisar.','error');
             this.hideLoading();
         }
     }
@@ -158,19 +176,19 @@ export class MovimentoCaixasComponent implements OnInit {
                     localStorage.setItem('mov_caixa_rel',JSON.stringify(res));
                     localStorage.setItem('filtros_rel',JSON.stringify(options));
                     this.openReal();
-                    this.toasterService.pop('success','Sucesso','Relátorio gerado com sucesso');
+                    this.toasterService.message('Sucesso','Relátorio gerado com sucesso','success');
                 });
         }else{
             this.showLoading();
         }
     }
 
-
     hideLoading(){
-        jQuery(".container-loading").hide();
+        jQuery("#bifrostBarSpinner").hide();
     }
+
     showLoading(){
-        jQuery(".container-loading").show();
+        jQuery("#bifrostBarSpinner").show();
     }
 
     showModal(id)

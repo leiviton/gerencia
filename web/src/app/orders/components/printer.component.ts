@@ -4,17 +4,13 @@ import * as jQuery from 'jquery';
 import { Router, ActivatedRoute } from '@angular/router';
 import { OrdersService } from '../services/orders.service';
 
-
-import { environment } from '../../../environments/environment';
-import {ToasterService} from 'angular2-toaster';
-
 @Component({
     templateUrl: 'printer.component.html'
 })
 export class PrinterComponent implements OnInit {
 
     constructor(private httpService: OrdersService, private router: Router, private route: ActivatedRoute
-        ,private toasterService: ToasterService,public sanitizer: DomSanitizer)
+        ,public sanitizer: DomSanitizer)
     {
 
         document.onkeydown = ((e) =>{
@@ -70,11 +66,11 @@ export class PrinterComponent implements OnInit {
     }
 
     hideLoading(){
-        jQuery(".container-loading").hide();
+        jQuery("#bifrostBarSpinner").hide();
     }
 
     showLoading(){
-        jQuery(".container-loading").show();
+        jQuery("#bifrostBarSpinner").show();
     }
 
 }

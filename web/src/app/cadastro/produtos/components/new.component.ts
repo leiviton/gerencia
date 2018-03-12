@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import {ToasterService} from 'angular2-toaster';
 import * as jQuery from 'jquery';
 
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgForOf } from '@angular/common';
 import { ProdutosService } from '../services/produtos.service';
 import { FormsModule } from '@angular/forms';
+import {AppMessageService} from "../../../app-message.service";
 
 @Component({
     templateUrl: 'new.component.html'
 })
 export class NewComponent implements OnInit {
 
-    constructor(private httpService: ProdutosService, private router: Router, private route: ActivatedRoute
-        ,private toasterService: ToasterService
+    constructor(private httpService: ProdutosService, private router: Router,
+                private route: ActivatedRoute,private toasterService: AppMessageService
     ) {}
 
     client = '';
@@ -31,7 +31,7 @@ export class NewComponent implements OnInit {
         u = JSON.parse(localStorage.getItem('user') || null);
         if(u.role !== 'gerente' && u.role !== 'admin')
         {
-            this.toasterService.pop('error','Sem permissão','Usuário sem acesso, contate o administrador');
+            this.toasterService.message('Sem permissão','Usuário sem acesso, contate o administrador','error');
             this.router.navigate(['/cadastro/produtos']);
             this.hideLoading();
         }
@@ -51,7 +51,6 @@ export class NewComponent implements OnInit {
                 this.groups = res;
             });
     }
-
 
     subgrupos()
     {
@@ -75,13 +74,12 @@ export class NewComponent implements OnInit {
                 .then(() => {
                     this.httpService.eventEmitter.emit();
                     this.hideLoading();
-                    this.toasterService.pop('success', 'Sucesso', 'Produto salvo com sucesso');
+                    this.toasterService.message('Sucesso', 'Produto salvo com sucesso','success');
                     this.close();
                 });
         }else{
-            this.toasterService.pop('error', 'Erro', 'Verifique se todos os campos foram preenchidos.');
+            this.toasterService.message('Erro', 'Verifique se todos os campos foram preenchidos.','error');
         }
-
     }
 
     close(){
@@ -90,11 +88,11 @@ export class NewComponent implements OnInit {
     }
 
     hideLoading(){
-        jQuery(".container-loading").hide();
+        jQuery("#bifrostBarSpinner").hide();
     }
 
     showLoading(){
-        jQuery(".container-loading").show();
+        jQuery("#bifrostBarSpinner").show();
     }
 
 }

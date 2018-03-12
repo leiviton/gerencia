@@ -7,16 +7,15 @@ import { NgForOf } from '@angular/common';
 import { OpenCloseCaixasService } from "../services/open-close-caixas.service"
 import { FormsModule } from '@angular/forms';
 
-
-import {ToasterService} from 'angular2-toaster';
+import {AppMessageService} from "../../app-message.service";
 
 @Component({
     templateUrl: 'open-close.component.html'
 })
 export class OpenCloseComponent implements OnInit {
 
-    constructor(private httpService: OpenCloseCaixasService, private router: Router, private route: ActivatedRoute
-        ,private toasterService: ToasterService)
+    constructor(private httpService: OpenCloseCaixasService, private router: Router,
+                private route: ActivatedRoute,private toasterService: AppMessageService)
     {
         document.onkeydown = ((e) =>{
 
@@ -62,25 +61,25 @@ export class OpenCloseComponent implements OnInit {
                     .then((res) => {
                         if(res == 'data_diverge') {
                             this.hideLoading();
-                            this.toasterService.pop('error','Erro','Data diferente da data atual');
+                            this.toasterService.message('Erro','Data diferente da data atual','error');
                         }else if (res === 'fechado') {
-                                this.toasterService.pop('error', 'Erro', 'Caixa está fechado');
+                                this.toasterService.message('Erro', 'Caixa está fechado','error');
                                 this.hideLoading();
                         } else if(res === 'caixa_aberto_o_data') {
-                                this.toasterService.pop('error', 'Erro', 'Caixa está aberto em outra data');
+                                this.toasterService.message('Erro', 'Caixa está aberto em outra data','error');
                                 this.hideLoading();
                         }else if(res == 'ok') {
                             this.httpService.eventEmitter.emit();
-                            this.toasterService.pop('success', 'Sucesso', 'Saque salvo com sucesso');
+                            this.toasterService.message('Sucesso', 'Saque salvo com sucesso','success');
                             this.hideLoading();
                             this.close();
                         }
                     });
             } else {
-                this.toasterService.pop('error', 'Erro', 'Verifique se todos os campos foram preenchidos.');
+                this.toasterService.message('Erro', 'Verifique se todos os campos foram preenchidos.','error');
             }
         }else{
-            this.toasterService.pop('error', 'Erro', 'Data não pode ser vazia');
+            this.toasterService.message('Erro', 'Data não pode ser vazia','error');
         }
     }
 
@@ -89,13 +88,11 @@ export class OpenCloseComponent implements OnInit {
         this.router.navigate(['/financeiro/open/close/caixas']);
     }
 
-
     hideLoading(){
-        jQuery(".container-loading").hide();
+        jQuery("#bifrostBarSpinner").hide();
     }
 
     showLoading(){
-        jQuery(".container-loading").show();
+        jQuery("#bifrostBarSpinner").show();
     }
-
 }

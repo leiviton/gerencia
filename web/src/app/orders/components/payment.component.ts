@@ -5,15 +5,15 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NgForOf } from '@angular/common';
 import { OrdersService } from '../services/orders.service';
 import { FormsModule } from '@angular/forms';
+import {AppMessageService} from "../../app-message.service";
 
-import {ToasterService} from 'angular2-toaster';
-
++6
 @Component({
     templateUrl: 'payment.component.html'
 })
 export class PaymentComponent implements OnInit {
 
-    constructor(private httpService: OrdersService, private router: Router, private route: ActivatedRoute,private toasterService: ToasterService) {
+    constructor(private httpService: OrdersService, private router: Router, private route: ActivatedRoute,private toasterService: AppMessageService) {
         document.onkeydown = ((e) =>{
             if(e.keyCode  == 120)
             {
@@ -94,17 +94,17 @@ export class PaymentComponent implements OnInit {
                             .then((res) => {
                                 if(res == 'fechado'){
                                     this.hideLoading();
-                                    this.toasterService.pop('error','Error','Caixa está fechado');
+                                    this.toasterService.message('Error','Caixa está fechado','error');
                                 }else {
                                     if (res == 0) {
                                         this.hideLoading();
-                                        this.toasterService.pop('error', 'Ops houve um erro, tente novamente');
+                                        this.toasterService.message('Erro', 'Ops houve um erro, tente novamente','error');
                                     } else {
                                         this.httpService.eventEmitter.emit();
                                         this.payment.total_realizado = this.payment.total_pago;
                                         this.valor_pag = 0;
                                         this.hideLoading();
-                                        this.toasterService.pop('success', 'Sucesso', 'Pagamento do pedido ' + res.data.id + ' realizado com sucesso');
+                                        this.toasterService.message('Sucesso', 'Pagamento do pedido ' + res.data.id + ' realizado com sucesso','success');
                                         this.close();
                                     }
                                 }
@@ -112,7 +112,7 @@ export class PaymentComponent implements OnInit {
 
                 }else{
                     this.hideLoading();
-                    this.toasterService.pop('error', 'Erro', 'Tipo pagamento não selecionado');
+                    this.toasterService.message('Erro', 'Tipo pagamento não selecionado','error');
 
                 }
             }else if (this.valor_pag + this.payment.desconto >= this.total){
@@ -126,23 +126,23 @@ export class PaymentComponent implements OnInit {
                         .then((res) => {
                             if(res=='fechado'){
                                 this.hideLoading();
-                                this.toasterService.pop('error','Error','Caixa está fechado');
+                                this.toasterService.message('Erro','Caixa está fechado','error');
                             }else {
                                 if (res == 0) {
                                     this.hideLoading();
-                                    this.toasterService.pop('error', 'Ops houve um erro, tente novamente');
+                                    this.toasterService.message('Erro', 'Ops houve um erro, tente novamente','error');
                                 } else {
                                     this.httpService.eventEmitter.emit();
                                     this.valor_pag = 0;
                                     this.hideLoading();
-                                    this.toasterService.pop('success', 'Sucesso', 'Pagamento do pedido ' + res.data.id + ' realizado com sucesso');
+                                    this.toasterService.message('Sucesso', 'Pagamento do pedido ' + res.data.id + ' realizado com sucesso','success');
                                     this.close();
                                 }
                             }
                     });
                 }else{
                     this.hideLoading();
-                    this.toasterService.pop('error', 'Erro', 'Tipo pagamento não selecionado');
+                    this.toasterService.message('Erro', 'Tipo pagamento não selecionado','error');
                 }
             }else if((this.valor_pag + this.payment.desconto) < this.total) {
                 this.payment.total_pago = (this.valor_pag - (-1 * this.troco));
@@ -155,11 +155,11 @@ export class PaymentComponent implements OnInit {
                         .then((res) => {
                             if(res=='fechado'){
                                 this.hideLoading();
-                                this.toasterService.pop('error','Error','Caixa está fechado');
+                                this.toasterService.message('Error','Caixa está fechado','error');
                             }else {
                                 if (res == 0) {
                                     this.hideLoading();
-                                    this.toasterService.pop('error', 'Ops houve um erro, tente novamente');
+                                    this.toasterService.message('Erro', 'Ops houve um erro, tente novamente','error');
                                 } else {
 
                                     this.httpService.eventEmitter.emit();
@@ -173,18 +173,18 @@ export class PaymentComponent implements OnInit {
                                         }
                                     }
                                     this.hideLoading();
-                                    this.toasterService.pop('success', 'Sucesso', 'Pagamento parcial ' + res.data.id + ' realizado com sucesso');
+                                    this.toasterService.message('Sucesso', 'Pagamento parcial ' + res.data.id + ' realizado com sucesso','success');
                                 }
                             }
                         });
                 } else {
                     this.hideLoading();
-                    this.toasterService.pop('error', 'Erro', 'Tipo pagamento não selecionado');
+                    this.toasterService.message('Erro', 'Tipo pagamento não selecionado','error');
                 }
             }
         }else{
             this.hideLoading();
-            this.toasterService.pop('error','Erro','Pagamento igual a zaro');
+            this.toasterService.message('Erro','Pagamento igual a zaro','error');
         }
     }
 
@@ -209,10 +209,10 @@ export class PaymentComponent implements OnInit {
         this.router.navigate(['/orders/edit/' + this.order.id]);
     }
     hideLoading(){
-        jQuery(".container-loading").hide();
+        jQuery("#bifrostBarSpinner").hide();
     }
     showLoading(){
-        jQuery(".container-loading").show();
+        jQuery("#bifrostBarSpinner").show();
     }
 }
 

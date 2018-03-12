@@ -4,8 +4,6 @@ import { Routes,
 
 import { OrdersCancelComponent } from './components/orders.component';
 
-import { PaymentComponent } from "./components/payment.component";
-
 import { PrinterComponent} from "./components/printer.component";
 
 import { EditComponent} from "./components/edit.component";
@@ -32,14 +30,8 @@ const routes: Routes = [
               data: {
                   title: 'Printer'
               }
-          },
-          {
-              path: 'payment/:id',
-              component: PaymentComponent,
-              data: {
-                  title: 'Editar'
-              }
           }
+
       ]
   }
 ];

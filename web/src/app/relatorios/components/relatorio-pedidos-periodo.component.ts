@@ -7,16 +7,12 @@ import { NgForOf } from '@angular/common';
 import { RelatoriosService } from '../services/relatorios.service';
 import { FormsModule } from '@angular/forms';
 
-
-import {ToasterService} from 'angular2-toaster';
-
 @Component({
     templateUrl: 'relatorio-pedidos-periodo.component.html'
 })
 export class RelatorioPedidosPeriodoComponent implements OnInit {
 
-    constructor(private httpService: RelatoriosService, private router: Router, private route: ActivatedRoute
-        ,private toasterService: ToasterService)
+    constructor(private httpService: RelatoriosService, private router: Router, private route: ActivatedRoute)
     {}
     movimentos = {
         data:[]

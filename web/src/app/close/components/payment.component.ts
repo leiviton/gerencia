@@ -6,14 +6,15 @@ import { NgForOf } from '@angular/common';
 import { OrdersService } from '../services/orders.service';
 import { FormsModule } from '@angular/forms';
 
-import {ToasterService} from 'angular2-toaster';
+import {AppMessageService} from "../../app-message.service";
 
 @Component({
     templateUrl: 'payment.component.html'
 })
 export class PaymentComponent implements OnInit {
 
-    constructor(private httpService: OrdersService, private router: Router, private route: ActivatedRoute,private toasterService: ToasterService) {
+    constructor(private httpService: OrdersService, private router: Router,
+                private route: ActivatedRoute,private toasterService: AppMessageService) {
         document.onkeydown = ((e) =>{
 
             if(e.keyCode == 27)
@@ -95,12 +96,11 @@ export class PaymentComponent implements OnInit {
     }
 
 
-
     hideLoading(){
-        jQuery(".container-loading").hide();
+        jQuery("#bifrostBarSpinner").hide();
     }
     showLoading(){
-        jQuery(".container-loading").show();
+        jQuery("#bifrostBarSpinner").show();
     }
 }
 

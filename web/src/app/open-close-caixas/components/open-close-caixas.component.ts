@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import {ToasterService} from 'angular2-toaster';
 import { Router } from '@angular/router';
 import { NgForOf } from '@angular/common';
 import { OpenCloseCaixasService } from '../services/open-close-caixas.service';
 import { FormsModule } from '@angular/forms';
 
 import * as jQuery from 'jquery';
+import {AppMessageService} from "../../app-message.service";
 @Component({
   templateUrl: 'open-close-caixas.component.html'
 })
 export class OpenCloseCaixasComponent implements OnInit {
 
-  constructor(private httpService: OpenCloseCaixasService, private router: Router, private toasterService: ToasterService) {
+  constructor(private httpService: OpenCloseCaixasService, private router: Router,
+              private toasterService: AppMessageService) {
       document.onkeydown = ((e) =>{
           if(e.keyCode == 113)
           {
@@ -44,14 +45,14 @@ export class OpenCloseCaixasComponent implements OnInit {
       let u = {role:null};
       u = JSON.parse(localStorage.getItem('user') || null);
       if(u == null){
-          this.toasterService.pop('error','Sem permissão','Usuário sem acesso, contate o administrador');
+          this.toasterService.message('Sem permissão','Usuário sem acesso, contate o administrador','error');
           this.router.navigate(['/']);
       }
 
       if(u.role !== 'gerente' && u.role !== 'admin' )
       {
-          this.toasterService.pop('error','Sem permissão','Usuário sem acesso, contate o administrador');
-          this.router.navigate(['/dashboard']);
+          this.toasterService.message('Sem permissão','Usuário sem acesso, contate o administrador','error');
+          this.router.navigate(['/']);
       }
 
       this.httpService.setAccessToken();
@@ -62,10 +63,10 @@ export class OpenCloseCaixasComponent implements OnInit {
                       .then((res) => {
                         this.movimentos = res;
                         this.tamanho = res.data.length;
+                        this.hideLoading();
                       });
       });
       this.httpService.eventEmitter.emit();
-      setTimeout(this.hideLoading(),2000);
       this.getCaixas();
       this.getUser();
 
@@ -128,12 +129,12 @@ export class OpenCloseCaixasComponent implements OnInit {
                         }
                         this.hideModal('#mov');
                         this.hideLoading();
-                        this.toasterService.pop('success', 'Sucesso', 'Dados carregados com sucesso');
+                        this.toasterService.message('Sucesso', 'Dados carregados com sucesso','success');
 
                     });
             }
         }else  {
-            this.toasterService.pop('error', 'Erro', 'Preencha inicio e caixa para pesquisar.');
+            this.toasterService.message('Erro', 'Preencha inicio e caixa para pesquisar.','error');
             this.hideLoading();
         }
     }
@@ -166,25 +167,26 @@ export class OpenCloseCaixasComponent implements OnInit {
                     this.hideLoading();
                     localStorage.setItem('mov_caixa_rel',JSON.stringify(res));
                     this.openReal();
-                    this.toasterService.pop('success','Sucesso','Relátorio gerado com sucesso');
+                    this.toasterService.message('Sucesso','Relátorio gerado com sucesso','success');
                 });
         }else{
             this.showLoading();
         }
     }
 
-
     hideLoading(){
-        jQuery(".container-loading").hide();
+        jQuery("#bifrostBarSpinner").hide();
     }
+
     showLoading(){
-        jQuery(".container-loading").show();
+        jQuery("#bifrostBarSpinner").show();
     }
 
     showModal(id)
     {
         jQuery(id).show().addClass('show');
     }
+
     hideModal(id)
     {
         jQuery(id).hide();

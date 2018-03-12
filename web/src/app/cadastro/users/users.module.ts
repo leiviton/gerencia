@@ -9,7 +9,6 @@ import { NewComponent } from './components/new.component';
 import { EditComponent} from "./components/edit.component";
 import { UsersRoutingModule } from './users-routing.module';
 
-
 import { UsersService } from './services/users.service';
 
 import { CurrencyMaskModule } from "ng2-currency-mask";

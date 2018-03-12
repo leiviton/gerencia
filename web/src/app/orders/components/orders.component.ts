@@ -1,19 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import {ToasterService} from 'angular2-toaster';
 import { Router } from '@angular/router';
 import { NgForOf } from '@angular/common';
 import { OrdersService } from '../services/orders.service';
 import { FormsModule } from '@angular/forms';
-
-
-
 import * as jQuery from 'jquery';
+import {AppMessageService} from "../../app-message.service";
+
 @Component({
   templateUrl: 'orders.component.html'
 })
 export class OrdersComponent implements OnInit {
 
-  constructor(private httpService: OrdersService, private router: Router, private toasterService: ToasterService) {
+  constructor(private httpService: OrdersService, private router: Router,
+              private toasterService: AppMessageService) {
       document.onkeydown = ((e) =>{
           if(e.keyCode == 113)
           {
@@ -46,7 +45,6 @@ export class OrdersComponent implements OnInit {
                       {
                           this.total = this.total + this.orders.data[i].total;
                       }
-
                       this.tamanho = res.data.length;
                       this.hideLoading();
                   });
@@ -66,22 +64,6 @@ export class OrdersComponent implements OnInit {
        return this.router.navigate(['/orders/new']);
     }
 
-
-    hideLoading(){
-        jQuery(".container-loading").hide();
-    }
-    showLoading(){
-        jQuery(".container-loading").show();
-    }
-
-    showModal()
-    {
-        jQuery(".modal").show().addClass('show');
-    }
-    hideModal()
-    {
-        jQuery(".modal").hide();
-    }
     pesquisar()
     {
 
@@ -102,13 +84,30 @@ export class OrdersComponent implements OnInit {
                         this.tamanho = res.data.length;
                         this.hideModal();
                         this.hideLoading();
-                        this.toasterService.pop('success', 'Sucesso', 'Dados carregados com sucesso');
+                        this.toasterService.message('Sucesso','Dados carregados com sucesso','success');
 
                     });
             }else  {
-                this.toasterService.pop('error', 'Erro', 'Preencha inicio, fim e status para pesquisar.');
+                this.toasterService.message('Erro', 'Preencha inicio, fim e status para pesquisar.','error');
 
                 this.hideLoading();
             }
     }
+
+    hideLoading(){
+        jQuery("#bifrostBarSpinner").hide();
+    }
+    showLoading(){
+        jQuery("#bifrostBarSpinner").show();
+    }
+
+    showModal()
+    {
+        jQuery(".modal").show().addClass('show');
+    }
+    hideModal()
+    {
+        jQuery(".modal").hide();
+    }
+
 }

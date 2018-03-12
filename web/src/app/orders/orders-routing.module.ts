@@ -3,6 +3,7 @@ import { Routes,
      RouterModule } from '@angular/router';
 
 import { OrdersComponent } from './components/orders.component';
+
 import { EditComponent} from './components/edit.component';
 
 import { NewComponent } from "./components/new.component";
@@ -11,9 +12,6 @@ import { PaymentComponent } from "./components/payment.component";
 
 import { PrinterComponent} from "./components/printer.component";
 
-import { ComplementComponent } from "./components/complement.component";
-
-import { OrdersCloseComponent } from "./components/orders-close.component"
 
 const routes: Routes = [
   {
@@ -42,16 +40,8 @@ const routes: Routes = [
               component: NewComponent,
               data:{
                   title:'Novo'
-              },
-              children:[
-                  {
-                      path: 'component/:id',
-                      component: ComplementComponent,
-                      data:{
-                          title:'Component'
-                      }
-                  }
-              ]
+              }
+
           },
           {
               path: 'payment/:id',
@@ -61,13 +51,6 @@ const routes: Routes = [
               }
           }
       ]
-  },
-  {
-     path:"orders/close",
-     component: OrdersCloseComponent,
-     data: {
-         title: 'Pedidos fechados'
-     }
   }
 ];
 

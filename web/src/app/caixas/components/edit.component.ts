@@ -7,8 +7,7 @@ import { NgForOf } from '@angular/common';
 import { CaixasService } from '../services/caixas.service';
 import { FormsModule } from '@angular/forms';
 
-
-import {ToasterService} from 'angular2-toaster';
+import {AppMessageService} from "../../app-message.service";
 
 @Component({
     templateUrl: 'edit.component.html'
@@ -16,7 +15,7 @@ import {ToasterService} from 'angular2-toaster';
 export class EditComponent implements OnInit {
 
     constructor(private httpService: CaixasService, private router: Router, private route: ActivatedRoute
-        ,private toasterService: ToasterService)
+        ,private toasterService: AppMessageService)
     {
         document.onkeydown = ((e) =>{
 
@@ -69,12 +68,12 @@ export class EditComponent implements OnInit {
                 .update(this.caixa.id, e)
                 .then(() => {
                     this.httpService.eventEmitter.emit();
-                    this.toasterService.pop('success', 'Sucesso', 'Caixa salvo com sucesso');
+                    this.toasterService.message('Sucesso', 'Caixa salvo com sucesso','success');
                     this.hideLoading();
                     this.close();
                 });
         }else{
-            this.toasterService.pop('error', 'Erro', 'Verifique se todos os campos foram preenchidos.');
+            this.toasterService.message('Erro', 'Verifique se todos os campos foram preenchidos.','error');
         }
     }
 
@@ -88,11 +87,11 @@ export class EditComponent implements OnInit {
         this.editar = !this.editar;
     }
     hideLoading(){
-        jQuery(".container-loading").hide();
+        jQuery("#bifrostBarSpinner").hide();
     }
 
     showLoading(){
-        jQuery(".container-loading").show();
+        jQuery("#bifrostBarSpinner").show();
     }
 
 }

@@ -4,8 +4,6 @@ import { Routes,
 
 import { CaixasComponent } from './components/caixas.component';
 
-import { PaymentComponent } from "./components/payment.component";
-
 import { SaqueComponent } from "./components/saque.component";
 
 import { EditComponent} from "./components/edit.component";

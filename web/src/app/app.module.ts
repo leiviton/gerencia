@@ -20,8 +20,6 @@ import { AsideToggleDirective } from './shared/aside.directive';
 import { BreadcrumbsComponent } from './shared/breadcrumb.component';
 import { CurrencyMaskModule } from "ng2-currency-mask";
 
-import { ToasterModule } from 'angular2-toaster';
-
 // Routing Module
 import { AppRoutingModule } from './app.routing';
 
@@ -46,10 +44,9 @@ import {AppMessageService} from "./app-message.service";
     TooltipModule.forRoot(),
     ModalModule.forRoot(),
     CurrencyMaskModule,
-    ToasterModule,
     LoadingModule,
     ChartsModule,
-      ToastyModule.forRoot()
+    ToastyModule.forRoot()
   ],
   declarations: [
     AppComponent,

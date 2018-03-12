@@ -110,21 +110,6 @@ export class OrdersCloseComponent implements OnInit {
     }
 
 
-    hideLoading(){
-        jQuery(".container-loading").hide();
-    }
-    showLoading(){
-        jQuery(".container-loading").show();
-    }
-
-    showModal(id)
-    {
-        jQuery(id).show().addClass('show');
-    }
-    hideModal(id)
-    {
-        jQuery(id).hide();
-    }
     pesquisar()
     {
 
@@ -193,4 +178,21 @@ export class OrdersCloseComponent implements OnInit {
                 this.hideLoading();
             }
     }
+
+    hideLoading(){
+        jQuery("#bifrostBarSpinner").hide();
+    }
+    showLoading(){
+        jQuery("#bifrostBarSpinner").show();
+    }
+
+    showModal(id)
+    {
+        jQuery(id).show().addClass('show');
+    }
+    hideModal(id)
+    {
+        jQuery(id).hide();
+    }
+
 }

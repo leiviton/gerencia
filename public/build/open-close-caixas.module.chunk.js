@@ -13,11 +13,11 @@ module.exports = "<div class=\"animated fadeIn\">\n    <div class=\"row\">\n    
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return OpenCloseCaixasComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angular2_toaster__ = __webpack_require__("../../../../angular2-toaster/angular2-toaster.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_open_close_caixas_service__ = __webpack_require__("../../../../../src/app/open-close-caixas/services/open-close-caixas.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_jquery__ = __webpack_require__("../../../../jquery/dist/jquery.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_jquery__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_open_close_caixas_service__ = __webpack_require__("../../../../../src/app/open-close-caixas/services/open-close-caixas.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jquery__ = __webpack_require__("../../../../jquery/dist/jquery.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_jquery__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_message_service__ = __webpack_require__("../../../../../src/app/app-message.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -68,12 +68,12 @@ var OpenCloseCaixasComponent = (function () {
         var u = { role: null };
         u = JSON.parse(localStorage.getItem('user') || null);
         if (u == null) {
-            this.toasterService.pop('error', 'Sem permissão', 'Usuário sem acesso, contate o administrador');
+            this.toasterService.message('Sem permissão', 'Usuário sem acesso, contate o administrador', 'error');
             this.router.navigate(['/']);
         }
         if (u.role !== 'gerente' && u.role !== 'admin') {
-            this.toasterService.pop('error', 'Sem permissão', 'Usuário sem acesso, contate o administrador');
-            this.router.navigate(['/dashboard']);
+            this.toasterService.message('Sem permissão', 'Usuário sem acesso, contate o administrador', 'error');
+            this.router.navigate(['/']);
         }
         this.httpService.setAccessToken();
         this.httpService.eventEmitter
@@ -83,10 +83,10 @@ var OpenCloseCaixasComponent = (function () {
                 .then(function (res) {
                 _this.movimentos = res;
                 _this.tamanho = res.data.length;
+                _this.hideLoading();
             });
         });
         this.httpService.eventEmitter.emit();
-        setTimeout(this.hideLoading(), 2000);
         this.getCaixas();
         this.getUser();
     };
@@ -141,12 +141,12 @@ var OpenCloseCaixasComponent = (function () {
                     }
                     _this.hideModal('#mov');
                     _this.hideLoading();
-                    _this.toasterService.pop('success', 'Sucesso', 'Dados carregados com sucesso');
+                    _this.toasterService.message('Sucesso', 'Dados carregados com sucesso', 'success');
                 });
             }
         }
         else {
-            this.toasterService.pop('error', 'Erro', 'Preencha inicio e caixa para pesquisar.');
+            this.toasterService.message('Erro', 'Preencha inicio e caixa para pesquisar.', 'error');
             this.hideLoading();
         }
     };
@@ -175,7 +175,7 @@ var OpenCloseCaixasComponent = (function () {
                 _this.hideLoading();
                 localStorage.setItem('mov_caixa_rel', JSON.stringify(res));
                 _this.openReal();
-                _this.toasterService.pop('success', 'Sucesso', 'Relátorio gerado com sucesso');
+                _this.toasterService.message('Sucesso', 'Relátorio gerado com sucesso', 'success');
             });
         }
         else {
@@ -183,22 +183,22 @@ var OpenCloseCaixasComponent = (function () {
         }
     };
     OpenCloseCaixasComponent.prototype.hideLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_4_jquery__(".container-loading").hide();
+        __WEBPACK_IMPORTED_MODULE_3_jquery__("#bifrostBarSpinner").hide();
     };
     OpenCloseCaixasComponent.prototype.showLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_4_jquery__(".container-loading").show();
+        __WEBPACK_IMPORTED_MODULE_3_jquery__("#bifrostBarSpinner").show();
     };
     OpenCloseCaixasComponent.prototype.showModal = function (id) {
-        __WEBPACK_IMPORTED_MODULE_4_jquery__(id).show().addClass('show');
+        __WEBPACK_IMPORTED_MODULE_3_jquery__(id).show().addClass('show');
     };
     OpenCloseCaixasComponent.prototype.hideModal = function (id) {
-        __WEBPACK_IMPORTED_MODULE_4_jquery__(id).hide();
+        __WEBPACK_IMPORTED_MODULE_3_jquery__(id).hide();
     };
     OpenCloseCaixasComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             template: __webpack_require__("../../../../../src/app/open-close-caixas/components/open-close-caixas.component.html")
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__services_open_close_caixas_service__["a" /* OpenCloseCaixasService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_open_close_caixas_service__["a" /* OpenCloseCaixasService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_angular2_toaster__["b" /* ToasterService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_angular2_toaster__["b" /* ToasterService */]) === "function" && _c || Object])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__services_open_close_caixas_service__["a" /* OpenCloseCaixasService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_open_close_caixas_service__["a" /* OpenCloseCaixasService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_4__app_message_service__["a" /* AppMessageService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__app_message_service__["a" /* AppMessageService */]) === "function" && _c || Object])
     ], OpenCloseCaixasComponent);
     return OpenCloseCaixasComponent;
     var _a, _b, _c;
@@ -225,7 +225,7 @@ module.exports = "<div tabindex=\"-1\" class=\"modal fade\" id=\"successModal\" 
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_jquery__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_open_close_caixas_service__ = __webpack_require__("../../../../../src/app/open-close-caixas/services/open-close-caixas.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angular2_toaster__ = __webpack_require__("../../../../angular2-toaster/angular2-toaster.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_message_service__ = __webpack_require__("../../../../../src/app/app-message.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -285,30 +285,30 @@ var OpenCloseComponent = (function () {
                     .then(function (res) {
                     if (res == 'data_diverge') {
                         _this.hideLoading();
-                        _this.toasterService.pop('error', 'Erro', 'Data diferente da data atual');
+                        _this.toasterService.message('Erro', 'Data diferente da data atual', 'error');
                     }
                     else if (res === 'fechado') {
-                        _this.toasterService.pop('error', 'Erro', 'Caixa está fechado');
+                        _this.toasterService.message('Erro', 'Caixa está fechado', 'error');
                         _this.hideLoading();
                     }
                     else if (res === 'caixa_aberto_o_data') {
-                        _this.toasterService.pop('error', 'Erro', 'Caixa está aberto em outra data');
+                        _this.toasterService.message('Erro', 'Caixa está aberto em outra data', 'error');
                         _this.hideLoading();
                     }
                     else if (res == 'ok') {
                         _this.httpService.eventEmitter.emit();
-                        _this.toasterService.pop('success', 'Sucesso', 'Saque salvo com sucesso');
+                        _this.toasterService.message('Sucesso', 'Saque salvo com sucesso', 'success');
                         _this.hideLoading();
                         _this.close();
                     }
                 });
             }
             else {
-                this.toasterService.pop('error', 'Erro', 'Verifique se todos os campos foram preenchidos.');
+                this.toasterService.message('Erro', 'Verifique se todos os campos foram preenchidos.', 'error');
             }
         }
         else {
-            this.toasterService.pop('error', 'Erro', 'Data não pode ser vazia');
+            this.toasterService.message('Erro', 'Data não pode ser vazia', 'error');
         }
     };
     OpenCloseComponent.prototype.close = function () {
@@ -316,16 +316,16 @@ var OpenCloseComponent = (function () {
         this.router.navigate(['/financeiro/open/close/caixas']);
     };
     OpenCloseComponent.prototype.hideLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_1_jquery__(".container-loading").hide();
+        __WEBPACK_IMPORTED_MODULE_1_jquery__("#bifrostBarSpinner").hide();
     };
     OpenCloseComponent.prototype.showLoading = function () {
-        __WEBPACK_IMPORTED_MODULE_1_jquery__(".container-loading").show();
+        __WEBPACK_IMPORTED_MODULE_1_jquery__("#bifrostBarSpinner").show();
     };
     OpenCloseComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             template: __webpack_require__("../../../../../src/app/open-close-caixas/components/open-close.component.html")
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__services_open_close_caixas_service__["a" /* OpenCloseCaixasService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_open_close_caixas_service__["a" /* OpenCloseCaixasService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4_angular2_toaster__["b" /* ToasterService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4_angular2_toaster__["b" /* ToasterService */]) === "function" && _d || Object])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__services_open_close_caixas_service__["a" /* OpenCloseCaixasService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__services_open_close_caixas_service__["a" /* OpenCloseCaixasService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["a" /* ActivatedRoute */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__app_message_service__["a" /* AppMessageService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__app_message_service__["a" /* AppMessageService */]) === "function" && _d || Object])
     ], OpenCloseComponent);
     return OpenCloseComponent;
     var _a, _b, _c, _d;

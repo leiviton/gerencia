@@ -6,8 +6,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NgForOf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import {ToasterService} from 'angular2-toaster';
 import {UsersService} from "../services/users.service";
+import {AppMessageService} from "../../../app-message.service";
 
 @Component({
     templateUrl: 'edit.component.html'
@@ -15,7 +15,7 @@ import {UsersService} from "../services/users.service";
 export class EditComponent implements OnInit {
 
     constructor(private httpService: UsersService, private router: Router, private route: ActivatedRoute
-        ,private toasterService: ToasterService
+        ,private toasterService: AppMessageService
     ) {}
 
     user = {
@@ -31,8 +31,8 @@ export class EditComponent implements OnInit {
         u = JSON.parse(localStorage.getItem('user') || null);
         if(u.role !== 'gerente' && u.role !== 'admin')
         {
-            this.toasterService.pop('error','Sem permissão','Usuário sem acesso, contate o administrador');
-            this.router.navigate(['/dashboard']);
+            this.toasterService.message('Sem permissão','Usuário sem acesso, contate o administrador','error');
+            this.router.navigate(['/']);
         }
         jQuery('#infoModal').show().addClass('show');
         this.httpService.setAccessToken();
@@ -62,11 +62,11 @@ export class EditComponent implements OnInit {
                 .then(() => {
                     this.httpService.eventEmitter.emit();
                     this.hideLoading();
-                    this.toasterService.pop('success', 'Sucesso', 'Usuário salvo com sucesso');
+                    this.toasterService.message('Sucesso', 'Usuário salvo com sucesso','success');
                     this.close();
                 });
         }else{
-            this.toasterService.pop('error', 'Erro', 'Verifique se todos os campos foram preenchidos.');
+            this.toasterService.message('Erro', 'Verifique se todos os campos foram preenchidos.','error');
         }
 
     }
@@ -77,11 +77,10 @@ export class EditComponent implements OnInit {
     }
 
     hideLoading(){
-        jQuery(".container-loading").hide();
+        jQuery("#bifrostBarSpinner").hide();
     }
 
     showLoading(){
-        jQuery(".container-loading").show();
+        jQuery("#bifrostBarSpinner").show();
     }
-
 }
