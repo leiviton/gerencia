@@ -15,6 +15,7 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Model implements Transformable,AuthenticatableContract,
     AuthorizableContract,
@@ -22,7 +23,7 @@ class User extends Model implements Transformable,AuthenticatableContract,
 {
 
     use TransformableTrait,Authenticatable, Authorizable, CanResetPassword;
-    use Notifiable, HasApiTokens;
+    use Notifiable, HasApiTokens, HasRoles;
 
     public function client(){
         return $this->hasOne(Client::class);

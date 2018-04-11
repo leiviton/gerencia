@@ -48,6 +48,7 @@ Route::group(['prefix'=>'api/v1','middleware' => 'auth:api'],function () {
        Route::get('contador','AdminCheckoutController@contadores');
        Route::post('order/open','AdminCheckoutController@openOrder');
        Route::get('orders/report','AdminCheckoutController@reportOrders');
+       Route::get('orders/report/xls','AdminCheckoutController@reportOrdersXLS');
        /*mesas*/
        Route::get('mesas', 'MesaController@index');
        Route::get('mesas/all', 'MesaController@all');
@@ -69,6 +70,7 @@ Route::group(['prefix'=>'api/v1','middleware' => 'auth:api'],function () {
        Route::put('users/{id}','UserController@update');
        Route::put('password/{id}','UserController@changePassword');
        Route::put('validar/{id}','UserController@valid');
+       Route::get('roles','RoleController@index');
        /*clients*/
        Route::get('search/client','ClientsController@search');
        Route::get('clients','ClientsController@index');

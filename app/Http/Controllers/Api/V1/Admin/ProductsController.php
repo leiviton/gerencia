@@ -36,6 +36,12 @@ class ProductsController extends Controller
         $this->repository = $repository;
         $this->productService = $productService;
         $this->auditRepository = $auditRepository;
+
+
+        $this->middleware('permission:product-list');
+        $this->middleware('permission:product-create', ['only' => ['create','store']]);
+        $this->middleware('permission:product-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:product-delete', ['only' => ['destroy']]);
     }
 
     public function index()

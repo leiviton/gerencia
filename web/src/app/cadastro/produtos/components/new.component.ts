@@ -29,7 +29,7 @@ export class NewComponent implements OnInit {
        this.showLoading();
         let u = {role:null};
         u = JSON.parse(localStorage.getItem('user') || null);
-        if(u.role !== 'gerente' && u.role !== 'admin')
+        if(u.role !== 'gerente' && u.role !== 'admin' && u.role !== 'superuser')
         {
             this.toasterService.message('Sem permissão','Usuário sem acesso, contate o administrador','error');
             this.router.navigate(['/cadastro/produtos']);

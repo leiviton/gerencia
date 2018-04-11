@@ -30,8 +30,10 @@ export class ProdutosComponent implements OnInit {
           .subscribe(() => {
               this.httpService.builder().list({}, 'products')
                   .then((res) => {
-                      this.produtos = res;
-                      this.tamanho = res.data.length;
+                      if(res.data){
+                          this.produtos = res;
+                          this.tamanho = res.data.length;
+                      }
                       this.hideLoading();
                   });
           });

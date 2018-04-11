@@ -103,6 +103,10 @@ class RepositoryServiceProvider extends ServiceProvider
             'Pedidos\Repositories\OpenCloseCaixasRepository',
             'Pedidos\Repositories\OpenCloseCaixasRepositoryEloquent'
         );
+        $this->app->bind(
+            'Pedidos\Repositories\ReportOrdersIntervalRepository',
+            'Pedidos\Repositories\ReportOrdersIntervalRepositoryEloquent'
+        );
     }
 }
 

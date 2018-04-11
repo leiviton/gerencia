@@ -104,23 +104,27 @@ export class AppHttpService{
                     message = 'Você não tem permissão para acessar, informe um usuario e senha validos';
                     this.toaster.message('Error', message,'error');
                     localStorage.setItem('user','');
+                    this.hideLoading();
                     this.router.navigate(['/user/login']);
                 }
                 if (err.status === 500)
                 {
                     message = 'Ops não foi possivel realizar opeção';
                     this.toaster.message('Error', message,'error');
+                    this.hideLoading();
                     this.router.navigate(['/pages/500']);
                 }
                 if (err.status === 422)
                 {
                     message = 'Erro de validação, verifique os campos';
                     this.toaster.message('Error', message,'error');
+                    this.hideLoading();
                 }
                 if (err.status === 404)
                 {
                     message = 'Verifique sua conexão ou tente novamente';
                     this.toaster.message('Error', message,'error');
+                    this.hideLoading();
                     this.router.navigate(['/pages/404']);
                 }
         });
@@ -147,6 +151,10 @@ export class AppHttpService{
     private getToken()
     {
         return localStorage.getItem('token');
+    }
+
+    hideLoading(){
+        jQuery("#bifrostBarSpinner").hide();
     }
 
 }

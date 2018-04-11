@@ -122,14 +122,17 @@
           <option value="S"> Sim</option>
           <option value="N"> Não</option>
         </select>
+        <a href="{{ link_report }}" *ngIf="link_report != ''">Baixar excel</a>
       </div>
       <div class="modal-footer novo">
         <button type="button" class="btn btn-secondary" (click)="hideModal('#rel')">Fechar</button>
-        <button type="button" class="btn btn-primary" (click)="report()"><i class="fa fa-search"></i> Buscar</button>
+        <button type="button" class="btn btn-danger" (click)="report()"><i class="fa fa-file-pdf-o"></i> PDF</button>
+        <button type="button" class="btn btn-success" (click)="reportXLS()"><i class="fa fa-file-excel-o"></i>Excel</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
 
 <router-outlet></router-outlet>
 

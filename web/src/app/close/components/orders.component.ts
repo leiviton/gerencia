@@ -47,6 +47,7 @@ export class OrdersCloseComponent implements OnInit {
       types_payments = {
           data:[]
       };
+      link_report = '';
       ngOnInit(): void {
         this.showLoading();
         this.httpService.setAccessToken();
@@ -166,6 +167,37 @@ export class OrdersCloseComponent implements OnInit {
                         this.openReal();
                         this.hideModal('#rel');
                         this.hideLoading();
+                        if(res.length > 0) {
+                            this.notification.message('Sucesso', 'Relatorio gerado com sucesso', 'success');
+                        }else if(res.length == 0)
+                        {
+                            this.notification.message('Informação', 'Sem pedidos fechados com data a data selecionada', 'info');
+                        }
+                    });
+            }else  {
+                this.notification.message('Erro','Preencha inicio, fim e status para pesquisar.','error');
+                this.hideLoading();
+            }
+    }
+
+    reportXLS()
+    {
+
+        this.showLoading();
+            if(this.pesquisa.inicio !== null && this.pesquisa.fim !== null)
+            {
+                let data = new Array();
+                data['ativo'] = this.pesquisa.ativo;
+                data['cliente'] = this.pesquisa.cliente;
+                data['inicio'] = this.pesquisa.inicio;
+                data['fim'] = this.pesquisa.fim;
+                data['tipo'] = this.pesquisa.tipo;
+                this.httpService.builder().list({}, "orders/report/xls/?data[cliente]="+this.pesquisa.cliente+"&data[inicio]="+this.pesquisa.inicio+
+                    "&data[fim]="+this.pesquisa.fim+"&data[tipo]="+this.pesquisa.tipo+"&data[ativo]="+this.pesquisa.ativo)
+                    .then((res) => {
+                        this.hideLoading();
+                        this.link_report = 'http://localhost:8810/printer/'+res+'.xls';
+
                         if(res.length > 0) {
                             this.notification.message('Sucesso', 'Relatorio gerado com sucesso', 'success');
                         }else if(res.length == 0)

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as jQuery from 'jquery';
 import { BsModalRef } from 'ngx-bootstrap/modal';
-
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgForOf } from '@angular/common';
 import { RelatoriosService } from '../services/relatorios.service';
@@ -50,6 +49,8 @@ export class RelatorioPedidosPeriodoComponent implements OnInit {
 
         this.tamanho = this.movimentos.data.length;
 
+        console.log('total',this.movimentos);
+        console.log('total',this.tamanho);
         for(let i in this.movimentos.data)
         {
             if(this.movimentos.data[i].tipo_id == 1) {
@@ -73,6 +74,6 @@ export class RelatorioPedidosPeriodoComponent implements OnInit {
 
     gerarExcel()
     {
-        window.open('data:application/vnd.ms-excel,' + jQuery('#relexc').html);
+        window.open('data:application/vnd.ms-excel,' + jQuery('#relexc').html());
     }
 }

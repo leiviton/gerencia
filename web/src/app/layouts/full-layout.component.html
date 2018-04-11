@@ -89,10 +89,10 @@
           </ul>
         </li>
         <li class="divider"></li>
-        <li class="nav-title" *ngIf="user.role === 'admin' || user.role === 'gerente'">
+        <li class="nav-title" *ngIf="user.role === 'admin' || user.role === 'gerente' || user.role == 'superuser'">
           Controle de acessos
         </li>
-        <li class="nav-item nav-dropdown" appNavDropdown *ngIf="user.role === 'admin' || user.role === 'gerente'">
+        <li class="nav-item nav-dropdown" appNavDropdown *ngIf="user.role === 'admin' || user.role === 'gerente' || user.role == 'superuser'">
           <a class="nav-link nav-dropdown-toggle" href="#" appNavDropdownToggle><i class="fa fa-user"></i> Usuários</a>
           <ul class="nav-dropdown-items">
             <li class="nav-item">

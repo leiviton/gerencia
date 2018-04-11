@@ -25,6 +25,10 @@ export class EditComponent implements OnInit {
         role:null,
         password:null
     };
+
+    roles = {
+        data:[]
+    };
     ngOnInit(): void {
         this.showLoading();
         let u = {role:null};
@@ -46,6 +50,12 @@ export class EditComponent implements OnInit {
                         this.user.role = res.data.role;
                         this.hideLoading();
                     });
+            });
+        this.httpService.builder()
+            .list({},'roles')
+            .then((res)=>{
+                this.roles.data = res;
+                this.hideLoading();
             });
     }
 

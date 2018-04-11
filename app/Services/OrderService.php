@@ -18,6 +18,7 @@ use Pedidos\Repositories\PaymentOrdersRepository;
 use Pedidos\Repositories\ProductRepository;
 //use Dmitrovskiy\IonicPush\PushProcessor;
 use Illuminate\Support\Facades\DB;
+use Pedidos\Repositories\ReportOrdersIntervalRepository;
 
 class OrderService{
     /**
@@ -56,6 +57,10 @@ class OrderService{
      * @var CaixaRepository
      */
     private $caixaRepository;
+    /**
+     * @var ReportOrdersIntervalRepository
+     */
+    private $reportOrdersInterval;
 
     /**
      * @var PushProcessor
@@ -72,7 +77,8 @@ class OrderService{
         ComplementItemRepository $complementItemRepository,
         MovimentoCaixaRepository $movimentoCaixaRepository,
         PaymentOrdersRepository $paymentOrdersRepository,
-        CaixaRepository $caixaRepository
+        CaixaRepository $caixaRepository,
+        ReportOrdersIntervalRepository $reportOrdersInterval
         //PushProcessor $pushProcessor
     )
     {
@@ -87,6 +93,7 @@ class OrderService{
         $this->movimentoCaixaRepository = $movimentoCaixaRepository;
         $this->paymentOrdersRepository = $paymentOrdersRepository;
         $this->caixaRepository = $caixaRepository;
+        $this->reportOrdersInterval = $reportOrdersInterval;
     }
 
     public function create(array $data){
@@ -438,6 +445,41 @@ class OrderService{
             $result = DB::select('select * from report_orders_types_payments where ativo = ? and cliente_id = ? and tipo_id = ? and (data BETWEEN ? AND ? )', [$data['ativo'], $data['cliente'], $data['tipo'], $data['inicio'], $data['fim']]);
         }
         return $result;
+    }
+
+    public function reportXLS($data)
+    {
+        $arquivo = new \DateTime();//(new \DateTime())->getTimestamp();
+
+        if($data['cliente'] === 'todos' && $data['tipo'] === 'todos') {
+            $query = $this->reportOrdersInterval->scopeQuery(function ($query) use ($data) {
+                return $query->whereRaw('ativo = ? and (data BETWEEN ? AND ? )', [$data['ativo'], $data['inicio'], $data['fim']]);
+            })->all();
+        }elseif ($data['cliente'] !== 'todos' && $data['tipo'] === 'todos')
+        {
+            $query = $this->reportOrdersInterval->scopeQuery(function ($query) use ($data) {
+                return $query->whereRaw('ativo = ? and cliente_id = ? and (data BETWEEN ? AND ? )', [$data['ativo'], $data['cliente'], $data['inicio'], $data['fim']]);
+            })->all();
+        }elseif ($data['cliente'] === 'todos' && $data['tipo'] !== 'todos')
+        {
+            $query = $this->reportOrdersInterval->scopeQuery(function ($query) use ($data) {
+                return $query->whereRaw('ativo = ? and tipo_id = ? and (data BETWEEN ? AND ? )', [$data['ativo'], $data['tipo'], $data['inicio'], $data['fim']]);
+            })->all();
+        }else {
+            $query = $this->reportOrdersInterval->scopeQuery(function ($query) use ($data) {
+                return $query->whereRaw('ativo = ? and cliente_id = ? and tipo_id = ? and (data BETWEEN ? AND ? )', [$data['ativo'],$data['cliente'], $data['tipo'], $data['inicio'], $data['fim']]);
+            })->all();
+        }
+
+        $name = (string)$arquivo->getTimestamp();
+
+        \Excel::create($name, function($excel) use($query) {
+            $excel->sheet('Sheet 1', function($sheet) use($query) {
+                $sheet->fromArray($query);
+            });
+        })->store('xls', public_path() . '/printer');
+
+        return $name;
     }
 }
 

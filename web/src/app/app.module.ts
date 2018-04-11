@@ -4,7 +4,8 @@ import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { LoadingModule } from 'ngx-loading';
-import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import {LocationStrategy, HashLocationStrategy, CommonModule} from '@angular/common';
+import {AutoCompleteModule} from 'primeng/autocomplete';
 
 import { AppComponent } from './app.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -34,6 +35,7 @@ import {AppMessageService} from "./app-message.service";
 
 @NgModule({
   imports: [
+     CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
     HttpModule,
@@ -46,7 +48,8 @@ import {AppMessageService} from "./app-message.service";
     CurrencyMaskModule,
     LoadingModule,
     ChartsModule,
-    ToastyModule.forRoot()
+    ToastyModule.forRoot(),
+    AutoCompleteModule
   ],
   declarations: [
     AppComponent,

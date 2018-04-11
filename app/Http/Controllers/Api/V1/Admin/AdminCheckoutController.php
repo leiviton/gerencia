@@ -8,12 +8,14 @@
 
 namespace Pedidos\Http\Controllers\Api\V1\Admin;
 
+use Cyberduck\LaravelExcel\Exporter\Excel;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Pedidos\Http\Controllers\Controller;
 use Pedidos\Http\Requests\CheckoutRequest;
 use Illuminate\Http\Request;
+use Pedidos\Models\ReportOrdersInterval;
 use Pedidos\Repositories\AuditRepository;
 use Pedidos\Repositories\CaixaRepository;
 use Pedidos\Repositories\ComplementItemRepository;
@@ -24,6 +26,7 @@ use Pedidos\Repositories\OrderItemRepository;
 use Pedidos\Repositories\OrderRepository;
 use Pedidos\Repositories\PaymentTypesRepository;
 use Pedidos\Repositories\ProductRepository;
+use Pedidos\Repositories\ReportOrdersIntervalRepository;
 use Pedidos\Services\OrderService;
 use Mike42\Escpos\Printer;
 use Mike42\Escpos\PrintConnectors\NetworkPrintConnector;
@@ -76,12 +79,17 @@ class AdminCheckoutController extends Controller
      * @var OpenCloseCaixasRepository
      */
     private $openCloseCaixasRepository;
+    /**
+     * @var ReportOrdersInterval
+     */
+    private $reportOrdersInterval;
 
     public function  __construct(OrderRepository $repository, OrderService $orderService
         , ProductRepository $productRepository, MesaRepository $mesaRepository,
                                  PaymentTypesRepository $typesRepository, OrderItemRepository $itemRepository
         ,ComplementRepository $complementRepository, ComplementItemRepository $complementItemRepository,
-        AuditRepository $auditRepository,CaixaRepository $caixaRepository, OpenCloseCaixasRepository $openCloseCaixasRepository){
+        AuditRepository $auditRepository,CaixaRepository $caixaRepository,
+                                 OpenCloseCaixasRepository $openCloseCaixasRepository,ReportOrdersIntervalRepository $reportOrdersInterval){
         $this->repository = $repository;
         $this->orderService = $orderService;
         $this->productRepository = $productRepository;
@@ -93,6 +101,7 @@ class AdminCheckoutController extends Controller
         $this->auditRepository = $auditRepository;
         $this->caixaRepository = $caixaRepository;
         $this->openCloseCaixasRepository = $openCloseCaixasRepository;
+        $this->reportOrdersInterval = $reportOrdersInterval;
     }
 
     public function orders(Request $request)
@@ -109,15 +118,17 @@ class AdminCheckoutController extends Controller
     public function reportOrders(Request $request)
     {
         $data = $request->get('data');
-        $o = Array($this->orderService->report($data));
+        $o = $this->orderService->report($data);
 
-//        \Excel::create('rel', function ($excel) use ($o){
-//            $excel->sheet('relatorio',function ($sheet) use ($o){
-//               $sheet->fromArray($o);
-//            });
-//        })->download('xls');
         return response()->json($o);
     }
+
+     public function reportOrdersXLS(Request $request)
+     {
+         $data = $request->get('data');
+         $o = $this->orderService->reportXLS($data);
+         return response()->json($o);
+     }
 
     public function store(CheckoutRequest $request){
         $user = \Auth::guard('api')->user();
