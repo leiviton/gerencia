@@ -1468,7 +1468,7 @@ var PrinterComponent = (function () {
                 _this.innerHtml = _this.sanitizer.bypassSecurityTrustHtml("<object data='" + res.data.link_printer + "' name='my_iframe' onload='window.option();window.print();window.close()' type='application/pdf' height='500' width='780' class='embed-responsive-item'>" +
                     "Object " + res.data.link_printer + " failed" +
                     "</object>");
-                _this.link_printer = 'http://108.61.155.169' + res.data.link_printer;
+                _this.link_printer = 'http://localhost:8810' + res.data.link_printer;
             });
         });
         this.httpService.eventEmitter.emit();
