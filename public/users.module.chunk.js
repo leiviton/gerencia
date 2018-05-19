@@ -3,7 +3,7 @@ webpackJsonp(["users.module"],{
 /***/ "../../../../../src/app/cadastro/users/components/edit.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div tabindex=\"-1\" class=\"modal fade\" id=\"infoModal\" role=\"dialog\" aria-hidden=\"true\" aria-labelledby=\"myModalLabel\" style=\"display: none;\">\r\n    <div class=\"modal-dialog modal-info\" role=\"document\">\r\n        <div class=\"modal-content\">\r\n            <div class=\"modal-header cadastro\">\r\n                <h6 class=\"modal-title\">Cadastrar novo produto</h6>\r\n                <button class=\"close\" aria-label=\"Close\" type=\"button\" data-dismiss=\"modal\" (click)=\"close()\">\r\n                    <span aria-hidden=\"true\">×</span>\r\n                </button>\r\n            </div>\r\n            <div class=\"modal-body\">\r\n                <form>\r\n                    <div class=\"form-group row\">\r\n                        <label class=\"col-md-2 col-form-label\" for=\"name\">Nome: <span class=\"text-danger\">*</span></label>\r\n                        <div class=\"col-md-10\">\r\n                            <input type=\"text\" id=\"name\" name=\"name\" [(ngModel)]=\"user.name\" class=\"form-control\" placeholder=\"Nome usuário\">\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"form-group row\">\r\n                        <label class=\"col-md-2 col-form-label\" for=\"email\">Email:</label>\r\n                        <div class=\"col-md-10\">\r\n                            <input type=\"email\" id=\"email\" name=\"email\" [(ngModel)]=\"user.email\" class=\"form-control\" placeholder=\"Email\" disabled>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"form-group row\">\r\n                        <label class=\"col-md-2 col-form-label\" for=\"perfil\">Perfil:</label>\r\n                        <div class=\"col-md-4\">\r\n                            <select name=\"cidade\" id=\"perfil\" class=\"form-control\" [(ngModel)]=\"user.role\">\r\n                                <option *ngFor=\"let g of roles.data\" value=\"{{g.name}}\"><p class=\"text-capitalize\">{{g.name}}</p></option>\r\n                            </select>\r\n                        </div>\r\n                        <label class=\"col-md-2 col-form-label\" for=\"password\">Senha:</label>\r\n                        <div class=\"col-md-4\">\r\n                            <input type=\"password\" id=\"password\" name=\"password\" [(ngModel)]=\"user.password\" class=\"form-control\" placeholder=\"Nova senha\">\r\n                        </div>\r\n                    </div>\r\n                </form>\r\n            </div>\r\n            <div class=\"modal-footer cadastro\">\r\n                <div class=\"modal-button\">\r\n                    <button class=\"btn btn-danger\" type=\"button\" (click)=\"close()\"><i class=\"fa fa-arrow-circle-left\"></i> Cancelar</button>\r\n                    <button class=\"btn btn-success\" type=\"button\" (click)=\"save(user)\"><i class=\"fa fa-save\"></i> Salvar</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <!-- /.modal-content -->\r\n    </div>\r\n    <!-- /.modal-dialog -->\r\n</div>"
+module.exports = "<div tabindex=\"-1\" class=\"modal fade\" id=\"infoModal\" role=\"dialog\" aria-hidden=\"true\" aria-labelledby=\"myModalLabel\" style=\"display: none;\">\r\n    <div class=\"modal-dialog modal-info\" role=\"document\">\r\n        <div class=\"modal-content\">\r\n            <div class=\"modal-header cadastro\">\r\n                <h6 class=\"modal-title\">Cadastrar novo produto</h6>\r\n                <button class=\"close\" aria-label=\"Close\" type=\"button\" data-dismiss=\"modal\" (click)=\"close()\">\r\n                    <span aria-hidden=\"true\">×</span>\r\n                </button>\r\n            </div>\r\n            <div class=\"modal-body\">\r\n                <form>\r\n                    <div class=\"form-group row\">\r\n                        <label class=\"col-md-2 col-form-label\" for=\"name\">Nome: <span class=\"text-danger\">*</span></label>\r\n                        <div class=\"col-md-10\">\r\n                            <input type=\"text\" id=\"name\" name=\"name\" [(ngModel)]=\"user.name\" class=\"form-control\" placeholder=\"Nome usuário\">\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"form-group row\">\r\n                        <label class=\"col-md-2 col-form-label\" for=\"email\">Email:</label>\r\n                        <div class=\"col-md-10\">\r\n                            <input type=\"email\" id=\"email\" name=\"email\" [(ngModel)]=\"user.email\" class=\"form-control\" placeholder=\"Email\" disabled>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"form-group row\">\r\n                        <label class=\"col-md-2 col-form-label\" for=\"perfil\">Perfil:</label>\r\n                        <div class=\"col-md-4\">\r\n                            <select name=\"cidade\" id=\"perfil\" class=\"form-control\" [(ngModel)]=\"user.role\">\r\n                                <option value=\"caixa\">Caixa</option>\r\n                                <option value=\"gerente\">Gerente</option>\r\n                                <option value=\"client\">Cliente</option>\r\n                            </select>\r\n                        </div>\r\n                        <label class=\"col-md-2 col-form-label\" for=\"password\">Senha:</label>\r\n                        <div class=\"col-md-4\">\r\n                            <input type=\"password\" id=\"password\" name=\"password\" [(ngModel)]=\"user.password\" class=\"form-control\" placeholder=\"Nova senha\">\r\n                        </div>\r\n                    </div>\r\n                </form>\r\n            </div>\r\n            <div class=\"modal-footer cadastro\">\r\n                <div class=\"modal-button\">\r\n                    <button class=\"btn btn-danger\" type=\"button\" (click)=\"close()\"><i class=\"fa fa-arrow-circle-left\"></i> Cancelar</button>\r\n                    <button class=\"btn btn-success\" type=\"button\" (click)=\"save(user)\"><i class=\"fa fa-save\"></i> Salvar</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <!-- /.modal-content -->\r\n    </div>\r\n    <!-- /.modal-dialog -->\r\n</div>"
 
 /***/ }),
 
@@ -45,9 +45,6 @@ var EditComponent = (function () {
             role: null,
             password: null
         };
-        this.roles = {
-            data: []
-        };
     }
     EditComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -70,12 +67,6 @@ var EditComponent = (function () {
                 _this.user.role = res.data.role;
                 _this.hideLoading();
             });
-        });
-        this.httpService.builder()
-            .list({}, 'roles')
-            .then(function (res) {
-            _this.roles.data = res;
-            _this.hideLoading();
         });
     };
     EditComponent.prototype.save = function (e) {
@@ -125,7 +116,7 @@ var EditComponent = (function () {
 /***/ "../../../../../src/app/cadastro/users/components/new.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div tabindex=\"-1\" class=\"modal fade\" id=\"infoModal\" role=\"dialog\" aria-hidden=\"true\" aria-labelledby=\"myModalLabel\" style=\"display: none;\">\r\n    <div class=\"modal-dialog modal-info\" role=\"document\">\r\n        <div class=\"modal-content\">\r\n            <div class=\"modal-header cadastro\">\r\n                <h6 class=\"modal-title\">Cadastrar novo usuário</h6>\r\n                <button class=\"close\" aria-label=\"Close\" type=\"button\" data-dismiss=\"modal\" (click)=\"close()\">\r\n                    <span aria-hidden=\"true\">×</span>\r\n                </button>\r\n            </div>\r\n            <div class=\"modal-body\">\r\n                <form>\r\n                    <div class=\"form-group row\">\r\n                        <label class=\"col-md-2 col-form-label\" for=\"name\">Nome: <span class=\"text-danger\">*</span></label>\r\n                        <div class=\"col-md-10\">\r\n                            <input type=\"text\" id=\"name\" name=\"name\" [(ngModel)]=\"user.name\" class=\"form-control\" placeholder=\"Nome usuário\" required>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"form-group row\">\r\n                        <label class=\"col-md-2 col-form-label\" for=\"email\">Email:</label>\r\n                        <div class=\"col-md-10\">\r\n                            <input type=\"email\" id=\"email\" name=\"email\" [(ngModel)]=\"user.email\" class=\"form-control\" placeholder=\"Email\" required>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"form-group row\">\r\n                        <label class=\"col-md-2 col-form-label\">Perfil:</label>\r\n                        <div class=\"col-md-10\">\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"form-group row\">\r\n                        <label class=\"col-md-2 col-form-label\" for=\"password\">Senha:</label>\r\n                        <div class=\"col-md-4\">\r\n                            <input type=\"password\" id=\"password\" name=\"password\" [(ngModel)]=\"user.password\" class=\"form-control\" placeholder=\"Nova senha\">\r\n                        </div>\r\n                    </div>\r\n                </form>\r\n            </div>\r\n            <div class=\"modal-footer cadastro\">\r\n                <div class=\"modal-button\">\r\n                    <button class=\"btn btn-danger\" type=\"button\" (click)=\"close()\"><i class=\"fa fa-arrow-circle-left\"></i> Cancelar</button>\r\n                    <button class=\"btn btn-success\" type=\"button\" (click)=\"save(user)\"><i class=\"fa fa-arrow-circle-right\"></i> Salvar</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <!-- /.modal-content -->\r\n    </div>\r\n    <!-- /.modal-dialog -->\r\n</div>"
+module.exports = "<div tabindex=\"-1\" class=\"modal fade\" id=\"infoModal\" role=\"dialog\" aria-hidden=\"true\" aria-labelledby=\"myModalLabel\" style=\"display: none;\">\r\n    <div class=\"modal-dialog modal-info\" role=\"document\">\r\n        <div class=\"modal-content\">\r\n            <div class=\"modal-header cadastro\">\r\n                <h6 class=\"modal-title\">Cadastrar novo usuário</h6>\r\n                <button class=\"close\" aria-label=\"Close\" type=\"button\" data-dismiss=\"modal\" (click)=\"close()\">\r\n                    <span aria-hidden=\"true\">×</span>\r\n                </button>\r\n            </div>\r\n            <div class=\"modal-body\">\r\n                <form>\r\n                <div class=\"form-group row\">\r\n                    <label class=\"col-md-2 col-form-label\" for=\"name\">Nome: <span class=\"text-danger\">*</span></label>\r\n                    <div class=\"col-md-10\">\r\n                        <input type=\"text\" id=\"name\" name=\"name\" [(ngModel)]=\"user.name\" class=\"form-control\" placeholder=\"Nome usuário\" required>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group row\">\r\n                    <label class=\"col-md-2 col-form-label\" for=\"email\">Email:</label>\r\n                    <div class=\"col-md-10\">\r\n                        <input type=\"email\" id=\"email\" name=\"email\" [(ngModel)]=\"user.email\" class=\"form-control\" placeholder=\"Email\" required>\r\n                    </div>\r\n                </div>\r\n                <div class=\"form-group row\">\r\n                    <label class=\"col-md-2 col-form-label\" for=\"perfil\">Perfil:</label>\r\n                    <div class=\"col-md-4\">\r\n                        <select name=\"cidade\" id=\"perfil\" class=\"form-control\" [(ngModel)]=\"user.role\" required>\r\n                            <option value=\"caixa\">Caixa</option>\r\n                            <option value=\"gerente\">Gerente</option>\r\n                            <option value=\"client\">Cliente</option>\r\n                        </select>\r\n                    </div>\r\n                    <label class=\"col-md-2 col-form-label\" for=\"password\">Senha:</label>\r\n                    <div class=\"col-md-4\">\r\n                        <input type=\"password\" id=\"password\" name=\"password\" [(ngModel)]=\"user.password\" class=\"form-control\" placeholder=\"Nova senha\">\r\n                    </div>\r\n                </div>\r\n                </form>\r\n            </div>\r\n            <div class=\"modal-footer cadastro\">\r\n                <div class=\"modal-button\">\r\n                    <button class=\"btn btn-danger\" type=\"button\" (click)=\"close()\"><i class=\"fa fa-arrow-circle-left\"></i> Cancelar</button>\r\n                    <button class=\"btn btn-success\" type=\"button\" (click)=\"save(user)\"><i class=\"fa fa-arrow-circle-right\"></i> Salvar</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <!-- /.modal-content -->\r\n    </div>\r\n    <!-- /.modal-dialog -->\r\n</div>"
 
 /***/ }),
 
@@ -163,12 +154,8 @@ var NewComponent = (function () {
         this.user = {
             name: null,
             email: null,
-            role: null,
-            password: null,
-            roles: []
-        };
-        this.roles = {
-            data: []
+            role: 'caixa',
+            password: null
         };
     }
     NewComponent.prototype.ngOnInit = function () {
@@ -181,25 +168,20 @@ var NewComponent = (function () {
             this.router.navigate(['/']);
         }
         __WEBPACK_IMPORTED_MODULE_1_jquery__('#infoModal').show().addClass('show');
-        this.httpService.builder()
-            .list({}, 'roles')
-            .then(function (res) {
-            _this.roles.data = res;
+        setTimeout(function () {
             _this.hideLoading();
-        });
+        }, 300);
     };
     NewComponent.prototype.save = function (e) {
         var _this = this;
-        this.showLoading();
         if (this.user.name != null && this.user.name.length > 4
             && this.user.email != null && this.user.email.length > 4
+            && this.user.role != null && this.user.role.length > 4
             && this.user.password != null && this.user.password.length > 4) {
-            this.user.roles = this.countries;
-            this.user.role = this.countries[0].name;
-            console.log('user', this.user);
+            this.showLoading();
             this.httpService.setAccessToken();
             this.httpService.builder()
-                .insert(this.user, 'users')
+                .insert(e, 'users')
                 .then(function () {
                 _this.httpService.eventEmitter.emit();
                 _this.hideLoading();
@@ -208,30 +190,8 @@ var NewComponent = (function () {
             });
         }
         else {
-            this.hideLoading();
             this.toasterService.message('Erro', 'Verifique se todos os campos foram preenchidos.', 'error');
         }
-    };
-    NewComponent.prototype.filterCountryMultiple = function (event) {
-        var _this = this;
-        var query = event.query;
-        this.httpService.builder()
-            .list({}, 'roles')
-            .then(function (res) {
-            _this.roles.data = res;
-            _this.filteredCountriesMultiple = _this.filterCountry(query, res);
-        });
-    };
-    NewComponent.prototype.filterCountry = function (query, countries) {
-        //in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
-        var filtered = [];
-        for (var i = 0; i < countries.length; i++) {
-            var country = countries[i];
-            if (country.name.toLowerCase().indexOf(query.toLowerCase()) == 0) {
-                filtered.push(country);
-            }
-        }
-        return filtered;
     };
     NewComponent.prototype.close = function () {
         __WEBPACK_IMPORTED_MODULE_1_jquery__('#infoModal').hide();
@@ -308,7 +268,7 @@ var UsersComponent = (function () {
         this.showLoading();
         var u = { role: null };
         u = JSON.parse(localStorage.getItem('user') || null);
-        if (u.role !== 'gerente' && u.role !== 'admin' && u.role !== 'superuser') {
+        if (u.role !== 'gerente' && u.role !== 'admin') {
             this.toasterService.message('Sem permissão', 'Usuário sem acesso, contate o administrador', 'error');
             this.router.navigate(['/dashboard']);
         }
