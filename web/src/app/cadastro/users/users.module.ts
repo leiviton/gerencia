@@ -15,8 +15,6 @@ import { CurrencyMaskModule } from "ng2-currency-mask";
 
 import { NgxPhoneMaskModule } from 'ngx-phone-mask';
 
-import {AutoCompleteModule} from 'primeng/autocomplete';
-
 @NgModule({
   imports: [
     CommonModule,
@@ -25,8 +23,7 @@ import {AutoCompleteModule} from 'primeng/autocomplete';
     ChartsModule,
     BsDropdownModule,
       CurrencyMaskModule,
-      NgxPhoneMaskModule,
-      AutoCompleteModule
+      NgxPhoneMaskModule
   ],
   declarations: [ UsersComponent, NewComponent, EditComponent ],
   providers: [ UsersService ]
