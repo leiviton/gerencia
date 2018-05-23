@@ -3,6 +3,7 @@
 <head>
     <base href="./">
     <meta charset="utf-8">
+    <meta http-equiv="cache-control" content="no-cache" />
 	<meta name="theme-color" content="#067e1a">
 	<link rel="manifest" href="/manifest.json">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
