@@ -5,7 +5,6 @@ import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { LoadingModule } from 'ngx-loading';
 import {LocationStrategy, HashLocationStrategy, CommonModule} from '@angular/common';
-import {AutoCompleteModule} from 'primeng/autocomplete';
 
 import { AppComponent } from './app.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -48,8 +47,7 @@ import {AppMessageService} from "./app-message.service";
     CurrencyMaskModule,
     LoadingModule,
     ChartsModule,
-    ToastyModule.forRoot(),
-    AutoCompleteModule
+    ToastyModule.forRoot()
   ],
   declarations: [
     AppComponent,

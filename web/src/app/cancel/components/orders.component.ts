@@ -37,7 +37,7 @@ export class OrdersCancelComponent implements OnInit {
   ngOnInit(): void {
     this.showLoading();
       this.httpService.setAccessToken();
-      this.httpService.builder().list({}, 'close/?status=5')
+      this.httpService.builder().list({}, 'close?status=5')
           .then((res) => {
               this.orders = res;
               console.log(this.orders);

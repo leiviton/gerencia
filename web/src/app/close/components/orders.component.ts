@@ -4,6 +4,8 @@ import { NgForOf } from '@angular/common';
 import { OrdersService } from '../services/orders.service';
 import { FormsModule } from '@angular/forms';
 
+import { environment } from '../../../environments/environment';
+
 import * as jQuery from 'jquery';
 import {AppMessageService} from "../../app-message.service";
 
@@ -51,7 +53,7 @@ export class OrdersCloseComponent implements OnInit {
       ngOnInit(): void {
         this.showLoading();
         this.httpService.setAccessToken();
-        this.httpService.builder().list({}, 'close/?status=3')
+        this.httpService.builder().list({}, 'close?status=3')
               .then((res) => {
                   this.orders = res;
                   this.tamanho = res.data.length;
@@ -160,7 +162,7 @@ export class OrdersCloseComponent implements OnInit {
                 data['inicio'] = this.pesquisa.inicio;
                 data['fim'] = this.pesquisa.fim;
                 data['tipo'] = this.pesquisa.tipo;
-                this.httpService.builder().list({}, "orders/report/?data[cliente]="+this.pesquisa.cliente+"&data[inicio]="+this.pesquisa.inicio+
+                this.httpService.builder().list({}, "orders/report?data[cliente]="+this.pesquisa.cliente+"&data[inicio]="+this.pesquisa.inicio+
                     "&data[fim]="+this.pesquisa.fim+"&data[tipo]="+this.pesquisa.tipo+"&data[ativo]="+this.pesquisa.ativo)
                     .then((res) => {
                         localStorage.setItem('rel_pedidos_filtros',JSON.stringify({data:res}));
@@ -192,11 +194,11 @@ export class OrdersCloseComponent implements OnInit {
                 data['inicio'] = this.pesquisa.inicio;
                 data['fim'] = this.pesquisa.fim;
                 data['tipo'] = this.pesquisa.tipo;
-                this.httpService.builder().list({}, "orders/report/xls/?data[cliente]="+this.pesquisa.cliente+"&data[inicio]="+this.pesquisa.inicio+
+                this.httpService.builder().list({}, "orders/report/xls?data[cliente]="+this.pesquisa.cliente+"&data[inicio]="+this.pesquisa.inicio+
                     "&data[fim]="+this.pesquisa.fim+"&data[tipo]="+this.pesquisa.tipo+"&data[ativo]="+this.pesquisa.ativo)
                     .then((res) => {
                         this.hideLoading();
-                        this.link_report = 'http://localhost:8810/printer/'+res+'.xls';
+                        this.link_report = environment.server_url+'/printer/'+res+'.xls';
 
                         if(res.length > 0) {
                             this.notification.message('Sucesso', 'Relatorio gerado com sucesso', 'success');

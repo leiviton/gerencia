@@ -53,7 +53,7 @@ export class DashboardComponent implements OnInit {
                 this.mesaslivres = res;
             });
         this.httpService.builder()
-            .list({},'contador/?type=1')
+            .list({},'contador?type=1')
             .then((res) => {
                 this.deliverys = res;
             });
@@ -63,12 +63,12 @@ export class DashboardComponent implements OnInit {
               this.pendentes = res.data.length;
             });
         this.httpService.builder()
-            .list({},'contador/?close=3')
+            .list({},'contador?close=3')
             .then((res) => {
                 this.fechado = res;
             });
         this.httpService.builder()
-            .list({},'contador/?local=1')
+            .list({},'contador?local=1')
             .then((res) => {
                 this.cancelados = res;
             });
