@@ -11,6 +11,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { TooltipModule } from 'ngx-bootstrap';
+import { BsDatepickerModule } from 'ngx-bootstrap';
 import { NAV_DROPDOWN_DIRECTIVES } from './shared/nav-dropdown.directive';
 
 import { ChartsModule } from 'ng2-charts/ng2-charts';
@@ -43,6 +44,7 @@ import {AppMessageService} from "./app-message.service";
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
     TooltipModule.forRoot(),
+    BsDatepickerModule.forRoot(),
     ModalModule.forRoot(),
     CurrencyMaskModule,
     LoadingModule,

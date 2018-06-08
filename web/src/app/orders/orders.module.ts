@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { FormsModule} from '@angular/forms'
 
 import { OrdersComponent } from './components/orders.component';
@@ -30,6 +31,7 @@ import {PrinterComponent} from "./components/printer.component";
       TabsModule,
       CurrencyMaskModule,
       NgxPhoneMaskModule,
+      BsDatepickerModule
   ],
   declarations: [
       OrdersComponent,

@@ -1,18 +1,24 @@
 import { Component, OnInit } from '@angular/core';
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { Router } from '@angular/router';
 import { NgForOf } from '@angular/common';
 import { OrdersService } from '../services/orders.service';
 import { FormsModule } from '@angular/forms';
 import * as jQuery from 'jquery';
 import {AppMessageService} from "../../app-message.service";
+import { listLocales } from 'ngx-bootstrap/bs-moment';
 
 @Component({
   templateUrl: 'orders.component.html'
 })
 export class OrdersComponent implements OnInit {
+    locale = 'en';
 
+    locates = listLocales();
+    bsConfig: Partial<BsDatepickerConfig>;
   constructor(private httpService: OrdersService, private router: Router,
               private toasterService: AppMessageService) {
+      this.bsConfig = Object.assign({}, {locale: this.locale});
       document.onkeydown = ((e) =>{
           if(e.keyCode == 113)
           {
@@ -25,7 +31,9 @@ export class OrdersComponent implements OnInit {
 
   total = 0;
   orders = {
-      data:[]
+      data:[{
+          total:0
+      }]
   };
   tamanho = 0;
     pesquisa:any = {
@@ -48,8 +56,9 @@ export class OrdersComponent implements OnInit {
                       this.tamanho = res.data.length;
                       this.hideLoading();
                   });
+                
           });
-
+    console.log(this.locates);
       this.httpService.eventEmitter.emit();
   }
 

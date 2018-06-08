@@ -34,6 +34,9 @@ export class NewComponent implements OnInit {
             this.router.navigate(['/']);
         }
         jQuery('#infoModal').show().addClass('show');
+        setTimeout(() =>{
+            this.hideLoading();
+        },500);
     }
 
     save(e)
