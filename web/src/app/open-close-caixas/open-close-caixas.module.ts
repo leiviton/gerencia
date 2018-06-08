@@ -10,7 +10,6 @@ import { OpenCloseCaixasComponent } from './components/open-close-caixas.compone
 import { OpenCloseCaixasRoutingModule } from './open-close-caixas-routing.module';
 import { TooltipModule } from 'ngx-bootstrap';
 import { OpenCloseCaixasService } from './services/open-close-caixas.service';
-import { CuppaDataGridModule } from 'cuppa-ng2-grid/cuppa-ng2-dataGrid';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 
 import { CurrencyMaskModule } from "ng2-currency-mask";
@@ -26,7 +25,6 @@ import { OpenCloseComponent } from "./components/open-close.component"
     BsDropdownModule,
     TooltipModule,
     FormsModule,
-      CuppaDataGridModule,
       TabsModule,
       CurrencyMaskModule,
       NgxPhoneMaskModule,

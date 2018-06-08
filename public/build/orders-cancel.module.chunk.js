@@ -277,7 +277,7 @@ var OrdersCancelComponent = (function () {
         var _this = this;
         this.showLoading();
         this.httpService.setAccessToken();
-        this.httpService.builder().list({}, 'close/?status=5')
+        this.httpService.builder().list({}, 'close?status=5')
             .then(function (res) {
             _this.orders = res;
             console.log(_this.orders);

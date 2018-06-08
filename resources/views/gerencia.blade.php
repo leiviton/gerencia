@@ -19,7 +19,7 @@
     <link href="assets/css/font-awesome.min.css" rel="stylesheet">
     <link href="assets/css/simple-line-icons.css" rel="stylesheet">
     <link href="assets/css/login.css" rel="stylesheet">
-
+	<link href="styles.99cbacbfba1e1e621f8a.bundle.css" rel="stylesheet"/>
 </head>
 
 <!-- BODY options, add following classes to body to change options
@@ -50,14 +50,15 @@
 <body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
 <!-- Enable bootstrap 4 theme -->
 <script>window.__theme = 'bs4';</script>
-
 <!-- App Loading... -->
-<script type="text/javascript" src="{{ URL::asset('inline.bundle.js')}}"></script>
-<script type="text/javascript" src="{{ URL::asset('polyfills.bundle.js')}}"></script>
-<script type="text/javascript" src="{{ URL::asset('scripts.bundle.js')}}"></script>
-<script type="text/javascript" src="{{ URL::asset('styles.bundle.js')}}"></script>
-<script type="text/javascript" src="{{ URL::asset('vendor.bundle.js')}}"></script>
-<script type="text/javascript" src="{{ URL::asset('main.bundle.js')}}"></script>
+
+<script type="text/javascript" src="{{ URL::asset('inline.04230aaed76f71c50faf.bundle.js')}}"></script>
+<script type="text/javascript" src="{{ URL::asset('polyfills.2b54cbaf017d7cde20d9.bundle.js')}}"></script>
+<script type="text/javascript" src="{{ URL::asset('scripts.21437ba4ab9367dc01b6.bundle.js')}}"></script>
+<script type="text/javascript" src="{{ URL::asset('vendor.bf4a7a68aec5542e3e74.bundle.js')}}"></script>
+<script type="text/javascript" src="{{ URL::asset('main.2f489d1acb6842c50da5.bundle.js')}}"></script>
+
+
 </body>
 
 </html>

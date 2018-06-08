@@ -64,8 +64,6 @@ class UserService
 
             $user = $this->repository->update($data,$id);
 
-            $user->assignRole($data['roles']);
-
             \DB::commit();
 
             return $user;

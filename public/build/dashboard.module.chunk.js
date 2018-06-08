@@ -75,7 +75,7 @@ var DashboardComponent = (function () {
             _this.mesaslivres = res;
         });
         this.httpService.builder()
-            .list({}, 'contador/?type=1')
+            .list({}, 'contador?type=1')
             .then(function (res) {
             _this.deliverys = res;
         });
@@ -85,12 +85,12 @@ var DashboardComponent = (function () {
             _this.pendentes = res.data.length;
         });
         this.httpService.builder()
-            .list({}, 'contador/?close=3')
+            .list({}, 'contador?close=3')
             .then(function (res) {
             _this.fechado = res;
         });
         this.httpService.builder()
-            .list({}, 'contador/?local=1')
+            .list({}, 'contador?local=1')
             .then(function (res) {
             _this.cancelados = res;
         });

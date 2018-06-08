@@ -23,7 +23,9 @@ export class NewComponent implements OnInit {
         price:null,
         category_id:null
     };
-    groups = {};
+    groups = {
+        data:[]
+    };
     subgroups = {};
     ngOnInit(): void {
        this.showLoading();

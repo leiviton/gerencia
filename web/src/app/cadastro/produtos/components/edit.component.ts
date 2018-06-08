@@ -28,7 +28,9 @@ export class EditComponent implements OnInit {
         status:null
     };
 
-    groups = {};
+    groups = {
+        data:[]
+    };
     ngOnInit(): void {
         this.showLoading();
         let u = {role:null};

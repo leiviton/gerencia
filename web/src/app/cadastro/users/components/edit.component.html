@@ -24,8 +24,10 @@
                     <div class="form-group row">
                         <label class="col-md-2 col-form-label" for="perfil">Perfil:</label>
                         <div class="col-md-4">
-                            <select name="cidade" id="perfil" class="form-control" [(ngModel)]="user.role">
-                                <option *ngFor="let g of roles.data" value="{{g.name}}"><p class="text-capitalize">{{g.name}}</p></option>
+                            <select class="form-control" id="perfil" name="cidade" required="" [(ngModel)]="user.role">
+                                <option value="caixa">Caixa</option>
+                                <option value="gerente">Gerente</option>
+                                <option value="client">Cliente</option>
                             </select>
                         </div>
                         <label class="col-md-2 col-form-label" for="password">Senha:</label>

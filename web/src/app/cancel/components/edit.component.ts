@@ -30,7 +30,10 @@ export class EditComponent implements OnInit {
             data:{
                 id:1
             }
-        }
+        },
+        type:0,
+        total:0,
+        motivo_cancelamento:null
     };
     client = {
         id:1,
@@ -44,7 +47,9 @@ export class EditComponent implements OnInit {
         },
         email:''
     };
-    products = {};
+    products = {
+        data:null
+    };
     mesas = {
         data:null
     };

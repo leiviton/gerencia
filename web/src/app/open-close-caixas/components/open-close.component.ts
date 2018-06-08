@@ -26,6 +26,7 @@ export class OpenCloseComponent implements OnInit {
         });
     }
     caixas = {
+        data:{}
     };
     valor = 0;
 

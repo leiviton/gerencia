@@ -8,7 +8,6 @@ import { OrdersCancelComponent } from './components/orders.component';
 import { OrdersCancelRoutingModule } from './orders-routing.module';
 import { TooltipModule } from 'ngx-bootstrap';
 import { OrdersService } from './services/orders.service';
-import { CuppaDataGridModule } from 'cuppa-ng2-grid/cuppa-ng2-dataGrid';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 
 import { CurrencyMaskModule } from "ng2-currency-mask";
@@ -27,7 +26,6 @@ import {AppMessageService} from "../app-message.service";
     BsDropdownModule,
     TooltipModule,
     FormsModule,
-      CuppaDataGridModule,
       TabsModule,
       CurrencyMaskModule,
       NgxPhoneMaskModule,

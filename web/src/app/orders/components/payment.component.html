@@ -15,9 +15,6 @@
                                 <input type="text" class="form-control-lg col-md-4" id="valor_pag" name="valor_pag"
                                        currencyMask [(ngModel)]="valor_pag" [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"
                                        placeholder="Digite o valor" required minlength="2" autofocus="autofocus">
-                                <div class="invalid-feedback" *ngIf="!valor_pag.valid">
-                                    Prencha o valor do pagamento
-                                </div>
                                 <label for="desconto" class="col-md-2">Desconto:</label>
                                 <input class="form-control-lg col-md-4" id="desconto" name="desconto" currencyMask [(ngModel)]="payment.desconto"  [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" placeholder="Desconto" type="text">
                             </div>

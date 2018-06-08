@@ -29,12 +29,29 @@ export class PaymentComponent implements OnInit {
 
     order = {
         id:0,
-        total:0
+        total:0,
+        payment:{
+            data:{
+                type:{
+                    data:{}
+                }
+            }
+        }
     };
 
 
     mesa = '';
-    products = {};
+    products = {
+        data:{
+            
+        },
+        complement:{
+            data:null
+        },
+        product:{
+            data:null
+        }
+    };
     total = 0;
     type_id = null;
     payment = {
@@ -47,7 +64,9 @@ export class PaymentComponent implements OnInit {
         'payment_types_id':1
     };
     troco = 0;
-    tipo = {};
+    tipo = {
+        data:{}
+    };
     valor_pag = 0;
     divisao = 1;
     result_div = 0;

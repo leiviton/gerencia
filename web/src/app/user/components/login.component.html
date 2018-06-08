@@ -1,37 +1,39 @@
 <div class="app flex-row align-items-center login">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-md-5">
-        <div class="card-group mb-0">
-          <div class="card p-4">
-            <div class="card-body">
-              <div class="text-center"><img src="assets/img/leiviton.png" alt=""></div>
-
-              <form #myForm="ngForm" (submit)="login($event)">
-                <div class="form-group mb-3">
-                  <label class="form-col-form-label">Usuário</label>
-                  <input type="email" class="form-control" [ngClass]="{'is-invalid': !username.valid && (username.dirty || username.touched)}" placeholder="Seu email..." name="username" [(ngModel)]="user.username" id="username" #username="ngModel" minlength="5" required>
-                  <div class="invalid-feedback" *ngIf="!username.valid">
-                    Verifique o seu usuário.
-                  </div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                <div class="card-group mb-0">
+                    <div class="card p-4">
+                        <div class="card-body">
+                            <div class="text-center"><img src="assets/img/leiviton.png" alt=""></div>
+                            <form #myForm="ngForm" (submit)="login($event)">
+                                <div class="form-group mb-3">
+                                    <label class="form-col-form-label">Usuário</label>
+                                    <input type="text" class="form-control"
+                                           [ngClass]="{'is-invalid': !username.valid && (username.dirty || username.touched),'is-valid': username.valid}"
+                                           placeholder="Seu username..." name="username" [(ngModel)]="user.username" id="username"
+                                           #username="ngModel" minlength="4" required>
+                                    <div class="invalid-feedback" *ngIf="!username.valid">
+                                        Verifique o seu usuário.
+                                    </div>
+                                </div>
+                                <div class="form-group mb-4">
+                                    <label class="form-col-form-label">Senha</label>
+                                    <input type="password" class="form-control" [ngClass]="{'is-invalid': !password.valid && (password.dirty || password.touched),'is-valid':password.valid}" placeholder="Sua senha..." name="password" [(ngModel)]="user.password" id="password" #password="ngModel" required minlength="6">
+                                    <div class="invalid-feedback" *ngIf="!password.valid">
+                                        Senha deve ser maior que 5 caracteres.
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6 text-right" style="right: -50%">
+                                        <button type="submit"  class="btn btn-lg btn-success" [disabled]="!myForm.valid">Acessar</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group mb-4">
-                  <label class="form-col-form-label">Senha</label>
-                  <input type="password" class="form-control" [ngClass]="{'is-invalid': !password.valid && (password.dirty || password.touched)}" placeholder="Sua senha..." name="password" [(ngModel)]="user.password" id="password" #password="ngModel" required minlength="6">
-                  <div class="invalid-feedback" *ngIf="!password.valid">
-                    Senha deve ser maior que 5 caracteres.
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-6 text-right" style="right: -50%">
-                    <button type="submit"  class="btn btn-lg btn-success" [disabled]="!myForm.valid">Acessar</button>
-                  </div>
-                </div>
-              </form>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>

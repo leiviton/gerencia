@@ -24,27 +24,12 @@
                     <div class="form-group row">
                         <label class="col-md-2 col-form-label" for="perfil">Perfil:</label>
                         <div class="col-md-4">
-                            <select class="form-control" id="perfil" name="cidade" required="" [(ngModel)}="user.role">
+                            <select class="form-control" id="perfil" name="cidade" required="" [(ngModel)]="user.role">
                                 <option value="caixa">Caixa</option>
                                 <option value="gerente">Gerente</option>
                                 <option value="client">Cliente</option>
                             </select>
                         </div>
-                        <label class="col-md-2 col-form-label" for="password">Senha:</label>
-                        <div class="col-md-4">
-                            <input class="form-control ng-valid ng-dirty ng-touched" id="password" name="password" placeholder="Nova senha" type="password">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-2 col-form-label">Perfil:</label>
-                        <div class="col-md-10">
-
-                        <p-autoComplete [(ngModel)]="countries" [suggestions]="filteredCountriesMultiple" (completeMethod)="filterCountryMultiple($event)" styleClass="wid100"
-                                        [minLength]="1" placeholder="perfis" field="name" [multiple]="true" [ngModelOptions]="{standalone: true}">
-                        </p-autoComplete>
-                        </div>
-                    </div>
-                    <div class="form-group row">
                         <label class="col-md-2 col-form-label" for="password">Senha:</label>
                         <div class="col-md-4">
                             <input type="password" id="password" name="password" [(ngModel)]="user.password" class="form-control" placeholder="Nova senha">

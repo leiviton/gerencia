@@ -54,7 +54,7 @@ var EditComponent = (function () {
         this.showLoading();
         var u = { role: null };
         u = JSON.parse(localStorage.getItem('user') || null);
-        if (u.role !== 'gerente' && u.role !== 'admin') {
+        if (u.role !== 'gerente' && u.role !== 'admin' && u.role !== 'superuser') {
             this.hideLoading();
             this.toasterService.message('Sem permissão', 'Usuário sem acesso, contate o administrador', 'error');
             this.router.navigate(['/cadastro/produtos']);
@@ -190,7 +190,7 @@ var NewComponent = (function () {
         this.showLoading();
         var u = { role: null };
         u = JSON.parse(localStorage.getItem('user') || null);
-        if (u.role !== 'gerente' && u.role !== 'admin') {
+        if (u.role !== 'gerente' && u.role !== 'admin' && u.role !== 'superuser') {
             this.toasterService.message('Sem permissão', 'Usuário sem acesso, contate o administrador', 'error');
             this.router.navigate(['/cadastro/produtos']);
             this.hideLoading();
@@ -317,8 +317,10 @@ var ProdutosComponent = (function () {
             .subscribe(function () {
             _this.httpService.builder().list({}, 'products')
                 .then(function (res) {
-                _this.produtos = res;
-                _this.tamanho = res.data.length;
+                if (res.data) {
+                    _this.produtos = res;
+                    _this.tamanho = res.data.length;
+                }
                 _this.hideLoading();
             });
         });

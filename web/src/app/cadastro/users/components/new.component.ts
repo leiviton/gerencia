@@ -30,7 +30,7 @@ export class NewComponent implements OnInit {
         u = JSON.parse(localStorage.getItem('user') || null);
         if(u.role !== 'gerente' && u.role !== 'admin')
         {
-            this.toasterService.message('Sem permissão','Usuário sem acesso, contate o administrador','error');
+     +       this.toasterService.message('Sem permissão','Usuário sem acesso, contate o administrador','error');
             this.router.navigate(['/']);
         }
         jQuery('#infoModal').show().addClass('show');

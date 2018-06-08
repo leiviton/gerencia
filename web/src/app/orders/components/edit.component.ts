@@ -43,7 +43,8 @@ export class EditComponent implements OnInit {
             }
         },
         observacao:'',
-        type:''
+        type:0,
+        total:0
     };
     client = {
         id:1,
@@ -59,7 +60,9 @@ export class EditComponent implements OnInit {
     };
 
     mesa_id = null;
-    products = {};
+    products = {
+        data:{}
+    };
     mesas = {
         data:null
     };
@@ -69,6 +72,7 @@ export class EditComponent implements OnInit {
         telefone:null
     };
     result = {
+        data:{},
         qtd:1
     };
     qtd = 1;
@@ -76,7 +80,9 @@ export class EditComponent implements OnInit {
     imprimir = false;
     historico = '';
     idItem = 0;
-    complements = {};
+    complements = {
+        data:{}
+    };
     complement = [{
         "id":0,
         "name":"Sem complemento",

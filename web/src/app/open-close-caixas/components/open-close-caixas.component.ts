@@ -34,7 +34,11 @@ export class OpenCloseCaixasComponent implements OnInit {
         user:'todos'
     };
     movimentos = {
-        data:[]
+        data:[{
+            caixa:{
+                data:null
+            }
+        }]
     };
     total = 0;
     usuarios = {

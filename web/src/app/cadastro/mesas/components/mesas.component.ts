@@ -20,7 +20,9 @@ export class MesasComponent implements OnInit {
       fim:null,
       status:null
   };
-  mesas:object = {};
+  mesas = {
+      data:[]
+  };
   tamanho = 0;
   ngOnInit(): void {
       this.showLoading();

@@ -20,7 +20,9 @@ export class ProdutosComponent implements OnInit {
       fim:null,
       status:null
   };
-  produtos:object = {};
+  produtos = {
+      data:[]
+  };
   tamanho = 0;
 
   ngOnInit(): void {

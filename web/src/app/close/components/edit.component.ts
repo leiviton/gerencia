@@ -38,7 +38,9 @@ export class EditComponent implements OnInit {
                 id:1
             }
         },
-        payment:{data:{type:{data:{id:0}}}}
+        payment:{data:{type:{data:{id:0}}}},
+        type:0,
+        total:0
     };
     client = {
         id:1,
@@ -52,7 +54,9 @@ export class EditComponent implements OnInit {
         },
         email:''
     };
-    products = {};
+    products = {
+        data:[]
+    };
     mesas = {
         data:null
     };

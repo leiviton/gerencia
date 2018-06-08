@@ -51,12 +51,7 @@ export class EditComponent implements OnInit {
                         this.hideLoading();
                     });
             });
-        this.httpService.builder()
-            .list({},'roles')
-            .then((res)=>{
-                this.roles.data = res;
-                this.hideLoading();
-            });
+    
     }
 
     save(e)

@@ -19,7 +19,9 @@ export class UsersComponent implements OnInit {
       fim:null,
       status:null
   };
-  users:object = {};
+  users = {
+      data:[]
+  };
   tamanho = 0;
 
   ngOnInit(): void {

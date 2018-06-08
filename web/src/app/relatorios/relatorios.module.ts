@@ -7,7 +7,6 @@ import { FormsModule} from '@angular/forms'
 import { MovimentoCaixasRoutingModule } from './relatorios-routing.module';
 import { TooltipModule } from 'ngx-bootstrap';
 import { RelatoriosService } from './services/relatorios.service';
-import { CuppaDataGridModule } from 'cuppa-ng2-grid/cuppa-ng2-dataGrid';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 
 import { CurrencyMaskModule } from "ng2-currency-mask";
@@ -24,7 +23,6 @@ import { RelatorioPedidosPeriodoComponent} from "./components/relatorio-pedidos-
     BsDropdownModule,
     TooltipModule,
     FormsModule,
-      CuppaDataGridModule,
       TabsModule,
       CurrencyMaskModule,
       NgxPhoneMaskModule,

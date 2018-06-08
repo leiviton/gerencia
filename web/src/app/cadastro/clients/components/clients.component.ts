@@ -19,7 +19,9 @@ export class ClientsComponent implements OnInit {
       fim:null,
       status:null
   };
-  clients:object = {};
+  clients = {
+      data:[]
+  };
   tamanho = 0;
 
   ngOnInit(): void {

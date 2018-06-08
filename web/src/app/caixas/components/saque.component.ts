@@ -25,6 +25,7 @@ export class SaqueComponent implements OnInit {
         });
     }
     caixas = {
+        data:[]
     };
     valor = 0;
 

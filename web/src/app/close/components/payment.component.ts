@@ -26,10 +26,15 @@ export class PaymentComponent implements OnInit {
 
     order = {
         id:0,
-        total:0
+        total:0,
+        payment:{
+            data:null
+        }
     };
     mesa = '';
-    products = {};
+    products = {
+        data:null
+    };
     total = 0;
     type_id = null;
     payment = {

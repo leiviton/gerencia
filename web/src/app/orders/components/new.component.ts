@@ -51,22 +51,30 @@ export class NewComponent implements OnInit {
         },
         email:null
     };
-    items = [];
-    result = [];
+    items = {
+        items:[]
+    };
+    result = {
+        data:[]
+    };
     qtd = 1;
     total = 0;
     pesquisa = {
         value:null,
         value2:null
     };
-    mesas: {};
+    mesas: {
+        data:null
+    };
     mesa_id = null;
     tipo = 0;
     novo = true;
     cartao = false;
     troco = 0;
     bandeira = '';
-    complements = {};
+    complements = {
+        data:[]
+    };
     complement = [{
           "id":0,
           "name":"Sem complemento",

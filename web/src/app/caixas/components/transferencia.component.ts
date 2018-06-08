@@ -25,8 +25,10 @@ export class TransferenciaComponent implements OnInit {
         });
     }
     caixas = {
+        data:[]
     };
     caixas1 = {
+        data:[]
     };
     valor = 0;
 

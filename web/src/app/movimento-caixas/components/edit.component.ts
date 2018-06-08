@@ -27,7 +27,9 @@ export class EditComponent implements OnInit {
     }
     caixa = {
         id:0,
-        name:''
+        name:'',
+        saldo:0
+        
     };
     pesquisa = {
         value:null,

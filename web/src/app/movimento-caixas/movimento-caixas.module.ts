@@ -10,7 +10,6 @@ import { MovimentoCaixasComponent } from './components/movimento-caixas.componen
 import { MovimentoCaixasRoutingModule } from './movimento-caixas-routing.module';
 import { TooltipModule } from 'ngx-bootstrap';
 import { MovimentoCaixasService } from './services/movimento-caixas.service';
-import { CuppaDataGridModule } from 'cuppa-ng2-grid/cuppa-ng2-dataGrid';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 
 import { CurrencyMaskModule } from "ng2-currency-mask";
@@ -28,7 +27,6 @@ import { NewComponent} from "./components/new.component";
     BsDropdownModule,
     TooltipModule,
     FormsModule,
-      CuppaDataGridModule,
       TabsModule,
       CurrencyMaskModule,
       NgxPhoneMaskModule,
