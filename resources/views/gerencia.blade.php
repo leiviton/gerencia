@@ -19,7 +19,7 @@
 		<link href="{{ URL::asset('assets/css/font-awesome.min.css')}}" rel="stylesheet">
 		<link href="{{ URL::asset('assets/css/simple-line-icons.css')}}" rel="stylesheet">
 		<link href="{{ URL::asset('assets/css/login.css')}}" rel="stylesheet">
-		<link href="{{ URL::asset('styles.71df694076694930c462.bundle.css')}}" rel="stylesheet"/>
+		<link href="{{ URL::asset('styles.bba8e717f4a94d7df6ec.bundle.css?v=1.0')}}" rel="stylesheet"/>
 	</head>
 	<body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
 		<!-- Enable bootstrap 4 theme -->
