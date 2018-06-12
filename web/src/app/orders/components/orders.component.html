@@ -82,9 +82,9 @@
       </div>
       <div class="modal-body">
         <label for="inicio">De</label>
-        <input type="date" id="inicio" class="form-control" name="inicio" [(ngModel)]="pesquisa.inicio" required>
+        <input type="text" id="inicio" class="form-control" name="inicio" [(ngModel)]="pesquisa.inicio" bsDatepicker #dp="bsDatepicker" [bsConfig]="bsConfig" required>
         <label for="fim">Até</label>
-        <input type="date" id="fim" class="form-control" name="fim" [(ngModel)]="pesquisa.fim" required>
+        <input type="text" id="fim" class="form-control" name="fim" [(ngModel)]="pesquisa.fim" bsDatepicker #dp="bsDatepicker" [bsConfig]="bsConfig" required>
         <label class="col-form-label" for="select">Status</label>
         <select name="status" class="form-control" id="select" [(ngModel)]="pesquisa.status" required>
           <option value="null">Selecione o status</option>

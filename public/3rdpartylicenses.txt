@@ -23,7 +23,7 @@ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 
 
-ngx-bootstrap@1.9.3 MIT
+ngx-bootstrap@2.0.4 MIT
 The MIT License (MIT)
 
 Copyright (c) 2015-2017 Valor Software

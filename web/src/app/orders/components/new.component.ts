@@ -35,7 +35,7 @@ export class NewComponent implements OnInit {
 
 
     cart =  this.httpService.get();
-    order = {};
+    order = [];
     client = {
         id:1,
         name:null,

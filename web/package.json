@@ -33,7 +33,7 @@
     "ng2-charts": "1.6.0",
     "ng2-currency-mask": "^4.4.1",
     "ng2-toasty": "^4.0.3",
-    "ngx-bootstrap": "1.9.3",
+    "ngx-bootstrap": "2.0.4",
     "ngx-loading": "^1.0.8",
     "print-js": "^1.0.29",
     "rxjs": "^5.4.2",

@@ -46,6 +46,7 @@ export class EditComponent implements OnInit {
         type:0,
         total:0
     };
+
     client = {
         id:1,
         name:'',
@@ -61,10 +62,10 @@ export class EditComponent implements OnInit {
 
     mesa_id = null;
     products = {
-        data:{}
+        data:[]
     };
     mesas = {
-        data:null
+        data:[]
     };
     mesa = '';
     pesquisa = {
@@ -72,7 +73,7 @@ export class EditComponent implements OnInit {
         telefone:null
     };
     result = {
-        data:{},
+        data:[],
         qtd:1
     };
     qtd = 1;
@@ -81,7 +82,7 @@ export class EditComponent implements OnInit {
     historico = '';
     idItem = 0;
     complements = {
-        data:{}
+        data:[]
     };
     complement = [{
         "id":0,
