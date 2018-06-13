@@ -25,7 +25,7 @@
 		<!-- Enable bootstrap 4 theme -->
 		<script>window.__theme = 'bs4';</script>
 		<!-- App Loading... -->
-		<script type="text/javascript" src="{{ URL::asset('inline.f6a28a06f61fde51b518.bundle.js')}}"></script>
+		<script type="text/javascript" src="{{ URL::asset('inline.f797761f0d1bc0b85cd9.bundle.js')}}"></script>
 		<script type="text/javascript" src="{{ URL::asset('polyfills.2b54cbaf017d7cde20d9.bundle.js')}}"></script>
 		<script type="text/javascript" src="{{ URL::asset('scripts.21437ba4ab9367dc01b6.bundle.js')}}"></script>
 		<script type="text/javascript" src="{{ URL::asset('vendor.8ba30b4c172d592265a5.bundle.js')}}"></script>
