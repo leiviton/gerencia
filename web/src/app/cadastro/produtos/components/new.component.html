@@ -23,9 +23,14 @@
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label" for="text-input">Preço venda <i class="fa fa-dollar"></i></label>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <input type="text" id="text-input" name="price" currencyMask [(ngModel)]="product.price" [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" class="form-control" placeholder="Price">
                         </div>
+                        <label class="col-md-2 col-form-label" for="text-input"><i class="fa fa-barcode"></i></label>
+                        <div class="col-md-4">
+                            <input type="text" id="text-input" name="bar_code" [(ngModel)]="product.bar_code" class="form-control" placeholder="Codigo de barras">
+                        </div>
+                    
                     </div>
                     <hr>
                     <div class="form-group row">

@@ -21,6 +21,7 @@ export class NewComponent implements OnInit {
         name:null,
         description:null,
         price:null,
+        bar_code:null,
         category_id:null
     };
     groups = {

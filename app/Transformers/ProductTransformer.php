@@ -28,6 +28,7 @@ class ProductTransformer extends TransformerAbstract
             'description' => $model->description,
             'price' => $model->price,
             'status' => (int) $model->status,
+			'bar_code' => (string) $model->bar_code,
             /* place your other model properties here */
 
             'created_at' => $model->created_at,

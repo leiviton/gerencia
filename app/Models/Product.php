@@ -15,7 +15,8 @@ class Product extends Model implements Transformable
         'name',
         'description',
         'price',
-        'status'
+        'status',
+		'bar_code'
     ];
 
     public function category(){
