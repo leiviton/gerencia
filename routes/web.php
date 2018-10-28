@@ -49,6 +49,7 @@ Route::group(['prefix'=>'api/v1','middleware' => 'auth:api'],function () {
        Route::post('order/open','AdminCheckoutController@openOrder');
        Route::get('orders/report','AdminCheckoutController@reportOrders');
        Route::get('orders/report/xls','AdminCheckoutController@reportOrdersXLS');
+       Route::get('orders/report/items','AdminCheckoutController@reportOrderItems');
        /*mesas*/
        Route::get('mesas', 'MesaController@index');
        Route::get('mesas/all', 'MesaController@all');

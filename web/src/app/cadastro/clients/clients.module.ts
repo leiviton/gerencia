@@ -12,8 +12,6 @@ import { ClientsRoutingModule } from './clients-routing.module';
 
 import { ClientsService } from './services/clients.service';
 
-import { CurrencyMaskModule } from "ng2-currency-mask";
-
 import { NgxPhoneMaskModule } from 'ngx-phone-mask';
 
 @NgModule({
@@ -23,7 +21,6 @@ import { NgxPhoneMaskModule } from 'ngx-phone-mask';
     ClientsRoutingModule,
     ChartsModule,
     BsDropdownModule,
-      CurrencyMaskModule,
       NgxPhoneMaskModule
   ],
   declarations: [ ClientsComponent, NewComponent, EditComponent ],

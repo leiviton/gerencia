@@ -7,6 +7,7 @@ namespace Pedidos\Services;
 use Faker\Provider\DateTime;
 use Pedidos\Models\MovimentoCaixa;
 use Pedidos\Models\Order;
+use Pedidos\Models\ReportOrderItems;
 use Pedidos\Repositories\CaixaRepository;
 use Pedidos\Repositories\ComplementItemRepository;
 use Pedidos\Repositories\CupomRepository;
@@ -18,6 +19,7 @@ use Pedidos\Repositories\PaymentOrdersRepository;
 use Pedidos\Repositories\ProductRepository;
 //use Dmitrovskiy\IonicPush\PushProcessor;
 use Illuminate\Support\Facades\DB;
+use Pedidos\Repositories\ReportOrderItemsRepository;
 use Pedidos\Repositories\ReportOrdersIntervalRepository;
 
 class OrderService{
@@ -61,13 +63,25 @@ class OrderService{
      * @var ReportOrdersIntervalRepository
      */
     private $reportOrdersInterval;
+    /**
+     * @var ReportOrderItemsRepository
+     */
+    private $reportOrderItemsRepository;
 
     /**
-     * @var PushProcessor
-     * private $pusherProcessor;
+     *
+     * @param OrderRepository $orderRepository
+     * @param CupomRepository $cupomRepository
+     * @param ProductRepository $productRepository
+     * @param MesaRepository $mesaRepository
+     * @param OrderItemRepository $itemRepository
+     * @param ComplementItemRepository $complementItemRepository
+     * @param MovimentoCaixaRepository $movimentoCaixaRepository
+     * @param PaymentOrdersRepository $paymentOrdersRepository
+     * @param CaixaRepository $caixaRepository
+     * @param ReportOrdersIntervalRepository $reportOrdersInterval
+     * @param ReportOrderItemsRepository $reportOrderItemsRepository
      */
-
-
     public function __construct(
         OrderRepository $orderRepository,
         CupomRepository $cupomRepository,
@@ -78,7 +92,8 @@ class OrderService{
         MovimentoCaixaRepository $movimentoCaixaRepository,
         PaymentOrdersRepository $paymentOrdersRepository,
         CaixaRepository $caixaRepository,
-        ReportOrdersIntervalRepository $reportOrdersInterval
+        ReportOrdersIntervalRepository $reportOrdersInterval,
+        ReportOrderItemsRepository $reportOrderItemsRepository
         //PushProcessor $pushProcessor
     )
     {
@@ -94,6 +109,7 @@ class OrderService{
         $this->paymentOrdersRepository = $paymentOrdersRepository;
         $this->caixaRepository = $caixaRepository;
         $this->reportOrdersInterval = $reportOrdersInterval;
+        $this->reportOrderItemsRepository = $reportOrderItemsRepository;
     }
 
     public function create(array $data){
@@ -475,6 +491,31 @@ class OrderService{
 
         \Excel::create($name, function($excel) use($query) {
             $excel->sheet('Sheet 1', function($sheet) use($query) {
+                $sheet->fromArray($query);
+            });
+        })->store('xls', public_path() . '/printer');
+
+        return $name;
+    }
+
+    public function reportItems($data)
+    {
+        $arquivo = new \DateTime();//(new \DateTime())->getTimestamp();
+
+        if($data['observacao'] == 'sim'){
+            $query = $this->reportOrderItemsRepository->scopeQuery(function ($query) use ($data) {
+                return $query->whereRaw('data BETWEEN ? AND ?', [$data['inicio'], $data['fim']]);
+            })->all(['pedido','data_pedido','hora','mes','produto','valor','qtd','pagamento','usuario','observacao']);
+        }else{
+            $query = $this->reportOrderItemsRepository->scopeQuery(function ($query) use ($data) {
+                return $query->whereRaw('data BETWEEN ? AND ?', [$data['inicio'], $data['fim']]);
+            })->all(['pedido','data','hora','mes','produto','valor','qtd','pagamento','usuario']);
+        }
+
+        $name = (string)$arquivo->getTimestamp();
+
+        \Excel::create($name, function ($excel) use ($query) {
+            $excel->sheet('Sheet 2', function ($sheet) use ($query) {
                 $sheet->fromArray($query);
             });
         })->store('xls', public_path() . '/printer');

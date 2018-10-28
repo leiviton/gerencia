@@ -1,0 +1,74 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-header">
+                <h4>Relatorios</h4>
+            </div>
+            <div class="card-body">
+              <table class="table table-responsive table-bordered table-striped table-sm">
+                <thead>
+                  <tr>
+                    <th class="title text-center">#</th>
+                    <th class="title text-center">Relatorio</th>
+                    <th class="title text-center">Modulo</th>
+                    <th class="title text-center">Detalhes</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr (dblclick)="showModal('#report_items_orders')" class="reports">
+                    <td> 1</td>
+                    <td> Pedidos Itens</td>
+                    <td> Pedidos</td>
+                    <td> Lista pedidos e seus produtos e valores de venda </td>
+                  </tr>
+                </tbody>
+              </table>
+              <!--nav>
+                <ul class="pagination">
+                  <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+                  <li class="page-item active">
+                    <a class="page-link" href="#">1</a>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item"><a class="page-link" href="#">4</a></li>
+                  <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                </ul>
+              </nav-->
+            </div>
+          </div>
+        </div>
+      </div>
+ </div>
+
+<div class="modal fade" id="report_items_orders" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-sm modal-info" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Relatorio pedidos com itens</h5>
+          </div>
+          <div class="modal-body">
+            <label for="inicior">De</label>
+            <input type="date" id="inicior" class="form-control" name="inicio" [(ngModel)]="pesquisa.inicio" required>
+    
+            <label for="fimr">Até</label>
+            <input type="date" id="fimr" class="form-control" name="fim" [(ngModel)]="pesquisa.fim" required>
+
+            <label class="col-form-label" for="ativo">Ativo</label>
+            <select name="status" class="form-control" id="ativo" [(ngModel)]="pesquisa.observacao" required>
+            <option value="sim"> Sim</option>
+            <option value="nao"> Não</option>
+            </select>
+            <a href="{{ link_report }}" *ngIf="link_report != ''">Baixar excel</a>
+          </div>
+          <div class="modal-footer novo">
+            <button type="button" class="btn btn-danger" (click)="hideModal('#report_items_orders')"> Fechar</button>
+            <button type="button" class="btn btn-success" (click)="reportXLS()"><i class="fa fa-file-excel-o"></i> Gerar</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<router-outlet></router-outlet>
+

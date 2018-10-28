@@ -107,6 +107,10 @@ class RepositoryServiceProvider extends ServiceProvider
             'Pedidos\Repositories\ReportOrdersIntervalRepository',
             'Pedidos\Repositories\ReportOrdersIntervalRepositoryEloquent'
         );
+        $this->app->bind(
+            'Pedidos\Repositories\ReportOrderItemsRepository',
+            'Pedidos\Repositories\ReportOrderItemsRepositoryEloquent'
+        );
     }
 }
 

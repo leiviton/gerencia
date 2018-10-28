@@ -182,8 +182,7 @@ export class OrdersCloseComponent implements OnInit {
             }
     }
 
-    reportXLS()
-    {
+    reportXLS() {
 
         this.showLoading();
             if(this.pesquisa.inicio !== null && this.pesquisa.fim !== null)
