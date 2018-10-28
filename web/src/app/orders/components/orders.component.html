@@ -26,7 +26,7 @@
                   <tr *ngIf="tamanho == 0">
                     <td colspan="10"> Sem dados</td>
                   </tr>
-                  <tr *ngFor="let o of orders.data" (dblclick)="edit(o.id)">
+                  <tr *ngFor="let o of orders.data" (dblclick)="edit(o.id)" class="reports">
                     <td class="text-center" *ngIf="tamanho > 0">
                       <span class="badge badge-pill badge-parcial" *ngIf="o.status === 4" tooltip="Pagamento parcial"> Pago parcial</span>
                       <span class="badge badge-pill badge-success" *ngIf="o.status === 3" tooltip="Pagamento realizado"> Pago</span>

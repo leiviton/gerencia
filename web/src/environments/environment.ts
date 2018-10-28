@@ -5,7 +5,7 @@
 
 export const environment = {
   production: true,
-  server_url: 'http://localhost:8810',
-  client_id: '2',
-  client_secret: 'fb7duCeekdxfWJI4gsmzoxV1vnVlmgVwIGlGgK2I'
+  server_url: 'http://localhost:8000',
+  client_id: '6',
+  client_secret: 'l6jfu4eSa8o7kBvUpsGSx1jeHwYxagCrPHLYuqvV'
 };

@@ -28,8 +28,6 @@ use Pedidos\Repositories\PaymentTypesRepository;
 use Pedidos\Repositories\ProductRepository;
 use Pedidos\Repositories\ReportOrdersIntervalRepository;
 use Pedidos\Services\OrderService;
-use Mike42\Escpos\Printer;
-use Mike42\Escpos\PrintConnectors\NetworkPrintConnector;
 
 
 class AdminCheckoutController extends Controller
@@ -129,6 +127,13 @@ class AdminCheckoutController extends Controller
          $o = $this->orderService->reportXLS($data);
          return response()->json($o);
      }
+
+    public function reportOrderItems(Request $request)
+    {
+        $data = $request->get('data');
+        $o = $this->orderService->reportItems($data);
+        return response()->json($o);
+    }
 
     public function store(CheckoutRequest $request){
         $user = \Auth::guard('api')->user();

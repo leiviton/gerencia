@@ -61,11 +61,14 @@ export const routes: Routes = [
         {
             path: 'financeiro/movimento/caixas',
             loadChildren: './movimento-caixas/movimento-caixas.module#MovimentoCaixasModule'
-        }
-        ,
+        },
         {
             path: 'financeiro/open/close/caixas',
             loadChildren: './open-close-caixas/open-close-caixas.module#OpenCloseCaixasModule'
+        },
+        {
+            path: 'reports',
+            loadChildren: './reports/reports.module#ReportsModule'
         }
     ]
   },

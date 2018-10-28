@@ -45,4 +45,6 @@ class RelatoriosController extends Controller
 
         return $result;
     }
+
+
 }
