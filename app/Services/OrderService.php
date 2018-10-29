@@ -509,7 +509,7 @@ class OrderService{
         }else{
             $query = $this->reportOrderItemsRepository->scopeQuery(function ($query) use ($data) {
                 return $query->whereRaw('data BETWEEN ? AND ?', [$data['inicio'], $data['fim']]);
-            })->all(['pedido','data','hora','mes','produto','valor','qtd','pagamento','usuario']);
+            })->all(['pedido','data_pedido','hora','mes','produto','valor','qtd','pagamento','usuario']);
         }
 
         $name = (string)$arquivo->getTimestamp();
