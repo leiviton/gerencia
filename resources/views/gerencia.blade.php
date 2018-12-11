@@ -22,10 +22,11 @@
 <body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
 <!-- Enable bootstrap 4 theme -->
 <script>window.__theme = 'bs4';</script>
-<script type="text/javascript" src="{{ URL::asset('inline.14ba710f93f83f2e0022.bundle.js') }}"></script>
-<script type="text/javascript" src="{{ URL::asset('polyfills.9f114c6c94829f3a43c6.bundle.js') }}"></script>
-<script type="text/javascript" src="{{ URL::asset('scripts.e00efc90c26ede3d6fd3.bundle.js') }}"></script>
-<script type="text/javascript" src="{{ URL::asset('vendor.14fc268be3f3ba3599f0.bundle.js') }}"></script>
-<script type="text/javascript" src="{{ URL::asset('main.a346bc42ad269079a2a0.bundle.js') }}"></script>
+<script type="text/javascript" src="inline.71cd4ba53f77240a0fb5.bundle.js"></script>
+<script type="text/javascript" src="polyfills.9f114c6c94829f3a43c6.bundle.js"></script>
+<script type="text/javascript" src="scripts.e00efc90c26ede3d6fd3.bundle.js"></script>
+<script type="text/javascript" src="vendor.14fc268be3f3ba3599f0.bundle.js"></script>
+<script type="text/javascript" src="main.a346bc42ad269079a2a0.bundle.js"></script>
+
 </body>
 </html>

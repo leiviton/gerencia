@@ -3,10 +3,11 @@
         <div class="col-lg-12">
           <div class="card">
             <div class="card-header">
-              <button class="btn btn-default" (click)="showModal()"><i class="fa fa-search"></i> Pesquisar</button>
               <a class="btn btn-success" [routerLink]="['new']"><i class="fa fa-plus"></i> Novo</a>
             </div>
             <div class="card-body">
+
+              <input type="text" class="form-control col-md-12" placeholder="Pesquisar" name="search" [(ngModel)]="search" (ngModelChange)="filteredProfessional($event)"><br>
               <table class="table table-responsive table-bordered table-striped table-sm">
                 <thead>
                   <tr>
@@ -21,7 +22,7 @@
                   <tr *ngIf="tamanho == 0">
                     <td colspan="5"> Sem dados</td>
                   </tr>
-                  <tr *ngFor="let o of produtos.data" (dblclick)="edit(o.id)">
+                  <tr *ngFor="let o of result" (dblclick)="edit(o.id)">
                     <td class="text-center">{{ o.id }}</td>
                     <td>{{ o.name | slice:0:35 }}</td>
                     <td>{{ o.description | slice:0:85 }}... </td>
