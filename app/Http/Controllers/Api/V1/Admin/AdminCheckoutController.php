@@ -704,7 +704,7 @@ class AdminCheckoutController extends Controller
                             </body>
                         </html>")->save(public_path() . '/printer/' . $order->id . '.pdf');
         }
-        $order->link_printer = 'http://108.61.155.169/printer/'.$order->id.'.pdf';
+        $order->link_printer = $order->id.'.pdf';
 
         $order->save();
 
@@ -947,7 +947,7 @@ class AdminCheckoutController extends Controller
                             </body>
                         </html>")->save(public_path() . '/printer/' . $order->id . '.pdf');
         }
-        $order->link_printer = 'http://108.61.155.169/printer/'.$order->id.'.pdf';
+        $order->link_printer = $order->id.'.pdf';
 
         $order->save();
 
@@ -1232,7 +1232,7 @@ class AdminCheckoutController extends Controller
                             </body>
                         </html>")->save(public_path() . '/printer/' . $order->id . '.pdf');
         }
-        $order->link_printer = 'http://108.61.155.169/printer/'.$order->id.'.pdf';
+        $order->link_printer = $order->id.'.pdf';
 
         $order->save();
 
