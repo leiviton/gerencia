@@ -39,6 +39,7 @@ export class LoginComponent {
             document.cookie = "token=" + res.access_token + "; expires=" + res.expires_in;
             localStorage.setItem('token',res.access_token);
             this.AuthService.setAccessToken();
+
             this.AuthService.getUser()
                 .then((res) => {
                     localStorage.setItem('user',JSON.stringify(res.data));
