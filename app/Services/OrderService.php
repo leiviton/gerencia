@@ -501,7 +501,7 @@ class OrderService{
     public function reportItems($data)
     {
         $arquivo = new \DateTime();//(new \DateTime())->getTimestamp();
-
+        $data['fim'] = $data['fim'].' 23:59:59';
         if($data['observacao'] == 'sim'){
             $query = $this->reportOrderItemsRepository->scopeQuery(function ($query) use ($data) {
                 return $query->whereRaw('data BETWEEN ? AND ?', [$data['inicio'], $data['fim']]);
