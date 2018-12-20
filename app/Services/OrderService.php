@@ -448,6 +448,7 @@ class OrderService{
 
     public function report($data)
     {
+        $data['fim'] = $data['fim'].' 23:59:59';
         if($data['cliente'] === 'todos' && $data['tipo'] === 'todos')
         {
             $result = DB::select('select * from report_orders_types_payments where ativo = ? and (data BETWEEN ? AND ? )', [$data['ativo'], $data['inicio'], $data['fim']]);
