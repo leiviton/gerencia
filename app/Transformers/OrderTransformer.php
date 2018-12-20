@@ -35,7 +35,7 @@ class OrderTransformer extends TransformerAbstract
             'troco' => $model->troco,
             'cartao' => $model->cartao,
             'observacao' => $model->observacao,
-            'link_printer' => env('APP_URL').'/'.$model->link_printer,
+            'link_printer' => env('APP_URL').'/printer/'.$model->link_printer,
             'address' => $model->address,
             'user_create' => $model->user_create,
             'user_update' => $model->user_update,

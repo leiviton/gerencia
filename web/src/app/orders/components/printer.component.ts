@@ -47,7 +47,7 @@ export class PrinterComponent implements OnInit {
                                 "<object data='"+res.data.link_printer+"' name='my_iframe' onload='window.option();window.print();window.close()' type='application/pdf' height='500' width='780' class='embed-responsive-item'>" +
                                 "Object " + res.data.link_printer + " failed" +
                                 "</object>");
-                            this.link_printer = 'http://108.61.155.169' + res.data.link_printer;
+                            this.link_printer = res.data.link_printer;
 
                     });
             });
