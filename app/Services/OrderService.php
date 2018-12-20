@@ -467,7 +467,7 @@ class OrderService{
     public function reportXLS($data)
     {
         $arquivo = new \DateTime();//(new \DateTime())->getTimestamp();
-
+        $data['fim'] = $data['fim'].' 23:59:59';
         if($data['cliente'] === 'todos' && $data['tipo'] === 'todos') {
             $query = $this->reportOrdersInterval->scopeQuery(function ($query) use ($data) {
                 return $query->whereRaw('ativo = ? and (data BETWEEN ? AND ? )', [$data['ativo'], $data['inicio'], $data['fim']]);
