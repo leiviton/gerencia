@@ -2,6 +2,9 @@
 <html>
 <head>
     <base href="./">
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <meta name="theme-color" content="#067e1a">
+    <link rel="manifest" href="{{ URL::asset('/manifest.json') }}">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
@@ -9,10 +12,6 @@
     <meta name="author" content="Leiviton Carlos">
     <meta name="keyword" content="Restaurantes,Pedidos,Food,Comida">
     <link rel="shortcut icon" href="assets/img/favicon.png">
-
-    <meta http-equiv="cache-control" content="no-cache"/>
-    <meta name="theme-color" content="#067e1a">
-    <link rel="manifest" href="{{ URL::asset('/manifest.json') }}">
     <title>Gerencia | Pedidos</title><!-- Icons -->
     <link href="assets/css/font-awesome.min.css" rel="stylesheet">
     <link href="assets/css/simple-line-icons.css" rel="stylesheet">
@@ -44,7 +43,7 @@
 -->
 <body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden"><!-- Enable bootstrap 4 theme -->
 <script>window.__theme = 'bs4';</script><!-- App Loading... -->
-<script type="text/javascript" src="inline.e208a1dd300cc2ffd671.bundle.js"></script>
+<script type="text/javascript" src="inline.5f631765dec419e2ef7f.bundle.js"></script>
 <script type="text/javascript" src="polyfills.9f114c6c94829f3a43c6.bundle.js"></script>
 <script type="text/javascript" src="scripts.e00efc90c26ede3d6fd3.bundle.js"></script>
 <script type="text/javascript" src="vendor.14fc268be3f3ba3599f0.bundle.js"></script>
