@@ -99,6 +99,8 @@ Route::group(['prefix'=>'api/v1','middleware' => 'auth:api'],function () {
         Route::get('open','OpenCloseCaixasController@getDateCaixa');
         Route::post('open/close', 'OpenCloseCaixasController@store');
         Route::get('open/close','OpenCloseCaixasController@getFiltros');
+        /*reports*/
+        Route::get('report','RelatoriosController@reportProductsSales');
     });
     Route::get('user','Api\UserController@authenticated');
 });

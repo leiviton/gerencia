@@ -22,6 +22,12 @@
                     <td> Pedidos</td>
                     <td> Lista pedidos e seus produtos e valores de venda </td>
                   </tr>
+                  <tr (dblclick)="showModal('#report_product_sales')" class="reports">
+                    <td> 2</td>
+                    <td> Pedidos Itens</td>
+                    <td> Pedidos</td>
+                    <td> Lista produtos mais vendidos por periodo </td>
+                  </tr>
                 </tbody>
               </table>
               <!--nav>
@@ -55,7 +61,7 @@
             <label for="fimr">Até</label>
             <input type="date" id="fimr" class="form-control" name="fim" [(ngModel)]="pesquisa.fim" required>
 
-            <label class="col-form-label" for="ativo">Ativo</label>
+            <label class="col-form-label" for="ativo">Observação</label>
             <select name="status" class="form-control" id="ativo" [(ngModel)]="pesquisa.observacao" required>
             <option value="sim"> Sim</option>
             <option value="nao"> Não</option>
@@ -68,6 +74,28 @@
           </div>
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="report_product_sales" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-sm modal-info" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Relatorio pedidos com itens</h5>
+      </div>
+      <div class="modal-body">
+        <label for="inicior">De</label>
+        <input type="date" id="iniciorel" class="form-control" name="inicio" [(ngModel)]="pesquisa.inicio" required>
+
+        <label for="fimr">Até</label>
+        <input type="date" id="fimrel" class="form-control" name="fim" [(ngModel)]="pesquisa.fim" required>
+
+      </div>
+      <div class="modal-footer novo">
+        <button type="button" class="btn btn-warning" (click)="hideModal('#report_product_sales')"> Fechar</button>
+        <button type="button" class="btn btn-danger" (click)="report()"><i class="fa fa-file-pdf-o"></i> Gerar</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
 <router-outlet></router-outlet>
