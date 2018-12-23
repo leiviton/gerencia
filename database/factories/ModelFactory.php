@@ -29,10 +29,7 @@ $factory->define(Pedidos\Models\Category::class, function (Faker\Generator $fake
 $factory->define(Pedidos\Models\Client::class, function (Faker\Generator $faker){
     return [
         'phone' => $faker->phoneNumber,
-        'address' => $faker->address,
-        'city' => $faker->city,
-        'state' => $faker->state,
-        'zipcode' => $faker->postcode,
+        'address' => $faker->address
     ];
 });
 

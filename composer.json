@@ -10,6 +10,7 @@
         "barryvdh/laravel-dompdf": "^0.8.1",
         "cyber-duck/laravel-excel": "^1.2",
         "fideloper/proxy": "~3.3",
+        "geekcom/phpjasper-laravel": "^1.1",
         "laravel/framework": "5.5.*",
         "laravel/passport": "^4.0",
         "laravel/tinker": "~1.0",
@@ -23,7 +24,8 @@
         "filp/whoops": "~2.0",
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "~1.0",
-        "phpunit/phpunit": "~6.0"
+        "phpunit/phpunit": "~6.0",
+        "xethron/migrations-generator": "^2.0"
     },
     "autoload": {
         "classmap": [
