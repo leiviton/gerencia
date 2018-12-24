@@ -62,13 +62,17 @@ export class ReportsComponent implements OnInit {
     }
 
     report() {
+        this.showLoading();
         this.httpService.builder().list({}, "report?inicio=" + this.pesquisa.inicio +
             "&final=" + this.pesquisa.fim)
             .then((res) => {
                 this.hideLoading();
                 this.link_report = environment.server_url + '/printer/' + res + '.xls';
                 this.notification.message('Sucesso', 'Relatorio gerado com sucesso', 'success');
-                window.open(environment.server_url+'/reports/product_sales.pdf', '_blank');
+                window.open(environment.server_url + res.url, '_blank');
+            }).catch((res)=>{
+                this.hideLoading();
+               console.log(res);
             });
     }
 

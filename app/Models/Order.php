@@ -24,7 +24,8 @@ class Order extends Model implements Transformable
         'link_printer',
         'user_create',
         'user_update',
-        'motivo_cancelamento'
+        'motivo_cancelamento',
+        'printer'
     ];
 
     public function items(){

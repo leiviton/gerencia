@@ -5,6 +5,7 @@
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Evoxbh"/>
 	<parameter name="inicial" class="java.lang.String"/>
 	<parameter name="final" class="java.lang.String"/>
+	<parameter name="periodo" class="java.lang.String"/>
 	<queryString language="SQL">
 		<![CDATA[SELECT p.id,p.name,SUM(o.total) AS TotalVenda,SUM(oi.subtotal) as `Total`, SUM(oi.qtd) as `QtdTotal`, SUM(oi.subtotal) / SUM(oi.qtd) as `MediaVlr`
 FROM order_items as oi
@@ -41,9 +42,9 @@ ORDER BY QtdTotal DESC]]>
 	<title>
 		<band height="32" splitType="Stretch">
 			<staticText>
-				<reportElement x="82" y="0" width="390" height="30" uuid="f0b8d2d4-c69c-46be-80dc-3aaed22ddea2"/>
+				<reportElement x="130" y="0" width="300" height="30" uuid="f0b8d2d4-c69c-46be-80dc-3aaed22ddea2"/>
 				<textElement textAlignment="Center" verticalAlignment="Bottom">
-					<font fontName="Arial" size="18" isBold="true"/>
+					<font fontName="Arial" size="16" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Listagem de produtos mais vendidos]]></text>
 			</staticText>
@@ -53,28 +54,42 @@ ORDER BY QtdTotal DESC]]>
 		<band height="27" splitType="Stretch">
 			<staticText>
 				<reportElement x="5" y="5" width="45" height="22" uuid="e716e8fd-b7f2-4e45-9969-e469fd79a438"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
 					<font fontName="Arial" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Data:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="51" y="7" width="89" height="20" uuid="81cf7d15-d622-4971-af10-01525f683eb8"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<reportElement x="50" y="5" width="89" height="22" uuid="81cf7d15-d622-4971-af10-01525f683eb8"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
 					<font fontName="Arial" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement x="350" y="5" width="64" height="22" uuid="f8afa8ac-30c3-4927-b884-2112677728c3"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="Arial" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Periodo:]]></text>
+			</staticText>
 			<textField>
-				<reportElement x="414" y="12" width="62" height="15" uuid="d7e78f71-31d9-41f4-8e0a-b311c60b1552"/>
-				<textElement textAlignment="Right">
+				<reportElement x="414" y="6" width="138" height="21" uuid="6c2c550f-1a47-4597-a95c-806a7a07a8c0"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{periodo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="179" y="4" width="62" height="22" uuid="d7e78f71-31d9-41f4-8e0a-b311c60b1552"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
 					<font fontName="Arial" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Pagina: " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
-				<reportElement x="483" y="12" width="62" height="15" uuid="1b6df1dd-3669-4b6c-8523-868e9f35c42d"/>
-				<textElement textAlignment="Left">
+				<reportElement x="231" y="4" width="62" height="22" uuid="1b6df1dd-3669-4b6c-8523-868e9f35c42d"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
 					<font fontName="Arial" size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA["de: " + $V{PAGE_NUMBER}]]></textFieldExpression>

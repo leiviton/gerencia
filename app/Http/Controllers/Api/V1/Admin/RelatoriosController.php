@@ -49,16 +49,19 @@ class RelatoriosController extends Controller
     }
 
     public function reportProductsSales(Request $request) {
+        $user = \Auth::user();
         $dataInicial = $request->get('inicio');
         $dataFinal = $request->get('final');
+        $periodo = $this->invertDate($dataInicial)." a ".$this->invertDate($dataFinal);
 
-        $input = base_path('/public/reports/list_products_sales_A4.jrxml');
-        $output = base_path('/public/reports/product_sales');
+        $input = base_path('/public/reports/list_products_sales_A4.jasper');
+        $output = base_path("/public/reports/".$user->id."_product_sales");
+
 
         $options = [
             'format' => ['pdf'],
             'locale' => 'pt_BR',
-            'params' => ['inicial'=>$dataInicial,'final'=>$dataFinal],
+            'params' => ['inicial'=>$dataInicial,'final'=>$dataFinal,'periodo'=>$periodo],
             'db_connection' => [
                 'driver' => env('DB_CONNECTION'), //mysql, ....
                 'username' => env('DB_USERNAME'),
@@ -70,14 +73,28 @@ class RelatoriosController extends Controller
         ];
 
         $jasper = new PHPJasper();
-        $jasper->compile($input)->execute();
+        //$jasper->compile($input)->execute();
 
-        $jasper->process(
+        if($jasper->process(
             $input,
             $output,
             $options
-        )->execute();
+        )->execute()) {
+            return response()->json(['url'=>"/reports/".$user->id."_product_sales.pdf"],200);
+        }else{
+            return response()->json(['error'=>'report error'],400);
+        }
     }
 
+    public function invertDate($date){
+        $result = '';
+        if(count(explode("/",$date)) > 1){
+            $result = implode("-",array_reverse(explode("/",$date)));
+            return $result;
+        }elseif(count(explode("-",$date)) > 1){
+            $result = implode("/",array_reverse(explode("-",$date)));
+            return $result;
+        }
+    }
 
 }
