@@ -176,6 +176,7 @@ return [
         Spatie\Permission\PermissionServiceProvider::class,
         Way\Generators\GeneratorsServiceProvider::class,
         Xethron\MigrationsGenerator\MigrationsGeneratorServiceProvider::class,
+        PHPJasper\PHPJasperServiceProvider::class,
         /*
          * Application Service Providers...
          */

@@ -10,7 +10,7 @@
         "barryvdh/laravel-dompdf": "^0.8.1",
         "cyber-duck/laravel-excel": "^1.2",
         "fideloper/proxy": "~3.3",
-        "geekcom/phpjasper-laravel": "^1.1",
+        "geekcom/phpjasper-laravel": "1.0",
         "laravel/framework": "5.5.*",
         "laravel/passport": "^4.0",
         "laravel/tinker": "~1.0",

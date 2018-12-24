@@ -68,22 +68,21 @@ class RelatoriosController extends Controller
                 'password' => env('DB_PASSWORD'),
                 'host' => env('DB_HOST'),
                 'database' => env('DB_DATABASE'),
-                'port' => env('DB_PORT')
+                'port' => env('DB_PORT'),
+                'jdbc_driver' => 'com.mysql.jdbc.Driver',
+                'jdbc_url' => "jdbc:mysql://localhost:3308/gerencia?useSSL=false",
+                'jdbc_dir' => base_path('vendor/geekcom/phpjasper-laravel/bin/jasperstarter/jdbc')
             ]
         ];
 
         $jasper = new PHPJasper();
         //$jasper->compile($input)->execute();
-
-        if($jasper->process(
+        //return $options;
+        $jasper->process(
             $input,
             $output,
             $options
-        )->execute()) {
-            return response()->json(['url'=>"/reports/".$user->id."_product_sales.pdf"],200);
-        }else{
-            return response()->json(['error'=>'report error'],400);
-        }
+        )->execute();
     }
 
     public function invertDate($date){

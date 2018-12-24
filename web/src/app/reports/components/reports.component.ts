@@ -63,6 +63,7 @@ export class ReportsComponent implements OnInit {
 
     report() {
         this.showLoading();
+        this.httpService.setAccessToken();
         this.httpService.builder().list({}, "report?inicio=" + this.pesquisa.inicio +
             "&final=" + this.pesquisa.fim)
             .then((res) => {

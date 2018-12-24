@@ -189,7 +189,7 @@ ORDER BY QtdTotal DESC]]>
 				<textFieldExpression><![CDATA[$F{QtdTotal}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="420" y="-6" width="130" height="20" uuid="b9e7cfd1-8511-4e62-9417-5bb442cd7d89"/>
+				<reportElement x="420" y="-6" width="124" height="20" uuid="b9e7cfd1-8511-4e62-9417-5bb442cd7d89"/>
 				<box>
 					<pen lineWidth="1.0" lineStyle="Dotted"/>
 					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
