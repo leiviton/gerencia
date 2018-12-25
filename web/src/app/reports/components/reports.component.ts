@@ -63,7 +63,8 @@ export class ReportsComponent implements OnInit {
 
     report() {
         this.showLoading();
-        this.httpService.setAccessToken();
+        if (this.pesquisa.inicio !== null && this.pesquisa.fim !== null) {
+            this.httpService.setAccessToken();
         this.httpService.builder().list({}, "report?inicio=" + this.pesquisa.inicio +
             "&final=" + this.pesquisa.fim)
             .then((res) => {
@@ -73,8 +74,12 @@ export class ReportsComponent implements OnInit {
                 window.open(environment.server_url + res.url, '_blank');
             }).catch((res)=>{
                 this.hideLoading();
-               console.log(res);
+                this.notification.message('Erro', 'Algo deu errado tente novamente.', 'error');
             });
+        } else {
+            this.notification.message('Erro', 'Preencha inicio, fim e status para pesquisar.', 'error');
+            this.hideLoading();
+        }
     }
 
     hideLoading() {

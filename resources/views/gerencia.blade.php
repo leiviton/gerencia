@@ -1,10 +1,10 @@
 <!doctype html>
 <html>
 <head>
-    <base href="./">
     <meta http-equiv="cache-control" content="no-cache"/>
     <meta name="theme-color" content="#067e1a">
     <link rel="manifest" href="{{ URL::asset('/manifest.json') }}">
+    <base href="./">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
@@ -43,31 +43,10 @@
 -->
 <body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden"><!-- Enable bootstrap 4 theme -->
 <script>window.__theme = 'bs4';</script><!-- App Loading... -->
-<script type="text/javascript" src="inline.5f631765dec419e2ef7f.bundle.js"></script>
+<script type="text/javascript" src="inline.7bbd37edb4d1ca8257cc.bundle.js"></script>
 <script type="text/javascript" src="polyfills.9f114c6c94829f3a43c6.bundle.js"></script>
 <script type="text/javascript" src="scripts.e00efc90c26ede3d6fd3.bundle.js"></script>
 <script type="text/javascript" src="vendor.14fc268be3f3ba3599f0.bundle.js"></script>
 <script type="text/javascript" src="main.9ab6afa948739624b1c1.bundle.js"></script>
-</body><!-- WhatsHelp.io widget -->
-<script type="text/javascript">(function () {
-        var options = {
-            whatsapp: "+5535988755376", // WhatsApp number
-            email: "leivitonpj@gmail.com", // Email
-            company_logo_url: "//static.whatshelp.io/img/flag.png", // URL of company logo (png, jpg, gif)
-            greeting_message: "Entre em contato com o suporte e deixe uma mensagem.", // Text of greeting message
-            call_to_action: "Suporte online", // Call to action
-            button_color: "#129BF4", // Color of button
-            position: "right", // Position may be 'right' or 'left'
-            order: "whatsapp,email" // Order of buttons
-        };
-        var proto = document.location.protocol, host = "whatshelp.io", url = proto + "//static." + host;
-        var s = document.createElement('script');
-        s.type = 'text/javascript';
-        s.async = true;
-        s.src = url + '/widget-send-button/js/init.js';
-        s.onload = function () {
-            WhWidgetSendButton.init(host, proto, options);
-        };
-        var x = document.getElementsByTagName('script')[0];
-        x.parentNode.insertBefore(s, x);
-    })();</script><!-- /WhatsHelp.io widget --></html>
+</body>
+</html>

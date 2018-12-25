@@ -63,26 +63,37 @@ class RelatoriosController extends Controller
             'locale' => 'pt_BR',
             'params' => ['inicial'=>$dataInicial,'final'=>$dataFinal,'periodo'=>$periodo],
             'db_connection' => [
-                'driver' => env('DB_CONNECTION'), //mysql, ....
+                'driver' => 'mysql', //mysql, ....
                 'username' => env('DB_USERNAME'),
                 'password' => env('DB_PASSWORD'),
                 'host' => env('DB_HOST'),
                 'database' => env('DB_DATABASE'),
                 'port' => env('DB_PORT'),
-                'jdbc_driver' => 'com.mysql.jdbc.Driver',
-                'jdbc_url' => "jdbc:mysql://localhost:3308/gerencia?useSSL=false",
-                'jdbc_dir' => base_path('vendor/geekcom/phpjasper-laravel/bin/jasperstarter/jdbc')
+//                'jdbc_driver' => 'com.mysql.jdbc.Driver',
+//                //'jdbc_url' => "jdbc:mysql://".env('DB_HOST').":".env('DB_PORT')."/".env('DB_DATABASE')."?useSSL=false",
+//                'jdbc_url' => 'jdbc:mysql://localhost:3308/gerencia?useSSL=false',
+//                'jdbc_dir' => base_path('vendor\geekcom\phpjasper-laravel\bin\jasperstarter\jdbc')
             ]
         ];
 
         $jasper = new PHPJasper();
         //$jasper->compile($input)->execute();
-        //return $options;
-        $jasper->process(
+//        $jasper->process(
+//            $input,
+//            $output,
+//            $options
+//        )->output();
+//        return response()->json(['jasper'=>var_dump($jasper)]);
+        if($jasper->process(
             $input,
             $output,
             $options
-        )->execute();
+        )->execute()) {
+            return response()->json(['message' => 'Relatorio gerado com sucesso','url'=>"/reports/".$user->id."_product_sales.pdf"],200);
+        }else{
+
+            return response()->json(['message' => 'Ocorreu um erro'],400);
+        }
     }
 
     public function invertDate($date){
