@@ -50,6 +50,9 @@ Route::group(['prefix'=>'api/v1','middleware' => 'auth:api'],function () {
        Route::get('orders/report','AdminCheckoutController@reportOrders');
        Route::get('orders/report/xls','AdminCheckoutController@reportOrdersXLS');
        Route::get('orders/report/items','AdminCheckoutController@reportOrderItems');
+       Route::get('printers','AdminCheckoutController@ordersPrinter');
+       Route::patch('printers/{id}','AdminCheckoutController@ordersPrinterUpdate');
+
        /*mesas*/
        Route::get('mesas', 'MesaController@index');
        Route::get('mesas/all', 'MesaController@all');

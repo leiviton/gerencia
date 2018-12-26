@@ -113,6 +113,27 @@ class AdminCheckoutController extends Controller
             ->all();
     }
 
+    public function ordersPrinter(Request $request)
+    {
+        $status = 0;
+        return $this->repository->skipPresenter(false)
+            ->scopeQuery(function($query) use($status){
+                return $query->where('printer',$status);
+            })
+            ->all();
+    }
+
+    public function ordersPrinterUpdate($id)
+    {
+        $order = $this->repository->find($id);
+
+        $order->printer = 1;
+
+        $order->save();
+
+        return response()->json(['status'=>'success', 'message'=>'order printer '.$order->id],200);
+    }
+
     public function reportOrders(Request $request)
     {
         $data = $request->get('data');
