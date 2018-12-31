@@ -26,6 +26,7 @@ class CompanyApplicationTransformer extends TransformerAbstract
             'nome_fantazia' => $model->nome_fantazia,
             'cnpj' => $model->cnpj,
             'inscricao_estatual' => $model->inscricao_estatual,
+            'cep' => $model->cep,
             'endereco' => $model->endereco,
             'numero' => $model->numero,
             'complemento' => $model->complemento,

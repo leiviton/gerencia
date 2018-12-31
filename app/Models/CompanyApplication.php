@@ -15,6 +15,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $nome_fantazia
  * @property string $cnpj
  * @property string $inscricao_estatual
+ * @property string $cep
  * @property string $endereco
  * @property string $numero
  * @property string $complemento
@@ -36,7 +37,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 class CompanyApplication extends Eloquent implements Transformable
 {
     use TransformableTrait;
-    
+
     protected $fillable = [
         'razao_social',
         'nome_fantazia',
