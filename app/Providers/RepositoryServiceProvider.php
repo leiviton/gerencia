@@ -28,6 +28,10 @@ class RepositoryServiceProvider extends ServiceProvider
             'Pedidos\Repositories\CategoryRepositoryEloquent'
         );
         $this->app->bind(
+            'Pedidos\Repositories\CompanyApplicationRepository',
+            'Pedidos\Repositories\CompanyApplicationRepositoryEloquent'
+        );
+        $this->app->bind(
             'Pedidos\Repositories\ClientRepository',
             'Pedidos\Repositories\ClientRepositoryEloquent'
         );

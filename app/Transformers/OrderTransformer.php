@@ -13,7 +13,7 @@ use Pedidos\Models\Order;
 class OrderTransformer extends TransformerAbstract
 {
     protected $availableIncludes = ['cupom'];
-    protected $defaultIncludes = ['client','items','mesa','payment'];
+    protected $defaultIncludes = ['client','items','mesa','payment','company'];
 
     /**
      * Transform the \Order entity
@@ -60,6 +60,14 @@ class OrderTransformer extends TransformerAbstract
             return null;
         }else{
             return $this->item($model->client, new ClientTransformer());
+        }
+    }
+
+    public function includeCompany(Order $model){
+        if(!$model->companyApplication){
+            return null;
+        }else{
+            return $this->item($model->companyApplication, new CompanyApplicationTransformer());
         }
     }
 

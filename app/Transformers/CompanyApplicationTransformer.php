@@ -22,6 +22,21 @@ class CompanyApplicationTransformer extends TransformerAbstract
     {
         return [
             'id'         => (int) $model->id,
+            'razao_social' => $model->razao_social,
+            'nome_fantazia' => $model->nome_fantazia,
+            'cnpj' => $model->cnpj,
+            'inscricao_estatual' => $model->inscricao_estatual,
+            'endereco' => $model->endereco,
+            'numero' => $model->numero,
+            'complemento' => $model->complemento,
+            'bairro' => $model->bairro,
+            'cidade' => $model->cidade,
+            'estado' => $model->estado,
+            'telefone' => $model->telefone,
+            'whatsapp' => $model->whatsapp,
+            'site' => $model->site,
+            'responsavel' => $model->responsavel,
+            'cpf_responsavel' => $model->cpf_responsavel,
 
             /* place your other model properties here */
 

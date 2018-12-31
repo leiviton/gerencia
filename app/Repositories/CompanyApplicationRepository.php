@@ -5,7 +5,8 @@ namespace Pedidos\Repositories;
 use Prettus\Repository\Contracts\RepositoryInterface;
 
 /**
- * Interface CompanyApplicationRepository
+ * Interface CompanyApplicationRepository.
+ *
  * @package namespace Pedidos\Repositories;
  */
 interface CompanyApplicationRepository extends RepositoryInterface

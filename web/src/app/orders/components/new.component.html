@@ -118,7 +118,7 @@
                                     <tr class="th-table" *ngFor="let p of items.items; let i = index">
                                         <td class="text-center" (click)="showObservacao(i)">{{ p.id }}</td>
                                         <td (click)="showObservacao(i)">{{ p.name }}
-                                            <p *ngFor="let c of p.complements" style="font-size: 12px; margin-bottom: 0;"> {{ c.name }}: {{ c.price | currency:'BRL':true }}</p>
+                                            <p *ngFor="let c of p.complements" style="font-size: 12px; margin-bottom: 0;">{{ c.qtd }} - {{ c.name }}: {{ c.price | currency:'BRL':true }}</p>
                                             <p style="font-size: 12px; margin-bottom: 0;">{{p.historico}}</p>
                                         </td>
                                         <td class="text-center" (click)="showObservacao(i)">{{ p.price | currency:'BRL':true }}</td>
@@ -172,6 +172,7 @@
                     </div>
                     <div class="col-md-6" style="margin-left: 250px; margin-top: -400px; height: 400px">
                         <h5>Adcionados ao item</h5>
+                        <label *ngIf="complement.length == 0"><p class="text-left">sem complementos</p></label>
                         <div class="checkbox" *ngFor="let p of complement">
                             <label>
                                 <p class="text-left"> {{ p.name }} - {{ p.price | currency:'BRL':true}}</p>

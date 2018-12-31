@@ -36,6 +36,10 @@ class Order extends Model implements Transformable
         return $this->belongsTo(User::class,'user_deliveryman_id','id');
     }
 
+    public function companyApplication(){
+        return $this->belongsTo(CompanyApplication::class,'company_application_id','id');
+    }
+
     public function client(){
         return $this->belongsTo(Client::class);
     }
