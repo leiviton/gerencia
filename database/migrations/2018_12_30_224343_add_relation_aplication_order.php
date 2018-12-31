@@ -14,7 +14,7 @@ class AddRelationAplicationOrder extends Migration
     public function up()
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->integer('company_application_id')->unsigned()->nullable()->after('user_deliveryman_id');
+            $table->integer('company_application_id')->unsigned()->nullable()->default(1)->after('user_deliveryman_id');
             $table->foreign('company_application_id')->references('id')->on('company_applications');
         });
     }
