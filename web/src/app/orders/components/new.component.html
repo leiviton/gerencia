@@ -172,13 +172,12 @@
                     </div>
                     <div class="col-md-6" style="margin-left: 250px; margin-top: -400px; height: 400px">
                         <h5>Adcionados ao item</h5>
-                        <label *ngIf="complement.length == 0"><p class="text-left">sem complementos</p></label>
+                        <label *ngIf="complement.length == 0"><p class="text-left">Sem complementos</p></label>
                         <div class="checkbox" *ngFor="let p of complement">
                             <label>
                                 <p class="text-left"> {{ p.name }} - {{ p.price | currency:'BRL':true}}</p>
                             </label>
-
-                            <button class="btn btn-default btn-sm" (click)="addComplement(p.id)"><i class="fa fa-info text-success"></i></button>
+                            <button class="btn btn-danger btn-sm" (click)="removeComplement(p.id)"><i class="fa fa-close"></i></button>
                         </div>
                     </div>
                 </div>

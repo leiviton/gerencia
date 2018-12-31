@@ -75,6 +75,24 @@ export class OrdersService extends AppHttpService {
         localStorage.setItem(this.key,JSON.stringify(cart));
     }
 
+    removeComplement(i,idItem)
+    {
+        let index;
+        let cart = this.get(),itemAux,subTotal = cart.items[idItem].subtotal;
+        for (var ind in cart.items[idItem].complements){
+            itemAux = cart.items[idItem].complements[ind];
+            if (itemAux.id == i){
+                index = ind;
+                subTotal-=itemAux.price;
+                break;
+            }
+        }
+
+        cart.items[idItem].complements.splice(index,1);
+        cart.items[idItem].subtotal = subTotal;
+        cart.total = this.getTotal(cart.items);
+        localStorage.setItem(this.key,JSON.stringify(cart));
+    }
     obs(o,i){
         let cart = this.get(),itemAux = cart.items[i];
         itemAux.historico = o;

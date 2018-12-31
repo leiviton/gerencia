@@ -72,15 +72,8 @@ export class NewComponent implements OnInit {
     complements = {
         data: []
     };
-    complement = [{
-        "id": 0,
-        "name": "Sem complemento",
-        "price": 0.0,
-        "ativo": "S",
-        "created_at": "",
-        "updated_at": ""
-    }];
-    idItem = 0;
+    complement = [];
+    idItem = null;
     idCom = 0;
     historico = '';
     observacao = '';
@@ -242,14 +235,7 @@ export class NewComponent implements OnInit {
         this.httpService.removeItem(i);
         this.total = this.httpService.get().total;
         this.items = this.httpService.get();
-        this.complement = [{
-            "id": 0,
-            "name": "Sem complemento",
-            "price": 0.0,
-            "ativo": "S",
-            "created_at": "",
-            "updated_at": ""
-        }];
+        this.complement = [];
         this.toasterService.message('Informação', 'Item removido.', 'info');
     }
 
@@ -357,12 +343,14 @@ export class NewComponent implements OnInit {
         for (let j in this.items.items) {
             console.log(this.items.items[j].complements);
             if(j == i){
-                console.log(this.items.items[j].complements);
-                this.complement = this.items.items[j].complements;
+                if(this.items.items[j].complements.length > 0) {
+                    this.complement = this.items.items[j].complements;
+                }else{
+                    this.complement = []
+                }
             }
         }
         this.idItem = i;
-        console.log('index', i);
     }
 
     showObservacao(i) {
@@ -385,7 +373,7 @@ export class NewComponent implements OnInit {
             .view(id, 'complement')
             .then((res) => {
                 let cart = this.httpService.get();
-                if (this.complement[0].id == 0) {
+                if (this.complement.length == 0) {
                     this.complement[0] = res.data;
                 } else {
                     this.complement.push(res.data);
@@ -393,6 +381,19 @@ export class NewComponent implements OnInit {
                 this.httpService.addComp(res.data, this.idItem);
                 this.toasterService.message('Sucesso', 'Adicionado complemento ' + res.data.name, 'success');
             });
+    }
+
+    removeComplement(id) {
+        this.httpService.removeComplement(id,this.idItem);
+        this.items = this.httpService.get();
+        this.total = this.httpService.get().total;
+        for (let j in this.items.items) {
+            console.log(this.items.items[j].complements);
+            if(j == this.idItem){
+                console.log(this.items.items[j].complements);
+                this.complement = this.items.items[j].complements;
+            }
+        }
     }
 
     saveComplement() {
