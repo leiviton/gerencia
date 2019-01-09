@@ -490,6 +490,14 @@ class OrderService{
 
         $name = (string)$arquivo->getTimestamp();
 
+        for($i = 0; $i < count($query) ; $i++) {
+            $query[$i]['valor'] = str_replace('.',',',$query[$i]['valor']);
+            $query[$i]['desconto'] = str_replace('.',',',$query[$i]['desconto']);
+            $query[$i]['acrescimo'] = str_replace('.',',',$query[$i]['acrescimo']);
+            $query[$i]['total'] = str_replace('.',',',$query[$i]['total']);
+            $query[$i]['pago_agora'] = str_replace('.',',',$query[$i]['pago_agora']);
+        }
+
         \Excel::create($name, function($excel) use($query) {
             $excel->sheet('Sheet 1', function($sheet) use($query) {
                 $sheet->fromArray($query);
@@ -514,6 +522,10 @@ class OrderService{
         }
 
         $name = (string)$arquivo->getTimestamp();
+
+        for($i = 0; $i < count($query) ; $i++) {
+            $query[$i]['valor'] = str_replace('.',',',$query[$i]['valor']);
+        }
 
         \Excel::create($name, function ($excel) use ($query) {
             $excel->sheet('Sheet 2', function ($sheet) use ($query) {
