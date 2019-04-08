@@ -19,8 +19,6 @@
                             <label for="tipo" class="label col-md-1">Tipo: </label>
                             <select id="tipo" name="tipo" class="form-control col-md-3" [(ngModel)]="tipo">
                                 <option value="0"> Delivery</option>
-                                <option value="1"> Salão</option>
-                                <option value="2"> Retirada</option>
                             </select>
                             <!--label class="label col-md-2">Mais sabor?</label>
                             <label class="switch switch-text switch-success">
@@ -36,29 +34,11 @@
                     <form #myForm="ngForm" class="form-inline">
                         <div class="form-group col-md-12">
                             <div class="col-md-1"></div>
-                            <div class="input-group col-md-5" *ngIf="tipo != 1">
-                                <label>CLiente: </label>
-                                <input type="text" class="form-control " name="pesquisa"  placeholder="Digite Cliente (Telefone, nome, codigo)" required minlength="11" [(ngModel)]="pesquisa.value2">
-                                <span class="input-group-append">
-                                <button type="button" class="btn btn-primary" (click)="buscarCliente()"><i class="fa fa-search"></i> (F2)</button>
-                              </span>
-                            </div>
                             <label for="mesa" class="label col-md-1" *ngIf="tipo == 1">Mesa: </label>
                             <select id="mesa" name="category_id" class="form-control col-md-3" [(ngModel)]="mesa_id" *ngIf="tipo == 1">
                                 <option value="null">Selecione a mesa</option>
                                 <option *ngFor="let g of mesas" value="{{ g.id }}"> {{ g.name }}</option>
                             </select>
-                                <label class="label col-md-1" *ngIf="tipo != 1">Cartão?</label>
-                                <label class="switch switch-text switch-success" *ngIf="tipo != 1">
-                                    <input type="checkbox" class="switch-input" name="cartao" [(ngModel)]="cartao" checked>
-                                    <span class="switch-label" data-on="Sim" data-off="Não"></span>
-                                    <span class="switch-handle"></span>
-                                </label>
-                                <label for="troco" class="label col-md-1" *ngIf="tipo != 1 && cartao == false">Troco:</label>
-                                <input *ngIf="tipo != 1 && cartao == false" type="text" name="troco" class="form-control col-md-2" id="troco" currencyMask [(ngModel)]="troco" [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"  placeholder="Troco para" style="margin-left: 10px">
-
-                                <label for="bandeira" class="label col-md-2" *ngIf="cartao == true">Bandeira:</label>
-                                <input *ngIf="cartao == true" type="text" id="bandeira" name="bandeira" [(ngModel)]="bandeira" class="form-control col-md-2" placeholder="Bandeira de cartão" style="margin-left: 10px">
                         </div>
                     </form>
                 </div>
@@ -126,7 +106,6 @@
                                         <td class="text-center" (click)="showObservacao(i)">{{ p.subtotal | currency:'BRL':true }}</td>
                                         <td class="text-center">
                                             <button class="btn btn-sm btn-link" (click)="removeItem(i)" tooltip="Remover do pedido"><i class="fa fa-remove text-danger"></i></button>
-                                            <button class="btn btn-sm btn-link" *ngIf="idCom == 0" (click)="showComplement(i)" tooltip="Gerenciar complementos"><i class="fa fa-plus text-info"></i></button>
                                         </td>
                                     </tr>
                                 </tbody>

@@ -158,28 +158,14 @@ class OrderService{
                 $res->save();
             }
 
-            $total = $data['total'];
-
-            if($order->type == 0)
-            {
-                $atual = new \DateTime();
-                DB::insert('insert into order_items (id,product_id,order_id,price,qtd,subtotal,created_at,updated_at) values(?,?,?,?,?,?,?,?)',[null,$taxa->id,$order->id,$taxa->price,1,$taxa->price,$atual,$atual]);
-                $mesa->status = 3;
-                $total += $taxa->price;
-            }else if($order->type == 1){
-                $mesa->status = 1;
-            }else if($order->type == 2){
-                $mesa->status = 3;
-            }
-
-            $order->total = $total;
+            $order->total = $data['total'];
 
             $order->mesa_id = $data['mesa_id'];
 
             if (isset($cupom)){
-                $order->total = $total - $cupom->value;
+                $order->total = $order->total - $cupom->value;
             }
-            $mesa->save();
+
             $order->save();
 
             \DB::commit();
@@ -193,7 +179,6 @@ class OrderService{
 
     public function updateStatus($data,$id){
         $order = $this->orderRepository->find($id);
-        $taxa = $this->productRepository->find(58);
         $order->status = $data['status'];
         $mesaAnt = $this->mesaRepository->find($data['mesa_id_ant']);
         $mesaAnt->save();

@@ -5,7 +5,7 @@
 
 export const environment = {
     production: true,
-    server_url: 'http://localhost:8000',
+    server_url: 'http://eguis.projectsoftware.com.br',
     client_id: '2',
-    client_secret: '37zbq7x6S6sBy875jyZJnFf0gqKy3cmlaMoSVfwH'
+    client_secret: '2qS6qS2KrCmc3NkBxsOZ2uFKiE6OcnIYhQYTThoS'
 };
