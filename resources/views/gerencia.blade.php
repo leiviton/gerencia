@@ -18,13 +18,12 @@
     <link href="assets/css/login.css" rel="stylesheet">
     <link href="styles.1ad436c5c42882d01e92.bundle.css" rel="stylesheet"/>
 </head>
-<body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
-<!-- Enable bootstrap 4 theme -->
+<body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden"><!-- Enable bootstrap 4 theme -->
 <script>window.__theme = 'bs4';</script><!-- App Loading... -->
-<script type="text/javascript" src="inline.39156bfd75fd55325011.bundle.js"></script>
+<script type="text/javascript" src="inline.a2cf1e783e1d11542a31.bundle.js"></script>
 <script type="text/javascript" src="polyfills.9f114c6c94829f3a43c6.bundle.js"></script>
-<script type="text/javascript" src="scripts.e00efc90c26ede3d6fd3.bundle.js"></script>
-<script type="text/javascript" src="vendor.14fc268be3f3ba3599f0.bundle.js"></script>
-<script type="text/javascript" src="main.9ab6afa948739624b1c1.bundle.js"></script>
+<script type="text/javascript" src="scripts.a97f89de0d87e41e9619.bundle.js"></script>
+<script type="text/javascript" src="vendor.1f671b11b2bdae72e4f4.bundle.js"></script>
+<script type="text/javascript" src="main.e30c9d28c0f8103006f3.bundle.js"></script>
 </body>
 </html>
