@@ -20,7 +20,7 @@
 </head>
 <body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden"><!-- Enable bootstrap 4 theme -->
 <script>window.__theme = 'bs4';</script><!-- App Loading... -->
-<script type="text/javascript" src="inline.ded22b9134f0be6f77bc.bundle.js"></script>
+<script type="text/javascript" src="inline.6d720c361799c8b945c8.bundle.js"></script>
 <script type="text/javascript" src="polyfills.9f114c6c94829f3a43c6.bundle.js"></script>
 <script type="text/javascript" src="scripts.a97f89de0d87e41e9619.bundle.js"></script>
 <script type="text/javascript" src="vendor.1f671b11b2bdae72e4f4.bundle.js"></script>
