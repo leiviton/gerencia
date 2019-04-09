@@ -41,7 +41,7 @@ export class NewComponent implements OnInit {
             address: null,
             numero: null,
             bairro: null,
-            city_id: 0
+            city_id: 3550308
         },
         user: {
             id: 1
